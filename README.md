@@ -8,7 +8,7 @@ The bootstrap packages **llama.cpp + Kev-4B Q4_K_M** behind a small Go request g
 It uses the existing `POST /v1/systemone` API. It adds no model, scoring formula,
 agent loop, NATS dependency or durable application state. See the
 [research and decision](docs/research-and-decision.md),
-[validation record](docs/validation.md) and
+[results history](docs/results.md) and
 [proposed SemStreams integration](docs/semstreams-integration.md).
 
 ## Capabilities and target
@@ -32,18 +32,36 @@ remain unverified. Start with 4 CPU cores, an 8 GiB runtime memory budget, and
 10 GiB free disk for model, images and build cache. The GGUF is 3.03 GB; RAM use
 is higher. See measured resource limits in the validation record.
 
-On the same 48-request routing smoke, native Metal Kev-4B returned **43/48** correct
-labels at **449 ms median**. A matched Qwen3.5-4B Q4_K_M chat baseline returned
-**46/48 at 288 ms**, using the same pinned runtime and laptop. These small results
-favor the chat baseline for this routing task; semselect's distinctive capability
-is native typed distributions, Score and Noul, not an established accuracy or
-speed advantage. The earlier CPU run took 9.88 seconds median for Kev.
-See the [Metal validation](docs/validation-metal.md) and
-[laptop/GPU workflow](docs/laptop-and-gpu.md).
-
 For this laptop, after fetching the model, run `task metal:build`, `task down`
 (if Docker is running), then `task metal:serve`. The API is on the same loopback
-port 8084. Ctrl-C stops the native runtime and guard.
+port 8084. This serves Kev. Ctrl-C stops the native runtime and guard.
+See the [laptop/GPU workflow](docs/laptop-and-gpu.md).
+
+## Latest routing results
+
+Measured 2026-10-05 on an **Apple M3 Pro, native Metal**, using the same pinned
+llama.cpp runtime, Q4_K_M quantization class, four CPU threads, 4096-token context
+and one slot. Dataset: 24 cases in two candidate orders; 48 correlated requests,
+with warmup excluded. These are small smoke results, not production benchmarks.
+
+| Model / serving path | Correct | Valid | Median | p95 | Evidence |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Kev-4B through semselect `/v1/systemone` | 43/48 (89.6%) | 48/48 | 449 ms | 474 ms | [JSON](docs/evidence/metal-kev-4b.json) |
+| Qwen3.5-4B through llama.cpp chat API | 46/48 (95.8%) | 48/48 | 288 ms | 423 ms | [JSON](docs/evidence/metal-qwen35-4b.json) |
+
+**Qwen3.5-4B is the stronger measured choice for this label-routing task.** The
+Qwen run used `/v1/chat/completions` directly, bypassing the semselect guard. It
+was a seminstruct-style comparison launched by this repository's evaluation
+tools, not Qwen substituted into semselect's decision API or a tested upgrade of
+the existing seminstruct release. That chat run returned constrained labels;
+it did not provide native Choice distributions, Score or Noul. Semselect still
+serves Kev for those typed readouts.
+
+See the [full results history and recording procedure](docs/results.md) for CPU
+reference runs and future hardware results, and the
+[Metal validation report](docs/validation-metal.md) for failures, abstention,
+resource measurements and limitations. Different serving formats and cache
+behavior remain confounders even in the matched 4B comparison.
 
 ## Quick start
 

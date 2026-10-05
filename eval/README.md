@@ -6,6 +6,10 @@ none of this taxonomy. Each example runs twice, with original and reversed candi
 order: 48 measured requests plus warmup. Reversed pairs are correlated observations;
 this tiny set is a smoke test, not a production benchmark or calibration study.
 
+Published measurements live in the [results history](../docs/results.md); follow
+its recording procedure to preserve new runs and refresh the README summary.
+Local `results/` files are ignored by Git and are not a permanent repository record.
+
 On Apple Silicon, `task metal:evaluate` and `task metal:baseline:evaluate` start
 and stop their own native GPU servers and save separate timestamped evidence.
 The second uses Qwen3.5-4B Q4_K_M on the same runtime, not the old 0.6B container.

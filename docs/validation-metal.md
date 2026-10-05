@@ -3,6 +3,7 @@
 The M3 Pro Metal path serves real Choice, Score and Noul. The matched 4B chat
 baseline was faster and more accurate on this small routing set. The results
 support native GPU packaging, but do not establish a routing advantage for Kev.
+See the [results history](results.md) for earlier runs and the recording procedure.
 
 ## Method
 
@@ -28,6 +29,8 @@ support native GPU packaging, but do not establish a routing advantage for Kev.
 - This baseline exercises the seminstruct-style chat protocol using our pinned
   runtime; it is not the existing seminstruct release image. Templates, output
   generation, per-tensor quantization and cache behavior remain confounders.
+  Qwen was served directly at `/v1/chat/completions`, bypassing the semselect guard;
+  it was not substituted for Kev behind `/v1/systemone`.
 
 ## Observations
 
