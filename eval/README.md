@@ -1,5 +1,11 @@
 # Routing smoke evaluation
 
+For the separate **answerability** workload, start with its
+[12 teaching examples and measured result](answerability/README.md).
+Run `task answerability:validate` offline or `task answerability:metal` with the
+cached native build and models. That workload checks evidence sufficiency rather
+than ticket routing; do not combine its scores with the routing results below.
+
 `routing-smoke.json` contains 24 manually labeled examples. Categories, descriptions,
 unknown selection, and multi-intent fallback are caller policy. The service owns
 none of this taxonomy. Each example runs twice, with original and reversed candidate

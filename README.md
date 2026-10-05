@@ -10,12 +10,15 @@ its place. A result recommending ordinary code or schema-constrained Qwen is a
 useful outcome. We have not yet demonstrated a workload advantage for the current
 decision model over the matched Qwen chat baseline.
 
-Start with [when to use semselect](docs/when-to-use.md), then the
-[comparison results](docs/results.md). The guide distinguishes measured findings
-from promising use cases that still need testing.
-The [existing-algorithm audit](docs/code-baselines-and-rag.md) explains what
-semsource/SemStreams already solve with rules, retrieval and graph composition,
-and where an added semantic judgment would need to prove its value.
+Start with the short [when-to-use guide](docs/when-to-use.md). The latest
+[answerability experiment](eval/answerability/README.md) shows the boundary:
+code resolved four cases without a model call; Qwen JSON and Kev each correctly
+judged the other eight. Both caught missing/conflicting evidence that a control
+with no semantic gate allowed through. These are 12 teaching cases, with no
+demonstrated decision-quality advantage for Kev. Each experiment shows worked
+examples, one small table and a recommendation. The
+[results history](docs/results.md) and [algorithm audit](docs/code-baselines-and-rag.md)
+provide the supporting evidence.
 
 Callers supply context and permissible answers; semselect returns typed model
 readouts. Callers own taxonomies, routing, authorization, acceptance thresholds,
@@ -234,6 +237,8 @@ task smoke          # requires running model; all three native primitives
 task evaluate       # 24 fixed cases × two candidate orders; results/semselect.json
 task baseline:up    # optional pinned ARM64 seminstruct image, port 8083
 task baseline:evaluate
+task answerability:validate # offline checks for the 12 teaching cases
+task answerability:metal    # same fixed evidence; cached native build/models required
 task down
 ```
 

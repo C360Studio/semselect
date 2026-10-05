@@ -1,5 +1,9 @@
 # Existing algorithms are part of the baseline
 
+This is the detailed source audit. Start with the short
+[when-to-use guide](when-to-use.md) or the [answerability teaching result](../eval/answerability/README.md)
+for the practical path forward.
+
 The question is whether an added semantic judgment improves the existing system.
 Comparing two models alone cannot answer that. Code already handles exact facts,
 syntax, graph relationships and substantial retrieval work in the sem* ecosystem.

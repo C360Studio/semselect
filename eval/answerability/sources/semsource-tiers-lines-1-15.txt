@@ -1,0 +1,15 @@
+# SemSource query tiers
+
+SemSource's retrieval quality — especially `code_search` (natural-language) — depends on which
+enrichment layer is running. The layers stack; each adds capability on top of the one below.
+
+| Tier | Adds | `code_search` (NL) | External service | Runnable in semsource today |
+|------|------|--------------------|------------------|------------------------------|
+| **Structural** | graph-ingest / index / query / gateway | — (byName / prefix / relations / impact only) | none | ✅ |
+| **0 — Statistical** | graph-embedding (**BM25**) | keyword-statistical: good for term overlap, weak for paraphrase | none | ✅ (`tier0-statistical.json`) |
+| **1 — Semantic** | graph-embedding (**HTTP → semembed**) | true semantic similarity, paraphrase-robust (needs `query_prefix` — beats BM25 once set) | **semembed** (:8081, OpenAI-compatible embeddings) | ✅ (`tier1-semantic.json`) |
+| **2 — Semantic + Instruct** | graph-clustering (LPA + **LLM → seminstruct**), GraphRAG/community summaries | + community/summary reasoning (`local`/`global`/`summary` search) | **seminstruct** (:8083, inference proxy) | ✅ (`tier2-semantic-instruct.json`) |
+
+The other query verbs — `code_context`, `code_impact`, `doc_context`, and byName/prefix resolution —
+are **structural** and work at every tier (they don't depend on the embedder). The tier only changes
+`code_search` NL quality and (Tier 2) community/summary features.

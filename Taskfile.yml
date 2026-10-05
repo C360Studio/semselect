@@ -79,3 +79,9 @@ tasks:
   compare:cpu:
     desc: Compare the same Qwen formats in the pinned CPU Docker runtime
     cmds: [python3 scripts/compare_scoring.py --hardware cpu-docker]
+  answerability:validate:
+    desc: Check the 12 teaching cases offline; no model inference
+    cmds: [python3 scripts/answerability.py --validate]
+  answerability:metal:
+    desc: Compare the frozen-evidence control, Qwen JSON and Kev on teaching cases
+    cmds: [python3 scripts/answerability.py --hardware metal]

@@ -1,0 +1,551 @@
+0.00.049.986 I srv  llama_server: initializing ...
+0.00.049.996 I cmn  common_param: common_params_print_info: build 0 (unknown) with AppleClang 21.0.0.21000101 for Darwin arm64
+0.00.049.996 I cmn  common_param: common_params_print_info: verbosity = 4 (adjust with the `-lv N` CLI arg)
+0.00.049.996 I cmn  common_param: device_info:
+0.00.050.000 I cmn  common_param:   - MTL0    : Apple M3 Pro (28753 MiB, 28753 MiB free)
+0.00.050.001 I cmn  common_param:   - BLAS    : Accelerate (0 MiB, 0 MiB free)
+0.00.050.009 I cmn  common_param:   - CPU     : Apple M3 Pro (36864 MiB, 36864 MiB free)
+0.00.050.022 I cmn  common_param: system_info: n_threads = 4 (n_threads_batch = 4) / 12 | MTL : EMBED_LIBRARY = 1 | CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | DOTPROD = 1 | ACCELERATE = 1 | REPACK = 1 | 
+0.00.050.184 I srv          init: using 11 threads for HTTP server
+0.00.050.211 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.051.914 I srv    load_model: loading model '/Users/coby/Code/c360/semselect/models/Kev-4B-Q4_K_M.gguf'
+0.00.051.916 I srv    load_model: local path '/Users/coby/Code/c360/semselect/models/Kev-4B-Q4_K_M.gguf'
+0.00.051.923 I cmn  common_init_: fitting params to device memory ...
+0.00.051.923 I cmn  common_init_: (for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on)
+0.00.051.930 I common_params_fit_impl: getting device memory data for initial parameters:
+0.00.291.376 I common_memory_breakdown_print: | memory breakdown [MiB]  | total    free    self   model   context   compute    unaccounted |
+0.00.291.379 I common_memory_breakdown_print: |   - MTL0 (Apple M3 Pro) | 28753 = 28703 + (3149 =  2882 +     178 +      89) +       -3099 |
+0.00.291.380 I common_memory_breakdown_print: |   - Host                |                   389 =   341 +       0 +      48                |
+0.00.310.977 I common_params_fit_impl: projected to use 3149 MiB of device memory vs. 28703 MiB of free device memory
+0.00.310.980 I common_params_fit_impl: will leave 25553 >= 1024 MiB of free device memory, no changes needed
+0.00.310.981 I common_fit_params: successfully fit params to free device memory
+0.00.310.982 I common_fit_params: fitting params to free memory took 0.26 seconds
+0.00.350.889 I llama_model_loader: loaded meta data with 90 key-value pairs and 428 tensors from /Users/coby/Code/c360/semselect/models/Kev-4B-Q4_K_M.gguf (version GGUF V3 (latest))
+0.00.350.902 I llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+0.00.350.903 I llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+0.00.350.904 I llama_model_loader: - kv   1:                               general.type str              = model
+0.00.350.904 I llama_model_loader: - kv   2:                               general.name str              = Kev-4B
+0.00.350.905 I llama_model_loader: - kv   3:                         general.size_label str              = 4.2B
+0.00.350.905 I llama_model_loader: - kv   4:                            general.license str              = apache-2.0
+0.00.350.906 I llama_model_loader: - kv   5:                   general.base_model.count u32              = 1
+0.00.350.906 I llama_model_loader: - kv   6:                  general.base_model.0.name str              = Qwen3.5 4B Base
+0.00.350.907 I llama_model_loader: - kv   7:          general.base_model.0.organization str              = Qwen
+0.00.350.908 I llama_model_loader: - kv   8:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-4...
+0.00.350.909 I llama_model_loader: - kv   9:                      general.dataset.count u32              = 13
+0.00.350.909 I llama_model_loader: - kv  10:                     general.dataset.0.name str              = Banking77
+0.00.350.910 I llama_model_loader: - kv  11:             general.dataset.0.organization str              = Legacy Datasets
+0.00.350.911 I llama_model_loader: - kv  12:                 general.dataset.0.repo_url str              = https://huggingface.co/legacy-dataset...
+0.00.350.911 I llama_model_loader: - kv  13:                     general.dataset.1.name str              = Boolq
+0.00.350.912 I llama_model_loader: - kv  14:             general.dataset.1.organization str              = Google
+0.00.350.912 I llama_model_loader: - kv  15:                 general.dataset.1.repo_url str              = https://huggingface.co/google/boolq
+0.00.350.912 I llama_model_loader: - kv  16:                     general.dataset.2.name str              = Ag_News
+0.00.350.913 I llama_model_loader: - kv  17:             general.dataset.2.organization str              = Fancyzhx
+0.00.350.913 I llama_model_loader: - kv  18:                 general.dataset.2.repo_url str              = https://huggingface.co/fancyzhx/ag_news
+0.00.350.914 I llama_model_loader: - kv  19:                     general.dataset.3.name str              = Multi_Nli
+0.00.350.914 I llama_model_loader: - kv  20:             general.dataset.3.organization str              = Nyu Mll
+0.00.350.914 I llama_model_loader: - kv  21:                 general.dataset.3.repo_url str              = https://huggingface.co/nyu-mll/multi_nli
+0.00.350.915 I llama_model_loader: - kv  22:                     general.dataset.4.name str              = Sst5
+0.00.350.915 I llama_model_loader: - kv  23:             general.dataset.4.organization str              = SetFit
+0.00.350.915 I llama_model_loader: - kv  24:                 general.dataset.4.repo_url str              = https://huggingface.co/SetFit/sst5
+0.00.350.916 I llama_model_loader: - kv  25:                     general.dataset.5.name str              = Yelp_Review_Full
+0.00.350.916 I llama_model_loader: - kv  26:             general.dataset.5.organization str              = Yelp
+0.00.350.917 I llama_model_loader: - kv  27:                 general.dataset.5.repo_url str              = https://huggingface.co/Yelp/yelp_revi...
+0.00.350.917 I llama_model_loader: - kv  28:                     general.dataset.6.name str              = Trec
+0.00.350.917 I llama_model_loader: - kv  29:             general.dataset.6.organization str              = CogComp
+0.00.350.918 I llama_model_loader: - kv  30:                 general.dataset.6.repo_url str              = https://huggingface.co/CogComp/trec
+0.00.350.918 I llama_model_loader: - kv  31:                     general.dataset.7.name str              = Dbpedia_14
+0.00.350.918 I llama_model_loader: - kv  32:             general.dataset.7.organization str              = Fancyzhx
+0.00.350.919 I llama_model_loader: - kv  33:                 general.dataset.7.repo_url str              = https://huggingface.co/fancyzhx/dbped...
+0.00.350.919 I llama_model_loader: - kv  34:                     general.dataset.8.name str              = Amazon_Reviews_Multi_En
+0.00.350.920 I llama_model_loader: - kv  35:             general.dataset.8.organization str              = SetFit
+0.00.350.920 I llama_model_loader: - kv  36:                 general.dataset.8.repo_url str              = https://huggingface.co/SetFit/amazon_...
+0.00.350.921 I llama_model_loader: - kv  37:                     general.dataset.9.name str              = Imdb
+0.00.350.921 I llama_model_loader: - kv  38:             general.dataset.9.organization str              = Stanfordnlp
+0.00.350.921 I llama_model_loader: - kv  39:                 general.dataset.9.repo_url str              = https://huggingface.co/stanfordnlp/imdb
+0.00.350.922 I llama_model_loader: - kv  40:                    general.dataset.10.name str              = Commitpackft
+0.00.350.922 I llama_model_loader: - kv  41:            general.dataset.10.organization str              = Bigcode
+0.00.350.923 I llama_model_loader: - kv  42:                general.dataset.10.repo_url str              = https://huggingface.co/bigcode/commit...
+0.00.350.923 I llama_model_loader: - kv  43:                    general.dataset.11.name str              = Aegis AI Content Safety Dataset 2.0
+0.00.350.924 I llama_model_loader: - kv  44:                 general.dataset.11.version str              = 2.0
+0.00.350.924 I llama_model_loader: - kv  45:            general.dataset.11.organization str              = Nvidia
+0.00.350.927 I llama_model_loader: - kv  46:                general.dataset.11.repo_url str              = https://huggingface.co/nvidia/Aegis-A...
+0.00.350.927 I llama_model_loader: - kv  47:                    general.dataset.12.name str              = Consumer Finance Complaints Large
+0.00.350.928 I llama_model_loader: - kv  48:            general.dataset.12.organization str              = Davidheineman
+0.00.350.928 I llama_model_loader: - kv  49:                general.dataset.12.repo_url str              = https://huggingface.co/davidheineman/...
+0.00.350.936 I llama_model_loader: - kv  50:                               general.tags arr[str,7]       = ["decision-model", "calibration", "lo...
+0.00.350.937 I llama_model_loader: - kv  51:                          general.languages arr[str,1]       = ["en"]
+0.00.350.937 I llama_model_loader: - kv  52:                         qwen35.block_count u32              = 32
+0.00.350.938 I llama_model_loader: - kv  53:                      qwen35.context_length u32              = 262144
+0.00.350.938 I llama_model_loader: - kv  54:                    qwen35.embedding_length u32              = 2560
+0.00.350.938 I llama_model_loader: - kv  55:                 qwen35.feed_forward_length u32              = 9216
+0.00.350.939 I llama_model_loader: - kv  56:                qwen35.attention.head_count u32              = 16
+0.00.350.939 I llama_model_loader: - kv  57:             qwen35.attention.head_count_kv u32              = 4
+0.00.350.940 I llama_model_loader: - kv  58:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+0.00.350.941 I llama_model_loader: - kv  59:                      qwen35.rope.freq_base f32              = 10000000.000000
+0.00.350.942 I llama_model_loader: - kv  60:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+0.00.350.942 I llama_model_loader: - kv  61:                qwen35.attention.key_length u32              = 256
+0.00.350.943 I llama_model_loader: - kv  62:              qwen35.attention.value_length u32              = 256
+0.00.350.943 I llama_model_loader: - kv  63:                     qwen35.ssm.conv_kernel u32              = 4
+0.00.350.943 I llama_model_loader: - kv  64:                      qwen35.ssm.state_size u32              = 128
+0.00.350.943 I llama_model_loader: - kv  65:                     qwen35.ssm.group_count u32              = 16
+0.00.350.944 I llama_model_loader: - kv  66:                  qwen35.ssm.time_step_rank u32              = 32
+0.00.350.944 I llama_model_loader: - kv  67:                      qwen35.ssm.inner_size u32              = 4096
+0.00.350.947 I llama_model_loader: - kv  68:          qwen35.attention.recurrent_layers arr[bool,32]     = [true, true, true, false, true, true,...
+0.00.350.948 I llama_model_loader: - kv  69:             qwen35.full_attention_interval u32              = 4
+0.00.350.948 I llama_model_loader: - kv  70:                qwen35.rope.dimension_count u32              = 64
+0.00.350.948 I llama_model_loader: - kv  71:                       qwen35.decision.type str              = kev
+0.00.350.948 I llama_model_loader: - kv  72:                qwen35.embedding_length_out u32              = 512
+0.00.350.949 I llama_model_loader: - kv  73:         qwen35.decision.temperature.choice f32              = 2.406050
+0.00.350.949 I llama_model_loader: - kv  74:          qwen35.decision.temperature.score f32              = 2.406050
+0.00.350.950 I llama_model_loader: - kv  75:           qwen35.decision.temperature.noul f32              = 2.406050
+0.00.350.950 I llama_model_loader: - kv  76:                       tokenizer.ggml.model str              = gpt2
+0.00.350.951 I llama_model_loader: - kv  77:                         tokenizer.ggml.pre str              = qwen35
+0.00.373.149 I llama_model_loader: - kv  78:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+0.00.379.092 I llama_model_loader: - kv  79:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+0.00.401.648 I llama_model_loader: - kv  80:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+0.00.401.650 I llama_model_loader: - kv  81:                tokenizer.ggml.eos_token_id u32              = 248044
+0.00.401.650 I llama_model_loader: - kv  82:            tokenizer.ggml.padding_token_id u32              = 248044
+0.00.401.651 I llama_model_loader: - kv  83:               tokenizer.ggml.add_bos_token bool             = false
+0.00.401.651 I llama_model_loader: - kv  84:               tokenizer.ggml.add_eos_token bool             = false
+0.00.401.656 I llama_model_loader: - kv  85:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+0.00.401.657 I llama_model_loader: - kv  86:          tokenizer.chat_template.systemone str              = <|fim_prefix|>{{ state }}<|fim_middle...
+0.00.401.659 I llama_model_loader: - kv  87:                   tokenizer.chat_templates arr[str,1]       = ["systemone"]
+0.00.401.659 I llama_model_loader: - kv  88:               general.quantization_version u32              = 2
+0.00.401.660 I llama_model_loader: - kv  89:                          general.file_type u32              = 15
+0.00.401.660 I llama_model_loader: - type  f32:  178 tensors
+0.00.401.661 I llama_model_loader: - type q8_0:  153 tensors
+0.00.401.661 I llama_model_loader: - type q4_K:   97 tensors
+0.00.401.662 I print_info: file format = GGUF V3 (latest)
+0.00.401.662 I print_info: file type   = Q4_K - Medium
+0.00.401.663 I print_info: file size   = 2.81 GiB (5.75 BPW) 
+0.00.401.671 I llama_prepare_model_devices: using device MTL0 (Apple M3 Pro) (unknown id) - 28753 MiB free
+0.00.466.037 I load: 0 unused tokens
+0.00.483.443 I load: printing all EOG tokens:
+0.00.483.446 I load:   - 248044 ('<|endoftext|>')
+0.00.483.447 I load:   - 248046 ('<|im_end|>')
+0.00.483.447 I load:   - 248063 ('<|fim_pad|>')
+0.00.483.447 I load:   - 248064 ('<|repo_name|>')
+0.00.483.447 I load:   - 248065 ('<|file_sep|>')
+0.00.483.555 I load: special tokens cache size = 33
+0.00.531.649 I load: token to piece cache size = 1.7581 MB
+0.00.531.665 I print_info: arch                  = qwen35
+0.00.531.665 I print_info: vocab_only            = 0
+0.00.531.666 I print_info: no_alloc              = 0
+0.00.531.666 I print_info: n_ctx_train           = 262144
+0.00.531.671 I print_info: n_embd_inp            = 2560
+0.00.531.672 I print_info: n_embd                = 2560
+0.00.531.672 I print_info: n_embd_out            = 512
+0.00.531.672 I print_info: n_layer               = 32
+0.00.531.672 I print_info: n_layer_all           = 32
+0.00.531.677 I print_info: n_head                = 16
+0.00.531.677 I print_info: n_head_kv             = 4
+0.00.531.678 I print_info: n_rot                 = 64
+0.00.531.678 I print_info: n_swa                 = 0
+0.00.531.678 I print_info: is_swa_any            = 0
+0.00.531.678 I print_info: non_causal_type       = 0
+0.00.531.678 I print_info: n_embd_head_k         = 256
+0.00.531.679 I print_info: n_embd_head_v         = 256
+0.00.531.679 I print_info: n_gqa                 = 4
+0.00.531.680 I print_info: n_embd_k_gqa          = 1024
+0.00.531.680 I print_info: n_embd_v_gqa          = 1024
+0.00.531.681 I print_info: f_norm_eps            = 0.0e+00
+0.00.531.681 I print_info: f_norm_rms_eps        = 1.0e-06
+0.00.531.681 I print_info: f_clamp_kqv           = 0.0e+00
+0.00.531.682 I print_info: f_max_alibi_bias      = 0.0e+00
+0.00.531.682 I print_info: f_logit_scale         = 0.0e+00
+0.00.531.682 I print_info: f_attn_scale          = 0.0e+00
+0.00.531.682 I print_info: f_attn_value_scale    = 0.0000
+0.00.531.683 I print_info: n_ff                  = 9216
+0.00.531.683 I print_info: n_expert              = 0
+0.00.531.683 I print_info: n_expert_used         = 0
+0.00.531.683 I print_info: n_expert_groups       = 0
+0.00.531.683 I print_info: n_group_used          = 0
+0.00.531.683 I print_info: causal attn           = 1
+0.00.531.684 I print_info: pooling type          = -1
+0.00.531.684 I print_info: rope type             = 40
+0.00.531.684 I print_info: rope scaling          = linear
+0.00.531.684 I print_info: freq_base_train       = 10000000.0
+0.00.531.684 I print_info: freq_scale_train      = 1
+0.00.531.685 I print_info: n_ctx_orig_yarn       = 262144
+0.00.531.685 I print_info: rope_yarn_log_mul     = 0.0000
+0.00.531.685 I print_info: rope_finetuned        = unknown
+0.00.531.686 I print_info: mrope sections        = [11, 11, 10, 0]
+0.00.531.686 I print_info: ssm_d_conv            = 4
+0.00.531.686 I print_info: ssm_d_inner           = 4096
+0.00.531.686 I print_info: ssm_d_state           = 128
+0.00.531.686 I print_info: ssm_dt_rank           = 32
+0.00.531.686 I print_info: ssm_n_group           = 16
+0.00.531.686 I print_info: ssm_dt_b_c_rms        = 0
+0.00.531.687 I print_info: model type            = 4B
+0.00.531.687 I print_info: model params          = 4.21 B
+0.00.531.687 I print_info: general.name          = Kev-4B
+0.00.531.688 I print_info: vocab type            = BPE
+0.00.531.688 I print_info: n_vocab               = 248320
+0.00.531.688 I print_info: n_merges              = 247587
+0.00.531.689 I print_info: BOS token             = 11 ','
+0.00.531.689 I print_info: EOS token             = 248044 '<|endoftext|>'
+0.00.531.689 I print_info: EOT token             = 248046 '<|im_end|>'
+0.00.531.689 I print_info: PAD token             = 248044 '<|endoftext|>'
+0.00.531.690 I print_info: LF token              = 198 'Ċ'
+0.00.531.690 I print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+0.00.531.690 I print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+0.00.531.690 I print_info: FIM MID token         = 248061 '<|fim_middle|>'
+0.00.531.690 I print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+0.00.531.691 I print_info: FIM REP token         = 248064 '<|repo_name|>'
+0.00.531.691 I print_info: FIM SEP token         = 248065 '<|file_sep|>'
+0.00.531.691 I print_info: EOG token             = 248044 '<|endoftext|>'
+0.00.531.691 I print_info: EOG token             = 248046 '<|im_end|>'
+0.00.531.691 I print_info: EOG token             = 248063 '<|fim_pad|>'
+0.00.531.692 I print_info: EOG token             = 248064 '<|repo_name|>'
+0.00.531.692 I print_info: EOG token             = 248065 '<|file_sep|>'
+0.00.531.692 I print_info: max token length      = 256
+0.00.531.695 I load_tensors: loading model tensors, this can take a while... (load_mode = mmap)
+0.00.755.375 I load_tensors: offloading output layer to GPU
+0.00.755.378 I load_tensors: offloading 31 repeating layers to GPU
+0.00.755.378 I load_tensors: offloaded 33/33 layers to GPU
+0.00.755.380 I load_tensors:   CPU_Mapped model buffer size =   341.02 MiB
+0.00.755.382 I load_tensors:  MTL0_Mapped model buffer size =  2882.50 MiB
+0.00.756.867 I decision model reads the embeddings output, enabling embedding mode
+0.00.757.935 I cmn  common_init_: added <|endoftext|> logit bias = -inf
+0.00.757.936 I cmn  common_init_: added <|im_end|> logit bias = -inf
+0.00.757.936 I cmn  common_init_: added <|fim_pad|> logit bias = -inf
+0.00.757.937 I cmn  common_init_: added <|repo_name|> logit bias = -inf
+0.00.757.937 I cmn  common_init_: added <|file_sep|> logit bias = -inf
+0.00.757.959 W llama_init_from_model: model default pooling_type is [-1], but [0] was specified
+0.00.757.968 I llama_context: constructing llama_context
+0.00.757.969 I llama_context: n_seq_max             = 1
+0.00.757.969 I llama_context: n_ctx                 = 4096
+0.00.757.969 I llama_context: n_ctx_seq             = 4096
+0.00.757.970 I llama_context: n_batch               = 512
+0.00.757.970 I llama_context: n_ubatch              = 512
+0.00.757.970 I llama_context: causal_attn           = 1
+0.00.757.970 I llama_context: flash_attn            = auto
+0.00.757.970 I llama_context: kv_unified            = false
+0.00.757.971 I llama_context: freq_base             = 10000000.0
+0.00.757.971 I llama_context: freq_scale            = 1
+0.00.757.971 I llama_context: n_rs_seq              = 0
+0.00.757.971 I llama_context: n_outputs_max         = 512
+0.00.757.972 I llama_context: n_outputs_max_per_seq = 1
+0.00.757.972 I llama_context: n_ctx_seq (4096) < n_ctx_train (262144) -- the full capacity of the model will not be utilized
+0.00.757.973 I ggml_metal_init: allocating
+0.00.757.997 I ggml_metal_init: found device: Apple M3 Pro
+0.00.758.000 I ggml_metal_init: picking default device: Apple M3 Pro
+0.00.758.019 I ggml_metal_init: use fusion         = true
+0.00.758.019 I ggml_metal_init: use concurrency    = true
+0.00.758.019 I ggml_metal_init: use graph optimize = true
+0.00.758.087 I llama_context:        CPU  output buffer size =     0.95 MiB
+0.00.761.458 I llama_kv_cache:       MTL0 KV buffer size =   128.00 MiB
+0.00.766.470 I llama_kv_cache: size =  128.00 MiB (  4096 cells,   8 layers,  1/1 seqs), K (f16):   64.00 MiB, V (f16):   64.00 MiB
+0.00.766.473 I llama_kv_cache: n_rot_k = 0, n_embd_head_k_all = 256
+0.00.766.473 I llama_kv_cache: n_rot_v = 0, n_embd_head_k_all = 256
+0.00.769.480 I llama_memory_recurrent:       MTL0 RS buffer size =    50.25 MiB
+0.00.769.487 I llama_memory_recurrent: size =   50.25 MiB (     1 cells,  32 layers,  1 seqs  0 rs_seq), R (f32):    2.25 MiB, S (f32):   48.00 MiB, P (f32):    0.00 MiB
+0.00.769.492 I sched_reserve: reserving ...
+0.00.771.207 I resolve_fused_ops: Flash Attention enabled
+0.00.771.209 I resolve_fused_ops: resolving fused DeepSeek V4 HC support:
+0.00.772.097 I resolve_fused_ops: fused DeepSeek V4 HC pre enabled
+0.00.772.964 I resolve_fused_ops: fused DeepSeek V4 HC comb enabled
+0.00.773.829 I resolve_fused_ops: fused DeepSeek V4 HC post enabled
+0.00.791.697 I sched_reserve:       MTL0 compute buffer size =   509.02 MiB
+0.00.791.700 I sched_reserve:        CPU compute buffer size =    24.03 MiB
+0.00.791.702 I sched_reserve: graph: nodes = 1930, splits = 2, input objects = 4, input tensors = 10
+0.00.791.703 I sched_reserve: reserve took 22.21 ms, sched copies = 1
+0.00.791.724 I cmn          init: llama threadpool init, n_threads = 4
+0.00.791.767 I cmn  common_init_: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+0.00.791.782 W init: embeddings required but some input tokens were not marked as outputs -> overriding
+0.00.834.973 I srv          init: decision model type: kev
+0.00.836.432 W init: embeddings required but some input tokens were not marked as outputs -> overriding
+0.00.837.436 I cmn  common_conte: the context does not support partial sequence removal
+0.00.868.793 I srv    load_model: speculative decoding will use checkpoints
+0.00.868.796 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+0.00.868.804 I spec common_specu: no implementations specified for speculative decoding
+0.00.868.805 I slot   load_model: id  0 | task -1 | new slot, n_ctx = 4096
+0.00.868.812 I srv    load_model: prompt cache is enabled, size limit: 8192 MiB
+0.00.868.812 I srv    load_model: use `--cache-ram 0` to disable the prompt cache
+0.00.868.813 I srv    load_model: for more info see https://github.com/ggml-org/llama.cpp/pull/16391
+0.00.868.813 I srv    load_model: context checkpoints enabled, max = 32, min spacing = 8192
+0.00.868.832 I srv          init: idle slots will be saved to prompt cache upon starting a new task
+0.00.872.046 I srv          init: init: chat template, example_format: '<|im_start|>system
+You are a helpful assistant<|im_end|>
+<|im_start|>user
+Hello<|im_end|>
+<|im_start|>assistant
+Hi there<|im_end|>
+<|im_start|>user
+How are you?<|im_end|>
+<|im_start|>assistant
+<think>
+'
+0.00.872.438 I srv          init: init: chat template, thinking = 1
+0.00.872.442 I srv          init: preserve_reasoning kwarg: not supported by template
+0.00.872.448 I srv  llama_server: model loaded
+0.00.872.451 I srv  llama_server: listening on http://127.0.0.1:18087
+0.00.872.471 I srv  update_slots: all slots are idle
+0.01.298.446 I slot get_availabl: id  0 | task -1 |  - skipping, slot is empty
+0.01.298.449 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.01.298.461 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.01.298.469 I slot   operator(): id  0 | task 0 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 246
+0.01.298.473 I slot   operator(): id  0 | task 0 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.01.804.023 I slot      release: id  0 | task 0 | stop processing: n_tokens = 246, truncated = 0
+0.01.804.029 I srv  update_slots: all slots are idle
+0.01.821.824 I slot get_availabl: id  0 | task -1 |  - checking sim = 1.000 (246/246) > 0.100
+0.01.821.826 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 1.000 (> 0.100 thold), f_keep = 1.000
+0.01.821.828 I slot launch_slot_: id  0 | task 2 | processing task, is_child = 0
+0.01.821.833 I slot   operator(): id  0 | task 2 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 246
+0.01.821.836 I slot   operator(): id  0 | task 2 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.01.821.837 I slot   operator(): id  0 | task 2 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.02.310.770 I slot      release: id  0 | task 2 | stop processing: n_tokens = 246, truncated = 0
+0.02.310.778 I srv  update_slots: all slots are idle
+0.02.314.408 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.837 (206/246) > 0.100
+0.02.314.410 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.837 (> 0.100 thold), f_keep = 0.837
+0.02.314.412 I slot launch_slot_: id  0 | task 4 | processing task, is_child = 0
+0.02.314.415 I slot   operator(): id  0 | task 4 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 246
+0.02.314.417 I slot   operator(): id  0 | task 4 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.02.314.418 I slot   operator(): id  0 | task 4 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.02.803.988 I slot      release: id  0 | task 4 | stop processing: n_tokens = 246, truncated = 0
+0.02.803.994 I srv  update_slots: all slots are idle
+0.02.807.661 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.155 (38/245) > 0.100
+0.02.807.663 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.155 (> 0.100 thold), f_keep = 0.154
+0.02.807.665 I slot launch_slot_: id  0 | task 6 | processing task, is_child = 0
+0.02.807.668 I slot   operator(): id  0 | task 6 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 245
+0.02.807.671 I slot   operator(): id  0 | task 6 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.02.807.672 I slot   operator(): id  0 | task 6 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.03.301.149 I slot      release: id  0 | task 6 | stop processing: n_tokens = 245, truncated = 0
+0.03.301.154 I srv  update_slots: all slots are idle
+0.03.304.895 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.837 (205/245) > 0.100
+0.03.304.896 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.837 (> 0.100 thold), f_keep = 0.837
+0.03.304.903 I slot launch_slot_: id  0 | task 8 | processing task, is_child = 0
+0.03.304.907 I slot   operator(): id  0 | task 8 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 245
+0.03.304.910 I slot   operator(): id  0 | task 8 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.03.304.910 I slot   operator(): id  0 | task 8 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.03.804.244 I slot      release: id  0 | task 8 | stop processing: n_tokens = 245, truncated = 0
+0.03.804.250 I srv  update_slots: all slots are idle
+0.03.808.109 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.131 (38/290) > 0.100
+0.03.808.110 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.131 (> 0.100 thold), f_keep = 0.155
+0.03.808.112 I slot launch_slot_: id  0 | task 10 | processing task, is_child = 0
+0.03.808.117 I slot   operator(): id  0 | task 10 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 290
+0.03.808.119 I slot   operator(): id  0 | task 10 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.03.808.120 I slot   operator(): id  0 | task 10 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.04.448.297 I slot      release: id  0 | task 10 | stop processing: n_tokens = 290, truncated = 0
+0.04.448.308 I srv  update_slots: all slots are idle
+0.04.452.228 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.134 (39/290) > 0.100
+0.04.452.230 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.134 (> 0.100 thold), f_keep = 0.134
+0.04.452.232 I slot launch_slot_: id  0 | task 12 | processing task, is_child = 0
+0.04.452.237 I slot   operator(): id  0 | task 12 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 290
+0.04.452.240 I slot   operator(): id  0 | task 12 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.04.452.241 I slot   operator(): id  0 | task 12 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.05.057.553 I slot      release: id  0 | task 12 | stop processing: n_tokens = 290, truncated = 0
+0.05.057.559 I srv  update_slots: all slots are idle
+0.05.061.441 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.020 (5/256) > 0.100
+0.05.061.442 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 1040482398788
+0.05.061.444 I slot launch_slot_: id  0 | task 14 | processing task, is_child = 0
+0.05.061.453 I slot   operator(): id  0 | task 14 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 256
+0.05.061.455 I slot   operator(): id  0 | task 14 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.05.061.456 I slot   operator(): id  0 | task 14 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.05.636.857 I slot      release: id  0 | task 14 | stop processing: n_tokens = 256, truncated = 0
+0.05.636.863 I srv  update_slots: all slots are idle
+0.05.640.627 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.844 (216/256) > 0.100
+0.05.640.628 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.844 (> 0.100 thold), f_keep = 0.844
+0.05.640.630 I slot launch_slot_: id  0 | task 16 | processing task, is_child = 0
+0.05.640.634 I slot   operator(): id  0 | task 16 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 256
+0.05.640.637 I slot   operator(): id  0 | task 16 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.05.640.638 I slot   operator(): id  0 | task 16 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.06.129.859 I slot      release: id  0 | task 16 | stop processing: n_tokens = 256, truncated = 0
+0.06.129.866 I srv  update_slots: all slots are idle
+0.06.133.555 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.020 (5/252) > 0.100
+0.06.133.556 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 1040483471094
+0.06.133.558 I slot launch_slot_: id  0 | task 18 | processing task, is_child = 0
+0.06.133.562 I slot   operator(): id  0 | task 18 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 252
+0.06.133.565 I slot   operator(): id  0 | task 18 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.06.133.566 I slot   operator(): id  0 | task 18 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.06.624.670 I slot      release: id  0 | task 18 | stop processing: n_tokens = 252, truncated = 0
+0.06.624.677 I srv  update_slots: all slots are idle
+0.06.628.552 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.841 (212/252) > 0.100
+0.06.628.553 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.841 (> 0.100 thold), f_keep = 0.841
+0.06.628.556 I slot launch_slot_: id  0 | task 20 | processing task, is_child = 0
+0.06.628.560 I slot   operator(): id  0 | task 20 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 252
+0.06.628.562 I slot   operator(): id  0 | task 20 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.06.628.563 I slot   operator(): id  0 | task 20 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.07.118.993 I slot      release: id  0 | task 20 | stop processing: n_tokens = 252, truncated = 0
+0.07.119.002 I srv  update_slots: all slots are idle
+0.07.123.108 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.018 (5/271) > 0.100
+0.07.123.109 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 1040484460229
+0.07.123.112 I slot launch_slot_: id  0 | task 22 | processing task, is_child = 0
+0.07.123.121 I slot   operator(): id  0 | task 22 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 271
+0.07.123.125 I slot   operator(): id  0 | task 22 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.07.123.126 I slot   operator(): id  0 | task 22 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.07.687.069 I slot      release: id  0 | task 22 | stop processing: n_tokens = 271, truncated = 0
+0.07.687.085 I srv  update_slots: all slots are idle
+0.07.691.239 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.122 (33/271) > 0.100
+0.07.691.241 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.122 (> 0.100 thold), f_keep = 0.122
+0.07.691.243 I slot launch_slot_: id  0 | task 24 | processing task, is_child = 0
+0.07.691.247 I slot   operator(): id  0 | task 24 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 271
+0.07.691.250 I slot   operator(): id  0 | task 24 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.07.691.251 I slot   operator(): id  0 | task 24 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.08.249.876 I slot      release: id  0 | task 24 | stop processing: n_tokens = 271, truncated = 0
+0.08.249.881 I srv  update_slots: all slots are idle
+0.08.253.832 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.022 (6/279) > 0.100
+0.08.253.834 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 1040485591110
+0.08.253.836 I slot launch_slot_: id  0 | task 26 | processing task, is_child = 0
+0.08.253.840 I slot   operator(): id  0 | task 26 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 279
+0.08.253.843 I slot   operator(): id  0 | task 26 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.08.253.844 I slot   operator(): id  0 | task 26 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.08.813.126 I slot      release: id  0 | task 26 | stop processing: n_tokens = 279, truncated = 0
+0.08.813.132 I srv  update_slots: all slots are idle
+0.08.817.099 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.122 (34/279) > 0.100
+0.08.817.101 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.122 (> 0.100 thold), f_keep = 0.122
+0.08.817.103 I slot launch_slot_: id  0 | task 28 | processing task, is_child = 0
+0.08.817.107 I slot   operator(): id  0 | task 28 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 279
+0.08.817.111 I slot   operator(): id  0 | task 28 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.08.817.112 I slot   operator(): id  0 | task 28 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.09.380.484 I slot      release: id  0 | task 28 | stop processing: n_tokens = 279, truncated = 0
+0.09.380.490 I srv  update_slots: all slots are idle
+0.09.384.749 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.020 (5/255) > 0.100
+0.09.384.750 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 1040486721719
+0.09.384.752 I slot launch_slot_: id  0 | task 30 | processing task, is_child = 0
+0.09.384.756 I slot   operator(): id  0 | task 30 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 255
+0.09.384.759 I slot   operator(): id  0 | task 30 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.09.384.759 I slot   operator(): id  0 | task 30 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.09.882.764 I slot      release: id  0 | task 30 | stop processing: n_tokens = 255, truncated = 0
+0.09.882.774 I srv  update_slots: all slots are idle
+0.09.886.891 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.843 (215/255) > 0.100
+0.09.886.892 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.843 (> 0.100 thold), f_keep = 0.843
+0.09.886.895 I slot launch_slot_: id  0 | task 32 | processing task, is_child = 0
+0.09.886.899 I slot   operator(): id  0 | task 32 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 255
+0.09.886.901 I slot   operator(): id  0 | task 32 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.09.886.902 I slot   operator(): id  0 | task 32 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.10.378.459 I slot      release: id  0 | task 32 | stop processing: n_tokens = 255, truncated = 0
+0.10.378.466 I srv  update_slots: all slots are idle
+0.10.382.541 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.843 (215/255) > 0.100
+0.10.382.543 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.843 (> 0.100 thold), f_keep = 0.843
+0.10.382.545 I slot launch_slot_: id  0 | task 34 | processing task, is_child = 0
+0.10.382.549 I slot   operator(): id  0 | task 34 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 255
+0.10.382.551 I slot   operator(): id  0 | task 34 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.10.382.552 I slot   operator(): id  0 | task 34 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.10.876.526 I slot      release: id  0 | task 34 | stop processing: n_tokens = 255, truncated = 0
+0.10.876.533 I srv  update_slots: all slots are idle
+0.10.880.576 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.843 (215/255) > 0.100
+0.10.880.577 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.843 (> 0.100 thold), f_keep = 0.843
+0.10.880.579 I slot launch_slot_: id  0 | task 36 | processing task, is_child = 0
+0.10.880.583 I slot   operator(): id  0 | task 36 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 255
+0.10.880.587 I slot   operator(): id  0 | task 36 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.10.880.587 I slot   operator(): id  0 | task 36 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.11.376.458 I slot      release: id  0 | task 36 | stop processing: n_tokens = 255, truncated = 0
+0.11.376.464 I srv  update_slots: all slots are idle
+0.11.380.607 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.018 (5/279) > 0.100
+0.11.380.608 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 1040488717692
+0.11.380.611 I slot launch_slot_: id  0 | task 38 | processing task, is_child = 0
+0.11.380.615 I slot   operator(): id  0 | task 38 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 279
+0.11.380.617 I slot   operator(): id  0 | task 38 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.11.380.618 I slot   operator(): id  0 | task 38 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.11.947.886 I slot      release: id  0 | task 38 | stop processing: n_tokens = 279, truncated = 0
+0.11.947.893 I srv  update_slots: all slots are idle
+0.11.951.953 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.122 (34/279) > 0.100
+0.11.951.955 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.122 (> 0.100 thold), f_keep = 0.122
+0.11.951.958 I slot launch_slot_: id  0 | task 40 | processing task, is_child = 0
+0.11.951.963 I slot   operator(): id  0 | task 40 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 279
+0.11.951.966 I slot   operator(): id  0 | task 40 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.11.951.967 I slot   operator(): id  0 | task 40 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.12.509.050 I slot      release: id  0 | task 40 | stop processing: n_tokens = 279, truncated = 0
+0.12.509.057 I srv  update_slots: all slots are idle
+0.12.513.361 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.022 (6/271) > 0.100
+0.12.513.363 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 1040489850285
+0.12.513.365 I slot launch_slot_: id  0 | task 42 | processing task, is_child = 0
+0.12.513.369 I slot   operator(): id  0 | task 42 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 271
+0.12.513.372 I slot   operator(): id  0 | task 42 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.12.513.373 I slot   operator(): id  0 | task 42 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.13.065.706 I slot      release: id  0 | task 42 | stop processing: n_tokens = 271, truncated = 0
+0.13.065.712 I srv  update_slots: all slots are idle
+0.13.069.799 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.122 (33/271) > 0.100
+0.13.069.801 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.122 (> 0.100 thold), f_keep = 0.122
+0.13.069.803 I slot launch_slot_: id  0 | task 44 | processing task, is_child = 0
+0.13.069.807 I slot   operator(): id  0 | task 44 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 271
+0.13.069.812 I slot   operator(): id  0 | task 44 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.13.069.812 I slot   operator(): id  0 | task 44 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.13.620.670 I slot      release: id  0 | task 44 | stop processing: n_tokens = 271, truncated = 0
+0.13.620.682 I srv  update_slots: all slots are idle
+0.13.625.090 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.020 (5/252) > 0.100
+0.13.625.092 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 1040490961905
+0.13.625.094 I slot launch_slot_: id  0 | task 46 | processing task, is_child = 0
+0.13.625.099 I slot   operator(): id  0 | task 46 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 252
+0.13.625.102 I slot   operator(): id  0 | task 46 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.13.625.103 I slot   operator(): id  0 | task 46 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.14.116.375 I slot      release: id  0 | task 46 | stop processing: n_tokens = 252, truncated = 0
+0.14.116.381 I srv  update_slots: all slots are idle
+0.14.120.436 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.841 (212/252) > 0.100
+0.14.120.438 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.841 (> 0.100 thold), f_keep = 0.841
+0.14.120.441 I slot launch_slot_: id  0 | task 48 | processing task, is_child = 0
+0.14.120.445 I slot   operator(): id  0 | task 48 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 252
+0.14.120.447 I slot   operator(): id  0 | task 48 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.14.120.448 I slot   operator(): id  0 | task 48 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.14.611.347 I slot      release: id  0 | task 48 | stop processing: n_tokens = 252, truncated = 0
+0.14.611.354 I srv  update_slots: all slots are idle
+0.14.615.602 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.020 (5/256) > 0.100
+0.14.615.603 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 1040491952582
+0.14.615.605 I slot launch_slot_: id  0 | task 50 | processing task, is_child = 0
+0.14.615.609 I slot   operator(): id  0 | task 50 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 256
+0.14.615.612 I slot   operator(): id  0 | task 50 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.14.615.613 I slot   operator(): id  0 | task 50 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.15.105.915 I slot      release: id  0 | task 50 | stop processing: n_tokens = 256, truncated = 0
+0.15.105.922 I srv  update_slots: all slots are idle
+0.15.110.028 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.844 (216/256) > 0.100
+0.15.110.030 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.844 (> 0.100 thold), f_keep = 0.844
+0.15.110.032 I slot launch_slot_: id  0 | task 52 | processing task, is_child = 0
+0.15.110.036 I slot   operator(): id  0 | task 52 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 256
+0.15.110.038 I slot   operator(): id  0 | task 52 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.15.110.039 I slot   operator(): id  0 | task 52 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.15.610.306 I slot      release: id  0 | task 52 | stop processing: n_tokens = 256, truncated = 0
+0.15.610.314 I srv  update_slots: all slots are idle
+0.15.614.488 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.017 (5/290) > 0.100
+0.15.614.490 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 1040492951541
+0.15.614.492 I slot launch_slot_: id  0 | task 54 | processing task, is_child = 0
+0.15.614.500 I slot   operator(): id  0 | task 54 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 290
+0.15.614.503 I slot   operator(): id  0 | task 54 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.15.614.503 I slot   operator(): id  0 | task 54 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.16.231.621 I slot      release: id  0 | task 54 | stop processing: n_tokens = 290, truncated = 0
+0.16.231.628 I srv  update_slots: all slots are idle
+0.16.235.781 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.134 (39/290) > 0.100
+0.16.235.782 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.134 (> 0.100 thold), f_keep = 0.134
+0.16.235.784 I slot launch_slot_: id  0 | task 56 | processing task, is_child = 0
+0.16.235.787 I slot   operator(): id  0 | task 56 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 290
+0.16.235.789 I slot   operator(): id  0 | task 56 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.16.235.790 I slot   operator(): id  0 | task 56 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.16.843.924 I slot      release: id  0 | task 56 | stop processing: n_tokens = 290, truncated = 0
+0.16.843.938 I srv  update_slots: all slots are idle
+0.16.852.997 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.155 (38/245) > 0.100
+0.16.853.000 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.155 (> 0.100 thold), f_keep = 0.131
+0.16.853.003 I slot launch_slot_: id  0 | task 58 | processing task, is_child = 0
+0.16.853.009 I slot   operator(): id  0 | task 58 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 245
+0.16.853.014 I slot   operator(): id  0 | task 58 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.16.853.015 I slot   operator(): id  0 | task 58 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.17.343.580 I slot      release: id  0 | task 58 | stop processing: n_tokens = 245, truncated = 0
+0.17.343.586 I srv  update_slots: all slots are idle
+0.17.347.729 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.837 (205/245) > 0.100
+0.17.347.731 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.837 (> 0.100 thold), f_keep = 0.837
+0.17.347.734 I slot launch_slot_: id  0 | task 60 | processing task, is_child = 0
+0.17.347.738 I slot   operator(): id  0 | task 60 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 245
+0.17.347.743 I slot   operator(): id  0 | task 60 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.17.347.744 I slot   operator(): id  0 | task 60 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.17.837.475 I slot      release: id  0 | task 60 | stop processing: n_tokens = 245, truncated = 0
+0.17.837.481 I srv  update_slots: all slots are idle
+0.17.841.627 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.154 (38/246) > 0.100
+0.17.841.628 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.154 (> 0.100 thold), f_keep = 0.155
+0.17.841.631 I slot launch_slot_: id  0 | task 62 | processing task, is_child = 0
+0.17.841.634 I slot   operator(): id  0 | task 62 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 246
+0.17.841.637 I slot   operator(): id  0 | task 62 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.17.841.637 I slot   operator(): id  0 | task 62 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.18.331.744 I slot      release: id  0 | task 62 | stop processing: n_tokens = 246, truncated = 0
+0.18.331.750 I srv  update_slots: all slots are idle
+0.18.335.904 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.837 (206/246) > 0.100
+0.18.335.906 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.837 (> 0.100 thold), f_keep = 0.837
+0.18.335.908 I slot launch_slot_: id  0 | task 64 | processing task, is_child = 0
+0.18.335.912 I slot   operator(): id  0 | task 64 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 246
+0.18.335.916 I slot   operator(): id  0 | task 64 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+0.18.335.917 I slot   operator(): id  0 | task 64 | cached n_tokens = 0, memory_seq_rm [0, end)
+0.18.825.563 I slot      release: id  0 | task 64 | stop processing: n_tokens = 246, truncated = 0
+0.18.825.570 I srv  update_slots: all slots are idle
+0.18.852.460 I srv    operator(): operator(): cleaning up before exit...
+0.18.852.608 I common_memory_breakdown_print: | memory breakdown [MiB]  | total    free    self   model   context   compute    unaccounted |
+0.18.852.609 I common_memory_breakdown_print: |   - MTL0 (Apple M3 Pro) | 28753 = 25183 + (3569 =  2882 +     178 +     509) +           0 |
+0.18.852.610 I common_memory_breakdown_print: |   - Host                |                   365 =   341 +       0 +      24                |
+0.18.854.589 I ggml_metal_free: deallocating

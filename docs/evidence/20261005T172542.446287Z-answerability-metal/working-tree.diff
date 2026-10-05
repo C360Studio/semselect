@@ -1,0 +1,255 @@
+diff --git a/README.md b/README.md
+index da8a05a..0a54e9d 100644
+--- a/README.md
++++ b/README.md
+@@ -10,12 +10,12 @@ its place. A result recommending ordinary code or schema-constrained Qwen is a
+ useful outcome. We have not yet demonstrated a workload advantage for the current
+ decision model over the matched Qwen chat baseline.
+ 
+-Start with [when to use semselect](docs/when-to-use.md), then the
+-[comparison results](docs/results.md). The guide distinguishes measured findings
+-from promising use cases that still need testing.
+-The [existing-algorithm audit](docs/code-baselines-and-rag.md) explains what
+-semsource/SemStreams already solve with rules, retrieval and graph composition,
+-and where an added semantic judgment would need to prove its value.
++Start with the short [when-to-use guide](docs/when-to-use.md). Our next experiment
++asks [whether retrieved evidence actually answers the question](eval/answerability/README.md),
++comparing existing code/retrieval, Qwen JSON and Kev. Each experiment should show
++worked examples, one small table and a recommendation. The
++[results history](docs/results.md) and [algorithm audit](docs/code-baselines-and-rag.md)
++provide the supporting evidence.
+ 
+ Callers supply context and permissible answers; semselect returns typed model
+ readouts. Callers own taxonomies, routing, authorization, acceptance thresholds,
+diff --git a/Taskfile.yml b/Taskfile.yml
+index 43a8f84..44b015a 100644
+--- a/Taskfile.yml
++++ b/Taskfile.yml
+@@ -79,3 +79,9 @@ tasks:
+   compare:cpu:
+     desc: Compare the same Qwen formats in the pinned CPU Docker runtime
+     cmds: [python3 scripts/compare_scoring.py --hardware cpu-docker]
++  answerability:validate:
++    desc: Check the 12 teaching cases offline; no model inference
++    cmds: [python3 scripts/answerability.py --validate]
++  answerability:metal:
++    desc: Compare the frozen-evidence control, Qwen JSON and Kev on teaching cases
++    cmds: [python3 scripts/answerability.py --hardware metal]
+diff --git a/docs/code-baselines-and-rag.md b/docs/code-baselines-and-rag.md
+index 2bbae19..07228a9 100644
+--- a/docs/code-baselines-and-rag.md
++++ b/docs/code-baselines-and-rag.md
+@@ -1,5 +1,9 @@
+ # Existing algorithms are part of the baseline
+ 
++This is the detailed source audit. Start with the short
++[when-to-use guide](when-to-use.md) or the [next experiment](../eval/answerability/README.md)
++for the practical path forward.
++
+ The question is whether an added semantic judgment improves the existing system.
+ Comparing two models alone cannot answer that. Code already handles exact facts,
+ syntax, graph relationships and substantial retrieval work in the sem* ecosystem.
+diff --git a/docs/sglang-investigation.md b/docs/sglang-investigation.md
+index 28e1979..fbce410 100644
+--- a/docs/sglang-investigation.md
++++ b/docs/sglang-investigation.md
+@@ -10,6 +10,10 @@ remain separate. Shutdown was bounded but not graceful. This is endpoint
+ compatibility, not a SGLang quality, calibration or performance result. The matched
+ SGLang workload comparison below remains future work.
+ 
++The immediate priority is the [answerability workload](../eval/answerability/README.md)
++on the existing llama.cpp Metal setup. Return to this serving comparison when a
++workload result makes runtime cost or scoring mechanics the next useful question.
++
+ ## Question and architecture boundary
+ 
+ Can direct option scoring improve useful semantic decisions or operating cost
+diff --git a/docs/when-to-use.md b/docs/when-to-use.md
+index 6978f87..0ef1bf5 100644
+--- a/docs/when-to-use.md
++++ b/docs/when-to-use.md
+@@ -1,128 +1,63 @@
+-# When to use semselect
++# When to use a decision classifier
+ 
+-semselect exists to help a skeptical developer decide when a Jev-like decision
+-model is worth using, with evidence they can inspect and reproduce. We provide
+-a tested local service, comparisons against simpler alternatives, and guidance
+-that changes when the evidence changes. A recommendation to use ordinary code
+-or schema-constrained chat is a successful outcome of this project.
++**Use one when it improves a specific semantic judgment over the simplest adequate
++existing approach.** semselect exists to demonstrate where that happens—and where
++code, retrieval or ordinary JSON output is enough.
+ 
+-Here, "Jev-like" describes an interface for bounded semantic judgments: choose
+-among supplied options, assess an ordered scale, or evaluate a yes/no proposition.
+-Our current service runs Kev. Kev, Jev and ordinary Qwen with direct scoring are
+-different models and approaches; findings about one do not establish another's
+-accuracy or calibration. See the [research record](research-and-decision.md).
++"Jev-like" describes the bounded decision interface. Our service runs Kev; our
++comparisons also use Qwen. Those results do not establish Jev's quality.
+ 
+-## Start with the decision you actually need
++## Three questions before adding a classifier
+ 
+-| Your situation | Starting point | What would justify another approach? |
+-| --- | --- | --- |
+-| The answer follows from authoritative fields and exact rules: permissions, balances, schema validity or allowed state transitions | Code | Missing semantic information may need interpretation; the rules still govern the action |
+-| Unstructured text needs a label or a few extracted fields | Schema-constrained chat as a baseline | A measured improvement in quality, latency, resource use or useful abstention |
+-| You need a bounded judgment and want scores to help decide when to defer | Evaluate a decision model or direct option scoring | More useful accepted decisions at the same tolerated error rate, measured on held-out examples |
+-| You need several independent judgments over the same input | Compare one multi-field JSON response with batched decisions | Better end-to-end quality or cost for the whole bundle; measure shared-input benefits |
+-| The decision requires missing records, external verification, a calculation or several reasoning steps | Obtain the evidence and perform the required computation | A bounded semantic judgment may fit within that workflow, but cannot supply missing authority |
+-
+-Native probabilities are useful only if they improve a caller decision. A tidy
+-distribution and a valid response are not sufficient evidence. Likewise, code
+-that guesses intent from a few keywords remains a heuristic; being written as
+-an `if` statement does not make its premise authoritative.
+-
+-The [existing-algorithm audit](code-baselines-and-rag.md) makes this concrete.
+-SemStreams already has keyword-first query routing, statistical example matching
+-and deterministic fusion/graph composition; learned embeddings may supply its NL
+-candidates. SemSource's historical scorecard found all seven tested loose-language
+-queries worked with the existing fusion path, so an extra classifier was not
+-justified there. Use that complete path as the baseline before adding a selector.
+-Keep query routing, retrieval relevance and evidence answerability as separate
+-tasks, and require an improvement on the task the caller actually needs.
+-
+-## A concrete example: a refund request
+-
+-Suppose a customer writes, "I was charged twice; can you sort this out?"
++1. **Can code determine the answer from known facts?** Use code for permissions,
++   exact metadata, valid transitions and calculations.
++2. **Does existing retrieval or a simple JSON response already meet the need?**
++   Keep it unless an added classifier demonstrates a useful improvement.
++3. **Is there an unresolved judgment about meaning?** A decision classifier may
++   help—for example, distinguishing a relevant passage from one that actually
++   contains the requested answer. The caller still owns actions and fallback.
+ 
+-1. A model can interpret the message as a possible billing/refund request. That
+-   is a semantic judgment, and a schema-constrained label may be all you need.
+-2. Code obtains transaction records and checks eligibility, identity, permissions
+-   and policy. The message and the model's confidence cannot prove a duplicate
+-   charge or authorize a refund.
+-3. If a bounded classifier helps, evaluate `billing`, other relevant routes and
+-   `unknown`. The caller can defer uncertain cases and enforce policy on every
+-   accepted label before executing anything.
++## What we know so far
+ 
+-The reason to try the current semselect service here would be a demonstrated
+-improvement in routing or deferral compared with the simpler label baseline.
+-That benefit remains unproved for Kev. A separate ordinary-Qwen experiment below
+-shows a latency benefit from one-token scoring on Metal, with the same decisions.
+-The winning option always exists mathematically in a nonempty list; the caller
+-still needs a way to express that no offered option fits.
+-
+-## What the evidence currently says
+-
+-These are findings from 2026-10-05, not universal model rankings. The routing set
+-contains 24 manual cases in two option orders. The original model comparison
+-has 48 correlated observations per model; the later format comparison repeats
+-both orders twice. Both 4B models used the same pinned llama.cpp runtime and
+-Q4_K_M quantization class on an M3 Pro with Metal. Prompts, serving paths and model
+-training differ in the model comparison.
+-
+-| Question | Evidence | Practical conclusion |
++| Question | Finding | Guidance today |
+ | --- | --- | --- |
+-| Does the local service work? | Real native Choice, Score and Noul smoke checks, health, request bounds and lifecycle checks | The documented service is usable for evaluation; these checks do not certify decision quality |
+-| Does Kev improve simple routing over the matched Qwen baseline? | Kev: 43/48 correct, 449 ms median. Qwen: 46/48, 288 ms median | This comparison favors Qwen's schema-constrained labels |
+-| Do Kev scores establish reliable abstention? | Rejecting `unknown` and requiring a top-option probability of at least 0.7 accepted 29/48 calls, including two wrong labels | A probability threshold alone does not establish reliable decisions; production calibration remains unproved |
+-| Can ordinary Qwen benefit from direct option scoring? | On Metal, the same Qwen3.5-4B returned identical labels with JSON and one-token scoring: 92/96 correct for each, with 673 ms versus 488 ms median inference HTTP latency | A measured format-efficiency benefit for this workload; no accuracy gain or evidence of Jev-specific training benefits |
+-| Does that Metal result transfer unchanged to CPU/Docker? | JSON: 92/96 correct, 11,191 ms median. Scoring: 90/96, 10,816 ms; one additional `unknown` per trial | A 3.4% raw median reduction with lower coverage does not justify the same recommendation; validate the actual deployment |
+-| Are ordered scores, yes/no judgments or bundles better than chat? | API smoke checks exist; matched workload-quality comparisons do not | Worth investigating when a caller needs them; no recommendation based on measured superiority yet |
+-| Does SGLang direct scoring improve ordinary Qwen? | After preserved warmup failures, a [cache-disabled MLX probe](evidence/20261005T154252Z-sglang-metal-cache-disabled/README.md) passed JSON, scoring and decision-bundle checks on one fixture | The mechanism works in that configuration; workload quality, useful abstention and speedup remain unproved |
+-
+-Inspect the [comparison history](results.md), [Metal validation](validation-metal.md)
+-and raw [Kev](evidence/metal-kev-4b.json) / [Qwen](evidence/metal-qwen35-4b.json)
+-results. Reproduction commands and exact conditions are in the validation report.
+-The Qwen run used the chat API directly, bypassing semselect; it represents the
+-seminstruct-style approach, not a validated upgrade of the seminstruct release.
+-The displayed threshold was inspected on this small set, not independently
+-validated as a production policy.
+-
+-The [direct-scoring experiment](validation-scoring.md) holds the Qwen model and
+-runtime fixed, repeats both candidate orders twice and disables prompt-prefix
+-reuse. Its 96 calls per format are still only 24 distinct examples. It uses
+-evaluation-only llama.cpp code, separate from the production semselect API.
+-Both formats make the same two reversed-order mistakes in each trial. Scoring
+-returns one token versus JSON's seven; it exposes candidate probabilities, but
+-their value for production deferral still needs held-out evidence. Output-format
+-instructions differ, and scoring preparation is recorded outside inference HTTP
+-latency. Keep those conditions attached to the timing claim.
+-
+-A practical reason to investigate this path is repeated, bounded interpretation
+-where labels alone are sufficient and decoding time is a meaningful part of the
+-latency budget. If JSON already meets the budget, the observed speedup may not
+-justify another integration. A need for explanations, extracted fields or
+-multi-step reasoning calls for a different comparison.
+-
+-## What would earn a positive recommendation?
+-
+-We will recommend a decision-model path for a specific workload when evidence
+-shows a useful gain over its simplest adequate alternative. Define acceptable
+-errors, latency and resource limits before evaluating. Keep the model and hardware
+-fixed when testing a serving mechanism, and label model comparisons separately.
+-
+-A worked example should let a reader answer:
+-
+-- What interpretation is needed, and which parts remain ordinary code?
+-- What does the simpler baseline get right or wrong?
+-- Does the alternative accept more correct cases at the same error budget, or
+-  reduce latency/resource cost at comparable quality? How often does it defer?
+-- What fails under ambiguity, missing evidence, changed option order or injected
+-  instructions? What happens after an error, timeout or unknown response?
+-- Which exact model, runtime, hardware, prompts and data produced the result,
+-  and how can someone reproduce it?
+-
+-For scores, choose thresholds or calibration settings on development examples
+-and evaluate them on a separate held-out set. Report errors together with coverage
+-and uncertainty; a zero-error result on a tiny accepted subset proves little.
+-Retain negative and inconclusive outcomes alongside successful ones.
+-
+-Until such a benefit is demonstrated, treat a new use case as an experiment.
+-"Proof" here means reproducible evidence for a stated workload and operating
+-conditions. The service, comparison matrix and explanation should make that
+-boundary easy for the next skeptic to understand.
++| Does existing fusion need another classifier for loose wording? | Semsource's historical scorecard passed all seven tested loose-language queries with its existing fusion path | No demonstrated need on that set; fusion can include learned embeddings |
++| Does Kev beat ordinary Qwen for simple ticket routing? | The matched 4B smoke comparison favored Qwen JSON | Keep Qwen as the practical baseline |
++| Does direct scoring make Qwen more useful? | Metal preserved labels with 28% lower median inference HTTP latency; CPU saved 3.4% but abstained more | A conditional efficiency benefit, with no demonstrated accuracy gain |
++| Do the probabilities support better decisions about when to defer? | No independent held-out evidence yet | Test this next; do not interpret scores as calibrated correctness |
++
++These are small, workload-specific findings. Full conditions, failures and raw
++results remain in the [results history](results.md). The
++[algorithm audit](code-baselines-and-rag.md) is supporting detail.
++
++## Next experiment: does the evidence answer the question?
++
++Question: **"When must I submit an expense claim?"**
++
++| Retrieved text | Expected action |
++| --- | --- |
++| "Expense claims must be submitted by the 25th." | Allow an answer |
++| "Use the expense portal to submit a claim." | Defer: the deadline is missing |
++| Two equally applicable passages give conflicting deadlines | Defer: the conflict is unresolved |
++
++These are illustrative examples, not measured results. Compare the existing
++retrieval/code baseline, Qwen JSON and Kev on the same frozen evidence. Count
++unsupported cases allowed through, answerable cases allowed through, unnecessary
++deferrals and added latency. A system that defers everything has not solved the
++problem.
++
++The [experiment brief](../eval/answerability/README.md) defines the next bounded
++step. Use the working Metal setup first. Expand runtime/hardware testing only
++when it answers a remaining question about a promising result.
++
++## How each experiment should read
++
++Every experiment gets one question, a few understandable examples, a small results
++table, and a verdict: **keep the baseline**, **worth a larger test**, or
++**inconclusive**. End with "use this when…" and "prefer the baseline when…".
++Readers can follow links for reproduction details and raw evidence.
++
++An added classifier earns further work by allowing more supported cases at the
++same observed unsupported-allow count, or achieving comparable decisions at lower
++total cost. Tradeoffs need an explicit caller error budget before recommendation.
++Small samples guide the next experiment; they do not certify production safety.

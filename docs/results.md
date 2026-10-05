@@ -1,7 +1,7 @@
 # Evaluation results history
 
-The [README](../README.md#latest-routing-results) shows the latest useful matched
-comparison. This page preserves the complete published routing history; linked
+The [README](../README.md) links the latest useful comparisons.
+This page preserves the complete published experiment history; linked
 JSON contains the per-request evidence and is the source for table values.
 Detailed validation reports explain conditions, failures and interpretation.
 The [when-to-use guide](when-to-use.md) turns these comparisons into guidance for
@@ -16,6 +16,34 @@ specified for each experiment. Accuracy includes invalid/error calls
 in its denominator. Latency covers measured calls; order flips compare valid
 pairs. These are small smoke evaluations, not a production benchmark or calibration
 study. Model probabilities are not established probabilities of correctness.
+
+## 2026-10-05 — answerability teaching cases on Metal
+
+Separate workload: 12 public development examples, with labels reviewed before
+inference. Shared code resolves four cases; models judge the other eight. The
+control applies the same code, then allows unresolved cases. It is no added
+semantic gate on fixed evidence, not a fusion retrieval or full-answering run.
+See the [worked examples and verdict](../eval/answerability/README.md),
+[validation record](validation-answerability.md) and
+[raw evidence](evidence/20261005T172542.446287Z-answerability-metal/comparison.json).
+
+| Primary: trial 1, normal order | Unsupported allowed / 7 | Answerable allowed / 5 | Correct / total | Median decision time, eight unresolved cases |
+| --- | ---: | ---: | ---: | ---: |
+| No added gate | 4 | 5 | 8/12 | <1 ms |
+| Qwen3.5-4B JSON | 0 | 5 | 12/12 | 553 ms |
+| Kev-4B through semselect | 0 | 5 | 12/12 | 530 ms |
+
+No invalid responses, transport errors or unnecessary deferrals. Across both
+trials and normal/reversed evidence/candidate order, each model made 32 correct
+model calls plus 16 correct code decisions, with zero order flips. These remain
+12 examples, not 48 independent tests. One warmup per model is excluded.
+Prompt-prefix caching is enabled in both configurations, but Qwen reused prefixes
+in 31/32 measured calls while Kev reprocessed every full prompt. Models, prompts
+and serving paths also differ. Startup, source snapshots and cleanup are preserved.
+
+Both classifiers illustrate a useful semantic check; this set shows no decision
+advantage for Kev over Qwen. Verdict: worth a held-out task test, keep Qwen as the
+model baseline. No full-pipeline or CPU answerability benefit has been established.
 
 ## 2026-10-05 — Qwen JSON versus one-token scoring
 
