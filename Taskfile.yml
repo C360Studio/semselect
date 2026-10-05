@@ -58,3 +58,18 @@ tasks:
   baseline:evaluate:
     desc: Evaluate the same dataset against seminstruct (no inferred probabilities)
     cmds: ['python3 scripts/evaluate.py --backend seminstruct --url http://127.0.0.1:8083 --model qwen3-0.6b --output results/seminstruct.json {{.CLI_ARGS}}']
+  metal:build:
+    desc: Build the pinned llama.cpp with Metal and the native guard (Apple Silicon)
+    cmds: [python3 scripts/metal.py build]
+  metal:serve:
+    desc: Serve Kev on loopback with Metal; Ctrl-C stops both owned processes
+    cmds: [python3 scripts/metal.py serve]
+  metal:evaluate:
+    desc: Start Metal Kev, run primitives and routing evaluation, then stop
+    cmds: [python3 scripts/metal.py evaluate]
+  metal:baseline:fetch:
+    desc: Download and verify the matched Qwen3.5-4B Q4_K_M baseline
+    cmds: [python3 scripts/model.py --lock models.baseline.lock.json]
+  metal:baseline:evaluate:
+    desc: Start the matched Metal Qwen baseline, evaluate, then stop
+    cmds: [python3 scripts/metal.py evaluate --baseline]

@@ -2,6 +2,13 @@
 
 Checked 2026-10-05. Initial deployment target: CPU-only Linux container. This document separates source review from the [local validation record](validation.md); numbers attributed to upstream are not local measurements.
 
+Follow-up: [native Metal validation](validation-metal.md) on the M3 Pro now compares
+both 4B models at Q4_K_M on the same runtime. Qwen3.5-4B returned 46/48 correct
+labels at 288 ms median versus Kev's 43/48 at 449 ms. This strengthens the case
+for retaining seminstruct as the routing reference and positioning semselect
+around typed model readouts. The earlier CPU/0.6B comparison below remains a
+bootstrap record, not a fair model-size comparison.
+
 ## Decision
 
 Package **llama.cpp's native `/v1/systemone` endpoint with Kev-4B Q4_K_M**. Keep semselect's own service code limited to operational bounds, health and request forwarding. The upstream runtime already implements Choice, Score and Noul, so semselect does not need its own probability extraction, tokenizer logic or decision head.

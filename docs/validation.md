@@ -1,5 +1,10 @@
 # Bootstrap validation — 2026-10-05
 
+This is the original **CPU** record. The later
+[native Metal comparison](validation-metal.md) uses a matched 4B chat baseline and
+changes the routing comparison: Qwen3.5-4B was faster and more accurate than Kev
+on this small set. Preserve these CPU results as the bootstrap reference.
+
 **The local service works; these are small smoke results, not production benchmarks.**
 The final CPU image loads the pinned model, serves native Choice/Score/Noul, and
 passes the offline contract checks. The routing evaluation favors Kev over the

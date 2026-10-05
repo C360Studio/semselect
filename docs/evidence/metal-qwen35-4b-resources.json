@@ -1,0 +1,162 @@
+{
+  "run_id": "20261005T143658.673689Z",
+  "model": {
+    "repository": "unsloth/Qwen3.5-4B-GGUF",
+    "revision": "e87f176479d0855a907a41277aca2f8ee7a09523",
+    "filename": "Qwen3.5-4B-Q4_K_M.gguf",
+    "size_bytes": 2740937888,
+    "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+    "license": "Apache-2.0",
+    "alias": "qwen3.5-4b",
+    "source_repository": "Qwen/Qwen3.5-4B",
+    "source_revision_note": "The GGUF publisher identifies Qwen/Qwen3.5-4B but does not pin its conversion source revision in the model card. The distributed GGUF bytes are pinned above.",
+    "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+    "metadata_source": "https://huggingface.co/api/models/unsloth/Qwen3.5-4B-GGUF/revision/e87f176479d0855a907a41277aca2f8ee7a09523?blobs=true"
+  },
+  "build": {
+    "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+    "source_sha256": "efe5ae8270793300807cd2c0e20e748816f2c153971ce5610450f0e6a23d214e",
+    "cmake_version": "4.1.2",
+    "cmake_wheel_sha256": "415396a7320856c64bd27ca00950b2bbb161604bff60ae5ebf256e2ca08b81ab",
+    "configure_command": [
+      "/Users/coby/Code/c360/semselect/.native/cmake/cmake/data/bin/cmake",
+      "-S",
+      "/Users/coby/Code/c360/semselect/.native/ggml-org-llama.cpp-6c59c40",
+      "-B",
+      "/Users/coby/Code/c360/semselect/.native/build-6c59c40076c0",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DGGML_METAL=ON",
+      "-DGGML_METAL_EMBED_LIBRARY=ON",
+      "-DGGML_CUDA=OFF",
+      "-DGGML_NATIVE=ON",
+      "-DLLAMA_OPENSSL=OFF",
+      "-DLLAMA_BUILD_TESTS=OFF",
+      "-DLLAMA_BUILD_EXAMPLES=OFF",
+      "-DLLAMA_BUILD_UI=OFF"
+    ],
+    "runtime_files_sha256": {
+      "libggml-base.0.25.3.dylib": {
+        "sha256": "094f324ed00a4bc4db87b35d5413e8f298241ec77ad491ffc8117f0053fb321c"
+      },
+      "libggml-base.0.dylib": {
+        "symlink": "libggml-base.0.25.3.dylib"
+      },
+      "libggml-base.dylib": {
+        "symlink": "libggml-base.0.dylib"
+      },
+      "libggml-blas.0.25.3.dylib": {
+        "sha256": "ac7958f1559318df81e39cb732d37dfdcf30c9041110c67fbc896dc5d92a676c"
+      },
+      "libggml-blas.0.dylib": {
+        "symlink": "libggml-blas.0.25.3.dylib"
+      },
+      "libggml-blas.dylib": {
+        "symlink": "libggml-blas.0.dylib"
+      },
+      "libggml-cpu.0.25.3.dylib": {
+        "sha256": "f978a4c5f95634a027c75147e45526d3a85cd94d99e8d18233bac63d7cd86050"
+      },
+      "libggml-cpu.0.dylib": {
+        "symlink": "libggml-cpu.0.25.3.dylib"
+      },
+      "libggml-cpu.dylib": {
+        "symlink": "libggml-cpu.0.dylib"
+      },
+      "libggml-metal.0.25.3.dylib": {
+        "sha256": "b2d8017872f35b64e0b2dedd3af9dad15a59722697a4558ddb3d44d40c55bf56"
+      },
+      "libggml-metal.0.dylib": {
+        "symlink": "libggml-metal.0.25.3.dylib"
+      },
+      "libggml-metal.dylib": {
+        "symlink": "libggml-metal.0.dylib"
+      },
+      "libggml.0.25.3.dylib": {
+        "sha256": "a8b83aa7b90b846fb2db8f395aa5e351ceaaf14b23c0bf0383e950328cd4aa61"
+      },
+      "libggml.0.dylib": {
+        "symlink": "libggml.0.25.3.dylib"
+      },
+      "libggml.dylib": {
+        "symlink": "libggml.0.dylib"
+      },
+      "libllama-common.0.5.0.dylib": {
+        "sha256": "47fa4244d4230994a87e2f732d669d04ba5e23e1987416c320f3aef25c74dd83"
+      },
+      "libllama-common.0.dylib": {
+        "symlink": "libllama-common.0.5.0.dylib"
+      },
+      "libllama-common.dylib": {
+        "symlink": "libllama-common.0.dylib"
+      },
+      "libllama-server-impl.dylib": {
+        "sha256": "0155360ea4dc8996715c17892d61cf3b52cdffffcdbc8ab7da81b27ed460a94a"
+      },
+      "libllama.0.5.0.dylib": {
+        "sha256": "87d2c5665c462ea673930ec5258ec2dff411fff9bfed3d59362f0bf432ec0c2e"
+      },
+      "libllama.0.dylib": {
+        "symlink": "libllama.0.5.0.dylib"
+      },
+      "libllama.dylib": {
+        "symlink": "libllama.0.dylib"
+      },
+      "libmtmd.0.5.0.dylib": {
+        "sha256": "8394255e3ac688ff89b1eb48b919cb44bb1f217a6226bd952236533135216d5c"
+      },
+      "libmtmd.0.dylib": {
+        "symlink": "libmtmd.0.5.0.dylib"
+      },
+      "libmtmd.dylib": {
+        "symlink": "libmtmd.0.dylib"
+      },
+      "llama-server": {
+        "sha256": "8bda715ee0f798954d51fcc0539b716ca8a3446dbb4b297a3f09071490b2e53a"
+      }
+    },
+    "guard_sha256": "164edd3d25766775f9177ae2a6d4f48851aac61b6a76183e314111e85a856e0b",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+    "go": "go version go1.26.4 darwin/arm64"
+  },
+  "runtime_command": [
+    "/Users/coby/Code/c360/semselect/.native/build-6c59c40076c0/bin/llama-server",
+    "-m",
+    "/Users/coby/Code/c360/semselect/models/Qwen3.5-4B-Q4_K_M.gguf",
+    "--alias",
+    "qwen3.5-4b",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8085",
+    "-ngl",
+    "99",
+    "-t",
+    "4",
+    "-tb",
+    "4",
+    "-c",
+    "4096",
+    "-b",
+    "512",
+    "-ub",
+    "512",
+    "-np",
+    "1",
+    "--no-context-shift",
+    "--metrics",
+    "-lv",
+    "4"
+  ],
+  "evaluation_path": "/Users/coby/Code/c360/semselect/results/metal-qwen35-4b/20261005T143658.673689Z/run.json",
+  "hardware": "Apple M3 Pro",
+  "memory_bytes": 38654705664,
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "evaluation": true,
+  "notes": "Native macOS; no container CPU/memory quota. Child resource usage includes startup, runtime, guard and evaluation, with warmup. Peak RSS is the largest child lifetime peak, not summed memory or Metal allocation.",
+  "gpu_offload": "offloaded 33/33 layers to GPU",
+  "status": "passed",
+  "wall_seconds": 17.007117917062715,
+  "child_cpu_seconds": 9.618597999999999,
+  "largest_child_peak_rss_bytes": 3832922112
+}

@@ -24,23 +24,32 @@ temperatures; that does **not** establish calibration on your data or parity wit
 Jev. Score need not be an integer. All probabilities are conditional on the supplied
 question and candidates. Explicitly include `unknown` when the categories may not fit.
 
-Initial supported deployment: **CPU-only Linux containers**. This bootstrap was
-run on Linux/ARM64 in Docker Desktop on an Apple Silicon Mac, using CPU inference
-only. It does not validate Metal, CUDA, native macOS, or Linux/AMD64 performance.
+Deployment paths: **CPU-only Linux containers** and **native Apple Silicon Metal**.
+The CPU bootstrap ran on Linux/ARM64 in Docker Desktop; Metal was subsequently
+validated on an M3 Pro laptop. CUDA and Linux/AMD64 remain unvalidated.
 The Dockerfile can target AMD64, but that build and older CPU instruction support
 remain unverified. Start with 4 CPU cores, an 8 GiB runtime memory budget, and
 10 GiB free disk for model, images and build cache. The GGUF is 3.03 GB; RAM use
 is higher. See measured resource limits in the validation record.
 
-On the 48-request routing smoke, Kev returned 43 correct labels versus the
-seminstruct 0.6B baseline's 24, at median latencies of **9.88 s versus 0.293 s**.
-These results are too small for production conclusions. In particular, this
-configuration is unsuitable for a subsecond CPU latency budget without further work.
+On the same 48-request routing smoke, native Metal Kev-4B returned **43/48** correct
+labels at **449 ms median**. A matched Qwen3.5-4B Q4_K_M chat baseline returned
+**46/48 at 288 ms**, using the same pinned runtime and laptop. These small results
+favor the chat baseline for this routing task; semselect's distinctive capability
+is native typed distributions, Score and Noul, not an established accuracy or
+speed advantage. The earlier CPU run took 9.88 seconds median for Kev.
+See the [Metal validation](docs/validation-metal.md) and
+[laptop/GPU workflow](docs/laptop-and-gpu.md).
+
+For this laptop, after fetching the model, run `task metal:build`, `task down`
+(if Docker is running), then `task metal:serve`. The API is on the same loopback
+port 8084. Ctrl-C stops the native runtime and guard.
 
 ## Quick start
 
-Requires Docker with Compose v2, Task v3, Python 3.11+ and curl. Go 1.26.4+ is only
-needed for host contract tests; Docker supplies its pinned build toolchain.
+The CPU quick start requires Docker with Compose v2, Task v3, Python 3.11+ and curl.
+Go 1.26.4+ is needed for host contract tests and native Metal builds; Docker supplies
+its own pinned build toolchain for the container path.
 
 ```sh
 cp .env.example .env
@@ -116,7 +125,9 @@ field; it currently mixes heuristics, similarity and generated confidence.
 
 The standalone guard also reads `SEMSELECT_UPSTREAM` (HTTP origin) and
 `SEMSELECT_MODEL` (expected model alias); Compose fixes these to the packaged
-runtime. Changing the model is a reviewed deployment change, not a per-request
+runtime. `SEMSELECT_ADDR` controls the standalone listener (default `:8084`);
+the Metal launcher sets `127.0.0.1:8084` and the health check follows that address.
+Changing the model is a reviewed deployment change, not a per-request
 download or routing operation.
 
 The supported API profile is intentionally bounded: UTF-8 JSON body ≤32 KiB,
@@ -128,8 +139,9 @@ Unknown fields, duplicate keys, wrong casing and non-string structured state are
 rejected. This is a subset of the upstream API, not blanket SDK conformance.
 The original candidate order and native response bytes are preserved by the guard.
 
-The runtime has one slot, 4096 context tokens, CPU layers only, and equal 512-token
-batch/microbatch sizes. Byte limits do not guarantee fitting the tokenizer budget:
+Both paths use one slot, 4096 context tokens and equal 512-token batch/microbatch
+sizes. Docker uses CPU layers; the Metal launcher requires full GPU offload.
+Byte limits do not guarantee fitting the tokenizer budget:
 native over-context errors are returned, without context shifting. One admitted
 inference request runs at a time; another receives 429 with `Retry-After: 1`.
 HTTP read timeouts also bound slow uploads. Upstream responses are limited to 1 MiB.

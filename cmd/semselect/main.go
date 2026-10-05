@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
 
@@ -19,14 +22,37 @@ func env(key, fallback string) string {
 	return fallback
 }
 
+func listenConfig(addr string) (string, error) {
+	host, port, err := net.SplitHostPort(addr)
+	if err != nil {
+		return "", fmt.Errorf("SEMSELECT_ADDR must be an IP address and port: %w", err)
+	}
+	n, err := strconv.Atoi(port)
+	if err != nil || n < 1 || n > 65535 || (host != "" && net.ParseIP(host) == nil) {
+		return "", fmt.Errorf("SEMSELECT_ADDR requires a literal IP (or empty host) and port 1–65535")
+	}
+	switch host {
+	case "", "0.0.0.0":
+		host = "127.0.0.1"
+	case "::":
+		host = "::1"
+	}
+	return "http://" + net.JoinHostPort(host, port) + "/ready", nil
+}
+
 func main() {
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 	slog.SetDefault(logger)
-	// Compose configures the host port; the container port is fixed.
-	const addr = ":8084"
+	// Compose keeps its fixed container port; native launchers bind loopback.
+	addr := env("SEMSELECT_ADDR", ":8084")
+	healthURL, err := listenConfig(addr)
+	if err != nil {
+		logger.Error("invalid listen address", "error", err)
+		os.Exit(1)
+	}
 	if len(os.Args) == 2 && os.Args[1] == "healthcheck" {
 		client := http.Client{Timeout: 3 * time.Second}
-		r, err := client.Get("http://127.0.0.1:8084/ready")
+		r, err := client.Get(healthURL)
 		if err != nil {
 			os.Exit(1)
 		}

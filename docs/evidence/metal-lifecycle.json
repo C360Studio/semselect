@@ -1,0 +1,20 @@
+{
+  "native_guard_healthcheck": "passed",
+  "over_context": {
+    "status": 400,
+    "body": {
+      "error": {
+        "code": 400,
+        "message": "request (4209 tokens) exceeds the available context size (4096 tokens), try increasing it",
+        "type": "exceed_context_size_error",
+        "n_prompt_tokens": 4209,
+        "n_ctx": 4096
+      }
+    }
+  },
+  "sigterm_launcher_exit": 130,
+  "owned_service_ports_closed_after_sigterm": [
+    8084,
+    8085
+  ]
+}
