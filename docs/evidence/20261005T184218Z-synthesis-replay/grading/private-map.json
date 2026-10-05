@@ -1,0 +1,387 @@
+[
+  {
+    "id": "B001",
+    "case_id": "S08",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B002",
+    "case_id": "S03",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B003",
+    "case_id": "S02",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B004",
+    "case_id": "S05",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B005",
+    "case_id": "S09",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "qwen_json"
+  },
+  {
+    "id": "B006",
+    "case_id": "S09",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "qwen_json"
+  },
+  {
+    "id": "B007",
+    "case_id": "S05",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B008",
+    "case_id": "S04",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B009",
+    "case_id": "S09",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "kev"
+  },
+  {
+    "id": "B010",
+    "case_id": "S13",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B011",
+    "case_id": "S03",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B012",
+    "case_id": "S12",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B013",
+    "case_id": "S09",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "kev"
+  },
+  {
+    "id": "B014",
+    "case_id": "S03",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B015",
+    "case_id": "S10",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B016",
+    "case_id": "S12",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B017",
+    "case_id": "S10",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B018",
+    "case_id": "S07",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B019",
+    "case_id": "S08",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B020",
+    "case_id": "S02",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B021",
+    "case_id": "S10",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B022",
+    "case_id": "S07",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B023",
+    "case_id": "S07",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B024",
+    "case_id": "S09",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "kev"
+  },
+  {
+    "id": "B025",
+    "case_id": "S09",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "qwen_json"
+  },
+  {
+    "id": "B026",
+    "case_id": "S12",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B027",
+    "case_id": "S01",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B028",
+    "case_id": "S11",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B029",
+    "case_id": "S05",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B030",
+    "case_id": "S09",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B031",
+    "case_id": "S09",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B032",
+    "case_id": "S12",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B033",
+    "case_id": "S09",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "qwen_json"
+  },
+  {
+    "id": "B034",
+    "case_id": "S01",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B035",
+    "case_id": "S11",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B036",
+    "case_id": "S13",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B037",
+    "case_id": "S08",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B038",
+    "case_id": "S10",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B039",
+    "case_id": "S05",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B040",
+    "case_id": "S01",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B041",
+    "case_id": "S09",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "kev"
+  },
+  {
+    "id": "B042",
+    "case_id": "S04",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B043",
+    "case_id": "S09",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B044",
+    "case_id": "S04",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B045",
+    "case_id": "S07",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B046",
+    "case_id": "S03",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B047",
+    "case_id": "S13",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B048",
+    "case_id": "S02",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B049",
+    "case_id": "S13",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B050",
+    "case_id": "S08",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B051",
+    "case_id": "S01",
+    "stratum": "metal_4b",
+    "trial": 2,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B052",
+    "case_id": "S04",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B053",
+    "case_id": "S11",
+    "stratum": "metal_4b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B054",
+    "case_id": "S02",
+    "stratum": "cpu_06b",
+    "trial": 1,
+    "arm": "no_gate"
+  },
+  {
+    "id": "B055",
+    "case_id": "S09",
+    "stratum": "cpu_06b",
+    "trial": 2,
+    "arm": "no_gate"
+  }
+]

@@ -1,0 +1,230 @@
+{
+  "command": [
+    "/private/tmp/semselect-synthesis-driver",
+    "--input",
+    "results/synthesis/20261005T1842Z/calls/metal_4b/trial-2/no_gate/S04/input.jsonl",
+    "--output",
+    "results/synthesis/20261005T1842Z/calls/metal_4b/trial-2/no_gate/S04/output.jsonl",
+    "--base-url",
+    "http://127.0.0.1:18089/v1",
+    "--model",
+    "qwen3.5-4b"
+  ],
+  "status": "ok",
+  "driver_duration_ms": 5415.915708,
+  "exit_code": 0,
+  "record": {
+    "id": "S04",
+    "mode": "inference",
+    "input": {
+      "id": "S04",
+      "query": "Are cache statistics collected without enabling Prometheus export, and which option enables that export?",
+      "summaries": [
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.",
+          "keywords": [
+            "cache",
+            "adr",
+            "lifecycle",
+            "branch",
+            "buffer",
+            "registration",
+            "0007",
+            "sidecar",
+            "repo",
+            "supersession"
+          ],
+          "level": 0,
+          "relevance": 0.8913043478260869,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0008",
+              "type": "chunk",
+              "label": "Cache Package § Prometheus Metrics"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0000",
+              "type": "chunk",
+              "label": "Cache Package"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0002",
+              "type": "chunk",
+              "label": "Cache Package § Quick Start § With Prometheus Metrics"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0020",
+              "type": "chunk",
+              "label": "Cache Package § Thread Safety"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0008",
+              "type": "chunk",
+              "label": "Buffer Package § Prometheus Metrics"
+            }
+          ]
+        },
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.",
+          "keywords": [
+            "cache",
+            "adr",
+            "branch",
+            "lifecycle",
+            "buffer",
+            "registration",
+            "0007",
+            "sidecar",
+            "repo",
+            "retention"
+          ],
+          "level": 1,
+          "relevance": 0.8913043478260869,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0008",
+              "type": "chunk",
+              "label": "Cache Package § Prometheus Metrics"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0000",
+              "type": "chunk",
+              "label": "Cache Package"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0002",
+              "type": "chunk",
+              "label": "Cache Package § Quick Start § With Prometheus Metrics"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0020",
+              "type": "chunk",
+              "label": "Cache Package § Thread Safety"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0008",
+              "type": "chunk",
+              "label": "Buffer Package § Prometheus Metrics"
+            }
+          ]
+        },
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.",
+          "keywords": [
+            "cache",
+            "adr",
+            "branch",
+            "lifecycle",
+            "buffer",
+            "registration",
+            "0007",
+            "repo",
+            "sidecar",
+            "retention"
+          ],
+          "level": 2,
+          "relevance": 0.8913043478260869,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0008",
+              "type": "chunk",
+              "label": "Cache Package § Prometheus Metrics"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0000",
+              "type": "chunk",
+              "label": "Cache Package"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0002",
+              "type": "chunk",
+              "label": "Cache Package § Quick Start § With Prometheus Metrics"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0020",
+              "type": "chunk",
+              "label": "Cache Package § Thread Safety"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0008",
+              "type": "chunk",
+              "label": "Buffer Package § Prometheus Metrics"
+            }
+          ]
+        }
+      ],
+      "total_entities": 82
+    },
+    "calls": [
+      {
+        "llm_request": {
+          "SystemPrompt": "You are a knowledge graph query assistant. Given a user query and summaries of related knowledge clusters, synthesize a concise answer that directly addresses the query.\n\nEach cluster summary describes a group of related entities in the knowledge graph. Use the cluster summaries, representative entities, and keywords to construct your answer. Reference specific entities by name when relevant.\n\nBe direct and factual. If the clusters don't contain enough information to fully answer the query, say what is known and what is missing. Do not speculate beyond the provided data.",
+          "UserPrompt": "Query: Are cache statistics collected without enabling Prometheus export, and which option enables that export?\n\nThe knowledge graph contains 82 matching entities across 3 clusters.\n\nCluster 1 (92 entities, 89% match):\nThis community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.\nRepresentatives: Cache Package § Prometheus Metrics [chunk], Cache Package [chunk], Cache Package § Quick Start § With Prometheus Metrics [chunk], Cache Package § Thread Safety [chunk], Buffer Package § Prometheus Metrics [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nCluster 2 (92 entities, 89% match):\nThis community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.\nRepresentatives: Cache Package § Prometheus Metrics [chunk], Cache Package [chunk], Cache Package § Quick Start § With Prometheus Metrics [chunk], Cache Package § Thread Safety [chunk], Buffer Package § Prometheus Metrics [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nCluster 3 (92 entities, 89% match):\nThis community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.\nRepresentatives: Cache Package § Prometheus Metrics [chunk], Cache Package [chunk], Cache Package § Quick Start § With Prometheus Metrics [chunk], Cache Package § Thread Safety [chunk], Buffer Package § Prometheus Metrics [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nSynthesize a concise answer to the query based on these clusters.",
+          "MaxTokens": 500,
+          "Temperature": 0.3
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a knowledge graph query assistant. Given a user query and summaries of related knowledge clusters, synthesize a concise answer that directly addresses the query.\n\nEach cluster summary describes a group of related entities in the knowledge graph. Use the cluster summaries, representative entities, and keywords to construct your answer. Reference specific entities by name when relevant.\n\nBe direct and factual. If the clusters don't contain enough information to fully answer the query, say what is known and what is missing. Do not speculate beyond the provided data."
+          },
+          {
+            "role": "user",
+            "content": "Query: Are cache statistics collected without enabling Prometheus export, and which option enables that export?\n\nThe knowledge graph contains 82 matching entities across 3 clusters.\n\nCluster 1 (92 entities, 89% match):\nThis community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.\nRepresentatives: Cache Package § Prometheus Metrics [chunk], Cache Package [chunk], Cache Package § Quick Start § With Prometheus Metrics [chunk], Cache Package § Thread Safety [chunk], Buffer Package § Prometheus Metrics [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nCluster 2 (92 entities, 89% match):\nThis community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.\nRepresentatives: Cache Package § Prometheus Metrics [chunk], Cache Package [chunk], Cache Package § Quick Start § With Prometheus Metrics [chunk], Cache Package § Thread Safety [chunk], Buffer Package § Prometheus Metrics [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nCluster 3 (92 entities, 89% match):\nThis community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.\nRepresentatives: Cache Package § Prometheus Metrics [chunk], Cache Package [chunk], Cache Package § Quick Start § With Prometheus Metrics [chunk], Cache Package § Thread Safety [chunk], Buffer Package § Prometheus Metrics [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nSynthesize a concise answer to the query based on these clusters."
+          }
+        ],
+        "deadline_remaining_ms": 14999.994333,
+        "llm_response": {
+          "Content": "Based on the provided cluster summaries, the following information is available:\n\n*   **Cache Statistics and Prometheus Export:** The knowledge graph confirms that the \"Cache Package\" supports Prometheus metrics. Specific entities such as \"Cache Package § Prometheus Metrics [chunk]\" and \"Cache Package § Quick Start § With Prometheus Metrics [chunk]\" indicate that Prometheus export is a documented feature within the Cache Package.\n*   **Export Without Enabling Prometheus:** The summaries do not explicitly state whether cache statistics are collected *without* enabling Prometheus export. While the existence of the \"Prometheus Metrics\" feature is confirmed, the text does not clarify if the underlying cache statistics are automatically collected regardless of the export setting or if they require the export feature to be active first.\n\n**Conclusion:**\nThe data confirms that Prometheus metrics are a supported feature for the Cache Package. However, the provided summaries do not contain specific information regarding whether cache statistics are collected independently of the Prometheus export setting or what specific option is required to enable that export.",
+          "PromptTokens": 642,
+          "CompletionTokens": 203,
+          "TotalTokens": 845,
+          "Model": "qwen3.5-4b",
+          "FinishReason": "stop"
+        },
+        "duration_ms": 5415.89575,
+        "wire_trace": [
+          {
+            "name": "get_connection",
+            "elapsed_ms": 0.11875,
+            "destination": "127.0.0.1:18089"
+          },
+          {
+            "name": "got_connection",
+            "elapsed_ms": 0.600625
+          },
+          {
+            "name": "wrote_headers",
+            "elapsed_ms": 0.637125
+          },
+          {
+            "name": "wrote_request",
+            "elapsed_ms": 0.669458
+          },
+          {
+            "name": "first_response_byte",
+            "elapsed_ms": 5415.567208
+          }
+        ],
+        "requests_written": 1
+      }
+    ],
+    "synthesis_outcome": {
+      "Answer": "Based on the provided cluster summaries, the following information is available:\n\n*   **Cache Statistics and Prometheus Export:** The knowledge graph confirms that the \"Cache Package\" supports Prometheus metrics. Specific entities such as \"Cache Package § Prometheus Metrics [chunk]\" and \"Cache Package § Quick Start § With Prometheus Metrics [chunk]\" indicate that Prometheus export is a documented feature within the Cache Package.\n*   **Export Without Enabling Prometheus:** The summaries do not explicitly state whether cache statistics are collected *without* enabling Prometheus export. While the existence of the \"Prometheus Metrics\" feature is confirmed, the text does not clarify if the underlying cache statistics are automatically collected regardless of the export setting or if they require the export feature to be active first.\n\n**Conclusion:**\nThe data confirms that Prometheus metrics are a supported feature for the Cache Package. However, the provided summaries do not contain specific information regarding whether cache statistics are collected independently of the Prometheus export setting or what specific option is required to enable that export.",
+      "Model": "qwen3.5-4b",
+      "Degraded": false,
+      "Reason": ""
+    },
+    "duration_ms": 5415.915708,
+    "started_at": "2026-10-05T18:48:28.138427Z",
+    "semstreams_version": "v1.0.0-beta.160"
+  },
+  "subprocess_wall_ms": 5449.273249949329,
+  "driver_startup_and_io_ms": 33.35754194932815
+}

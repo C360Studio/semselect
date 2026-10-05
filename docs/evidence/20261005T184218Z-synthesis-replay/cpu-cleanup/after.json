@@ -1,0 +1,282 @@
+{
+  "Id": "ab76424955dcf705218beb65a1a9c1f50cfa549f07b3ce3c6dd6f610f57020f2",
+  "Created": "2026-10-05T18:28:53.628053595Z",
+  "Path": "sh",
+  "Args": [
+    "-c",
+    "exec llama-server     --host 0.0.0.0     --port 8083     -m /models/model.gguf     --alias ${MODEL_ALIAS}     --reasoning ${MODEL_REASONING}     -np ${MODEL_PARALLEL}     -c ${MODEL_CONTEXT}     -cb     --metrics     ${MODEL_THREADS:+-t ${MODEL_THREADS}}     ${MODEL_API_KEY:+--api-key ${MODEL_API_KEY}}"
+  ],
+  "State": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-05T18:28:53.684005178Z",
+    "FinishedAt": "2026-10-05T18:50:34.666411086Z",
+    "Health": {
+      "Status": "unhealthy",
+      "FailingStreak": 0,
+      "Log": [
+        {
+          "Start": "2026-10-05T18:48:30.262757584Z",
+          "End": "2026-10-05T18:48:30.304128417Z",
+          "ExitCode": 0,
+          "Output": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100    15  100    15    0     0  19788      0 --:--:-- --:--:-- --:--:-- 15000\n{\"status\":\"ok\"}"
+        },
+        {
+          "Start": "2026-10-05T18:49:00.315204334Z",
+          "End": "2026-10-05T18:49:00.35305925Z",
+          "ExitCode": 0,
+          "Output": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0{\"status\":\"ok\"}\r100    15  100    15    0     0  21739      0 --:--:-- --:--:-- --:--:-- 15000\n"
+        },
+        {
+          "Start": "2026-10-05T18:49:30.363404584Z",
+          "End": "2026-10-05T18:49:30.403669417Z",
+          "ExitCode": 0,
+          "Output": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100    15  100    15    0     0  23474      0 --:--:-- --:--:-- --:--:-- 15000\n{\"status\":\"ok\"}"
+        },
+        {
+          "Start": "2026-10-05T18:50:00.410853709Z",
+          "End": "2026-10-05T18:50:00.448953209Z",
+          "ExitCode": 0,
+          "Output": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100    15  100    15    0     0  21994      0 --:--:-- --:--:-- --:--:-- 15000\n{\"status\":\"ok\"}"
+        },
+        {
+          "Start": "2026-10-05T18:50:30.449798417Z",
+          "End": "2026-10-05T18:50:30.4899965Z",
+          "ExitCode": 0,
+          "Output": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0{\"status\":\"ok\"}\r100    15  100    15    0     0  20689      0 --:--:-- --:--:-- --:--:-- 15000\n"
+        }
+      ]
+    }
+  },
+  "Image": "sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+  "ResolvConfPath": "/var/lib/docker/containers/ab76424955dcf705218beb65a1a9c1f50cfa549f07b3ce3c6dd6f610f57020f2/resolv.conf",
+  "HostnamePath": "/var/lib/docker/containers/ab76424955dcf705218beb65a1a9c1f50cfa549f07b3ce3c6dd6f610f57020f2/hostname",
+  "HostsPath": "/var/lib/docker/containers/ab76424955dcf705218beb65a1a9c1f50cfa549f07b3ce3c6dd6f610f57020f2/hosts",
+  "LogPath": "/var/lib/docker/containers/ab76424955dcf705218beb65a1a9c1f50cfa549f07b3ce3c6dd6f610f57020f2/ab76424955dcf705218beb65a1a9c1f50cfa549f07b3ce3c6dd6f610f57020f2-json.log",
+  "Name": "/semselect-synthesis-4093d3c-a2-seminstruct-1",
+  "RestartCount": 0,
+  "Driver": "overlayfs",
+  "Platform": "linux",
+  "MountLabel": "",
+  "ProcessLabel": "",
+  "AppArmorProfile": "",
+  "ExecIDs": null,
+  "HostConfig": {
+    "Binds": null,
+    "ContainerIDFile": "",
+    "LogConfig": {
+      "Type": "json-file",
+      "Config": {}
+    },
+    "NetworkMode": "semselect-synthesis-4093d3c-a2_isolated",
+    "PortBindings": {
+      "8083/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "48083"
+        }
+      ]
+    },
+    "RestartPolicy": {
+      "Name": "no",
+      "MaximumRetryCount": 0
+    },
+    "AutoRemove": false,
+    "VolumeDriver": "",
+    "VolumesFrom": null,
+    "ConsoleSize": [
+      0,
+      0
+    ],
+    "CapAdd": null,
+    "CapDrop": null,
+    "CgroupnsMode": "private",
+    "Dns": null,
+    "DnsOptions": null,
+    "DnsSearch": null,
+    "ExtraHosts": [],
+    "GroupAdd": null,
+    "IpcMode": "private",
+    "Cgroup": "",
+    "Links": null,
+    "OomScoreAdj": 0,
+    "PidMode": "",
+    "Privileged": false,
+    "PublishAllPorts": false,
+    "ReadonlyRootfs": false,
+    "SecurityOpt": null,
+    "UTSMode": "",
+    "UsernsMode": "",
+    "ShmSize": 67108864,
+    "Runtime": "runc",
+    "Isolation": "",
+    "CpuShares": 0,
+    "Memory": 2147483648,
+    "NanoCpus": 2000000000,
+    "CgroupParent": "",
+    "BlkioWeight": 0,
+    "BlkioWeightDevice": null,
+    "BlkioDeviceReadBps": null,
+    "BlkioDeviceWriteBps": null,
+    "BlkioDeviceReadIOps": null,
+    "BlkioDeviceWriteIOps": null,
+    "CpuPeriod": 0,
+    "CpuQuota": 0,
+    "CpuRealtimePeriod": 0,
+    "CpuRealtimeRuntime": 0,
+    "CpusetCpus": "",
+    "CpusetMems": "",
+    "Devices": null,
+    "DeviceCgroupRules": null,
+    "DeviceRequests": null,
+    "MemoryReservation": 0,
+    "MemorySwap": 4294967296,
+    "MemorySwappiness": null,
+    "OomKillDisable": null,
+    "PidsLimit": null,
+    "Ulimits": null,
+    "CpuCount": 0,
+    "CpuPercent": 0,
+    "IOMaximumIOps": 0,
+    "IOMaximumBandwidth": 0,
+    "MaskedPaths": [
+      "/proc/acpi",
+      "/proc/asound",
+      "/proc/interrupts",
+      "/proc/kcore",
+      "/proc/keys",
+      "/proc/latency_stats",
+      "/proc/sched_debug",
+      "/proc/scsi",
+      "/proc/timer_list",
+      "/proc/timer_stats",
+      "/sys/devices/virtual/powercap",
+      "/sys/firmware"
+    ],
+    "ReadonlyPaths": [
+      "/proc/bus",
+      "/proc/fs",
+      "/proc/irq",
+      "/proc/sys",
+      "/proc/sysrq-trigger"
+    ]
+  },
+  "Storage": {
+    "RootFS": {
+      "Snapshot": {
+        "Name": "overlayfs"
+      }
+    }
+  },
+  "Mounts": [],
+  "Config": {
+    "Hostname": "ab76424955dc",
+    "Domainname": "",
+    "User": "",
+    "AttachStdin": false,
+    "AttachStdout": true,
+    "AttachStderr": true,
+    "ExposedPorts": {
+      "8083/tcp": {}
+    },
+    "Tty": false,
+    "OpenStdin": false,
+    "StdinOnce": false,
+    "Env": [
+      "MODEL_CONTEXT=16384",
+      "MODEL_REASONING=off",
+      "MODEL_THREADS=2",
+      "MODEL_PARALLEL=4",
+      "MODEL_ALIAS=seminstruct",
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "MODEL_API_KEY="
+    ],
+    "Cmd": [
+      "sh",
+      "-c",
+      "exec llama-server     --host 0.0.0.0     --port 8083     -m /models/model.gguf     --alias ${MODEL_ALIAS}     --reasoning ${MODEL_REASONING}     -np ${MODEL_PARALLEL}     -c ${MODEL_CONTEXT}     -cb     --metrics     ${MODEL_THREADS:+-t ${MODEL_THREADS}}     ${MODEL_API_KEY:+--api-key ${MODEL_API_KEY}}"
+    ],
+    "Healthcheck": {
+      "Test": [
+        "CMD-SHELL",
+        "curl -f http://localhost:8083/health || exit 1"
+      ],
+      "Interval": 30000000000,
+      "Timeout": 10000000000,
+      "StartPeriod": 30000000000,
+      "Retries": 3
+    },
+    "Image": "ghcr.io/c360studio/seminstruct:qwen3-0.6b@sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+    "Volumes": null,
+    "WorkingDir": "/app",
+    "Entrypoint": null,
+    "Labels": {
+      "com.docker.compose.config-hash": "2caf122499afe8d7381c100ac9548ad093739bc5a940b733db65fcf0b96ed707",
+      "com.docker.compose.container-number": "1",
+      "com.docker.compose.depends_on": "",
+      "com.docker.compose.image": "sha256:f7c654d32f43b6d545676dd8b8adac9c401761043c22ea628d339f92ce6546c4",
+      "com.docker.compose.oneoff": "False",
+      "com.docker.compose.project": "semselect-synthesis-4093d3c-a2",
+      "com.docker.compose.project.config_files": "/Users/coby/Code/c360/semselect/.synthesis/attempts/02-pinned-embedding-cache/config/compose.json",
+      "com.docker.compose.project.working_dir": "/Users/coby/Code/c360/semselect/.synthesis/attempts/02-pinned-embedding-cache/config",
+      "com.docker.compose.service": "seminstruct",
+      "com.docker.compose.version": "5.5.1",
+      "io.semselect.experiment": "synthesis-4093d3c",
+      "org.opencontainers.image.created": "2026-05-02T14:05:02.178Z",
+      "org.opencontainers.image.description": "",
+      "org.opencontainers.image.licenses": "",
+      "org.opencontainers.image.revision": "7f9135a99cd27a6c63a2a60db5daeee9f5622be4",
+      "org.opencontainers.image.source": "https://github.com/C360Studio/seminstruct",
+      "org.opencontainers.image.title": "seminstruct",
+      "org.opencontainers.image.url": "https://github.com/C360Studio/seminstruct",
+      "org.opencontainers.image.version": "qwen3-0.6b"
+    }
+  },
+  "NetworkSettings": {
+    "SandboxID": "",
+    "SandboxKey": "",
+    "Ports": {},
+    "Networks": {
+      "semselect-synthesis-4093d3c-a2_isolated": {
+        "IPAMConfig": null,
+        "Links": null,
+        "Aliases": [
+          "semselect-synthesis-4093d3c-a2-seminstruct-1",
+          "seminstruct"
+        ],
+        "DriverOpts": null,
+        "GwPriority": 0,
+        "NetworkID": "672007d0b2d8d657eadc60b5cec1f80f48d8c072be180e6bab2dab18ff3c705f",
+        "EndpointID": "",
+        "Gateway": "",
+        "IPAddress": "",
+        "MacAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "DNSNames": [
+          "semselect-synthesis-4093d3c-a2-seminstruct-1",
+          "seminstruct",
+          "ab76424955dc"
+        ]
+      }
+    }
+  },
+  "ImageManifestDescriptor": {
+    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+    "digest": "sha256:f7c654d32f43b6d545676dd8b8adac9c401761043c22ea628d339f92ce6546c4",
+    "size": 1629,
+    "platform": {
+      "architecture": "arm64",
+      "os": "linux"
+    }
+  }
+}

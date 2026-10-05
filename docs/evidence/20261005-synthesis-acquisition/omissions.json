@@ -1,0 +1,409 @@
+{
+  "scope": "Only experiment-owned and public pinned source/model evidence is published. Original ignored files remain untouched.",
+  "files_excluded": [
+    {
+      "original_local_path": ".synthesis/attempts/01-offline-no-cache/preservation.json",
+      "original_sha256": "b546979dd34d1f89753c0bd732342c82fb35bf52ba7d00be37400248327f1388",
+      "bytes": 2448,
+      "reason": "Local all-file inventory includes excluded records. Replaced by this package-specific hash manifest."
+    },
+    {
+      "original_local_path": ".synthesis/attempts/01-offline-no-cache/running-after.jsonl",
+      "original_sha256": "a2e43fd3ec853d09a3b40608e1cfba19db201d127eae084077a05e0b7420f8fe",
+      "bytes": 3168,
+      "reason": "Unrelated or broad Docker inventory is excluded; experiment-owned runtime inspection supplies scoped facts."
+    },
+    {
+      "original_local_path": ".synthesis/attempts/01-offline-no-cache/semembed-containers.jsonl",
+      "original_sha256": "9b17068571f72816da9873860b327fc6c48f3a81bfee999a6e20c043d0882701",
+      "bytes": 1602,
+      "reason": "Unrelated or broad Docker inventory is excluded; experiment-owned runtime inspection supplies scoped facts."
+    },
+    {
+      "original_local_path": ".synthesis/attempts/01-offline-no-cache/volume-list.jsonl",
+      "original_sha256": "17903742009dc8ccd7ef962fba44153e9a88f0d7b2b2e153a2715d6e1b154d16",
+      "bytes": 356693,
+      "reason": "Unrelated or broad Docker inventory is excluded; experiment-owned runtime inspection supplies scoped facts."
+    },
+    {
+      "original_local_path": ".synthesis/attempts/02-pinned-embedding-cache/acquisition/preservation.json",
+      "original_sha256": "ff689c78649e1a6ef810a4996a975d29cab607cddeecb434e2a5ccb130830b23",
+      "bytes": 4934,
+      "reason": "Local all-file inventory includes excluded records. Replaced by this package-specific hash manifest."
+    },
+    {
+      "original_local_path": ".synthesis/attempts/02-pinned-embedding-cache/acquisition/running-after.jsonl",
+      "original_sha256": "b892eb0e200884750223c76d0e3f94f5319e84a17f33217f5fbdeca2bd1dba08",
+      "bytes": 4647,
+      "reason": "Unrelated or broad Docker inventory is excluded; experiment-owned runtime inspection supplies scoped facts."
+    }
+  ],
+  "categories_excluded": [
+    {
+      "category": "Broad running_containers_before fields",
+      "reason": "Excluded from both preflight projections; original file hashes are attached to each projection."
+    },
+    {
+      "category": "SemSource/collector/copied semembed binaries, source tar archive, model weights and NATS databases",
+      "reason": "Large executable/data artifacts stay ignored. Applicable build/source/model hashes and retrieval outputs are preserved; no claim of byte-for-byte database restore."
+    }
+  ],
+  "environment_audit": [
+    {
+      "record": "stopped-runtime.json/semselect-synthesis-4093d3c-nats-1",
+      "keys": [
+        "NATS_SERVER",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "stopped-runtime.json/semselect-synthesis-4093d3c-semembed-1",
+      "keys": [
+        "PATH",
+        "RUST_LOG",
+        "SEMEMBED_MODEL",
+        "SEMEMBED_PORT"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "stopped-runtime.json/semselect-synthesis-4093d3c-seminstruct-1",
+      "keys": [
+        "MODEL_ALIAS",
+        "MODEL_API_KEY",
+        "MODEL_CONTEXT",
+        "MODEL_PARALLEL",
+        "MODEL_REASONING",
+        "MODEL_THREADS",
+        "PATH"
+      ],
+      "credential_shaped_values": {
+        "MODEL_API_KEY": "empty"
+      }
+    },
+    {
+      "record": "dependencies-runtime.json/semselect-synthesis-4093d3c-nats-1",
+      "keys": [
+        "NATS_SERVER",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "dependencies-runtime.json/semselect-synthesis-4093d3c-semembed-1",
+      "keys": [
+        "PATH",
+        "RUST_LOG",
+        "SEMEMBED_MODEL",
+        "SEMEMBED_PORT"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "dependencies-runtime.json/semselect-synthesis-4093d3c-seminstruct-1",
+      "keys": [
+        "MODEL_ALIAS",
+        "MODEL_API_KEY",
+        "MODEL_CONTEXT",
+        "MODEL_PARALLEL",
+        "MODEL_REASONING",
+        "MODEL_THREADS",
+        "PATH"
+      ],
+      "credential_shaped_values": {
+        "MODEL_API_KEY": "empty"
+      }
+    },
+    {
+      "record": "cleanup-runtime.json/semselect-synthesis-4093d3c-a2-nats-1",
+      "keys": [
+        "NATS_SERVER",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "cleanup-runtime.json/semselect-synthesis-4093d3c-a2-semembed-1",
+      "keys": [
+        "FASTEMBED_CACHE_DIR",
+        "HF_ENDPOINT",
+        "HF_HOME",
+        "PATH",
+        "RUST_LOG",
+        "SEMEMBED_MODEL",
+        "SEMEMBED_PORT"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "cleanup-runtime.json/semselect-synthesis-4093d3c-a2-seminstruct-1",
+      "keys": [
+        "MODEL_ALIAS",
+        "MODEL_API_KEY",
+        "MODEL_CONTEXT",
+        "MODEL_PARALLEL",
+        "MODEL_REASONING",
+        "MODEL_THREADS",
+        "PATH"
+      ],
+      "credential_shaped_values": {
+        "MODEL_API_KEY": "empty"
+      }
+    },
+    {
+      "record": "cleanup-runtime.json/semselect-synthesis-4093d3c-a2-semsource-1",
+      "keys": [
+        "GOLANG_VERSION",
+        "GOPATH",
+        "GOTOOLCHAIN",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "ready-runtime.json/semselect-synthesis-4093d3c-a2-nats-1",
+      "keys": [
+        "NATS_SERVER",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "ready-runtime.json/semselect-synthesis-4093d3c-a2-semembed-1",
+      "keys": [
+        "FASTEMBED_CACHE_DIR",
+        "HF_ENDPOINT",
+        "HF_HOME",
+        "PATH",
+        "RUST_LOG",
+        "SEMEMBED_MODEL",
+        "SEMEMBED_PORT"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "ready-runtime.json/semselect-synthesis-4093d3c-a2-seminstruct-1",
+      "keys": [
+        "MODEL_ALIAS",
+        "MODEL_API_KEY",
+        "MODEL_CONTEXT",
+        "MODEL_PARALLEL",
+        "MODEL_REASONING",
+        "MODEL_THREADS",
+        "PATH"
+      ],
+      "credential_shaped_values": {
+        "MODEL_API_KEY": "empty"
+      }
+    },
+    {
+      "record": "ready-runtime.json/semselect-synthesis-4093d3c-a2-semsource-1",
+      "keys": [
+        "GOLANG_VERSION",
+        "GOPATH",
+        "GOTOOLCHAIN",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "after-runtime.json/semselect-synthesis-4093d3c-a2-nats-1",
+      "keys": [
+        "NATS_SERVER",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "after-runtime.json/semselect-synthesis-4093d3c-a2-semembed-1",
+      "keys": [
+        "FASTEMBED_CACHE_DIR",
+        "HF_ENDPOINT",
+        "HF_HOME",
+        "PATH",
+        "RUST_LOG",
+        "SEMEMBED_MODEL",
+        "SEMEMBED_PORT"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "after-runtime.json/semselect-synthesis-4093d3c-a2-seminstruct-1",
+      "keys": [
+        "MODEL_ALIAS",
+        "MODEL_API_KEY",
+        "MODEL_CONTEXT",
+        "MODEL_PARALLEL",
+        "MODEL_REASONING",
+        "MODEL_THREADS",
+        "PATH"
+      ],
+      "credential_shaped_values": {
+        "MODEL_API_KEY": "empty"
+      }
+    },
+    {
+      "record": "after-runtime.json/semselect-synthesis-4093d3c-a2-semsource-1",
+      "keys": [
+        "GOLANG_VERSION",
+        "GOPATH",
+        "GOTOOLCHAIN",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt1imagesha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36",
+      "keys": [
+        "GOLANG_VERSION",
+        "GOPATH",
+        "GOTOOLCHAIN",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt1imagesha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66",
+      "keys": [
+        "NATS_SERVER",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt1imagesha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "keys": [
+        "PATH",
+        "RUST_LOG",
+        "SEMEMBED_MODEL",
+        "SEMEMBED_PORT"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt1imagesha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+      "keys": [
+        "MODEL_ALIAS",
+        "MODEL_API_KEY",
+        "MODEL_CONTEXT",
+        "MODEL_PARALLEL",
+        "MODEL_REASONING",
+        "MODEL_THREADS",
+        "PATH"
+      ],
+      "credential_shaped_values": {
+        "MODEL_API_KEY": "empty"
+      }
+    },
+    {
+      "record": "attempt1composenats",
+      "keys": [],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt1composesemembed",
+      "keys": [
+        "SEMEMBED_MODEL",
+        "SEMEMBED_PORT"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt1composeseminstruct",
+      "keys": [
+        "MODEL_ALIAS",
+        "MODEL_CONTEXT",
+        "MODEL_PARALLEL",
+        "MODEL_REASONING",
+        "MODEL_THREADS"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt1composesemsource",
+      "keys": [],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt2imagesha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36",
+      "keys": [
+        "GOLANG_VERSION",
+        "GOPATH",
+        "GOTOOLCHAIN",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt2imagesha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66",
+      "keys": [
+        "NATS_SERVER",
+        "PATH"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt2imagesha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "keys": [
+        "PATH",
+        "RUST_LOG",
+        "SEMEMBED_MODEL",
+        "SEMEMBED_PORT"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt2imagesha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+      "keys": [
+        "MODEL_ALIAS",
+        "MODEL_API_KEY",
+        "MODEL_CONTEXT",
+        "MODEL_PARALLEL",
+        "MODEL_REASONING",
+        "MODEL_THREADS",
+        "PATH"
+      ],
+      "credential_shaped_values": {
+        "MODEL_API_KEY": "empty"
+      }
+    },
+    {
+      "record": "attempt2composenats",
+      "keys": [],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt2composesemembed",
+      "keys": [
+        "FASTEMBED_CACHE_DIR",
+        "HF_ENDPOINT",
+        "HF_HOME",
+        "SEMEMBED_MODEL",
+        "SEMEMBED_PORT"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt2composeseminstruct",
+      "keys": [
+        "MODEL_ALIAS",
+        "MODEL_CONTEXT",
+        "MODEL_PARALLEL",
+        "MODEL_REASONING",
+        "MODEL_THREADS"
+      ],
+      "credential_shaped_values": {}
+    },
+    {
+      "record": "attempt2composesemsource",
+      "keys": [],
+      "credential_shaped_values": {}
+    }
+  ],
+  "license_notes": [
+    "Pinned SemSource and SemStreams MIT license files are copied.",
+    "Snowflake pinned model card and metadata declare Apache-2.0; no weights are distributed here.",
+    "Seminstruct image/model are pinned by immutable image digest and observed GGUF SHA-256; this package distributes observations and logs, not its runtime or model weights."
+  ]
+}

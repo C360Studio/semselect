@@ -1,0 +1,2101 @@
+{
+  "buckets": {
+    "COMMUNITY_INDEX": {
+      "0.semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5": {
+        "created": "2026-10-05T18:30:14.536416882Z",
+        "revision": 280,
+        "sha256": "af7fc0e2e6b33390bf82279e3d469ac6a40f67dea65e081b79f2dd579f3c1769",
+        "value": {
+          "id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "level": 0,
+          "members": [
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0013",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0014",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0015",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0013",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0014",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0015",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0016",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0017",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0018",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0019",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0020",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0021",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0013",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0014",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0015",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0016",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0017",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0018",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0019",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0020",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0021",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0006",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0008-versioned-source-retention-57ce97d9",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-migration-doc-passage-chunking-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-buffer-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-cache-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md"
+          ],
+          "statistical_summary": "Community of 92 entities including 86 chunks, 6 docs. Key themes: cache, adr, lifecycle, branch, buffer.",
+          "keywords": [
+            "cache",
+            "adr",
+            "lifecycle",
+            "branch",
+            "buffer",
+            "registration",
+            "0007",
+            "sidecar",
+            "repo",
+            "supersession"
+          ],
+          "rep_entities": [
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-buffer-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-cache-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0008-versioned-source-retention-57ce97d9",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md"
+          ],
+          "summary_status": "statistical",
+          "metadata": {
+            "size": 92
+          }
+        }
+      },
+      "1.semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5": {
+        "created": "2026-10-05T18:30:14.586533382Z",
+        "revision": 373,
+        "sha256": "ed50e8ef2cd15a9f8d52d234483a51051fba38e1e140f2a1c678e04b5adebb39",
+        "value": {
+          "id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "level": 1,
+          "members": [
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0013",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0014",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0015",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0013",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0014",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0015",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0016",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0017",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0018",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0019",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0020",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0021",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0013",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0014",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0015",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0016",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0017",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0018",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0019",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0020",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0021",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0006",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0008-versioned-source-retention-57ce97d9",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-migration-doc-passage-chunking-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-buffer-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-cache-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md"
+          ],
+          "statistical_summary": "Community of 92 entities including 86 chunks, 6 docs. Key themes: cache, adr, branch, lifecycle, buffer.",
+          "keywords": [
+            "cache",
+            "adr",
+            "branch",
+            "lifecycle",
+            "buffer",
+            "registration",
+            "0007",
+            "sidecar",
+            "repo",
+            "retention"
+          ],
+          "rep_entities": [
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-buffer-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-cache-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0008-versioned-source-retention-57ce97d9",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md"
+          ],
+          "summary_status": "statistical",
+          "metadata": {
+            "size": 92
+          }
+        }
+      },
+      "2.semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5": {
+        "created": "2026-10-05T18:30:14.626400591Z",
+        "revision": 466,
+        "sha256": "1f4f91be9e08c2d8ba59e5e66533dbcca0dbdc7e222c7b3b4ec156de32bf5928",
+        "value": {
+          "id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "level": 2,
+          "members": [
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0013",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0014",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0015",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0013",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0014",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0015",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0016",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0017",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0018",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0019",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0020",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0021",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0006",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0007",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0008",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0009",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0010",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0011",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0012",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0013",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0014",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0015",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0016",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0017",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0018",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0019",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0020",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0021",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0000",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0001",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0002",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0003",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0004",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0005",
+            "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0006",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0008-versioned-source-retention-57ce97d9",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-migration-doc-passage-chunking-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-buffer-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-cache-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md"
+          ],
+          "statistical_summary": "Community of 92 entities including 86 chunks, 6 docs. Key themes: cache, adr, branch, lifecycle, buffer.",
+          "keywords": [
+            "cache",
+            "adr",
+            "branch",
+            "lifecycle",
+            "buffer",
+            "registration",
+            "0007",
+            "sidecar",
+            "repo",
+            "source"
+          ],
+          "rep_entities": [
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-buffer-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-cache-README-md",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+            "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0008-versioned-source-retention-57ce97d9",
+            "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md"
+          ],
+          "summary_status": "statistical",
+          "metadata": {
+            "size": 92
+          }
+        }
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0000": {
+        "created": "2026-10-05T18:30:14.537177257Z",
+        "revision": 281,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0001": {
+        "created": "2026-10-05T18:30:14.537527674Z",
+        "revision": 282,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0002": {
+        "created": "2026-10-05T18:30:14.537844507Z",
+        "revision": 283,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0003": {
+        "created": "2026-10-05T18:30:14.538104966Z",
+        "revision": 284,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0004": {
+        "created": "2026-10-05T18:30:14.538634257Z",
+        "revision": 285,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0005": {
+        "created": "2026-10-05T18:30:14.538875507Z",
+        "revision": 286,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0006": {
+        "created": "2026-10-05T18:30:14.539186257Z",
+        "revision": 287,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0007": {
+        "created": "2026-10-05T18:30:14.539615299Z",
+        "revision": 288,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0008": {
+        "created": "2026-10-05T18:30:14.539887632Z",
+        "revision": 289,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0009": {
+        "created": "2026-10-05T18:30:14.540153757Z",
+        "revision": 290,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0010": {
+        "created": "2026-10-05T18:30:14.540482841Z",
+        "revision": 291,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0011": {
+        "created": "2026-10-05T18:30:14.540825674Z",
+        "revision": 292,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0012": {
+        "created": "2026-10-05T18:30:14.541320049Z",
+        "revision": 293,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0013": {
+        "created": "2026-10-05T18:30:14.541636799Z",
+        "revision": 294,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0014": {
+        "created": "2026-10-05T18:30:14.542398924Z",
+        "revision": 295,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0015": {
+        "created": "2026-10-05T18:30:14.542974799Z",
+        "revision": 296,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0000": {
+        "created": "2026-10-05T18:30:14.543474049Z",
+        "revision": 297,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0001": {
+        "created": "2026-10-05T18:30:14.543902549Z",
+        "revision": 298,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0002": {
+        "created": "2026-10-05T18:30:14.544324674Z",
+        "revision": 299,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0003": {
+        "created": "2026-10-05T18:30:14.544628507Z",
+        "revision": 300,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0004": {
+        "created": "2026-10-05T18:30:14.544881716Z",
+        "revision": 301,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0005": {
+        "created": "2026-10-05T18:30:14.545104799Z",
+        "revision": 302,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0006": {
+        "created": "2026-10-05T18:30:14.545346466Z",
+        "revision": 303,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0007": {
+        "created": "2026-10-05T18:30:14.545691924Z",
+        "revision": 304,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0008": {
+        "created": "2026-10-05T18:30:14.545917632Z",
+        "revision": 305,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0009": {
+        "created": "2026-10-05T18:30:14.546121632Z",
+        "revision": 306,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0010": {
+        "created": "2026-10-05T18:30:14.546460841Z",
+        "revision": 307,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0011": {
+        "created": "2026-10-05T18:30:14.546666507Z",
+        "revision": 308,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0012": {
+        "created": "2026-10-05T18:30:14.546866632Z",
+        "revision": 309,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0000": {
+        "created": "2026-10-05T18:30:14.547183716Z",
+        "revision": 310,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0001": {
+        "created": "2026-10-05T18:30:14.547377882Z",
+        "revision": 311,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0002": {
+        "created": "2026-10-05T18:30:14.547608299Z",
+        "revision": 312,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0003": {
+        "created": "2026-10-05T18:30:14.547738924Z",
+        "revision": 313,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0004": {
+        "created": "2026-10-05T18:30:14.547988091Z",
+        "revision": 314,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0005": {
+        "created": "2026-10-05T18:30:14.548347257Z",
+        "revision": 315,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0000": {
+        "created": "2026-10-05T18:30:14.548565841Z",
+        "revision": 316,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0001": {
+        "created": "2026-10-05T18:30:14.548808007Z",
+        "revision": 317,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0002": {
+        "created": "2026-10-05T18:30:14.549106257Z",
+        "revision": 318,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0003": {
+        "created": "2026-10-05T18:30:14.549275799Z",
+        "revision": 319,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0004": {
+        "created": "2026-10-05T18:30:14.549551716Z",
+        "revision": 320,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0005": {
+        "created": "2026-10-05T18:30:14.549880424Z",
+        "revision": 321,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0006": {
+        "created": "2026-10-05T18:30:14.550131216Z",
+        "revision": 322,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0007": {
+        "created": "2026-10-05T18:30:14.550374341Z",
+        "revision": 323,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0008": {
+        "created": "2026-10-05T18:30:14.550552841Z",
+        "revision": 324,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0009": {
+        "created": "2026-10-05T18:30:14.550801257Z",
+        "revision": 325,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0010": {
+        "created": "2026-10-05T18:30:14.551123924Z",
+        "revision": 326,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0011": {
+        "created": "2026-10-05T18:30:14.551366757Z",
+        "revision": 327,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0012": {
+        "created": "2026-10-05T18:30:14.551701966Z",
+        "revision": 328,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0013": {
+        "created": "2026-10-05T18:30:14.551983174Z",
+        "revision": 329,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0014": {
+        "created": "2026-10-05T18:30:14.552329591Z",
+        "revision": 330,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0015": {
+        "created": "2026-10-05T18:30:14.552533382Z",
+        "revision": 331,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0016": {
+        "created": "2026-10-05T18:30:14.552727007Z",
+        "revision": 332,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0017": {
+        "created": "2026-10-05T18:30:14.552997799Z",
+        "revision": 333,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0018": {
+        "created": "2026-10-05T18:30:14.553199841Z",
+        "revision": 334,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0019": {
+        "created": "2026-10-05T18:30:14.553345382Z",
+        "revision": 335,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0020": {
+        "created": "2026-10-05T18:30:14.553453966Z",
+        "revision": 336,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0021": {
+        "created": "2026-10-05T18:30:14.553646341Z",
+        "revision": 337,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0000": {
+        "created": "2026-10-05T18:30:14.553847132Z",
+        "revision": 338,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0001": {
+        "created": "2026-10-05T18:30:14.553978341Z",
+        "revision": 339,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0002": {
+        "created": "2026-10-05T18:30:14.554248174Z",
+        "revision": 340,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0003": {
+        "created": "2026-10-05T18:30:14.554419174Z",
+        "revision": 341,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0004": {
+        "created": "2026-10-05T18:30:14.554628757Z",
+        "revision": 342,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0005": {
+        "created": "2026-10-05T18:30:14.554871257Z",
+        "revision": 343,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0006": {
+        "created": "2026-10-05T18:30:14.555086299Z",
+        "revision": 344,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0007": {
+        "created": "2026-10-05T18:30:14.555282591Z",
+        "revision": 345,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0008": {
+        "created": "2026-10-05T18:30:14.555414049Z",
+        "revision": 346,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0009": {
+        "created": "2026-10-05T18:30:14.555535216Z",
+        "revision": 347,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0010": {
+        "created": "2026-10-05T18:30:14.555650299Z",
+        "revision": 348,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0011": {
+        "created": "2026-10-05T18:30:14.555848841Z",
+        "revision": 349,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0012": {
+        "created": "2026-10-05T18:30:14.555948799Z",
+        "revision": 350,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0013": {
+        "created": "2026-10-05T18:30:14.556108799Z",
+        "revision": 351,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0014": {
+        "created": "2026-10-05T18:30:14.556252549Z",
+        "revision": 352,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0015": {
+        "created": "2026-10-05T18:30:14.556448674Z",
+        "revision": 353,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0016": {
+        "created": "2026-10-05T18:30:14.556574757Z",
+        "revision": 354,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0017": {
+        "created": "2026-10-05T18:30:14.556722674Z",
+        "revision": 355,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0018": {
+        "created": "2026-10-05T18:30:14.556868757Z",
+        "revision": 356,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0019": {
+        "created": "2026-10-05T18:30:14.557007049Z",
+        "revision": 357,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0020": {
+        "created": "2026-10-05T18:30:14.557150757Z",
+        "revision": 358,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0021": {
+        "created": "2026-10-05T18:30:14.557328007Z",
+        "revision": 359,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0000": {
+        "created": "2026-10-05T18:30:14.557471424Z",
+        "revision": 360,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0001": {
+        "created": "2026-10-05T18:30:14.557747174Z",
+        "revision": 361,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0002": {
+        "created": "2026-10-05T18:30:14.557968299Z",
+        "revision": 362,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0003": {
+        "created": "2026-10-05T18:30:14.558147341Z",
+        "revision": 363,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0004": {
+        "created": "2026-10-05T18:30:14.558307882Z",
+        "revision": 364,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0005": {
+        "created": "2026-10-05T18:30:14.558453466Z",
+        "revision": 365,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0006": {
+        "created": "2026-10-05T18:30:14.558622591Z",
+        "revision": 366,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5": {
+        "created": "2026-10-05T18:30:14.558748424Z",
+        "revision": 367,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0008-versioned-source-retention-57ce97d9": {
+        "created": "2026-10-05T18:30:14.558949382Z",
+        "revision": 368,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.doc.semsource-docs-migration-doc-passage-chunking-md": {
+        "created": "2026-10-05T18:30:14.559107632Z",
+        "revision": 369,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.doc.semstreams-pkg-buffer-README-md": {
+        "created": "2026-10-05T18:30:14.559242424Z",
+        "revision": 370,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.doc.semstreams-pkg-cache-README-md": {
+        "created": "2026-10-05T18:30:14.559392716Z",
+        "revision": 371,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.0.semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md": {
+        "created": "2026-10-05T18:30:14.559543799Z",
+        "revision": 372,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0000": {
+        "created": "2026-10-05T18:30:14.586872299Z",
+        "revision": 374,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0001": {
+        "created": "2026-10-05T18:30:14.587016549Z",
+        "revision": 375,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0002": {
+        "created": "2026-10-05T18:30:14.587157757Z",
+        "revision": 376,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0003": {
+        "created": "2026-10-05T18:30:14.587265299Z",
+        "revision": 377,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0004": {
+        "created": "2026-10-05T18:30:14.587436341Z",
+        "revision": 378,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0005": {
+        "created": "2026-10-05T18:30:14.587596966Z",
+        "revision": 379,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0006": {
+        "created": "2026-10-05T18:30:14.587706549Z",
+        "revision": 380,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0007": {
+        "created": "2026-10-05T18:30:14.587867091Z",
+        "revision": 381,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0008": {
+        "created": "2026-10-05T18:30:14.588055841Z",
+        "revision": 382,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0009": {
+        "created": "2026-10-05T18:30:14.588173966Z",
+        "revision": 383,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0010": {
+        "created": "2026-10-05T18:30:14.588342091Z",
+        "revision": 384,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0011": {
+        "created": "2026-10-05T18:30:14.588518966Z",
+        "revision": 385,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0012": {
+        "created": "2026-10-05T18:30:14.588695549Z",
+        "revision": 386,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0013": {
+        "created": "2026-10-05T18:30:14.588895216Z",
+        "revision": 387,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0014": {
+        "created": "2026-10-05T18:30:14.589018174Z",
+        "revision": 388,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0015": {
+        "created": "2026-10-05T18:30:14.589149632Z",
+        "revision": 389,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0000": {
+        "created": "2026-10-05T18:30:14.589270049Z",
+        "revision": 390,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0001": {
+        "created": "2026-10-05T18:30:14.589393091Z",
+        "revision": 391,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0002": {
+        "created": "2026-10-05T18:30:14.589507341Z",
+        "revision": 392,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0003": {
+        "created": "2026-10-05T18:30:14.589627882Z",
+        "revision": 393,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0004": {
+        "created": "2026-10-05T18:30:14.589816049Z",
+        "revision": 394,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0005": {
+        "created": "2026-10-05T18:30:14.589959341Z",
+        "revision": 395,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0006": {
+        "created": "2026-10-05T18:30:14.590068299Z",
+        "revision": 396,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0007": {
+        "created": "2026-10-05T18:30:14.590187632Z",
+        "revision": 397,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0008": {
+        "created": "2026-10-05T18:30:14.590289049Z",
+        "revision": 398,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0009": {
+        "created": "2026-10-05T18:30:14.590415174Z",
+        "revision": 399,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0010": {
+        "created": "2026-10-05T18:30:14.590529299Z",
+        "revision": 400,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0011": {
+        "created": "2026-10-05T18:30:14.590689007Z",
+        "revision": 401,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0012": {
+        "created": "2026-10-05T18:30:14.590881799Z",
+        "revision": 402,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0000": {
+        "created": "2026-10-05T18:30:14.590989632Z",
+        "revision": 403,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0001": {
+        "created": "2026-10-05T18:30:14.591197799Z",
+        "revision": 404,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0002": {
+        "created": "2026-10-05T18:30:14.591342507Z",
+        "revision": 405,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0003": {
+        "created": "2026-10-05T18:30:14.591467841Z",
+        "revision": 406,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0004": {
+        "created": "2026-10-05T18:30:14.591643382Z",
+        "revision": 407,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0005": {
+        "created": "2026-10-05T18:30:14.591786007Z",
+        "revision": 408,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0000": {
+        "created": "2026-10-05T18:30:14.591965174Z",
+        "revision": 409,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0001": {
+        "created": "2026-10-05T18:30:14.592142966Z",
+        "revision": 410,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0002": {
+        "created": "2026-10-05T18:30:14.592262632Z",
+        "revision": 411,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0003": {
+        "created": "2026-10-05T18:30:14.592357716Z",
+        "revision": 412,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0004": {
+        "created": "2026-10-05T18:30:14.592509049Z",
+        "revision": 413,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0005": {
+        "created": "2026-10-05T18:30:14.592616091Z",
+        "revision": 414,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0006": {
+        "created": "2026-10-05T18:30:14.592747549Z",
+        "revision": 415,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0007": {
+        "created": "2026-10-05T18:30:14.592855674Z",
+        "revision": 416,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0008": {
+        "created": "2026-10-05T18:30:14.593006757Z",
+        "revision": 417,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0009": {
+        "created": "2026-10-05T18:30:14.593130591Z",
+        "revision": 418,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0010": {
+        "created": "2026-10-05T18:30:14.593320382Z",
+        "revision": 419,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0011": {
+        "created": "2026-10-05T18:30:14.593465382Z",
+        "revision": 420,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0012": {
+        "created": "2026-10-05T18:30:14.593574341Z",
+        "revision": 421,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0013": {
+        "created": "2026-10-05T18:30:14.593712591Z",
+        "revision": 422,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0014": {
+        "created": "2026-10-05T18:30:14.593865257Z",
+        "revision": 423,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0015": {
+        "created": "2026-10-05T18:30:14.593979049Z",
+        "revision": 424,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0016": {
+        "created": "2026-10-05T18:30:14.594131007Z",
+        "revision": 425,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0017": {
+        "created": "2026-10-05T18:30:14.594263382Z",
+        "revision": 426,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0018": {
+        "created": "2026-10-05T18:30:14.594411674Z",
+        "revision": 427,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0019": {
+        "created": "2026-10-05T18:30:14.594529799Z",
+        "revision": 428,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0020": {
+        "created": "2026-10-05T18:30:14.594654424Z",
+        "revision": 429,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0021": {
+        "created": "2026-10-05T18:30:14.594783757Z",
+        "revision": 430,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0000": {
+        "created": "2026-10-05T18:30:14.594967632Z",
+        "revision": 431,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0001": {
+        "created": "2026-10-05T18:30:14.595080424Z",
+        "revision": 432,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0002": {
+        "created": "2026-10-05T18:30:14.595223799Z",
+        "revision": 433,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0003": {
+        "created": "2026-10-05T18:30:14.595328424Z",
+        "revision": 434,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0004": {
+        "created": "2026-10-05T18:30:14.595474299Z",
+        "revision": 435,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0005": {
+        "created": "2026-10-05T18:30:14.595633049Z",
+        "revision": 436,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0006": {
+        "created": "2026-10-05T18:30:14.595782966Z",
+        "revision": 437,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0007": {
+        "created": "2026-10-05T18:30:14.595907132Z",
+        "revision": 438,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0008": {
+        "created": "2026-10-05T18:30:14.596004549Z",
+        "revision": 439,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0009": {
+        "created": "2026-10-05T18:30:14.596112049Z",
+        "revision": 440,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0010": {
+        "created": "2026-10-05T18:30:14.596247716Z",
+        "revision": 441,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0011": {
+        "created": "2026-10-05T18:30:14.596412549Z",
+        "revision": 442,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0012": {
+        "created": "2026-10-05T18:30:14.596551132Z",
+        "revision": 443,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0013": {
+        "created": "2026-10-05T18:30:14.596720382Z",
+        "revision": 444,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0014": {
+        "created": "2026-10-05T18:30:14.596861591Z",
+        "revision": 445,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0015": {
+        "created": "2026-10-05T18:30:14.597004466Z",
+        "revision": 446,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0016": {
+        "created": "2026-10-05T18:30:14.597110757Z",
+        "revision": 447,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0017": {
+        "created": "2026-10-05T18:30:14.597261674Z",
+        "revision": 448,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0018": {
+        "created": "2026-10-05T18:30:14.597393216Z",
+        "revision": 449,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0019": {
+        "created": "2026-10-05T18:30:14.597527799Z",
+        "revision": 450,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0020": {
+        "created": "2026-10-05T18:30:14.597669716Z",
+        "revision": 451,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0021": {
+        "created": "2026-10-05T18:30:14.597855007Z",
+        "revision": 452,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0000": {
+        "created": "2026-10-05T18:30:14.597966382Z",
+        "revision": 453,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0001": {
+        "created": "2026-10-05T18:30:14.598083007Z",
+        "revision": 454,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0002": {
+        "created": "2026-10-05T18:30:14.598236882Z",
+        "revision": 455,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0003": {
+        "created": "2026-10-05T18:30:14.598369091Z",
+        "revision": 456,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0004": {
+        "created": "2026-10-05T18:30:14.598542716Z",
+        "revision": 457,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0005": {
+        "created": "2026-10-05T18:30:14.598827382Z",
+        "revision": 458,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0006": {
+        "created": "2026-10-05T18:30:14.599010757Z",
+        "revision": 459,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5": {
+        "created": "2026-10-05T18:30:14.599167007Z",
+        "revision": 460,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0008-versioned-source-retention-57ce97d9": {
+        "created": "2026-10-05T18:30:14.599291549Z",
+        "revision": 461,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.doc.semsource-docs-migration-doc-passage-chunking-md": {
+        "created": "2026-10-05T18:30:14.599428257Z",
+        "revision": 462,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.doc.semstreams-pkg-buffer-README-md": {
+        "created": "2026-10-05T18:30:14.599546924Z",
+        "revision": 463,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.doc.semstreams-pkg-cache-README-md": {
+        "created": "2026-10-05T18:30:14.599695966Z",
+        "revision": 464,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.1.semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md": {
+        "created": "2026-10-05T18:30:14.599844674Z",
+        "revision": 465,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0000": {
+        "created": "2026-10-05T18:30:14.626602299Z",
+        "revision": 467,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0001": {
+        "created": "2026-10-05T18:30:14.626754674Z",
+        "revision": 468,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0002": {
+        "created": "2026-10-05T18:30:14.626932799Z",
+        "revision": 469,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0003": {
+        "created": "2026-10-05T18:30:14.627045049Z",
+        "revision": 470,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0004": {
+        "created": "2026-10-05T18:30:14.627178966Z",
+        "revision": 471,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0005": {
+        "created": "2026-10-05T18:30:14.627292299Z",
+        "revision": 472,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0006": {
+        "created": "2026-10-05T18:30:14.627405299Z",
+        "revision": 473,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0007": {
+        "created": "2026-10-05T18:30:14.627511841Z",
+        "revision": 474,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0008": {
+        "created": "2026-10-05T18:30:14.627651424Z",
+        "revision": 475,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0009": {
+        "created": "2026-10-05T18:30:14.627752257Z",
+        "revision": 476,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0010": {
+        "created": "2026-10-05T18:30:14.627877757Z",
+        "revision": 477,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0011": {
+        "created": "2026-10-05T18:30:14.628009841Z",
+        "revision": 478,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0012": {
+        "created": "2026-10-05T18:30:14.628124799Z",
+        "revision": 479,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0013": {
+        "created": "2026-10-05T18:30:14.628241424Z",
+        "revision": 480,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0014": {
+        "created": "2026-10-05T18:30:14.628363507Z",
+        "revision": 481,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0015": {
+        "created": "2026-10-05T18:30:14.628480549Z",
+        "revision": 482,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0000": {
+        "created": "2026-10-05T18:30:14.628607424Z",
+        "revision": 483,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0001": {
+        "created": "2026-10-05T18:30:14.628701757Z",
+        "revision": 484,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0002": {
+        "created": "2026-10-05T18:30:14.628809424Z",
+        "revision": 485,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0003": {
+        "created": "2026-10-05T18:30:14.628982091Z",
+        "revision": 486,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0004": {
+        "created": "2026-10-05T18:30:14.629082674Z",
+        "revision": 487,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0005": {
+        "created": "2026-10-05T18:30:14.629179091Z",
+        "revision": 488,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0006": {
+        "created": "2026-10-05T18:30:14.629291382Z",
+        "revision": 489,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0007": {
+        "created": "2026-10-05T18:30:14.629404924Z",
+        "revision": 490,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0008": {
+        "created": "2026-10-05T18:30:14.629512924Z",
+        "revision": 491,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0009": {
+        "created": "2026-10-05T18:30:14.629641132Z",
+        "revision": 492,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0010": {
+        "created": "2026-10-05T18:30:14.629763882Z",
+        "revision": 493,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0011": {
+        "created": "2026-10-05T18:30:14.629882632Z",
+        "revision": 494,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0012": {
+        "created": "2026-10-05T18:30:14.629993799Z",
+        "revision": 495,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0000": {
+        "created": "2026-10-05T18:30:14.630113216Z",
+        "revision": 496,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0001": {
+        "created": "2026-10-05T18:30:14.630217341Z",
+        "revision": 497,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0002": {
+        "created": "2026-10-05T18:30:14.630340674Z",
+        "revision": 498,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0003": {
+        "created": "2026-10-05T18:30:14.630449007Z",
+        "revision": 499,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0004": {
+        "created": "2026-10-05T18:30:14.630557549Z",
+        "revision": 500,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semsource-docs-migration-doc-passage-chunking-md-0005": {
+        "created": "2026-10-05T18:30:14.630656799Z",
+        "revision": 501,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0000": {
+        "created": "2026-10-05T18:30:14.630781799Z",
+        "revision": 502,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0001": {
+        "created": "2026-10-05T18:30:14.630922424Z",
+        "revision": 503,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0002": {
+        "created": "2026-10-05T18:30:14.631039257Z",
+        "revision": 504,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0003": {
+        "created": "2026-10-05T18:30:14.631144007Z",
+        "revision": 505,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0004": {
+        "created": "2026-10-05T18:30:14.631297049Z",
+        "revision": 506,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0005": {
+        "created": "2026-10-05T18:30:14.631405799Z",
+        "revision": 507,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0006": {
+        "created": "2026-10-05T18:30:14.631512507Z",
+        "revision": 508,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0007": {
+        "created": "2026-10-05T18:30:14.631627382Z",
+        "revision": 509,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0008": {
+        "created": "2026-10-05T18:30:14.631736216Z",
+        "revision": 510,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0009": {
+        "created": "2026-10-05T18:30:14.631852716Z",
+        "revision": 511,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0010": {
+        "created": "2026-10-05T18:30:14.631982841Z",
+        "revision": 512,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0011": {
+        "created": "2026-10-05T18:30:14.632091341Z",
+        "revision": 513,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0012": {
+        "created": "2026-10-05T18:30:14.632197799Z",
+        "revision": 514,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0013": {
+        "created": "2026-10-05T18:30:14.632320174Z",
+        "revision": 515,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0014": {
+        "created": "2026-10-05T18:30:14.632448299Z",
+        "revision": 516,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0015": {
+        "created": "2026-10-05T18:30:14.632559507Z",
+        "revision": 517,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0016": {
+        "created": "2026-10-05T18:30:14.632683382Z",
+        "revision": 518,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0017": {
+        "created": "2026-10-05T18:30:14.632795549Z",
+        "revision": 519,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0018": {
+        "created": "2026-10-05T18:30:14.632918257Z",
+        "revision": 520,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0019": {
+        "created": "2026-10-05T18:30:14.633034882Z",
+        "revision": 521,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0020": {
+        "created": "2026-10-05T18:30:14.633142299Z",
+        "revision": 522,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-buffer-README-md-0021": {
+        "created": "2026-10-05T18:30:14.633243507Z",
+        "revision": 523,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0000": {
+        "created": "2026-10-05T18:30:14.633354966Z",
+        "revision": 524,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0001": {
+        "created": "2026-10-05T18:30:14.633462299Z",
+        "revision": 525,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0002": {
+        "created": "2026-10-05T18:30:14.633573466Z",
+        "revision": 526,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0003": {
+        "created": "2026-10-05T18:30:14.633680466Z",
+        "revision": 527,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0004": {
+        "created": "2026-10-05T18:30:14.633817757Z",
+        "revision": 528,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0005": {
+        "created": "2026-10-05T18:30:14.633926716Z",
+        "revision": 529,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0006": {
+        "created": "2026-10-05T18:30:14.634042424Z",
+        "revision": 530,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0007": {
+        "created": "2026-10-05T18:30:14.634170799Z",
+        "revision": 531,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0008": {
+        "created": "2026-10-05T18:30:14.634290507Z",
+        "revision": 532,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0009": {
+        "created": "2026-10-05T18:30:14.634393674Z",
+        "revision": 533,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0010": {
+        "created": "2026-10-05T18:30:14.634527674Z",
+        "revision": 534,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0011": {
+        "created": "2026-10-05T18:30:14.634639882Z",
+        "revision": 535,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0012": {
+        "created": "2026-10-05T18:30:14.634768007Z",
+        "revision": 536,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0013": {
+        "created": "2026-10-05T18:30:14.634886841Z",
+        "revision": 537,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0014": {
+        "created": "2026-10-05T18:30:14.634991674Z",
+        "revision": 538,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0015": {
+        "created": "2026-10-05T18:30:14.635111549Z",
+        "revision": 539,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0016": {
+        "created": "2026-10-05T18:30:14.635224591Z",
+        "revision": 540,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0017": {
+        "created": "2026-10-05T18:30:14.635364007Z",
+        "revision": 541,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0018": {
+        "created": "2026-10-05T18:30:14.635523174Z",
+        "revision": 542,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0019": {
+        "created": "2026-10-05T18:30:14.635630257Z",
+        "revision": 543,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0020": {
+        "created": "2026-10-05T18:30:14.635739716Z",
+        "revision": 544,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-cache-README-md-0021": {
+        "created": "2026-10-05T18:30:14.635861966Z",
+        "revision": 545,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0000": {
+        "created": "2026-10-05T18:30:14.636000049Z",
+        "revision": 546,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0001": {
+        "created": "2026-10-05T18:30:14.636117382Z",
+        "revision": 547,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0002": {
+        "created": "2026-10-05T18:30:14.636220257Z",
+        "revision": 548,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0003": {
+        "created": "2026-10-05T18:30:14.636337966Z",
+        "revision": 549,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0004": {
+        "created": "2026-10-05T18:30:14.636452216Z",
+        "revision": 550,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0005": {
+        "created": "2026-10-05T18:30:14.636552091Z",
+        "revision": 551,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0006": {
+        "created": "2026-10-05T18:30:14.636665716Z",
+        "revision": 552,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5": {
+        "created": "2026-10-05T18:30:14.636780716Z",
+        "revision": 553,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0008-versioned-source-retention-57ce97d9": {
+        "created": "2026-10-05T18:30:14.636890216Z",
+        "revision": 554,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.doc.semsource-docs-migration-doc-passage-chunking-md": {
+        "created": "2026-10-05T18:30:14.637019674Z",
+        "revision": 555,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.doc.semstreams-pkg-buffer-README-md": {
+        "created": "2026-10-05T18:30:14.637134507Z",
+        "revision": 556,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.doc.semstreams-pkg-cache-README-md": {
+        "created": "2026-10-05T18:30:14.637236216Z",
+        "revision": 557,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      },
+      "entity.2.semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md": {
+        "created": "2026-10-05T18:30:14.637348757Z",
+        "revision": 558,
+        "sha256": "2893e410ac6d5f5a2df866f210956673b56857624857899e35af665eca5c7f77",
+        "value": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5"
+      }
+    },
+    "COMMUNITY_SUMMARIES": {
+      "0.de84422356dd6dfd76a04bcc50702fd0d0bfb260fc03d7cbecb197f1fb257cdb": {
+        "created": "2026-10-05T18:30:27.523370222Z",
+        "revision": 1,
+        "sha256": "91cc7d2fb11a02e7e860aa2b047f63dc85dbd73fde82e453924f1d71825bf261",
+        "value": {
+          "membership_hash": "de84422356dd6dfd76a04bcc50702fd0d0bfb260fc03d7cbecb197f1fb257cdb",
+          "level": 0,
+          "llm_summary": "This community represents a web-based organization focused on the semantic and semantic content of a system (semselectsynth.semsource) with entities categorized into domains such as web and corpus. The entities are grouped into a corpus chunk, indicating a focus on content management, with key themes like cache, data reuse, and lifecycle. These entities form a structured dataset centered around semantic topics and system operations.",
+          "model": "seminstruct",
+          "status": "llm-enhanced",
+          "member_count": 92,
+          "generated_at": "2026-10-05T18:30:27.523054138Z"
+        }
+      }
+    },
+    "GRAPH_STATUS": {
+      "graph-embedding": {
+        "created": "2026-10-05T18:30:29.352572Z",
+        "revision": 46,
+        "sha256": "7f1a798ead958bf2aa95f85fa2a1c486d8db12a52c91a95efea54471c1cd521d",
+        "value": {
+          "ready": true,
+          "state": "ready",
+          "bootstrap_complete": true,
+          "indexed_revision": 92,
+          "target_revision": 92,
+          "revision": "92",
+          "last_synced": "2026-10-05T18:29:24Z"
+        }
+      },
+      "graph-index": {
+        "created": "2026-10-05T18:30:29.367754667Z",
+        "revision": 48,
+        "sha256": "51a3c6e73fa9d28c2158222717c753414bf9839b9e91254342ea826164821e58",
+        "value": {
+          "ready": true,
+          "state": "ready",
+          "bootstrap_complete": true,
+          "indexed_revision": 92,
+          "target_revision": 92,
+          "revision": "92",
+          "last_synced": "2026-10-05T18:29:19Z"
+        }
+      },
+      "graph-ingest": {
+        "created": "2026-10-05T18:30:29.353709958Z",
+        "revision": 47,
+        "sha256": "6661bf7339297f25658b94bda6fa9372c1d9191c42480ead02a03b5f53af7b75",
+        "value": {
+          "ready": true,
+          "state": "ready",
+          "bootstrap_complete": true,
+          "last_synced": "2026-10-05T18:29:14Z"
+        }
+      }
+    }
+  },
+  "captured_utc": "2026-10-05T18:30:30.492879709Z"
+}

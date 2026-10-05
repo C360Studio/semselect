@@ -1,0 +1,3 @@
+{"time":"2026-10-05T13:43:15.894335-05:00","level":"WARN","msg":"LLM request failed, retrying","attempt":1,"max_retries":3,"error":"Post \"http://127.0.0.1:48083/v1/chat/completions\": context deadline exceeded"}
+{"time":"2026-10-05T13:43:15.894644-05:00","level":"WARN","msg":"LLM answer synthesis failed, using template fallback","query":"When a new version is indexed, what happens to the old version, and how do historical versions remain available without dominating ordinary current-version queries?","timeout":15000000000,"degraded_reason":"answer_synthesis_timeout","error":"context deadline exceeded"}
+S11: inference, 15004.0ms, 1 synthesis call(s)

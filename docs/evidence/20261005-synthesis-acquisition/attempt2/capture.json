@@ -1,0 +1,7 @@
+{
+  "completed_utc": "2026-10-05T18:34:27.717306347Z",
+  "planned": 13,
+  "query_plan_sha256": "3976404bb63bf61b9403c78d4f1b31f40703c5726901774db0ab366cd474f37d",
+  "requests_per_query": 1,
+  "scope": "Acquisition only; answers are preserved but not used for selection or formal metrics."
+}

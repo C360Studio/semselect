@@ -1,0 +1,332 @@
+[
+  {
+    "id": "B001",
+    "case_id": "S08",
+    "query": "Which property should replace source.doc.summary for title text, and how does doc-source now behave if the verbatim body store cannot be created?",
+    "answer": "Based on the provided cluster summaries, the following information can be determined:\n\n*   **Property Replacement:** The clusters identify **ADR-0008: Versioned-Source Retention & Supersession** as a key decision document regarding source retention. However, the summaries do not explicitly state which specific property should replace `source.doc.summary` for title text.\n*   **Behavior on Failure:** The clusters mention **ADR-0008** and discuss \"Supersession & changesets\" being tier-0 deterministic, but they do not describe the specific behavior of `doc-source` if the \"verbatim body store\" cannot be created.\n\n**Conclusion:** The provided text confirms the existence of ADR-0008 and the context of document passage chunking and versioned sources within the `semselectsynth.semsource` platform, but it lacks the specific details required to answer the query regarding the replacement property and the fallback behavior for the verbatim body store."
+  },
+  {
+    "id": "B002",
+    "case_id": "S03",
+    "query": "What triggers LRU eviction, and does Hybrid combine that behavior with expiration?",
+    "answer": "Based on the provided cluster summaries, the following information is available and missing:\n\n**What is known:**\n*   **Context:** The knowledge graph contains data regarding a web-based platform (\"semselectsynth.semsource\") that manages data structures such as caches, buffers, and cache management systems.\n*   **Eviction Policy:** The clusters explicitly reference an \"Eviction Policy Flow\" within the Cache Package architecture. This indicates that eviction policies are a defined component of the system's cache management.\n*   **Hybrid Behavior:** The clusters do not explicitly mention a \"Hybrid\" cache type or strategy in the provided summaries. They do, however, list \"Simple Cache\" as a specific cache type and note that the architecture includes multiple cache types.\n\n**What is missing:**\n*   **Specific Triggers:** The summaries do not define the specific conditions or triggers (e.g., memory pressure, time-based, access patterns) that cause LRU (Least Recently Used) eviction to occur.\n*   **Hybrid Combination:** There is no information confirming whether a \"Hybrid\" approach combines LRU eviction with expiration, nor is there any mention of expiration mechanisms in the provided text.\n\n**Conclusion:**\nWhile the system architecture includes an eviction policy and manages various cache types (including Simple Cache), the provided summaries do not contain the specific details required to answer what triggers LRU eviction or whether the system employs a Hybrid strategy that combines eviction with expiration."
+  },
+  {
+    "id": "B003",
+    "case_id": "S02",
+    "query": "Which retry preset is recommended for critical resources versus normal operations, and should an already-resilient operation receive an extra retry wrapper?",
+    "answer": "Based on the provided cluster summaries, the following information is available and missing:\n\n**What is known:**\n*   **Context:** The recommendations regarding retry presets and wrappers are found within the **Retry Package** documentation, specifically under sections titled \"Best Practices,\" \"Why This Design?\", and \"Framework Patterns \u00a7 Pattern 3: Network Operations.\"\n*   **Platform:** These guidelines are associated with the web-based platform **semselectsynth.semsource**.\n*   **Relevant Domains:** The advice pertains to managing data structures such as **caches**, **buffers**, and **cache management systems**, which are central to the platform's operational lifecycle.\n\n**What is missing:**\n*   **Specific Recommendations:** The cluster summaries describe *where* the information is located (e.g., specific chunks and documents within the Retry Package) but do not explicitly state **which** retry preset is recommended for \"critical resources\" versus \"normal operations.\"\n*   **Wrapper Logic:** The summaries do not specify whether an \"already-resilient operation\" should receive an extra retry wrapper.\n\n**Conclusion:**\nThe provided text confirms that the answer to your query exists within the **Retry Package** documentation sections listed above, but the specific criteria or preset names for critical vs. normal operations are not detailed in these summaries. To answer the query, you would need to access the specific **Retry Package \u00a7 Best Practices** or **Framework Patterns** chunks mentioned."
+  },
+  {
+    "id": "B004",
+    "case_id": "S05",
+    "query": "Under the Block overflow policy, what makes a write wait, and which documented calls let a caller bound that wait with a timeout or context?",
+    "answer": "Based on the provided cluster summaries, the following information is available and missing regarding your query:\n\n**What is Known:**\n*   **Context:** The relevant data resides within the \"Buffer Package\" and its overflow policies, specifically under the \"DropNewest\" strategy.\n*   **Retention Logic:** The retention of data is bounded by \"ingestion depth\" rather than eviction.\n*   **Architecture:** There is a documented \"Overflow Policy Behavior\" section within the Buffer Package architecture.\n\n**What is Missing:**\n*   **Specific Wait Conditions:** The summaries do not explicitly state the specific conditions that cause a write to wait under the Block overflow policy (e.g., specific buffer fullness thresholds or queue states).\n*   **Documented API Calls:** The summaries do not list specific function names or documented calls that allow a caller to bound a wait with a timeout or context.\n\n**Conclusion:**\nWhile the clusters confirm that the **Buffer Package** handles overflow policies with a **DropNewest** strategy and that retention is bounded by ingestion depth, the provided text does not contain the specific details on what triggers a write wait or which API calls implement timeout/context binding for that wait."
+  },
+  {
+    "id": "B005",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "The supplied sidecar design for an in-flight agent worktree requires a coherent checkpoint cadence, not churn. This cadence ensures the worktree is properly managed and synchronized. Regarding the caller-owned worktree disk, SemSource does not delete the disk, as per the provided information."
+  },
+  {
+    "id": "B006",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "Based on the provided clusters, the supplied sidecar design requires an indexing cadence of **coherent checkpoints** rather than continuous churn.\n\nRegarding the deletion of the caller-owned worktree disk, the provided summaries do not contain specific information confirming whether SemSource may delete it. The clusters focus on the architectural decision for the sidecar's registration and branch lifecycle cadence but do not detail the specific permissions or actions SemSource takes on caller-owned disk resources."
+  },
+  {
+    "id": "B007",
+    "case_id": "S05",
+    "query": "Under the Block overflow policy, what makes a write wait, and which documented calls let a caller bound that wait with a timeout or context?",
+    "answer": "Under the Block overflow policy, a write wait is typically resolved when a buffer exceeds its capacity, and a documented call that allows a caller to bind a wait with a timeout or context is `ADR-0008: Versioned-Source Retention & Supersession \u2014 A Temporal Knowledge Graph`."
+  },
+  {
+    "id": "B008",
+    "case_id": "S04",
+    "query": "Are cache statistics collected without enabling Prometheus export, and which option enables that export?",
+    "answer": "Based on the provided cluster summaries, the following information is available:\n\n*   **Cache Statistics and Prometheus Export:** The knowledge graph confirms that the \"Cache Package\" supports Prometheus metrics. Specific entities such as \"Cache Package \u00a7 Prometheus Metrics [chunk]\" and \"Cache Package \u00a7 Quick Start \u00a7 With Prometheus Metrics [chunk]\" indicate that Prometheus export is a documented feature within the Cache Package.\n*   **Export Without Enabling Prometheus:** The summaries do not explicitly state whether cache statistics are collected *without* enabling Prometheus export. While the existence of the \"Prometheus Metrics\" feature is confirmed, the text does not clarify if the underlying cache statistics are automatically collected regardless of the export setting or if they require the export feature to be active first.\n\n**Conclusion:**\nThe data confirms that Prometheus metrics are a supported feature for the Cache Package. However, the provided summaries do not contain specific information regarding whether cache statistics are collected independently of the Prometheus export setting or what specific option is required to enable that export."
+  },
+  {
+    "id": "B009",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "The supplied sidecar design for an in-flight agent worktree requires a coherent checkpoint cadence, not churn. SemSource may delete the caller-owned worktree disk under certain conditions, such as when the sidecar's lifecycle management processes are active."
+  },
+  {
+    "id": "B010",
+    "case_id": "S13",
+    "query": "What two cleanup obligations must be satisfied for exceptional deletion, and what exact waiting period must elapse before a mis-registered scope can be deleted?",
+    "answer": "Based on the provided cluster summaries, it is **not possible** to answer the specific details of your query regarding the \"two cleanup obligations\" or the \"exact waiting period\" for deleting a mis-registered scope.\n\nThe provided text contains high-level metadata about three clusters related to the platform `semselectsynth.semsource` and a specific document titled **ADR-0008: Versioned-Source Retention & Supersession \u2014 A Temporal Knowledge Graph**. While the summaries indicate that this document discusses deletion as a \"rare, graph-aware, framework-gated exception,\" they do not list the specific obligations or timeframes required.\n\n**What is known:**\n*   The relevant information resides in **ADR-0008** within the context of the `semselectsynth.semsource` platform.\n*   Deletion is described as an exception off the critical path.\n*   The clusters reference sections regarding \"Decision,\" \"Consequences,\" \"Upstream asks,\" \"Task #36,\" \"Guardrail,\" and \"Context.\"\n\n**What is missing:**\n*   The specific names of the two cleanup obligations.\n*   The exact duration of the waiting period for mis-registered scopes.\n*   Detailed content from the \"Decision,\" \"Consequences,\" or \"Task #36\" sections of ADR-0008."
+  },
+  {
+    "id": "B011",
+    "case_id": "S03",
+    "query": "What triggers LRU eviction, and does Hybrid combine that behavior with expiration?",
+    "answer": "LRU (Least Recently Used) eviction is triggered by the system's need to remove a cache entry that is no longer in use. Hybrid combines this behavior with expiration by integrating LRU eviction with a mechanism that accounts for cache expiration, such as a time-based expiration policy."
+  },
+  {
+    "id": "B012",
+    "case_id": "S12",
+    "query": "For which two kinds of source mistake does the supplied ADR permit exceptional deletion, and what two cleanup obligations must be satisfied?",
+    "answer": "Based on the provided cluster summaries, the specific details regarding the **two kinds of source mistakes** that permit exceptional deletion and the **two cleanup obligations** required are **not present** in the available data.\n\nThe summaries confirm that **ADR-0008** (Versioned-Source Retention & Supersession) addresses deletion as a \"rare, graph-aware, framework-gated exception\" within the **semselectsynth.semsource** platform. However, the text does not specify:\n1.  The specific types of source mistakes that trigger this exception.\n2.  The specific cleanup obligations that must be satisfied.\n\nTo answer this query accurately, access to the full text or specific sections of **ADR-0008** containing the \"Upstream asks,\" \"Decision,\" or \"Consequences\" details would be required."
+  },
+  {
+    "id": "B013",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "Based on the provided knowledge clusters, specifically the **ADR-0007: SemSource Sidecar** documents regarding Dynamic Repo Registration and Branch Lifecycle:\n\n*   **Indexing Cadence:** The supplied sidecar design requires a cadence of **coherent checkpoints**, explicitly designed to avoid churn.\n*   **Worktree Disk Deletion:** The provided summaries do not contain specific information regarding whether SemSource may delete the caller-owned worktree disk. While the clusters confirm the architecture focuses on dynamic registration and branch lifecycle management with coherent checkpoints, they do not explicitly state the policy on caller-owned disk deletion."
+  },
+  {
+    "id": "B014",
+    "case_id": "S03",
+    "query": "What triggers LRU eviction, and does Hybrid combine that behavior with expiration?",
+    "answer": "Based on the provided cluster summaries, the following information is available and missing:\n\n**What is known:**\n*   **Context:** The knowledge graph contains entities related to a web-based platform named **semselectsynth.semsource**, which focuses on managing data structures such as caches, buffers, and cache management systems.\n*   **Eviction Policy:** The clusters explicitly reference an **\"Eviction Policy Flow\"** within the Cache Package architecture. This indicates that eviction policies (which include LRU) are a defined component of the system's architecture.\n*   **Hybrid Behavior:** The clusters mention **\"Why Multiple Cache Types\"** and **\"Cache Architecture by Type,\"** suggesting the system supports different caching strategies, potentially including a hybrid approach.\n*   **Lifecycle:** There is a reference to **\"Branch Lifecycle\"** and general **\"Lifecycle\"** management in the context of the SemSource Sidecar.\n\n**What is missing:**\n*   **Specific Triggers:** The summaries do not explicitly state the specific conditions or triggers that cause LRU eviction (e.g., memory pressure, specific time intervals, or hit/miss ratios).\n*   **Expiration Integration:** While the clusters mention \"lifecycle\" and \"branch lifecycle,\" they do not explicitly confirm whether the Hybrid cache behavior **combines** eviction with expiration policies. The distinction between LRU eviction and expiration (TTL) is not detailed in the provided text.\n\n**Conclusion:**\nThe provided clusters confirm that the **semselectsynth.semsource** platform has a defined **Eviction Policy Flow** and supports multiple cache types. However, the specific triggers for LRU eviction and whether the Hybrid implementation explicitly combines eviction with expiration are **not described** in the available summaries."
+  },
+  {
+    "id": "B015",
+    "case_id": "S10",
+    "query": "How should an external consumer poll source readiness, and which registration-handle fields distinguish snapshot/watch mode and identify what content was actually indexed?",
+    "answer": "Based on the provided cluster summaries, the following is known regarding external consumer polling and registration handles:\n\n*   **Polling Source Readiness:** External consumers should poll for readiness using the **registration handle**, which is defined as a **stable and auditable** identifier required by SemSpec v1. The architecture mandates that the **read/query** process remains external, pairing with ADR-0004 to ensure the consumer interacts directly with the platform rather than internal state.\n*   **Registration-Handle Fields:** The specific fields within the registration handle that distinguish **snapshot** versus **watch** modes or identify **indexed content** are not explicitly detailed in the provided summaries. The text confirms the handle is stable, auditable, and SemSpec-required, but does not list the specific attributes (e.g., mode flags or content IDs) contained within it.\n\n**Missing Information:**\nThe provided data does not specify the exact mechanism for polling (e.g., polling intervals, specific API endpoints) nor does it detail the specific fields within the registration handle that differentiate snapshot/watch modes or list the content identifiers. This information is implied to be in the \"Remaining design items (follow-on)\" or \"Context\" sections of ADR-0007, but those details are not included in the current summaries."
+  },
+  {
+    "id": "B016",
+    "case_id": "S12",
+    "query": "For which two kinds of source mistake does the supplied ADR permit exceptional deletion, and what two cleanup obligations must be satisfied?",
+    "answer": "The supplied ADR permits exceptional deletion of source mistakes related to **cache management and buffer usage**. The two cleanup obligations must be satisfied are **lifecycle management and data retention practices**."
+  },
+  {
+    "id": "B017",
+    "case_id": "S10",
+    "query": "How should an external consumer poll source readiness, and which registration-handle fields distinguish snapshot/watch mode and identify what content was actually indexed?",
+    "answer": "Based on the provided clusters, the external consumer should poll source readiness using the **SemSource Sidecar** platform, specifically leveraging the **ADR-0007** decision regarding dynamic repo registration and branch lifecycle.\n\nRegarding the specific fields and modes:\n*   **Registration Handle:** This is a stable and auditable field required by the SemSpec (v1) to distinguish the registration.\n*   **Snapshot vs. Watch Mode:** The clusters indicate that **read/query operations remain external** (linked with ADR-0004) and rely on **coherent checkpoints** rather than data churn to manage the cadence of updates.\n*   **Indexed Content:** The clusters highlight that the system manages a **corpus** of data structures, including specific **caches, buffers, and branch** data, which constitutes the content indexed or managed by the platform.\n\n*Note: The provided summaries do not explicitly name specific field names (e.g., \"field_X\") that distinguish snapshot from watch mode beyond the general concept of \"coherent checkpoints,\" nor do they list the exact content identifiers used to verify what was indexed, though they confirm the management of caches, buffers, and branches.*"
+  },
+  {
+    "id": "B018",
+    "case_id": "S07",
+    "query": "Why can an in-place reindex leave old whole-file bodies on parent documents, and what readiness signal should be awaited after rebuilding?",
+    "answer": "Based on the provided cluster summaries, the following information is available and missing:\n\n**What is known:**\n*   **Context:** The query relates to the **SemSource** platform (`semselectsynth.semsource`), a web-based system focused on managing data structures, caches, buffers, and document content.\n*   **Relevant Documents:** The specific technical details regarding \"in-place reindexing,\" \"old whole-file bodies,\" and the specific \"readiness signal\" to await are contained within the following representative entities found in all three clusters:\n    *   `Migration: document passage chunking`\n    *   `Migration: document passage chunking \u00a7 Operational requirement`\n    *   `ADR-0007: SemSource Sidecar \u2014 Dynamic Repo Registration & Branch Lifecycle` (specifically sections covering \"The hard problem (resolved: B + C) \u2014 branch lifecycle & deletion\" and \"Remaining design items (follow-on)\").\n\n**What is missing:**\n*   The provided summaries describe the *topics* and *entities* related to the query but do not contain the actual explanatory text or logic.\n*   It is not specified **why** in-place reindexing leaves old whole-file bodies on parent documents.\n*   It is not specified **what** the specific readiness signal is that should be awaited after rebuilding.\n\n**Conclusion:**\nThe knowledge graph clusters identify the relevant entities (`Migration: document passage chunking` and `ADR-0007` documents) where this information resides, but the summaries themselves do not provide the specific reasons for the file body retention or the name of the readiness signal. To answer the query, you must consult the full content of the `Migration: document passage chunking` and `ADR-0007` documents listed in the clusters."
+  },
+  {
+    "id": "B019",
+    "case_id": "S08",
+    "query": "Which property should replace source.doc.summary for title text, and how does doc-source now behave if the verbatim body store cannot be created?",
+    "answer": "Based on the provided cluster summaries, the following information is available and missing:\n\n**Known Information:**\n*   **Platform Context:** The relevant entities belong to the web-based platform **semselectsynth.semsource**, which focuses on managing data structures, caches, buffers, and document content.\n*   **Relevant Documentation:** The clusters reference **ADR-0008: Versioned-Source Retention & Supersession**, which addresses the \"Supersession & changesets\" behavior within this platform.\n*   **Migration Context:** There are specific migration documents regarding \"document passage chunking\" (covering operational requirements, consumer changes, and document-level changes) that likely contain the specific property replacement logic for `source.doc.summary`.\n\n**Missing Information:**\n*   **Specific Property Replacement:** The summaries do not explicitly state which specific property should replace `source.doc.summary` for title text.\n*   **Fallback Behavior:** The summaries do not describe the specific behavior of `doc-source` if the \"verbatim body store\" cannot be created.\n\n**Conclusion:**\nThe provided clusters identify the correct platform (**semselectsynth.semsource**) and the relevant decision document (**ADR-0008**) and migration guides, but they do not contain the specific details regarding the property replacement rule or the fallback behavior for the verbatim body store. To answer the query, you must consult the full text of **ADR-0008** and the **Migration: document passage chunking** documents listed in the representatives."
+  },
+  {
+    "id": "B020",
+    "case_id": "S02",
+    "query": "Which retry preset is recommended for critical resources versus normal operations, and should an already-resilient operation receive an extra retry wrapper?",
+    "answer": "Based on the provided cluster summaries, it is not possible to answer the specific query regarding which retry preset is recommended for critical versus normal operations, nor whether an already-resilient operation should receive an extra retry wrapper.\n\nThe clusters contain 73 matching entities focused on a web-based platform (\"semselectsynth.semsource\") and its data structures (caches, buffers, lifecycle). While the representatives list includes documents such as \"Retry Package \u00a7 Best Practices\" and \"Retry Package \u00a7 Framework Patterns \u00a7 Pattern 3: Network Operations,\" the summaries do not extract the actual content, specific preset names, or the logic regarding resilient operations.\n\n**Known:**\n*   The domain involves a \"Retry Package\" and \"Framework Patterns.\"\n*   Relevant documents exist (e.g., \"Retry Package \u00a7 Best Practices\").\n\n**Missing:**\n*   Specific recommendations for retry presets in critical vs. normal scenarios.\n*   Guidelines on applying retry wrappers to already-resilient operations."
+  },
+  {
+    "id": "B021",
+    "case_id": "S10",
+    "query": "How should an external consumer poll source readiness, and which registration-handle fields distinguish snapshot/watch mode and identify what content was actually indexed?",
+    "answer": "An external consumer poll source readiness is determined by the **registration handle** fields, which are required by the platform (e.g., ADR-0007: SemSource Sidecar \u2014 Dynamic Repo Registration & Branch Lifecycle \u00a7 Decision (architecture \u2014 settled) \u00a7 5. Registration handle \u2014 stable & auditable). The **snapshot/watch mode** is identified by the **cadence** (coherent checkpoints, not churn), and the **content indexed** is distinguished by the **buffer** in the registration handle."
+  },
+  {
+    "id": "B022",
+    "case_id": "S07",
+    "query": "Why can an in-place reindex leave old whole-file bodies on parent documents, and what readiness signal should be awaited after rebuilding?",
+    "answer": "An in-place reindex may leave old whole-file bodies on parent documents due to the way document structures are managed in the system, which often relies on chunking and lifecycle management. After rebuilding, a readiness signal should be awaited for the system to ensure that all data is properly restructured and that the new document structure is fully operational."
+  },
+  {
+    "id": "B023",
+    "case_id": "S07",
+    "query": "Why can an in-place reindex leave old whole-file bodies on parent documents, and what readiness signal should be awaited after rebuilding?",
+    "answer": "An in-place reindex can leave old whole-file bodies on parent documents if the reindexing process does not properly handle document lifecycle management, such as cache management and buffer usage. After rebuilding, it is recommended to await a readiness signal indicating that the system is prepared for the new state of the documents."
+  },
+  {
+    "id": "B024",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "The supplied sidecar design for the in-flight agent worktree requires a coherent checkpoint cadence, which is not churn. SemSource may delete the caller-owned worktree disk under certain conditions, depending on the specific implementation details of the sidecar design."
+  },
+  {
+    "id": "B025",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "The supplied sidecar design for the in-flight agent worktree requires a coherent checkpoint cadence, not churn. SemSource may delete the caller-owned worktree disk under certain conditions, such as when the worktree is no longer needed or when the deletion is permitted by the system's policies."
+  },
+  {
+    "id": "B026",
+    "case_id": "S12",
+    "query": "For which two kinds of source mistake does the supplied ADR permit exceptional deletion, and what two cleanup obligations must be satisfied?",
+    "answer": "The supplied ADR permits exceptional deletion for **cache and buffer**. To satisfy cleanup obligations, the platform must ensure proper **lifecycle management** and **cache management**."
+  },
+  {
+    "id": "B027",
+    "case_id": "S01",
+    "query": "What maximum attempt count does retry.DefaultConfig return?",
+    "answer": "Based on the provided cluster summaries, it is **not possible** to determine the specific maximum attempt count that `retry.DefaultConfig` returns.\n\nThe clusters contain representative entities such as \"Retry Package,\" \"Configuration,\" and \"Custom Config,\" which indicate that the topic is covered in the knowledge graph. However, the summaries only describe the *context* (web-based platform, data structure management, network operations) and the *existence* of configuration sections. They do not provide the specific numerical value or the code logic defining the default retry limit.\n\n**What is known:**\n*   The `Retry Package` includes a `DefaultConfig` section.\n*   The configuration is part of a web-based platform focused on network operations and data structures.\n\n**What is missing:**\n*   The actual value of the maximum attempt count within `retry.DefaultConfig`."
+  },
+  {
+    "id": "B028",
+    "case_id": "S11",
+    "query": "When a new version is indexed, what happens to the old version, and how do historical versions remain available without dominating ordinary current-version queries?",
+    "answer": "When a new version is indexed, the old version is retained based on its current relevance and ingestion depth, with no explicit global or storage-based eviction. Historical versions remain available in the system as part of the versioned-source retention mechanism, ensuring that the current-version queries can access the most relevant data without dominating the ordinary current-version queries."
+  },
+  {
+    "id": "B029",
+    "case_id": "S05",
+    "query": "Under the Block overflow policy, what makes a write wait, and which documented calls let a caller bound that wait with a timeout or context?",
+    "answer": "Based on the provided cluster summaries, the following information can be synthesized:\n\n**What makes a write wait:**\nThe clusters indicate that the **Buffer Package** implements an **Overflow Policy**. Specifically, the representative entity **`Buffer Package \u00a7 Overflow Policies \u00a7 DropNewest`** suggests that writes may be affected by this policy, likely resulting in drops or waits when the buffer capacity is exceeded. The policy behavior is detailed in **`Buffer Package \u00a7 Architecture \u00a7 Overflow Policy Behavior`**.\n\n**Documented calls for timeouts or context:**\nThe provided summaries do not explicitly name specific API calls that allow a caller to bind the wait with a timeout or context. The clusters focus on the high-level architecture, retention decisions (e.g., **ADR-0008**), and lifecycle management (e.g., **ADR-0007**), but they do not list the specific function signatures or parameters for timeout handling within the overflow logic.\n\n**Conclusion:**\nWhile the **Buffer Package** and its **Overflow Policy** (specifically the `DropNewest` behavior) are identified as the mechanism governing writes and potential waits, the specific documented calls for applying timeouts or context to these waits are not detailed in the current knowledge graph summaries."
+  },
+  {
+    "id": "B030",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "The supplied sidecar design for the in-flight agent worktree requires a coherent checkpoint cadence, not churn. SemSource may delete the caller-owned worktree disk based on the sidecar's lifecycle management and decision architecture."
+  },
+  {
+    "id": "B031",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "Based on the provided clusters, specifically the **ADR-0007: SemSource Sidecar** documents regarding Dynamic Repo Registration and Branch Lifecycle:\n\n*   **Indexing Cadence:** The supplied sidecar design requires **coherent checkpoints** rather than frequent churn.\n*   **Worktree Disk Deletion:** The clusters do not explicitly state whether SemSource may delete the caller-owned worktree disk. While the documents mention \"Out of scope (v1)\" as a consequence, the specific permission regarding the deletion of caller-owned worktree disks is not detailed in the available summaries."
+  },
+  {
+    "id": "B032",
+    "case_id": "S12",
+    "query": "For which two kinds of source mistake does the supplied ADR permit exceptional deletion, and what two cleanup obligations must be satisfied?",
+    "answer": "Based on the provided cluster summaries, the specific details regarding the **two kinds of source mistake** and the **two cleanup obligations** permitted for exceptional deletion under ADR-0008 are **not present** in the available data.\n\nThe summaries confirm that:\n*   The relevant document is **ADR-0008: Versioned-Source Retention & Supersession \u2014 A Temporal Knowledge Graph**.\n*   Deletion is defined as a \"rare, graph-aware, framework-gated exception (off the critical path).\"\n*   The system involves data structures like caches, buffers, and a corpus.\n\nHowever, the specific conditions (the two types of mistakes) and the required actions (the two cleanup obligations) are not described in the entity summaries or keywords provided. To answer this query fully, access to the specific text chunks or sections of ADR-0008 detailing the \"Upstream asks\" and \"Decision\" logic would be required."
+  },
+  {
+    "id": "B033",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "Based on the provided clusters, specifically ADR-0007 regarding the SemSource Sidecar architecture:\n\n*   **Indexing Cadence:** The supplied sidecar design requires **coherent checkpoints** rather than continuous churn.\n*   **Worktree Deletion:** The provided summaries do not contain specific information regarding whether SemSource may delete the caller-owned worktree disk. While the clusters confirm the architecture uses coherent checkpoints for branch lifecycle management, they do not explicitly state the policy on deleting caller-owned disk space."
+  },
+  {
+    "id": "B034",
+    "case_id": "S01",
+    "query": "What maximum attempt count does retry.DefaultConfig return?",
+    "answer": "The maximum attempt count returned by `Retry.DefaultConfig` is not explicitly mentioned in the provided knowledge clusters. However, based on the clusters, the relevant entities include `cache`, `buffer`, and `lifecycle`, which are related to data management and system operations. For a precise answer, more specific information about `Retry.DefaultConfig`'s configuration parameters would be needed."
+  },
+  {
+    "id": "B035",
+    "case_id": "S11",
+    "query": "When a new version is indexed, what happens to the old version, and how do historical versions remain available without dominating ordinary current-version queries?",
+    "answer": "Based on the provided clusters, here is the answer regarding version indexing and retention:\n\nWhen a new version is indexed, the old version is not removed via standard eviction mechanisms. Instead, the system employs a retention strategy where:\n*   **Retention is bounded by ingestion depth**, not by eviction.\n*   The **\"Current\" version** is treated as a per-source ranking marker rather than a specific storage target or a globally unique version.\n*   Historical versions remain available because the platform (specifically `semselectsynth.semsource`) retains data based on how deeply it has been ingested, ensuring that older versions are preserved until they exceed the defined ingestion depth threshold.\n\nThis approach prevents historical versions from dominating current-version queries by distinguishing between the active \"current\" ranking and the stored history, which is managed through the lifecycle of the data rather than immediate deletion."
+  },
+  {
+    "id": "B036",
+    "case_id": "S13",
+    "query": "What two cleanup obligations must be satisfied for exceptional deletion, and what exact waiting period must elapse before a mis-registered scope can be deleted?",
+    "answer": "Based on the provided cluster summaries, it is **not possible** to answer the specific details of your query regarding the \"two cleanup obligations\" or the \"exact waiting period\" for deleting a mis-registered scope.\n\nThe available information confirms that:\n*   **Deletion** is defined as a \"rare, graph-aware, framework-gated exception\" within the context of the **ADR-0008: Versioned-Source Retention & Supersession** document.\n*   The clusters reference specific sections of this document (Decision \u00a7 5, Consequences, Task #36, Guardrails), but the summaries do not extract the specific text detailing the cleanup obligations or the waiting period duration.\n\nTo answer the query, the specific content from the referenced chunks (particularly Decision \u00a7 5 and the Guardrails section) would be required, which is not present in the provided summaries."
+  },
+  {
+    "id": "B037",
+    "case_id": "S08",
+    "query": "Which property should replace source.doc.summary for title text, and how does doc-source now behave if the verbatim body store cannot be created?",
+    "answer": "The property \"source.doc.summary\" should be replaced with \"doc-source's title text.\" If the verbatim body store cannot be created, doc-source will not support the verbatim body store, and the title text will remain unchanged."
+  },
+  {
+    "id": "B038",
+    "case_id": "S10",
+    "query": "How should an external consumer poll source readiness, and which registration-handle fields distinguish snapshot/watch mode and identify what content was actually indexed?",
+    "answer": "An external consumer poll source readiness is determined by the **registration handle** fields, which are required by the **ADR** (Architecture Decision) process. These fields ensure the source is properly auditable and can be accessed. The **snapshot/watch mode** is distinguished by the **registration handle** being **stable and auditable**, while the **content being indexed** is identified through the **cache** and **buffer** fields. The **lifecycle** and **branch** management are also critical for identifying operational states."
+  },
+  {
+    "id": "B039",
+    "case_id": "S05",
+    "query": "Under the Block overflow policy, what makes a write wait, and which documented calls let a caller bound that wait with a timeout or context?",
+    "answer": "Under the Block overflow policy, a write wait is typically caused by the system's inability to handle the overflow of data, leading to a blocking condition. A documented call that allows a caller to bind a wait with a timeout or context is `ADR-0008: Versioned-Source Retention & Supersession \u2014 A Temporal Knowledge Graph`."
+  },
+  {
+    "id": "B040",
+    "case_id": "S01",
+    "query": "What maximum attempt count does retry.DefaultConfig return?",
+    "answer": "The maximum attempt count returned by `Retry.DefaultConfig` is not explicitly mentioned in the provided knowledge clusters. However, based on the context of retry configurations in similar systems, it is likely related to a maximum number of attempts before a failure is considered. For precise information, more specific details about `Retry.DefaultConfig` or its configuration parameters would be needed."
+  },
+  {
+    "id": "B041",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "Based on the provided cluster summaries, the SemSource Sidecar design requires an indexing cadence of **coherent checkpoints**, explicitly avoiding \"churn.\"\n\nRegarding the deletion of the caller-owned worktree disk, the provided summaries do not contain specific information confirming whether SemSource may delete it. The clusters focus on the architecture decision for branch lifecycle management and the cadence of coherent checkpoints, but they do not detail the specific permissions or actions SemSource takes regarding the caller's disk space or worktree ownership."
+  },
+  {
+    "id": "B042",
+    "case_id": "S04",
+    "query": "Are cache statistics collected without enabling Prometheus export, and which option enables that export?",
+    "answer": "Based on the provided cluster summaries, it is **not possible to determine** whether cache statistics are collected without enabling Prometheus export, nor can the specific option required to enable that export be identified.\n\nThe available data indicates the following:\n*   **Context**: The clusters describe a web-based platform (specifically `semselectsynth.semsource`) focusing on cache management, buffers, and data structures.\n*   **Representative Entities**: The summaries explicitly list \"Cache Package \u00a7 Prometheus Metrics\" and \"Cache Package \u00a7 Quick Start \u00a7 With Prometheus Metrics\" as representative entities.\n*   **Missing Information**: While the existence of Prometheus metrics documentation is confirmed, the summaries do not contain details regarding the default collection behavior (whether metrics are collected by default) or the specific configuration option needed to enable the export."
+  },
+  {
+    "id": "B043",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "Based on the provided clusters, specifically the **ADR-0007: SemSource Sidecar \u2014 Dynamic Repo Registration & Branch Lifecycle** documents, the following details are known:\n\n*   **Indexing Cadence:** The supplied sidecar design requires a cadence of **coherent checkpoints**, explicitly avoiding data churn.\n*   **Worktree Disk Deletion:** The provided text snippets do not contain specific information regarding whether SemSource may delete the caller-owned worktree disk. The clusters focus on the architecture decision for branch lifecycle and checkpoint cadence but do not detail the specific permissions or actions regarding caller-owned disk deletion."
+  },
+  {
+    "id": "B044",
+    "case_id": "S04",
+    "query": "Are cache statistics collected without enabling Prometheus export, and which option enables that export?",
+    "answer": "Yes, cache statistics are typically collected without enabling Prometheus export by default, and the option to enable it is provided through the Prometheus configuration settings. The relevant entities in the knowledge graph include \"Cache Package \u00a7 Prometheus Metrics [chunk]\" and \"Cache Package [chunk],\" which highlight the integration of cache statistics in web systems. Keywords such as \"cache,\" \"adr,\" \"branch,\" \"lifecycle,\" and \"buffer\" are used to summarize the connection between cache management and data statistics."
+  },
+  {
+    "id": "B045",
+    "case_id": "S07",
+    "query": "Why can an in-place reindex leave old whole-file bodies on parent documents, and what readiness signal should be awaited after rebuilding?",
+    "answer": "Based on the provided cluster summaries, it is **not possible** to answer the specific query regarding \"in-place reindex,\" \"old whole-file bodies,\" or the specific \"readiness signal\" to await.\n\nThe provided knowledge clusters (1, 2, and 3) describe a web-based platform focused on managing data structures, caches, buffers, and document corpus lifecycles for `semselectsynth.semsource`. While the clusters mention related concepts such as **document passage chunking**, **branch lifecycle**, and **ADR-0007** (SemSource Sidecar), they do not contain specific details about:\n*   The mechanics of an \"in-place reindex\" operation.\n*   The retention of \"old whole-file bodies\" on parent documents.\n*   The specific readiness signal required after a rebuild.\n\nThe clusters focus on high-level domain descriptions and representative entities (like migration tasks and design documents) rather than the specific operational behavior or signals requested in the query."
+  },
+  {
+    "id": "B046",
+    "case_id": "S03",
+    "query": "What triggers LRU eviction, and does Hybrid combine that behavior with expiration?",
+    "answer": "LRU eviction is triggered by the need to remove a cache entry that is not used in the current context, and Hybrid combines this behavior with expiration by maintaining both LRU and expiration policies."
+  },
+  {
+    "id": "B047",
+    "case_id": "S13",
+    "query": "What two cleanup obligations must be satisfied for exceptional deletion, and what exact waiting period must elapse before a mis-registered scope can be deleted?",
+    "answer": "For exceptional deletion, the two cleanup obligations must be satisfied, and the exact waiting period before a mis-registered scope can be deleted is determined by the lifecycle management framework. The relevant entities include \"semselectsynth.semsource\" and \"cache, buffer, and lifecycle.\" The keywords are \"cache,\" \"buffer,\" and \"lifecycle.\""
+  },
+  {
+    "id": "B048",
+    "case_id": "S02",
+    "query": "Which retry preset is recommended for critical resources versus normal operations, and should an already-resilient operation receive an extra retry wrapper?",
+    "answer": "The recommended retry preset for critical resources and normal operations is based on the highest priority of operations. An already-resilient operation should receive an extra retry wrapper to ensure that the system can handle potential failures without compromising its reliability. This recommendation is supported by the cluster summaries that highlight the importance of prioritizing operations and the integration of data structures like cache, buffer, and lifecycle management."
+  },
+  {
+    "id": "B049",
+    "case_id": "S13",
+    "query": "What two cleanup obligations must be satisfied for exceptional deletion, and what exact waiting period must elapse before a mis-registered scope can be deleted?",
+    "answer": "For exceptional deletion, the two cleanup obligations must be satisfied: ensuring the cache and buffer are properly managed and the lifecycle is appropriately tracked. The exact waiting period before a mis-registered scope can be deleted is determined by the lifecycle management framework, which is governed by ADR-0008: Versioned-Source Retention & Supersession."
+  },
+  {
+    "id": "B050",
+    "case_id": "S08",
+    "query": "Which property should replace source.doc.summary for title text, and how does doc-source now behave if the verbatim body store cannot be created?",
+    "answer": "The property that should replace `source.doc.summary` for title text is likely `source.doc.title`. If the verbatim body store cannot be created, doc-source behavior may involve alternative storage mechanisms or updates to the title text, ensuring consistency with the data structure."
+  },
+  {
+    "id": "B051",
+    "case_id": "S01",
+    "query": "What maximum attempt count does retry.DefaultConfig return?",
+    "answer": "Based on the provided cluster summaries, it is **not possible** to determine the specific maximum attempt count that `retry.DefaultConfig` returns.\n\nWhile the clusters contain representative entities such as \"Retry Package,\" \"Configuration,\" and \"Custom Config,\" and keywords like \"cache\" and \"lifecycle,\" the summaries do not disclose the actual configuration values or the specific return value of the `retry.DefaultConfig` function. The available information only confirms the existence of a retry configuration system within the \"semselectsynth.semsource\" web platform but lacks the granular details required to answer the query."
+  },
+  {
+    "id": "B052",
+    "case_id": "S04",
+    "query": "Are cache statistics collected without enabling Prometheus export, and which option enables that export?",
+    "answer": "Yes, cache statistics are typically collected without enabling Prometheus export, and the option that enables the export is **Prometheus metrics**. The relevant entities and keywords from the clusters include **Cache Package \u00a7 Prometheus Metrics [chunk]**, **Cache Package [chunk]**, **Buffer Package \u00a7 Prometheus Metrics [chunk]**, and **Cache Package \u00a7 Thread Safety [chunk]**."
+  },
+  {
+    "id": "B053",
+    "case_id": "S11",
+    "query": "When a new version is indexed, what happens to the old version, and how do historical versions remain available without dominating ordinary current-version queries?",
+    "answer": "Based on the provided clusters, here is the answer:\n\nWhen a new version is indexed on the **semselectsynth.semsource** platform, the old version is not removed via global eviction. Instead, the system follows these principles:\n\n*   **Retention Mechanism:** Retention is bounded by **ingestion depth**, not by eviction. Old versions remain available as part of the data corpus.\n*   **Query Behavior:** The \"Current\" version is treated as a **per-source ranking marker** rather than a storage designation. This ensures that historical versions do not dominate ordinary current-version queries, as the system prioritizes the latest ranked version while still preserving the history for specific needs.\n\n*Note: The provided clusters contain identical summaries and do not explicitly define the specific mechanism used to supersede old versions (e.g., logical deletion vs. logical archiving), only that retention is depth-based and current status is a ranking marker.*"
+  },
+  {
+    "id": "B054",
+    "case_id": "S02",
+    "query": "Which retry preset is recommended for critical resources versus normal operations, and should an already-resilient operation receive an extra retry wrapper?",
+    "answer": "The recommendation for retry presets depends on the context of the operation: critical resources may require a higher retry count, while normal operations can benefit from an extra retry wrapper. An already-resilient operation should receive an extra retry wrapper to maintain system stability and prevent unnecessary overhead. Based on the knowledge graph, entities related to cache, buffer, and lifecycle management are key in determining the optimal retry setup."
+  },
+  {
+    "id": "B055",
+    "case_id": "S09",
+    "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+    "answer": "The supplied sidecar design for the in-flight agent worktree requires a coherent checkpoint cadence, not churn. It does not allow SemSource to delete the caller-owned worktree disk."
+  }
+]

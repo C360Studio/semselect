@@ -1,0 +1,1 @@
+{"query":"Why can an in-place reindex leave old whole-file bodies on parent documents, and what readiness signal should be awaited after rebuilding?","summarize_threshold":1}

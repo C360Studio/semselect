@@ -1,0 +1,49 @@
+[
+    {
+        "Name": "semselect-synthesis-4093d3c_isolated",
+        "Id": "cbadc4ab4a394b666a48ec77f6a82f12f15f2edc8b66f54041f1d5652fe0ffc9",
+        "Created": "2026-10-05T18:19:17.819498676Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "192.168.208.0/20",
+                    "Gateway": "192.168.208.1"
+                }
+            ]
+        },
+        "Internal": true,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Options": {
+            "com.docker.network.enable_ipv4": "true",
+            "com.docker.network.enable_ipv6": "false"
+        },
+        "Labels": {
+            "com.docker.compose.config-hash": "5ba6e0fc613f10da13a5442dd52aa91525607052f39f070d272bb1dd6c49e6f0",
+            "com.docker.compose.network": "isolated",
+            "com.docker.compose.project": "semselect-synthesis-4093d3c",
+            "com.docker.compose.version": "5.5.1"
+        },
+        "Containers": {},
+        "Status": {
+            "IPAM": {
+                "Subnets": {
+                    "192.168.208.0/20": {
+                        "IPsInUse": 3,
+                        "DynamicIPsAvailable": 4093
+                    }
+                }
+            }
+        }
+    }
+]

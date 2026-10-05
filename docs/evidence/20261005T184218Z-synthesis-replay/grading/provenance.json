@@ -1,0 +1,7 @@
+{
+  "source_sha256": "ee75ccde8d6f2a1e545b7b1a343b560d23450b0e5d4173fe40378a1c073953ed",
+  "selected": "Every nondegraded successful synthesis with an actual model call; operational/degraded/deferred results retained separately in replay.json",
+  "count": 55,
+  "shuffle_seed": 202610051842,
+  "blinded_fields": "stratum,arm,trial,model,latency,usage; caseID only joins predeclared visible evidence"
+}

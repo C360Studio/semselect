@@ -1,0 +1,13 @@
+{
+  "created_utc": "2026-10-05T18:27:35.179161+00:00",
+  "prior_attempt": "01-offline-no-cache",
+  "question_id_text_order_unchanged": true,
+  "changes": [
+    "New isolated experiment project with separate fresh NATS directory preserves all stopped attempt-1 containers/state.",
+    "Dedicated bridge uses default non-internal networking; published ports retain 127.0.0.1 only.",
+    "Mount approved pinned embedding cache read-only at /model-cache; FASTEMBED_CACHE_DIR=HF_HOME=/model-cache; HF_ENDPOINT=http://127.0.0.1:9 prevents remote fallback.",
+    "Updated query-plan protocol metadata from root; exact 13 questions and order unchanged."
+  ],
+  "query_plan_sha256": "3976404bb63bf61b9403c78d4f1b31f40703c5726901774db0ab366cd474f37d",
+  "compose_sha256": "fc2d6ebb255851c11a6fadb9f96da816e5ed80def50fe8bd1234252b06e8e007"
+}

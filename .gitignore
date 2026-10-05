@@ -5,6 +5,7 @@
 /bin/
 /.native/
 /.sglang/
+/.synthesis/
 __pycache__/
 *.pyc
 .DS_Store

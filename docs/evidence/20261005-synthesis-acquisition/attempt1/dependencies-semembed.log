@@ -1,0 +1,8 @@
+semembed-1  | 2026-10-05T18:19:39.586454630Z onnxruntime cpuid_info warning: Unknown CPU vendor. cpuinfo_vendor value: 0
+semembed-1  | 2026-10-05T18:19:39.588744963Z [2m2026-10-05T18:19:39.588578Z[0m [32m INFO[0m [2msemembed[0m[2m:[0m Starting semembed service
+semembed-1  | 2026-10-05T18:19:39.588774463Z [2m2026-10-05T18:19:39.588612Z[0m [32m INFO[0m [2msemembed[0m[2m:[0m Loading embedding model: Snowflake/snowflake-arctic-embed-s
+semembed-1  | 2026-10-05T18:19:39.593997797Z Error: Failed to retrieve onnx/model.onnx
+semembed-1  | 2026-10-05T18:19:39.594012338Z 
+semembed-1  | 2026-10-05T18:19:39.594013463Z Caused by:
+semembed-1  | 2026-10-05T18:19:39.594014255Z     0: request error: io: failed to lookup address information: Temporary failure in name resolution
+semembed-1  | 2026-10-05T18:19:39.594015130Z     1: io: failed to lookup address information: Temporary failure in name resolution

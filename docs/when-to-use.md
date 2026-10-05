@@ -25,6 +25,7 @@ comparisons also use Qwen. Those results do not establish Jev's quality.
 | Does Kev beat ordinary Qwen for simple ticket routing? | The matched 4B smoke comparison favored Qwen JSON | Keep Qwen as the practical baseline |
 | Does direct scoring make Qwen more useful? | Metal preserved labels with 28% lower median inference HTTP latency; CPU saved 3.4% but abstained more | A conditional efficiency benefit, with no demonstrated accuracy gain |
 | Can a model distinguish relevant text from sufficient evidence? | On 24 new source cases, Kev allowed 5/12 unsupported inputs and preserved all 12 supported cases; Qwen allowed 7/12 unsupported inputs and preserved 11/12 | Kev earns a downstream comparison; both retain consequential omissions |
+| Does a gate improve the existing generator's answers? | On 12 usable captured summary inputs, both gates reduced unsupported assertions; with the 4B generator, 3 became 0 and one useful partial answer remained | No Kev advantage observed; all captures lacked a full answer, so improve evidence and test a balanced set |
 | Do the probabilities support better decisions about when to defer? | Calibration and threshold benefits remain untested; Kev assigned about 0.795 to one wrong allow | Do not interpret scores as calibrated correctness |
 
 These are small, workload-specific findings. Full conditions, failures and raw
@@ -55,9 +56,16 @@ not rerun retrieval or test whether the existing answer generator would already
 refuse. These manually selected excerpts and deliberate ablations are a pilot,
 not production traffic. The [answer-path audit](answering-path.md) shows that the
 existing generator is already instructed to acknowledge missing information and
-consumes community summaries. Preserve that instruction and representation in the next comparison,
-including useful partial answers a strict gate might block. Establish downstream
-value and repeat on CPU/Docker before seeking CUDA help.
+consumes community summaries. The [subsequent synthesis replay](../eval/synthesis/README.md)
+preserved both. Qwen and Kev made identical gate decisions and reduced unsupported
+assertions, but neither rescued the 0.6B generator's remaining disk-permission
+invention. The 4B generator gave a useful qualified answer to that same allowed
+question. A gate decision is not permission to execute an action.
+
+That capture contained no fully answerable questions: broad community descriptions
+and headings had lost details available in the source documents. The next priority
+is better evidence and a balanced downstream set that can reveal unnecessary
+deferrals. Confirm any useful result with CPU-only gates before seeking CUDA help.
 
 ## How each experiment should read
 

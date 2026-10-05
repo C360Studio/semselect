@@ -1,0 +1,230 @@
+{
+  "command": [
+    "/private/tmp/semselect-synthesis-driver",
+    "--input",
+    "results/synthesis/20261005T1842Z/calls/metal_4b/trial-2/no_gate/S09/input.jsonl",
+    "--output",
+    "results/synthesis/20261005T1842Z/calls/metal_4b/trial-2/no_gate/S09/output.jsonl",
+    "--base-url",
+    "http://127.0.0.1:18089/v1",
+    "--model",
+    "qwen3.5-4b"
+  ],
+  "status": "ok",
+  "driver_duration_ms": 3128.058625,
+  "exit_code": 0,
+  "record": {
+    "id": "S09",
+    "mode": "inference",
+    "input": {
+      "id": "S09",
+      "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+      "summaries": [
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.",
+          "keywords": [
+            "cache",
+            "adr",
+            "lifecycle",
+            "branch",
+            "buffer",
+            "registration",
+            "0007",
+            "repo",
+            "sidecar",
+            "retention"
+          ],
+          "level": 0,
+          "relevance": 0.5543478260869565,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0015",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences § Out of scope (v1)"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0001",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Context"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0004",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) § 4. Cadence: coherent checkpoints, not churn"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0002",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled)"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0014",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences"
+            }
+          ]
+        },
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.",
+          "keywords": [
+            "cache",
+            "adr",
+            "lifecycle",
+            "branch",
+            "buffer",
+            "registration",
+            "0007",
+            "sidecar",
+            "repo",
+            "source"
+          ],
+          "level": 1,
+          "relevance": 0.5543478260869565,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0015",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences § Out of scope (v1)"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0001",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Context"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0004",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) § 4. Cadence: coherent checkpoints, not churn"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0002",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled)"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0014",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences"
+            }
+          ]
+        },
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.",
+          "keywords": [
+            "cache",
+            "adr",
+            "branch",
+            "lifecycle",
+            "buffer",
+            "registration",
+            "0007",
+            "sidecar",
+            "repo",
+            "supersession"
+          ],
+          "level": 2,
+          "relevance": 0.5543478260869565,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0015",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences § Out of scope (v1)"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0001",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Context"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0004",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) § 4. Cadence: coherent checkpoints, not churn"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0002",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled)"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5-0014",
+              "type": "chunk",
+              "label": "ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences"
+            }
+          ]
+        }
+      ],
+      "total_entities": 51
+    },
+    "calls": [
+      {
+        "llm_request": {
+          "SystemPrompt": "You are a knowledge graph query assistant. Given a user query and summaries of related knowledge clusters, synthesize a concise answer that directly addresses the query.\n\nEach cluster summary describes a group of related entities in the knowledge graph. Use the cluster summaries, representative entities, and keywords to construct your answer. Reference specific entities by name when relevant.\n\nBe direct and factual. If the clusters don't contain enough information to fully answer the query, say what is known and what is missing. Do not speculate beyond the provided data.",
+          "UserPrompt": "Query: For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?\n\nThe knowledge graph contains 51 matching entities across 3 clusters.\n\nCluster 1 (92 entities, 55% match):\nThis community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.\nRepresentatives: ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences § Out of scope (v1) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Context [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) § 4. Cadence: coherent checkpoints, not churn [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nCluster 2 (92 entities, 55% match):\nThis community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.\nRepresentatives: ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences § Out of scope (v1) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Context [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) § 4. Cadence: coherent checkpoints, not churn [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nCluster 3 (92 entities, 55% match):\nThis community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.\nRepresentatives: ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences § Out of scope (v1) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Context [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) § 4. Cadence: coherent checkpoints, not churn [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nSynthesize a concise answer to the query based on these clusters.",
+          "MaxTokens": 500,
+          "Temperature": 0.3
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a knowledge graph query assistant. Given a user query and summaries of related knowledge clusters, synthesize a concise answer that directly addresses the query.\n\nEach cluster summary describes a group of related entities in the knowledge graph. Use the cluster summaries, representative entities, and keywords to construct your answer. Reference specific entities by name when relevant.\n\nBe direct and factual. If the clusters don't contain enough information to fully answer the query, say what is known and what is missing. Do not speculate beyond the provided data."
+          },
+          {
+            "role": "user",
+            "content": "Query: For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?\n\nThe knowledge graph contains 51 matching entities across 3 clusters.\n\nCluster 1 (92 entities, 55% match):\nThis community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.\nRepresentatives: ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences § Out of scope (v1) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Context [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) § 4. Cadence: coherent checkpoints, not churn [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nCluster 2 (92 entities, 55% match):\nThis community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.\nRepresentatives: ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences § Out of scope (v1) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Context [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) § 4. Cadence: coherent checkpoints, not churn [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nCluster 3 (92 entities, 55% match):\nThis community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.\nRepresentatives: ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences § Out of scope (v1) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Context [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) § 4. Cadence: coherent checkpoints, not churn [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Decision (architecture — settled) [chunk], ADR-0007: SemSource Sidecar — Dynamic Repo Registration & Branch Lifecycle § Consequences [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nSynthesize a concise answer to the query based on these clusters."
+          }
+        ],
+        "deadline_remaining_ms": 14999.993291,
+        "llm_response": {
+          "Content": "Based on the provided clusters, specifically the **ADR-0007: SemSource Sidecar** documents regarding Dynamic Repo Registration and Branch Lifecycle:\n\n*   **Indexing Cadence:** The supplied sidecar design requires **coherent checkpoints** rather than frequent churn.\n*   **Worktree Disk Deletion:** The clusters do not explicitly state whether SemSource may delete the caller-owned worktree disk. While the documents mention \"Out of scope (v1)\" as a consequence, the specific permission regarding the deletion of caller-owned worktree disks is not detailed in the available summaries.",
+          "PromptTokens": 991,
+          "CompletionTokens": 120,
+          "TotalTokens": 1111,
+          "Model": "qwen3.5-4b",
+          "FinishReason": "stop"
+        },
+        "duration_ms": 3128.038833,
+        "wire_trace": [
+          {
+            "name": "get_connection",
+            "elapsed_ms": 0.117875,
+            "destination": "127.0.0.1:18089"
+          },
+          {
+            "name": "got_connection",
+            "elapsed_ms": 0.409208
+          },
+          {
+            "name": "wrote_headers",
+            "elapsed_ms": 0.441166
+          },
+          {
+            "name": "wrote_request",
+            "elapsed_ms": 0.487666
+          },
+          {
+            "name": "first_response_byte",
+            "elapsed_ms": 3127.84375
+          }
+        ],
+        "requests_written": 1
+      }
+    ],
+    "synthesis_outcome": {
+      "Answer": "Based on the provided clusters, specifically the **ADR-0007: SemSource Sidecar** documents regarding Dynamic Repo Registration and Branch Lifecycle:\n\n*   **Indexing Cadence:** The supplied sidecar design requires **coherent checkpoints** rather than frequent churn.\n*   **Worktree Disk Deletion:** The clusters do not explicitly state whether SemSource may delete the caller-owned worktree disk. While the documents mention \"Out of scope (v1)\" as a consequence, the specific permission regarding the deletion of caller-owned worktree disks is not detailed in the available summaries.",
+      "Model": "qwen3.5-4b",
+      "Degraded": false,
+      "Reason": ""
+    },
+    "duration_ms": 3128.058625,
+    "started_at": "2026-10-05T18:48:00.170408Z",
+    "semstreams_version": "v1.0.0-beta.160"
+  },
+  "subprocess_wall_ms": 3169.9396249605343,
+  "driver_startup_and_io_ms": 41.880999960534155
+}

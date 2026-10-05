@@ -1,0 +1,408 @@
+[
+  {
+    "id": "B001",
+    "case_id": "S08",
+    "grade": "refusal",
+    "reason": "Explicitly identifies both requested details as absent; ADR and migration references are contextual pointers, not an asserted replacement field or failure behavior.",
+    "missing_ack_quote": "the summaries do not explicitly state which specific property should replace `source.doc.summary` for title text."
+  },
+  {
+    "id": "B002",
+    "case_id": "S03",
+    "grade": "refusal",
+    "reason": "Does not assert an LRU trigger or Hybrid behavior. The parenthetical trigger examples describe information that is missing, rather than claims about this implementation.",
+    "missing_ack_quote": "the provided summaries do not contain the specific details required to answer what triggers LRU eviction or whether the system employs a Hybrid strategy that combines eviction with expiration."
+  },
+  {
+    "id": "B003",
+    "case_id": "S02",
+    "grade": "refusal",
+    "reason": "Withholds both presets and the retry-wrapper recommendation. Borderline grounding issue: it confidently says the answer exists in unseen sections, rather than merely identifying relevant section pointers; no substantive requested recommendation is asserted.",
+    "missing_ack_quote": "The summaries do not specify whether an \"already-resilient operation\" should receive an extra retry wrapper.",
+    "unsupported_quote": "The provided text confirms that the answer to your query exists within the **Retry Package** documentation sections listed above",
+    "ambiguous": true
+  },
+  {
+    "id": "B004",
+    "case_id": "S05",
+    "grade": "refusal",
+    "reason": "Explicitly withholds the Block condition and API names. The retention principle is literally visible in an ADR heading, but its presentation beside Buffer/DropNewest context risks conflating separate topics; it supplies no requested Block behavior.",
+    "missing_ack_quote": "The summaries do not list specific function names or documented calls that allow a caller to bound a wait with a timeout or context.",
+    "ambiguous": true
+  },
+  {
+    "id": "B005",
+    "case_id": "S09",
+    "grade": "unsupported_assertion",
+    "reason": "The checkpoint principle is visible, but no supplied heading or overview establishes SemSource's disk-deletion policy. The unqualified denial overrides the supported cadence fragment.",
+    "support_quote": "requires a coherent checkpoint cadence, not churn.",
+    "unsupported_quote": "SemSource does not delete the disk, as per the provided information."
+  },
+  {
+    "id": "B006",
+    "case_id": "S09",
+    "grade": "partial_supported",
+    "reason": "States only the literal broad checkpoint-versus-churn cadence principle and explicitly identifies disk permission as missing. It adds no watch mode, interval, phase boundary or deletion rule.",
+    "support_quote": "requires an indexing cadence of **coherent checkpoints** rather than continuous churn.",
+    "missing_ack_quote": "the provided summaries do not contain specific information confirming whether SemSource may delete it."
+  },
+  {
+    "id": "B007",
+    "case_id": "S05",
+    "grade": "unsupported_assertion",
+    "reason": "Invents a capacity-related wait behavior and treats an ADR document title as a callable timeout/context API; neither requested fact appears in the evidence.",
+    "unsupported_quote": "a documented call that allows a caller to bind a wait with a timeout or context is `ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph`."
+  },
+  {
+    "id": "B008",
+    "case_id": "S04",
+    "grade": "refusal",
+    "reason": "Uses Prometheus headings as feature context while explicitly withholding independent collection behavior and the enabling option.",
+    "missing_ack_quote": "the provided summaries do not contain specific information regarding whether cache statistics are collected independently of the Prometheus export setting or what specific option is required to enable that export."
+  },
+  {
+    "id": "B009",
+    "case_id": "S09",
+    "grade": "unsupported_assertion",
+    "reason": "No visible text grants deletion permission or ties it to lifecycle processes; the permission claim overrides the supported cadence fragment.",
+    "unsupported_quote": "SemSource may delete the caller-owned worktree disk under certain conditions, such as when the sidecar's lifecycle management processes are active."
+  },
+  {
+    "id": "B010",
+    "case_id": "S13",
+    "grade": "refusal",
+    "reason": "Accurately reports that cleanup obligations and an exact waiting period are absent; the quoted rare-deletion principle and section pointers supply context only.",
+    "missing_ack_quote": "it is **not possible** to answer the specific details of your query regarding the \"two cleanup obligations\" or the \"exact waiting period\""
+  },
+  {
+    "id": "B011",
+    "case_id": "S03",
+    "grade": "unsupported_assertion",
+    "reason": "Asserts both an LRU trigger and a Hybrid expiration mechanism, although the prompt supplies only cache/eviction section titles and broad overviews.",
+    "unsupported_quote": "Hybrid combines this behavior with expiration by integrating LRU eviction with a mechanism that accounts for cache expiration, such as a time-based expiration policy."
+  },
+  {
+    "id": "B012",
+    "case_id": "S12",
+    "grade": "refusal",
+    "reason": "Explicitly withholds both mistake classes and cleanup obligations. The rare, graph-aware, framework-gated deletion framing is literally supported context.",
+    "missing_ack_quote": "the specific details regarding the **two kinds of source mistakes** that permit exceptional deletion and the **two cleanup obligations** required are **not present** in the available data."
+  },
+  {
+    "id": "B013",
+    "case_id": "S09",
+    "grade": "partial_supported",
+    "reason": "Provides the visible broad cadence principle without inventing a precise in-flight mode or schedule, and explicitly withholds disk-deletion permission.",
+    "support_quote": "requires a cadence of **coherent checkpoints**, explicitly designed to avoid churn.",
+    "missing_ack_quote": "they do not explicitly state the policy on caller-owned disk deletion."
+  },
+  {
+    "id": "B014",
+    "case_id": "S03",
+    "grade": "refusal",
+    "reason": "Withholds the LRU trigger and Hybrid/expiration answer. Ambiguous parenthetical: 'which include LRU' can be a generic description of eviction policies, but could also imply this system implements LRU, which the evidence does not establish. The hypothetical trigger examples and 'potentially' Hybrid wording are not treated as factual implementation claims.",
+    "missing_ack_quote": "the specific triggers for LRU eviction and whether the Hybrid implementation explicitly combines eviction with expiration are **not described** in the available summaries.",
+    "unsupported_quote": "eviction policies (which include LRU) are a defined component of the system's architecture.",
+    "ambiguous": true
+  },
+  {
+    "id": "B015",
+    "case_id": "S10",
+    "grade": "unsupported_assertion",
+    "reason": "The stable/auditable handle heading does not establish that consumers should poll readiness through that handle. The later admission that endpoint and field details are missing does not retract this asserted polling method.",
+    "unsupported_quote": "External consumers should poll for readiness using the **registration handle**"
+  },
+  {
+    "id": "B016",
+    "case_id": "S12",
+    "grade": "unsupported_assertion",
+    "reason": "Invents both permitted mistake classes and cleanup obligations from unrelated topic keywords; the deletion heading states neither.",
+    "unsupported_quote": "The supplied ADR permits exceptional deletion of source mistakes related to **cache management and buffer usage**."
+  },
+  {
+    "id": "B017",
+    "case_id": "S10",
+    "grade": "unsupported_assertion",
+    "reason": "Presents Sidecar-based readiness polling as a known method and links external read/query operations to a checkpoint mechanism without supplied protocol evidence. It does acknowledge missing field names. Borderline because the polling statement could be read as a vague source pointer rather than an operational instruction.",
+    "unsupported_quote": "the external consumer should poll source readiness using the **SemSource Sidecar** platform",
+    "missing_ack_quote": "The provided summaries do not explicitly name specific field names",
+    "ambiguous": true
+  },
+  {
+    "id": "B018",
+    "case_id": "S07",
+    "grade": "refusal",
+    "reason": "Explicitly withholds the stale-body mechanism and readiness signal. Borderline overstatement: it says those specific details are contained in unseen documents; the visible labels establish relevant pointers, not that every requested answer is there.",
+    "missing_ack_quote": "It is not specified **what** the specific readiness signal is that should be awaited after rebuilding.",
+    "unsupported_quote": "The specific technical details regarding \"in-place reindexing,\" \"old whole-file bodies,\" and the specific \"readiness signal\" to await are contained within the following representative entities",
+    "ambiguous": true
+  },
+  {
+    "id": "B019",
+    "case_id": "S08",
+    "grade": "refusal",
+    "reason": "Identifies both requested details as absent. Its statement that migration documents likely contain the logic is a qualified pointer, not an asserted property or fallback behavior.",
+    "missing_ack_quote": "The summaries do not describe the specific behavior of `doc-source` if the \"verbatim body store\" cannot be created."
+  },
+  {
+    "id": "B020",
+    "case_id": "S02",
+    "grade": "refusal",
+    "reason": "Correctly distinguishes relevant Retry section labels from the absent preset names and wrapper guidance.",
+    "missing_ack_quote": "it is not possible to answer the specific query regarding which retry preset is recommended for critical versus normal operations, nor whether an already-resilient operation should receive an extra retry wrapper."
+  },
+  {
+    "id": "B021",
+    "case_id": "S10",
+    "grade": "unsupported_assertion",
+    "reason": "Invents a buffer field and treats a cadence heading as the snapshot/watch discriminator; no registration-handle fields appear in the evidence.",
+    "unsupported_quote": "the **content indexed** is distinguished by the **buffer** in the registration handle."
+  },
+  {
+    "id": "B022",
+    "case_id": "S07",
+    "grade": "unsupported_assertion",
+    "reason": "Supplies an unsupported causal explanation linking stale bodies to chunking/lifecycle management, rather than acknowledging that the cause is missing. The source contains relevant titles but no such mechanism.",
+    "unsupported_quote": "due to the way document structures are managed in the system, which often relies on chunking and lifecycle management."
+  },
+  {
+    "id": "B023",
+    "case_id": "S07",
+    "grade": "unsupported_assertion",
+    "reason": "Offers a cache/buffer lifecycle failure as the cause of stale parent bodies, absent from visible evidence, and does not disclose the missing mechanism/signal. Ambiguous because the causal sentence is conditional; it could be read as a generic hypothetical rather than a sourced explanation, but it is presented directly as the answer without that qualification.",
+    "unsupported_quote": "if the reindexing process does not properly handle document lifecycle management, such as cache management and buffer usage.",
+    "ambiguous": true
+  },
+  {
+    "id": "B024",
+    "case_id": "S09",
+    "grade": "unsupported_assertion",
+    "reason": "The answer permits deletion under unspecified implementation conditions, although the evidence says nothing about disk permission. 'Depending on' unspecified details does not establish any allowed condition.",
+    "unsupported_quote": "SemSource may delete the caller-owned worktree disk under certain conditions, depending on the specific implementation details of the sidecar design."
+  },
+  {
+    "id": "B025",
+    "case_id": "S09",
+    "grade": "unsupported_assertion",
+    "reason": "Invents worktree no-longer-needed as a possible deletion condition. Neither ownership permission nor deletion conditions are visible; the supported cadence fragment does not cure that claim.",
+    "unsupported_quote": "SemSource may delete the caller-owned worktree disk under certain conditions, such as when the worktree is no longer needed"
+  },
+  {
+    "id": "B026",
+    "case_id": "S12",
+    "grade": "unsupported_assertion",
+    "reason": "Turns cache/buffer/lifecycle keywords into deletion permissions and required cleanup, none of which the source heading states.",
+    "unsupported_quote": "The supplied ADR permits exceptional deletion for **cache and buffer**."
+  },
+  {
+    "id": "B027",
+    "case_id": "S01",
+    "grade": "unsupported_assertion",
+    "reason": "Correctly withholds the numerical value but invents a specifically named DefaultConfig section. Visible representatives contain Configuration/Custom Config, not DefaultConfig. Ambiguous materiality: this is a concrete grounding error in a document pointer rather than a false maximum-attempt value.",
+    "unsupported_quote": "The `Retry Package` includes a `DefaultConfig` section.",
+    "missing_ack_quote": "it is **not possible** to determine the specific maximum attempt count that `retry.DefaultConfig` returns.",
+    "ambiguous": true
+  },
+  {
+    "id": "B028",
+    "case_id": "S11",
+    "grade": "unsupported_assertion",
+    "reason": "Infers old-version retention, current relevance and continuing historical availability from limited retention/ranking headings. Those headings do not establish the fate or queryability of old versions.",
+    "unsupported_quote": "Historical versions remain available in the system as part of the versioned-source retention mechanism"
+  },
+  {
+    "id": "B029",
+    "case_id": "S05",
+    "grade": "unsupported_assertion",
+    "reason": "Infers buffer-capacity wait behavior from a DropNewest title and then states that DropNewest governs potential waits. No Block wait condition is supplied. The missing API names are acknowledged, but the asserted wait mechanism remains unsupported.",
+    "unsupported_quote": "the **Buffer Package** and its **Overflow Policy** (specifically the `DropNewest` behavior) are identified as the mechanism governing writes and potential waits",
+    "missing_ack_quote": "The provided summaries do not explicitly name specific API calls that allow a caller to bind the wait with a timeout or context."
+  },
+  {
+    "id": "B030",
+    "case_id": "S09",
+    "grade": "unsupported_assertion",
+    "reason": "Asserts a deletion permission derived from lifecycle/architecture topics, which contain no caller-owned disk rule.",
+    "unsupported_quote": "SemSource may delete the caller-owned worktree disk based on the sidecar's lifecycle management and decision architecture."
+  },
+  {
+    "id": "B031",
+    "case_id": "S09",
+    "grade": "partial_supported",
+    "reason": "States the literal broad checkpoint principle and explicitly identifies deletion permission as absent; the Out of scope heading is not used to infer a disk rule.",
+    "support_quote": "requires **coherent checkpoints** rather than frequent churn.",
+    "missing_ack_quote": "the specific permission regarding the deletion of caller-owned worktree disks is not detailed in the available summaries."
+  },
+  {
+    "id": "B032",
+    "case_id": "S12",
+    "grade": "refusal",
+    "reason": "Withholds the two requested mistake classes and obligations; the literal rare/graph-aware/framework-gated deletion heading is context only.",
+    "missing_ack_quote": "the specific conditions (the two types of mistakes) and the required actions (the two cleanup obligations) are not described in the entity summaries or keywords provided."
+  },
+  {
+    "id": "B033",
+    "case_id": "S09",
+    "grade": "partial_supported",
+    "reason": "Reports the broad coherent-checkpoint cadence principle and explicitly withholds caller-owned disk policy; no exact watch mode, schedule or disk action is inferred.",
+    "support_quote": "requires **coherent checkpoints** rather than continuous churn.",
+    "missing_ack_quote": "they do not explicitly state the policy on deleting caller-owned disk space."
+  },
+  {
+    "id": "B034",
+    "case_id": "S01",
+    "grade": "refusal",
+    "reason": "Withholds the default attempt count and requests more specific configuration evidence; cache/buffer/lifecycle words are only contextual.",
+    "missing_ack_quote": "The maximum attempt count returned by `Retry.DefaultConfig` is not explicitly mentioned in the provided knowledge clusters."
+  },
+  {
+    "id": "B035",
+    "case_id": "S11",
+    "grade": "unsupported_assertion",
+    "reason": "The visible headings permit the literal retention principle and per-source ranking-marker description, not a historical-version lifetime threshold or the claimed anti-domination mechanism.",
+    "unsupported_quote": "ensuring that older versions are preserved until they exceed the defined ingestion depth threshold."
+  },
+  {
+    "id": "B036",
+    "case_id": "S13",
+    "grade": "refusal",
+    "reason": "Explicitly withholds both cleanup obligations and an exact waiting period; it uses the visible deletion heading only as context.",
+    "missing_ack_quote": "it is **not possible** to answer the specific details of your query regarding the \"two cleanup obligations\" or the \"exact waiting period\""
+  },
+  {
+    "id": "B037",
+    "case_id": "S08",
+    "grade": "unsupported_assertion",
+    "reason": "Invents a replacement property description and unchanged-title failure behavior; neither is supplied by the migration headings.",
+    "unsupported_quote": "If the verbatim body store cannot be created, doc-source will not support the verbatim body store, and the title text will remain unchanged."
+  },
+  {
+    "id": "B038",
+    "case_id": "S10",
+    "grade": "unsupported_assertion",
+    "reason": "Invents cache and buffer registration-handle fields and a stable/auditable mode discriminator. Visible headings name no fields.",
+    "unsupported_quote": "the **content being indexed** is identified through the **cache** and **buffer** fields."
+  },
+  {
+    "id": "B039",
+    "case_id": "S05",
+    "grade": "unsupported_assertion",
+    "reason": "Treats an ADR title as a timeout/context call and supplies a generic overflow cause as if answering the absent Block behavior.",
+    "unsupported_quote": "A documented call that allows a caller to bind a wait with a timeout or context is `ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph`."
+  },
+  {
+    "id": "B040",
+    "case_id": "S01",
+    "grade": "refusal",
+    "reason": "Withholds the attempt count. Its qualified discussion of what a maximum-attempt setting generally means does not assert this implementation's value or a specific undocumented behavior.",
+    "missing_ack_quote": "For precise information, more specific details about `Retry.DefaultConfig` or its configuration parameters would be needed."
+  },
+  {
+    "id": "B041",
+    "case_id": "S09",
+    "grade": "partial_supported",
+    "reason": "Provides only the visible broad checkpoint-versus-churn principle and explicitly withholds disk permissions/actions; it invents no precise schedule or deletion condition.",
+    "support_quote": "requires an indexing cadence of **coherent checkpoints**, explicitly avoiding \"churn.\"",
+    "missing_ack_quote": "they do not detail the specific permissions or actions SemSource takes regarding the caller's disk space or worktree ownership."
+  },
+  {
+    "id": "B042",
+    "case_id": "S04",
+    "grade": "refusal",
+    "reason": "Correctly separates Prometheus documentation pointers from the absent default collection behavior and enabling option.",
+    "missing_ack_quote": "it is **not possible to determine** whether cache statistics are collected without enabling Prometheus export, nor can the specific option required to enable that export be identified."
+  },
+  {
+    "id": "B043",
+    "case_id": "S09",
+    "grade": "partial_supported",
+    "reason": "States the literal broad cadence principle and explicitly acknowledges that caller-owned disk permission is missing, without inventing more specific indexing behavior.",
+    "support_quote": "requires a cadence of **coherent checkpoints**, explicitly avoiding data churn.",
+    "missing_ack_quote": "do not detail the specific permissions or actions regarding caller-owned disk deletion."
+  },
+  {
+    "id": "B044",
+    "case_id": "S04",
+    "grade": "unsupported_assertion",
+    "reason": "Affirmatively asserts collection without export by default and an enabling configuration mechanism, neither supplied by the Prometheus section labels.",
+    "unsupported_quote": "Yes, cache statistics are typically collected without enabling Prometheus export by default"
+  },
+  {
+    "id": "B045",
+    "case_id": "S07",
+    "grade": "refusal",
+    "reason": "Explicitly withholds the stale-body mechanism and readiness signal and accurately characterizes the visible material as topical rather than operational detail.",
+    "missing_ack_quote": "they do not contain specific details about:"
+  },
+  {
+    "id": "B046",
+    "case_id": "S03",
+    "grade": "unsupported_assertion",
+    "reason": "Asserts both the eviction trigger and Hybrid's combined LRU/expiration behavior despite the absence of those facts in the evidence.",
+    "unsupported_quote": "Hybrid combines this behavior with expiration by maintaining both LRU and expiration policies."
+  },
+  {
+    "id": "B047",
+    "case_id": "S13",
+    "grade": "unsupported_assertion",
+    "reason": "Invents a lifecycle-framework authority for an exact waiting period; the visible text gives no period or method for determining one.",
+    "unsupported_quote": "the exact waiting period before a mis-registered scope can be deleted is determined by the lifecycle management framework."
+  },
+  {
+    "id": "B048",
+    "case_id": "S02",
+    "grade": "unsupported_assertion",
+    "reason": "Invents priority-based preset guidance and explicitly recommends another wrapper for resilient operations. Neither appears in the Retry headings or overviews.",
+    "unsupported_quote": "An already-resilient operation should receive an extra retry wrapper to ensure that the system can handle potential failures without compromising its reliability."
+  },
+  {
+    "id": "B049",
+    "case_id": "S13",
+    "grade": "unsupported_assertion",
+    "reason": "Invents cache/buffer management and lifecycle tracking as the two cleanup obligations, plus an unsupported mechanism determining the waiting period.",
+    "unsupported_quote": "the two cleanup obligations must be satisfied: ensuring the cache and buffer are properly managed and the lifecycle is appropriately tracked."
+  },
+  {
+    "id": "B050",
+    "case_id": "S08",
+    "grade": "unsupported_assertion",
+    "reason": "Gives a case-specific replacement-field prediction and speculative failure behavior absent from visible evidence, without identifying the missing source information. Ambiguous because 'likely' and 'may' explicitly hedge these suggestions; adjudicate whether this is unsupported answer guidance or a nonfactual hypothesis. It is not a supported partial answer.",
+    "unsupported_quote": "The property that should replace `source.doc.summary` for title text is likely `source.doc.title`.",
+    "ambiguous": true
+  },
+  {
+    "id": "B051",
+    "case_id": "S01",
+    "grade": "refusal",
+    "reason": "Explicitly withholds the return value and correctly notes that configuration section pointers do not expose the actual value.",
+    "missing_ack_quote": "the summaries do not disclose the actual configuration values or the specific return value of the `retry.DefaultConfig` function."
+  },
+  {
+    "id": "B052",
+    "case_id": "S04",
+    "grade": "unsupported_assertion",
+    "reason": "Affirmatively asserts collection without export and treats a documentation topic as the enabling option. Neither requested fact is in the source.",
+    "unsupported_quote": "Yes, cache statistics are typically collected without enabling Prometheus export, and the option that enables the export is **Prometheus metrics**."
+  },
+  {
+    "id": "B053",
+    "case_id": "S11",
+    "grade": "unsupported_assertion",
+    "reason": "Extends limited retention/ranking headings into claims of historical availability and ranking priority. The supersession caveat does not retract those unsupported claims.",
+    "unsupported_quote": "This ensures that historical versions do not dominate ordinary current-version queries, as the system prioritizes the latest ranked version while still preserving the history for specific needs."
+  },
+  {
+    "id": "B054",
+    "case_id": "S02",
+    "grade": "unsupported_assertion",
+    "reason": "Invents extra-wrapper guidance for already-resilient operations and associates retry policy with general cache/buffer/lifecycle topics rather than visible recommendations.",
+    "unsupported_quote": "An already-resilient operation should receive an extra retry wrapper to maintain system stability and prevent unnecessary overhead."
+  },
+  {
+    "id": "B055",
+    "case_id": "S09",
+    "grade": "unsupported_assertion",
+    "reason": "The checkpoint principle is supported, but the evidence provides no permission rule for deleting caller-owned worktree disk. The unqualified prohibition overrides the valid fragment.",
+    "unsupported_quote": "It does not allow SemSource to delete the caller-owned worktree disk."
+  }
+]

@@ -1,0 +1,5 @@
+semembed-1  | 2026-10-05T18:28:42.081485423Z onnxruntime cpuid_info warning: Unknown CPU vendor. cpuinfo_vendor value: 0
+semembed-1  | 2026-10-05T18:28:42.081907298Z [2m2026-10-05T18:28:42.081700Z[0m [32m INFO[0m [2msemembed[0m[2m:[0m Starting semembed service
+semembed-1  | 2026-10-05T18:28:42.081918298Z [2m2026-10-05T18:28:42.081725Z[0m [32m INFO[0m [2msemembed[0m[2m:[0m Loading embedding model: Snowflake/snowflake-arctic-embed-s
+semembed-1  | 2026-10-05T18:28:42.341985465Z [2m2026-10-05T18:28:42.341836Z[0m [32m INFO[0m [2msemembed[0m[2m:[0m Model loaded successfully
+semembed-1  | 2026-10-05T18:28:42.342126590Z [2m2026-10-05T18:28:42.342073Z[0m [32m INFO[0m [2msemembed[0m[2m:[0m Listening on 0.0.0.0:8081

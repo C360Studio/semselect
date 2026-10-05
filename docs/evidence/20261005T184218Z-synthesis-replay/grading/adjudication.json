@@ -1,0 +1,61 @@
+{
+  "adjudicated_at": "2026-10-05T18:56:11.169745+00:00",
+  "original_blind_grades_sha256": "af4aba3d4312933715581a7f04aa6f50fa709c2a4f96a343d162c0a4a83127a7",
+  "review": "Root reviewed all55 grade reasons/quoted spans and all8 ambiguous full answers before reading the identity map. All original grades retained. No inference, prompts, evidence labels or arm policy changed.",
+  "cases": [
+    {
+      "id": "B003",
+      "original_grade": "refusal",
+      "final_grade": "refusal",
+      "reason": "Uphold refusal: no requested preset or wrapper behavior is supplied. Confident availability claims about unseen documents are ancillary grounding cautions, not reliable proof the answer exists."
+    },
+    {
+      "id": "B004",
+      "original_grade": "refusal",
+      "final_grade": "refusal",
+      "reason": "Uphold refusal: neither requested Block condition nor API is asserted. Cross-topic placement of the visible retention heading is a contextual conflation caution."
+    },
+    {
+      "id": "B014",
+      "original_grade": "refusal",
+      "final_grade": "refusal",
+      "reason": "Uphold refusal: LRU is mentioned as a generic eviction-policy example and neither requested trigger nor Hybrid behavior is asserted. The text distinguishes hypothetical examples from known implementation."
+    },
+    {
+      "id": "B017",
+      "original_grade": "unsupported_assertion",
+      "final_grade": "unsupported_assertion",
+      "reason": "Uphold unsupported assertion: the text presents Sidecar polling and checkpoint-linked operations as the prescribed approach without supporting protocol evidence. Its missing-field disclaimer does not retract that recommendation. This broad-method boundary remains debatable."
+    },
+    {
+      "id": "B018",
+      "original_grade": "refusal",
+      "final_grade": "refusal",
+      "reason": "Uphold refusal: no causal mechanism or readiness signal is supplied. Claiming unseen documents contain all details is an ancillary grounding caution, not verified coverage."
+    },
+    {
+      "id": "B023",
+      "original_grade": "unsupported_assertion",
+      "final_grade": "unsupported_assertion",
+      "reason": "Uphold unsupported assertion: cache/buffer handling is presented directly as the causal answer; conditional syntax does not label it a mere hypothetical or acknowledge missing evidence."
+    },
+    {
+      "id": "B027",
+      "original_grade": "unsupported_assertion",
+      "final_grade": "unsupported_assertion",
+      "reason": "Uphold unsupported assertion: a specifically named DefaultConfig section is fabricated. This is a concrete document-location error, not an invented numeric attempt count; report that distinction."
+    },
+    {
+      "id": "B050",
+      "original_grade": "unsupported_assertion",
+      "final_grade": "unsupported_assertion",
+      "reason": "Uphold unsupported assertion: likely/may hedge specific replacement and failure guidance, but do not acknowledge that the source provides neither. It is unsupported answer guidance, not a clearly separated hypothetical example."
+    }
+  ],
+  "limits": [
+    "Eight borderline outputs are explicitly retained for sensitivity review; a tiny judgment-based sample should not imply fine-grained ranking.",
+    "The unsupported category includes a fabricated document-location claim in B027; it is not exclusively false requested numerical/behavioral answers.",
+    "Some refusals contain overconfident document pointers or topic conflation. Refusal does not mean the entire prose is free of all ancillary grounding issues.",
+    "No grade uses external source truth. A guessed field name or permission can accidentally be correct and still be unsupported by visible evidence."
+  ]
+}

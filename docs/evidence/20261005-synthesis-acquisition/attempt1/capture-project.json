@@ -1,0 +1,10 @@
+{
+  "record_type": "explicit project-only projection",
+  "selected": {
+    "planned": 13,
+    "attempted": 0,
+    "captured": 0,
+    "status": "dependency_readiness_failed",
+    "timeout_seconds": 120
+  }
+}

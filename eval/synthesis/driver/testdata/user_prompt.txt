@@ -1,0 +1,23 @@
+Query: How does the sample system behave?
+
+The knowledge graph contains 116 matching entities across 6 clusters.
+
+Cluster 1 (12 entities, 88% match):
+First cluster summary.
+Representatives: Alpha [function] {tags: stable, public},  [struct]
+Keywords: k1, k2, k3, k4, k5
+
+Cluster 2:
+Second cluster summary.
+
+Cluster 3 (2 entities, 40% match):
+Representatives: Beta [file]
+Keywords: third
+
+Cluster 4 (1 entities, 0% match):
+Fourth cluster summary.
+
+Cluster 5 (1 entities, 100% match):
+Fifth cluster summary.
+
+Synthesize a concise answer to the query based on these clusters.

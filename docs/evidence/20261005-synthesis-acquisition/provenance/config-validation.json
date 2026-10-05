@@ -1,0 +1,18 @@
+{
+  "checked_utc": "2026-10-05T18:13:21.420629+00:00",
+  "binary_validate": {
+    "exit_code": 0,
+    "output": "Config at /config/semsource.json is valid; Namespace semselectsynth; Sources 1: docs",
+    "network": "none",
+    "cpu_limit": 1,
+    "memory_limit": "512m",
+    "image": "golang:1.26.6-bookworm@sha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36"
+  },
+  "docker_compose_config": {
+    "exit_code": 0,
+    "project": "semselect-synthesis-4093d3c",
+    "internal_network": true,
+    "all_published_ports_loopback": true
+  },
+  "services_launched": false
+}

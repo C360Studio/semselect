@@ -1,0 +1,486 @@
+{
+  "record_type": "explicit project-only projection",
+  "original_sha256": "9f8a72905ccabbb5276262514490e87668bca0e8d1de7c2b5da88c963961b5f2",
+  "omitted_top_level_fields": [
+    "running_containers_before"
+  ],
+  "selected": {
+    "checked_utc": "2026-10-05T18:19:02.811664+00:00",
+    "prepared": {
+      "semsource_commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "checkout_head_at_archive": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "checkout_porcelain": "",
+      "archive_sha256": "2891ae68b72ef76180b0c3fd1b07f9d464b4eb9801bdf4e72fb5dab1a219db4a",
+      "images": {
+        "go": "golang:1.26.6-bookworm@sha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36",
+        "nats": "nats:2.14.4-alpine@sha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66",
+        "semembed": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+        "seminstruct": "ghcr.io/c360studio/seminstruct:qwen3-0.6b@sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9"
+      },
+      "corpus": [
+        {
+          "key": "retry",
+          "repository": "https://github.com/c360studio/semstreams",
+          "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+          "path": "pkg/retry/README.md",
+          "sha256": "b82a86f041164403b90f8c6528d8000a776d1b0c950cfb025bcc124890fdd677",
+          "artifact": "source/semstreams/pkg/retry/README.md",
+          "bytes": 3681,
+          "container_path": "/corpus/semstreams/pkg/retry/README.md"
+        },
+        {
+          "key": "cache",
+          "repository": "https://github.com/c360studio/semstreams",
+          "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+          "path": "pkg/cache/README.md",
+          "sha256": "55ad24142fa635f759592542e1192f1f7bf0d8f76fada0597f0475a89bee0868",
+          "artifact": "source/semstreams/pkg/cache/README.md",
+          "bytes": 12406,
+          "container_path": "/corpus/semstreams/pkg/cache/README.md"
+        },
+        {
+          "key": "buffer",
+          "repository": "https://github.com/c360studio/semstreams",
+          "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+          "path": "pkg/buffer/README.md",
+          "sha256": "9641c7f9abef197906f21897acbb988895f21690e6f8bc887185d1890fb230fe",
+          "artifact": "source/semstreams/pkg/buffer/README.md",
+          "bytes": 14249,
+          "container_path": "/corpus/semstreams/pkg/buffer/README.md"
+        },
+        {
+          "key": "migration",
+          "repository": "https://github.com/c360studio/semsource",
+          "revision": "4093d3ce421371f4a99d7168e372552899bf6795",
+          "path": "docs/migration/doc-passage-chunking.md",
+          "sha256": "d344ca55288512226cf9d3978e5caf81cf98337788d8d59d4a7e1a394931f062",
+          "artifact": "source/semsource/docs/migration/doc-passage-chunking.md",
+          "bytes": 3230,
+          "container_path": "/corpus/semsource/docs/migration/doc-passage-chunking.md"
+        },
+        {
+          "key": "registration",
+          "repository": "https://github.com/c360studio/semsource",
+          "revision": "4093d3ce421371f4a99d7168e372552899bf6795",
+          "path": "docs/adr/0007-sidecar-repo-registration-branch-lifecycle.md",
+          "sha256": "27be93062a6853c3fa24937ec44eaaa6c9d1471a4cfb7e89a2edc55b282c4a08",
+          "artifact": "source/semsource/docs/adr/0007-sidecar-repo-registration-branch-lifecycle.md",
+          "bytes": 15915,
+          "container_path": "/corpus/semsource/docs/adr/0007-sidecar-repo-registration-branch-lifecycle.md"
+        },
+        {
+          "key": "retention",
+          "repository": "https://github.com/c360studio/semsource",
+          "revision": "4093d3ce421371f4a99d7168e372552899bf6795",
+          "path": "docs/adr/0008-versioned-source-retention-supersession.md",
+          "sha256": "5ae83d432d632edb3b91d1d121dcaeeb20dc96364bd4cff556d41284a3007d10",
+          "artifact": "source/semsource/docs/adr/0008-versioned-source-retention-supersession.md",
+          "bytes": 14306,
+          "container_path": "/corpus/semsource/docs/adr/0008-versioned-source-retention-supersession.md"
+        }
+      ],
+      "source_files": {
+        "go.mod": "6d120a680506aff2ee9519e26ea08ab000d893133cb6e9ee2992c8ae4b957a52",
+        "go.sum": "47b9d1c78828310541de62421f1778a867016392e4d6cdb81f631ca5479e2221"
+      },
+      "config_sha256": "5f4580d7667fa85ad07d004b6f130c330791387170a206eeb50b158c90ce6fc5",
+      "scope": "Six public pinned documentation files; no code, gold labels, questions or private checkout corpus."
+    },
+    "build": {
+      "started_utc": "2026-10-05T18:11:05.963712+00:00",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--network=none",
+        "--name",
+        "semselect-synthesis-build-4093d3c",
+        "--cpus=4",
+        "--memory=8g",
+        "--read-only",
+        "--tmpfs",
+        "/tmp:rw,exec,size=2g",
+        "--tmpfs",
+        "/gocache:rw,size=3g",
+        "--mount",
+        "type=bind,src=/Users/coby/Code/c360/semselect/.synthesis/source,dst=/src,readonly",
+        "--mount",
+        "type=bind,src=/Users/coby/go/pkg/mod,dst=/go/pkg/mod,readonly",
+        "--mount",
+        "type=bind,src=/Users/coby/Code/c360/semselect/.synthesis/bin,dst=/out",
+        "--env",
+        "GOPROXY=off",
+        "--env",
+        "GOSUMDB=off",
+        "--env",
+        "GOTOOLCHAIN=local",
+        "--env",
+        "CGO_ENABLED=1",
+        "--env",
+        "GOCACHE=/gocache",
+        "--env",
+        "GOTMPDIR=/tmp",
+        "--workdir",
+        "/src",
+        "golang:1.26.6-bookworm@sha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36",
+        "go",
+        "build",
+        "-mod=readonly",
+        "-trimpath",
+        "-buildvcs=false",
+        "-p",
+        "4",
+        "-o",
+        "/out/semsource",
+        "./cmd/semsource"
+      ],
+      "image": {
+        "Id": "sha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36",
+        "RepoDigests": [
+          "golang@sha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36"
+        ],
+        "Architecture": "arm64",
+        "Os": "linux"
+      },
+      "semsource_commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "archive_sha256": "2891ae68b72ef76180b0c3fd1b07f9d464b4eb9801bdf4e72fb5dab1a219db4a",
+      "exit_code": 0,
+      "elapsed_seconds": 23.696942124981433,
+      "binary_sha256": "0b4ea8526611d87245c5993e91016b65656001244239fd40672eb619afa780d6",
+      "binary_bytes": 51478904
+    },
+    "query_plan_sha256": "41072492db2132ab665bf4313e5a0ef17dc765dd2ba685db0e21f62ddf3cdd0f",
+    "capture_source_sha256": "b3cecbc56566df7be85bb1855724ce8a3c21e17ceb8aac83f55c1889f0241787",
+    "capture_binary_sha256": "9d58fce9c5df88743288c87266edfa1dd2ed79f367506e6466737eb2233e6ffa",
+    "images": [
+      {
+        "Id": "sha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36",
+        "RepoTags": [
+          "golang:1.26.6-bookworm"
+        ],
+        "RepoDigests": [
+          "golang@sha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36"
+        ],
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Config": {
+          "Env": [
+            "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+            "GOLANG_VERSION=1.26.6",
+            "GOTOOLCHAIN=local",
+            "GOPATH=/go"
+          ],
+          "Cmd": [
+            "bash"
+          ],
+          "WorkingDir": "/go"
+        }
+      },
+      {
+        "Id": "sha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66",
+        "RepoTags": [
+          "nats:2.14.4-alpine",
+          "nats@sha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66"
+        ],
+        "RepoDigests": [
+          "nats@sha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66"
+        ],
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Config": {
+          "ExposedPorts": {
+            "4222/tcp": {},
+            "6222/tcp": {},
+            "8222/tcp": {}
+          },
+          "Env": [
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+            "NATS_SERVER=2.14.4"
+          ],
+          "Entrypoint": [
+            "docker-entrypoint.sh"
+          ],
+          "Cmd": [
+            "nats-server",
+            "--config",
+            "/etc/nats/nats-server.conf"
+          ],
+          "WorkingDir": "/",
+          "Labels": {
+            "org.opencontainers.image.description": "NATS is an open-source, high-performance, cloud native messaging system.",
+            "org.opencontainers.image.documentation": "https://docs.nats.io",
+            "org.opencontainers.image.licenses": "Apache-2.0",
+            "org.opencontainers.image.source": "https://github.com/nats-io/nats-docker",
+            "org.opencontainers.image.title": "NATS Server",
+            "org.opencontainers.image.url": "https://nats.io",
+            "org.opencontainers.image.vendor": "NATS.io",
+            "org.opencontainers.image.version": "2.14.4"
+          }
+        }
+      },
+      {
+        "Id": "sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+        "RepoTags": [
+          "ghcr.io/c360studio/semembed:latest"
+        ],
+        "RepoDigests": [
+          "ghcr.io/c360studio/semembed@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2"
+        ],
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Config": {
+          "User": "semembed",
+          "ExposedPorts": {
+            "8081/tcp": {}
+          },
+          "Env": [
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+            "SEMEMBED_MODEL=Snowflake/snowflake-arctic-embed-s",
+            "SEMEMBED_PORT=8081",
+            "RUST_LOG=info"
+          ],
+          "Entrypoint": [
+            "/usr/local/bin/semembed"
+          ],
+          "WorkingDir": "/app",
+          "Labels": {
+            "org.opencontainers.image.created": "2026-05-01T22:09:44.219Z",
+            "org.opencontainers.image.description": "",
+            "org.opencontainers.image.licenses": "",
+            "org.opencontainers.image.revision": "7ceb5281c96b3664321f3f28c9d7f96acbb41843",
+            "org.opencontainers.image.source": "https://github.com/C360Studio/semembed",
+            "org.opencontainers.image.title": "semembed",
+            "org.opencontainers.image.url": "https://github.com/C360Studio/semembed",
+            "org.opencontainers.image.version": "latest"
+          },
+          "Healthcheck": {
+            "Test": [
+              "CMD-SHELL",
+              "curl -f http://localhost:8081/health || exit 1"
+            ],
+            "Interval": 30000000000,
+            "Timeout": 3000000000,
+            "StartPeriod": 10000000000,
+            "Retries": 3
+          }
+        }
+      },
+      {
+        "Id": "sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+        "RepoTags": [
+          "ghcr.io/c360studio/seminstruct:latest",
+          "ghcr.io/c360studio/seminstruct:qwen3-0.6b"
+        ],
+        "RepoDigests": [
+          "ghcr.io/c360studio/seminstruct@sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9"
+        ],
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Config": {
+          "ExposedPorts": {
+            "8083/tcp": {}
+          },
+          "Env": [
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+            "MODEL_ALIAS=qwen3-0.6b",
+            "MODEL_REASONING=off",
+            "MODEL_CONTEXT=16384",
+            "MODEL_PARALLEL=4",
+            "MODEL_THREADS=",
+            "MODEL_API_KEY="
+          ],
+          "Cmd": [
+            "sh",
+            "-c",
+            "exec llama-server     --host 0.0.0.0     --port 8083     -m /models/model.gguf     --alias ${MODEL_ALIAS}     --reasoning ${MODEL_REASONING}     -np ${MODEL_PARALLEL}     -c ${MODEL_CONTEXT}     -cb     --metrics     ${MODEL_THREADS:+-t ${MODEL_THREADS}}     ${MODEL_API_KEY:+--api-key ${MODEL_API_KEY}}"
+          ],
+          "WorkingDir": "/app",
+          "Labels": {
+            "org.opencontainers.image.created": "2026-05-02T14:05:02.178Z",
+            "org.opencontainers.image.description": "",
+            "org.opencontainers.image.licenses": "",
+            "org.opencontainers.image.revision": "7f9135a99cd27a6c63a2a60db5daeee9f5622be4",
+            "org.opencontainers.image.source": "https://github.com/C360Studio/seminstruct",
+            "org.opencontainers.image.title": "seminstruct",
+            "org.opencontainers.image.url": "https://github.com/C360Studio/seminstruct",
+            "org.opencontainers.image.version": "qwen3-0.6b"
+          },
+          "ArgsEscaped": true,
+          "Healthcheck": {
+            "Test": [
+              "CMD-SHELL",
+              "curl -f http://localhost:8083/health || exit 1"
+            ],
+            "Interval": 30000000000,
+            "Timeout": 10000000000,
+            "StartPeriod": 30000000000,
+            "Retries": 3
+          }
+        }
+      }
+    ],
+    "compose_rendered": {
+      "name": "semselect-synthesis-4093d3c",
+      "networks": {
+        "isolated": {
+          "name": "semselect-synthesis-4093d3c_isolated",
+          "ipam": {},
+          "internal": true
+        }
+      },
+      "services": {
+        "nats": {
+          "cpus": 1,
+          "command": [
+            "-js",
+            "-sd",
+            "/data",
+            "-m",
+            "8222"
+          ],
+          "entrypoint": null,
+          "image": "nats:2.14.4-alpine@sha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66",
+          "labels": {
+            "io.semselect.experiment": "synthesis-4093d3c"
+          },
+          "mem_limit": "1073741824",
+          "networks": {
+            "isolated": null
+          },
+          "ports": [
+            {
+              "mode": "ingress",
+              "host_ip": "127.0.0.1",
+              "target": 4222,
+              "published": "44222",
+              "protocol": "tcp"
+            },
+            {
+              "mode": "ingress",
+              "host_ip": "127.0.0.1",
+              "target": 8222,
+              "published": "48222",
+              "protocol": "tcp"
+            }
+          ],
+          "pull_policy": "never",
+          "restart": "no",
+          "volumes": [
+            {
+              "type": "bind",
+              "source": "${SEMSELECT_ROOT}/.synthesis/nats",
+              "target": "/data"
+            }
+          ]
+        },
+        "semembed": {
+          "cpus": 2,
+          "command": null,
+          "entrypoint": null,
+          "environment": {
+            "SEMEMBED_MODEL": "Snowflake/snowflake-arctic-embed-s",
+            "SEMEMBED_PORT": "8081"
+          },
+          "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+          "labels": {
+            "io.semselect.experiment": "synthesis-4093d3c"
+          },
+          "mem_limit": "2147483648",
+          "networks": {
+            "isolated": null
+          },
+          "pull_policy": "never",
+          "restart": "no"
+        },
+        "seminstruct": {
+          "cpus": 2,
+          "command": null,
+          "entrypoint": null,
+          "environment": {
+            "MODEL_ALIAS": "seminstruct",
+            "MODEL_CONTEXT": "16384",
+            "MODEL_PARALLEL": "4",
+            "MODEL_REASONING": "off",
+            "MODEL_THREADS": "2"
+          },
+          "image": "ghcr.io/c360studio/seminstruct:qwen3-0.6b@sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+          "labels": {
+            "io.semselect.experiment": "synthesis-4093d3c"
+          },
+          "mem_limit": "2147483648",
+          "networks": {
+            "isolated": null
+          },
+          "ports": [
+            {
+              "mode": "ingress",
+              "host_ip": "127.0.0.1",
+              "target": 8083,
+              "published": "48083",
+              "protocol": "tcp"
+            }
+          ],
+          "pull_policy": "never",
+          "restart": "no"
+        },
+        "semsource": {
+          "cpus": 4,
+          "command": [
+            "run",
+            "--config",
+            "/config/semsource.json",
+            "--nats-url",
+            "nats://nats:4222"
+          ],
+          "entrypoint": [
+            "/out/semsource"
+          ],
+          "image": "golang:1.26.6-bookworm@sha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36",
+          "labels": {
+            "io.semselect.experiment": "synthesis-4093d3c"
+          },
+          "mem_limit": "4294967296",
+          "networks": {
+            "isolated": null
+          },
+          "ports": [
+            {
+              "mode": "ingress",
+              "host_ip": "127.0.0.1",
+              "target": 8080,
+              "published": "48080",
+              "protocol": "tcp"
+            }
+          ],
+          "pull_policy": "never",
+          "read_only": true,
+          "restart": "no",
+          "tmpfs": [
+            "/tmp:size=512m"
+          ],
+          "volumes": [
+            {
+              "type": "bind",
+              "source": "${SEMSELECT_ROOT}/.synthesis/bin",
+              "target": "/out",
+              "read_only": true
+            },
+            {
+              "type": "bind",
+              "source": "${SEMSELECT_ROOT}/.synthesis/config",
+              "target": "/config",
+              "read_only": true
+            },
+            {
+              "type": "bind",
+              "source": "${SEMSELECT_ROOT}/.synthesis/corpus",
+              "target": "/corpus",
+              "read_only": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

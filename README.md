@@ -7,20 +7,23 @@ semselect is a small, local decision service and evaluation project for the
 c360studio sem* ecosystem. Its deliverables are a working service, a comparison
 matrix with inspectable evidence, and an explanation of when each approach earns
 its place. A result recommending ordinary code or schema-constrained Qwen is a
-useful outcome. A small real-source answerability pilot now favors Kev over Qwen
-on aggregate quality, but both still allow unsupported evidence. Benefit to the
-complete answering pipeline remains unproved.
+useful outcome. The latest experiments show why workload matters: Kev led a small
+controlled source-passage test, but made the same gate decisions as Qwen JSON on
+actual captured community summaries.
 
 Start with the short [when-to-use guide](docs/when-to-use.md). The latest
-[real-source pilot](eval/answerability/heldout/README.md) moves beyond the
-[12 teaching cases](eval/answerability/README.md): on 24 frozen cases, Kev allowed
-5/12 unsupported inputs and preserved 12/12 supported ones; Qwen allowed 7/12
-unsupported inputs and preserved 11/12 supported ones. Code resolved two cases
-before either model was called. Kev merits further testing, with remaining
-failures documented. Each experiment shows worked examples, one small table and
-a recommendation. The
-[results history](docs/results.md) and [algorithm audit](docs/code-baselines-and-rag.md)
-provide the supporting evidence.
+[answer-synthesis experiment](eval/synthesis/README.md) preserves the existing
+generator and its missing-information instructions. Both gates reduced unsupported
+assertions: with the 4B generator, the primary run went from three to zero while
+preserving one useful partial answer. But none of the 12 usable captures fully
+answered its question, so the study cannot establish how often gates block good
+answers or beat always deferring. Kev showed no advantage over Qwen in this run.
+
+The earlier [24-case source pilot](eval/answerability/heldout/README.md) includes
+supported and deliberately incomplete passages. Each experiment has worked examples,
+one small table and a verdict; the [results history](docs/results.md) links the
+conditions, failures and raw proof. Better source evidence and a balanced downstream
+set come before a production gate recommendation.
 
 Callers supply context and permissible answers; semselect returns typed model
 readouts. Callers own taxonomies, routing, authorization, acceptance thresholds,

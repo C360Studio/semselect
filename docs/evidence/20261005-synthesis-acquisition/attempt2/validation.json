@@ -1,0 +1,51 @@
+{
+  "verified_utc": "2026-10-05T18:36:34.048664+00:00",
+  "planned": 13,
+  "request_attempts": 13,
+  "records": 13,
+  "captured_responses": 12,
+  "server_error_responses": 1,
+  "empty_community_successes": 0,
+  "mapping": "Input summaries equal raw community_summaries, and total_entities equals raw count; all fields/order/values retained.",
+  "input_sha256": "9939d6776c1df7ce071145cf43d9ada3f422fef092f0b74d31b3be859d36e1b3",
+  "query_plan_sha256": "3976404bb63bf61b9403c78d4f1b31f40703c5726901774db0ab366cd474f37d",
+  "status_counts": {
+    "captured": 12,
+    "invalid_response": 1
+  },
+  "server_error": {
+    "id": "S06",
+    "message": "GraphQuery.handleStrategyTemporal: temporal query failed: nats: no responders available for request",
+    "formal_rule": "Keep in all-13 denominator as retrieval/classification failure; do not score placeholder empty driver input as legitimate empty evidence."
+  },
+  "cleanup": {
+    "nats": {
+      "Status": "exited",
+      "Running": false,
+      "ExitCode": 0,
+      "OOMKilled": false
+    },
+    "semembed": {
+      "Status": "exited",
+      "Running": false,
+      "ExitCode": 137,
+      "OOMKilled": false
+    },
+    "seminstruct": {
+      "Status": "running",
+      "Running": true,
+      "ExitCode": 0,
+      "OOMKilled": false
+    },
+    "semsource": {
+      "Status": "exited",
+      "Running": false,
+      "ExitCode": 0,
+      "OOMKilled": false
+    }
+  },
+  "generator_endpoint": "http://127.0.0.1:48083/v1",
+  "generator_model_alias": "seminstruct",
+  "generator_gguf_sha256": "ac2d97712095a558e31573f62f466a3f9d93990898b0ec79d7c974c1780d524a",
+  "answers": "Preserved acquisition outputs; no answer-based selection and no formal metric use."
+}

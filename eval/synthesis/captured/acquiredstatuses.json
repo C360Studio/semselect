@@ -1,0 +1,80 @@
+[
+  {
+    "id": "S01",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S02",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S03",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S04",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S05",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S06",
+    "status": "error",
+    "error": "Response must be valid JSON with a count field; full body preserved.",
+    "original_status": "invalid_response"
+  },
+  {
+    "id": "S07",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S08",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S09",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S10",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S11",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S12",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  },
+  {
+    "id": "S13",
+    "status": "ok",
+    "error": null,
+    "original_status": "captured"
+  }
+]

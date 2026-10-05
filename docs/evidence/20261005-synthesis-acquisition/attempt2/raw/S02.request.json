@@ -1,0 +1,1 @@
+{"query":"Which retry preset is recommended for critical resources versus normal operations, and should an already-resilient operation receive an extra retry wrapper?","summarize_threshold":1}

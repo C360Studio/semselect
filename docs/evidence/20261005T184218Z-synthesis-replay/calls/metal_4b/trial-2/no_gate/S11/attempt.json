@@ -1,0 +1,230 @@
+{
+  "command": [
+    "/private/tmp/semselect-synthesis-driver",
+    "--input",
+    "results/synthesis/20261005T1842Z/calls/metal_4b/trial-2/no_gate/S11/input.jsonl",
+    "--output",
+    "results/synthesis/20261005T1842Z/calls/metal_4b/trial-2/no_gate/S11/output.jsonl",
+    "--base-url",
+    "http://127.0.0.1:18089/v1",
+    "--model",
+    "qwen3.5-4b"
+  ],
+  "status": "ok",
+  "driver_duration_ms": 4669.634833,
+  "exit_code": 0,
+  "record": {
+    "id": "S11",
+    "mode": "inference",
+    "input": {
+      "id": "S11",
+      "query": "When a new version is indexed, what happens to the old version, and how do historical versions remain available without dominating ordinary current-version queries?",
+      "summaries": [
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.",
+          "keywords": [
+            "cache",
+            "adr",
+            "branch",
+            "lifecycle",
+            "buffer",
+            "registration",
+            "0007",
+            "repo",
+            "sidecar",
+            "retention"
+          ],
+          "level": 0,
+          "relevance": 0.8913043478260869,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0005",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 3. \"Current\" is a per-source ranking marker — not storage, not global"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0006",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 4. Retention is bounded by ingestion depth, never by eviction"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0003",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0010",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Consequences § Costs / risks"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0002",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Context § Grounded facts (verified in `semstreams@v1.0.0-beta.129/130` + semsource)"
+            }
+          ]
+        },
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.",
+          "keywords": [
+            "cache",
+            "adr",
+            "branch",
+            "lifecycle",
+            "buffer",
+            "registration",
+            "0007",
+            "sidecar",
+            "repo",
+            "retention"
+          ],
+          "level": 1,
+          "relevance": 0.8913043478260869,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0005",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 3. \"Current\" is a per-source ranking marker — not storage, not global"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0006",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 4. Retention is bounded by ingestion depth, never by eviction"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0003",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0010",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Consequences § Costs / risks"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0002",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Context § Grounded facts (verified in `semstreams@v1.0.0-beta.129/130` + semsource)"
+            }
+          ]
+        },
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.",
+          "keywords": [
+            "cache",
+            "adr",
+            "lifecycle",
+            "branch",
+            "buffer",
+            "registration",
+            "0007",
+            "repo",
+            "sidecar",
+            "source"
+          ],
+          "level": 2,
+          "relevance": 0.8913043478260869,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0005",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 3. \"Current\" is a per-source ranking marker — not storage, not global"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0006",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 4. Retention is bounded by ingestion depth, never by eviction"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0003",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0010",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Consequences § Costs / risks"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semsource-docs-adr-0008-versioned-source-retention-57ce97d9-0002",
+              "type": "chunk",
+              "label": "ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Context § Grounded facts (verified in `semstreams@v1.0.0-beta.129/130` + semsource)"
+            }
+          ]
+        }
+      ],
+      "total_entities": 82
+    },
+    "calls": [
+      {
+        "llm_request": {
+          "SystemPrompt": "You are a knowledge graph query assistant. Given a user query and summaries of related knowledge clusters, synthesize a concise answer that directly addresses the query.\n\nEach cluster summary describes a group of related entities in the knowledge graph. Use the cluster summaries, representative entities, and keywords to construct your answer. Reference specific entities by name when relevant.\n\nBe direct and factual. If the clusters don't contain enough information to fully answer the query, say what is known and what is missing. Do not speculate beyond the provided data.",
+          "UserPrompt": "Query: When a new version is indexed, what happens to the old version, and how do historical versions remain available without dominating ordinary current-version queries?\n\nThe knowledge graph contains 82 matching entities across 3 clusters.\n\nCluster 1 (92 entities, 89% match):\nThis community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.\nRepresentatives: ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 3. \"Current\" is a per-source ranking marker — not storage, not global [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 4. Retention is bounded by ingestion depth, never by eviction [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Consequences § Costs / risks [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Context § Grounded facts (verified in `semstreams@v1.0.0-beta.129/130` + semsource) [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nCluster 2 (92 entities, 89% match):\nThis community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.\nRepresentatives: ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 3. \"Current\" is a per-source ranking marker — not storage, not global [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 4. Retention is bounded by ingestion depth, never by eviction [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Consequences § Costs / risks [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Context § Grounded facts (verified in `semstreams@v1.0.0-beta.129/130` + semsource) [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nCluster 3 (92 entities, 89% match):\nThis community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.\nRepresentatives: ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 3. \"Current\" is a per-source ranking marker — not storage, not global [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 4. Retention is bounded by ingestion depth, never by eviction [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Consequences § Costs / risks [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Context § Grounded facts (verified in `semstreams@v1.0.0-beta.129/130` + semsource) [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nSynthesize a concise answer to the query based on these clusters.",
+          "MaxTokens": 500,
+          "Temperature": 0.3
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a knowledge graph query assistant. Given a user query and summaries of related knowledge clusters, synthesize a concise answer that directly addresses the query.\n\nEach cluster summary describes a group of related entities in the knowledge graph. Use the cluster summaries, representative entities, and keywords to construct your answer. Reference specific entities by name when relevant.\n\nBe direct and factual. If the clusters don't contain enough information to fully answer the query, say what is known and what is missing. Do not speculate beyond the provided data."
+          },
+          {
+            "role": "user",
+            "content": "Query: When a new version is indexed, what happens to the old version, and how do historical versions remain available without dominating ordinary current-version queries?\n\nThe knowledge graph contains 82 matching entities across 3 clusters.\n\nCluster 1 (92 entities, 89% match):\nThis community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.\nRepresentatives: ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 3. \"Current\" is a per-source ranking marker — not storage, not global [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 4. Retention is bounded by ingestion depth, never by eviction [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Consequences § Costs / risks [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Context § Grounded facts (verified in `semstreams@v1.0.0-beta.129/130` + semsource) [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nCluster 2 (92 entities, 89% match):\nThis community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.\nRepresentatives: ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 3. \"Current\" is a per-source ranking marker — not storage, not global [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 4. Retention is bounded by ingestion depth, never by eviction [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Consequences § Costs / risks [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Context § Grounded facts (verified in `semstreams@v1.0.0-beta.129/130` + semsource) [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nCluster 3 (92 entities, 89% match):\nThis community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.\nRepresentatives: ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 3. \"Current\" is a per-source ranking marker — not storage, not global [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision § 4. Retention is bounded by ingestion depth, never by eviction [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Decision [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Consequences § Costs / risks [chunk], ADR-0008: Versioned-Source Retention & Supersession — A Temporal Knowledge Graph § Context § Grounded facts (verified in `semstreams@v1.0.0-beta.129/130` + semsource) [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nSynthesize a concise answer to the query based on these clusters."
+          }
+        ],
+        "deadline_remaining_ms": 14999.994416,
+        "llm_response": {
+          "Content": "Based on the provided clusters, here is the answer regarding version indexing and retention:\n\nWhen a new version is indexed, the old version is not removed via standard eviction mechanisms. Instead, the system employs a retention strategy where:\n*   **Retention is bounded by ingestion depth**, not by eviction.\n*   The **\"Current\" version** is treated as a per-source ranking marker rather than a specific storage target or a globally unique version.\n*   Historical versions remain available because the platform (specifically `semselectsynth.semsource`) retains data based on how deeply it has been ingested, ensuring that older versions are preserved until they exceed the defined ingestion depth threshold.\n\nThis approach prevents historical versions from dominating current-version queries by distinguishing between the active \"current\" ranking and the stored history, which is managed through the lifecycle of the data rather than immediate deletion.",
+          "PromptTokens": 1176,
+          "CompletionTokens": 178,
+          "TotalTokens": 1354,
+          "Model": "qwen3.5-4b",
+          "FinishReason": "stop"
+        },
+        "duration_ms": 4669.615792,
+        "wire_trace": [
+          {
+            "name": "get_connection",
+            "elapsed_ms": 0.12575,
+            "destination": "127.0.0.1:18089"
+          },
+          {
+            "name": "got_connection",
+            "elapsed_ms": 0.528708
+          },
+          {
+            "name": "wrote_headers",
+            "elapsed_ms": 0.560458
+          },
+          {
+            "name": "wrote_request",
+            "elapsed_ms": 0.629
+          },
+          {
+            "name": "first_response_byte",
+            "elapsed_ms": 4669.349417
+          }
+        ],
+        "requests_written": 1
+      }
+    ],
+    "synthesis_outcome": {
+      "Answer": "Based on the provided clusters, here is the answer regarding version indexing and retention:\n\nWhen a new version is indexed, the old version is not removed via standard eviction mechanisms. Instead, the system employs a retention strategy where:\n*   **Retention is bounded by ingestion depth**, not by eviction.\n*   The **\"Current\" version** is treated as a per-source ranking marker rather than a specific storage target or a globally unique version.\n*   Historical versions remain available because the platform (specifically `semselectsynth.semsource`) retains data based on how deeply it has been ingested, ensuring that older versions are preserved until they exceed the defined ingestion depth threshold.\n\nThis approach prevents historical versions from dominating current-version queries by distinguishing between the active \"current\" ranking and the stored history, which is managed through the lifecycle of the data rather than immediate deletion.",
+      "Model": "qwen3.5-4b",
+      "Degraded": false,
+      "Reason": ""
+    },
+    "duration_ms": 4669.634833,
+    "started_at": "2026-10-05T18:47:48.916488Z",
+    "semstreams_version": "v1.0.0-beta.160"
+  },
+  "subprocess_wall_ms": 4734.217582968995,
+  "driver_startup_and_io_ms": 64.5827499689949
+}

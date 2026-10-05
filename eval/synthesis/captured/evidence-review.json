@@ -1,0 +1,541 @@
+{
+  "schema_version": 1,
+  "status": "pre-inference evidence review; awaiting root review and freeze",
+  "review_scope": "Read only the actual capture-only prompts, acquisition-status file and shared sufficiency instructions. No acquisition raw responses/answers, formal gate outputs or formal generated answers were read. Source-pilot H labels were not transferred.",
+  "inputs": {
+    "prompts_jsonl_sha256": "f6bc97218bf3a7e98e3e091162305e52086c75a06961f749b61ffbf569706b43",
+    "acquiredstatuses_json_sha256": "7201e4f8b5152b70c5a5d4fb852d8ee1fea3e7df4dd93435a9f07f7c296e5d29",
+    "shared_instructions_utf8_sha256": "e5b03e21be465e49f5bcb5fb096fb1483e1100367910329ea1a7d5561427f41a"
+  },
+  "rubric": {
+    "complete_sufficient": "All requested subquestions can be answered from explicitly stated visible facts or their direct combination, without outside knowledge.",
+    "partial_evidence": "A nontrivial part of a requested behavior is explicitly stated, but at least one required detail remains missing. A clear assertive heading can support only its literal limited proposition, never unshown implementation detail.",
+    "no_answer_evidence": "No requested subanswer is established. Broad topical prose, match counts, keywords and descriptive section labels may identify where an answer could be found but do not supply it. Context-only assertions can be acknowledged without being credited as requested-subanswer utility.",
+    "acquisition_failure": "Operational capture failure prevents semantic evaluation; keep the row and error, but do not credit a fallback defer as correct classification.",
+    "strict_gate": "allow only for complete_sufficient; defer for the two insufficient-evidence classes. Acquisition failure also defers operationally but is excluded from semantic accuracy.",
+    "partial_answer_utility": "A useful partial answer may state only the listed supported_subanswers, disclose their heading-only limits, and explicitly identify missing requested details. Naming relevant sections alone is not a supported subanswer. A full answer that adds absent details is unsupported even if it happens to match an unseen source.",
+    "query_is_not_evidence": "Question wording and its premises do not prove the requested facts. Retrieval entity counts/relevance percentages do not establish answerability."
+  },
+  "counts": {
+    "complete_sufficient": 0,
+    "partial_evidence": 2,
+    "no_answer_evidence": 10,
+    "acquisition_failure": 1
+  },
+  "limits": [
+    "There are zero complete_sufficient cases in this capture. False-deferral rate and useful complete answers lost to a strict gate cannot be estimated; their denominator is zero.",
+    "All 12 semantically assessable cases require strict defer. This capture can compare inappropriate full answering, bounded partial utility and existing-generator refusal behavior, but cannot establish a balanced answerability classifier or a benefit over always deferring.",
+    "The three displayed cluster overviews are broad and substantially repeated; relevant representatives mostly expose document/section labels rather than their bodies. This suggests a limitation in what reaches synthesis, not evidence that the underlying source corpus lacks answers.",
+    "Two cases retain limited partial utility from literal assertive headings. Those propositions do not license unseen document content or business actions.",
+    "Model/source truth, authoritative policy correctness, production prevalence and generalization are not assessed here."
+  ],
+  "cases": [
+    {
+      "id": "S01",
+      "query": "What maximum attempt count does retry.DefaultConfig return?",
+      "evidence_class": "no_answer_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S01",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "4aa279478abaa03c0286c1c3d97d4bec3d012c352144eb0a1c01486d2be28ea2",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "What maximum attempt count does retry.DefaultConfig return?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [],
+      "missing_details": [
+        "The value returned for DefaultConfig’s maximum attempt count."
+      ],
+      "reason": "Cluster prose describes generic data-management topics. Retry section names do not supply the DefaultConfig value; counts of graph entities are not attempt counts.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S02",
+      "query": "Which retry preset is recommended for critical resources versus normal operations, and should an already-resilient operation receive an extra retry wrapper?",
+      "evidence_class": "no_answer_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S02",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "7b1a6f0e64ed5766a7698e2b285b5a55c7481c746a2402aeeb5e3fb9ab3c42d2",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "Which retry preset is recommended for critical resources?",
+          "support": "unsupported"
+        },
+        {
+          "number": 2,
+          "question": "Which retry preset is recommended for normal operations?",
+          "support": "unsupported"
+        },
+        {
+          "number": 3,
+          "question": "Should an already-resilient operation receive an additional retry wrapper?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [],
+      "missing_details": [
+        "The critical-resource preset.",
+        "The normal-operation preset.",
+        "The recommendation on adding retry to an already-resilient operation."
+      ],
+      "reason": "A Best Practices representative names a relevant section but does not state any preset recommendation or wrapping exception.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S03",
+      "query": "What triggers LRU eviction, and does Hybrid combine that behavior with expiration?",
+      "evidence_class": "no_answer_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S03",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "772329bdb378f3cfab7d7ef2ef68b50575bbf775c1e3b682ff16b770aebef84d",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "What triggers LRU eviction?",
+          "support": "unsupported"
+        },
+        {
+          "number": 2,
+          "question": "Does Hybrid combine that behavior with expiration?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [],
+      "missing_details": [
+        "The condition that triggers LRU eviction.",
+        "Whether and how Hybrid combines that behavior with expiration."
+      ],
+      "reason": "Cache-type and eviction-flow representative labels identify subjects, but neither LRU eviction conditions nor Hybrid behavior is stated.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S04",
+      "query": "Are cache statistics collected without enabling Prometheus export, and which option enables that export?",
+      "evidence_class": "no_answer_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S04",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "146312496c36a5b9810813bf777d204ff2e6a57d0aee0968f9944e8bd0ff8830",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "Are cache statistics collected without enabling Prometheus export?",
+          "support": "unsupported"
+        },
+        {
+          "number": 2,
+          "question": "Which option enables Prometheus export?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [],
+      "missing_details": [
+        "Whether statistics remain collected with Prometheus export disabled.",
+        "The exact enabling option."
+      ],
+      "reason": "Prometheus-related headings indicate relevant documentation exists, but do not establish collection without export or name an enabling option.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S05",
+      "query": "Under the Block overflow policy, what makes a write wait, and which documented calls let a caller bound that wait with a timeout or context?",
+      "evidence_class": "no_answer_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S05",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "ec7b0e6969ae9861223a0f268b2d1b64139fdfddb1a76d864a8f6ae346ddf4bf",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "What condition makes a write wait under the Block overflow policy?",
+          "support": "unsupported"
+        },
+        {
+          "number": 2,
+          "question": "Which documented call bounds the wait with a timeout?",
+          "support": "unsupported"
+        },
+        {
+          "number": 3,
+          "question": "Which documented call bounds the wait with a context?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [],
+      "missing_details": [
+        "The Block wait condition.",
+        "The timeout-bounded write method.",
+        "The context-bounded write method."
+      ],
+      "reason": "Overflow-related representative labels and broad buffer summaries do not state the Block wait condition or timeout/context method names.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S06",
+      "query": "Which policy is described for prioritizing the newest telemetry, and what does DropNewest do when the buffer is full?",
+      "evidence_class": "acquisition_failure",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": false,
+      "gate_label_meaning": "operational fallback only; do not count as a correct semantic prediction",
+      "acquisition_status": {
+        "id": "S06",
+        "status": "error",
+        "error": "Response must be valid JSON with a count field; full body preserved.",
+        "original_status": "invalid_response"
+      },
+      "model_visible_user_prompt_sha256": null,
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "Which policy prioritizes the newest telemetry?",
+          "support": "not_assessable"
+        },
+        {
+          "number": 2,
+          "question": "What does DropNewest do when the buffer is full?",
+          "support": "not_assessable"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [],
+      "missing_details": [
+        "Usable acquired evidence and an actual model-visible prompt; substantive requested details cannot be assessed from this failed capture."
+      ],
+      "reason": "Acquisition status is error/invalid_response and there is no captured synthesis call. This is an operational failure, not observed semantic insufficiency or a correct classifier deferral.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S07",
+      "query": "Why can an in-place reindex leave old whole-file bodies on parent documents, and what readiness signal should be awaited after rebuilding?",
+      "evidence_class": "no_answer_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S07",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "af2aa87a537e6436cf58cb19ddc2ebc1c30a19db29a535fd112dd5a8c52bc904",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "Why can an in-place reindex leave old whole-file bodies on parent documents?",
+          "support": "unsupported"
+        },
+        {
+          "number": 2,
+          "question": "Which readiness signal should be awaited after rebuilding?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [],
+      "missing_details": [
+        "The cause of old parent-document bodies surviving an in-place reindex.",
+        "The readiness signal to await after rebuilding."
+      ],
+      "reason": "Migration and operational-requirement headings do not contain the stale-parent mechanism or the readiness signal. General cluster summaries do not add either.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S08",
+      "query": "Which property should replace source.doc.summary for title text, and how does doc-source now behave if the verbatim body store cannot be created?",
+      "evidence_class": "no_answer_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S08",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "53f43ff6af262f4992c41e85603c641eed66b82a57ead7bc3c782daea85ce070",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "Which property replaces source.doc.summary for title text?",
+          "support": "unsupported"
+        },
+        {
+          "number": 2,
+          "question": "How does doc-source behave if the verbatim body store cannot be created?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [],
+      "missing_details": [
+        "The replacement title property.",
+        "The behavior when the verbatim body store cannot be created."
+      ],
+      "reason": "Consumer-change and operational-requirement headings omit both the replacement predicate and body-store failure behavior.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S09",
+      "query": "For an in-flight agent worktree, what indexing cadence does the supplied sidecar design require, and may SemSource delete the caller-owned worktree disk?",
+      "evidence_class": "partial_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S09",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "3f50226ca57eca07e15123f5973f62a6a83fe29f4d6f052fa1fd2758a0518e7f",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "What indexing cadence is required for an in-flight agent worktree?",
+          "support": "partially_supported"
+        },
+        {
+          "number": 2,
+          "question": "May SemSource delete caller-owned worktree disk?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [
+        {
+          "subquestion": 1,
+          "claim": "The visible cadence heading advocates coherent checkpoints instead of churn; this is only a broad cadence principle.",
+          "quote": "4. Cadence: coherent checkpoints, not churn",
+          "limit": "Do not infer an in-flight-specific watch/snapshot mode, phase boundary, timing, or filesystem deletion permission from this heading.",
+          "location": "Representatives line; same assertive heading visible in all three displayed clusters."
+        }
+      ],
+      "context_only_assertions": [],
+      "missing_details": [
+        "The exact cadence/mode applicable specifically to an in-flight agent worktree.",
+        "The rule governing deletion of caller-owned worktree disk."
+      ],
+      "reason": "The assertive cadence heading gives a limited principle: coherent checkpoints rather than churn. It does not identify the rule specifically applicable to an in-flight worktree, and supplies no disk-deletion ownership rule.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S10",
+      "query": "How should an external consumer poll source readiness, and which registration-handle fields distinguish snapshot/watch mode and identify what content was actually indexed?",
+      "evidence_class": "no_answer_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S10",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "92400e4e897e670e8110bf32595d9a3bb53618d5a20e00d4b4d00a3d6a857c46",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "How should an external consumer poll source readiness?",
+          "support": "unsupported"
+        },
+        {
+          "number": 2,
+          "question": "Which registration-handle field distinguishes snapshot/watch mode?",
+          "support": "unsupported"
+        },
+        {
+          "number": 3,
+          "question": "Which registration-handle fields identify the content actually indexed?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [
+        {
+          "quote": "5. Registration handle — stable & auditable _(SemSpec-required, v1)_",
+          "limit": "Describes a handle, not its concrete fields."
+        },
+        {
+          "quote": "6. Read/query stays external too — pairs with ADR-0004 _(SemSpec-required)_",
+          "limit": "Describes the read/query boundary, not a readiness polling endpoint or protocol."
+        }
+      ],
+      "missing_details": [
+        "The external readiness polling method/endpoint.",
+        "The handle field for snapshot/watch mode.",
+        "The field or alternatives identifying indexed content."
+      ],
+      "reason": "The visible labels describe an auditable handle and an external read/query path, but do not state a polling protocol/endpoint or any requested handle field.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S11",
+      "query": "When a new version is indexed, what happens to the old version, and how do historical versions remain available without dominating ordinary current-version queries?",
+      "evidence_class": "partial_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S11",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "6c13e66a854397840f9c44edb4666df4606c21ba9a49c046234caedb0cd055fe",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "What happens to the old version when a new version is indexed?",
+          "support": "unsupported"
+        },
+        {
+          "number": 2,
+          "question": "How can historical versions remain available without dominating ordinary current-version queries?",
+          "support": "partially_supported"
+        }
+      ],
+      "supported_subanswers": [
+        {
+          "subquestion": 2,
+          "claim": "The visible heading characterizes current as a per-source ranking marker, not storage and not global.",
+          "quote": "3. \"Current\" is a per-source ranking marker — not storage, not global",
+          "limit": "Do not infer old-version retention, historical queryability, ranking direction/weight, or supersession mechanics from this heading alone.",
+          "location": "Representatives line; same assertive heading visible in all three displayed clusters."
+        }
+      ],
+      "context_only_assertions": [
+        {
+          "quote": "4. Retention is bounded by ingestion depth, never by eviction",
+          "limit": "An answer may state this literal retention principle. It does not establish what happens to a particular old version when a new version is indexed, that historical versions remain queryable, or the ranking direction/weight for current and historical results."
+        }
+      ],
+      "missing_details": [
+        "What happens to the old version on indexing a new one.",
+        "Whether historical versions remain queryable.",
+        "How historical results are ranked relative to current results."
+      ],
+      "reason": "Assertive headings characterize current as a per-source ranking marker, not storage or global, and say retention is bounded by ingestion depth rather than eviction. These limited propositions are permissible, but do not establish a particular old version’s fate on reindexing or the treatment/accessibility of historical versions.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S12",
+      "query": "For which two kinds of source mistake does the supplied ADR permit exceptional deletion, and what two cleanup obligations must be satisfied?",
+      "evidence_class": "no_answer_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S12",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "424348f76106ef6110a997507066212f8b310cc082d719d2feef4b28469909db",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "Which two kinds of source mistake permit exceptional deletion?",
+          "support": "unsupported"
+        },
+        {
+          "number": 2,
+          "question": "What two cleanup obligations must be satisfied?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [
+        {
+          "quote": "5. Deletion is a rare, graph-aware, framework-gated exception (off the critical path)",
+          "limit": "This broad exception framing does not name either requested mistake class or either cleanup obligation."
+        }
+      ],
+      "missing_details": [
+        "Both allowed categories of source mistake.",
+        "Both specific cleanup obligations."
+      ],
+      "reason": "An assertive heading describes deletion as a rare, graph-aware, framework-gated exception. That is relevant context, but neither the two permitted mistake classes nor the two cleanup obligations is supplied.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    },
+    {
+      "id": "S13",
+      "query": "What two cleanup obligations must be satisfied for exceptional deletion, and what exact waiting period must elapse before a mis-registered scope can be deleted?",
+      "evidence_class": "no_answer_evidence",
+      "expected_strict_gate": "defer",
+      "semantic_gate_grade_eligible": true,
+      "gate_label_meaning": "all requested information is not supplied",
+      "acquisition_status": {
+        "id": "S13",
+        "status": "ok",
+        "error": null,
+        "original_status": "captured"
+      },
+      "model_visible_user_prompt_sha256": "cb34fcdb0c7791637aab0c1aafb53b79f711344e0434f9457fec1066e24eed89",
+      "requested_subquestions": [
+        {
+          "number": 1,
+          "question": "What two cleanup obligations must be satisfied for exceptional deletion?",
+          "support": "unsupported"
+        },
+        {
+          "number": 2,
+          "question": "What exact waiting period must elapse before deleting a mis-registered scope?",
+          "support": "unsupported"
+        }
+      ],
+      "supported_subanswers": [],
+      "context_only_assertions": [
+        {
+          "quote": "5. Deletion is a rare, graph-aware, framework-gated exception (off the critical path)",
+          "limit": "This broad exception framing gives no cleanup details or waiting-period duration."
+        }
+      ],
+      "missing_details": [
+        "Both specific cleanup obligations.",
+        "An explicit exact waiting-period duration, or an explicit rule that none is required."
+      ],
+      "reason": "The same exception heading gives broad context, but neither specific cleanup obligation nor any waiting-period duration is present. Absence of a duration does not establish zero wait.",
+      "authority_truth": "Not assessed beyond the supplied model-visible text; no source document bodies or current implementation were consulted for these labels."
+    }
+  ]
+}

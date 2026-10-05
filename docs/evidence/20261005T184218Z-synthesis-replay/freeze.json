@@ -1,0 +1,82 @@
+{
+  "frozen_at": "2026-10-05T18:41:51.307751+00:00",
+  "hashes": {
+    "input": "9939d6776c1df7ce071145cf43d9ada3f422fef092f0b74d31b3be859d36e1b3",
+    "prompts": "f6bc97218bf3a7e98e3e091162305e52086c75a06961f749b61ffbf569706b43",
+    "acquiredstatuses": "7201e4f8b5152b70c5a5d4fb852d8ee1fea3e7df4dd93435a9f07f7c296e5d29",
+    "driver": "bd12a315d102eadabf4259031b379bddfb58b6ec21c5eba3ff2a0874fcb3f420",
+    "instructions_dataset": "7660ef6a314af9f3c09748189b104060c0f728736462924aff00cf6ceca5734e",
+    "evidence_review": "0dfc5858b2bbc895de895b1b6395a106c55c7c1bd86ac8a95e5d8cd1e033c4ff",
+    "query_plan": "3976404bb63bf61b9403c78d4f1b31f40703c5726901774db0ab366cd474f37d"
+  },
+  "ids": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11",
+    "S12",
+    "S13"
+  ],
+  "trials": 2,
+  "arm_order": [
+    [
+      "no_gate",
+      "qwen_json",
+      "kev"
+    ],
+    [
+      "kev",
+      "qwen_json",
+      "no_gate"
+    ]
+  ],
+  "context_preflight_policy": "exact-runtime-tokenization-v1",
+  "profile_errors": {},
+  "review": "Independent prompt-only evidence review by answerability_runner; read-only independent review by answerability_review; root approved. S11 literal retention heading allowance added before this freeze. All13 Python tests pass; actual8 Go driver race tests pass. No formal model outputs yet.",
+  "limits": "All12 acquired inputs lack a complete supported answer;2 have limited partial facts;S06 is an upstream error. Cannot estimate false-deferral rate, complete-answer preservation or superiority to always defer. Acquisition answers never selected cases or provided gold. Sourcepilot labels not transferred.",
+  "protocol": {
+    "capture": "Pin an isolated current SemSource build and public docs corpus. Wait for readiness; preserve full retrieval/summary results and freeze visible synthesis inputs before formal gate/generator comparison. Document all setup model calls separately.",
+    "baseline": "Preserve actual beta.160 AnswerSynthesizer prompt, summary selection/formatting, temperature0.3,max500tokens,15second deadline and default actual-client retries. Retain hard failure/template fallback disclosure.",
+    "strata": "Cached Tier2 default Qwen3-0.6B CPU generator; separately cached Qwen3.5-4B Metal generator substitution. Within each, compare no gate, Qwen4B JSON gate and Kev4B native gate. Common evidence and checks remain same.",
+    "gate": "Use unchanged evidence-sufficiency task rule and allow/defer categories on exact generator-visible query/evidence. No answer hints or gold. Keep profile/context failures in denominator; never silently truncate only one arm.",
+    "outcomes": "Independent agent grading with supporting or unsupported spans, without model/arm identities in grading input: complete supported answer, supported partial answer explicitly identifying missing information, pure refusal, unsupported assertion, or invalid/degraded operation. Distinguish evidence support from truth in original docs.",
+    "metrics": "Unsupported assertions, useful supported complete/partial answers lost or preserved, refusals, actual extra calls, failures and measured total decision+generation time. Repeats at temperature0.3, not extra independent questions. No post-hoc gate threshold tuning.",
+    "scope": "A replay of actual captured summaries tests the synthesis seam. It does not rerun retrieval per arm or establish live-traffic benefit. Fullstack capture provenance stays explicit.",
+    "repeats": {
+      "primary": "trial1;all13 planned questions remain in accounting",
+      "trials": 2,
+      "trial1": {
+        "arm_order": [
+          "no_gate",
+          "qwen_json",
+          "kev"
+        ],
+        "case_order": "S01 through S13"
+      },
+      "trial2": {
+        "arm_order": [
+          "kev",
+          "qwen_json",
+          "no_gate"
+        ],
+        "case_order": "S13 through S01"
+      },
+      "candidate_order": [
+        "allow",
+        "defer"
+      ],
+      "interpretation": "Trials share questions and retrieval; correlated descriptive observations, not independent examples. No output-dependent prompt, threshold, case or retry changes."
+    },
+    "eligibility": "All13 acquisition outcomes retained. Retrieval errors, empty evidence and profile/context failures are separate operational categories, never successful semantic refusals. A matched in-profile subset may be reported alongside the full13 denominator. Never truncate one arm to fit."
+  },
+  "timing": "Record actual component decision+synthesis times; startup/process overhead separate. Serialized requests with both native models loaded and sequential generator strata. Existing cache behavior remains, no matched/cold/cache-independent/head-efficiency claim.",
+  "warmup": "One excluded call for each gate and each generator, first eligible visible case; preserve failures, no warmup retry.",
+  "grading": "Freeze input rubric now; grade generated answers against exact visible evidence with opaqueIDs and no model/arm/trial identity. Retain whole answers and unsupported/support spans; one independent grader plus root audit/adjudication. Gate defer is caller policy, no invented refusal text. Operational failures distinct."
+}

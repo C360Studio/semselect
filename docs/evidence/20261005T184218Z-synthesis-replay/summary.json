@@ -1,0 +1,322 @@
+{
+  "scope": "Primary trial1; trial2 is correlated repetition. Every row includes all13 planned IDs; one common upstream failure. Timings exclude acquisition and process startup/I/O; cache effects preclude efficiency claims.",
+  "fully_sufficient_cases": 0,
+  "false_deferral_rate": null,
+  "blind_grade_counts": {
+    "refusal": 18,
+    "unsupported_assertion": 31,
+    "partial_supported": 6
+  },
+  "ambiguous_grade_ids": [
+    "B003",
+    "B004",
+    "B014",
+    "B017",
+    "B018",
+    "B023",
+    "B027",
+    "B050"
+  ],
+  "groups": [
+    {
+      "stratum": "cpu_06b",
+      "trial": 1,
+      "arm": "no_gate",
+      "planned": 13,
+      "outcomes": {
+        "refusal": 1,
+        "unsupported_assertion": 10,
+        "acquisition_error": 1,
+        "degraded": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 1817.1581459894483,
+      "p95_ms": 15004.032249952603,
+      "total_component_ms": 44216.42891690185,
+      "gate_calls": 0,
+      "synthesis_calls": 12,
+      "synthesis_requests_written": 12,
+      "gate_allows": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12",
+        "S13"
+      ]
+    },
+    {
+      "stratum": "cpu_06b",
+      "trial": 1,
+      "arm": "qwen_json",
+      "planned": 13,
+      "outcomes": {
+        "deferred": 11,
+        "acquisition_error": 1,
+        "unsupported_assertion": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 1826.401853992138,
+      "p95_ms": 3675.576875972356,
+      "total_component_ms": 22830.393125357834,
+      "gate_calls": 12,
+      "synthesis_calls": 1,
+      "synthesis_requests_written": 1,
+      "gate_allows": [
+        "S09"
+      ]
+    },
+    {
+      "stratum": "cpu_06b",
+      "trial": 1,
+      "arm": "kev",
+      "planned": 13,
+      "outcomes": {
+        "deferred": 11,
+        "acquisition_error": 1,
+        "unsupported_assertion": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 1974.2912915535271,
+      "p95_ms": 3591.9154998865715,
+      "total_component_ms": 25137.923918317145,
+      "gate_calls": 12,
+      "synthesis_calls": 1,
+      "synthesis_requests_written": 1,
+      "gate_allows": [
+        "S09"
+      ]
+    },
+    {
+      "stratum": "cpu_06b",
+      "trial": 2,
+      "arm": "no_gate",
+      "planned": 13,
+      "outcomes": {
+        "refusal": 1,
+        "unsupported_assertion": 11,
+        "acquisition_error": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 1887.5931460263564,
+      "p95_ms": 3081.3112489010573,
+      "total_component_ms": 22656.33216702951,
+      "gate_calls": 0,
+      "synthesis_calls": 12,
+      "synthesis_requests_written": 12,
+      "gate_allows": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12",
+        "S13"
+      ]
+    },
+    {
+      "stratum": "cpu_06b",
+      "trial": 2,
+      "arm": "qwen_json",
+      "planned": 13,
+      "outcomes": {
+        "deferred": 11,
+        "acquisition_error": 1,
+        "unsupported_assertion": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 319.56887495471165,
+      "p95_ms": 2013.7607089206215,
+      "total_component_ms": 5414.83571002815,
+      "gate_calls": 12,
+      "synthesis_calls": 1,
+      "synthesis_requests_written": 1,
+      "gate_allows": [
+        "S09"
+      ]
+    },
+    {
+      "stratum": "cpu_06b",
+      "trial": 2,
+      "arm": "kev",
+      "planned": 13,
+      "outcomes": {
+        "deferred": 11,
+        "acquisition_error": 1,
+        "unsupported_assertion": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 1970.718624535948,
+      "p95_ms": 3579.564833091572,
+      "total_component_ms": 25106.284665185958,
+      "gate_calls": 12,
+      "synthesis_calls": 1,
+      "synthesis_requests_written": 1,
+      "gate_allows": [
+        "S09"
+      ]
+    },
+    {
+      "stratum": "metal_4b",
+      "trial": 1,
+      "arm": "no_gate",
+      "planned": 13,
+      "outcomes": {
+        "unsupported_assertion": 3,
+        "refusal": 8,
+        "acquisition_error": 1,
+        "partial_supported": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 6818.941333515136,
+      "p95_ms": 9185.15916694539,
+      "total_component_ms": 82852.33370900268,
+      "gate_calls": 0,
+      "synthesis_calls": 12,
+      "synthesis_requests_written": 12,
+      "gate_allows": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12",
+        "S13"
+      ]
+    },
+    {
+      "stratum": "metal_4b",
+      "trial": 1,
+      "arm": "qwen_json",
+      "planned": 13,
+      "outcomes": {
+        "deferred": 11,
+        "acquisition_error": 1,
+        "partial_supported": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 326.34020800469443,
+      "p95_ms": 3167.9661249770925,
+      "total_component_ms": 6819.094126255359,
+      "gate_calls": 12,
+      "synthesis_calls": 1,
+      "synthesis_requests_written": 1,
+      "gate_allows": [
+        "S09"
+      ]
+    },
+    {
+      "stratum": "metal_4b",
+      "trial": 1,
+      "arm": "kev",
+      "planned": 13,
+      "outcomes": {
+        "deferred": 11,
+        "acquisition_error": 1,
+        "partial_supported": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 1970.7075420301408,
+      "p95_ms": 4880.062333056565,
+      "total_component_ms": 26445.600332091424,
+      "gate_calls": 12,
+      "synthesis_calls": 1,
+      "synthesis_requests_written": 1,
+      "gate_allows": [
+        "S09"
+      ]
+    },
+    {
+      "stratum": "metal_4b",
+      "trial": 2,
+      "arm": "no_gate",
+      "planned": 13,
+      "outcomes": {
+        "refusal": 8,
+        "unsupported_assertion": 3,
+        "acquisition_error": 1,
+        "partial_supported": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 5924.891353495361,
+      "p95_ms": 9720.59537504698,
+      "total_component_ms": 73549.70645801346,
+      "gate_calls": 0,
+      "synthesis_calls": 12,
+      "synthesis_requests_written": 12,
+      "gate_allows": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12",
+        "S13"
+      ]
+    },
+    {
+      "stratum": "metal_4b",
+      "trial": 2,
+      "arm": "qwen_json",
+      "planned": 13,
+      "outcomes": {
+        "deferred": 11,
+        "acquisition_error": 1,
+        "partial_supported": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 270.10022901231423,
+      "p95_ms": 2721.8453740077084,
+      "total_component_ms": 5612.340123306959,
+      "gate_calls": 12,
+      "synthesis_calls": 1,
+      "synthesis_requests_written": 1,
+      "gate_allows": [
+        "S09"
+      ]
+    },
+    {
+      "stratum": "metal_4b",
+      "trial": 2,
+      "arm": "kev",
+      "planned": 13,
+      "outcomes": {
+        "deferred": 11,
+        "acquisition_error": 1,
+        "partial_supported": 1
+      },
+      "measured_timing_cases": 12,
+      "median_ms": 1971.0197080275975,
+      "p95_ms": 5365.869790890771,
+      "total_component_ms": 26917.80562570091,
+      "gate_calls": 12,
+      "synthesis_calls": 1,
+      "synthesis_requests_written": 1,
+      "gate_allows": [
+        "S09"
+      ]
+    }
+  ],
+  "replay_sha256": "ee75ccde8d6f2a1e545b7b1a343b560d23450b0e5d4173fe40378a1c073953ed"
+}

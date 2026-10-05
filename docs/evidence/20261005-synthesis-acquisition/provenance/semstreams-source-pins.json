@@ -1,0 +1,38 @@
+{
+  "module": "github.com/c360studio/semstreams",
+  "version": "v1.0.0-beta.160",
+  "origin": {
+    "VCS": "git",
+    "URL": "https://github.com/c360studio/semstreams",
+    "Hash": "8403a2218000e45a31c5132fbfe01af42ed04f14",
+    "Ref": "refs/tags/v1.0.0-beta.160"
+  },
+  "module_h1": "h1:sVkaLPOqs0Jy/iyYvfamkSi9An+Vq0o/5nqMxZVCvtk=",
+  "files": [
+    {
+      "path": "processor/graph-query/answer.go",
+      "sha256": "052adde66aa48d05e86c7141c25c44e86d3e6deec321a0635d83abe6962d2c19"
+    },
+    {
+      "path": "processor/graph-query/graphrag.go",
+      "sha256": "21ff00840aecd3f414af0bed5c1531986de4bf347d6014cb9f41412f7514ba15"
+    },
+    {
+      "path": "processor/graph-query/component.go",
+      "sha256": "ae36416b6e66096b5fbdc368f82ae76c30f59bf06312eb22062c586d74966487"
+    },
+    {
+      "path": "graph/llm/client.go",
+      "sha256": "7cb97eb98947188295029e88861a98d45d8d232fa01c5b8fa03061a45c81a4c4"
+    },
+    {
+      "path": "graph/llm/openai_client.go",
+      "sha256": "b251e87f71bbcc053b136172f275440a8b7d3f5446816e63654bfec7ea95149b"
+    },
+    {
+      "path": "model/httpclient.go",
+      "sha256": "a956ebea443f3fe7863e41a72bcd65d1b34c91c9a105df5128afb77ece4ab843"
+    }
+  ],
+  "note": "Hashes of cached pinned module sources used by the imported implementation. go.mod/go.sum pin the compiled module graph; result provenance carries Go build information. No copied or modified production implementation."
+}

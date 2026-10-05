@@ -1,0 +1,80 @@
+{
+  "semsource_commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+  "checkout_head_at_archive": "4093d3ce421371f4a99d7168e372552899bf6795",
+  "checkout_porcelain": "",
+  "archive_sha256": "2891ae68b72ef76180b0c3fd1b07f9d464b4eb9801bdf4e72fb5dab1a219db4a",
+  "images": {
+    "go": "golang:1.26.6-bookworm@sha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36",
+    "nats": "nats:2.14.4-alpine@sha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66",
+    "semembed": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+    "seminstruct": "ghcr.io/c360studio/seminstruct:qwen3-0.6b@sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9"
+  },
+  "corpus": [
+    {
+      "key": "retry",
+      "repository": "https://github.com/c360studio/semstreams",
+      "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "path": "pkg/retry/README.md",
+      "sha256": "b82a86f041164403b90f8c6528d8000a776d1b0c950cfb025bcc124890fdd677",
+      "artifact": "source/semstreams/pkg/retry/README.md",
+      "bytes": 3681,
+      "container_path": "/corpus/semstreams/pkg/retry/README.md"
+    },
+    {
+      "key": "cache",
+      "repository": "https://github.com/c360studio/semstreams",
+      "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "path": "pkg/cache/README.md",
+      "sha256": "55ad24142fa635f759592542e1192f1f7bf0d8f76fada0597f0475a89bee0868",
+      "artifact": "source/semstreams/pkg/cache/README.md",
+      "bytes": 12406,
+      "container_path": "/corpus/semstreams/pkg/cache/README.md"
+    },
+    {
+      "key": "buffer",
+      "repository": "https://github.com/c360studio/semstreams",
+      "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "path": "pkg/buffer/README.md",
+      "sha256": "9641c7f9abef197906f21897acbb988895f21690e6f8bc887185d1890fb230fe",
+      "artifact": "source/semstreams/pkg/buffer/README.md",
+      "bytes": 14249,
+      "container_path": "/corpus/semstreams/pkg/buffer/README.md"
+    },
+    {
+      "key": "migration",
+      "repository": "https://github.com/c360studio/semsource",
+      "revision": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "path": "docs/migration/doc-passage-chunking.md",
+      "sha256": "d344ca55288512226cf9d3978e5caf81cf98337788d8d59d4a7e1a394931f062",
+      "artifact": "source/semsource/docs/migration/doc-passage-chunking.md",
+      "bytes": 3230,
+      "container_path": "/corpus/semsource/docs/migration/doc-passage-chunking.md"
+    },
+    {
+      "key": "registration",
+      "repository": "https://github.com/c360studio/semsource",
+      "revision": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "path": "docs/adr/0007-sidecar-repo-registration-branch-lifecycle.md",
+      "sha256": "27be93062a6853c3fa24937ec44eaaa6c9d1471a4cfb7e89a2edc55b282c4a08",
+      "artifact": "source/semsource/docs/adr/0007-sidecar-repo-registration-branch-lifecycle.md",
+      "bytes": 15915,
+      "container_path": "/corpus/semsource/docs/adr/0007-sidecar-repo-registration-branch-lifecycle.md"
+    },
+    {
+      "key": "retention",
+      "repository": "https://github.com/c360studio/semsource",
+      "revision": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "path": "docs/adr/0008-versioned-source-retention-supersession.md",
+      "sha256": "5ae83d432d632edb3b91d1d121dcaeeb20dc96364bd4cff556d41284a3007d10",
+      "artifact": "source/semsource/docs/adr/0008-versioned-source-retention-supersession.md",
+      "bytes": 14306,
+      "container_path": "/corpus/semsource/docs/adr/0008-versioned-source-retention-supersession.md"
+    }
+  ],
+  "source_files": {
+    "go.mod": "6d120a680506aff2ee9519e26ea08ab000d893133cb6e9ee2992c8ae4b957a52",
+    "go.sum": "47b9d1c78828310541de62421f1778a867016392e4d6cdb81f631ca5479e2221"
+  },
+  "config_sha256": "5f4580d7667fa85ad07d004b6f130c330791387170a206eeb50b158c90ce6fc5",
+  "scope": "Six public pinned documentation files; no code, gold labels, questions or private checkout corpus."
+}

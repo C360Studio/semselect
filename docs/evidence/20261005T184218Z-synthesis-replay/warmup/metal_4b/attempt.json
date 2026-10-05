@@ -1,0 +1,230 @@
+{
+  "command": [
+    "/private/tmp/semselect-synthesis-driver",
+    "--input",
+    "results/synthesis/20261005T1842Z/warmup/metal_4b/input.jsonl",
+    "--output",
+    "results/synthesis/20261005T1842Z/warmup/metal_4b/output.jsonl",
+    "--base-url",
+    "http://127.0.0.1:18089/v1",
+    "--model",
+    "qwen3.5-4b"
+  ],
+  "status": "ok",
+  "driver_duration_ms": 5958.21325,
+  "exit_code": 0,
+  "record": {
+    "id": "S01",
+    "mode": "inference",
+    "input": {
+      "id": "S01",
+      "query": "What maximum attempt count does retry.DefaultConfig return?",
+      "summaries": [
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.",
+          "keywords": [
+            "cache",
+            "adr",
+            "lifecycle",
+            "branch",
+            "buffer",
+            "registration",
+            "0007",
+            "repo",
+            "sidecar",
+            "supersession"
+          ],
+          "level": 0,
+          "relevance": 0.3804347826086957,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0004",
+              "type": "chunk",
+              "label": "Retry Package § Configuration § Custom Config"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0003",
+              "type": "chunk",
+              "label": "Retry Package § Framework Patterns § Pattern 3: Network Operations"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0006",
+              "type": "chunk",
+              "label": "Retry Package § Why This Design?"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md",
+              "type": "doc",
+              "label": "Retry Package"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0000",
+              "type": "chunk",
+              "label": "Retry Package"
+            }
+          ]
+        },
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.",
+          "keywords": [
+            "cache",
+            "adr",
+            "lifecycle",
+            "branch",
+            "buffer",
+            "registration",
+            "0007",
+            "repo",
+            "sidecar",
+            "supersession"
+          ],
+          "level": 1,
+          "relevance": 0.3804347826086957,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0004",
+              "type": "chunk",
+              "label": "Retry Package § Configuration § Custom Config"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0003",
+              "type": "chunk",
+              "label": "Retry Package § Framework Patterns § Pattern 3: Network Operations"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0006",
+              "type": "chunk",
+              "label": "Retry Package § Why This Design?"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md",
+              "type": "doc",
+              "label": "Retry Package"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0000",
+              "type": "chunk",
+              "label": "Retry Package"
+            }
+          ]
+        },
+        {
+          "community_id": "semselectsynth.semsource.web.corpus.doc.semsource-docs-adr-0007-sidecar-repo-registration-b-4c42b1f5",
+          "summary": "This community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.",
+          "keywords": [
+            "cache",
+            "adr",
+            "branch",
+            "lifecycle",
+            "buffer",
+            "registration",
+            "0007",
+            "repo",
+            "sidecar",
+            "retention"
+          ],
+          "level": 2,
+          "relevance": 0.3804347826086957,
+          "member_count": 92,
+          "entities": [
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0004",
+              "type": "chunk",
+              "label": "Retry Package § Configuration § Custom Config"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0003",
+              "type": "chunk",
+              "label": "Retry Package § Framework Patterns § Pattern 3: Network Operations"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0006",
+              "type": "chunk",
+              "label": "Retry Package § Why This Design?"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.doc.semstreams-pkg-retry-README-md",
+              "type": "doc",
+              "label": "Retry Package"
+            },
+            {
+              "id": "semselectsynth.semsource.web.corpus.chunk.semstreams-pkg-retry-README-md-0000",
+              "type": "chunk",
+              "label": "Retry Package"
+            }
+          ]
+        }
+      ],
+      "total_entities": 35
+    },
+    "calls": [
+      {
+        "llm_request": {
+          "SystemPrompt": "You are a knowledge graph query assistant. Given a user query and summaries of related knowledge clusters, synthesize a concise answer that directly addresses the query.\n\nEach cluster summary describes a group of related entities in the knowledge graph. Use the cluster summaries, representative entities, and keywords to construct your answer. Reference specific entities by name when relevant.\n\nBe direct and factual. If the clusters don't contain enough information to fully answer the query, say what is known and what is missing. Do not speculate beyond the provided data.",
+          "UserPrompt": "Query: What maximum attempt count does retry.DefaultConfig return?\n\nThe knowledge graph contains 35 matching entities across 3 clusters.\n\nCluster 1 (92 entities, 38% match):\nThis community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.\nRepresentatives: Retry Package § Configuration § Custom Config [chunk], Retry Package § Framework Patterns § Pattern 3: Network Operations [chunk], Retry Package § Why This Design? [chunk], Retry Package [doc], Retry Package [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nCluster 2 (92 entities, 38% match):\nThis community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.\nRepresentatives: Retry Package § Configuration § Custom Config [chunk], Retry Package § Framework Patterns § Pattern 3: Network Operations [chunk], Retry Package § Why This Design? [chunk], Retry Package [doc], Retry Package [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nCluster 3 (92 entities, 38% match):\nThis community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.\nRepresentatives: Retry Package § Configuration § Custom Config [chunk], Retry Package § Framework Patterns § Pattern 3: Network Operations [chunk], Retry Package § Why This Design? [chunk], Retry Package [doc], Retry Package [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nSynthesize a concise answer to the query based on these clusters.",
+          "MaxTokens": 500,
+          "Temperature": 0.3
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a knowledge graph query assistant. Given a user query and summaries of related knowledge clusters, synthesize a concise answer that directly addresses the query.\n\nEach cluster summary describes a group of related entities in the knowledge graph. Use the cluster summaries, representative entities, and keywords to construct your answer. Reference specific entities by name when relevant.\n\nBe direct and factual. If the clusters don't contain enough information to fully answer the query, say what is known and what is missing. Do not speculate beyond the provided data."
+          },
+          {
+            "role": "user",
+            "content": "Query: What maximum attempt count does retry.DefaultConfig return?\n\nThe knowledge graph contains 35 matching entities across 3 clusters.\n\nCluster 1 (92 entities, 38% match):\nThis community represents a web-based platform that focuses on managing and analyzing data structures (such as caches, buffers, and cache management systems). The domain is \"web,\" and the primary entity is \"semselectsynth.semsource,\" a platform with a focus on organizing and managing data content. The community includes 92 entities, with 6 related to a specific cache and 86 to a corpus, highlighting the integration of data structures and their applications in web systems.\nRepresentatives: Retry Package § Configuration § Custom Config [chunk], Retry Package § Framework Patterns § Pattern 3: Network Operations [chunk], Retry Package § Why This Design? [chunk], Retry Package [doc], Retry Package [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nCluster 2 (92 entities, 38% match):\nThis community represents a web-based platform for managing and analyzing content, focusing on caching, data structures, and operational lifecycle. The entities are organized around a central organization, \"semselectsynth.semsource,\" and span various system domains, with the primary domain being web. The community includes a corpus of data, with key elements like cache, buffer, and lifecycle management.\nRepresentatives: Retry Package § Configuration § Custom Config [chunk], Retry Package § Framework Patterns § Pattern 3: Network Operations [chunk], Retry Package § Why This Design? [chunk], Retry Package [doc], Retry Package [chunk]\nKeywords: cache, adr, lifecycle, branch, buffer\n\nCluster 3 (92 entities, 38% match):\nThis community represents a web-based platform focused on organizing and managing content related to semselectsynth.semsource, with entities grouped by domain. The primary domain is web, and the key entities include a corpus of document and chunk data, along with themes such as cache, cache management, and lifecycle. The community likely serves as a resource for organizing and accessing data related to the platform's operations and content management.\nRepresentatives: Retry Package § Configuration § Custom Config [chunk], Retry Package § Framework Patterns § Pattern 3: Network Operations [chunk], Retry Package § Why This Design? [chunk], Retry Package [doc], Retry Package [chunk]\nKeywords: cache, adr, branch, lifecycle, buffer\n\nSynthesize a concise answer to the query based on these clusters."
+          }
+        ],
+        "deadline_remaining_ms": 14999.995833,
+        "llm_response": {
+          "Content": "Based on the provided cluster summaries, it is **not possible** to determine the specific maximum attempt count returned by `retry.DefaultConfig`.\n\nThe available information confirms the following:\n*   **Context**: The clusters contain entities related to a \"Retry Package,\" including sections on \"Configuration\" and \"Custom Config.\"\n*   **Keywords**: The data includes terms like \"cache,\" \"lifecycle,\" and \"buffer,\" but does not explicitly mention \"attempt count\" or specific integer values for default retry limits.\n*   **Missing Data**: While the clusters reference the existence of configuration settings for the retry package, they do not provide the actual value or logic for `retry.DefaultConfig`.\n\nTo answer the query, you would need to access the specific \"Retry Package § Configuration\" or \"Custom Config\" documents mentioned in the representatives, as the current summaries only describe the community structure rather than the specific configuration values.",
+          "PromptTokens": 648,
+          "CompletionTokens": 186,
+          "TotalTokens": 834,
+          "Model": "qwen3.5-4b",
+          "FinishReason": "stop"
+        },
+        "duration_ms": 5958.191083,
+        "wire_trace": [
+          {
+            "name": "get_connection",
+            "elapsed_ms": 0.115625,
+            "destination": "127.0.0.1:18089"
+          },
+          {
+            "name": "got_connection",
+            "elapsed_ms": 0.401125
+          },
+          {
+            "name": "wrote_headers",
+            "elapsed_ms": 0.436583
+          },
+          {
+            "name": "wrote_request",
+            "elapsed_ms": 0.458833
+          },
+          {
+            "name": "first_response_byte",
+            "elapsed_ms": 5957.881
+          }
+        ],
+        "requests_written": 1
+      }
+    ],
+    "synthesis_outcome": {
+      "Answer": "Based on the provided cluster summaries, it is **not possible** to determine the specific maximum attempt count returned by `retry.DefaultConfig`.\n\nThe available information confirms the following:\n*   **Context**: The clusters contain entities related to a \"Retry Package,\" including sections on \"Configuration\" and \"Custom Config.\"\n*   **Keywords**: The data includes terms like \"cache,\" \"lifecycle,\" and \"buffer,\" but does not explicitly mention \"attempt count\" or specific integer values for default retry limits.\n*   **Missing Data**: While the clusters reference the existence of configuration settings for the retry package, they do not provide the actual value or logic for `retry.DefaultConfig`.\n\nTo answer the query, you would need to access the specific \"Retry Package § Configuration\" or \"Custom Config\" documents mentioned in the representatives, as the current summaries only describe the community structure rather than the specific configuration values.",
+      "Model": "qwen3.5-4b",
+      "Degraded": false,
+      "Reason": ""
+    },
+    "duration_ms": 5958.21325,
+    "started_at": "2026-10-05T18:45:02.643414Z",
+    "semstreams_version": "v1.0.0-beta.160"
+  },
+  "subprocess_wall_ms": 6017.52233307343,
+  "driver_startup_and_io_ms": 59.309083073429974
+}

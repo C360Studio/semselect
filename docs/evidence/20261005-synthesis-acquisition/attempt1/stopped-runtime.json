@@ -1,0 +1,779 @@
+{
+  "utc": "2026-10-05T18:22:18.723585+00:00",
+  "containers": [
+    {
+      "Id": "4e9c6bbe4355cca250584edc718f787a1eb4e582e0897950a49aad2694c96339",
+      "Created": "2026-10-05T18:19:17.843078176Z",
+      "Path": "docker-entrypoint.sh",
+      "Args": [
+        "-js",
+        "-sd",
+        "/data",
+        "-m",
+        "8222"
+      ],
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-05T18:19:17.905598426Z",
+        "FinishedAt": "2026-10-05T18:21:28.253593875Z"
+      },
+      "Image": "sha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66",
+      "ResolvConfPath": "/var/lib/docker/containers/4e9c6bbe4355cca250584edc718f787a1eb4e582e0897950a49aad2694c96339/resolv.conf",
+      "HostnamePath": "/var/lib/docker/containers/4e9c6bbe4355cca250584edc718f787a1eb4e582e0897950a49aad2694c96339/hostname",
+      "HostsPath": "/var/lib/docker/containers/4e9c6bbe4355cca250584edc718f787a1eb4e582e0897950a49aad2694c96339/hosts",
+      "LogPath": "/var/lib/docker/containers/4e9c6bbe4355cca250584edc718f787a1eb4e582e0897950a49aad2694c96339/4e9c6bbe4355cca250584edc718f787a1eb4e582e0897950a49aad2694c96339-json.log",
+      "Name": "/semselect-synthesis-4093d3c-nats-1",
+      "RestartCount": 0,
+      "Driver": "overlayfs",
+      "Platform": "linux",
+      "MountLabel": "",
+      "ProcessLabel": "",
+      "AppArmorProfile": "",
+      "ExecIDs": null,
+      "HostConfig": {
+        "Binds": [
+          "/Users/coby/Code/c360/semselect/.synthesis/nats:/data:rw"
+        ],
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "json-file",
+          "Config": {}
+        },
+        "NetworkMode": "semselect-synthesis-4093d3c_isolated",
+        "PortBindings": {
+          "4222/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "44222"
+            }
+          ],
+          "8222/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "48222"
+            }
+          ]
+        },
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": null,
+        "CgroupnsMode": "private",
+        "Dns": null,
+        "DnsOptions": null,
+        "DnsSearch": null,
+        "ExtraHosts": [],
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": false,
+        "SecurityOpt": null,
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 1073741824,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": null,
+        "BlkioDeviceReadBps": null,
+        "BlkioDeviceWriteBps": null,
+        "BlkioDeviceReadIOps": null,
+        "BlkioDeviceWriteIOps": null,
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": null,
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 2147483648,
+        "MemorySwappiness": null,
+        "OomKillDisable": null,
+        "PidsLimit": null,
+        "Ulimits": null,
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "MaskedPaths": [
+          "/proc/acpi",
+          "/proc/asound",
+          "/proc/interrupts",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/sys/devices/virtual/powercap",
+          "/sys/firmware"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "Storage": {
+        "RootFS": {
+          "Snapshot": {
+            "Name": "overlayfs"
+          }
+        }
+      },
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/Users/coby/Code/c360/semselect/.synthesis/nats",
+          "Destination": "/data",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "Config": {
+        "Hostname": "4e9c6bbe4355",
+        "Domainname": "",
+        "User": "",
+        "AttachStdin": false,
+        "AttachStdout": true,
+        "AttachStderr": true,
+        "ExposedPorts": {
+          "4222/tcp": {},
+          "6222/tcp": {},
+          "8222/tcp": {}
+        },
+        "Tty": false,
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "NATS_SERVER=2.14.4"
+        ],
+        "Cmd": [
+          "-js",
+          "-sd",
+          "/data",
+          "-m",
+          "8222"
+        ],
+        "Image": "nats:2.14.4-alpine@sha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66",
+        "Volumes": null,
+        "WorkingDir": "/",
+        "Entrypoint": [
+          "docker-entrypoint.sh"
+        ],
+        "Labels": {
+          "com.docker.compose.config-hash": "6a10d3e6931fae0026403758e7e441d1fde9175f6f1e06e5cde17cdc43def473",
+          "com.docker.compose.container-number": "1",
+          "com.docker.compose.depends_on": "",
+          "com.docker.compose.image": "sha256:862c0b3de443e209f342b8d224a88a54f4981834816849e27c40f4fc6b221b5c",
+          "com.docker.compose.oneoff": "False",
+          "com.docker.compose.project": "semselect-synthesis-4093d3c",
+          "com.docker.compose.project.config_files": "/Users/coby/Code/c360/semselect/.synthesis/config/compose.json",
+          "com.docker.compose.project.working_dir": "/Users/coby/Code/c360/semselect/.synthesis/config",
+          "com.docker.compose.service": "nats",
+          "com.docker.compose.version": "5.5.1",
+          "io.semselect.experiment": "synthesis-4093d3c",
+          "org.opencontainers.image.description": "NATS is an open-source, high-performance, cloud native messaging system.",
+          "org.opencontainers.image.documentation": "https://docs.nats.io",
+          "org.opencontainers.image.licenses": "Apache-2.0",
+          "org.opencontainers.image.source": "https://github.com/nats-io/nats-docker",
+          "org.opencontainers.image.title": "NATS Server",
+          "org.opencontainers.image.url": "https://nats.io",
+          "org.opencontainers.image.vendor": "NATS.io",
+          "org.opencontainers.image.version": "2.14.4"
+        }
+      },
+      "NetworkSettings": {
+        "SandboxID": "",
+        "SandboxKey": "",
+        "Ports": {},
+        "Networks": {
+          "semselect-synthesis-4093d3c_isolated": {
+            "IPAMConfig": null,
+            "Links": null,
+            "Aliases": [
+              "semselect-synthesis-4093d3c-nats-1",
+              "nats"
+            ],
+            "DriverOpts": null,
+            "GwPriority": 0,
+            "NetworkID": "cbadc4ab4a394b666a48ec77f6a82f12f15f2edc8b66f54041f1d5652fe0ffc9",
+            "EndpointID": "",
+            "Gateway": "",
+            "IPAddress": "",
+            "MacAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "DNSNames": [
+              "semselect-synthesis-4093d3c-nats-1",
+              "nats",
+              "4e9c6bbe4355"
+            ]
+          }
+        }
+      },
+      "ImageManifestDescriptor": {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "digest": "sha256:862c0b3de443e209f342b8d224a88a54f4981834816849e27c40f4fc6b221b5c",
+        "size": 1730,
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "arm64v8",
+          "org.opencontainers.image.base.digest": "sha256:2c9d26f410d032d5b1525aa8a873e238b05b90c4ae8618743d4311f0cc827e37",
+          "org.opencontainers.image.base.name": "alpine:3.22",
+          "org.opencontainers.image.created": "2026-07-30T19:54:06Z",
+          "org.opencontainers.image.revision": "2240af2a7067772eaa6453e3aa801c2c28657440",
+          "org.opencontainers.image.source": "https://github.com/nats-io/nats-docker.git#2240af2a7067772eaa6453e3aa801c2c28657440:2.14.x/alpine3.22",
+          "org.opencontainers.image.url": "https://hub.docker.com/_/nats",
+          "org.opencontainers.image.version": "2.14.4-alpine3.22"
+        },
+        "platform": {
+          "architecture": "arm64",
+          "os": "linux",
+          "variant": "v8"
+        }
+      }
+    },
+    {
+      "Id": "89b8c8bf3e377d43a119ff86b1e428f082434eae6cc08531bb75aedaebf677d9",
+      "Created": "2026-10-05T18:19:39.434925922Z",
+      "Path": "/usr/local/bin/semembed",
+      "Args": [],
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 1,
+        "Error": "",
+        "StartedAt": "2026-10-05T18:19:39.485316338Z",
+        "FinishedAt": "2026-10-05T18:19:39.595968047Z",
+        "Health": {
+          "Status": "unhealthy",
+          "FailingStreak": 0,
+          "Log": []
+        }
+      },
+      "Image": "sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "ResolvConfPath": "/var/lib/docker/containers/89b8c8bf3e377d43a119ff86b1e428f082434eae6cc08531bb75aedaebf677d9/resolv.conf",
+      "HostnamePath": "/var/lib/docker/containers/89b8c8bf3e377d43a119ff86b1e428f082434eae6cc08531bb75aedaebf677d9/hostname",
+      "HostsPath": "/var/lib/docker/containers/89b8c8bf3e377d43a119ff86b1e428f082434eae6cc08531bb75aedaebf677d9/hosts",
+      "LogPath": "/var/lib/docker/containers/89b8c8bf3e377d43a119ff86b1e428f082434eae6cc08531bb75aedaebf677d9/89b8c8bf3e377d43a119ff86b1e428f082434eae6cc08531bb75aedaebf677d9-json.log",
+      "Name": "/semselect-synthesis-4093d3c-semembed-1",
+      "RestartCount": 0,
+      "Driver": "overlayfs",
+      "Platform": "linux",
+      "MountLabel": "",
+      "ProcessLabel": "",
+      "AppArmorProfile": "",
+      "ExecIDs": null,
+      "HostConfig": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "json-file",
+          "Config": {}
+        },
+        "NetworkMode": "semselect-synthesis-4093d3c_isolated",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": null,
+        "CgroupnsMode": "private",
+        "Dns": null,
+        "DnsOptions": null,
+        "DnsSearch": null,
+        "ExtraHosts": [],
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": false,
+        "SecurityOpt": null,
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 2147483648,
+        "NanoCpus": 2000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": null,
+        "BlkioDeviceReadBps": null,
+        "BlkioDeviceWriteBps": null,
+        "BlkioDeviceReadIOps": null,
+        "BlkioDeviceWriteIOps": null,
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": null,
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 4294967296,
+        "MemorySwappiness": null,
+        "OomKillDisable": null,
+        "PidsLimit": null,
+        "Ulimits": null,
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "MaskedPaths": [
+          "/proc/acpi",
+          "/proc/asound",
+          "/proc/interrupts",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/sys/devices/virtual/powercap",
+          "/sys/firmware"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "Storage": {
+        "RootFS": {
+          "Snapshot": {
+            "Name": "overlayfs"
+          }
+        }
+      },
+      "Mounts": [],
+      "Config": {
+        "Hostname": "89b8c8bf3e37",
+        "Domainname": "",
+        "User": "semembed",
+        "AttachStdin": false,
+        "AttachStdout": true,
+        "AttachStderr": true,
+        "ExposedPorts": {
+          "8081/tcp": {}
+        },
+        "Tty": false,
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Env": [
+          "SEMEMBED_MODEL=Snowflake/snowflake-arctic-embed-s",
+          "SEMEMBED_PORT=8081",
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "RUST_LOG=info"
+        ],
+        "Cmd": null,
+        "Healthcheck": {
+          "Test": [
+            "CMD-SHELL",
+            "curl -f http://localhost:8081/health || exit 1"
+          ],
+          "Interval": 30000000000,
+          "Timeout": 3000000000,
+          "StartPeriod": 10000000000,
+          "Retries": 3
+        },
+        "Image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+        "Volumes": null,
+        "WorkingDir": "/app",
+        "Entrypoint": [
+          "/usr/local/bin/semembed"
+        ],
+        "Labels": {
+          "com.docker.compose.config-hash": "8afb3268ee5a628ad2b015b563a3eb088e47062ae2928b5f28080fb41bba6b20",
+          "com.docker.compose.container-number": "1",
+          "com.docker.compose.depends_on": "",
+          "com.docker.compose.image": "sha256:0394be7df6af3dc20983067d7734d516df6b33573ce0aef989e19f23e83749ee",
+          "com.docker.compose.oneoff": "False",
+          "com.docker.compose.project": "semselect-synthesis-4093d3c",
+          "com.docker.compose.project.config_files": "/Users/coby/Code/c360/semselect/.synthesis/config/compose.json",
+          "com.docker.compose.project.working_dir": "/Users/coby/Code/c360/semselect/.synthesis/config",
+          "com.docker.compose.service": "semembed",
+          "com.docker.compose.version": "5.5.1",
+          "io.semselect.experiment": "synthesis-4093d3c",
+          "org.opencontainers.image.created": "2026-05-01T22:09:44.219Z",
+          "org.opencontainers.image.description": "",
+          "org.opencontainers.image.licenses": "",
+          "org.opencontainers.image.revision": "7ceb5281c96b3664321f3f28c9d7f96acbb41843",
+          "org.opencontainers.image.source": "https://github.com/C360Studio/semembed",
+          "org.opencontainers.image.title": "semembed",
+          "org.opencontainers.image.url": "https://github.com/C360Studio/semembed",
+          "org.opencontainers.image.version": "latest"
+        }
+      },
+      "NetworkSettings": {
+        "SandboxID": "",
+        "SandboxKey": "",
+        "Ports": {},
+        "Networks": {
+          "semselect-synthesis-4093d3c_isolated": {
+            "IPAMConfig": null,
+            "Links": null,
+            "Aliases": [
+              "semselect-synthesis-4093d3c-semembed-1",
+              "semembed"
+            ],
+            "DriverOpts": null,
+            "GwPriority": 0,
+            "NetworkID": "cbadc4ab4a394b666a48ec77f6a82f12f15f2edc8b66f54041f1d5652fe0ffc9",
+            "EndpointID": "",
+            "Gateway": "",
+            "IPAddress": "",
+            "MacAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "DNSNames": [
+              "semselect-synthesis-4093d3c-semembed-1",
+              "semembed",
+              "89b8c8bf3e37"
+            ]
+          }
+        }
+      },
+      "ImageManifestDescriptor": {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "digest": "sha256:0394be7df6af3dc20983067d7734d516df6b33573ce0aef989e19f23e83749ee",
+        "size": 1430,
+        "platform": {
+          "architecture": "arm64",
+          "os": "linux"
+        }
+      }
+    },
+    {
+      "Id": "04f1628bc46726b485b1ba89570e2b6334618634e99dffc1d0de1182694e5466",
+      "Created": "2026-10-05T18:19:55.923473846Z",
+      "Path": "sh",
+      "Args": [
+        "-c",
+        "exec llama-server     --host 0.0.0.0     --port 8083     -m /models/model.gguf     --alias ${MODEL_ALIAS}     --reasoning ${MODEL_REASONING}     -np ${MODEL_PARALLEL}     -c ${MODEL_CONTEXT}     -cb     --metrics     ${MODEL_THREADS:+-t ${MODEL_THREADS}}     ${MODEL_API_KEY:+--api-key ${MODEL_API_KEY}}"
+      ],
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-05T18:19:55.977834138Z",
+        "FinishedAt": "2026-10-05T18:21:28.290737125Z",
+        "Health": {
+          "Status": "unhealthy",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-05T18:20:01.048243751Z",
+              "End": "2026-10-05T18:20:01.090180293Z",
+              "ExitCode": 0,
+              "Output": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100    15  100    15    0     0  20325      0 --:--:-- --:--:-- --:--:-- 15000\n{\"status\":\"ok\"}"
+            },
+            {
+              "Start": "2026-10-05T18:20:31.091236918Z",
+              "End": "2026-10-05T18:20:31.132078168Z",
+              "ExitCode": 0,
+              "Output": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100    15  100    15    0     0  27223      0 --:--:-- --:--:-- --:--:-- 15000\n{\"status\":\"ok\"}"
+            },
+            {
+              "Start": "2026-10-05T18:21:01.134319501Z",
+              "End": "2026-10-05T18:21:01.171933459Z",
+              "ExitCode": 0,
+              "Output": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100    15  100    15    0     0  19455      0 --:--:-- --:--:-- --:--:-- 15000\n{\"status\":\"ok\"}"
+            }
+          ]
+        }
+      },
+      "Image": "sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+      "ResolvConfPath": "/var/lib/docker/containers/04f1628bc46726b485b1ba89570e2b6334618634e99dffc1d0de1182694e5466/resolv.conf",
+      "HostnamePath": "/var/lib/docker/containers/04f1628bc46726b485b1ba89570e2b6334618634e99dffc1d0de1182694e5466/hostname",
+      "HostsPath": "/var/lib/docker/containers/04f1628bc46726b485b1ba89570e2b6334618634e99dffc1d0de1182694e5466/hosts",
+      "LogPath": "/var/lib/docker/containers/04f1628bc46726b485b1ba89570e2b6334618634e99dffc1d0de1182694e5466/04f1628bc46726b485b1ba89570e2b6334618634e99dffc1d0de1182694e5466-json.log",
+      "Name": "/semselect-synthesis-4093d3c-seminstruct-1",
+      "RestartCount": 0,
+      "Driver": "overlayfs",
+      "Platform": "linux",
+      "MountLabel": "",
+      "ProcessLabel": "",
+      "AppArmorProfile": "",
+      "ExecIDs": null,
+      "HostConfig": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "json-file",
+          "Config": {}
+        },
+        "NetworkMode": "semselect-synthesis-4093d3c_isolated",
+        "PortBindings": {
+          "8083/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "48083"
+            }
+          ]
+        },
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": null,
+        "CgroupnsMode": "private",
+        "Dns": null,
+        "DnsOptions": null,
+        "DnsSearch": null,
+        "ExtraHosts": [],
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": false,
+        "SecurityOpt": null,
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 2147483648,
+        "NanoCpus": 2000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": null,
+        "BlkioDeviceReadBps": null,
+        "BlkioDeviceWriteBps": null,
+        "BlkioDeviceReadIOps": null,
+        "BlkioDeviceWriteIOps": null,
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": null,
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 4294967296,
+        "MemorySwappiness": null,
+        "OomKillDisable": null,
+        "PidsLimit": null,
+        "Ulimits": null,
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "MaskedPaths": [
+          "/proc/acpi",
+          "/proc/asound",
+          "/proc/interrupts",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/sys/devices/virtual/powercap",
+          "/sys/firmware"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "Storage": {
+        "RootFS": {
+          "Snapshot": {
+            "Name": "overlayfs"
+          }
+        }
+      },
+      "Mounts": [],
+      "Config": {
+        "Hostname": "04f1628bc467",
+        "Domainname": "",
+        "User": "",
+        "AttachStdin": false,
+        "AttachStdout": true,
+        "AttachStderr": true,
+        "ExposedPorts": {
+          "8083/tcp": {}
+        },
+        "Tty": false,
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Env": [
+          "MODEL_CONTEXT=16384",
+          "MODEL_REASONING=off",
+          "MODEL_THREADS=2",
+          "MODEL_PARALLEL=4",
+          "MODEL_ALIAS=seminstruct",
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "MODEL_API_KEY="
+        ],
+        "Cmd": [
+          "sh",
+          "-c",
+          "exec llama-server     --host 0.0.0.0     --port 8083     -m /models/model.gguf     --alias ${MODEL_ALIAS}     --reasoning ${MODEL_REASONING}     -np ${MODEL_PARALLEL}     -c ${MODEL_CONTEXT}     -cb     --metrics     ${MODEL_THREADS:+-t ${MODEL_THREADS}}     ${MODEL_API_KEY:+--api-key ${MODEL_API_KEY}}"
+        ],
+        "Healthcheck": {
+          "Test": [
+            "CMD-SHELL",
+            "curl -f http://localhost:8083/health || exit 1"
+          ],
+          "Interval": 30000000000,
+          "Timeout": 10000000000,
+          "StartPeriod": 30000000000,
+          "Retries": 3
+        },
+        "Image": "ghcr.io/c360studio/seminstruct:qwen3-0.6b@sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+        "Volumes": null,
+        "WorkingDir": "/app",
+        "Entrypoint": null,
+        "Labels": {
+          "com.docker.compose.config-hash": "2caf122499afe8d7381c100ac9548ad093739bc5a940b733db65fcf0b96ed707",
+          "com.docker.compose.container-number": "1",
+          "com.docker.compose.depends_on": "",
+          "com.docker.compose.image": "sha256:f7c654d32f43b6d545676dd8b8adac9c401761043c22ea628d339f92ce6546c4",
+          "com.docker.compose.oneoff": "False",
+          "com.docker.compose.project": "semselect-synthesis-4093d3c",
+          "com.docker.compose.project.config_files": "/Users/coby/Code/c360/semselect/.synthesis/config/compose.json",
+          "com.docker.compose.project.working_dir": "/Users/coby/Code/c360/semselect/.synthesis/config",
+          "com.docker.compose.service": "seminstruct",
+          "com.docker.compose.version": "5.5.1",
+          "io.semselect.experiment": "synthesis-4093d3c",
+          "org.opencontainers.image.created": "2026-05-02T14:05:02.178Z",
+          "org.opencontainers.image.description": "",
+          "org.opencontainers.image.licenses": "",
+          "org.opencontainers.image.revision": "7f9135a99cd27a6c63a2a60db5daeee9f5622be4",
+          "org.opencontainers.image.source": "https://github.com/C360Studio/seminstruct",
+          "org.opencontainers.image.title": "seminstruct",
+          "org.opencontainers.image.url": "https://github.com/C360Studio/seminstruct",
+          "org.opencontainers.image.version": "qwen3-0.6b"
+        }
+      },
+      "NetworkSettings": {
+        "SandboxID": "",
+        "SandboxKey": "",
+        "Ports": {},
+        "Networks": {
+          "semselect-synthesis-4093d3c_isolated": {
+            "IPAMConfig": null,
+            "Links": null,
+            "Aliases": [
+              "semselect-synthesis-4093d3c-seminstruct-1",
+              "seminstruct"
+            ],
+            "DriverOpts": null,
+            "GwPriority": 0,
+            "NetworkID": "cbadc4ab4a394b666a48ec77f6a82f12f15f2edc8b66f54041f1d5652fe0ffc9",
+            "EndpointID": "",
+            "Gateway": "",
+            "IPAddress": "",
+            "MacAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "DNSNames": [
+              "semselect-synthesis-4093d3c-seminstruct-1",
+              "seminstruct",
+              "04f1628bc467"
+            ]
+          }
+        }
+      },
+      "ImageManifestDescriptor": {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "digest": "sha256:f7c654d32f43b6d545676dd8b8adac9c401761043c22ea628d339f92ce6546c4",
+        "size": 1629,
+        "platform": {
+          "architecture": "arm64",
+          "os": "linux"
+        }
+      }
+    }
+  ]
+}

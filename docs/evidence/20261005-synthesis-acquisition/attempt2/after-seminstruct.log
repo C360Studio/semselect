@@ -1,0 +1,843 @@
+seminstruct-1  | 2026-10-05T18:28:53.783936512Z build_info: b1-aab6821
+seminstruct-1  | 2026-10-05T18:28:53.783971595Z system_info: n_threads = 2 (n_threads_batch = 2) / 12 | CPU : NEON = 1 | ARM_FMA = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+seminstruct-1  | 2026-10-05T18:28:53.783973345Z init: using 11 threads for HTTP server
+seminstruct-1  | 2026-10-05T18:28:53.783974137Z start: binding port with default address family
+seminstruct-1  | 2026-10-05T18:28:53.785378845Z main: loading model
+seminstruct-1  | 2026-10-05T18:28:53.785452928Z srv    load_model: loading model '/models/model.gguf'
+seminstruct-1  | 2026-10-05T18:28:53.785454970Z common_init_result: fitting params to device memory, for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on
+seminstruct-1  | 2026-10-05T18:28:53.785457053Z common_params_fit_impl: getting device memory data for initial parameters:
+seminstruct-1  | 2026-10-05T18:28:53.980055512Z common_memory_breakdown_print: | memory breakdown [MiB] | total   free    self   model   context   compute    unaccounted |
+seminstruct-1  | 2026-10-05T18:28:53.980079845Z common_memory_breakdown_print: |   - Host               |                 2473 =   372 +    1792 +     308                |
+seminstruct-1  | 2026-10-05T18:28:54.000363387Z common_params_fit_impl: projected to use 2473 MiB of host memory vs. 23742 MiB of total host memory
+seminstruct-1  | 2026-10-05T18:28:54.000395137Z common_params_fit_impl: will leave 21268 >= 1024 MiB of system memory, no changes needed
+seminstruct-1  | 2026-10-05T18:28:54.000396928Z common_fit_params: successfully fit params to free device memory
+seminstruct-1  | 2026-10-05T18:28:54.000397720Z common_fit_params: fitting params to free memory took 0.22 seconds
+seminstruct-1  | 2026-10-05T18:28:54.012876762Z llama_model_loader: loaded meta data with 32 key-value pairs and 310 tensors from /models/model.gguf (version GGUF V3 (latest))
+seminstruct-1  | 2026-10-05T18:28:54.012888678Z llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+seminstruct-1  | 2026-10-05T18:28:54.012889595Z llama_model_loader: - kv   0:                       general.architecture str              = qwen3
+seminstruct-1  | 2026-10-05T18:28:54.012890345Z llama_model_loader: - kv   1:                               general.type str              = model
+seminstruct-1  | 2026-10-05T18:28:54.012891262Z llama_model_loader: - kv   2:                               general.name str              = Qwen3-0.6B
+seminstruct-1  | 2026-10-05T18:28:54.012892262Z llama_model_loader: - kv   3:                           general.basename str              = Qwen3-0.6B
+seminstruct-1  | 2026-10-05T18:28:54.012892970Z llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+seminstruct-1  | 2026-10-05T18:28:54.012893762Z llama_model_loader: - kv   5:                         general.size_label str              = 0.6B
+seminstruct-1  | 2026-10-05T18:28:54.012894720Z llama_model_loader: - kv   6:                           general.repo_url str              = https://huggingface.co/unsloth
+seminstruct-1  | 2026-10-05T18:28:54.012895512Z llama_model_loader: - kv   7:                          qwen3.block_count u32              = 28
+seminstruct-1  | 2026-10-05T18:28:54.012896262Z llama_model_loader: - kv   8:                       qwen3.context_length u32              = 40960
+seminstruct-1  | 2026-10-05T18:28:54.012897012Z llama_model_loader: - kv   9:                     qwen3.embedding_length u32              = 1024
+seminstruct-1  | 2026-10-05T18:28:54.012908553Z llama_model_loader: - kv  10:                  qwen3.feed_forward_length u32              = 3072
+seminstruct-1  | 2026-10-05T18:28:54.012909345Z llama_model_loader: - kv  11:                 qwen3.attention.head_count u32              = 16
+seminstruct-1  | 2026-10-05T18:28:54.012910095Z llama_model_loader: - kv  12:              qwen3.attention.head_count_kv u32              = 8
+seminstruct-1  | 2026-10-05T18:28:54.012910803Z llama_model_loader: - kv  13:                       qwen3.rope.freq_base f32              = 1000000.000000
+seminstruct-1  | 2026-10-05T18:28:54.012911595Z llama_model_loader: - kv  14:     qwen3.attention.layer_norm_rms_epsilon f32              = 0.000001
+seminstruct-1  | 2026-10-05T18:28:54.012912345Z llama_model_loader: - kv  15:                 qwen3.attention.key_length u32              = 128
+seminstruct-1  | 2026-10-05T18:28:54.012913095Z llama_model_loader: - kv  16:               qwen3.attention.value_length u32              = 128
+seminstruct-1  | 2026-10-05T18:28:54.012913845Z llama_model_loader: - kv  17:                       tokenizer.ggml.model str              = gpt2
+seminstruct-1  | 2026-10-05T18:28:54.012915220Z llama_model_loader: - kv  18:                         tokenizer.ggml.pre str              = qwen2
+seminstruct-1  | 2026-10-05T18:28:54.021631595Z llama_model_loader: - kv  19:                      tokenizer.ggml.tokens arr[str,151936]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+seminstruct-1  | 2026-10-05T18:28:54.023948970Z llama_model_loader: - kv  20:                  tokenizer.ggml.token_type arr[i32,151936]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+seminstruct-1  | 2026-10-05T18:28:54.032768970Z llama_model_loader: - kv  21:                      tokenizer.ggml.merges arr[str,151387]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+seminstruct-1  | 2026-10-05T18:28:54.032779470Z llama_model_loader: - kv  22:                tokenizer.ggml.eos_token_id u32              = 151645
+seminstruct-1  | 2026-10-05T18:28:54.032780303Z llama_model_loader: - kv  23:            tokenizer.ggml.padding_token_id u32              = 151654
+seminstruct-1  | 2026-10-05T18:28:54.032781053Z llama_model_loader: - kv  24:               tokenizer.ggml.add_bos_token bool             = false
+seminstruct-1  | 2026-10-05T18:28:54.032781803Z llama_model_loader: - kv  25:                    tokenizer.chat_template str              = {%- if tools %}\n    {{- '<|im_start|>...
+seminstruct-1  | 2026-10-05T18:28:54.032782970Z llama_model_loader: - kv  26:               general.quantization_version u32              = 2
+seminstruct-1  | 2026-10-05T18:28:54.032783720Z llama_model_loader: - kv  27:                          general.file_type u32              = 15
+seminstruct-1  | 2026-10-05T18:28:54.032784553Z llama_model_loader: - kv  28:                      quantize.imatrix.file str              = Qwen3-0.6B-GGUF/imatrix_unsloth.dat
+seminstruct-1  | 2026-10-05T18:28:54.032785345Z llama_model_loader: - kv  29:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3-0.6B.txt
+seminstruct-1  | 2026-10-05T18:28:54.032786137Z llama_model_loader: - kv  30:             quantize.imatrix.entries_count u32              = 196
+seminstruct-1  | 2026-10-05T18:28:54.032786887Z llama_model_loader: - kv  31:              quantize.imatrix.chunks_count u32              = 688
+seminstruct-1  | 2026-10-05T18:28:54.032787637Z llama_model_loader: - type  f32:  113 tensors
+seminstruct-1  | 2026-10-05T18:28:54.032800345Z llama_model_loader: - type q4_K:  168 tensors
+seminstruct-1  | 2026-10-05T18:28:54.032801887Z llama_model_loader: - type q6_K:   29 tensors
+seminstruct-1  | 2026-10-05T18:28:54.032802595Z print_info: file format = GGUF V3 (latest)
+seminstruct-1  | 2026-10-05T18:28:54.032803303Z print_info: file type   = Q4_K - Medium
+seminstruct-1  | 2026-10-05T18:28:54.032803970Z print_info: file size   = 372.65 MiB (5.24 BPW) 
+seminstruct-1  | 2026-10-05T18:28:54.085168470Z load: 0 unused tokens
+seminstruct-1  | 2026-10-05T18:28:54.086262303Z load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+seminstruct-1  | 2026-10-05T18:28:54.105758012Z load: printing all EOG tokens:
+seminstruct-1  | 2026-10-05T18:28:54.105772262Z load:   - 128247 ('</s>')
+seminstruct-1  | 2026-10-05T18:28:54.105773887Z load:   - 151643 ('<|endoftext|>')
+seminstruct-1  | 2026-10-05T18:28:54.105774970Z load:   - 151645 ('<|im_end|>')
+seminstruct-1  | 2026-10-05T18:28:54.105775845Z load:   - 151662 ('<|fim_pad|>')
+seminstruct-1  | 2026-10-05T18:28:54.105776762Z load:   - 151663 ('<|repo_name|>')
+seminstruct-1  | 2026-10-05T18:28:54.105777762Z load:   - 151664 ('<|file_sep|>')
+seminstruct-1  | 2026-10-05T18:28:54.105780887Z load: special tokens cache size = 27
+seminstruct-1  | 2026-10-05T18:28:54.135603220Z load: token to piece cache size = 0.9311 MB
+seminstruct-1  | 2026-10-05T18:28:54.135614387Z print_info: arch                  = qwen3
+seminstruct-1  | 2026-10-05T18:28:54.135615470Z print_info: vocab_only            = 0
+seminstruct-1  | 2026-10-05T18:28:54.135616470Z print_info: no_alloc              = 0
+seminstruct-1  | 2026-10-05T18:28:54.135617595Z print_info: n_ctx_train           = 40960
+seminstruct-1  | 2026-10-05T18:28:54.135618762Z print_info: n_embd                = 1024
+seminstruct-1  | 2026-10-05T18:28:54.135619679Z print_info: n_embd_inp            = 1024
+seminstruct-1  | 2026-10-05T18:28:54.135620554Z print_info: n_layer               = 28
+seminstruct-1  | 2026-10-05T18:28:54.135621345Z print_info: n_head                = 16
+seminstruct-1  | 2026-10-05T18:28:54.135622179Z print_info: n_head_kv             = 8
+seminstruct-1  | 2026-10-05T18:28:54.135622970Z print_info: n_rot                 = 128
+seminstruct-1  | 2026-10-05T18:28:54.135623804Z print_info: n_swa                 = 0
+seminstruct-1  | 2026-10-05T18:28:54.135624637Z print_info: is_swa_any            = 0
+seminstruct-1  | 2026-10-05T18:28:54.135625470Z print_info: n_embd_head_k         = 128
+seminstruct-1  | 2026-10-05T18:28:54.135626304Z print_info: n_embd_head_v         = 128
+seminstruct-1  | 2026-10-05T18:28:54.135627137Z print_info: n_gqa                 = 2
+seminstruct-1  | 2026-10-05T18:28:54.135627970Z print_info: n_embd_k_gqa          = 1024
+seminstruct-1  | 2026-10-05T18:28:54.135628804Z print_info: n_embd_v_gqa          = 1024
+seminstruct-1  | 2026-10-05T18:28:54.135629595Z print_info: f_norm_eps            = 0.0e+00
+seminstruct-1  | 2026-10-05T18:28:54.135630470Z print_info: f_norm_rms_eps        = 1.0e-06
+seminstruct-1  | 2026-10-05T18:28:54.135631262Z print_info: f_clamp_kqv           = 0.0e+00
+seminstruct-1  | 2026-10-05T18:28:54.135637179Z print_info: f_max_alibi_bias      = 0.0e+00
+seminstruct-1  | 2026-10-05T18:28:54.135637887Z print_info: f_logit_scale         = 0.0e+00
+seminstruct-1  | 2026-10-05T18:28:54.135638595Z print_info: f_attn_scale          = 0.0e+00
+seminstruct-1  | 2026-10-05T18:28:54.135639262Z print_info: n_ff                  = 3072
+seminstruct-1  | 2026-10-05T18:28:54.135639929Z print_info: n_expert              = 0
+seminstruct-1  | 2026-10-05T18:28:54.135640595Z print_info: n_expert_used         = 0
+seminstruct-1  | 2026-10-05T18:28:54.135641262Z print_info: n_expert_groups       = 0
+seminstruct-1  | 2026-10-05T18:28:54.135641929Z print_info: n_group_used          = 0
+seminstruct-1  | 2026-10-05T18:28:54.135642595Z print_info: causal attn           = 1
+seminstruct-1  | 2026-10-05T18:28:54.135643220Z print_info: pooling type          = -1
+seminstruct-1  | 2026-10-05T18:28:54.135643887Z print_info: rope type             = 2
+seminstruct-1  | 2026-10-05T18:28:54.135644554Z print_info: rope scaling          = linear
+seminstruct-1  | 2026-10-05T18:28:54.135645220Z print_info: freq_base_train       = 1000000.0
+seminstruct-1  | 2026-10-05T18:28:54.135645929Z print_info: freq_scale_train      = 1
+seminstruct-1  | 2026-10-05T18:28:54.135646554Z print_info: n_ctx_orig_yarn       = 40960
+seminstruct-1  | 2026-10-05T18:28:54.135647262Z print_info: rope_yarn_log_mul     = 0.0000
+seminstruct-1  | 2026-10-05T18:28:54.135647929Z print_info: rope_finetuned        = unknown
+seminstruct-1  | 2026-10-05T18:28:54.135648595Z print_info: model type            = 0.6B
+seminstruct-1  | 2026-10-05T18:28:54.135649220Z print_info: model params          = 596.05 M
+seminstruct-1  | 2026-10-05T18:28:54.135649929Z print_info: general.name          = Qwen3-0.6B
+seminstruct-1  | 2026-10-05T18:28:54.135650595Z print_info: vocab type            = BPE
+seminstruct-1  | 2026-10-05T18:28:54.135651262Z print_info: n_vocab               = 151936
+seminstruct-1  | 2026-10-05T18:28:54.135652054Z print_info: n_merges              = 151387
+seminstruct-1  | 2026-10-05T18:28:54.135652887Z print_info: BOS token             = 11 ','
+seminstruct-1  | 2026-10-05T18:28:54.135653720Z print_info: EOS token             = 151645 '<|im_end|>'
+seminstruct-1  | 2026-10-05T18:28:54.135654929Z print_info: EOT token             = 151645 '<|im_end|>'
+seminstruct-1  | 2026-10-05T18:28:54.135655804Z print_info: PAD token             = 151654 '<|vision_pad|>'
+seminstruct-1  | 2026-10-05T18:28:54.135657179Z print_info: LF token              = 198 'Ċ'
+seminstruct-1  | 2026-10-05T18:28:54.135658304Z print_info: FIM PRE token         = 151659 '<|fim_prefix|>'
+seminstruct-1  | 2026-10-05T18:28:54.135659220Z print_info: FIM SUF token         = 151661 '<|fim_suffix|>'
+seminstruct-1  | 2026-10-05T18:28:54.135660095Z print_info: FIM MID token         = 151660 '<|fim_middle|>'
+seminstruct-1  | 2026-10-05T18:28:54.135660970Z print_info: FIM PAD token         = 151662 '<|fim_pad|>'
+seminstruct-1  | 2026-10-05T18:28:54.135661845Z print_info: FIM REP token         = 151663 '<|repo_name|>'
+seminstruct-1  | 2026-10-05T18:28:54.135662720Z print_info: FIM SEP token         = 151664 '<|file_sep|>'
+seminstruct-1  | 2026-10-05T18:28:54.135663595Z print_info: EOG token             = 128247 '</s>'
+seminstruct-1  | 2026-10-05T18:28:54.135668595Z print_info: EOG token             = 151643 '<|endoftext|>'
+seminstruct-1  | 2026-10-05T18:28:54.135669470Z print_info: EOG token             = 151645 '<|im_end|>'
+seminstruct-1  | 2026-10-05T18:28:54.135670262Z print_info: EOG token             = 151662 '<|fim_pad|>'
+seminstruct-1  | 2026-10-05T18:28:54.135670970Z print_info: EOG token             = 151663 '<|repo_name|>'
+seminstruct-1  | 2026-10-05T18:28:54.135671679Z print_info: EOG token             = 151664 '<|file_sep|>'
+seminstruct-1  | 2026-10-05T18:28:54.135672387Z print_info: max token length      = 256
+seminstruct-1  | 2026-10-05T18:28:54.135673054Z load_tensors: loading model tensors, this can take a while... (mmap = true, direct_io = false)
+seminstruct-1  | 2026-10-05T18:28:54.141169012Z load_tensors:   CPU_Mapped model buffer size =   372.65 MiB
+seminstruct-1  | 2026-10-05T18:28:54.141568762Z .....................................................................
+seminstruct-1  | 2026-10-05T18:28:54.143210512Z common_init_result: added </s> logit bias = -inf
+seminstruct-1  | 2026-10-05T18:28:54.143374512Z common_init_result: added <|endoftext|> logit bias = -inf
+seminstruct-1  | 2026-10-05T18:28:54.143377679Z common_init_result: added <|im_end|> logit bias = -inf
+seminstruct-1  | 2026-10-05T18:28:54.143378637Z common_init_result: added <|fim_pad|> logit bias = -inf
+seminstruct-1  | 2026-10-05T18:28:54.143379595Z common_init_result: added <|repo_name|> logit bias = -inf
+seminstruct-1  | 2026-10-05T18:28:54.143380512Z common_init_result: added <|file_sep|> logit bias = -inf
+seminstruct-1  | 2026-10-05T18:28:54.143435429Z llama_context: constructing llama_context
+seminstruct-1  | 2026-10-05T18:28:54.143438179Z llama_context: n_seq_max     = 4
+seminstruct-1  | 2026-10-05T18:28:54.143439095Z llama_context: n_ctx         = 16384
+seminstruct-1  | 2026-10-05T18:28:54.143439970Z llama_context: n_ctx_seq     = 4096
+seminstruct-1  | 2026-10-05T18:28:54.143440804Z llama_context: n_batch       = 2048
+seminstruct-1  | 2026-10-05T18:28:54.143441637Z llama_context: n_ubatch      = 512
+seminstruct-1  | 2026-10-05T18:28:54.143442470Z llama_context: causal_attn   = 1
+seminstruct-1  | 2026-10-05T18:28:54.143443387Z llama_context: flash_attn    = auto
+seminstruct-1  | 2026-10-05T18:28:54.143444220Z llama_context: kv_unified    = false
+seminstruct-1  | 2026-10-05T18:28:54.143445054Z llama_context: freq_base     = 1000000.0
+seminstruct-1  | 2026-10-05T18:28:54.143445929Z llama_context: freq_scale    = 1
+seminstruct-1  | 2026-10-05T18:28:54.143446762Z llama_context: n_ctx_seq (4096) < n_ctx_train (40960) -- the full capacity of the model will not be utilized
+seminstruct-1  | 2026-10-05T18:28:54.143465970Z llama_context:        CPU  output buffer size =     2.32 MiB
+seminstruct-1  | 2026-10-05T18:28:54.143604304Z llama_kv_cache:        CPU KV buffer size =  1792.00 MiB
+seminstruct-1  | 2026-10-05T18:28:54.197125679Z llama_kv_cache: size = 1792.00 MiB (  4096 cells,  28 layers,  4/4 seqs), K (f16):  896.00 MiB, V (f16):  896.00 MiB
+seminstruct-1  | 2026-10-05T18:28:54.197140470Z llama_kv_cache: attn_rot_k = 0, n_embd_head_k_all = 128
+seminstruct-1  | 2026-10-05T18:28:54.197141720Z llama_kv_cache: attn_rot_v = 0, n_embd_head_k_all = 128
+seminstruct-1  | 2026-10-05T18:28:54.197151887Z sched_reserve: reserving ...
+seminstruct-1  | 2026-10-05T18:28:54.197397720Z sched_reserve: Flash Attention was auto, set to enabled
+seminstruct-1  | 2026-10-05T18:28:54.197400179Z sched_reserve: resolving fused Gated Delta Net support:
+seminstruct-1  | 2026-10-05T18:28:54.197598845Z sched_reserve: fused Gated Delta Net (autoregressive) enabled
+seminstruct-1  | 2026-10-05T18:28:54.197795929Z sched_reserve: fused Gated Delta Net (chunked) enabled
+seminstruct-1  | 2026-10-05T18:28:54.198608887Z sched_reserve:        CPU compute buffer size =   308.75 MiB
+seminstruct-1  | 2026-10-05T18:28:54.198613804Z sched_reserve: graph nodes  = 1043
+seminstruct-1  | 2026-10-05T18:28:54.198614554Z sched_reserve: graph splits = 1
+seminstruct-1  | 2026-10-05T18:28:54.198615304Z sched_reserve: reserve took 1.53 ms, sched copies = 1
+seminstruct-1  | 2026-10-05T18:28:54.198646054Z common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+seminstruct-1  | 2026-10-05T18:28:54.245784845Z srv    load_model: initializing slots, n_slots = 4
+seminstruct-1  | 2026-10-05T18:28:54.301240179Z no implementations specified for speculative decoding
+seminstruct-1  | 2026-10-05T18:28:54.301255179Z slot   load_model: id  0 | task -1 | new slot, n_ctx = 4096
+seminstruct-1  | 2026-10-05T18:28:54.301256262Z no implementations specified for speculative decoding
+seminstruct-1  | 2026-10-05T18:28:54.301257137Z slot   load_model: id  1 | task -1 | new slot, n_ctx = 4096
+seminstruct-1  | 2026-10-05T18:28:54.301258012Z no implementations specified for speculative decoding
+seminstruct-1  | 2026-10-05T18:28:54.301259137Z slot   load_model: id  2 | task -1 | new slot, n_ctx = 4096
+seminstruct-1  | 2026-10-05T18:28:54.301259970Z no implementations specified for speculative decoding
+seminstruct-1  | 2026-10-05T18:28:54.301260887Z slot   load_model: id  3 | task -1 | new slot, n_ctx = 4096
+seminstruct-1  | 2026-10-05T18:28:54.301261720Z srv    load_model: prompt cache is enabled, size limit: 8192 MiB
+seminstruct-1  | 2026-10-05T18:28:54.301262637Z srv    load_model: use `--cache-ram 0` to disable the prompt cache
+seminstruct-1  | 2026-10-05T18:28:54.301263554Z srv    load_model: for more info see https://github.com/ggml-org/llama.cpp/pull/16391
+seminstruct-1  | 2026-10-05T18:28:54.301264429Z srv          init: init: --cache-idle-slots requires --kv-unified, disabling
+seminstruct-1  | 2026-10-05T18:28:54.306776345Z init: chat template, example_format: '<|im_start|>system
+seminstruct-1  | 2026-10-05T18:28:54.306782970Z You are a helpful assistant<|im_end|>
+seminstruct-1  | 2026-10-05T18:28:54.306784220Z <|im_start|>user
+seminstruct-1  | 2026-10-05T18:28:54.306785095Z Hello<|im_end|>
+seminstruct-1  | 2026-10-05T18:28:54.306785970Z <|im_start|>assistant
+seminstruct-1  | 2026-10-05T18:28:54.306786887Z Hi there<|im_end|>
+seminstruct-1  | 2026-10-05T18:28:54.306787762Z <|im_start|>user
+seminstruct-1  | 2026-10-05T18:28:54.306788595Z How are you?<|im_end|>
+seminstruct-1  | 2026-10-05T18:28:54.306789387Z <|im_start|>assistant
+seminstruct-1  | 2026-10-05T18:28:54.306790220Z <think>
+seminstruct-1  | 2026-10-05T18:28:54.306791012Z 
+seminstruct-1  | 2026-10-05T18:28:54.306799679Z </think>
+seminstruct-1  | 2026-10-05T18:28:54.306800512Z 
+seminstruct-1  | 2026-10-05T18:28:54.306801304Z '
+seminstruct-1  | 2026-10-05T18:28:54.309871137Z srv          init: init: chat template, thinking = 0
+seminstruct-1  | 2026-10-05T18:28:54.309875095Z main: model loaded
+seminstruct-1  | 2026-10-05T18:28:54.309875887Z main: server is listening on http://0.0.0.0:8083
+seminstruct-1  | 2026-10-05T18:28:54.309876637Z main: starting the main loop...
+seminstruct-1  | 2026-10-05T18:28:54.309877262Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:29:44.461529507Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:29:44.461557341Z slot get_availabl: id  3 | task -1 | selected slot by LRU, t_last = -1
+seminstruct-1  | 2026-10-05T18:29:44.461559174Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:29:44.461560507Z srv          load:  - looking for better prompt, base f_keep = -1.000, sim = 0.000
+seminstruct-1  | 2026-10-05T18:29:44.461561799Z srv        update:  - cache state: 0 prompts, 0.000 MiB (limits: 8192.000 MiB, 16384 tokens, 8589934592 est)
+seminstruct-1  | 2026-10-05T18:29:44.461563132Z srv  get_availabl: prompt cache update took 0.00 ms
+seminstruct-1  | 2026-10-05T18:29:44.461599257Z slot launch_slot_: id  3 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:29:44.461605424Z slot launch_slot_: id  3 | task 0 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:29:44.461606924Z slot update_slots: id  3 | task 0 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 772
+seminstruct-1  | 2026-10-05T18:29:44.461608091Z slot update_slots: id  3 | task 0 | n_tokens = 0, memory_seq_rm [0, end)
+seminstruct-1  | 2026-10-05T18:29:44.461724841Z slot init_sampler: id  3 | task 0 | init sampler, took 0.08 ms, tokens: text = 772, total = 772
+seminstruct-1  | 2026-10-05T18:29:44.461728257Z slot update_slots: id  3 | task 0 | prompt processing done, n_tokens = 772, batch.n_tokens = 772
+seminstruct-1  | 2026-10-05T18:29:44.502183716Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:29:44.560416841Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:29:53.627405095Z slot get_availabl: id  2 | task -1 | selected slot by LRU, t_last = -1
+seminstruct-1  | 2026-10-05T18:29:53.627428512Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:29:53.627430887Z srv          load:  - looking for better prompt, base f_keep = -1.000, sim = 0.000
+seminstruct-1  | 2026-10-05T18:29:53.627431928Z srv        update:  - cache state: 0 prompts, 0.000 MiB (limits: 8192.000 MiB, 16384 tokens, 8589934592 est)
+seminstruct-1  | 2026-10-05T18:29:53.627432928Z srv  get_availabl: prompt cache update took 0.01 ms
+seminstruct-1  | 2026-10-05T18:29:53.627433845Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:29:53.627436137Z slot launch_slot_: id  2 | task 2 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:29:53.627437095Z slot get_availabl: id  1 | task -1 | selected slot by LRU, t_last = -1
+seminstruct-1  | 2026-10-05T18:29:53.627445178Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:29:53.627446012Z srv          load:  - looking for better prompt, base f_keep = -1.000, sim = 0.000
+seminstruct-1  | 2026-10-05T18:29:53.627446720Z srv        update:  - cache state: 0 prompts, 0.000 MiB (limits: 8192.000 MiB, 16384 tokens, 8589934592 est)
+seminstruct-1  | 2026-10-05T18:29:53.627447512Z srv  get_availabl: prompt cache update took 0.00 ms
+seminstruct-1  | 2026-10-05T18:29:53.627448220Z slot launch_slot_: id  1 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:29:53.627449178Z slot launch_slot_: id  1 | task 3 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:29:53.627449887Z slot update_slots: id  1 | task 3 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 772
+seminstruct-1  | 2026-10-05T18:29:53.627450678Z slot update_slots: id  1 | task 3 | n_tokens = 0, memory_seq_rm [0, end)
+seminstruct-1  | 2026-10-05T18:29:53.627518303Z slot init_sampler: id  1 | task 3 | init sampler, took 0.07 ms, tokens: text = 772, total = 772
+seminstruct-1  | 2026-10-05T18:29:53.627521678Z slot update_slots: id  1 | task 3 | prompt processing done, n_tokens = 772, batch.n_tokens = 773
+seminstruct-1  | 2026-10-05T18:29:53.627522637Z slot update_slots: id  2 | task 2 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 772
+seminstruct-1  | 2026-10-05T18:29:53.627523553Z slot update_slots: id  2 | task 2 | n_tokens = 0, memory_seq_rm [0, end)
+seminstruct-1  | 2026-10-05T18:29:53.627611803Z slot init_sampler: id  2 | task 2 | init sampler, took 0.08 ms, tokens: text = 772, total = 772
+seminstruct-1  | 2026-10-05T18:29:53.627617095Z slot update_slots: id  2 | task 2 | prompt processing done, n_tokens = 772, batch.n_tokens = 1545
+seminstruct-1  | 2026-10-05T18:30:14.563477674Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:30:14.603791049Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:30:14.615492549Z slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+seminstruct-1  | 2026-10-05T18:30:14.615511091Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:30:14.615512466Z srv          load:  - looking for better prompt, base f_keep = -1.000, sim = 0.000
+seminstruct-1  | 2026-10-05T18:30:14.615513466Z srv        update:  - cache state: 0 prompts, 0.000 MiB (limits: 8192.000 MiB, 16384 tokens, 8589934592 est)
+seminstruct-1  | 2026-10-05T18:30:14.615514507Z srv  get_availabl: prompt cache update took 0.01 ms
+seminstruct-1  | 2026-10-05T18:30:14.615519216Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:30:14.615528966Z slot launch_slot_: id  0 | task 42 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:30:14.615530424Z slot update_slots: id  0 | task 42 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 772
+seminstruct-1  | 2026-10-05T18:30:14.615531549Z slot update_slots: id  0 | task 42 | n_tokens = 0, memory_seq_rm [0, end)
+seminstruct-1  | 2026-10-05T18:30:14.615598507Z slot init_sampler: id  0 | task 42 | init sampler, took 0.07 ms, tokens: text = 772, total = 772
+seminstruct-1  | 2026-10-05T18:30:14.615612007Z slot update_slots: id  0 | task 42 | prompt processing done, n_tokens = 772, batch.n_tokens = 775
+seminstruct-1  | 2026-10-05T18:30:27.522359597Z slot print_timing: id  3 | task 0 | 
+seminstruct-1  | 2026-10-05T18:30:27.522398180Z prompt eval time =    9165.69 ms /   772 tokens (   11.87 ms per token,    84.23 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:27.522407763Z        eval time =   33894.92 ms /    80 tokens (  423.69 ms per token,     2.36 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:27.522411097Z       total time =   43060.61 ms /   852 tokens
+seminstruct-1  | 2026-10-05T18:30:27.522413180Z slot      release: id  3 | task 0 | stop processing: n_tokens = 851, truncated = 0
+seminstruct-1  | 2026-10-05T18:30:27.522415097Z slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, sim_best = 0.301 (> 0.100 thold), f_keep = 0.273
+seminstruct-1  | 2026-10-05T18:30:27.522417347Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:30:27.522438972Z srv   prompt_save:  - saving prompt with length 851, total state size = 93.089 MiB
+seminstruct-1  | 2026-10-05T18:30:27.522623055Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:30:27.543508805Z srv          load:  - looking for better prompt, base f_keep = 0.273, sim = 0.301
+seminstruct-1  | 2026-10-05T18:30:27.543545347Z srv        update:  - cache state: 1 prompts, 93.089 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:30:27.543548263Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:30:27.543550513Z srv  get_availabl: prompt cache update took 21.15 ms
+seminstruct-1  | 2026-10-05T18:30:27.543601930Z slot launch_slot_: id  3 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:30:27.543611638Z slot launch_slot_: id  3 | task 43 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:30:27.543613722Z slot update_slots: id  3 | task 43 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 772
+seminstruct-1  | 2026-10-05T18:30:27.543615638Z slot update_slots: id  3 | task 43 | n_tokens = 232, memory_seq_rm [232, end)
+seminstruct-1  | 2026-10-05T18:30:27.543726680Z slot init_sampler: id  3 | task 43 | init sampler, took 0.07 ms, tokens: text = 772, total = 772
+seminstruct-1  | 2026-10-05T18:30:27.543740055Z slot update_slots: id  3 | task 43 | prompt processing done, n_tokens = 772, batch.n_tokens = 543
+seminstruct-1  | 2026-10-05T18:30:27.571814638Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:30:34.504910211Z slot print_timing: id  1 | task 3 | 
+seminstruct-1  | 2026-10-05T18:30:34.504940877Z prompt eval time =   17708.42 ms /   772 tokens (   22.94 ms per token,    43.60 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:34.504942544Z        eval time =   23168.94 ms /    84 tokens (  275.82 ms per token,     3.63 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:34.504943669Z       total time =   40877.36 ms /   856 tokens
+seminstruct-1  | 2026-10-05T18:30:34.504944627Z slot      release: id  1 | task 3 | stop processing: n_tokens = 855, truncated = 0
+seminstruct-1  | 2026-10-05T18:30:34.504958044Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:30:34.505193377Z slot get_availabl: id  1 | task -1 | selected slot by LCP similarity, sim_best = 0.301 (> 0.100 thold), f_keep = 0.271
+seminstruct-1  | 2026-10-05T18:30:34.505200086Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:30:34.505201752Z srv   prompt_save:  - saving prompt with length 855, total state size = 93.526 MiB
+seminstruct-1  | 2026-10-05T18:30:34.541955211Z srv          load:  - looking for better prompt, base f_keep = 0.271, sim = 0.301
+seminstruct-1  | 2026-10-05T18:30:34.541974127Z srv        update:  - cache state: 2 prompts, 186.615 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:30:34.541975419Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:30:34.541976252Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:30:34.541977086Z srv  get_availabl: prompt cache update took 36.70 ms
+seminstruct-1  | 2026-10-05T18:30:34.545600794Z slot launch_slot_: id  1 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:30:34.545608377Z slot launch_slot_: id  1 | task 86 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:30:34.545691961Z slot update_slots: id  1 | task 86 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 772
+seminstruct-1  | 2026-10-05T18:30:34.545695086Z slot update_slots: id  1 | task 86 | n_tokens = 232, memory_seq_rm [232, end)
+seminstruct-1  | 2026-10-05T18:30:34.546205377Z slot init_sampler: id  1 | task 86 | init sampler, took 0.07 ms, tokens: text = 772, total = 772
+seminstruct-1  | 2026-10-05T18:30:34.546210169Z slot update_slots: id  1 | task 86 | prompt processing done, n_tokens = 772, batch.n_tokens = 543
+seminstruct-1  | 2026-10-05T18:30:41.884384381Z slot print_timing: id  2 | task 2 | 
+seminstruct-1  | 2026-10-05T18:30:41.884410006Z prompt eval time =   17708.98 ms /   772 tokens (   22.94 ms per token,    43.59 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:41.884411548Z        eval time =   30547.81 ms /    94 tokens (  324.98 ms per token,     3.08 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:41.884412381Z       total time =   48256.79 ms /   866 tokens
+seminstruct-1  | 2026-10-05T18:30:41.888284464Z slot      release: id  2 | task 2 | stop processing: n_tokens = 865, truncated = 0
+seminstruct-1  | 2026-10-05T18:30:41.888589714Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:30:45.046366966Z slot print_timing: id  0 | task 42 | 
+seminstruct-1  | 2026-10-05T18:30:45.046393924Z prompt eval time =    9000.97 ms /   772 tokens (   11.66 ms per token,    85.77 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:45.046395466Z        eval time =   21429.62 ms /    97 tokens (  220.92 ms per token,     4.53 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:45.046396299Z       total time =   30430.59 ms /   869 tokens
+seminstruct-1  | 2026-10-05T18:30:45.046581674Z slot      release: id  0 | task 42 | stop processing: n_tokens = 868, truncated = 0
+seminstruct-1  | 2026-10-05T18:30:45.047759216Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:30:46.114927675Z slot print_timing: id  3 | task 43 | 
+seminstruct-1  | 2026-10-05T18:30:46.114942716Z prompt eval time =    6582.03 ms /   540 tokens (   12.19 ms per token,    82.04 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:46.114943883Z        eval time =   11989.18 ms /    76 tokens (  157.75 ms per token,     6.34 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:46.114944883Z       total time =   18571.21 ms /   616 tokens
+seminstruct-1  | 2026-10-05T18:30:46.115442550Z slot      release: id  3 | task 43 | stop processing: n_tokens = 847, truncated = 0
+seminstruct-1  | 2026-10-05T18:30:46.116262883Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:30:46.458665342Z slot print_timing: id  1 | task 86 | 
+seminstruct-1  | 2026-10-05T18:30:46.458686883Z prompt eval time =    6489.90 ms /   540 tokens (   12.02 ms per token,    83.21 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:46.458688258Z        eval time =    5422.98 ms /    84 tokens (   64.56 ms per token,    15.49 tokens per second)
+seminstruct-1  | 2026-10-05T18:30:46.458689050Z       total time =   11912.88 ms /   624 tokens
+seminstruct-1  | 2026-10-05T18:30:46.458689800Z slot      release: id  1 | task 86 | stop processing: n_tokens = 855, truncated = 0
+seminstruct-1  | 2026-10-05T18:30:46.458897967Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:30:46.459121217Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:31:21.380525344Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:31:21.380570844Z slot get_availabl: id  2 | task -1 | selected slot by LRU, t_last = 336591166373
+seminstruct-1  | 2026-10-05T18:31:21.380578677Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:31:21.380603302Z srv   prompt_save:  - saving prompt with length 865, total state size = 94.620 MiB
+seminstruct-1  | 2026-10-05T18:31:21.545535094Z srv          load:  - looking for better prompt, base f_keep = 0.006, sim = 0.008
+seminstruct-1  | 2026-10-05T18:31:21.545555177Z srv        update:  - cache state: 3 prompts, 281.235 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:31:21.545556344Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:31:21.545557386Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:31:21.545558344Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:31:21.545559302Z srv  get_availabl: prompt cache update took 164.89 ms
+seminstruct-1  | 2026-10-05T18:31:21.545562094Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:31:21.545564302Z slot launch_slot_: id  2 | task 175 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:31:21.545565302Z slot update_slots: id  2 | task 175 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 635
+seminstruct-1  | 2026-10-05T18:31:21.545566261Z slot update_slots: id  2 | task 175 | n_tokens = 5, memory_seq_rm [5, end)
+seminstruct-1  | 2026-10-05T18:31:21.546808802Z slot init_sampler: id  2 | task 175 | init sampler, took 0.06 ms, tokens: text = 635, total = 635
+seminstruct-1  | 2026-10-05T18:31:21.546820386Z slot update_slots: id  2 | task 175 | prompt processing done, n_tokens = 635, batch.n_tokens = 630
+seminstruct-1  | 2026-10-05T18:31:31.138201668Z slot print_timing: id  2 | task 175 | 
+seminstruct-1  | 2026-10-05T18:31:31.138235834Z prompt eval time =    7066.58 ms /   630 tokens (   11.22 ms per token,    89.15 tokens per second)
+seminstruct-1  | 2026-10-05T18:31:31.138237501Z        eval time =    2526.02 ms /   107 tokens (   23.61 ms per token,    42.36 tokens per second)
+seminstruct-1  | 2026-10-05T18:31:31.138238376Z       total time =    9592.60 ms /   737 tokens
+seminstruct-1  | 2026-10-05T18:31:31.141800084Z slot      release: id  2 | task 175 | stop processing: n_tokens = 741, truncated = 0
+seminstruct-1  | 2026-10-05T18:31:31.141807959Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:31:31.141866459Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:31:31.199948501Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:31:31.199988293Z slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 336594324698
+seminstruct-1  | 2026-10-05T18:31:31.199993084Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:31:31.200032293Z srv   prompt_save:  - saving prompt with length 868, total state size = 94.948 MiB
+seminstruct-1  | 2026-10-05T18:31:31.204962043Z srv          load:  - looking for better prompt, base f_keep = 0.006, sim = 0.013
+seminstruct-1  | 2026-10-05T18:31:31.204971209Z srv        update:  - cache state: 4 prompts, 376.183 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:31:31.204972126Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:31:31.204972876Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:31:31.204973793Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:31:31.204974501Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:31:31.204975251Z srv  get_availabl: prompt cache update took 4.93 ms
+seminstruct-1  | 2026-10-05T18:31:31.204976084Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:31:31.204978168Z slot launch_slot_: id  0 | task 283 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:31:31.204978959Z slot update_slots: id  0 | task 283 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 394
+seminstruct-1  | 2026-10-05T18:31:31.204979709Z slot update_slots: id  0 | task 283 | n_tokens = 5, memory_seq_rm [5, end)
+seminstruct-1  | 2026-10-05T18:31:31.205514376Z slot init_sampler: id  0 | task 283 | init sampler, took 0.04 ms, tokens: text = 394, total = 394
+seminstruct-1  | 2026-10-05T18:31:31.205521626Z slot update_slots: id  0 | task 283 | prompt processing done, n_tokens = 394, batch.n_tokens = 389
+seminstruct-1  | 2026-10-05T18:31:39.217709630Z slot print_timing: id  0 | task 283 | 
+seminstruct-1  | 2026-10-05T18:31:39.217749963Z prompt eval time =    4234.23 ms /   389 tokens (   10.88 ms per token,    91.87 tokens per second)
+seminstruct-1  | 2026-10-05T18:31:39.217751296Z        eval time =    3778.40 ms /   172 tokens (   21.97 ms per token,    45.52 tokens per second)
+seminstruct-1  | 2026-10-05T18:31:39.217752088Z       total time =    8012.64 ms /   561 tokens
+seminstruct-1  | 2026-10-05T18:31:39.220871255Z slot      release: id  0 | task 283 | stop processing: n_tokens = 565, truncated = 0
+seminstruct-1  | 2026-10-05T18:31:39.220879921Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:31:39.220937421Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:31:39.243168171Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:31:39.243190880Z slot get_availabl: id  2 | task -1 | selected slot by LCP similarity, sim_best = 0.175 (> 0.100 thold), f_keep = 0.152
+seminstruct-1  | 2026-10-05T18:31:39.243192421Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:31:39.243215171Z srv   prompt_save:  - saving prompt with length 741, total state size = 81.056 MiB
+seminstruct-1  | 2026-10-05T18:31:39.247649755Z srv          load:  - looking for better prompt, base f_keep = 0.152, sim = 0.175
+seminstruct-1  | 2026-10-05T18:31:39.247663005Z srv        update:  - cache state: 5 prompts, 457.239 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:31:39.247664088Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:31:39.247664880Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:31:39.247665671Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:31:39.247666421Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:31:39.247667171Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:31:39.247667880Z srv  get_availabl: prompt cache update took 4.40 ms
+seminstruct-1  | 2026-10-05T18:31:39.247745046Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:31:39.247748130Z slot launch_slot_: id  2 | task 456 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:31:39.247748921Z slot update_slots: id  2 | task 456 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 645
+seminstruct-1  | 2026-10-05T18:31:39.247749713Z slot update_slots: id  2 | task 456 | n_tokens = 113, memory_seq_rm [113, end)
+seminstruct-1  | 2026-10-05T18:31:39.247859671Z slot init_sampler: id  2 | task 456 | init sampler, took 0.06 ms, tokens: text = 645, total = 645
+seminstruct-1  | 2026-10-05T18:31:39.247861380Z slot update_slots: id  2 | task 456 | prompt processing done, n_tokens = 645, batch.n_tokens = 532
+seminstruct-1  | 2026-10-05T18:31:47.483660925Z slot print_timing: id  2 | task 456 | 
+seminstruct-1  | 2026-10-05T18:31:47.483688342Z prompt eval time =    6022.02 ms /   532 tokens (   11.32 ms per token,    88.34 tokens per second)
+seminstruct-1  | 2026-10-05T18:31:47.483701175Z        eval time =    2213.79 ms /    94 tokens (   23.55 ms per token,    42.46 tokens per second)
+seminstruct-1  | 2026-10-05T18:31:47.483702092Z       total time =    8235.81 ms /   626 tokens
+seminstruct-1  | 2026-10-05T18:31:47.483784300Z slot      release: id  2 | task 456 | stop processing: n_tokens = 738, truncated = 0
+seminstruct-1  | 2026-10-05T18:31:47.483790050Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:31:47.483840842Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:31:47.493961800Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:31:47.494022259Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.896 (> 0.100 thold), f_keep = 0.607
+seminstruct-1  | 2026-10-05T18:31:47.494070384Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:31:47.494073800Z slot launch_slot_: id  0 | task 551 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:31:47.494074717Z slot update_slots: id  0 | task 551 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 383
+seminstruct-1  | 2026-10-05T18:31:47.494075550Z slot update_slots: id  0 | task 551 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:31:47.494149759Z slot init_sampler: id  0 | task 551 | init sampler, took 0.04 ms, tokens: text = 383, total = 383
+seminstruct-1  | 2026-10-05T18:31:47.494152675Z slot update_slots: id  0 | task 551 | prompt processing done, n_tokens = 383, batch.n_tokens = 40
+seminstruct-1  | 2026-10-05T18:31:51.008914260Z slot print_timing: id  0 | task 551 | 
+seminstruct-1  | 2026-10-05T18:31:51.008941219Z prompt eval time =     500.60 ms /    40 tokens (   12.51 ms per token,    79.90 tokens per second)
+seminstruct-1  | 2026-10-05T18:31:51.008942385Z        eval time =    3014.16 ms /   141 tokens (   21.38 ms per token,    46.78 tokens per second)
+seminstruct-1  | 2026-10-05T18:31:51.008943219Z       total time =    3514.76 ms /   181 tokens
+seminstruct-1  | 2026-10-05T18:31:51.008943969Z slot      release: id  0 | task 551 | stop processing: n_tokens = 523, truncated = 0
+seminstruct-1  | 2026-10-05T18:31:51.008944719Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:31:51.008986844Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:31:51.032274927Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:31:51.032335219Z slot get_availabl: id  2 | task -1 | selected slot by LCP similarity, sim_best = 0.154 (> 0.100 thold), f_keep = 0.153
+seminstruct-1  | 2026-10-05T18:31:51.032338969Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:31:51.032371094Z srv   prompt_save:  - saving prompt with length 738, total state size = 80.728 MiB
+seminstruct-1  | 2026-10-05T18:31:51.036776510Z srv          load:  - looking for better prompt, base f_keep = 0.153, sim = 0.154
+seminstruct-1  | 2026-10-05T18:31:51.036794760Z srv        update:  - cache state: 6 prompts, 537.967 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:31:51.036796094Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:31:51.036807552Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:31:51.036808344Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:31:51.036809094Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:31:51.036809885Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:31:51.036810594Z srv        update:    - prompt 0xaaab0b9bf460:     738 tokens, checkpoints:  0,    80.728 MiB
+seminstruct-1  | 2026-10-05T18:31:51.036811344Z srv  get_availabl: prompt cache update took 4.38 ms
+seminstruct-1  | 2026-10-05T18:31:51.036812094Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:31:51.036813969Z slot launch_slot_: id  2 | task 693 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:31:51.036814760Z slot update_slots: id  2 | task 693 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 733
+seminstruct-1  | 2026-10-05T18:31:51.037021802Z slot update_slots: id  2 | task 693 | n_tokens = 113, memory_seq_rm [113, end)
+seminstruct-1  | 2026-10-05T18:31:51.037024344Z slot init_sampler: id  2 | task 693 | init sampler, took 0.07 ms, tokens: text = 733, total = 733
+seminstruct-1  | 2026-10-05T18:31:51.037025135Z slot update_slots: id  2 | task 693 | prompt processing done, n_tokens = 733, batch.n_tokens = 620
+seminstruct-1  | 2026-10-05T18:31:59.180816292Z slot print_timing: id  2 | task 693 | 
+seminstruct-1  | 2026-10-05T18:31:59.180842792Z prompt eval time =    7072.84 ms /   620 tokens (   11.41 ms per token,    87.66 tokens per second)
+seminstruct-1  | 2026-10-05T18:31:59.180844333Z        eval time =    1071.39 ms /    45 tokens (   23.81 ms per token,    42.00 tokens per second)
+seminstruct-1  | 2026-10-05T18:31:59.180845375Z       total time =    8144.23 ms /   665 tokens
+seminstruct-1  | 2026-10-05T18:31:59.181763792Z slot      release: id  2 | task 693 | stop processing: n_tokens = 777, truncated = 0
+seminstruct-1  | 2026-10-05T18:31:59.181771667Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:31:59.181833375Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:31:59.193889500Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:31:59.193934958Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.893 (> 0.100 thold), f_keep = 0.656
+seminstruct-1  | 2026-10-05T18:31:59.193969708Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:31:59.193974167Z slot launch_slot_: id  0 | task 739 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:31:59.193975208Z slot update_slots: id  0 | task 739 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 384
+seminstruct-1  | 2026-10-05T18:31:59.193976208Z slot update_slots: id  0 | task 739 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:31:59.194040417Z slot init_sampler: id  0 | task 739 | init sampler, took 0.04 ms, tokens: text = 384, total = 384
+seminstruct-1  | 2026-10-05T18:31:59.194044042Z slot update_slots: id  0 | task 739 | prompt processing done, n_tokens = 384, batch.n_tokens = 41
+seminstruct-1  | 2026-10-05T18:32:02.579293127Z slot print_timing: id  0 | task 739 | 
+seminstruct-1  | 2026-10-05T18:32:02.579330043Z prompt eval time =     511.78 ms /    41 tokens (   12.48 ms per token,    80.11 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:02.579332752Z        eval time =    2872.50 ms /   135 tokens (   21.28 ms per token,    47.00 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:02.579333752Z       total time =    3384.28 ms /   176 tokens
+seminstruct-1  | 2026-10-05T18:32:02.579334627Z slot      release: id  0 | task 739 | stop processing: n_tokens = 518, truncated = 0
+seminstruct-1  | 2026-10-05T18:32:02.579335543Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:32:02.579359710Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:32:02.600092460Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:32:02.600117585Z slot get_availabl: id  2 | task -1 | selected slot by LCP similarity, sim_best = 0.180 (> 0.100 thold), f_keep = 0.145
+seminstruct-1  | 2026-10-05T18:32:02.600121668Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:32:02.600143210Z srv   prompt_save:  - saving prompt with length 777, total state size = 84.994 MiB
+seminstruct-1  | 2026-10-05T18:32:02.604393585Z srv          load:  - looking for better prompt, base f_keep = 0.145, sim = 0.180
+seminstruct-1  | 2026-10-05T18:32:02.604402710Z srv        update:  - cache state: 7 prompts, 622.960 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:32:02.604403793Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:32:02.604404543Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:32:02.604405377Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:32:02.604406085Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:32:02.604406835Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:32:02.604407585Z srv        update:    - prompt 0xaaab0b9bf460:     738 tokens, checkpoints:  0,    80.728 MiB
+seminstruct-1  | 2026-10-05T18:32:02.604408293Z srv        update:    - prompt 0xaaab09c035f0:     777 tokens, checkpoints:  0,    84.994 MiB
+seminstruct-1  | 2026-10-05T18:32:02.604409043Z srv  get_availabl: prompt cache update took 4.26 ms
+seminstruct-1  | 2026-10-05T18:32:02.604410502Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:32:02.604412460Z slot launch_slot_: id  2 | task 875 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:32:02.604413252Z slot update_slots: id  2 | task 875 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 629
+seminstruct-1  | 2026-10-05T18:32:02.604423793Z slot update_slots: id  2 | task 875 | n_tokens = 113, memory_seq_rm [113, end)
+seminstruct-1  | 2026-10-05T18:32:02.604543043Z slot init_sampler: id  2 | task 875 | init sampler, took 0.06 ms, tokens: text = 629, total = 629
+seminstruct-1  | 2026-10-05T18:32:02.604545502Z slot update_slots: id  2 | task 875 | prompt processing done, n_tokens = 629, batch.n_tokens = 516
+seminstruct-1  | 2026-10-05T18:32:09.732710380Z slot print_timing: id  2 | task 875 | 
+seminstruct-1  | 2026-10-05T18:32:09.732738588Z prompt eval time =    5778.24 ms /   516 tokens (   11.20 ms per token,    89.30 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:09.732740213Z        eval time =    1349.93 ms /    58 tokens (   23.27 ms per token,    42.97 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:09.732741213Z       total time =    7128.17 ms /   574 tokens
+seminstruct-1  | 2026-10-05T18:32:09.732742130Z slot      release: id  2 | task 875 | stop processing: n_tokens = 686, truncated = 0
+seminstruct-1  | 2026-10-05T18:32:09.732743088Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:32:09.732790172Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:32:09.745774172Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:32:09.745831297Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.866 (> 0.100 thold), f_keep = 0.662
+seminstruct-1  | 2026-10-05T18:32:09.745853213Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:32:09.745856172Z slot launch_slot_: id  0 | task 934 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:32:09.745857088Z slot update_slots: id  0 | task 934 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 396
+seminstruct-1  | 2026-10-05T18:32:09.745857922Z slot update_slots: id  0 | task 934 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:32:09.745933172Z slot init_sampler: id  0 | task 934 | init sampler, took 0.04 ms, tokens: text = 396, total = 396
+seminstruct-1  | 2026-10-05T18:32:09.745936463Z slot update_slots: id  0 | task 934 | prompt processing done, n_tokens = 396, batch.n_tokens = 53
+seminstruct-1  | 2026-10-05T18:32:13.994199090Z slot print_timing: id  0 | task 934 | 
+seminstruct-1  | 2026-10-05T18:32:13.994226882Z prompt eval time =     657.55 ms /    53 tokens (   12.41 ms per token,    80.60 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:13.994228215Z        eval time =    3590.66 ms /   164 tokens (   21.89 ms per token,    45.67 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:13.994229132Z       total time =    4248.22 ms /   217 tokens
+seminstruct-1  | 2026-10-05T18:32:13.994230049Z slot      release: id  0 | task 934 | stop processing: n_tokens = 559, truncated = 0
+seminstruct-1  | 2026-10-05T18:32:13.994230924Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:32:13.994256132Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:32:14.024740090Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:32:14.024763674Z slot get_availabl: id  2 | task -1 | selected slot by LCP similarity, sim_best = 0.132 (> 0.100 thold), f_keep = 0.165
+seminstruct-1  | 2026-10-05T18:32:14.024774090Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:32:14.024801840Z srv   prompt_save:  - saving prompt with length 686, total state size = 75.040 MiB
+seminstruct-1  | 2026-10-05T18:32:14.028876340Z srv          load:  - looking for better prompt, base f_keep = 0.165, sim = 0.132
+seminstruct-1  | 2026-10-05T18:32:14.028890090Z srv        update:  - cache state: 8 prompts, 698.000 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:32:14.028891340Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:32:14.028892215Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:32:14.028893007Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:32:14.028893757Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:32:14.028894507Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:32:14.028895215Z srv        update:    - prompt 0xaaab0b9bf460:     738 tokens, checkpoints:  0,    80.728 MiB
+seminstruct-1  | 2026-10-05T18:32:14.028895965Z srv        update:    - prompt 0xaaab09c035f0:     777 tokens, checkpoints:  0,    84.994 MiB
+seminstruct-1  | 2026-10-05T18:32:14.028896674Z srv        update:    - prompt 0xaaab09afc340:     686 tokens, checkpoints:  0,    75.040 MiB
+seminstruct-1  | 2026-10-05T18:32:14.028897424Z srv  get_availabl: prompt cache update took 4.05 ms
+seminstruct-1  | 2026-10-05T18:32:14.028898174Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:32:14.028900090Z slot launch_slot_: id  2 | task 1099 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:32:14.028900840Z slot update_slots: id  2 | task 1099 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 857
+seminstruct-1  | 2026-10-05T18:32:14.028901632Z slot update_slots: id  2 | task 1099 | n_tokens = 113, memory_seq_rm [113, end)
+seminstruct-1  | 2026-10-05T18:32:14.029034257Z slot init_sampler: id  2 | task 1099 | init sampler, took 0.09 ms, tokens: text = 857, total = 857
+seminstruct-1  | 2026-10-05T18:32:14.029038007Z slot update_slots: id  2 | task 1099 | prompt processing done, n_tokens = 857, batch.n_tokens = 744
+seminstruct-1  | 2026-10-05T18:32:24.883451304Z slot print_timing: id  2 | task 1099 | 
+seminstruct-1  | 2026-10-05T18:32:24.883473887Z prompt eval time =    8671.09 ms /   744 tokens (   11.65 ms per token,    85.80 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:24.883475221Z        eval time =    2183.43 ms /    84 tokens (   25.99 ms per token,    38.47 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:24.883476096Z       total time =   10854.52 ms /   828 tokens
+seminstruct-1  | 2026-10-05T18:32:24.885585804Z slot      release: id  2 | task 1099 | stop processing: n_tokens = 940, truncated = 0
+seminstruct-1  | 2026-10-05T18:32:24.885599012Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:32:24.885799054Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:32:24.896282596Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:32:24.896392262Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.875 (> 0.100 thold), f_keep = 0.614
+seminstruct-1  | 2026-10-05T18:32:24.896395846Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:32:24.896397512Z slot launch_slot_: id  0 | task 1184 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:32:24.896398346Z slot update_slots: id  0 | task 1184 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 392
+seminstruct-1  | 2026-10-05T18:32:24.896399137Z slot update_slots: id  0 | task 1184 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:32:24.896486971Z slot init_sampler: id  0 | task 1184 | init sampler, took 0.04 ms, tokens: text = 392, total = 392
+seminstruct-1  | 2026-10-05T18:32:24.896489262Z slot update_slots: id  0 | task 1184 | prompt processing done, n_tokens = 392, batch.n_tokens = 49
+seminstruct-1  | 2026-10-05T18:32:29.280288875Z slot print_timing: id  0 | task 1184 | 
+seminstruct-1  | 2026-10-05T18:32:29.280315250Z prompt eval time =     621.23 ms /    49 tokens (   12.68 ms per token,    78.88 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:29.280316833Z        eval time =    3762.90 ms /   171 tokens (   22.01 ms per token,    45.44 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:29.280317875Z       total time =    4384.12 ms /   220 tokens
+seminstruct-1  | 2026-10-05T18:32:29.280318875Z slot      release: id  0 | task 1184 | stop processing: n_tokens = 562, truncated = 0
+seminstruct-1  | 2026-10-05T18:32:29.280319792Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:32:29.280353167Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:32:29.292883292Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:32:29.293033292Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.871 (> 0.100 thold), f_keep = 0.610
+seminstruct-1  | 2026-10-05T18:32:29.293036375Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:32:29.293038167Z slot launch_slot_: id  0 | task 1356 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:32:29.293038917Z slot update_slots: id  0 | task 1356 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 394
+seminstruct-1  | 2026-10-05T18:32:29.293039708Z slot update_slots: id  0 | task 1356 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:32:29.293099833Z slot init_sampler: id  0 | task 1356 | init sampler, took 0.04 ms, tokens: text = 394, total = 394
+seminstruct-1  | 2026-10-05T18:32:29.293104875Z slot update_slots: id  0 | task 1356 | prompt processing done, n_tokens = 394, batch.n_tokens = 51
+seminstruct-1  | 2026-10-05T18:32:33.776089877Z slot print_timing: id  0 | task 1356 | 
+seminstruct-1  | 2026-10-05T18:32:33.776114377Z prompt eval time =     632.49 ms /    51 tokens (   12.40 ms per token,    80.63 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:33.776115335Z        eval time =    3850.51 ms /   175 tokens (   22.00 ms per token,    45.45 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:33.776128460Z       total time =    4483.00 ms /   226 tokens
+seminstruct-1  | 2026-10-05T18:32:33.776129252Z slot      release: id  0 | task 1356 | stop processing: n_tokens = 568, truncated = 0
+seminstruct-1  | 2026-10-05T18:32:33.776130044Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:32:33.776147752Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:32:33.803361419Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:32:33.803402502Z slot get_availabl: id  2 | task -1 | selected slot by LCP similarity, sim_best = 0.126 (> 0.100 thold), f_keep = 0.120
+seminstruct-1  | 2026-10-05T18:32:33.803405085Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:32:33.803439377Z srv   prompt_save:  - saving prompt with length 940, total state size = 102.824 MiB
+seminstruct-1  | 2026-10-05T18:32:33.808806585Z srv          load:  - looking for better prompt, base f_keep = 0.120, sim = 0.126
+seminstruct-1  | 2026-10-05T18:32:33.808816919Z srv        update:  - cache state: 9 prompts, 800.824 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:32:33.808817877Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:32:33.808818627Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:32:33.808819544Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:32:33.808820294Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:32:33.808821044Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:32:33.808821752Z srv        update:    - prompt 0xaaab0b9bf460:     738 tokens, checkpoints:  0,    80.728 MiB
+seminstruct-1  | 2026-10-05T18:32:33.808822502Z srv        update:    - prompt 0xaaab09c035f0:     777 tokens, checkpoints:  0,    84.994 MiB
+seminstruct-1  | 2026-10-05T18:32:33.808823210Z srv        update:    - prompt 0xaaab09afc340:     686 tokens, checkpoints:  0,    75.040 MiB
+seminstruct-1  | 2026-10-05T18:32:33.808823960Z srv        update:    - prompt 0xaaab0b9925d0:     940 tokens, checkpoints:  0,   102.824 MiB
+seminstruct-1  | 2026-10-05T18:32:33.808824710Z srv  get_availabl: prompt cache update took 5.34 ms
+seminstruct-1  | 2026-10-05T18:32:33.808825460Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:32:33.808829085Z slot launch_slot_: id  2 | task 1532 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:32:33.808829877Z slot update_slots: id  2 | task 1532 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 897
+seminstruct-1  | 2026-10-05T18:32:33.808830669Z slot update_slots: id  2 | task 1532 | n_tokens = 113, memory_seq_rm [113, end)
+seminstruct-1  | 2026-10-05T18:32:33.809190960Z slot init_sampler: id  2 | task 1532 | init sampler, took 0.08 ms, tokens: text = 897, total = 897
+seminstruct-1  | 2026-10-05T18:32:33.809194585Z slot update_slots: id  2 | task 1532 | prompt processing done, n_tokens = 897, batch.n_tokens = 784
+seminstruct-1  | 2026-10-05T18:32:45.240083133Z slot print_timing: id  2 | task 1532 | 
+seminstruct-1  | 2026-10-05T18:32:45.240111341Z prompt eval time =    9273.77 ms /   784 tokens (   11.83 ms per token,    84.54 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:45.240112758Z        eval time =    2157.39 ms /    82 tokens (   26.31 ms per token,    38.01 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:45.240114133Z       total time =   11431.17 ms /   866 tokens
+seminstruct-1  | 2026-10-05T18:32:45.241407508Z slot      release: id  2 | task 1532 | stop processing: n_tokens = 978, truncated = 0
+seminstruct-1  | 2026-10-05T18:32:45.241417383Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:32:45.241482466Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:32:45.252898758Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:32:45.252965133Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.866 (> 0.100 thold), f_keep = 0.604
+seminstruct-1  | 2026-10-05T18:32:45.253003883Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:32:45.253021049Z slot launch_slot_: id  0 | task 1615 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:32:45.253022174Z slot update_slots: id  0 | task 1615 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 396
+seminstruct-1  | 2026-10-05T18:32:45.253023133Z slot update_slots: id  0 | task 1615 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:32:45.253070258Z slot init_sampler: id  0 | task 1615 | init sampler, took 0.04 ms, tokens: text = 396, total = 396
+seminstruct-1  | 2026-10-05T18:32:45.253077299Z slot update_slots: id  0 | task 1615 | prompt processing done, n_tokens = 396, batch.n_tokens = 53
+seminstruct-1  | 2026-10-05T18:32:48.920051759Z slot print_timing: id  0 | task 1615 | 
+seminstruct-1  | 2026-10-05T18:32:48.920072468Z prompt eval time =     659.86 ms /    53 tokens (   12.45 ms per token,    80.32 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:48.920073801Z        eval time =    3007.09 ms /   140 tokens (   21.48 ms per token,    46.56 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:48.920074843Z       total time =    3666.95 ms /   193 tokens
+seminstruct-1  | 2026-10-05T18:32:48.920075759Z slot      release: id  0 | task 1615 | stop processing: n_tokens = 535, truncated = 0
+seminstruct-1  | 2026-10-05T18:32:48.920076718Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:32:48.920121468Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:32:48.945137218Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:32:48.945166093Z slot get_availabl: id  2 | task -1 | selected slot by LCP similarity, sim_best = 0.141 (> 0.100 thold), f_keep = 0.116
+seminstruct-1  | 2026-10-05T18:32:48.945173509Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:32:48.945193384Z srv   prompt_save:  - saving prompt with length 978, total state size = 106.981 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951034176Z srv          load:  - looking for better prompt, base f_keep = 0.116, sim = 0.141
+seminstruct-1  | 2026-10-05T18:32:48.951054968Z srv        update:  - cache state: 10 prompts, 907.805 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:32:48.951055926Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951056676Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951057426Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951058176Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951058884Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951059634Z srv        update:    - prompt 0xaaab0b9bf460:     738 tokens, checkpoints:  0,    80.728 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951060384Z srv        update:    - prompt 0xaaab09c035f0:     777 tokens, checkpoints:  0,    84.994 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951061093Z srv        update:    - prompt 0xaaab09afc340:     686 tokens, checkpoints:  0,    75.040 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951061801Z srv        update:    - prompt 0xaaab0b9925d0:     940 tokens, checkpoints:  0,   102.824 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951062551Z srv        update:    - prompt 0xaaab0d06c1a0:     978 tokens, checkpoints:  0,   106.981 MiB
+seminstruct-1  | 2026-10-05T18:32:48.951063301Z srv  get_availabl: prompt cache update took 5.83 ms
+seminstruct-1  | 2026-10-05T18:32:48.951064051Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:32:48.951065843Z slot launch_slot_: id  2 | task 1756 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:32:48.951066593Z slot update_slots: id  2 | task 1756 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 800
+seminstruct-1  | 2026-10-05T18:32:48.951067384Z slot update_slots: id  2 | task 1756 | n_tokens = 113, memory_seq_rm [113, end)
+seminstruct-1  | 2026-10-05T18:32:48.951211009Z slot init_sampler: id  2 | task 1756 | init sampler, took 0.08 ms, tokens: text = 800, total = 800
+seminstruct-1  | 2026-10-05T18:32:48.951213176Z slot update_slots: id  2 | task 1756 | prompt processing done, n_tokens = 800, batch.n_tokens = 687
+seminstruct-1  | 2026-10-05T18:32:58.122930639Z slot print_timing: id  2 | task 1756 | 
+seminstruct-1  | 2026-10-05T18:32:58.122957889Z prompt eval time =    7950.50 ms /   687 tokens (   11.57 ms per token,    86.41 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:58.122959180Z        eval time =    1221.28 ms /    47 tokens (   25.98 ms per token,    38.48 tokens per second)
+seminstruct-1  | 2026-10-05T18:32:58.122959972Z       total time =    9171.78 ms /   734 tokens
+seminstruct-1  | 2026-10-05T18:32:58.124436305Z slot      release: id  2 | task 1756 | stop processing: n_tokens = 846, truncated = 0
+seminstruct-1  | 2026-10-05T18:32:58.124442180Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:32:58.124523930Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:32:58.133985555Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:32:58.134046930Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.858 (> 0.100 thold), f_keep = 0.641
+seminstruct-1  | 2026-10-05T18:32:58.134076639Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:32:58.134081430Z slot launch_slot_: id  0 | task 1804 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:32:58.134082597Z slot update_slots: id  0 | task 1804 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 400
+seminstruct-1  | 2026-10-05T18:32:58.134083597Z slot update_slots: id  0 | task 1804 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:32:58.134143139Z slot init_sampler: id  0 | task 1804 | init sampler, took 0.04 ms, tokens: text = 400, total = 400
+seminstruct-1  | 2026-10-05T18:32:58.134145180Z slot update_slots: id  0 | task 1804 | prompt processing done, n_tokens = 400, batch.n_tokens = 57
+seminstruct-1  | 2026-10-05T18:33:02.131887835Z slot print_timing: id  0 | task 1804 | 
+seminstruct-1  | 2026-10-05T18:33:02.131913626Z prompt eval time =     710.81 ms /    57 tokens (   12.47 ms per token,    80.19 tokens per second)
+seminstruct-1  | 2026-10-05T18:33:02.131915085Z        eval time =    3287.19 ms /   150 tokens (   21.91 ms per token,    45.63 tokens per second)
+seminstruct-1  | 2026-10-05T18:33:02.131916001Z       total time =    3998.00 ms /   207 tokens
+seminstruct-1  | 2026-10-05T18:33:02.132847710Z slot      release: id  0 | task 1804 | stop processing: n_tokens = 549, truncated = 0
+seminstruct-1  | 2026-10-05T18:33:02.132853251Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:33:02.132930251Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:33:02.153693668Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:33:02.153746335Z slot get_availabl: id  2 | task -1 | selected slot by LCP similarity, sim_best = 0.116 (> 0.100 thold), f_keep = 0.134
+seminstruct-1  | 2026-10-05T18:33:02.153752001Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:33:02.153766793Z srv   prompt_save:  - saving prompt with length 846, total state size = 92.542 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250951668Z srv          load:  - looking for better prompt, base f_keep = 0.134, sim = 0.116
+seminstruct-1  | 2026-10-05T18:33:02.250967751Z srv        update:  - cache state: 11 prompts, 1000.346 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:33:02.250968751Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250969543Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250970335Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250971085Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250971793Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250988918Z srv        update:    - prompt 0xaaab0b9bf460:     738 tokens, checkpoints:  0,    80.728 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250990585Z srv        update:    - prompt 0xaaab09c035f0:     777 tokens, checkpoints:  0,    84.994 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250991335Z srv        update:    - prompt 0xaaab09afc340:     686 tokens, checkpoints:  0,    75.040 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250992043Z srv        update:    - prompt 0xaaab0b9925d0:     940 tokens, checkpoints:  0,   102.824 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250992751Z srv        update:    - prompt 0xaaab0d06c1a0:     978 tokens, checkpoints:  0,   106.981 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250993460Z srv        update:    - prompt 0xaaab0d3f3a10:     846 tokens, checkpoints:  0,    92.542 MiB
+seminstruct-1  | 2026-10-05T18:33:02.250994210Z srv  get_availabl: prompt cache update took 97.14 ms
+seminstruct-1  | 2026-10-05T18:33:02.250996460Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:33:02.250998460Z slot launch_slot_: id  2 | task 1955 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:33:02.250999251Z slot update_slots: id  2 | task 1955 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 970
+seminstruct-1  | 2026-10-05T18:33:02.251000043Z slot update_slots: id  2 | task 1955 | n_tokens = 113, memory_seq_rm [113, end)
+seminstruct-1  | 2026-10-05T18:33:02.251470918Z slot init_sampler: id  2 | task 1955 | init sampler, took 0.10 ms, tokens: text = 970, total = 970
+seminstruct-1  | 2026-10-05T18:33:02.251477960Z slot update_slots: id  2 | task 1955 | prompt processing done, n_tokens = 970, batch.n_tokens = 857
+seminstruct-1  | 2026-10-05T18:33:13.584752673Z slot print_timing: id  2 | task 1955 | 
+seminstruct-1  | 2026-10-05T18:33:13.584783715Z prompt eval time =   10189.53 ms /   857 tokens (   11.89 ms per token,    84.11 tokens per second)
+seminstruct-1  | 2026-10-05T18:33:13.584785007Z        eval time =    1144.14 ms /    45 tokens (   25.43 ms per token,    39.33 tokens per second)
+seminstruct-1  | 2026-10-05T18:33:13.584785840Z       total time =   11333.66 ms /   902 tokens
+seminstruct-1  | 2026-10-05T18:33:13.584786590Z slot      release: id  2 | task 1955 | stop processing: n_tokens = 1014, truncated = 0
+seminstruct-1  | 2026-10-05T18:33:13.584787382Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:33:13.584867173Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:33:13.598313007Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:33:13.598415257Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.871 (> 0.100 thold), f_keep = 0.625
+seminstruct-1  | 2026-10-05T18:33:13.598423548Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:33:13.598425132Z slot launch_slot_: id  0 | task 2001 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:33:13.598426048Z slot update_slots: id  0 | task 2001 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 394
+seminstruct-1  | 2026-10-05T18:33:13.598426840Z slot update_slots: id  0 | task 2001 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:33:13.598491548Z slot init_sampler: id  0 | task 2001 | init sampler, took 0.04 ms, tokens: text = 394, total = 394
+seminstruct-1  | 2026-10-05T18:33:13.598494590Z slot update_slots: id  0 | task 2001 | prompt processing done, n_tokens = 394, batch.n_tokens = 51
+seminstruct-1  | 2026-10-05T18:33:17.910108634Z slot print_timing: id  0 | task 2001 | 
+seminstruct-1  | 2026-10-05T18:33:17.910131967Z prompt eval time =     638.52 ms /    51 tokens (   12.52 ms per token,    79.87 tokens per second)
+seminstruct-1  | 2026-10-05T18:33:17.910133217Z        eval time =    3673.06 ms /   166 tokens (   22.13 ms per token,    45.19 tokens per second)
+seminstruct-1  | 2026-10-05T18:33:17.910134051Z       total time =    4311.58 ms /   217 tokens
+seminstruct-1  | 2026-10-05T18:33:17.910134801Z slot      release: id  0 | task 2001 | stop processing: n_tokens = 559, truncated = 0
+seminstruct-1  | 2026-10-05T18:33:17.910135592Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:33:17.910178092Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:33:17.935552217Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:33:17.935600467Z slot get_availabl: id  2 | task -1 | selected slot by LCP similarity, sim_best = 0.102 (> 0.100 thold), f_keep = 0.111
+seminstruct-1  | 2026-10-05T18:33:17.935605134Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:33:17.935621842Z srv   prompt_save:  - saving prompt with length 1014, total state size = 110.919 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942575467Z srv          load:  - looking for better prompt, base f_keep = 0.111, sim = 0.102
+seminstruct-1  | 2026-10-05T18:33:17.942588009Z srv        update:  - cache state: 12 prompts, 1111.265 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:33:17.942589009Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942589842Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942590592Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942591342Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942592051Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942592801Z srv        update:    - prompt 0xaaab0b9bf460:     738 tokens, checkpoints:  0,    80.728 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942593509Z srv        update:    - prompt 0xaaab09c035f0:     777 tokens, checkpoints:  0,    84.994 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942594259Z srv        update:    - prompt 0xaaab09afc340:     686 tokens, checkpoints:  0,    75.040 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942594967Z srv        update:    - prompt 0xaaab0b9925d0:     940 tokens, checkpoints:  0,   102.824 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942595717Z srv        update:    - prompt 0xaaab0d06c1a0:     978 tokens, checkpoints:  0,   106.981 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942596426Z srv        update:    - prompt 0xaaab0d3f3a10:     846 tokens, checkpoints:  0,    92.542 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942607092Z srv        update:    - prompt 0xaaab0b5284b0:    1014 tokens, checkpoints:  0,   110.919 MiB
+seminstruct-1  | 2026-10-05T18:33:17.942607926Z srv  get_availabl: prompt cache update took 6.93 ms
+seminstruct-1  | 2026-10-05T18:33:17.942608676Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:33:17.942610592Z slot launch_slot_: id  2 | task 2168 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:33:17.942611342Z slot update_slots: id  2 | task 2168 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 1104
+seminstruct-1  | 2026-10-05T18:33:17.942612092Z slot update_slots: id  2 | task 2168 | n_tokens = 113, memory_seq_rm [113, end)
+seminstruct-1  | 2026-10-05T18:33:17.942796884Z slot init_sampler: id  2 | task 2168 | init sampler, took 0.10 ms, tokens: text = 1104, total = 1104
+seminstruct-1  | 2026-10-05T18:33:17.942799509Z slot update_slots: id  2 | task 2168 | prompt processing done, n_tokens = 1104, batch.n_tokens = 991
+seminstruct-1  | 2026-10-05T18:33:32.938480835Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:33:32.960876210Z srv          stop: cancel task, id_task = 2168
+seminstruct-1  | 2026-10-05T18:33:32.960893710Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:33:32.964507127Z slot      release: id  2 | task 2168 | stop processing: n_tokens = 1207, truncated = 0
+seminstruct-1  | 2026-10-05T18:33:32.964520918Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.866 (> 0.100 thold), f_keep = 0.614
+seminstruct-1  | 2026-10-05T18:33:32.964544293Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:33:32.964548543Z slot launch_slot_: id  0 | task 2273 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:33:32.964549543Z slot update_slots: id  0 | task 2273 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 396
+seminstruct-1  | 2026-10-05T18:33:32.964550502Z slot update_slots: id  0 | task 2273 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:33:32.964629918Z slot init_sampler: id  0 | task 2273 | init sampler, took 0.04 ms, tokens: text = 396, total = 396
+seminstruct-1  | 2026-10-05T18:33:32.964632960Z slot update_slots: id  0 | task 2273 | prompt processing done, n_tokens = 396, batch.n_tokens = 53
+seminstruct-1  | 2026-10-05T18:33:37.170909962Z slot print_timing: id  0 | task 2273 | 
+seminstruct-1  | 2026-10-05T18:33:37.170933837Z prompt eval time =     667.21 ms /    53 tokens (   12.59 ms per token,    79.44 tokens per second)
+seminstruct-1  | 2026-10-05T18:33:37.170935545Z        eval time =    3539.07 ms /   161 tokens (   21.98 ms per token,    45.49 tokens per second)
+seminstruct-1  | 2026-10-05T18:33:37.170936920Z       total time =    4206.27 ms /   214 tokens
+seminstruct-1  | 2026-10-05T18:33:37.170938170Z slot      release: id  0 | task 2273 | stop processing: n_tokens = 556, truncated = 0
+seminstruct-1  | 2026-10-05T18:33:37.170939337Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:33:37.171000837Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:33:37.196428420Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:33:37.196456420Z slot get_availabl: id  3 | task -1 | selected slot by LRU, t_last = 336595393536
+seminstruct-1  | 2026-10-05T18:33:37.196461170Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:33:37.196492545Z srv   prompt_save:  - saving prompt with length 847, total state size = 92.651 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226413295Z srv          load:  - looking for better prompt, base f_keep = 0.006, sim = 0.004
+seminstruct-1  | 2026-10-05T18:33:37.226427004Z srv        update:  - cache state: 13 prompts, 1203.916 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:33:37.226428045Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226428837Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226429587Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226430337Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226431045Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226431795Z srv        update:    - prompt 0xaaab0b9bf460:     738 tokens, checkpoints:  0,    80.728 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226432545Z srv        update:    - prompt 0xaaab09c035f0:     777 tokens, checkpoints:  0,    84.994 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226433295Z srv        update:    - prompt 0xaaab09afc340:     686 tokens, checkpoints:  0,    75.040 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226434045Z srv        update:    - prompt 0xaaab0b9925d0:     940 tokens, checkpoints:  0,   102.824 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226434754Z srv        update:    - prompt 0xaaab0d06c1a0:     978 tokens, checkpoints:  0,   106.981 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226435545Z srv        update:    - prompt 0xaaab0d3f3a10:     846 tokens, checkpoints:  0,    92.542 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226436295Z srv        update:    - prompt 0xaaab0b5284b0:    1014 tokens, checkpoints:  0,   110.919 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226437004Z srv        update:    - prompt 0xaaab0b962f20:     847 tokens, checkpoints:  0,    92.651 MiB
+seminstruct-1  | 2026-10-05T18:33:37.226437795Z srv  get_availabl: prompt cache update took 29.91 ms
+seminstruct-1  | 2026-10-05T18:33:37.227031920Z slot launch_slot_: id  3 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:33:37.227036004Z slot launch_slot_: id  3 | task 2436 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:33:37.227054504Z slot update_slots: id  3 | task 2436 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 1160
+seminstruct-1  | 2026-10-05T18:33:37.227056254Z slot update_slots: id  3 | task 2436 | n_tokens = 5, memory_seq_rm [5, end)
+seminstruct-1  | 2026-10-05T18:33:37.227802545Z slot init_sampler: id  3 | task 2436 | init sampler, took 0.11 ms, tokens: text = 1160, total = 1160
+seminstruct-1  | 2026-10-05T18:33:37.227816295Z slot update_slots: id  3 | task 2436 | prompt processing done, n_tokens = 1160, batch.n_tokens = 1155
+seminstruct-1  | 2026-10-05T18:33:52.221975844Z srv          stop: cancel task, id_task = 2436
+seminstruct-1  | 2026-10-05T18:33:52.222003094Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:33:52.229927761Z slot      release: id  3 | task 2436 | stop processing: n_tokens = 1185, truncated = 0
+seminstruct-1  | 2026-10-05T18:33:52.229948219Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:33:52.275329886Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:33:52.275419928Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.873 (> 0.100 thold), f_keep = 0.617
+seminstruct-1  | 2026-10-05T18:33:52.275467678Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:33:52.275473219Z slot launch_slot_: id  0 | task 2464 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:33:52.275474136Z slot update_slots: id  0 | task 2464 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 393
+seminstruct-1  | 2026-10-05T18:33:52.275474969Z slot update_slots: id  0 | task 2464 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:33:52.275598969Z slot init_sampler: id  0 | task 2464 | init sampler, took 0.04 ms, tokens: text = 393, total = 393
+seminstruct-1  | 2026-10-05T18:33:52.275600886Z slot update_slots: id  0 | task 2464 | prompt processing done, n_tokens = 393, batch.n_tokens = 50
+seminstruct-1  | 2026-10-05T18:33:56.449900846Z slot print_timing: id  0 | task 2464 | 
+seminstruct-1  | 2026-10-05T18:33:56.449928138Z prompt eval time =     627.27 ms /    50 tokens (   12.55 ms per token,    79.71 tokens per second)
+seminstruct-1  | 2026-10-05T18:33:56.449929513Z        eval time =    3547.03 ms /   160 tokens (   22.17 ms per token,    45.11 tokens per second)
+seminstruct-1  | 2026-10-05T18:33:56.449930346Z       total time =    4174.31 ms /   210 tokens
+seminstruct-1  | 2026-10-05T18:33:56.456764013Z slot      release: id  0 | task 2464 | stop processing: n_tokens = 552, truncated = 0
+seminstruct-1  | 2026-10-05T18:33:56.456774013Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:33:56.456846138Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:33:56.500055221Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:33:56.500118263Z slot get_availabl: id  2 | task -1 | selected slot by LCP similarity, sim_best = 0.105 (> 0.100 thold), f_keep = 0.094
+seminstruct-1  | 2026-10-05T18:33:56.500123013Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:33:56.500132971Z srv   prompt_save:  - saving prompt with length 1207, total state size = 132.030 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566663930Z srv          load:  - looking for better prompt, base f_keep = 0.094, sim = 0.105
+seminstruct-1  | 2026-10-05T18:33:56.566677388Z srv        update:  - cache state: 14 prompts, 1335.946 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:33:56.566678430Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566689346Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566690180Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566690888Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566691721Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566692471Z srv        update:    - prompt 0xaaab0b9bf460:     738 tokens, checkpoints:  0,    80.728 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566693180Z srv        update:    - prompt 0xaaab09c035f0:     777 tokens, checkpoints:  0,    84.994 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566693930Z srv        update:    - prompt 0xaaab09afc340:     686 tokens, checkpoints:  0,    75.040 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566694638Z srv        update:    - prompt 0xaaab0b9925d0:     940 tokens, checkpoints:  0,   102.824 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566695388Z srv        update:    - prompt 0xaaab0d06c1a0:     978 tokens, checkpoints:  0,   106.981 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566696096Z srv        update:    - prompt 0xaaab0d3f3a10:     846 tokens, checkpoints:  0,    92.542 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566696846Z srv        update:    - prompt 0xaaab0b5284b0:    1014 tokens, checkpoints:  0,   110.919 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566697555Z srv        update:    - prompt 0xaaab0b962f20:     847 tokens, checkpoints:  0,    92.651 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566698263Z srv        update:    - prompt 0xaaab0b96e510:    1207 tokens, checkpoints:  0,   132.030 MiB
+seminstruct-1  | 2026-10-05T18:33:56.566699013Z srv  get_availabl: prompt cache update took 66.51 ms
+seminstruct-1  | 2026-10-05T18:33:56.566701305Z slot launch_slot_: id  2 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:33:56.566705346Z slot launch_slot_: id  2 | task 2625 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:33:56.566706138Z slot update_slots: id  2 | task 2625 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 1076
+seminstruct-1  | 2026-10-05T18:33:56.566706930Z slot update_slots: id  2 | task 2625 | n_tokens = 113, memory_seq_rm [113, end)
+seminstruct-1  | 2026-10-05T18:33:56.567001638Z slot init_sampler: id  2 | task 2625 | init sampler, took 0.10 ms, tokens: text = 1076, total = 1076
+seminstruct-1  | 2026-10-05T18:33:56.567005346Z slot update_slots: id  2 | task 2625 | prompt processing done, n_tokens = 1076, batch.n_tokens = 963
+seminstruct-1  | 2026-10-05T18:34:09.301407921Z slot print_timing: id  2 | task 2625 | 
+seminstruct-1  | 2026-10-05T18:34:09.301432630Z prompt eval time =   11697.44 ms /   963 tokens (   12.15 ms per token,    82.33 tokens per second)
+seminstruct-1  | 2026-10-05T18:34:09.301433963Z        eval time =    1037.43 ms /    37 tokens (   28.04 ms per token,    35.66 tokens per second)
+seminstruct-1  | 2026-10-05T18:34:09.301434838Z       total time =   12734.87 ms /  1000 tokens
+seminstruct-1  | 2026-10-05T18:34:09.306495630Z slot      release: id  2 | task 2625 | stop processing: n_tokens = 1112, truncated = 0
+seminstruct-1  | 2026-10-05T18:34:09.306513630Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:34:09.306553713Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:34:09.317632380Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:34:09.317660171Z slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.864 (> 0.100 thold), f_keep = 0.621
+seminstruct-1  | 2026-10-05T18:34:09.317687046Z slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:34:09.317690130Z slot launch_slot_: id  0 | task 2663 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:34:09.317691046Z slot update_slots: id  0 | task 2663 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 397
+seminstruct-1  | 2026-10-05T18:34:09.317691838Z slot update_slots: id  0 | task 2663 | n_tokens = 343, memory_seq_rm [343, end)
+seminstruct-1  | 2026-10-05T18:34:09.317762380Z slot init_sampler: id  0 | task 2663 | init sampler, took 0.04 ms, tokens: text = 397, total = 397
+seminstruct-1  | 2026-10-05T18:34:09.317764338Z slot update_slots: id  0 | task 2663 | prompt processing done, n_tokens = 397, batch.n_tokens = 54
+seminstruct-1  | 2026-10-05T18:34:13.533429382Z slot print_timing: id  0 | task 2663 | 
+seminstruct-1  | 2026-10-05T18:34:13.533450382Z prompt eval time =     671.18 ms /    54 tokens (   12.43 ms per token,    80.46 tokens per second)
+seminstruct-1  | 2026-10-05T18:34:13.533451882Z        eval time =    3544.45 ms /   162 tokens (   21.88 ms per token,    45.71 tokens per second)
+seminstruct-1  | 2026-10-05T18:34:13.533453090Z       total time =    4215.62 ms /   216 tokens
+seminstruct-1  | 2026-10-05T18:34:13.533454257Z slot      release: id  0 | task 2663 | stop processing: n_tokens = 558, truncated = 0
+seminstruct-1  | 2026-10-05T18:34:13.533455548Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:34:13.533501965Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200
+seminstruct-1  | 2026-10-05T18:34:13.555774007Z srv  params_from_: Chat format: peg-native
+seminstruct-1  | 2026-10-05T18:34:13.555822298Z slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, sim_best = 0.104 (> 0.100 thold), f_keep = 0.096
+seminstruct-1  | 2026-10-05T18:34:13.555830507Z srv  get_availabl: updating prompt cache
+seminstruct-1  | 2026-10-05T18:34:13.555874965Z srv   prompt_save:  - saving prompt with length 1185, total state size = 129.624 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622199923Z srv          load:  - looking for better prompt, base f_keep = 0.096, sim = 0.104
+seminstruct-1  | 2026-10-05T18:34:13.622218507Z srv        update:  - cache state: 15 prompts, 1465.570 MiB (limits: 8192.000 MiB, 16384 tokens, 74889 est)
+seminstruct-1  | 2026-10-05T18:34:13.622219798Z srv        update:    - prompt 0xaaab0b9b0c40:     851 tokens, checkpoints:  0,    93.089 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622220798Z srv        update:    - prompt 0xaaab0b9bc350:     855 tokens, checkpoints:  0,    93.526 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622221798Z srv        update:    - prompt 0xaaab0b9bf600:     865 tokens, checkpoints:  0,    94.620 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622222715Z srv        update:    - prompt 0xaaab0b9adb90:     868 tokens, checkpoints:  0,    94.948 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622234382Z srv        update:    - prompt 0xaaab0b9ade20:     741 tokens, checkpoints:  0,    81.056 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622235257Z srv        update:    - prompt 0xaaab0b9bf460:     738 tokens, checkpoints:  0,    80.728 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622236048Z srv        update:    - prompt 0xaaab09c035f0:     777 tokens, checkpoints:  0,    84.994 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622236757Z srv        update:    - prompt 0xaaab09afc340:     686 tokens, checkpoints:  0,    75.040 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622237507Z srv        update:    - prompt 0xaaab0b9925d0:     940 tokens, checkpoints:  0,   102.824 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622238257Z srv        update:    - prompt 0xaaab0d06c1a0:     978 tokens, checkpoints:  0,   106.981 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622238965Z srv        update:    - prompt 0xaaab0d3f3a10:     846 tokens, checkpoints:  0,    92.542 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622239715Z srv        update:    - prompt 0xaaab0b5284b0:    1014 tokens, checkpoints:  0,   110.919 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622240423Z srv        update:    - prompt 0xaaab0b962f20:     847 tokens, checkpoints:  0,    92.651 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622242840Z srv        update:    - prompt 0xaaab0b96e510:    1207 tokens, checkpoints:  0,   132.030 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622243715Z srv        update:    - prompt 0xaaab0d3f1fe0:    1185 tokens, checkpoints:  0,   129.624 MiB
+seminstruct-1  | 2026-10-05T18:34:13.622244465Z srv  get_availabl: prompt cache update took 66.33 ms
+seminstruct-1  | 2026-10-05T18:34:13.622245215Z slot launch_slot_: id  3 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+seminstruct-1  | 2026-10-05T18:34:13.622247173Z slot launch_slot_: id  3 | task 2826 | processing task, is_child = 0
+seminstruct-1  | 2026-10-05T18:34:13.622247923Z slot update_slots: id  3 | task 2826 | new prompt, n_ctx_slot = 4096, n_keep = 0, task.n_tokens = 1095
+seminstruct-1  | 2026-10-05T18:34:13.622249257Z slot update_slots: id  3 | task 2826 | n_tokens = 114, memory_seq_rm [114, end)
+seminstruct-1  | 2026-10-05T18:34:13.622426007Z slot init_sampler: id  3 | task 2826 | init sampler, took 0.10 ms, tokens: text = 1095, total = 1095
+seminstruct-1  | 2026-10-05T18:34:13.622428840Z slot update_slots: id  3 | task 2826 | prompt processing done, n_tokens = 1095, batch.n_tokens = 981
+seminstruct-1  | 2026-10-05T18:34:27.713999430Z slot print_timing: id  3 | task 2826 | 
+seminstruct-1  | 2026-10-05T18:34:27.714024514Z prompt eval time =   11908.84 ms /   981 tokens (   12.14 ms per token,    82.38 tokens per second)
+seminstruct-1  | 2026-10-05T18:34:27.714025805Z        eval time =    2182.84 ms /    77 tokens (   28.35 ms per token,    35.28 tokens per second)
+seminstruct-1  | 2026-10-05T18:34:27.714026722Z       total time =   14091.69 ms /  1058 tokens
+seminstruct-1  | 2026-10-05T18:34:27.714896014Z slot      release: id  3 | task 2826 | stop processing: n_tokens = 1171, truncated = 0
+seminstruct-1  | 2026-10-05T18:34:27.714905764Z srv  update_slots: all slots are idle
+seminstruct-1  | 2026-10-05T18:34:27.714972180Z srv  log_server_r: done request: POST /v1/chat/completions 192.168.224.5 200

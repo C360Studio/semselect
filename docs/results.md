@@ -17,6 +17,36 @@ in its denominator. Latency covers measured calls; order flips compare valid
 pairs. These are small smoke evaluations, not a production benchmark or calibration
 study. Model probabilities are not established probabilities of correctness.
 
+## 2026-10-05 — actual SemStreams answer-synthesis replay
+
+Thirteen known source-pilot questions were captured once from a pinned isolated
+SemSource stack. Twelve produced actual community summaries; S06 failed upstream.
+The imported production synthesizer kept its prompt, temperature, deadline and
+fallback behavior. Gates received exactly its visible evidence. Two generator
+strata were tested: shipped 0.6B CPU wiring default and a stronger 4B Metal
+substitution. Both gates ran on Metal; this was not a CPU-only gate comparison.
+
+On primary trial 1, the CPU generator's unsupported-assertion count went from 10/12
+to 1/12 with either gate; its baseline also had one refusal and one degraded timeout.
+The Metal 4B generator went from 3/12 to 0/12 with either gate, preserving one useful
+partial answer. One baseline 4B error was a fabricated document-section claim,
+not an incorrect requested number. Both gates allowed only S09 in every view;
+trial 2 kept 4B category totals and gate decisions unchanged. The CPU baseline had
+11 unsupported answers and one refusal on trial 2. Repeats are correlated.
+
+Verdict: a gating effect on this capture, with **no observed Kev advantage over
+Qwen JSON**. There are zero fully sufficient inputs, so no false-deferral estimate
+or demonstrated advantage over always deferring. The strict gates still allowed
+an incomplete disk-permission question: 0.6B invented a rule, while 4B correctly
+qualified its partial answer. Improve source evidence and test a balanced set.
+
+See the [one-table explanation](../eval/synthesis/README.md),
+[validation](validation-synthesis.md), [acquisition proof](evidence/20261005-synthesis-acquisition/README.md)
+and [complete replay, blind grades and summary](evidence/20261005T184218Z-synthesis-replay/README.md).
+All 156 planned records are accounted for; all owned inference services stopped.
+Timing retained existing caching: Qwen reused nearly complete repeated gate
+prompts while Kev reprocessed them, preventing an inherent-efficiency claim.
+
 ## 2026-10-05 — frozen real-source answerability pilot on Metal
 
 Twenty-four authored questions over pinned source excerpts from six new families,
@@ -48,7 +78,7 @@ raw errors/responses, source snapshots and successful shutdown are preserved.
 Verdict: observed aggregate quality advantage for Kev on this pilot, sufficient
 to justify a downstream comparison, not a production gate recommendation. Neither
 the control nor these model labels establish what the existing generator would
-answer. The [answer-path audit](answering-path.md) defines that next test.
+answer. The [answer-path audit](answering-path.md) defined the synthesis test reported above.
 
 ## 2026-10-05 — answerability teaching cases on Metal
 

@@ -1,0 +1,57 @@
+[
+    {
+        "Name": "semselect-synthesis-4093d3c-a2_isolated",
+        "Id": "672007d0b2d8d657eadc60b5cec1f80f48d8c072be180e6bab2dab18ff3c705f",
+        "Created": "2026-10-05T18:28:30.333371875Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "192.168.224.0/20",
+                    "Gateway": "192.168.224.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Options": {
+            "com.docker.network.enable_ipv4": "true",
+            "com.docker.network.enable_ipv6": "false"
+        },
+        "Labels": {
+            "com.docker.compose.config-hash": "173eb8af3ee0fbc0873cc5f76fb0fec830bcc0bb5dac2e60e284188250524392",
+            "com.docker.compose.network": "isolated",
+            "com.docker.compose.project": "semselect-synthesis-4093d3c-a2",
+            "com.docker.compose.version": "5.5.1"
+        },
+        "Containers": {
+            "ab76424955dcf705218beb65a1a9c1f50cfa549f07b3ce3c6dd6f610f57020f2": {
+                "Name": "semselect-synthesis-4093d3c-a2-seminstruct-1",
+                "EndpointID": "b4cd131003833f7c87efb84a08ab241d4855edec4e728684226cc3cb9c91b724",
+                "MacAddress": "b6:20:86:5f:0a:d9",
+                "IPv4Address": "192.168.224.4/20",
+                "IPv6Address": ""
+            }
+        },
+        "Status": {
+            "IPAM": {
+                "Subnets": {
+                    "192.168.224.0/20": {
+                        "IPsInUse": 4,
+                        "DynamicIPsAvailable": 4092
+                    }
+                }
+            }
+        }
+    }
+]

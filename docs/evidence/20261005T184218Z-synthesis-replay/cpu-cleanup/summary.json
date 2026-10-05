@@ -1,0 +1,8 @@
+{
+  "finished_at": "2026-10-05T18:50:34.879602+00:00",
+  "stopped": true,
+  "exit_code": 0,
+  "oom_killed": false,
+  "port_closed": true,
+  "scope": "Owned experiment generator only; cumulative cgroup values include acquisition and replay, not per-arm resources."
+}

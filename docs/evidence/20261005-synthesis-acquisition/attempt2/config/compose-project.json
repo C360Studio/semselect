@@ -1,0 +1,145 @@
+{
+  "name": "semselect-synthesis-4093d3c-a2",
+  "services": {
+    "nats": {
+      "image": "nats:2.14.4-alpine@sha256:f2123f533c2b0cada0a5c5ec434fb2b8cfe1cf220215ef9d7517e1372917ad66",
+      "pull_policy": "never",
+      "restart": "no",
+      "cpus": 1,
+      "mem_limit": "1g",
+      "networks": [
+        "isolated"
+      ],
+      "labels": {
+        "io.semselect.experiment": "synthesis-4093d3c"
+      },
+      "command": [
+        "-js",
+        "-sd",
+        "/data",
+        "-m",
+        "8222"
+      ],
+      "ports": [
+        "127.0.0.1:44222:4222",
+        "127.0.0.1:48222:8222"
+      ],
+      "volumes": [
+        {
+          "type": "bind",
+          "source": "${SEMSELECT_ROOT}/.synthesis/attempts/02-pinned-embedding-cache/nats",
+          "target": "/data",
+          "read_only": false
+        }
+      ]
+    },
+    "semembed": {
+      "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "pull_policy": "never",
+      "restart": "no",
+      "cpus": 2,
+      "mem_limit": "2g",
+      "networks": [
+        "isolated"
+      ],
+      "labels": {
+        "io.semselect.experiment": "synthesis-4093d3c"
+      },
+      "environment": {
+        "SEMEMBED_PORT": "8081",
+        "SEMEMBED_MODEL": "Snowflake/snowflake-arctic-embed-s",
+        "FASTEMBED_CACHE_DIR": "/model-cache",
+        "HF_HOME": "/model-cache",
+        "HF_ENDPOINT": "http://127.0.0.1:9"
+      },
+      "volumes": [
+        {
+          "type": "bind",
+          "source": "${SEMSELECT_ROOT}/.synthesis/model-cache",
+          "target": "/model-cache",
+          "read_only": true
+        }
+      ]
+    },
+    "seminstruct": {
+      "image": "ghcr.io/c360studio/seminstruct:qwen3-0.6b@sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+      "pull_policy": "never",
+      "restart": "no",
+      "cpus": 2,
+      "mem_limit": "2g",
+      "networks": [
+        "isolated"
+      ],
+      "labels": {
+        "io.semselect.experiment": "synthesis-4093d3c"
+      },
+      "environment": {
+        "MODEL_ALIAS": "seminstruct",
+        "MODEL_CONTEXT": "16384",
+        "MODEL_REASONING": "off",
+        "MODEL_THREADS": "2",
+        "MODEL_PARALLEL": "4"
+      },
+      "ports": [
+        "127.0.0.1:48083:8083"
+      ]
+    },
+    "semsource": {
+      "image": "golang:1.26.6-bookworm@sha256:116d58cbd88c1297624acc6e967a060012422bacf9930927e23fb719189c6f36",
+      "pull_policy": "never",
+      "restart": "no",
+      "cpus": 4,
+      "mem_limit": "4g",
+      "networks": [
+        "isolated"
+      ],
+      "labels": {
+        "io.semselect.experiment": "synthesis-4093d3c"
+      },
+      "entrypoint": [
+        "/out/semsource"
+      ],
+      "command": [
+        "run",
+        "--config",
+        "/config/semsource.json",
+        "--nats-url",
+        "nats://nats:4222"
+      ],
+      "ports": [
+        "127.0.0.1:48080:8080"
+      ],
+      "read_only": true,
+      "tmpfs": [
+        "/tmp:size=512m"
+      ],
+      "volumes": [
+        {
+          "type": "bind",
+          "source": "${SEMSELECT_ROOT}/.synthesis/bin",
+          "target": "/out",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "${SEMSELECT_ROOT}/.synthesis/config",
+          "target": "/config",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "${SEMSELECT_ROOT}/.synthesis/corpus",
+          "target": "/corpus",
+          "read_only": true
+        }
+      ]
+    }
+  },
+  "networks": {
+    "isolated": {}
+  },
+  "x-evidence-projection": {
+    "original_sha256": "fc2d6ebb255851c11a6fadb9f96da816e5ed80def50fe8bd1234252b06e8e007",
+    "transformation": "Only absolute semselect checkout prefix replaced with ${SEMSELECT_ROOT}; project/services/resources/images/network semantics retained."
+  }
+}

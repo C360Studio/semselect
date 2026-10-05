@@ -1,0 +1,43 @@
+{
+  "record_type": "explicit model metadata projection",
+  "id": "Snowflake/snowflake-arctic-embed-s",
+  "sha": "e596f507467533e48a2e17c007f0e1dacc837b33",
+  "license": "apache-2.0",
+  "files": [
+    {
+      "rfilename": "README.md",
+      "blobId": "36b307ef43ce930daa529eb151763835268482dc",
+      "size": 85025
+    },
+    {
+      "rfilename": "config.json",
+      "blobId": "44dc4d3c660fd87dd1147355d74614615ce0ea8f",
+      "size": 703
+    },
+    {
+      "rfilename": "onnx/model.onnx",
+      "blobId": "8dbdd39e39186d27bb1665d3c0a2607fefe8e87b",
+      "size": 133093492,
+      "lfs": {
+        "sha256": "579c1f1778a0993eb0d2a1403340ffb491c769247fb46acc4f5cf8ac5b89c1e1",
+        "size": 133093492,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "special_tokens_map.json",
+      "blobId": "9bbecc17cabbcbd3112c14d6982b51403b264bfa",
+      "size": 695
+    },
+    {
+      "rfilename": "tokenizer.json",
+      "blobId": "3c0e6344ec45a9a6e5a621d6711baf109c2d9f87",
+      "size": 711649
+    },
+    {
+      "rfilename": "tokenizer_config.json",
+      "blobId": "87037a042c056e895fa5f3faf777a0ec8bb92c49",
+      "size": 1433
+    }
+  ]
+}
