@@ -1,0 +1,39 @@
+{
+  "model": "semselect-kev-4b",
+  "answers": {
+    "route": {
+      "type": "choice",
+      "choice": "billing",
+      "probabilities": {
+        "billing": 0.7969648146071497,
+        "technical": 0.049404052530324934,
+        "account": 0.01657132071338465,
+        "unknown": 0.13705981214914062
+      },
+      "confidence": 0.7292864194761997
+    },
+    "urgency": {
+      "type": "score",
+      "score": 0.7780533865023498,
+      "legend": {
+        "0": "Can wait",
+        "1": "Needs attention soon",
+        "2": "Immediate service disruption"
+      },
+      "probabilities": {
+        "0": 0.2881846897253495,
+        "1": 0.6455772340469512,
+        "2": 0.06623807622769928
+      },
+      "confidence": 0.46836585107042683
+    },
+    "refund": {
+      "type": "noul",
+      "noul": 0.9546377153670274
+    }
+  },
+  "usage": {
+    "input_tokens": 137,
+    "output_tokens": 0
+  }
+}

@@ -1,0 +1,70 @@
+name: semselect
+services:
+  runtime:
+    image: semselect-runtime:dev
+    build:
+      context: .
+      target: runtime
+    command:
+      - -m
+      - /models/Kev-4B-Q4_K_M.gguf
+      - --alias
+      - semselect-kev-4b
+      - --host
+      - 0.0.0.0
+      - --port
+      - '8080'
+      - -ngl
+      - '0'
+      - -t
+      - '${SEMSELECT_THREADS:-4}'
+      - -tb
+      - '${SEMSELECT_THREADS:-4}'
+      - -c
+      - '4096'
+      - -b
+      - '512'
+      - -ub
+      - '512'
+      - -np
+      - '1'
+      - --no-context-shift
+      - --metrics
+    volumes:
+      - ./models:/models:ro
+    mem_limit: 8g
+    cpus: 4
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: [CMD, curl, -fsS, http://localhost:8080/health]
+      interval: 10s
+      timeout: 3s
+      retries: 12
+      start_period: 90s
+  semselect:
+    image: semselect:dev
+    build:
+      context: .
+      target: service
+    environment:
+      SEMSELECT_UPSTREAM: http://runtime:8080
+      SEMSELECT_MODEL: semselect-kev-4b
+      SEMSELECT_TIMEOUT: '${SEMSELECT_TIMEOUT:-120s}'
+    ports:
+      - '127.0.0.1:${SEMSELECT_PORT:-8084}:8084'
+    depends_on:
+      runtime:
+        condition: service_healthy
+    mem_limit: 128m
+    cpus: 1
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: [CMD, /semselect, healthcheck]
+      interval: 10s
+      timeout: 4s
+      retries: 3

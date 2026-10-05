@@ -1,0 +1,60 @@
+version: '3'
+dotenv: ['.env']
+
+tasks:
+  default:
+    cmds: [task --list]
+  model:fetch:
+    desc: Download and checksum the pinned public Kev GGUF (3.03 GB)
+    cmds: [python3 scripts/model.py]
+  model:verify:
+    desc: Verify the cached model without network access
+    cmds: [python3 scripts/model.py --verify]
+  build:
+    desc: Build the CPU runtime and HTTP service
+    cmds: [docker compose build]
+  up:
+    desc: Verify model and start with a bounded readiness wait
+    cmds:
+      - task: model:verify
+      - docker compose up -d --wait --wait-timeout 180
+  down:
+    desc: Stop this project's containers (keeps models and results)
+    cmds: [docker compose -f docker-compose.yml -f docker-compose.baseline.yml down]
+  logs:
+    desc: Follow service and runtime logs
+    cmds: [docker compose logs -f --tail 100]
+  stats:
+    desc: Show current container CPU and memory use
+    cmds: [docker compose stats --no-stream]
+  test:
+    desc: Offline guard contract and evaluator tests (no inference)
+    cmds:
+      - go test -race ./...
+      - python3 -m unittest discover -s tests -v
+  lint:
+    desc: Check Go formatting, vet and Compose configuration
+    cmds:
+      - test -z "$(gofmt -l cmd internal)"
+      - go vet ./...
+      - docker compose config --quiet
+  check:
+    desc: Run offline tests and configuration checks
+    cmds:
+      - task: test
+      - task: lint
+  test:health:
+    desc: Verify the loaded runtime via the public service
+    cmds: ['curl --fail --max-time 5 http://127.0.0.1:${SEMSELECT_PORT:-8084}/ready']
+  smoke:
+    desc: Exercise native Choice, Score and Noul against the running model
+    cmds: [python3 scripts/smoke.py]
+  evaluate:
+    desc: Run the 48-request routing smoke set against real semselect inference
+    cmds: ['python3 scripts/evaluate.py --backend semselect --url http://127.0.0.1:${SEMSELECT_PORT:-8084} --output results/semselect.json {{.CLI_ARGS}}']
+  baseline:up:
+    desc: Start the pinned ARM64 seminstruct baseline on port 8083
+    cmds: [docker compose -f docker-compose.yml -f docker-compose.baseline.yml up -d --wait --wait-timeout 120 baseline]
+  baseline:evaluate:
+    desc: Evaluate the same dataset against seminstruct (no inferred probabilities)
+    cmds: ['python3 scripts/evaluate.py --backend seminstruct --url http://127.0.0.1:8083 --model qwen3-0.6b --output results/seminstruct.json {{.CLI_ARGS}}']

@@ -1,0 +1,19 @@
+# Opt-in local comparison; identical CPU/thread/context budgets to semselect.
+services:
+  baseline:
+    image: ghcr.io/c360studio/seminstruct@sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9
+    # This digest is the available linux/arm64 baseline image. No amd64 claim.
+    platform: linux/arm64
+    environment:
+      MODEL_PARALLEL: '1'
+      MODEL_CONTEXT: '4096'
+      MODEL_THREADS: '4'
+      MODEL_REASONING: 'off'
+    ports: ['127.0.0.1:8083:8083']
+    mem_limit: 8g
+    cpus: 4
+    healthcheck:
+      test: [CMD, curl, -fsS, http://localhost:8083/health]
+      interval: 5s
+      timeout: 3s
+      retries: 20

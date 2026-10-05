@@ -1,0 +1,139 @@
+{
+  "kind": "docker-cgroup-v2-resource-observation",
+  "started_at": "2026-10-05T13:59:55.124366+00:00",
+  "container_requested": "semselect-baseline-1",
+  "client_platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "command_executable": "python3",
+  "command_argument_count": 13,
+  "command_timeout_seconds": 1800,
+  "probe_timeout_seconds": 10,
+  "notes": "",
+  "measurement_notes": [
+    "Read-only cgroup v2 counters; counters are never reset.",
+    "memory.current and memory.peak include cgroup-accounted memory such as file cache; neither is process RSS.",
+    "memory.peak is the existing cgroup peak, normally since container creation, including startup/cache and earlier activity. It is NOT an interval peak; another actor may have reset it.",
+    "CPU counter delta includes all server, idle/background, warmup, concurrent-client, and measurement activity between snapshots; it is not model-only CPU time.",
+    "Docker probes occur outside the wrapped command. Evaluator per-request timings do not include wrapper probes.",
+    "Snapshots are sequential and are not atomic. Missing cgroup data does not prevent the wrapped command from running.",
+    "Docker engine hardware can belong to a Linux VM rather than the physical client host. No GPU measurement is provided.",
+    "Only selected Docker fields are collected; container environment, full config, and wrapped command arguments are not persisted."
+  ],
+  "container_before": {
+    "available": true,
+    "data": {
+      "id": "98a27bf8e1eea0954bbb621a0f50e3f09aeae69ace5213968d7c0035a5ed3993",
+      "name": "/semselect-baseline-1",
+      "image_id": "sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+      "started_at": "2026-10-05T13:42:21.663788512Z",
+      "running": true,
+      "limits": {
+        "memory_bytes": 8589934592,
+        "memory_swap_bytes": 17179869184,
+        "nano_cpus": 4000000000,
+        "cpu_period": 0,
+        "cpu_quota": 0,
+        "cpuset_cpus": ""
+      }
+    }
+  },
+  "docker_engine": {
+    "available": true,
+    "data": {
+      "server_version": "29.8.1",
+      "os_type": "linux",
+      "operating_system": "Docker Desktop",
+      "architecture": "aarch64",
+      "kernel_version": "7.0.14-linuxkit",
+      "cpu_count": 12,
+      "memory_total_bytes": 24895582208,
+      "cgroup_version": "2"
+    }
+  },
+  "image": {
+    "available": true,
+    "data": {
+      "id": "sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+      "os": "linux",
+      "architecture": "arm64"
+    }
+  },
+  "before": {
+    "started_at": "2026-10-05T13:59:55.761556+00:00",
+    "errors": {},
+    "memory_current_bytes": 1003819008,
+    "memory_peak_lifetime_bytes": 1006649344,
+    "cpu_stat": {
+      "usage_usec": 5648203,
+      "user_usec": 3778239,
+      "system_usec": 1869964,
+      "nice_usec": 0,
+      "nr_periods": 556,
+      "nr_throttled": 0,
+      "throttled_usec": 0,
+      "nr_bursts": 0,
+      "burst_usec": 0
+    },
+    "finished_at": "2026-10-05T13:59:55.872808+00:00",
+    "available": true
+  },
+  "command_run": {
+    "started_at": "2026-10-05T13:59:55.872916+00:00",
+    "timed_out": false,
+    "exit_code": 0,
+    "duration_seconds": 16.098019666969776,
+    "finished_at": "2026-10-05T14:00:11.971038+00:00"
+  },
+  "after": {
+    "started_at": "2026-10-05T14:00:11.971095+00:00",
+    "errors": {},
+    "memory_current_bytes": 1040347136,
+    "memory_peak_lifetime_bytes": 1117802496,
+    "cpu_stat": {
+      "usage_usec": 66959951,
+      "user_usec": 64899382,
+      "system_usec": 2060568,
+      "nice_usec": 0,
+      "nr_periods": 718,
+      "nr_throttled": 24,
+      "throttled_usec": 53045,
+      "nr_bursts": 0,
+      "burst_usec": 0
+    },
+    "finished_at": "2026-10-05T14:00:12.079968+00:00",
+    "available": true
+  },
+  "container_after": {
+    "available": true,
+    "data": {
+      "id": "98a27bf8e1eea0954bbb621a0f50e3f09aeae69ace5213968d7c0035a5ed3993",
+      "name": "/semselect-baseline-1",
+      "image_id": "sha256:297507bee8396438fe284f9ed285165c47a565b3f65be177030c473a4b90bdb9",
+      "started_at": "2026-10-05T13:42:21.663788512Z",
+      "running": true,
+      "limits": {
+        "memory_bytes": 8589934592,
+        "memory_swap_bytes": 17179869184,
+        "nano_cpus": 4000000000,
+        "cpu_period": 0,
+        "cpu_quota": 0,
+        "cpuset_cpus": ""
+      }
+    }
+  },
+  "cpu_delta": {
+    "available": true,
+    "counters": {
+      "usage_usec": 61311748,
+      "system_usec": 190604,
+      "nr_throttled": 24,
+      "nr_bursts": 0,
+      "burst_usec": 0,
+      "user_usec": 61121143,
+      "nr_periods": 162,
+      "nice_usec": 0,
+      "throttled_usec": 53045
+    },
+    "usage_seconds": 61.311748
+  },
+  "finished_at": "2026-10-05T14:00:12.097993+00:00"
+}
