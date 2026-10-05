@@ -31,12 +31,14 @@ not evidence of general reliability. Read all [12 complete examples](examples.md
 
 Apple M3 Pro, native Metal, 2026-10-05. The main result was fixed before inference:
 **trial 1, normal ordering, 12 cases: five answerable and seven unsupported.**
-Shared coded facts/applicability checks resolve four correctly: one allow and
-three deferrals. The other eight need a text judgment.
+The shared [code precheck](../../docs/when-to-use.md#what-our-code-baseline-actually-does)
+filters supplied status/audience fields and checks supplied exact fact values.
+It resolves four correctly: one allow and three deferrals. It leaves the other
+eight unresolved; it does not classify their prose.
 
-| Approach after shared code checks | Unsupported allowed / 7 | Answerable allowed / 5 | Answerable deferred / 5 | Median decision time on 8 unresolved cases |
+| Approach (all include code precheck) | Unsupported allowed / 7 | Answerable allowed / 5 | Answerable deferred / 5 | Median decision time on 8 unresolved cases |
 | --- | ---: | ---: | ---: | ---: |
-| No added semantic gate | 4 | 5 | 0 | <1 ms |
+| No added semantic gate: allow unresolved | 4 | 5 | 0 | <1 ms |
 | Qwen3.5-4B JSON | 0 | 5 | 0 | 553 ms |
 | Kev-4B through semselect | 0 | 5 | 0 | 530 ms |
 

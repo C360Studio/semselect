@@ -10,6 +10,15 @@ pilot tested evidence sufficiency. Here we captured the actual SemSource graph
 answer path and kept the existing SemStreams generator prompt—including its
 instruction to acknowledge missing information—unchanged.
 
+The shared [code precheck](../../docs/when-to-use.md#what-our-code-baseline-actually-does)
+leaves every usable capture unresolved. The replay wraps each captured prompt as
+one current, all-audience passage with `required_fact = null` and `facts = []`;
+these are wrapper fields, not extracted source facts. “None” below therefore means
+the existing generator receives
+the evidence without an added semantic gate, not that a code-only text classifier
+approved it. The 13th question's acquisition failure is recorded before either
+gate or generation; it earns no semantic-classification credit.
+
 ## One small table
 
 Primary trial; counts over **12 usable captures**. Each arm also retains the same

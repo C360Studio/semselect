@@ -17,6 +17,50 @@ comparisons also use Qwen. Those results do not establish Jev's quality.
    help—for example, distinguishing a relevant passage from one that actually
    contains the requested answer. The caller still owns actions and fallback.
 
+## What our code baseline actually does
+
+The answerability experiments use a **code precheck**, implemented in
+[`common_gate`](../scripts/answerability.py). It checks supplied fields; it does
+not interpret the question or read facts out of prose. This is evaluation code
+illustrating caller policy, separate from semselect's Go API guard.
+
+The caller supplies the audience, passage status/audience, an optional required
+fact key, and fact records tied to passages. First, code keeps only current
+passages for that audience (or everyone), and facts tied to those passages. Then:
+
+| Condition after filtering | Code decision |
+| --- | --- |
+| No passages remain | Defer |
+| A required fact key has exactly one distinct supplied value | Allow |
+| A required fact key has no supplied value or conflicting values | Defer |
+| No required fact key was supplied | Unresolved |
+
+For example, [A01](../eval/answerability/examples.md#a01) supplies
+`required_fact = seminstruct.port` and a fact record with value `8083`. Code allows
+it without calling a model. It compares supplied strings; it neither discovers
+the key from the question nor extracts `8083` from the document. The fixture
+author supplied those fields. They are trusted experiment inputs, not an existing
+SemSource extraction contract or an implemented authorization system.
+
+**Unresolved does not mean answerable.** The “no added semantic gate” control
+allows unresolved cases through. Qwen and Kev instead judge the remaining text.
+All three approaches share the same precheck: it resolves 4/12 teaching cases and
+2/24 source cases before any model call. In the later synthesis replay, the 12
+usable captures supply no structured facts or required keys, so all remain
+unresolved; the control uses the existing generator, which can itself refuse.
+
+SemStreams also has real code-based query classifiers: regex rules recognize
+query patterns, and an optional BM25 example matcher compares word-weighted
+vectors with labeled examples. Fusion retrieves and assembles evidence. Those
+are different jobs from deciding whether evidence fully answers a question; the
+[algorithm audit](code-baselines-and-rag.md) explains their wiring and limits.
+
+**We have not yet compared a strong code-only text classifier with these models
+on the same answerability task.** The current control measures the effect of
+adding a semantic check. It cannot establish that models beat regex, BM25 or
+fusion. A fair additional comparison needs an applicable algorithm, development
+examples to set its rules/thresholds, and fresh held-out cases.
+
 ## What we know so far
 
 | Question | Finding | Guidance today |

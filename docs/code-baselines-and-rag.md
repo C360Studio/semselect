@@ -15,6 +15,14 @@ SemSource was clean at `4093d3ce421371f4a99d7168e372552899bf6795`. No sibling re
 was changed and no historical scorecard was rerun. The current semselect routing
 smoke set measures a different task and cannot rank these retrieval algorithms.
 
+The algorithms audited here are **not the small code precheck in semselect's
+answerability tables**. That precheck filters caller-supplied metadata and checks
+supplied exact facts; the no-added-gate control then allows unresolved cases.
+See [its complete rules and example](when-to-use.md#what-our-code-baseline-actually-does).
+Neither those tables nor this source audit establish that a model outperforms
+an applicable regex/BM25 classifier on the same task. That direct comparison
+remains open.
+
 ## Where SemEngine and fusion fit
 
 SemEngine at clean commit `2ec3bcf08bc1d2794d6cb1081ebd1982e08cf2c5` has a documented

@@ -30,6 +30,11 @@ readouts. Callers own taxonomies, routing, authorization, acceptance thresholds,
 fallback and execution. Resolve authoritative facts and exact predicates in code;
 use model judgments where interpretation is needed.
 
+Our answerability experiments share a small **code precheck** for supplied
+metadata and exact facts. The control lets unresolved text pass through; it is
+not a general code-only text classifier. See [the rules and a worked example](docs/when-to-use.md#what-our-code-baseline-actually-does)
+before interpreting the model comparisons.
+
 The bootstrap packages **llama.cpp + Kev-4B Q4_K_M** behind a small Go request guard.
 It uses the existing `POST /v1/systemone` API. It adds no model, scoring formula,
 agent loop, NATS dependency or durable application state. See the
