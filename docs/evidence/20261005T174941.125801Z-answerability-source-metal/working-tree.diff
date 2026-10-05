@@ -1,0 +1,184 @@
+diff --git a/Taskfile.yml b/Taskfile.yml
+index 44b015a..cfb60d4 100644
+--- a/Taskfile.yml
++++ b/Taskfile.yml
+@@ -85,3 +85,9 @@ tasks:
+   answerability:metal:
+     desc: Compare the frozen-evidence control, Qwen JSON and Kev on teaching cases
+     cmds: [python3 scripts/answerability.py --hardware metal]
++  answerability:source:validate:
++    desc: Validate the frozen 24-case real-source pilot offline
++    cmds: [python3 scripts/answerability.py --validate --dataset eval/answerability/heldout/cases.json --expected-dataset-sha256 74066d02a4fcff48b8363478dcbc22f9e08bc6cef5be668c859a7a50ee536594]
++  answerability:source:metal:
++    desc: Compare the frozen real-source pilot on Metal without tuning
++    cmds: [python3 scripts/answerability.py --hardware metal --dataset eval/answerability/heldout/cases.json --expected-dataset-sha256 74066d02a4fcff48b8363478dcbc22f9e08bc6cef5be668c859a7a50ee536594]
+diff --git a/scripts/answerability.py b/scripts/answerability.py
+index 1f87c87..e8ef389 100644
+--- a/scripts/answerability.py
++++ b/scripts/answerability.py
+@@ -1,11 +1,12 @@
+ #!/usr/bin/env python3
+-"""Teaching-only answerability comparison on frozen evidence; not a benchmark."""
++"""Answerability experiments on frozen evidence; small pilots, not benchmarks."""
+ from __future__ import annotations
+ 
+ import argparse
+ from collections import Counter
+ from datetime import datetime, timezone
+ import fcntl
++import hashlib
+ import json
+ import os
+ from pathlib import Path
+@@ -30,6 +31,9 @@ ROOT = Path(__file__).resolve().parents[1]
+ RUNTIME_PORT, GUARD_PORT = 18087, 18088
+ LABELS = ['allow', 'defer']
+ ARMS = ('no_added_gate', 'qwen_json', 'kev')
++SCOPES = ('teaching/development-only', 'heldout/source-pilot')
++TEACHING_FAMILIES = {'service-config', 'expense-scope', 'expense-deadline',
++                     'expense-review', 'expense-destination'}
+ 
+ 
+ def nonempty(value):
+@@ -44,7 +48,7 @@ def require(condition, message):
+ def validate_dataset(dataset):
+     """Reject ambiguous fixtures before launching any model or reading gold into input."""
+     require(dataset.get('version') == 1, 'dataset version must be 1')
+-    require(dataset.get('scope') == 'teaching/development-only', 'dataset must declare teaching/development-only')
++    require(dataset.get('scope') in SCOPES, 'dataset must declare a supported experimental scope')
+     instructions = dataset.get('instructions')
+     require(nonempty(instructions) and len(instructions.encode('utf-8')) <= 1024,
+             'instructions must be nonempty and at most 1024 UTF-8 bytes')
+@@ -94,6 +98,9 @@ def validate_dataset(dataset):
+                 and origin['kind'] in ('constructed', 'source_excerpt', 'source_mutation')
+                 and isinstance(origin['references'], list) and nonempty(origin['note']), 'invalid origin')
+         require(origin['kind'] == 'constructed' or bool(origin['references']), 'source-derived cases need pinned references')
++        if dataset['scope'] == 'heldout/source-pilot':
++            require(bool(origin['references']), 'source pilot cases need pinned sources')
++            require(case['family'] not in TEACHING_FAMILIES, 'source pilot reuses a teaching family')
+         for reference in origin['references']:
+             require(isinstance(reference, dict) and set(reference) == {'repository', 'revision', 'path', 'sha256', 'note'}
+                     and all(nonempty(reference[k]) for k in ('repository', 'path', 'note'))
+@@ -107,6 +114,15 @@ def load_dataset(path):
+     return validate_dataset(json.loads(path.read_text()))
+ 
+ 
++def verify_frozen_dataset(path, dataset, expected_digest):
++    """Require an explicit pre-run digest for a held-out pilot, before model loading."""
++    if dataset['scope'] == 'heldout/source-pilot':
++        require(expected_digest is not None, 'source pilot requires --expected-dataset-sha256 from pre-run review')
++    if expected_digest is not None:
++        require(re.fullmatch(r'[0-9a-f]{64}', expected_digest) is not None, 'expected dataset digest must be SHA-256')
++        require(metal.sha256(path) == expected_digest, 'dataset changed since freezing; review before running')
++
++
+ def common_gate(inp, reverse=False):
+     """Caller-owned applicability/fact checks, using only supplied input fields."""
+     passages = [dict(id=p['id'], text=p['text'], metadata=dict(p['metadata']))
+@@ -373,6 +389,7 @@ def model_arm(result, dataset, arm, lock, run_dir, repeats, timeout, save):
+ 
+ def run(args):
+     dataset = load_dataset(args.dataset)
++    verify_frozen_dataset(args.dataset, dataset, args.expected_dataset_sha256)
+     require(platform.system() == 'Darwin' and platform.machine() == 'arm64', 'Metal requires macOS arm64')
+     locks = {arm: load_lock(ROOT / name) for arm, name in
+              [('qwen_json', 'models.baseline.lock.json'), ('kev', 'models.lock.json')]}
+@@ -388,9 +405,13 @@ def run(args):
+     run_dir = ROOT / 'results' / 'answerability' / (run_id + '-metal')
+     run_dir.mkdir(parents=True)
+     result = {
+-        'kind': 'answerability-teaching-not-benchmark', 'run_id': run_id, 'status': 'running',
++        'kind': 'answerability-' + ('source-pilot' if dataset['scope'] == 'heldout/source-pilot' else 'teaching') + '-not-benchmark',
++        'run_id': run_id, 'status': 'running',
+         'started_at': datetime.now(timezone.utc).isoformat(), 'repeats': args.repeats,
+-        'dataset': dataset, 'dataset_sha256': metal.sha256(args.dataset), 'runtimes': [], 'rows': [], 'warmups': [],
++        'dataset': dataset, 'dataset_sha256': metal.sha256(args.dataset),
++        'expected_dataset_sha256': args.expected_dataset_sha256,
++        'instructions_sha256': hashlib.sha256(dataset['instructions'].encode()).hexdigest(),
++        'runtimes': [], 'rows': [], 'warmups': [],
+         'hardware': {'platform': platform.platform(), 'machine': platform.machine(),
+                      'cpu': command(['sysctl', '-n', 'machdep.cpu.brand_string']),
+                      'memory_bytes': int(command(['sysctl', '-n', 'hw.memsize']))},
+@@ -403,7 +424,10 @@ def run(args):
+             'timing': 'Decision time is common filtering/request preparation plus HTTP, excluding evidence serialization to disk, startup and warmup. Code skips included in whole-set metrics. Shared laptop, no thermal control.',
+             'failures': 'Malformed/transport responses defer for action but never count as correct semantic predictions. Unattempted cases stay in denominators, are marked not_run and have no latency sample. No retries.',
+             'resources': 'Native macOS, no container limits; child CPU includes startup, warmup and shutdown. Peak RSS is cumulative largest child lifetime peak, not summed memory or Metal allocation.',
+-            'generalization': '12 public development teaching cases; repeats and reversed variants are correlated. No held-out accuracy/calibration or downstream generator benefit established.',
++            'generalization': f'{len(dataset["cases"])} cases; scope {dataset["scope"]}. '
++            'For a source pilot, cases are manually selected from new families after freezing the teaching prompt; '
++            'this does not establish random live traffic or absence from pretraining. '
++            'Repeats and reversed variants are correlated. No calibration or downstream generator benefit established.',
+             'primary': 'Predefined first trial with normal evidence/candidate order. Other views are descriptive robustness checks, not independent examples.',
+         },
+     }
+@@ -414,6 +438,14 @@ def run(args):
+         shutil.copy2(ROOT / name, source / Path(name).name)
+     shutil.copy2(args.dataset, source / 'cases.json')
+     result['source_sha256'] = {p.name: metal.sha256(p) for p in source.iterdir()}
++    if dataset['scope'] == 'heldout/source-pilot':
++        fixture = run_dir / 'fixture'
++        fixture.mkdir()
++        for name in ('sources.json', 'freeze.json'):
++            shutil.copy2(args.dataset.parent / name, fixture / name)
++        shutil.copytree(args.dataset.parent / 'source', fixture / 'source')
++        result['fixture_sha256'] = {str(p.relative_to(fixture)): metal.sha256(p)
++                                    for p in fixture.rglob('*') if p.is_file()}
+     (run_dir / 'working-tree.diff').write_text(command(['git', 'diff', 'HEAD']))
+     def save():
+         result['summary'] = summarize(result['rows'])
+@@ -442,6 +474,7 @@ def main():
+     mode.add_argument('--validate', action='store_true', help='Validate fixtures offline without any model launch')
+     mode.add_argument('--hardware', choices=['metal'])
+     parser.add_argument('--dataset', type=Path, default=ROOT / 'eval/answerability/cases.json')
++    parser.add_argument('--expected-dataset-sha256', help='Required pre-reviewed dataset digest for a source pilot')
+     parser.add_argument('--repeats', type=int, default=2)
+     parser.add_argument('--timeout', type=evaluate.positive_float, default=120)
+     args = parser.parse_args()
+@@ -451,6 +484,8 @@ def main():
+         parser.error('--timeout must not exceed 120 seconds')
+     if args.validate:
+         dataset = load_dataset(args.dataset)
++        if args.expected_dataset_sha256 is not None:
++            verify_frozen_dataset(args.dataset, dataset, args.expected_dataset_sha256)
+         counts = Counter(common_gate(case['input'])[1] or 'unresolved' for case in dataset['cases'])
+         print(json.dumps({'valid': True, 'cases': len(dataset['cases']), 'common_code': dict(counts),
+                           'sha256': metal.sha256(args.dataset)}, indent=2))
+diff --git a/tests/test_answerability.py b/tests/test_answerability.py
+index c148667..6ebe439 100644
+--- a/tests/test_answerability.py
++++ b/tests/test_answerability.py
+@@ -34,6 +34,34 @@ def successful_response(choice='allow'):
+ 
+ 
+ class FixtureTests(unittest.TestCase):
++    def test_source_pilot_requires_pinned_origins_and_disjoint_teaching_families(self):
++        data = fixture()
++        data['scope'] = 'heldout/source-pilot'
++        with self.assertRaisesRegex(ValueError, 'pinned sources'):
++            experiment.validate_dataset(data)
++        data['cases'][0]['origin']['references'] = [{
++            'repository': 'example/repo', 'revision': 'a' * 40,
++            'path': 'behavior.md', 'sha256': 'b' * 64, 'note': 'intact excerpt'}]
++        experiment.validate_dataset(data)
++        data['cases'][0]['family'] = 'service-config'
++        with self.assertRaisesRegex(ValueError, 'teaching family'):
++            experiment.validate_dataset(data)
++
++    def test_frozen_run_refuses_missing_or_changed_dataset_digest(self):
++        from tempfile import TemporaryDirectory
++        data = fixture()
++        data['scope'] = 'heldout/source-pilot'
++        with TemporaryDirectory() as directory:
++            path = Path(directory) / 'cases.json'
++            path.write_text(json.dumps(data))
++            with self.assertRaisesRegex(ValueError, 'expected-dataset-sha256'):
++                experiment.verify_frozen_dataset(path, data, None)
++            digest = experiment.metal.sha256(path)
++            experiment.verify_frozen_dataset(path, data, digest)
++            path.write_text(json.dumps(data) + '\n')
++            with self.assertRaisesRegex(ValueError, 'changed since freezing'):
++                experiment.verify_frozen_dataset(path, data, digest)
++
+     def test_valid_fixture_and_duplicate_id_rejection(self):
+         data = fixture()
+         self.assertIs(experiment.validate_dataset(data), data)

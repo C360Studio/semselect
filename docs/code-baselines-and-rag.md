@@ -1,7 +1,7 @@
 # Existing algorithms are part of the baseline
 
 This is the detailed source audit. Start with the short
-[when-to-use guide](when-to-use.md) or the [answerability teaching result](../eval/answerability/README.md)
+[when-to-use guide](when-to-use.md) or the [real-source answerability result](../eval/answerability/heldout/README.md)
 for the practical path forward.
 
 The question is whether an added semantic judgment improves the existing system.

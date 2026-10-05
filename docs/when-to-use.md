@@ -24,8 +24,8 @@ comparisons also use Qwen. Those results do not establish Jev's quality.
 | Does existing fusion need another classifier for loose wording? | Semsource's historical scorecard passed all seven tested loose-language queries with its existing fusion path | No demonstrated need on that set; fusion can include learned embeddings |
 | Does Kev beat ordinary Qwen for simple ticket routing? | The matched 4B smoke comparison favored Qwen JSON | Keep Qwen as the practical baseline |
 | Does direct scoring make Qwen more useful? | Metal preserved labels with 28% lower median inference HTTP latency; CPU saved 3.4% but abstained more | A conditional efficiency benefit, with no demonstrated accuracy gain |
-| Can a model distinguish relevant text from sufficient evidence? | Code resolved four teaching cases; both Qwen JSON and Kev correctly judged the remaining eight, catching four unsupported cases that a no-added-gate control allowed | Worth a held-out test; no decision-quality advantage for Kev here |
-| Do the probabilities support better decisions about when to defer? | No independent held-out evidence yet | Do not interpret scores as calibrated correctness |
+| Can a model distinguish relevant text from sufficient evidence? | On 24 new source cases, Kev allowed 5/12 unsupported inputs and preserved all 12 supported cases; Qwen allowed 7/12 unsupported inputs and preserved 11/12 | Kev earns a downstream comparison; both retain consequential omissions |
+| Do the probabilities support better decisions about when to defer? | Calibration and threshold benefits remain untested; Kev assigned about 0.795 to one wrong allow | Do not interpret scores as calibrated correctness |
 
 These are small, workload-specific findings. Full conditions, failures and raw
 results remain in the [results history](results.md). The
@@ -33,27 +33,31 @@ results remain in the [results history](results.md). The
 
 ## A measured example: does the evidence answer the question?
 
-Question: **"When must I submit an expense claim?"**
+Question: **"Which title property replaces `source.doc.summary`, and what happens
+when the body store is unavailable?"**
 
-| Retrieved text | Expected action |
+| Supplied text | Expected action |
 | --- | --- |
-| "Expense claims must be submitted by the 25th." | Allow an answer |
-| "Use the expense portal to submit a claim." | Defer: the deadline is missing |
-| Two equally applicable passages give conflicting deadlines | Defer: the conflict is unresolved |
+| Replacement property and startup-failure behavior are both supplied | Allow an answer |
+| Startup-failure behavior is supplied, but the replacement property is absent | Defer: one requested detail is missing |
 
-These summarize cases in the [completed teaching experiment](../eval/answerability/README.md).
-Both models made the expected decisions, including allowing a supported answer
-assembled from two passages. Median decision time on the eight cases needing a
-model was 553 ms for Qwen JSON and 530 ms for Kev on Metal. Different serving paths
-and observed cache reuse limit that timing comparison: Qwen reused prefixes while
-Kev reprocessed each full prompt.
+These are cases H15/H16 in the [real-source pilot](../eval/answerability/heldout/README.md).
+In the primary normal-order view, Kev correctly distinguishes them; Qwen allows
+both. But Kev also allows other
+incomplete evidence, including a question asking for an unspecified waiting
+period. It fixes four Qwen errors and introduces one, rather than winning every
+case. Code resolves two exact-fact cases without a model. Median decision time on
+the other 22 was 940 ms for Qwen and 985 ms for Kev on Metal; differing cache reuse
+and serving paths limit that timing comparison.
 
 The control applied shared coded checks, then allowed unresolved cases. We did
 not rerun retrieval or test whether the existing answer generator would already
-refuse. These constructed examples explain the task; they do not prove the benefit
-of inserting a gate into SemSource. Next, freeze unseen real-source families and
-test the complete answering pipeline before recommending an integration. Repeat
-a useful finding on CPU/Docker before seeking CUDA help.
+refuse. These manually selected excerpts and deliberate ablations are a pilot,
+not production traffic. The [answer-path audit](answering-path.md) shows that the
+existing generator is already instructed to acknowledge missing information and
+consumes community summaries. Preserve that instruction and representation in the next comparison,
+including useful partial answers a strict gate might block. Establish downstream
+value and repeat on CPU/Docker before seeking CUDA help.
 
 ## How each experiment should read
 

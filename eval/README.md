@@ -1,7 +1,8 @@
 # Routing smoke evaluation
 
-For the separate **answerability** workload, start with its
-[12 teaching examples and measured result](answerability/README.md).
+For the separate **answerability** workload, start with the
+[real-source pilot](answerability/heldout/README.md) or the earlier
+[12 teaching examples](answerability/README.md).
 Run `task answerability:validate` offline or `task answerability:metal` with the
 cached native build and models. That workload checks evidence sufficiency rather
 than ticket routing; do not combine its scores with the routing results below.

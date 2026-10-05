@@ -85,3 +85,9 @@ tasks:
   answerability:metal:
     desc: Compare the frozen-evidence control, Qwen JSON and Kev on teaching cases
     cmds: [python3 scripts/answerability.py --hardware metal]
+  answerability:source:validate:
+    desc: Validate the frozen 24-case real-source pilot offline
+    cmds: [python3 scripts/answerability.py --validate --dataset eval/answerability/heldout/cases.json --expected-dataset-sha256 74066d02a4fcff48b8363478dcbc22f9e08bc6cef5be668c859a7a50ee536594]
+  answerability:source:metal:
+    desc: Compare the frozen real-source pilot on Metal without tuning
+    cmds: [python3 scripts/answerability.py --hardware metal --dataset eval/answerability/heldout/cases.json --expected-dataset-sha256 74066d02a4fcff48b8363478dcbc22f9e08bc6cef5be668c859a7a50ee536594]

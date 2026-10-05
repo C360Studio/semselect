@@ -1,0 +1,461 @@
+{
+  "status": "Frozen after independent pre-run review; see freeze.json. No inference before freezing.",
+  "scope": "Manually selected pinned-source answerability pilot; not retrieval, production traffic, or representative benchmark.",
+  "selection": "Six source-document families excluded from teaching; 24 authored questions with 12 allow / 12 defer. Correlated cases within each family. No model inference or candidate-model consultation during authoring.",
+  "source_policy": "All excerpts are exact inclusive line ranges from git-show blobs at recorded commits. Full files and repository LICENSE files are preserved. No network downloads or sibling repository changes.",
+  "applicability": "All passages use caller-supplied all/current metadata for this pinned documentation question. ADR accepted design text is not proof of deployed behavior; source excerpts may describe historical implementation status.",
+  "structured_fact_policy": "H01 extracts the single MaxAttempts integer literal from the full supplied DefaultConfig function using ^\\s*MaxAttempts:\\s*(\\d+),\\s*$ with multiline matching; H02 has the same required key but only the Config declaration and no corresponding fact. Other questions require combined prose facts or procedures and provide no fabricated structured facts.",
+  "source_files": [
+    {
+      "key": "retry_code",
+      "repository": "https://github.com/c360studio/semstreams",
+      "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "path": "pkg/retry/retry.go",
+      "sha256": "4372a3b704a9f5ea9ee4facb771a1b214eb0347133640d97f7684f5725f95607",
+      "artifact": "source/semstreams/pkg/retry/retry.go",
+      "bytes": 4969
+    },
+    {
+      "key": "retry",
+      "repository": "https://github.com/c360studio/semstreams",
+      "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "path": "pkg/retry/README.md",
+      "sha256": "b82a86f041164403b90f8c6528d8000a776d1b0c950cfb025bcc124890fdd677",
+      "artifact": "source/semstreams/pkg/retry/README.md",
+      "bytes": 3681
+    },
+    {
+      "key": "cache",
+      "repository": "https://github.com/c360studio/semstreams",
+      "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "path": "pkg/cache/README.md",
+      "sha256": "55ad24142fa635f759592542e1192f1f7bf0d8f76fada0597f0475a89bee0868",
+      "artifact": "source/semstreams/pkg/cache/README.md",
+      "bytes": 12406
+    },
+    {
+      "key": "buffer",
+      "repository": "https://github.com/c360studio/semstreams",
+      "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "path": "pkg/buffer/README.md",
+      "sha256": "9641c7f9abef197906f21897acbb988895f21690e6f8bc887185d1890fb230fe",
+      "artifact": "source/semstreams/pkg/buffer/README.md",
+      "bytes": 14249
+    },
+    {
+      "key": "migration",
+      "repository": "https://github.com/c360studio/semsource",
+      "revision": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "path": "docs/migration/doc-passage-chunking.md",
+      "sha256": "d344ca55288512226cf9d3978e5caf81cf98337788d8d59d4a7e1a394931f062",
+      "artifact": "source/semsource/docs/migration/doc-passage-chunking.md",
+      "bytes": 3230
+    },
+    {
+      "key": "registration",
+      "repository": "https://github.com/c360studio/semsource",
+      "revision": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "path": "docs/adr/0007-sidecar-repo-registration-branch-lifecycle.md",
+      "sha256": "27be93062a6853c3fa24937ec44eaaa6c9d1471a4cfb7e89a2edc55b282c4a08",
+      "artifact": "source/semsource/docs/adr/0007-sidecar-repo-registration-branch-lifecycle.md",
+      "bytes": 15915
+    },
+    {
+      "key": "retention",
+      "repository": "https://github.com/c360studio/semsource",
+      "revision": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "path": "docs/adr/0008-versioned-source-retention-supersession.md",
+      "sha256": "5ae83d432d632edb3b91d1d121dcaeeb20dc96364bd4cff556d41284a3007d10",
+      "artifact": "source/semsource/docs/adr/0008-versioned-source-retention-supersession.md",
+      "bytes": 14306
+    }
+  ],
+  "licenses": [
+    {
+      "repository": "semstreams",
+      "revision": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "path": "LICENSE",
+      "sha256": "f04755968ca6dc99d31430e02ff6db65032586f7ddd5f955e86e2df31310a478",
+      "artifact": "source/semstreams/LICENSE"
+    },
+    {
+      "repository": "semsource",
+      "revision": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "path": "LICENSE",
+      "sha256": "8dcc0740ed8301461c7ca2fe87689692e9e5c78798e50db6bf07b9fcde6ad12f",
+      "artifact": "source/semsource/LICENSE"
+    }
+  ],
+  "passages": [
+    {
+      "case_id": "H01",
+      "passage_id": "p1",
+      "source_key": "retry_code",
+      "start_line": 55,
+      "end_line": 64,
+      "text_sha256": "0521611a2dfd0cc3180c72f109ed61b7c560f94ff2e41c8cf1f0e3d5a2730b43"
+    },
+    {
+      "case_id": "H02",
+      "passage_id": "p1",
+      "source_key": "retry_code",
+      "start_line": 46,
+      "end_line": 53,
+      "text_sha256": "884d67b813f7fb7af16ade8bed9c7f44a590fbfae687d61ce6b57b4d820046c8"
+    },
+    {
+      "case_id": "H03",
+      "passage_id": "p1",
+      "source_key": "retry",
+      "start_line": 120,
+      "end_line": 134,
+      "text_sha256": "3ff72074545fb35101e087c06586d841fa2b9112483af97029ce4a01ab249ab3"
+    },
+    {
+      "case_id": "H04",
+      "passage_id": "p1",
+      "source_key": "retry",
+      "start_line": 88,
+      "end_line": 92,
+      "text_sha256": "50cb57aac4127d13fb8a480fa475144b4d03603c5200891789f6a2e10641bc96"
+    },
+    {
+      "case_id": "H04",
+      "passage_id": "p2",
+      "source_key": "retry",
+      "start_line": 106,
+      "end_line": 118,
+      "text_sha256": "0e0f66e75ca85e90ff8936ea32db62433ead2bdf405103a3ce388c5826a51284"
+    },
+    {
+      "case_id": "H05",
+      "passage_id": "p1",
+      "source_key": "cache",
+      "start_line": 71,
+      "end_line": 103,
+      "text_sha256": "769c59747711bf695f1ffa5da0437561a0e65bd7c6e06a3ee1ec0b7008be98ca"
+    },
+    {
+      "case_id": "H06",
+      "passage_id": "p1",
+      "source_key": "cache",
+      "start_line": 81,
+      "end_line": 95,
+      "text_sha256": "a8438733e9a09c13bc4592d0bc8ffab1849807a938485156b1991162c71f35a3"
+    },
+    {
+      "case_id": "H06",
+      "passage_id": "p2",
+      "source_key": "cache",
+      "start_line": 135,
+      "end_line": 149,
+      "text_sha256": "00bb42344088c5b76417ad05971e52fdb1f95a4c16b09703916a8b1f34d615f6"
+    },
+    {
+      "case_id": "H07",
+      "passage_id": "p1",
+      "source_key": "cache",
+      "start_line": 109,
+      "end_line": 115,
+      "text_sha256": "8d253e64a2c37bf862296ee369678d868c2de3fc3d82890cbbec71b43d949d53"
+    },
+    {
+      "case_id": "H07",
+      "passage_id": "p2",
+      "source_key": "cache",
+      "start_line": 151,
+      "end_line": 165,
+      "text_sha256": "5dcc94cdecb3f42e28cd688d0b9698305355d07f23ec1564038ebaf8b1aab2a9"
+    },
+    {
+      "case_id": "H08",
+      "passage_id": "p1",
+      "source_key": "cache",
+      "start_line": 151,
+      "end_line": 165,
+      "text_sha256": "5dcc94cdecb3f42e28cd688d0b9698305355d07f23ec1564038ebaf8b1aab2a9"
+    },
+    {
+      "case_id": "H08",
+      "passage_id": "p2",
+      "source_key": "cache",
+      "start_line": 71,
+      "end_line": 87,
+      "text_sha256": "5268b5420d6c82a7e2f60fe3004cadb2af74edbc25119336355422e6743e6ccf"
+    },
+    {
+      "case_id": "H09",
+      "passage_id": "p1",
+      "source_key": "buffer",
+      "start_line": 109,
+      "end_line": 129,
+      "text_sha256": "b5e9fae6273b3c9534c89df10c095b316e1288c5ec7878e6eae15cc4e1408633"
+    },
+    {
+      "case_id": "H10",
+      "passage_id": "p1",
+      "source_key": "buffer",
+      "start_line": 109,
+      "end_line": 114,
+      "text_sha256": "246ff5b76ff987f12a707a22ce1b6cfd6bba5192787c53ef0a72782a9e2f1ff6"
+    },
+    {
+      "case_id": "H10",
+      "passage_id": "p2",
+      "source_key": "buffer",
+      "start_line": 175,
+      "end_line": 191,
+      "text_sha256": "2442fc6f8dbe5c36ac93e3914029f4799a9d369420c9de5a4f149198711112d0"
+    },
+    {
+      "case_id": "H11",
+      "passage_id": "p1",
+      "source_key": "buffer",
+      "start_line": 95,
+      "end_line": 107,
+      "text_sha256": "c2a95c7c6482247ec258e1d7d5fdcd5ae675a7be39c97268e4cc5e7195269b7b"
+    },
+    {
+      "case_id": "H12",
+      "passage_id": "p1",
+      "source_key": "buffer",
+      "start_line": 95,
+      "end_line": 100,
+      "text_sha256": "9c50b66a258dddcd0516f87b10900d453ac60c053c6b2706d7ad27d3a0b7124e"
+    },
+    {
+      "case_id": "H12",
+      "passage_id": "p2",
+      "source_key": "buffer",
+      "start_line": 193,
+      "end_line": 207,
+      "text_sha256": "df0608432544dd61184b919ed8d5f87fad2d59ee44875182f561d509c3b3c25a"
+    },
+    {
+      "case_id": "H13",
+      "passage_id": "p1",
+      "source_key": "migration",
+      "start_line": 8,
+      "end_line": 24,
+      "text_sha256": "82994d0506d45f671a1e32773a21af9ec7a2a234ac821f44d339fee8f6a4eb34"
+    },
+    {
+      "case_id": "H13",
+      "passage_id": "p2",
+      "source_key": "migration",
+      "start_line": 26,
+      "end_line": 38,
+      "text_sha256": "d1685ac4b405bd02de242b552aab825992d8ef05583807af18bf6b9bfac49b7d"
+    },
+    {
+      "case_id": "H14",
+      "passage_id": "p1",
+      "source_key": "migration",
+      "start_line": 8,
+      "end_line": 24,
+      "text_sha256": "82994d0506d45f671a1e32773a21af9ec7a2a234ac821f44d339fee8f6a4eb34"
+    },
+    {
+      "case_id": "H14",
+      "passage_id": "p2",
+      "source_key": "migration",
+      "start_line": 57,
+      "end_line": 65,
+      "text_sha256": "bd044cfa32dd158143afcb9e614b26d57e0c47c5667ef99983ba8d9d248a5be5"
+    },
+    {
+      "case_id": "H15",
+      "passage_id": "p1",
+      "source_key": "migration",
+      "start_line": 40,
+      "end_line": 55,
+      "text_sha256": "7cab5d484fc48e8bcef2ab5159832ca1816f0c85798f9e626947942ffe61f33c"
+    },
+    {
+      "case_id": "H15",
+      "passage_id": "p2",
+      "source_key": "migration",
+      "start_line": 57,
+      "end_line": 65,
+      "text_sha256": "bd044cfa32dd158143afcb9e614b26d57e0c47c5667ef99983ba8d9d248a5be5"
+    },
+    {
+      "case_id": "H16",
+      "passage_id": "p1",
+      "source_key": "migration",
+      "start_line": 1,
+      "end_line": 6,
+      "text_sha256": "4e8ef4fadbae45570ce657dcac582d94488046df827434a15369121a1ed6b40d"
+    },
+    {
+      "case_id": "H16",
+      "passage_id": "p2",
+      "source_key": "migration",
+      "start_line": 8,
+      "end_line": 24,
+      "text_sha256": "82994d0506d45f671a1e32773a21af9ec7a2a234ac821f44d339fee8f6a4eb34"
+    },
+    {
+      "case_id": "H16",
+      "passage_id": "p3",
+      "source_key": "migration",
+      "start_line": 57,
+      "end_line": 65,
+      "text_sha256": "bd044cfa32dd158143afcb9e614b26d57e0c47c5667ef99983ba8d9d248a5be5"
+    },
+    {
+      "case_id": "H17",
+      "passage_id": "p1",
+      "source_key": "registration",
+      "start_line": 40,
+      "end_line": 55,
+      "text_sha256": "6036ab4d3db6e5efbb12c2e8df1d1b0aca71bcccd7d27f0bf2d00f8a2c58a078"
+    },
+    {
+      "case_id": "H17",
+      "passage_id": "p2",
+      "source_key": "registration",
+      "start_line": 76,
+      "end_line": 89,
+      "text_sha256": "e6f007ce22cf775543d7fd9ec848ed6cae2e0cc4c4ee05e64bfd32237811b427"
+    },
+    {
+      "case_id": "H18",
+      "passage_id": "p1",
+      "source_key": "registration",
+      "start_line": 76,
+      "end_line": 89,
+      "text_sha256": "e6f007ce22cf775543d7fd9ec848ed6cae2e0cc4c4ee05e64bfd32237811b427"
+    },
+    {
+      "case_id": "H18",
+      "passage_id": "p2",
+      "source_key": "registration",
+      "start_line": 91,
+      "end_line": 103,
+      "text_sha256": "26072927536b1b16a0e4d622a4c1edcd8eec46500ac1083f8fe40d3cbbe46e76"
+    },
+    {
+      "case_id": "H19",
+      "passage_id": "p1",
+      "source_key": "registration",
+      "start_line": 91,
+      "end_line": 103,
+      "text_sha256": "26072927536b1b16a0e4d622a4c1edcd8eec46500ac1083f8fe40d3cbbe46e76"
+    },
+    {
+      "case_id": "H19",
+      "passage_id": "p2",
+      "source_key": "registration",
+      "start_line": 105,
+      "end_line": 113,
+      "text_sha256": "ed4aeef04db7ddca9b3d24b3c5952c613cc9114ce844992ab61e3e5171a038a9"
+    },
+    {
+      "case_id": "H20",
+      "passage_id": "p1",
+      "source_key": "registration",
+      "start_line": 105,
+      "end_line": 113,
+      "text_sha256": "ed4aeef04db7ddca9b3d24b3c5952c613cc9114ce844992ab61e3e5171a038a9"
+    },
+    {
+      "case_id": "H20",
+      "passage_id": "p2",
+      "source_key": "registration",
+      "start_line": 76,
+      "end_line": 89,
+      "text_sha256": "e6f007ce22cf775543d7fd9ec848ed6cae2e0cc4c4ee05e64bfd32237811b427"
+    },
+    {
+      "case_id": "H21",
+      "passage_id": "p1",
+      "source_key": "retention",
+      "start_line": 58,
+      "end_line": 65,
+      "text_sha256": "b08c62bb63fdc967641c066e7dec8091c082317c847f1cecaa6ece810d1f41ae"
+    },
+    {
+      "case_id": "H21",
+      "passage_id": "p2",
+      "source_key": "retention",
+      "start_line": 94,
+      "end_line": 105,
+      "text_sha256": "147bfc09c59b07228166702f8dc7709d94212f140f31fb4893302f3a21bb1eb0"
+    },
+    {
+      "case_id": "H22",
+      "passage_id": "p1",
+      "source_key": "retention",
+      "start_line": 58,
+      "end_line": 65,
+      "text_sha256": "b08c62bb63fdc967641c066e7dec8091c082317c847f1cecaa6ece810d1f41ae"
+    },
+    {
+      "case_id": "H22",
+      "passage_id": "p2",
+      "source_key": "retention",
+      "start_line": 39,
+      "end_line": 50,
+      "text_sha256": "28906924774eaa91a3f5749fa770f6cdaab14b7f26d582ab80859f04b1ffe9d0"
+    },
+    {
+      "case_id": "H23",
+      "passage_id": "p1",
+      "source_key": "retention",
+      "start_line": 121,
+      "end_line": 129,
+      "text_sha256": "9d2bc50aa0e9f5caf82355c67e4d5d72cfce67a444abab3aa5dbc13a9d63d00f"
+    },
+    {
+      "case_id": "H24",
+      "passage_id": "p1",
+      "source_key": "retention",
+      "start_line": 121,
+      "end_line": 129,
+      "text_sha256": "9d2bc50aa0e9f5caf82355c67e4d5d72cfce67a444abab3aa5dbc13a9d63d00f"
+    }
+  ],
+  "family_groups": {
+    "retry-behavior": [
+      "H01",
+      "H02",
+      "H03",
+      "H04"
+    ],
+    "cache-eviction": [
+      "H05",
+      "H06",
+      "H07",
+      "H08"
+    ],
+    "buffer-overflow": [
+      "H09",
+      "H10",
+      "H11",
+      "H12"
+    ],
+    "document-passage-migration": [
+      "H13",
+      "H14",
+      "H15",
+      "H16"
+    ],
+    "repository-registration": [
+      "H17",
+      "H18",
+      "H19",
+      "H20"
+    ],
+    "source-retention": [
+      "H21",
+      "H22",
+      "H23",
+      "H24"
+    ]
+  },
+  "bounds": {
+    "instructions_utf8_bytes": 710,
+    "max_input_json_utf8_bytes": 2772
+  }
+}

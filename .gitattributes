@@ -2,3 +2,5 @@
 docs/evidence/**/*.log -whitespace linguist-generated=true
 docs/evidence/**/working-tree.diff -whitespace linguist-generated=true
 docs/evidence/**/comparison.json linguist-generated=true
+eval/answerability/heldout/source/** -whitespace linguist-vendored=true
+docs/evidence/**/fixture/source/** -whitespace linguist-generated=true

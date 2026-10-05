@@ -1,5 +1,9 @@
 # Does the evidence answer the question?
 
+Follow-up: the [24-case real-source pilot](heldout/README.md) now exposes failures
+and a limited aggregate advantage for Kev. This page preserves the earlier
+teaching result.
+
 **Verdict: worth a held-out test of the task; keep Qwen JSON as the model baseline.**
 On these 12 teaching cases, both Qwen and Kev identified missing/conflicting
 answers that a control with no semantic gate allowed through. Kev did not improve

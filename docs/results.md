@@ -17,6 +17,39 @@ in its denominator. Latency covers measured calls; order flips compare valid
 pairs. These are small smoke evaluations, not a production benchmark or calibration
 study. Model probabilities are not established probabilities of correctness.
 
+## 2026-10-05 — frozen real-source answerability pilot on Metal
+
+Twenty-four authored questions over pinned source excerpts from six new families,
+with labels independently reviewed and hash-frozen before inference. Same teaching
+prompt and decision policy, no tuning on these outputs. This is manually selected
+documentation evidence with omissions/ablations, not recorded retrieval or traffic.
+See the [worked result](../eval/answerability/heldout/README.md),
+[validation and failure details](validation-answerability-source.md) and
+[raw run](evidence/20261005T174941.125801Z-answerability-source-metal/comparison.json).
+
+| Primary: trial 1 / normal | Unsupported allowed / 12 | Answerable allowed / 12 | Correct / total | Median decision time, 22 unresolved cases |
+| --- | ---: | ---: | ---: | ---: |
+| No added gate | 11 | 12 | 13/24 | <1 ms |
+| Qwen3.5-4B JSON | 7 | 11 | 16/24 | 940 ms |
+| Kev-4B through semselect | 5 | 12 | 19/24 | 985 ms |
+
+Shared code resolves two cases in every arm. Both model arms return valid responses
+on all 88 measured model calls plus one excluded warmup. All four correlated views
+give Qwen 62/96 correct and Kev 74/96, including eight code decisions per arm.
+Qwen changes six of 48 order pairs; Kev changes two. The second trial preserves
+each corresponding label. These remain 24 cases, not 96 independent examples.
+
+Kev fixes four primary Qwen errors but adds H12; both allow several incomplete
+evidence sets. Qwen actually reused prefixes in 82/88 measured calls; Kev reprocessed
+every full prompt despite caching being enabled. Model/prompt/serving-path
+differences prevent an isolated architecture or efficiency conclusion. Startup,
+raw errors/responses, source snapshots and successful shutdown are preserved.
+
+Verdict: observed aggregate quality advantage for Kev on this pilot, sufficient
+to justify a downstream comparison, not a production gate recommendation. Neither
+the control nor these model labels establish what the existing generator would
+answer. The [answer-path audit](answering-path.md) defines that next test.
+
 ## 2026-10-05 — answerability teaching cases on Metal
 
 Separate workload: 12 public development examples, with labels reviewed before

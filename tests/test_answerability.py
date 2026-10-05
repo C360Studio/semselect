@@ -34,6 +34,34 @@ def successful_response(choice='allow'):
 
 
 class FixtureTests(unittest.TestCase):
+    def test_source_pilot_requires_pinned_origins_and_disjoint_teaching_families(self):
+        data = fixture()
+        data['scope'] = 'heldout/source-pilot'
+        with self.assertRaisesRegex(ValueError, 'pinned sources'):
+            experiment.validate_dataset(data)
+        data['cases'][0]['origin']['references'] = [{
+            'repository': 'example/repo', 'revision': 'a' * 40,
+            'path': 'behavior.md', 'sha256': 'b' * 64, 'note': 'intact excerpt'}]
+        experiment.validate_dataset(data)
+        data['cases'][0]['family'] = 'service-config'
+        with self.assertRaisesRegex(ValueError, 'teaching family'):
+            experiment.validate_dataset(data)
+
+    def test_frozen_run_refuses_missing_or_changed_dataset_digest(self):
+        from tempfile import TemporaryDirectory
+        data = fixture()
+        data['scope'] = 'heldout/source-pilot'
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / 'cases.json'
+            path.write_text(json.dumps(data))
+            with self.assertRaisesRegex(ValueError, 'expected-dataset-sha256'):
+                experiment.verify_frozen_dataset(path, data, None)
+            digest = experiment.metal.sha256(path)
+            experiment.verify_frozen_dataset(path, data, digest)
+            path.write_text(json.dumps(data) + '\n')
+            with self.assertRaisesRegex(ValueError, 'changed since freezing'):
+                experiment.verify_frozen_dataset(path, data, digest)
+
     def test_valid_fixture_and_duplicate_id_rejection(self):
         data = fixture()
         self.assertIs(experiment.validate_dataset(data), data)

@@ -1,0 +1,11 @@
+{
+  "repository": "ggml-org/Kev-4B-GGUF",
+  "revision": "d924f2e2c3872da8b8aaf3eb4453b4126deceb79",
+  "filename": "Kev-4B-Q4_K_M.gguf",
+  "size_bytes": 3033489824,
+  "sha256": "33ae6b18926502b2209a1bf7d3b61a350d65938441515c686bb87d226a19eff9",
+  "license": "Apache-2.0",
+  "alias": "semselect-kev-4b",
+  "conversion_source_revision": "6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+  "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125"
+}

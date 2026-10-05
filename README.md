@@ -7,16 +7,18 @@ semselect is a small, local decision service and evaluation project for the
 c360studio sem* ecosystem. Its deliverables are a working service, a comparison
 matrix with inspectable evidence, and an explanation of when each approach earns
 its place. A result recommending ordinary code or schema-constrained Qwen is a
-useful outcome. We have not yet demonstrated a workload advantage for the current
-decision model over the matched Qwen chat baseline.
+useful outcome. A small real-source answerability pilot now favors Kev over Qwen
+on aggregate quality, but both still allow unsupported evidence. Benefit to the
+complete answering pipeline remains unproved.
 
 Start with the short [when-to-use guide](docs/when-to-use.md). The latest
-[answerability experiment](eval/answerability/README.md) shows the boundary:
-code resolved four cases without a model call; Qwen JSON and Kev each correctly
-judged the other eight. Both caught missing/conflicting evidence that a control
-with no semantic gate allowed through. These are 12 teaching cases, with no
-demonstrated decision-quality advantage for Kev. Each experiment shows worked
-examples, one small table and a recommendation. The
+[real-source pilot](eval/answerability/heldout/README.md) moves beyond the
+[12 teaching cases](eval/answerability/README.md): on 24 frozen cases, Kev allowed
+5/12 unsupported inputs and preserved 12/12 supported ones; Qwen allowed 7/12
+unsupported inputs and preserved 11/12 supported ones. Code resolved two cases
+before either model was called. Kev merits further testing, with remaining
+failures documented. Each experiment shows worked examples, one small table and
+a recommendation. The
 [results history](docs/results.md) and [algorithm audit](docs/code-baselines-and-rag.md)
 provide the supporting evidence.
 
@@ -239,6 +241,8 @@ task baseline:up    # optional pinned ARM64 seminstruct image, port 8083
 task baseline:evaluate
 task answerability:validate # offline checks for the 12 teaching cases
 task answerability:metal    # same fixed evidence; cached native build/models required
+task answerability:source:validate # frozen 24-case source pilot, offline
+task answerability:source:metal    # same prompt on six new source families
 task down
 ```
 

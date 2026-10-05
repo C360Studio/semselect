@@ -10,9 +10,10 @@ remain separate. Shutdown was bounded but not graceful. This is endpoint
 compatibility, not a SGLang quality, calibration or performance result. The matched
 SGLang workload comparison below remains future work.
 
-The [answerability teaching run](../eval/answerability/README.md) now passes on the
-existing llama.cpp Metal setup with both Qwen JSON and Kev. The immediate priority
-is unseen real-source cases and full-pipeline benefit. Return to this serving comparison when a
+The [real-source answerability pilot](../eval/answerability/heldout/README.md) shows
+a limited aggregate quality advantage for Kev, with omissions still missed by both
+models. The immediate priority is downstream benefit using the
+[existing answer path](answering-path.md). Return to this serving comparison when a
 workload result makes runtime cost or scoring mechanics the next useful question.
 
 ## Question and architecture boundary

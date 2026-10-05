@@ -1,0 +1,42 @@
+{
+  "frozen_at": "2026-10-05T17:49:18.985240+00:00",
+  "dataset_sha256": "74066d02a4fcff48b8363478dcbc22f9e08bc6cef5be668c859a7a50ee536594",
+  "sources_sha256": "02dbbc6a75ebcd2618596dda3d04c995210893b04f29089f711e2b8a400c92dc",
+  "instructions_sha256": "e5b03e21be465e49f5bcb5fb096fb1483e1100367910329ea1a7d5561427f41a",
+  "teaching_dataset_sha256": "7660ef6a314af9f3c09748189b104060c0f728736462924aff00cf6ceca5734e",
+  "review": "Independent read-only source and gold review by answerability_review, plus root review. 24 labels, 7 files, 2 licenses, 41 passage ranges checked before inference. H03 support quote expanded to include its DON'T heading before freeze; inputs and gold actions unchanged.",
+  "selection": "24 authored questions over manually selected intact source excerpts and ablations, across six new families. No candidate model consulted while authoring. Not production queries, retrieval outputs, random sampling or pretraining isolation.",
+  "primary": "Trial 1, normal passage/fact/candidate order; all 24 cases. Report whole set and 22 unresolved cases separately.",
+  "robustness": "Two trials, normal/reversed passage/fact/candidate ordering together. Correlated descriptive observations, not additional independent examples.",
+  "code": "Same common_gate as teaching. One authoritative exact fact allow and one missing-fact defer; no keyword substitute for retrieval.",
+  "decision": "Same 710-byte task instructions/categories, Qwen constrained JSON thinking off; Kev native selected argmax. No threshold tuning.",
+  "timing": "Preparation plus HTTP/validation; startup and one warmup per model separate. Same pinned runtime/models as teaching, prefix caching configured enabled in both; observed reuse must be audited. No cold/matched-cache interpretation.",
+  "interpretation": "Compare unsupported allows and supported deferrals before timing. A quality tradeoff is not superiority without a caller error budget; small cache-confounded timing differences alone do not justify a model switch. Actual pipeline benefit remains a separate test.",
+  "failure_policy": "Keep malformed/transport/unattempted cases in denominators; operational defer does not count as correct semantic judgement. No retries or prompt changes after outputs.",
+  "models": {
+    "models.lock.json": {
+      "repository": "ggml-org/Kev-4B-GGUF",
+      "revision": "d924f2e2c3872da8b8aaf3eb4453b4126deceb79",
+      "filename": "Kev-4B-Q4_K_M.gguf",
+      "size_bytes": 3033489824,
+      "sha256": "33ae6b18926502b2209a1bf7d3b61a350d65938441515c686bb87d226a19eff9",
+      "license": "Apache-2.0",
+      "alias": "semselect-kev-4b",
+      "conversion_source_revision": "6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+      "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125"
+    },
+    "models.baseline.lock.json": {
+      "repository": "unsloth/Qwen3.5-4B-GGUF",
+      "revision": "e87f176479d0855a907a41277aca2f8ee7a09523",
+      "filename": "Qwen3.5-4B-Q4_K_M.gguf",
+      "size_bytes": 2740937888,
+      "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+      "license": "Apache-2.0",
+      "alias": "qwen3.5-4b",
+      "source_repository": "Qwen/Qwen3.5-4B",
+      "source_revision_note": "The GGUF publisher identifies Qwen/Qwen3.5-4B but does not pin its conversion source revision in the model card. The distributed GGUF bytes are pinned above.",
+      "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+      "metadata_source": "https://huggingface.co/api/models/unsloth/Qwen3.5-4B-GGUF/revision/e87f176479d0855a907a41277aca2f8ee7a09523?blobs=true"
+    }
+  }
+}
