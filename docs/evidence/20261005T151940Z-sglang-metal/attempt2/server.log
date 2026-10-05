@@ -1,0 +1,31 @@
+/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/launch_server.py:71: UserWarning: 'python -m sglang.launch_server' is still supported, but 'sglang serve' is the recommended entrypoint.
+  Example: sglang serve --model-path <model> [options]
+  warnings.warn(
+[2026-10-05 10:24:55] [1;33m'--disable-cuda-graph' is deprecated and will be removed in a future release. Use '--cuda-graph-backend-{decode,prefill}=disabled' instead.[0m
+[2026-10-05 10:24:55] Registered linear attn model: config=GigaChat35Config, backend=GDNAttnBackend, archs=['GigaChat35ForCausalLM', 'GigaChat35ForCausalLMNextN']
+/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/layers/quantization/gguf.py:69: UserWarning: Only CUDA, MUSA and NPU support GGUF quantization currently.
+  warnings.warn(f"Only CUDA, MUSA and NPU support GGUF quantization currently.")
+[2026-10-05 10:24:56] mlx_q4 quantization is not fully optimized yet. The speed can be slower than non-quantized models.
+[2026-10-05 10:24:56] Attention backend not specified. Use torch_native backend by default.
+[2026-10-05 10:24:56] Cuda graph is disabled because of using torch native attention backend
+[2026-10-05 10:24:56] kill_process_tree called: parent_pid=6989, include_parent=False, pid=6989
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/launch_server.py", line 84, in <module>
+    run_server(server_args)
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/launch_server.py", line 29, in run_server
+    server_args.resolve_once()
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/server_args.py", line 276, in resolve_once
+    run_resolution_pipeline(self)
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/arg_groups/pipeline.py", line 311, in run_resolution_pipeline
+    run_hook(handle_encoder_disaggregation, server_args)
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/arg_groups/resolution_hooks.py", line 134, in run_hook
+    step(server_args)
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/arg_groups/pd_disaggregation_hook.py", line 294, in handle_encoder_disaggregation
+    handle_language_model_only(server_args)
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/arg_groups/model_hook.py", line 1008, in handle_language_model_only
+    raise ValueError(
+ValueError: --language-model-only does not support ['Qwen3_5ForConditionalGeneration']. Supported: ['MuseGlimmerForConditionalGeneration', 'Cosmos3ForConditionalGeneration', 'Cosmos3EdgeForConditionalGeneration'].

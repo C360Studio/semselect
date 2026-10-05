@@ -9,6 +9,42 @@ for retaining seminstruct as the routing reference and positioning semselect
 around typed model readouts. The earlier CPU/0.6B comparison below remains a
 bootstrap record, not a fair model-size comparison.
 
+## Project stance and next investigation — 2026-10-05
+
+The mission is to teach a skeptical developer when a Jev-like decision model is
+worth using, with inspectable evidence. A tested service, reproducible comparison
+matrix and [plain-language selection guide](when-to-use.md) are all deliverables.
+The project can provide value by showing where code or schema-constrained chat
+is sufficient, even if decision-model packaging eventually joins seminstruct.
+
+The project owner explicitly reports a strong skeptical prior toward Jev's hype.
+The concern is that a convenient semantic selection API may encourage developers
+to replace coded control structures with uncertain model judgments. This records
+a starting bias and an architectural concern, not a finding that Jev lacks value.
+The owner supports further evidence-driven investigation, including SGLang.
+Preserve favorable and unfavorable results and define acceptance criteria before
+evaluating, so the experiment can challenge that prior as well as vendor claims.
+
+Prefer coded rules where authoritative facts and exact predicates are available.
+Use models to interpret ambiguous unstructured evidence when a semantic judgment
+is actually needed. The caller owns eligibility, permissions, valid transitions,
+abstention, fallback and execution. Selecting the highest-scoring supplied option
+does not itself provide a fallthrough case, prove the option applies, or authorize
+an action. Type-safe output does not change that boundary.
+
+The [completed same-Qwen experiment](validation-scoring.md) compares schema JSON
+with one-token option scoring on CPU/Docker and Metal. Metal preserved all labels
+while lowering median inference HTTP latency by about 28%; CPU lowered it by only
+3.4% and added an abstention in each trial. Neither result demonstrates a Jev
+training advantage or a need to replace an adequate coded pipeline.
+
+SGLang/MLX also passed a one-fixture endpoint probe after disabling radix caching;
+its earlier startup failures and bounded, non-graceful shutdown remain documented.
+A matched SGLang workload comparison is still future work. SGLang supplies serving
+mechanisms, not Jev's training. See the [bounded investigation](sglang-investigation.md).
+This supersedes the initial shortlist's decision to defer SGLang research while
+leaving the production llama.cpp deployment and historical results unchanged.
+
 ## Decision
 
 Package **llama.cpp's native `/v1/systemone` endpoint with Kev-4B Q4_K_M**. Keep semselect's own service code limited to operational bounds, health and request forwarding. The upstream runtime already implements Choice, Score and Noul, so semselect does not need its own probability extraction, tokenizer logic or decision head.
@@ -38,7 +74,7 @@ The [shared evaluation](../eval/README.md) asks seminstruct to generate a constr
 | **llama.cpp + Kev** | Trained decision head; native Choice/Score/Noul over runtime-defined options, without generated answer text | Native GGUF runtime; 4B Q4 download 3.03 GB, 0.8B Q8 812 MB; total RAM unmeasured here | MIT runtime, Apache-2.0 weights; new native endpoint, upstream tests and model evaluations | Initial backend; validate pinned 4B |
 | **Laya** | ModernBERT-large plus decision head; option-marker scores, native Choice/Score/Noul | Python/PyTorch CPU supported; also now a native [Laya GGUF](https://huggingface.co/ggml-org/Laya-GGUF) option | Apache-2.0 code/weights; Python 0.3.27 declares beta, tests and Docker support | Smaller alternative; domain-quality concerns below |
 | **SemIf-OpenJev** | Direct conditional option-token logits from ordinary open causal models; typed option distributions | Current upstream supports llama.cpp/GGUF CPU, PyTorch CPU, CUDA and Apple backends | MIT engine; model licenses separate; committed fixtures, runners and failures, small project | Useful reference/baseline; redundant inference layer for current scope |
-| **SGLang decisions / openjev-sglang** | Selected label-token probabilities; native decisions and System One interfaces | Reviewed openjev deployment is Qwen3.6-35B-A3B on B200, not the CPU target | SGLang is an existing serving project; openjev calls itself an early experiment and recommends native SGLang | GPU alternative; no reason to introduce its stack here |
+| **SGLang decisions / openjev-sglang** | Selected label-token probabilities; native decisions and System One interfaces | Reviewed openjev deployment is Qwen3.6-35B-A3B on B200; that does not establish laptop or 4B results | SGLang is an existing serving project; openjev calls itself an early experiment and recommends native SGLang | Next bounded evaluation candidate; see [investigation plan](sglang-investigation.md). No production backend change |
 | **NotJev** | One-token logprobs from an OpenAI-compatible backend; normalize option mass; System One adapter | Node/Bun adapter plus a separate model runtime; backend may be local or hosted | Apache-2.0 adapter; test and benchmark directories; backend/model licenses separate | Adds a layer already supplied by native llama.cpp |
 | **GLiClass** | Encoder classifier for dynamic label sets; softmax single-label or sigmoid multilabel scores | Python/PyTorch CPU path; small model is about 0.1B parameters | Apache-2.0 code and reviewed small-model weights; tests, paper and pretrained families | Relevant classifier baseline, not native ordered Score/Noul semantics |
 
@@ -62,4 +98,55 @@ Before using automatic actions, evaluate representative labeled examples separat
 
 ## Starting reference
 
-The supplied [Daniel García article](https://iamdgarcia.medium.com/build-your-own-jev-100-local-56799bcf2909), published September 21, was accessible only as a member-only introduction. The visible portion describes next-token scoring and SGLang; its complete code and benchmark method were not available for verification. It was a discovery lead, not the authority for this implementation. The independently inspected primary sources above now include native upstream support that postdates the article.
+The supplied [Daniel García article](https://iamdgarcia.medium.com/build-your-own-jev-100-local-56799bcf2909), published September 21, was initially accessible only as a member-only introduction. The owner supplied the article text on 2026-10-05, making its example code and comparison description available for review. The copyrighted article is not copied into this repository.
+
+The article distinguishes the inference mechanism from Jev's training and
+calibration, explains restricted option probabilities, and requires an escape
+option when the candidates are not exhaustive. Its example uses SGLang's
+`/v1/score` with single-token labels. Our investigation tests this same idea.
+
+Its described demo generation comparison asks for a label and a short explanation
+with a 32-token limit. That does not establish a speedup over our existing
+label-only JSON baseline. We keep that stronger baseline. The prose also calls
+for checking tokenization at the answer position; the shown example tokenizes
+labels in isolation. Our probe checks each label appended to the rendered prompt
+and rejects a changed prefix or a multi-token continuation.
+
+The llama.cpp experiment emits one constrained token and reads its pre-sampling
+log-probabilities; it is not SGLang's zero-output-token scoring endpoint. Every
+candidate must be present before normalizing, and both the raw candidate mass
+and conditional distribution are retained. Preserve that distinction in results.
+Upstream references and the local evidence remain the basis for compatibility
+and performance claims.
+
+### Additional RAG article supplied by the owner
+
+On 2026-10-05 the owner supplied another Medium excerpt, beginning "Where to place
+Jev in RAG"; its author, URL and result images were not included. It proposes
+post-retrieval relevance/answerability judgments and inferred metadata filters
+before retrieval. The latter is explicitly an untested proposal in the excerpt.
+Its hosted Jev timings, prices, question limits and score thresholds are not local
+semselect measurements or transferable deployment settings.
+
+The useful workload distinction is **topical relevance versus sufficient evidence**.
+A passage may discuss expense reimbursement while omitting the requested deadline.
+The author acknowledges that one reranking comparison already had Recall@5 of
+1.0 without reranking, so that result does not establish a need for a reranker.
+We should apply the same skepticism to our existing algorithmic retrieval paths.
+
+Inferred filters can exclude the correct document before retrieval has a chance
+to find it. Per-chunk answerability also differs from answerability across several
+chunks: an answer can require evidence spread across documents. Both need explicit
+failure cases and a broad-search or abstention fallback. A single HTTP request
+with many questions does not establish constant inference cost. Our current guard
+allows four questions, not the excerpt's 20/40-question examples, and our native
+Score/Noul smoke checks do not validate a RAG workload.
+
+The next comparison must include existing rules and retrieval algorithms, not
+only model alternatives. Keep corpus, retrieved candidates and task definitions
+fixed when evaluating an added gate, and include a no-gate baseline. Compare
+single-response JSON with bundled decisions fairly. Preserve exact metadata and
+authorization predicates in code; measure any benefit of semantic filtering,
+reranking or answerability separately.
+The [source and scorecard audit](code-baselines-and-rag.md) records the existing
+semsource/SemStreams capabilities, historical no-gap finding and fair test design.

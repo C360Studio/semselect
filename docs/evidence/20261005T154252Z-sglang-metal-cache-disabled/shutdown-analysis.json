@@ -1,0 +1,22 @@
+{
+  "interpretation": "Evidence supports SGLang self-kill after driver SIGTERM to the owned process group; this is bounded cleanup, not graceful-shutdown validation or an inference failure.",
+  "server_exit_code": -9,
+  "driver_term_wait_seconds": 15,
+  "driver_timeout_branch_instrumented": false,
+  "log_timezone": "America/Chicago UTC-05:00 on2026-10-05",
+  "log_excerpt": [
+    "[2026-10-05 11:13:57] SIGTERM received. signum=None frame=None. Draining requests and shutting down...",
+    "[2026-10-05 11:13:57] Subprocess scheduler_0 (pid=1184) crashed with exit code -15. Triggering SIGQUIT for cleanup...",
+    "[2026-10-05 11:13:57] SIGQUIT received. signum=None, frame=None. It usually means one child failed.",
+    "[2026-10-05 11:13:57] Sleeping 5 seconds before crash diagnostics to let GPU activity settle.",
+    "[2026-10-05 11:14:02] No live scheduler processes found; skipping py-spy and CUDA coredump.",
+    "[2026-10-05 11:14:02] kill_process_tree called: parent_pid=1170, include_parent=True, pid=1170"
+  ],
+  "source_revision": "efb62ce269b499123e2d1c89005ee4cea8c31098",
+  "source_references": {
+    "subprocess_watchdog": "https://github.com/sgl-project/sglang/blob/efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/utils/watchdog.py#L211",
+    "sigquit_handler": "https://github.com/sgl-project/sglang/blob/efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/managers/tokenizer_manager.py#L3909",
+    "self_kill": "https://github.com/sgl-project/sglang/blob/efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/utils/common.py#L2509"
+  },
+  "limitation": "No separate driver timestamps for signal delivery or boolean marking its SIGKILL fallback. Interpretation uses observed server log sequence and pinned implementation."
+}

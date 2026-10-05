@@ -1,0 +1,7 @@
+{
+  "recorded_utc": "2026-10-05T15:28:12.286907+00:00",
+  "host_process_check": "pgrep -fl 'sglang.launch_server|sglang::scheduler|sglang::detokenizer'",
+  "host_listener_check": "lsof -nP -iTCP:30101 -sTCP:LISTEN",
+  "output": "",
+  "interpretation": "No matching process lines and no listener lines returned. Both absence checks conventionally return exit1; combined command exit1. This checks named processes and port, not every conceivable child."
+}

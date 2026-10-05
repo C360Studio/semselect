@@ -73,3 +73,9 @@ tasks:
   metal:baseline:evaluate:
     desc: Start the matched Metal Qwen baseline, evaluate, then stop
     cmds: [python3 scripts/metal.py evaluate --baseline]
+  compare:metal:
+    desc: Compare JSON vs complete raw option scores on Metal; preserve two trials
+    cmds: [python3 scripts/compare_scoring.py --hardware metal]
+  compare:cpu:
+    desc: Compare the same Qwen formats in the pinned CPU Docker runtime
+    cmds: [python3 scripts/compare_scoring.py --hardware cpu-docker]

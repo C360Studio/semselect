@@ -1,0 +1,28 @@
+{
+  "recorded_utc": "2026-10-05T16:14:29.341299+00:00",
+  "checks": [
+    {
+      "argv": [
+        "pgrep",
+        "-fl",
+        "sglang.launch_server|sglang::scheduler|sglang::detokenizer"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "lsof",
+        "-nP",
+        "-iTCP:30101",
+        "-sTCP:LISTEN"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "passed": true,
+  "interpretation": "No process matching server/scheduler/detokenizer names and no TCP30101 listener; not an exhaustive proof against every conceivable renamed child."
+}

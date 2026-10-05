@@ -1,0 +1,261 @@
+diff --git a/.gitignore b/.gitignore
+index d767822..23c534b 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -4,6 +4,7 @@
+ /results/
+ /bin/
+ /.native/
++/.sglang/
+ __pycache__/
+ *.pyc
+ .DS_Store
+diff --git a/AGENTS.md b/AGENTS.md
+index 3f23297..63ad2fd 100644
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -1,14 +1,28 @@
+ # semselect working agreements
+ 
++- The mission is to help skeptical developers decide when a Jev-like decision
++  model is worth using, through a tested service, reproducible comparisons and
++  plain-language guidance. Evidence favoring code or schema-constrained chat is
++  a successful result. Keep `docs/when-to-use.md` aligned with measured evidence;
++  distinguish a functioning API from demonstrated workload benefit.
+ - Keep this a small packaging/integration service. Use the native llama.cpp
+   `/v1/systemone` API; do not implement a second scoring engine or provider framework.
+ - Callers own categories, routing, authorization, thresholds, fallback and actions.
+   Example taxonomies belong in evaluation fixtures, never the service.
++- Prefer coded control structures for authoritative facts, validation, permissions
++  and state transitions. Use models for the remaining semantic judgments, with
++  explicit abstention/fallback and caller-enforced action policy.
++- SGLang/direct-scoring investigations belong in isolated evaluation work. They
++  do not change the default runtime or justify a new provider framework. Follow
++  the scope and evidence criteria in `docs/sglang-investigation.md`.
+ - Preserve the pinned runtime, model revision, SHA-256 and license attribution.
+   Model/runtime changes require real smoke evaluation and a revised validation record.
+ - Support CPU-only Linux containers and the native Apple Silicon Metal path.
+   Record the architecture actually tested; do not infer AMD64 or CUDA results
+   from ARM64 CPU or Metal execution.
++- Establish reproducible CPU/Docker and Metal experiments before asking for CUDA
++  help. Preserve SGLang compatibility failures separately from successful
++  llama.cpp experiments; neither establishes support for the other runtime.
+ - Go code must honor contexts and bound bodies, concurrency and response size.
+   Preserve original candidate order and native response values.
+ - Run `task check` for service changes. Use a failing regression before bug fixes.
+diff --git a/README.md b/README.md
+index 1fb3f87..7193f0a 100644
+--- a/README.md
++++ b/README.md
+@@ -1,8 +1,23 @@
+ # semselect
+ 
+-Small, local decision service for the c360studio sem* ecosystem. Callers supply
+-context and permissible answers; semselect returns typed model readouts. Callers
+-own taxonomies, routing, authorization, acceptance thresholds, fallback and execution.
++**Help skeptical developers decide when a Jev-like decision model is worth using,
++through a tested local service, reproducible comparisons, and plain-language guidance.**
++
++semselect is a small, local decision service and evaluation project for the
++c360studio sem* ecosystem. Its deliverables are a working service, a comparison
++matrix with inspectable evidence, and an explanation of when each approach earns
++its place. A result recommending ordinary code or schema-constrained Qwen is a
++useful outcome. We have not yet demonstrated a workload advantage for the current
++decision model over the matched Qwen chat baseline.
++
++Start with [when to use semselect](docs/when-to-use.md), then the
++[comparison results](docs/results.md). The guide distinguishes measured findings
++from promising use cases that still need testing.
++
++Callers supply context and permissible answers; semselect returns typed model
++readouts. Callers own taxonomies, routing, authorization, acceptance thresholds,
++fallback and execution. Resolve authoritative facts and exact predicates in code;
++use model judgments where interpretation is needed.
+ 
+ The bootstrap packages **llama.cpp + Kev-4B Q4_K_M** behind a small Go request guard.
+ It uses the existing `POST /v1/systemone` API. It adds no model, scoring formula,
+diff --git a/Taskfile.yml b/Taskfile.yml
+index c25488b..43a8f84 100644
+--- a/Taskfile.yml
++++ b/Taskfile.yml
+@@ -73,3 +73,9 @@ tasks:
+   metal:baseline:evaluate:
+     desc: Start the matched Metal Qwen baseline, evaluate, then stop
+     cmds: [python3 scripts/metal.py evaluate --baseline]
++  compare:metal:
++    desc: Compare JSON vs complete raw option scores on Metal; preserve two trials
++    cmds: [python3 scripts/compare_scoring.py --hardware metal]
++  compare:cpu:
++    desc: Compare the same Qwen formats in the pinned CPU Docker runtime
++    cmds: [python3 scripts/compare_scoring.py --hardware cpu-docker]
+diff --git a/docs/research-and-decision.md b/docs/research-and-decision.md
+index d3c61c0..1714e43 100644
+--- a/docs/research-and-decision.md
++++ b/docs/research-and-decision.md
+@@ -9,6 +9,36 @@ for retaining seminstruct as the routing reference and positioning semselect
+ around typed model readouts. The earlier CPU/0.6B comparison below remains a
+ bootstrap record, not a fair model-size comparison.
+ 
++## Project stance and next investigation — 2026-10-05
++
++The mission is to teach a skeptical developer when a Jev-like decision model is
++worth using, with inspectable evidence. A tested service, reproducible comparison
++matrix and [plain-language selection guide](when-to-use.md) are all deliverables.
++The project can provide value by showing where code or schema-constrained chat
++is sufficient, even if decision-model packaging eventually joins seminstruct.
++
++The project owner explicitly reports a strong skeptical prior toward Jev's hype.
++The concern is that a convenient semantic selection API may encourage developers
++to replace coded control structures with uncertain model judgments. This records
++a starting bias and an architectural concern, not a finding that Jev lacks value.
++The owner supports further evidence-driven investigation, including SGLang.
++Preserve favorable and unfavorable results and define acceptance criteria before
++evaluating, so the experiment can challenge that prior as well as vendor claims.
++
++Prefer coded rules where authoritative facts and exact predicates are available.
++Use models to interpret ambiguous unstructured evidence when a semantic judgment
++is actually needed. The caller owns eligibility, permissions, valid transitions,
++abstention, fallback and execution. Selecting the highest-scoring supplied option
++does not itself provide a fallthrough case, prove the option applies, or authorize
++an action. Type-safe output does not change that boundary.
++
++The next proposed experiment compares Qwen's schema-constrained generation with
++direct option scoring, keeping the model and hardware fixed. SGLang is a serving
++engine capable of that comparison; it does not impart Jev's training to Qwen.
++See the [bounded SGLang investigation](sglang-investigation.md). This supersedes
++the initial shortlist's decision to defer SGLang research, while leaving the
++validated llama.cpp deployment and saved results unchanged.
++
+ ## Decision
+ 
+ Package **llama.cpp's native `/v1/systemone` endpoint with Kev-4B Q4_K_M**. Keep semselect's own service code limited to operational bounds, health and request forwarding. The upstream runtime already implements Choice, Score and Noul, so semselect does not need its own probability extraction, tokenizer logic or decision head.
+@@ -38,7 +68,7 @@ The [shared evaluation](../eval/README.md) asks seminstruct to generate a constr
+ | **llama.cpp + Kev** | Trained decision head; native Choice/Score/Noul over runtime-defined options, without generated answer text | Native GGUF runtime; 4B Q4 download 3.03 GB, 0.8B Q8 812 MB; total RAM unmeasured here | MIT runtime, Apache-2.0 weights; new native endpoint, upstream tests and model evaluations | Initial backend; validate pinned 4B |
+ | **Laya** | ModernBERT-large plus decision head; option-marker scores, native Choice/Score/Noul | Python/PyTorch CPU supported; also now a native [Laya GGUF](https://huggingface.co/ggml-org/Laya-GGUF) option | Apache-2.0 code/weights; Python 0.3.27 declares beta, tests and Docker support | Smaller alternative; domain-quality concerns below |
+ | **SemIf-OpenJev** | Direct conditional option-token logits from ordinary open causal models; typed option distributions | Current upstream supports llama.cpp/GGUF CPU, PyTorch CPU, CUDA and Apple backends | MIT engine; model licenses separate; committed fixtures, runners and failures, small project | Useful reference/baseline; redundant inference layer for current scope |
+-| **SGLang decisions / openjev-sglang** | Selected label-token probabilities; native decisions and System One interfaces | Reviewed openjev deployment is Qwen3.6-35B-A3B on B200, not the CPU target | SGLang is an existing serving project; openjev calls itself an early experiment and recommends native SGLang | GPU alternative; no reason to introduce its stack here |
++| **SGLang decisions / openjev-sglang** | Selected label-token probabilities; native decisions and System One interfaces | Reviewed openjev deployment is Qwen3.6-35B-A3B on B200; that does not establish laptop or 4B results | SGLang is an existing serving project; openjev calls itself an early experiment and recommends native SGLang | Next bounded evaluation candidate; see [investigation plan](sglang-investigation.md). No production backend change |
+ | **NotJev** | One-token logprobs from an OpenAI-compatible backend; normalize option mass; System One adapter | Node/Bun adapter plus a separate model runtime; backend may be local or hosted | Apache-2.0 adapter; test and benchmark directories; backend/model licenses separate | Adds a layer already supplied by native llama.cpp |
+ | **GLiClass** | Encoder classifier for dynamic label sets; softmax single-label or sigmoid multilabel scores | Python/PyTorch CPU path; small model is about 0.1B parameters | Apache-2.0 code and reviewed small-model weights; tests, paper and pretrained families | Relevant classifier baseline, not native ordered Score/Noul semantics |
+ 
+@@ -62,4 +92,23 @@ Before using automatic actions, evaluate representative labeled examples separat
+ 
+ ## Starting reference
+ 
+-The supplied [Daniel García article](https://iamdgarcia.medium.com/build-your-own-jev-100-local-56799bcf2909), published September 21, was accessible only as a member-only introduction. The visible portion describes next-token scoring and SGLang; its complete code and benchmark method were not available for verification. It was a discovery lead, not the authority for this implementation. The independently inspected primary sources above now include native upstream support that postdates the article.
++The supplied [Daniel García article](https://iamdgarcia.medium.com/build-your-own-jev-100-local-56799bcf2909), published September 21, was initially accessible only as a member-only introduction. The owner supplied the article text on 2026-10-05, making its example code and comparison description available for review. The copyrighted article is not copied into this repository.
++
++The article distinguishes the inference mechanism from Jev's training and
++calibration, explains restricted option probabilities, and requires an escape
++option when the candidates are not exhaustive. Its example uses SGLang's
++`/v1/score` with single-token labels. Our investigation tests this same idea.
++
++Its described demo generation comparison asks for a label and a short explanation
++with a 32-token limit. That does not establish a speedup over our existing
++label-only JSON baseline. We keep that stronger baseline. The prose also calls
++for checking tokenization at the answer position; the shown example tokenizes
++labels in isolation. Our probe checks each label appended to the rendered prompt
++and rejects a changed prefix or a multi-token continuation.
++
++The llama.cpp experiment emits one constrained token and reads its pre-sampling
++log-probabilities; it is not SGLang's zero-output-token scoring endpoint. Every
++candidate must be present before normalizing, and both the raw candidate mass
++and conditional distribution are retained. Preserve that distinction in results.
++Upstream references and the local evidence remain the basis for compatibility
++and performance claims.
+diff --git a/docs/results.md b/docs/results.md
+index a0d5040..6352e90 100644
+--- a/docs/results.md
++++ b/docs/results.md
+@@ -4,6 +4,9 @@ The [README](../README.md#latest-routing-results) shows the latest useful matche
+ comparison. This page preserves the complete published routing history; linked
+ JSON contains the per-request evidence and is the source for table values.
+ Detailed validation reports explain conditions, failures and interpretation.
++The [when-to-use guide](when-to-use.md) turns these comparisons into guidance for
++choosing code, schema-constrained chat or a decision model. A working endpoint,
++a workload advantage and an untested hypothesis are different evidence states.
+ 
+ All four runs below use the same [routing smoke dataset](../eval/routing-smoke.json),
+ SHA-256 `81590b0d2e0773f49b7b1c524729acb96d37a74b29ca134c710701a0037b5d2a`:
+@@ -91,6 +94,11 @@ separate; do not rank all rows as an isolated model or GPU benchmark.
+    the documentation and evidence together. Test artifacts containing private
+    inputs belong in approved private storage; commit only their allowed summaries
+    or access references.
++6. Update the [when-to-use guide](when-to-use.md) when evidence changes a
++   recommendation. State the caller's problem, simplest adequate alternative,
++   observed benefit or lack of one, failure cases and conditions that limit the
++   conclusion. Include a concrete example and reproduction link. Label proposed
++   benefits as untested; retain negative and inconclusive findings.
+ 
+ At this scale, Markdown plus versioned JSON is sufficient. If the hardware/model
+ matrix grows, generate the tables and charts from those same saved summaries;
+diff --git a/docs/semstreams-integration.md b/docs/semstreams-integration.md
+index 7affd90..4b66433 100644
+--- a/docs/semstreams-integration.md
++++ b/docs/semstreams-integration.md
+@@ -16,6 +16,13 @@ are permitted. Neither a selected label nor a high probability authorizes an act
+ This follows the framework/product boundary in
+ [SemStreams `openspec/project.md:39`](https://github.com/c360studio/semstreams/blob/1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a/openspec/project.md#L39).
+ 
++Resolve authoritative facts and exact predicates in code first. For example,
++transaction records and policy determine refund eligibility; a model may interpret
++whether a free-text message requests a refund. The model cannot waive eligibility
++checks. A semantic selector also needs an explicit unknown/abstention path:
++returning the largest option score does not prove that any offered option applies.
++Weak keyword guesses are not authoritative facts merely because they are coded.
++
+ The service needs no graph, NATS dependency, agent loop, or durable workflow state.
+ SemTeams remains a product-shell consumer of framework primitives; new inference
+ transport belongs in SemStreams, while product-specific routing stays in SemTeams
+diff --git a/eval/README.md b/eval/README.md
+index bc9787b..78124de 100644
+--- a/eval/README.md
++++ b/eval/README.md
+@@ -16,6 +16,47 @@ The second uses Qwen3.5-4B Q4_K_M on the same runtime, not the old 0.6B containe
+ See [setup and measurement limits](../docs/laptop-and-gpu.md) and the
+ [measured Metal comparison](../docs/validation-metal.md).
+ 
++## Same-model output-format comparison
++
++`task compare:metal` and `task compare:cpu` compare the pinned Qwen3.5-4B GGUF
++against itself: schema-constrained JSON labels versus one-token labels with raw
++option log-probabilities. Run them sequentially. Both own and stop their runtime;
++the CPU task uses the existing `semselect-runtime:dev` image after checking its
++runtime-revision label. Build it with `task build` if absent. Both tasks verify
++the model checksum; fetch it with `task metal:baseline:fetch` if needed.
++
++Each command saves a unique directory in `results/scoring-comparison/`, with
++runtime logs, image/binary provenance, source snapshots, rendered prompts, token
++checks, warmups and every measured response. These files are still ignored until
++preserved under `docs/evidence/`. No public service API or provider framework is
++added. The comparison bypasses the semselect guard on both paths.
++
++The default is two trials of the same 24 cases in both candidate orders: 96 calls
++per format, not 96 independent examples. Format order alternates and reverses on
++the second trial. Prompt-cache reuse is disabled for both formats. This differs
++from earlier cache-enabled sequential model comparisons; do not mix their latency
++rows. Model load and prompt preparation/token validation are excluded from request
++latency and preserved separately. The host remains shared and thermally uncontrolled.
++
++The scoring path renders the chat template with thinking disabled, then verifies
++each A..Z label as a distinct single-token continuation at the actual answer
++position. It requests one greedy grammar-constrained token plus 256 pre-sampling
++vocabulary log-probabilities. Every supplied option must be present; missing
++options fail validation instead of receiving invented zero probabilities. It
++normalizes only those raw scores, preserves their full-vocabulary mass and checks
++that the generated label agrees with their maximum. A tiny top-k API result would
++otherwise silently bias the distribution. This is one-token generation with
++scores, not SGLang's zero-output-token `/v1/score` operation.
++
++Reports add multiclass Brier score (sum over classes, average over valid scored
++calls) and per-trial accuracy/latency. Errors stay in accuracy and coverage
++denominators; no chat probabilities are invented. Threshold sweeps are descriptive
++on this smoke set, not held-out calibration or a production acceptance policy.
++Different format prompts remain a confounder. The experiment does not isolate
++the benefit of distributions from the benefit of emitting fewer output tokens.
++
++## Existing model comparison
++
+ Run against a real semselect service:
+ 
+ ```sh

@@ -4,14 +4,60 @@ The [README](../README.md#latest-routing-results) shows the latest useful matche
 comparison. This page preserves the complete published routing history; linked
 JSON contains the per-request evidence and is the source for table values.
 Detailed validation reports explain conditions, failures and interpretation.
+The [when-to-use guide](when-to-use.md) turns these comparisons into guidance for
+choosing code, schema-constrained chat or a decision model. A working endpoint,
+a workload advantage and an untested hypothesis are different evidence states.
 
-All four runs below use the same [routing smoke dataset](../eval/routing-smoke.json),
+The routing runs below use the same [routing smoke dataset](../eval/routing-smoke.json),
 SHA-256 `81590b0d2e0773f49b7b1c524729acb96d37a74b29ca134c710701a0037b5d2a`:
-24 labeled cases, each in two candidate orders. The resulting 48 observations are
-correlated. Each run excluded one warmup. Accuracy includes invalid/error calls
+24 labeled cases, each in two candidate orders. The resulting observations are
+correlated; repeats do not add independent examples. Warmups are excluded as
+specified for each experiment. Accuracy includes invalid/error calls
 in its denominator. Latency covers measured calls; order flips compare valid
 pairs. These are small smoke evaluations, not a production benchmark or calibration
 study. Model probabilities are not established probabilities of correctness.
+
+## 2026-10-05 — Qwen JSON versus one-token scoring
+
+Same Qwen3.5-4B Q4_K_M bytes and llama.cpp revision on CPU/Docker and native Metal.
+Two trials per deployment, alternating format order, one excluded warmup per
+format, no prompt-prefix reuse, four runtime threads and a 4096-token context.
+Every measured response reported `cache_n=0`. See the [validation report](validation-scoring.md)
+for requests, provenance, source snapshots, resource limits and interpretation.
+
+| Deployment / format | Correct | Valid | Median | p95 | Order flips | Evidence |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Metal / JSON | 92/96 | 96/96 | 673 ms | 749 ms | 4/48 | [Complete run](evidence/20261005T153218.957088Z-metal/comparison.json) |
+| Metal / token scores | 92/96 | 96/96 | 488 ms | 529 ms | 4/48 | [Same run](evidence/20261005T153218.957088Z-metal/comparison.json) |
+| Docker Linux/ARM64 CPU / JSON | 92/96 | 96/96 | 11,191 ms | 15,119 ms | 4/48 | [Complete run](evidence/20261005T153432.573761Z-cpu-docker/comparison.json) |
+| Docker Linux/ARM64 CPU / token scores | 90/96 | 96/96 | 10,816 ms | 13,994 ms | 6/48 | [Same run](evidence/20261005T153432.573761Z-cpu-docker/comparison.json) |
+
+Both runs passed inference and explicit runtime shutdown checks. On Metal, both
+formats made the same predictions. On CPU, scoring added an `unknown` on the
+normal-order `injection-account` case in each trial. CPU's small raw latency
+reduction and lower coverage do not establish the same benefit as the Metal result.
+Probabilities are uncalibrated; output prompts differ and scoring preparation is
+outside inference HTTP timing. These evaluation-only calls bypass semselect's guard.
+
+An [earlier Metal run](evidence/20261005T152813.162235Z-metal/comparison.json) also
+completed all 192 calls: each format got 92/96 correct, with JSON/scoring medians
+670/485 ms and p95 724/506 ms. Its overall provenance is **failed** because the
+cleanup check mistook TCP `TIME_WAIT` for a listener. The original record is retained
+alongside its [follow-up](evidence/20261005T152813.162235Z-metal/cleanup-followup.json).
+The successful final run above followed a failing regression and corrected check;
+the earlier failure has not been silently relabeled.
+
+### SGLang/MLX compatibility, separate from routing measurements
+
+The [initial probe](evidence/20261005T151940Z-sglang-metal/README.md) preserved three
+configuration attempts ending in a warmup failure before endpoint validation.
+A [fourth probe with radix caching disabled](evidence/20261005T154252Z-sglang-metal-cache-disabled/README.md)
+passed two schema JSON calls, two independent score calls, two three-question
+decision bundles and two matching route-score replays. These use one fixture and
+a separate MLX quantization, so no routing accuracy or comparative latency is
+reported. Shutdown ended with SGLang self-kill behavior; bounded cleanup and
+absence of the process/listener were verified. The failed cached path is not
+validated by this configuration workaround.
 
 ## 2026-10-05 — matched 4B models on native Metal
 
@@ -91,6 +137,11 @@ separate; do not rank all rows as an isolated model or GPU benchmark.
    the documentation and evidence together. Test artifacts containing private
    inputs belong in approved private storage; commit only their allowed summaries
    or access references.
+6. Update the [when-to-use guide](when-to-use.md) when evidence changes a
+   recommendation. State the caller's problem, simplest adequate alternative,
+   observed benefit or lack of one, failure cases and conditions that limit the
+   conclusion. Include a concrete example and reproduction link. Label proposed
+   benefits as untested; retain negative and inconclusive findings.
 
 At this scale, Markdown plus versioned JSON is sufficient. If the hardware/model
 matrix grows, generate the tables and charts from those same saved summaries;

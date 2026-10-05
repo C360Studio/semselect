@@ -1,0 +1,31 @@
+/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/launch_server.py:71: UserWarning: 'python -m sglang.launch_server' is still supported, but 'sglang serve' is the recommended entrypoint.
+  Example: sglang serve --model-path <model> [options]
+  warnings.warn(
+[2026-10-05 10:23:43] [1;33m'--disable-cuda-graph' is deprecated and will be removed in a future release. Use '--cuda-graph-backend-{decode,prefill}=disabled' instead.[0m
+[2026-10-05 10:23:44] Registered linear attn model: config=GigaChat35Config, backend=GDNAttnBackend, archs=['GigaChat35ForCausalLM', 'GigaChat35ForCausalLMNextN']
+/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/layers/quantization/gguf.py:69: UserWarning: Only CUDA, MUSA and NPU support GGUF quantization currently.
+  warnings.warn(f"Only CUDA, MUSA and NPU support GGUF quantization currently.")
+[2026-10-05 10:23:46] mlx_q4 quantization is not fully optimized yet. The speed can be slower than non-quantized models.
+[2026-10-05 10:23:46] kill_process_tree called: parent_pid=3110, include_parent=False, pid=3110
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/launch_server.py", line 84, in <module>
+    run_server(server_args)
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/launch_server.py", line 29, in run_server
+    server_args.resolve_once()
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/server_args.py", line 276, in resolve_once
+    run_resolution_pipeline(self)
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/arg_groups/pipeline.py", line 213, in run_resolution_pipeline
+    run_hook(handle_model_specific_adjustments, server_args)
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/arg_groups/resolution_hooks.py", line 134, in run_hook
+    step(server_args)
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/arg_groups/model_hook.py", line 708, in handle_model_specific_adjustments
+    handle_mamba_radix_cache(server_args, hf_config)
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/arg_groups/model_hook.py", line 974, in handle_mamba_radix_cache
+    validate_mamba_extra_buffer(
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/arg_groups/mamba_hook.py", line 107, in validate_mamba_extra_buffer
+    get_platform().is_cuda
+AssertionError: extra_buffer needs CUDA/MUSA/NPU/ROCm/XPU (FLA).

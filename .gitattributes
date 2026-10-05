@@ -1,0 +1,4 @@
+# Preserve captured bytes; collapse bulky generated evidence in GitHub reviews.
+docs/evidence/**/*.log -whitespace linguist-generated=true
+docs/evidence/**/working-tree.diff -whitespace linguist-generated=true
+docs/evidence/**/comparison.json linguist-generated=true

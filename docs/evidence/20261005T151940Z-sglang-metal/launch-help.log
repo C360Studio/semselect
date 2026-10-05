@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 189, in _run_module_as_main
+  File "<frozen runpy>", line 112, in _get_module_details
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/__init__.py", line 21, in <module>
+    from sglang.srt.utils.hf_transformers_patches import apply_all as _apply_hf_patches
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/utils/__init__.py", line 2, in <module>
+    from sglang.srt.utils.common import *
+  File "/Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python/sglang/srt/utils/common.py", line 91, in <module>
+    import triton
+ModuleNotFoundError: No module named 'triton'

@@ -1,0 +1,15 @@
+{
+  "observed_at": "2026-10-05T16:14:07.968234+00:00",
+  "scope": "Environment observed immediately after completed CPU comparison; not a during-run resource sample.",
+  "client_platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "host_cpu": "Apple M3 Pro",
+  "host_memory_bytes": 38654705664,
+  "docker_engine": {
+    "server_version": "29.8.1",
+    "os_type": "linux",
+    "architecture": "aarch64",
+    "cpus": 12,
+    "memory_bytes": 24895582208,
+    "kernel_version": "7.0.14-linuxkit"
+  }
+}

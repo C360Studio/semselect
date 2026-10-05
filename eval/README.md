@@ -16,6 +16,49 @@ The second uses Qwen3.5-4B Q4_K_M on the same runtime, not the old 0.6B containe
 See [setup and measurement limits](../docs/laptop-and-gpu.md) and the
 [measured Metal comparison](../docs/validation-metal.md).
 
+## Same-model output-format comparison
+
+`task compare:metal` and `task compare:cpu` compare the pinned Qwen3.5-4B GGUF
+against itself: schema-constrained JSON labels versus one-token labels with raw
+option log-probabilities. Run them sequentially. Both own and stop their runtime;
+the CPU task uses the existing `semselect-runtime:dev` image after checking its
+runtime-revision label. Build it with `task build` if absent. Both tasks verify
+the model checksum; fetch it with `task metal:baseline:fetch` if needed.
+
+Each command saves a unique directory in `results/scoring-comparison/`, with
+runtime logs, image/binary provenance, source snapshots, rendered prompts, token
+checks, warmups and every measured response. These files are still ignored until
+preserved under `docs/evidence/`. No public service API or provider framework is
+added. The comparison bypasses the semselect guard on both paths.
+
+The default is two trials of the same 24 cases in both candidate orders: 96 calls
+per format, not 96 independent examples. Format order alternates and reverses on
+the second trial. Prompt-cache reuse is disabled for both formats. This differs
+from earlier cache-enabled sequential model comparisons; do not mix their latency
+rows. Model load is excluded from request latency. Scoring prompt preparation,
+template rendering and token validation are recorded outside that timing; JSON
+template rendering occurs inside its timed chat request. The host remains shared
+and thermally uncontrolled. See the [complete CPU/Metal findings](../docs/validation-scoring.md).
+
+The scoring path renders the chat template with thinking disabled, then verifies
+each A..Z label as a distinct single-token continuation at the actual answer
+position. It requests one greedy grammar-constrained token plus 256 pre-sampling
+vocabulary log-probabilities. Every supplied option must be present; missing
+options fail validation instead of receiving invented zero probabilities. It
+normalizes only those raw scores, preserves their full-vocabulary mass and checks
+that the generated label agrees with their maximum. A tiny top-k API result would
+otherwise silently bias the distribution. This is one-token generation with
+scores, not SGLang's zero-output-token `/v1/score` operation.
+
+Reports add multiclass Brier score (sum over classes, average over valid scored
+calls) and per-trial accuracy/latency. Errors stay in accuracy and coverage
+denominators; no chat probabilities are invented. Threshold sweeps are descriptive
+on this smoke set, not held-out calibration or a production acceptance policy.
+Different format prompts remain a confounder. The experiment does not isolate
+the benefit of distributions from the benefit of emitting fewer output tokens.
+
+## Existing model comparison
+
 Run against a real semselect service:
 
 ```sh

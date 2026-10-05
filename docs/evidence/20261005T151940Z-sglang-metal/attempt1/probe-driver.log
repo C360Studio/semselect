@@ -1,0 +1,9 @@
+{
+  "kind": "compatibility_probe",
+  "started_utc": "2026-10-05T15:23:39.898997+00:00",
+  "server_pid": 3110,
+  "failure": "RuntimeError: Server exited before readiness: 1",
+  "server_exit_code": 1,
+  "port_closed": true,
+  "finished_utc": "2026-10-05T15:23:47.949170+00:00"
+}

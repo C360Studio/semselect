@@ -1,0 +1,13 @@
+{
+  "repository": "unsloth/Qwen3.5-4B-GGUF",
+  "revision": "e87f176479d0855a907a41277aca2f8ee7a09523",
+  "filename": "Qwen3.5-4B-Q4_K_M.gguf",
+  "size_bytes": 2740937888,
+  "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+  "license": "Apache-2.0",
+  "alias": "qwen3.5-4b",
+  "source_repository": "Qwen/Qwen3.5-4B",
+  "source_revision_note": "The GGUF publisher identifies Qwen/Qwen3.5-4B but does not pin its conversion source revision in the model card. The distributed GGUF bytes are pinned above.",
+  "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+  "metadata_source": "https://huggingface.co/api/models/unsloth/Qwen3.5-4B-GGUF/revision/e87f176479d0855a907a41277aca2f8ee7a09523?blobs=true"
+}

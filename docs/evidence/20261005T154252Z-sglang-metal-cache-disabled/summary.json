@@ -1,0 +1,148 @@
+{
+  "status": "endpoint_compatibility_pass",
+  "scope": "One refund fixture, two repeats; not a quality or performance evaluation",
+  "started_utc": "2026-10-05T16:13:24.393722+00:00",
+  "finished_utc": "2026-10-05T16:14:02.500954+00:00",
+  "ready": true,
+  "schema_json": {
+    "valid_count": 2,
+    "total": 2,
+    "content": [
+      "{\n  \"route\": \"billing\"\n}",
+      "{\n  \"route\": \"billing\"\n}"
+    ]
+  },
+  "independent_score": {
+    "valid_count": 2,
+    "total": 2,
+    "repeats_exactly_equal": true,
+    "labels": [
+      "billing",
+      "unknown"
+    ],
+    "scores": [
+      [
+        0.9968273171575148,
+        0.0031726828424851893
+      ]
+    ],
+    "token_logprobs": [
+      [
+        -0.003253936767578125,
+        -5.753253936767578
+      ]
+    ]
+  },
+  "decisions": {
+    "valid_count": 2,
+    "total": 2,
+    "repeats_exactly_equal": true,
+    "answers": {
+      "route": {
+        "type": "choice",
+        "probabilities": {
+          "billing": 0.991422514586288,
+          "unknown": 0.008577485413711986
+        },
+        "label_mass": 0.999800645603678,
+        "choice": "billing",
+        "label_token_ids": [
+          32,
+          33
+        ]
+      },
+      "refund": {
+        "type": "yes_no",
+        "probabilities": {
+          "yes": 0.8175744761936437,
+          "no": 0.18242552380635632
+        },
+        "label_mass": 0.20093009980412796,
+        "label_token_ids": [
+          9405,
+          2083
+        ]
+      },
+      "urgency": {
+        "type": "score",
+        "probabilities": {
+          "0": 0.44393511840650457,
+          "1": 0.503044392684369,
+          "2": 0.05302048890912647
+        },
+        "label_mass": 0.9945885762696411,
+        "score": 0.6090853705026219,
+        "label_token_ids": [
+          15,
+          16,
+          17
+        ]
+      }
+    }
+  },
+  "replay": {
+    "valid_count": 2,
+    "total": 2,
+    "max_delta_from_decisions": 0.0
+  },
+  "cleanup": {
+    "server_exit_code": -9,
+    "port_closed": true,
+    "host_checks_passed": true
+  },
+  "warning": "No graceful-exit claim: logs show driver group SIGTERM followed by scheduler -15, SGLang watchdog SIGQUIT and SGLang self-kill with parent included five seconds later, before the driver15-second fallback. No explicit timeout-branch instrumentation was recorded. See shutdown-analysis.json.",
+  "request_counts": {
+    "recorded_http_requests": 12,
+    "inference_http_requests": 8,
+    "decisions_questions_per_call": 3,
+    "fixture_count": 1,
+    "repeats": 2
+  },
+  "token_usage": {
+    "source": "server-reported response.usage; excludes internal startup/warmup and non-inference calls",
+    "per_call": [
+      {
+        "path": "/v1/chat/completions",
+        "prompt_tokens": 42,
+        "completion_tokens": 12
+      },
+      {
+        "path": "/v1/chat/completions",
+        "prompt_tokens": 42,
+        "completion_tokens": 12
+      },
+      {
+        "path": "/v1/score",
+        "prompt_tokens": 57,
+        "completion_tokens": 0
+      },
+      {
+        "path": "/v1/score",
+        "prompt_tokens": 57,
+        "completion_tokens": 0
+      },
+      {
+        "path": "/v1/decisions",
+        "prompt_tokens": 160,
+        "completion_tokens": 0
+      },
+      {
+        "path": "/v1/score",
+        "prompt_tokens": 58,
+        "completion_tokens": 0
+      },
+      {
+        "path": "/v1/decisions",
+        "prompt_tokens": 160,
+        "completion_tokens": 0
+      },
+      {
+        "path": "/v1/score",
+        "prompt_tokens": 58,
+        "completion_tokens": 0
+      }
+    ],
+    "total_prompt_tokens": 634,
+    "total_completion_tokens": 24
+  }
+}

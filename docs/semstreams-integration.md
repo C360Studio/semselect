@@ -16,6 +16,13 @@ are permitted. Neither a selected label nor a high probability authorizes an act
 This follows the framework/product boundary in
 [SemStreams `openspec/project.md:39`](https://github.com/c360studio/semstreams/blob/1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a/openspec/project.md#L39).
 
+Resolve authoritative facts and exact predicates in code first. For example,
+transaction records and policy determine refund eligibility; a model may interpret
+whether a free-text message requests a refund. The model cannot waive eligibility
+checks. A semantic selector also needs an explicit unknown/abstention path:
+returning the largest option score does not prove that any offered option applies.
+Weak keyword guesses are not authoritative facts merely because they are coded.
+
 The service needs no graph, NATS dependency, agent loop, or durable workflow state.
 SemTeams remains a product-shell consumer of framework primitives; new inference
 transport belongs in SemStreams, while product-specific routing stays in SemTeams
@@ -100,8 +107,16 @@ queueing, HTTP exchange, and decoding; do not store caller contexts in client st
 Malformed input, unsupported models, readiness failures, and transport failures
 remain errors for the caller to handle.
 
-Initially integrate Choice into one query-classification call site. Map permitted
-labels to existing search strategies in caller code and retain a separate decision
+Before implementing this adapter, demonstrate a gap in the existing coded and
+embedding-based retrieval paths. A working probability API does not justify adding
+a classifier to a path that already meets its requirements. Existing scorecard
+results and dormant classifier branches are relevant baselines; distinguish
+query-strategy classification from retrieval ranking and answerability.
+See the [code and RAG comparison audit](code-baselines-and-rag.md) for inspected
+implementations, source pins, historical results and the proposed workload split.
+
+If that comparison justifies integration, start with one measured call site. Map
+permitted labels to existing search strategies in caller code and retain a separate decision
 evidence field containing the distribution and upstream confidence. Do not overwrite
 the meaning of the existing heterogeneous `Confidence` field. Follow the repository's
 change process to decide whether to extend `ClassificationResult` or introduce a

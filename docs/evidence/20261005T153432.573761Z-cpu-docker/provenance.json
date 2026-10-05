@@ -1,0 +1,414 @@
+{
+  "run_id": "20261005T153432.573761Z",
+  "hardware": "cpu-docker",
+  "model": {
+    "repository": "unsloth/Qwen3.5-4B-GGUF",
+    "revision": "e87f176479d0855a907a41277aca2f8ee7a09523",
+    "filename": "Qwen3.5-4B-Q4_K_M.gguf",
+    "size_bytes": 2740937888,
+    "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+    "license": "Apache-2.0",
+    "alias": "qwen3.5-4b",
+    "source_repository": "Qwen/Qwen3.5-4B",
+    "source_revision_note": "The GGUF publisher identifies Qwen/Qwen3.5-4B but does not pin its conversion source revision in the model card. The distributed GGUF bytes are pinned above.",
+    "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+    "metadata_source": "https://huggingface.co/api/models/unsloth/Qwen3.5-4B-GGUF/revision/e87f176479d0855a907a41277aca2f8ee7a09523?blobs=true"
+  },
+  "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+  "client_platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "code_commit": "0c4da4ad9a2f4daff8da7f565471856998d520a9",
+  "repeats": 2,
+  "dataset_sha256": "81590b0d2e0773f49b7b1c524729acb96d37a74b29ca134c710701a0037b5d2a",
+  "notes": "Shared laptop; no controlled thermal state. No CUDA. See explicit runtime_stopped and port_closed checks.",
+  "source_sha256": {
+    "compare_scoring.py": "fe38643869f2e0f475ab1a81acf432f16fb21e22e38a4eada888ae1e779ef573",
+    "Dockerfile": "875521ae3c5d0e5008843795810037dab01514d2c108d45eb8e5370b7fe36828",
+    "model.py": "eda4d6bfef779e1622f33df722c9f4459e5857262121cb3732d4d2880adf5824",
+    "evaluate.py": "b448c23d910b57c383b53ea90f5684f8400e0f6bec1a75027a08a060ad9260b7",
+    "routing-smoke.json": "81590b0d2e0773f49b7b1c524729acb96d37a74b29ca134c710701a0037b5d2a",
+    "metal.py": "115291eb7e669d000343975cad3d5a3e92cf2a54a7b50c3c1433d7c6d872804f",
+    "models.baseline.lock.json": "c218e6b307360c4098e6454839b319948a4bfe4744344ccd859dde83b0c84ae5"
+  },
+  "image": {
+    "Id": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+    "RepoDigests": [
+      "semselect-runtime@sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1"
+    ],
+    "Architecture": "arm64",
+    "Os": "linux",
+    "Config": {
+      "User": "65532:65532",
+      "ExposedPorts": {
+        "8080/tcp": {}
+      },
+      "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LD_LIBRARY_PATH=/opt/llama"
+      ],
+      "Entrypoint": [
+        "/opt/llama/llama-server"
+      ],
+      "Labels": {
+        "com.docker.compose.project": "semselect",
+        "com.docker.compose.service": "runtime",
+        "com.docker.compose.version": "5.5.1",
+        "io.semselect.llama-revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+        "org.opencontainers.image.source": "https://github.com/C360Studio/semselect",
+        "org.opencontainers.image.version": "24.04"
+      }
+    }
+  },
+  "launch": [
+    "docker",
+    "run",
+    "-d",
+    "--pull=never",
+    "--name",
+    "semselect-scoring-20261005t153432-573761z",
+    "--cpus=4",
+    "--memory=8g",
+    "--read-only",
+    "--tmpfs=/tmp",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges:true",
+    "-p",
+    "127.0.0.1:18086:8080",
+    "-v",
+    "/Users/coby/Code/c360/semselect/models:/models:ro",
+    "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+    "-m",
+    "/models/Qwen3.5-4B-Q4_K_M.gguf",
+    "--host",
+    "0.0.0.0",
+    "--port",
+    "8080",
+    "-ngl",
+    "0",
+    "--alias",
+    "qwen3.5-4b",
+    "-t",
+    "4",
+    "-tb",
+    "4",
+    "-c",
+    "4096",
+    "-b",
+    "512",
+    "-ub",
+    "512",
+    "-np",
+    "1",
+    "--no-context-shift",
+    "--metrics",
+    "-lv",
+    "4"
+  ],
+  "container_id": "00b027d416a8d451ea91b84ed326ebc21f55b18fc28f73200aea93dcf07f7884",
+  "container": {
+    "Id": "00b027d416a8d451ea91b84ed326ebc21f55b18fc28f73200aea93dcf07f7884",
+    "Created": "2026-10-05T15:34:32.719693461Z",
+    "Path": "/opt/llama/llama-server",
+    "Args": [
+      "-m",
+      "/models/Qwen3.5-4B-Q4_K_M.gguf",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8080",
+      "-ngl",
+      "0",
+      "--alias",
+      "qwen3.5-4b",
+      "-t",
+      "4",
+      "-tb",
+      "4",
+      "-c",
+      "4096",
+      "-b",
+      "512",
+      "-ub",
+      "512",
+      "-np",
+      "1",
+      "--no-context-shift",
+      "--metrics",
+      "-lv",
+      "4"
+    ],
+    "State": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 16409,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-05T15:34:32.771374586Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "Image": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+    "ResolvConfPath": "/var/lib/docker/containers/00b027d416a8d451ea91b84ed326ebc21f55b18fc28f73200aea93dcf07f7884/resolv.conf",
+    "HostnamePath": "/var/lib/docker/containers/00b027d416a8d451ea91b84ed326ebc21f55b18fc28f73200aea93dcf07f7884/hostname",
+    "HostsPath": "/var/lib/docker/containers/00b027d416a8d451ea91b84ed326ebc21f55b18fc28f73200aea93dcf07f7884/hosts",
+    "LogPath": "/var/lib/docker/containers/00b027d416a8d451ea91b84ed326ebc21f55b18fc28f73200aea93dcf07f7884/00b027d416a8d451ea91b84ed326ebc21f55b18fc28f73200aea93dcf07f7884-json.log",
+    "Name": "/semselect-scoring-20261005t153432-573761z",
+    "RestartCount": 0,
+    "Driver": "overlayfs",
+    "Platform": "linux",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "AppArmorProfile": "",
+    "ExecIDs": null,
+    "HostConfig": {
+      "Binds": [
+        "/Users/coby/Code/c360/semselect/models:/models:ro"
+      ],
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "json-file",
+        "Config": {}
+      },
+      "NetworkMode": "bridge",
+      "PortBindings": {
+        "8080/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18086"
+          }
+        ]
+      },
+      "RestartPolicy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CgroupnsMode": "private",
+      "Dns": null,
+      "DnsOptions": [],
+      "DnsSearch": [],
+      "ExtraHosts": null,
+      "GroupAdd": null,
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": false,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": true,
+      "SecurityOpt": [
+        "no-new-privileges:true"
+      ],
+      "Tmpfs": {
+        "/tmp": ""
+      },
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 8589934592,
+      "NanoCpus": 4000000000,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": [],
+      "BlkioDeviceReadBps": [],
+      "BlkioDeviceWriteBps": [],
+      "BlkioDeviceReadIOps": [],
+      "BlkioDeviceWriteIOps": [],
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": [],
+      "DeviceCgroupRules": null,
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 17179869184,
+      "MemorySwappiness": null,
+      "OomKillDisable": null,
+      "PidsLimit": null,
+      "Ulimits": null,
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "MaskedPaths": [
+        "/proc/acpi",
+        "/proc/asound",
+        "/proc/interrupts",
+        "/proc/kcore",
+        "/proc/keys",
+        "/proc/latency_stats",
+        "/proc/sched_debug",
+        "/proc/scsi",
+        "/proc/timer_list",
+        "/proc/timer_stats",
+        "/sys/devices/virtual/powercap",
+        "/sys/firmware"
+      ],
+      "ReadonlyPaths": [
+        "/proc/bus",
+        "/proc/fs",
+        "/proc/irq",
+        "/proc/sys",
+        "/proc/sysrq-trigger"
+      ]
+    },
+    "Storage": {
+      "RootFS": {
+        "Snapshot": {
+          "Name": "overlayfs"
+        }
+      }
+    },
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/Users/coby/Code/c360/semselect/models",
+        "Destination": "/models",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      }
+    ],
+    "Config": {
+      "Hostname": "00b027d416a8",
+      "Domainname": "",
+      "User": "65532:65532",
+      "AttachStdin": false,
+      "AttachStdout": false,
+      "AttachStderr": false,
+      "ExposedPorts": {
+        "8080/tcp": {}
+      },
+      "Tty": false,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LD_LIBRARY_PATH=/opt/llama"
+      ],
+      "Cmd": [
+        "-m",
+        "/models/Qwen3.5-4B-Q4_K_M.gguf",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8080",
+        "-ngl",
+        "0",
+        "--alias",
+        "qwen3.5-4b",
+        "-t",
+        "4",
+        "-tb",
+        "4",
+        "-c",
+        "4096",
+        "-b",
+        "512",
+        "-ub",
+        "512",
+        "-np",
+        "1",
+        "--no-context-shift",
+        "--metrics",
+        "-lv",
+        "4"
+      ],
+      "Image": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+      "Volumes": null,
+      "WorkingDir": "",
+      "Entrypoint": [
+        "/opt/llama/llama-server"
+      ],
+      "Labels": {
+        "com.docker.compose.project": "semselect",
+        "com.docker.compose.service": "runtime",
+        "com.docker.compose.version": "5.5.1",
+        "io.semselect.llama-revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+        "org.opencontainers.image.source": "https://github.com/C360Studio/semselect",
+        "org.opencontainers.image.version": "24.04"
+      }
+    },
+    "NetworkSettings": {
+      "SandboxID": "19dfb722b03f497d460b6fb507cbebba63ac7c468b29b6c96afe2afd7e45976f",
+      "SandboxKey": "/var/run/docker/netns/19dfb722b03f",
+      "Ports": {
+        "8080/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18086"
+          }
+        ]
+      },
+      "Networks": {
+        "bridge": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": null,
+          "DriverOpts": null,
+          "GwPriority": 0,
+          "NetworkID": "76d98d1b3ad922e3ee102679ed2be7159fc25c4140ee52275e787fa8049db4bb",
+          "EndpointID": "2ae6a8eee94cf4c58bce76a4c71c2a0a6b2101ef28472fbf0914f44cf4cf918a",
+          "Gateway": "172.17.0.1",
+          "IPAddress": "172.17.0.2",
+          "MacAddress": "d2:d7:4a:83:be:12",
+          "IPPrefixLen": 16,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "DNSNames": null
+        }
+      }
+    },
+    "ImageManifestDescriptor": {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:c1530bf8a7abce5e5150b885c63488905a2e10b6f5743e5a770a2ca370327138",
+      "size": 1623,
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux"
+      }
+    }
+  },
+  "runtime_files_sha256": "128b09ab9677fb83b52635eb99969a60a5aec6b1ae985facb6b09db65b3afb19  /opt/llama/libggml-base.so\n128b09ab9677fb83b52635eb99969a60a5aec6b1ae985facb6b09db65b3afb19  /opt/llama/libggml-base.so.0\n128b09ab9677fb83b52635eb99969a60a5aec6b1ae985facb6b09db65b3afb19  /opt/llama/libggml-base.so.0.25.3\n64770f45a6f229d4edd5557345f5718cdfe990382b20a4b9087c3f41f6fc69c2  /opt/llama/libggml-cpu.so\n64770f45a6f229d4edd5557345f5718cdfe990382b20a4b9087c3f41f6fc69c2  /opt/llama/libggml-cpu.so.0\n64770f45a6f229d4edd5557345f5718cdfe990382b20a4b9087c3f41f6fc69c2  /opt/llama/libggml-cpu.so.0.25.3\nfde75f50dbf5598becfcf95246afff77667b360bee83b3c4ee12994e6b2ba87d  /opt/llama/libggml.so\nfde75f50dbf5598becfcf95246afff77667b360bee83b3c4ee12994e6b2ba87d  /opt/llama/libggml.so.0\nfde75f50dbf5598becfcf95246afff77667b360bee83b3c4ee12994e6b2ba87d  /opt/llama/libggml.so.0.25.3\n7487d03967b94f73fb1f24eb5f31582c0f88bb277691d5bcecc4e7640d10ee83  /opt/llama/libllama-common.so\n7487d03967b94f73fb1f24eb5f31582c0f88bb277691d5bcecc4e7640d10ee83  /opt/llama/libllama-common.so.0\n7487d03967b94f73fb1f24eb5f31582c0f88bb277691d5bcecc4e7640d10ee83  /opt/llama/libllama-common.so.0.5.0\ne282d6a9238d5123625f7748ec00e3558def88f1895cd710d20975a1896d8bd8  /opt/llama/libllama-server-impl.so\nba6ae32110bb741c831c6fef5be01edc0f35a32bb0cb4d424deb4818741bde4d  /opt/llama/libllama.so\nba6ae32110bb741c831c6fef5be01edc0f35a32bb0cb4d424deb4818741bde4d  /opt/llama/libllama.so.0\nba6ae32110bb741c831c6fef5be01edc0f35a32bb0cb4d424deb4818741bde4d  /opt/llama/libllama.so.0.5.0\nd6dbf8ec3d200aacdddb372b610217a0db73cbe120c608023cd6a55c6963d2e4  /opt/llama/libmtmd.so\nd6dbf8ec3d200aacdddb372b610217a0db73cbe120c608023cd6a55c6963d2e4  /opt/llama/libmtmd.so.0\nd6dbf8ec3d200aacdddb372b610217a0db73cbe120c608023cd6a55c6963d2e4  /opt/llama/libmtmd.so.0.5.0\nfb85943749fd82842334ff104753cfe9f6dddd7dcf266d110956f218961b29fd  /opt/llama/llama-server",
+  "status": "passed",
+  "cgroup_memory_peak_bytes": 3804602368,
+  "cgroup_cpu_stat": "usage_usec 8668351222\nuser_usec 8645405086\nsystem_usec 22946136\nnice_usec 0\nnr_periods 22439\nnr_throttled 5463\nthrottled_usec 18990846\nnr_bursts 0\nburst_usec 0",
+  "stopped_container": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-05T15:34:32.771374586Z",
+    "FinishedAt": "2026-10-05T16:11:56.861655417Z"
+  },
+  "runtime_stopped": true,
+  "container_removed": true,
+  "port_closed": true,
+  "cleanup_errors": [],
+  "wall_seconds": 2244.3936740839854
+}

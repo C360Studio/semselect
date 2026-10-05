@@ -1,8 +1,26 @@
 # semselect
 
-Small, local decision service for the c360studio sem* ecosystem. Callers supply
-context and permissible answers; semselect returns typed model readouts. Callers
-own taxonomies, routing, authorization, acceptance thresholds, fallback and execution.
+**Help skeptical developers decide when a Jev-like decision model is worth using,
+through a tested local service, reproducible comparisons, and plain-language guidance.**
+
+semselect is a small, local decision service and evaluation project for the
+c360studio sem* ecosystem. Its deliverables are a working service, a comparison
+matrix with inspectable evidence, and an explanation of when each approach earns
+its place. A result recommending ordinary code or schema-constrained Qwen is a
+useful outcome. We have not yet demonstrated a workload advantage for the current
+decision model over the matched Qwen chat baseline.
+
+Start with [when to use semselect](docs/when-to-use.md), then the
+[comparison results](docs/results.md). The guide distinguishes measured findings
+from promising use cases that still need testing.
+The [existing-algorithm audit](docs/code-baselines-and-rag.md) explains what
+semsource/SemStreams already solve with rules, retrieval and graph composition,
+and where an added semantic judgment would need to prove its value.
+
+Callers supply context and permissible answers; semselect returns typed model
+readouts. Callers own taxonomies, routing, authorization, acceptance thresholds,
+fallback and execution. Resolve authoritative facts and exact predicates in code;
+use model judgments where interpretation is needed.
 
 The bootstrap packages **llama.cpp + Kev-4B Q4_K_M** behind a small Go request guard.
 It uses the existing `POST /v1/systemone` API. It adds no model, scoring formula,
@@ -39,6 +57,28 @@ See the [laptop/GPU workflow](docs/laptop-and-gpu.md).
 
 ## Latest routing results
 
+The latest experiment holds **Qwen3.5-4B Q4_K_M and llama.cpp fixed** and compares
+JSON labels with one-token option scores. Each row has 96/96 valid calls: 24 cases,
+two candidate orders and two trials. Prompt-prefix reuse is disabled; output-format
+instructions differ. These are small smoke results on the same M3 Pro laptop.
+
+| Deployment | Output | Correct | Median | p95 |
+| --- | --- | ---: | ---: | ---: |
+| Native Metal | JSON Schema | 92/96 (95.8%) | 673 ms | 749 ms |
+| Native Metal | One-token scores | 92/96 (95.8%) | 488 ms | 529 ms |
+| Docker Linux/ARM64, CPU only | JSON Schema | 92/96 (95.8%) | 11,191 ms | 15,119 ms |
+| Docker Linux/ARM64, CPU only | One-token scores | 90/96 (93.8%) | 10,816 ms | 13,994 ms |
+
+Metal scoring produced identical labels with about 28% lower median inference
+HTTP latency. CPU scoring saved only 3.4% and abstained on one additional case in
+each trial. This supports a specific Metal format-efficiency experiment, not a
+general accuracy gain or a reason to add a model where code already works.
+Scoring preparation is separately recorded; JSON rendering is inside its request
+timing. The one-token scorer is evaluation code, separate from the production API.
+See the [complete scoring validation and evidence](docs/validation-scoring.md).
+
+### Earlier matched model comparison
+
 Measured 2026-10-05 on an **Apple M3 Pro, native Metal**, using the same pinned
 llama.cpp runtime, Q4_K_M quantization class, four CPU threads, 4096-token context
 and one slot. Dataset: 24 cases in two candidate orders; 48 correlated requests,
@@ -49,7 +89,7 @@ with warmup excluded. These are small smoke results, not production benchmarks.
 | Kev-4B through semselect `/v1/systemone` | 43/48 (89.6%) | 48/48 | 449 ms | 474 ms | [JSON](docs/evidence/metal-kev-4b.json) |
 | Qwen3.5-4B through llama.cpp chat API | 46/48 (95.8%) | 48/48 | 288 ms | 423 ms | [JSON](docs/evidence/metal-qwen35-4b.json) |
 
-**Qwen3.5-4B is the stronger measured choice for this label-routing task.** The
+**This model comparison favors Qwen3.5-4B for label routing.** The
 Qwen run used `/v1/chat/completions` directly, bypassing the semselect guard. It
 was a seminstruct-style comparison launched by this repository's evaluation
 tools, not Qwen substituted into semselect's decision API or a tested upgrade of

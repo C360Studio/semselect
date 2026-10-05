@@ -1,0 +1,7 @@
+{
+  "finding": "The original bind-based port check mistook TIME_WAIT for an active listener. Original record kept unchanged.",
+  "runtime_exit_code": 0,
+  "followup_connection_result": 61,
+  "followup_connection_meaning": "ECONNREFUSED on macOS; no active listener when checked",
+  "fix": "Use TCP connect and only interpret ECONNREFUSED as closed; actual TIME_WAIT regression failed before the fix and passed afterwards. A fresh full Metal run validates corrected cleanup."
+}

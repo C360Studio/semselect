@@ -3,7 +3,8 @@
 The first GPU target is native macOS on Apple Silicon. Docker Desktop's Linux
 CPU path remains available; the Metal launcher runs llama.cpp and the same Go
 guard as host processes. The public API and caller-owned decision policy stay
-the same. Windows/NVIDIA validation is a separate next step.
+the same. Establish the CPU/Docker and Metal comparison first; Windows/NVIDIA
+validation is a separate follow-up.
 
 ## Native Apple Silicon
 
@@ -69,9 +70,29 @@ also report Metal buffer allocations. Timing excludes model startup and warmup.
 The laptop is shared, with no controlled thermal state; these remain small smoke
 observations rather than a hardware benchmark.
 
+## Same-model output-format comparison
+
+```sh
+task compare:metal
+task compare:cpu
+```
+
+Run these sequentially, with other owned inference stopped. Both use the pinned
+Qwen3.5-4B GGUF and llama.cpp revision, compare schema-constrained JSON with
+one-token option scores, and disable prompt-prefix reuse. Each runs two trials
+of the 24 cases in both candidate orders: 96 measured calls per format. The CPU
+command requires the existing `semselect-runtime:dev` image built from this
+checkout. Both use an isolated loopback port and clean up their owned runtime.
+
+The [scoring validation report](validation-scoring.md) records the method,
+complete evidence, timing scope and compatibility failures. Its latencies are
+not interchangeable with the earlier cache-enabled model comparison above.
+The scorer is evaluation code; the production service still serves Kev's native
+SystemOne readouts.
+
 ## Windows/NVIDIA handoff
 
-Use a teammate's real NVIDIA machine for the next target. Start with Windows
+After the local baselines, use a teammate's real NVIDIA machine for the next target. Start with Windows
 plus WSL2/Linux CUDA to share the Linux packaging; native Windows is a separate
 support decision. Before claiming support, record the exact Windows/WSL/kernel,
 GPU and VRAM, driver, CUDA toolchain, runtime commit, model hashes and launch flags.
