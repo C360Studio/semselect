@@ -91,3 +91,16 @@ tasks:
   answerability:source:metal:
     desc: Compare the frozen real-source pilot on Metal without tuning
     cmds: [python3 scripts/answerability.py --hardware metal --dataset eval/answerability/heldout/cases.json --expected-dataset-sha256 74066d02a4fcff48b8363478dcbc22f9e08bc6cef5be668c859a7a50ee536594]
+  routing:validate:
+    desc: Validate query-classification fixtures, requests and freeze without inference
+    cmds: [python3 eval/query-routing/experiment.py]
+  routing:test:
+    desc: Test the evaluation adapters and real SemStreams classifier driver offline
+    cmds:
+      - python3 -m unittest discover -s eval/query-routing -p 'test_*.py' -v
+      - task: routing:driver:test
+  routing:driver:test:
+    desc: Test the isolated classifier driver with cached pinned dependencies
+    dir: eval/query-routing/driver
+    cmds:
+      - GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off GOCACHE=/tmp/semselect-query-routing-gocache go test -mod=readonly -race ./...

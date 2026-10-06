@@ -1,0 +1,44 @@
+{
+  "module": "github.com/c360studio/semstreams",
+  "version": "v1.0.0-beta.160",
+  "origin": {
+    "VCS": "git",
+    "URL": "https://github.com/c360studio/semstreams",
+    "Hash": "8403a2218000e45a31c5132fbfe01af42ed04f14",
+    "Ref": "refs/tags/v1.0.0-beta.160"
+  },
+  "module_h1": "h1:sVkaLPOqs0Jy/iyYvfamkSi9An+Vq0o/5nqMxZVCvtk=",
+  "files": [
+    {
+      "path": "graph/query/classifier.go",
+      "sha256": "270f6b589a41abf951367f4bf66c7a24f42a2b020e72c525bcb80669313c8555",
+      "matches_inspected_local_source": true
+    },
+    {
+      "path": "graph/query/classifier_chain.go",
+      "sha256": "36aed177170d384e5758bd82908f4d70a321a7cd61e9c6dcccafcd095a473b86",
+      "matches_inspected_local_source": true
+    },
+    {
+      "path": "graph/query/classifier_embedding.go",
+      "sha256": "77a3b99c6c40d3814b6f7d8162c12b29cc16deede6cfabbba5ccd407718aa056",
+      "matches_inspected_local_source": true
+    },
+    {
+      "path": "graph/query/examples.go",
+      "sha256": "fcc72f9defcd9af3f04366dfd5dd9cb21cb61a24fba26dfc475e19d16e1b1d01",
+      "matches_inspected_local_source": true
+    },
+    {
+      "path": "graph/query/search_options.go",
+      "sha256": "c1ac2665ed4319a1a78070f498f6a50c097c334a81376c3427886f40bb87cd80",
+      "matches_inspected_local_source": true
+    },
+    {
+      "path": "graph/embedding/bm25_embedder.go",
+      "sha256": "e7688a67d0f7ff16f3bd0bbc6fb9805091bc495a1465301e5b95d99efab7dcfa",
+      "matches_inspected_local_source": true
+    }
+  ],
+  "note": "Hashes of cached pinned module source used by imported classifiers, plus exact match against inspected local sibling files. Sibling remains unchanged. No copied or modified production implementation."
+}

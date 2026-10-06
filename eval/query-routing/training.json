@@ -1,0 +1,162 @@
+{
+  "domain": "semselect-bounded-search-options",
+  "version": "1.0",
+  "examples": [
+    {
+      "query": "Show sensor-17 status",
+      "intent": "no_override",
+      "options": {}
+    },
+    {
+      "query": "List pump-42 maintenance notes",
+      "intent": "no_override",
+      "options": {}
+    },
+    {
+      "query": "Find sensors similar to sensor-17",
+      "intent": "similarity",
+      "options": {
+        "use_embeddings": true
+      }
+    },
+    {
+      "query": "Find devices like pump-42",
+      "intent": "similarity",
+      "options": {
+        "use_embeddings": true
+      }
+    },
+    {
+      "query": "Show devices connected to gateway-main",
+      "intent": "path",
+      "options": {
+        "path_intent": true,
+        "path_start_node": "gateway-main"
+      }
+    },
+    {
+      "query": "Follow links from pump-42",
+      "intent": "path",
+      "options": {
+        "path_intent": true,
+        "path_start_node": "pump-42"
+      }
+    },
+    {
+      "query": "Show connections from sensor-17",
+      "intent": "path",
+      "options": {
+        "path_intent": true,
+        "path_start_node": "sensor-17"
+      }
+    },
+    {
+      "query": "List sensors in zone-A",
+      "intent": "zone",
+      "options": {
+        "path_intent": true,
+        "path_start_node": "zone-A",
+        "path_predicates": [
+          "located_in"
+        ]
+      }
+    },
+    {
+      "query": "Show devices in area-north",
+      "intent": "zone",
+      "options": {
+        "path_intent": true,
+        "path_start_node": "area-north",
+        "path_predicates": [
+          "located_in"
+        ]
+      }
+    },
+    {
+      "query": "How many sensors are reporting?",
+      "intent": "count",
+      "options": {
+        "aggregation_type": "count"
+      }
+    },
+    {
+      "query": "Count pumps",
+      "intent": "count",
+      "options": {
+        "aggregation_type": "count"
+      }
+    },
+    {
+      "query": "Average temperature of sensors",
+      "intent": "avg",
+      "options": {
+        "aggregation_type": "avg",
+        "aggregation_field": "temperature"
+      }
+    },
+    {
+      "query": "Mean humidity of sensors",
+      "intent": "avg",
+      "options": {
+        "aggregation_type": "avg",
+        "aggregation_field": "humidity"
+      }
+    },
+    {
+      "query": "Average pressure of pumps",
+      "intent": "avg",
+      "options": {
+        "aggregation_type": "avg",
+        "aggregation_field": "pressure"
+      }
+    },
+    {
+      "query": "Sum power of pumps",
+      "intent": "sum",
+      "options": {
+        "aggregation_type": "sum",
+        "aggregation_field": "power"
+      }
+    },
+    {
+      "query": "Total pressure of pumps",
+      "intent": "sum",
+      "options": {
+        "aggregation_type": "sum",
+        "aggregation_field": "pressure"
+      }
+    },
+    {
+      "query": "Minimum temperature of sensors",
+      "intent": "min",
+      "options": {
+        "aggregation_type": "min",
+        "aggregation_field": "temperature"
+      }
+    },
+    {
+      "query": "Min pressure of pumps",
+      "intent": "min",
+      "options": {
+        "aggregation_type": "min",
+        "aggregation_field": "pressure"
+      }
+    },
+    {
+      "query": "Maximum humidity of sensors",
+      "intent": "max",
+      "options": {
+        "aggregation_type": "max",
+        "aggregation_field": "humidity"
+      }
+    },
+    {
+      "query": "Max power of pumps",
+      "intent": "max",
+      "options": {
+        "aggregation_type": "max",
+        "aggregation_field": "power"
+      }
+    }
+  ]
+}

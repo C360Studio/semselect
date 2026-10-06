@@ -162,3 +162,22 @@ and [`Taskfile.yml:46`](https://github.com/c360studio/seminstruct/blob/7f9135a99
 Its model download lacks an immutable revision/checksum, so a comparison must record
 the actual artifact used. semselect can reuse the llama.cpp operational knowledge
 while pinning the newer native-decision runtime and decision model independently.
+
+## Classifier hints and production dispatch
+
+The [query-classifier experiment](../eval/query-routing/README.md) evaluates the
+actual library's options, including node bindings and aggregation fields. It
+does not prove that a deployed request executes the corresponding search.
+At inspected SemStreams `1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a`,
+[`resolveStrategy`](https://github.com/C360Studio/semstreams/blob/1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a/processor/graph-query/graphrag.go#L633)
+uses explicit strategy values and path/time/geography signals, but does not infer
+aggregation or similarity dispatch from `aggregation_type` or `use_embeddings`.
+The library's `SearchOptions.InferStrategy` has different precedence and no
+non-test caller in that inspected checkout.
+
+Before integrating a new classifier, independently test how its options travel
+through gateway requests, graph-query reclassification, strategy resolution and
+fallback. Preserve exact node bindings and test unsupported combinations.
+The optional gateway BM25 path and graph-query's keyword/optional-LLM path are
+different configurations. A correct library hint is not evidence of correct
+end-to-end dispatch. This is proposed follow-up work; siblings remain unchanged.

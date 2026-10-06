@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "kind": "design-and-code-baseline",
+  "frozen_at": "2026-10-06T00:03:41.946834+00:00",
+  "user_date": "2026-10-05 America/Chicago",
+  "driver_sha256": "312162db25a394dcf7726bb9370cfdba6e951de5f0e2a120f7fa3593d8384cda",
+  "driver_platform": "darwin/arm64",
+  "heldout_executed": false,
+  "model_inference_executed": false,
+  "execution_pending": [
+    "independently reviewed runner",
+    "exact runtime token/context preflight",
+    "recorded cache behavior",
+    "Metal and CPU-only Docker measurements"
+  ],
+  "files": {
+    "../../models.baseline.lock.json": "c218e6b307360c4098e6454839b319948a4bfe4744344ccd859dde83b0c84ae5",
+    "../../models.lock.json": "a79136a2c946e1fdbbdfc79f9e21bb47aa466adf19ba25d7cefe11f37c6d8b16",
+    "development-evidence.json": "84d540e046e56fb8825e30ef6b64aa0023e5b32cc7955e2e5c25dc9d8dac39f7",
+    "development-selection.json": "e9f932e1b2a85bcc5aaf2326dcdb6b195790fa28dbd818047f9ff083e31a42f6",
+    "development.json": "e8ca9bf8b63d8ff784ef0406d3b4ee13bb42a4546e97f83716dcbb3be7802378",
+    "driver/go.mod": "4bf2c17602763580b24317e17de20cd7239e8e6fa91276ae2e86553ae8a772ab",
+    "driver/go.sum": "2339f18874e6dd22e0faaf1fd97cbabe6a156c06cf1a6b9af24bfa7279ceed70",
+    "driver/main.go": "ec0b6afaf4dfd9d0b3ea6143d69c52d07da6c6d86b99dcef3ee2fab4f4117643",
+    "driver/main_test.go": "5026b0e2a7cce21abcaa9451c51d6860091753a8cb2c2834bf26754f9ad6e9e5",
+    "driver/source-pins.json": "3b08851ce3ca160bac007da51a3acb4830e845c8a9b88cd6124b18f3b19969e9",
+    "experiment.py": "7ce07108ed4738b308e4bb0003dabb5de86ee439ddd7d6997a46fc7ec9fc38a9",
+    "heldout.json": "01e484b73969cd35684a4153f33248af509b35c19a59bfe87ed8e51c33eac39a",
+    "protocol.json": "c14cecc28d271c4c6174bd12a3d63d76be4244a407d792089e0fbdaa4570d39e",
+    "request-manifest.json": "ca2b851aef6861df96a26f549ec2c36d0cd2602ea6912982374e41cdbf5bfdb9",
+    "review.md": "9937d2bc4131287e32434a4c4c74172671cfb75cf5e16b1a5efd697f5c02e4f8",
+    "test_experiment.py": "dcd883ae8b8c0eb4c676437672d1c99786c3f141e571a0d53851e7781a31e57f",
+    "training.json": "3b92afc0218ede557a854e0137c2303a02ced4def4a8230d63f87d010068499b"
+  }
+}

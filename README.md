@@ -35,6 +35,10 @@ metadata and exact facts. The control lets unresolved text pass through; it is
 not a general code-only text classifier. See [the rules and a worked example](docs/when-to-use.md#what-our-code-baseline-actually-does)
 before interpreting the model comparisons.
 
+Next is a [comparison with the actual SemStreams query classifiers](eval/query-routing/README.md),
+scoring both intent and arguments. Its design and fixtures precede any held-out
+results; it does not establish that a model is needed.
+
 The bootstrap packages **llama.cpp + Kev-4B Q4_K_M** behind a small Go request guard.
 It uses the existing `POST /v1/systemone` API. It adds no model, scoring formula,
 agent loop, NATS dependency or durable application state. See the

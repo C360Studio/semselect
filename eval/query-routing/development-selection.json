@@ -1,0 +1,76 @@
+{
+  "scope": "development-only",
+  "started_at": "2026-10-06T00:01:54.114193+00:00",
+  "driver_sha256": "312162db25a394dcf7726bb9370cfdba6e951de5f0e2a120f7fa3593d8384cda",
+  "source_hashes": {
+    "protocol.json": "c14cecc28d271c4c6174bd12a3d63d76be4244a407d792089e0fbdaa4570d39e",
+    "training.json": "3b92afc0218ede557a854e0137c2303a02ced4def4a8230d63f87d010068499b",
+    "development.json": "e8ca9bf8b63d8ff784ef0406d3b4ee13bb42a4546e97f83716dcbb3be7802378",
+    "experiment.py": "7ce07108ed4738b308e4bb0003dabb5de86ee439ddd7d6997a46fc7ec9fc38a9"
+  },
+  "scores": [
+    {
+      "arm": "keyword",
+      "threshold": 0.7,
+      "exact": 12,
+      "total": 18
+    },
+    {
+      "arm": "keyword_bm25",
+      "threshold": 0.1,
+      "exact": 11,
+      "total": 18
+    },
+    {
+      "arm": "keyword_bm25",
+      "threshold": 0.2,
+      "exact": 11,
+      "total": 18
+    },
+    {
+      "arm": "keyword_bm25",
+      "threshold": 0.3,
+      "exact": 11,
+      "total": 18
+    },
+    {
+      "arm": "keyword_bm25",
+      "threshold": 0.4,
+      "exact": 11,
+      "total": 18
+    },
+    {
+      "arm": "keyword_bm25",
+      "threshold": 0.5,
+      "exact": 11,
+      "total": 18
+    },
+    {
+      "arm": "keyword_bm25",
+      "threshold": 0.6,
+      "exact": 12,
+      "total": 18
+    },
+    {
+      "arm": "keyword_bm25",
+      "threshold": 0.7,
+      "exact": 12,
+      "total": 18
+    },
+    {
+      "arm": "keyword_bm25",
+      "threshold": 0.8,
+      "exact": 12,
+      "total": 18
+    },
+    {
+      "arm": "keyword_bm25",
+      "threshold": 0.9,
+      "exact": 12,
+      "total": 18
+    }
+  ],
+  "selected_threshold": 0.9,
+  "strongest_code_arm": "keyword",
+  "finished_at": "2026-10-06T00:01:56.985059+00:00"
+}

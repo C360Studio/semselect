@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "scope": "development-only",
+  "cases": [
+    {
+      "id": "D01",
+      "family": "ordinary",
+      "input": {
+        "query": "Show the service notes for sensor-17"
+      },
+      "gold": {
+        "operation": "no_override",
+        "node": "none",
+        "field": "none",
+        "options": {},
+        "reason": "A document/status lookup adds no specialized hint."
+      }
+    },
+    {
+      "id": "D02",
+      "family": "negation",
+      "input": {
+        "query": "List sensors, without counting them"
+      },
+      "gold": {
+        "operation": "no_override",
+        "node": "none",
+        "field": "none",
+        "options": {},
+        "reason": "Counting is explicitly excluded."
+      }
+    },
+    {
+      "id": "D03",
+      "family": "literal",
+      "input": {
+        "query": "Locate devices similar to pump-42"
+      },
+      "gold": {
+        "operation": "similarity",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "use_embeddings": true
+        },
+        "reason": "Similarity keeps its reference in the original query."
+      }
+    },
+    {
+      "id": "D04",
+      "family": "paraphrase",
+      "input": {
+        "query": "Find sensors that resemble sensor-17"
+      },
+      "gold": {
+        "operation": "similarity",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "use_embeddings": true
+        },
+        "reason": "Resemblance requests similarity."
+      }
+    },
+    {
+      "id": "D05",
+      "family": "literal",
+      "input": {
+        "query": "Trace links from gateway-main"
+      },
+      "gold": {
+        "operation": "path",
+        "node": "gateway-main",
+        "field": "none",
+        "options": {
+          "path_intent": true,
+          "path_start_node": "gateway-main"
+        },
+        "reason": "Follow graph links from this literal node."
+      }
+    },
+    {
+      "id": "D06",
+      "family": "paraphrase",
+      "input": {
+        "query": "Which devices are attached to pump-42?"
+      },
+      "gold": {
+        "operation": "path",
+        "node": "pump-42",
+        "field": "none",
+        "options": {
+          "path_intent": true,
+          "path_start_node": "pump-42"
+        },
+        "reason": "Attached devices are graph neighbors."
+      }
+    },
+    {
+      "id": "D07",
+      "family": "literal",
+      "input": {
+        "query": "Find sensors in area-north"
+      },
+      "gold": {
+        "operation": "zone",
+        "node": "area-north",
+        "field": "none",
+        "options": {
+          "path_intent": true,
+          "path_start_node": "area-north",
+          "path_predicates": [
+            "located_in"
+          ]
+        },
+        "reason": "Named area uses located_in."
+      }
+    },
+    {
+      "id": "D08",
+      "family": "paraphrase",
+      "input": {
+        "query": "Show occupants of zone-A"
+      },
+      "gold": {
+        "operation": "zone",
+        "node": "zone-A",
+        "field": "none",
+        "options": {
+          "path_intent": true,
+          "path_start_node": "zone-A",
+          "path_predicates": [
+            "located_in"
+          ]
+        },
+        "reason": "Occupancy asks for entities located in the named zone."
+      }
+    },
+    {
+      "id": "D09",
+      "family": "literal",
+      "input": {
+        "query": "Count reporting devices"
+      },
+      "gold": {
+        "operation": "count",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "aggregation_type": "count"
+        },
+        "reason": "Entity count, no metric."
+      }
+    },
+    {
+      "id": "D10",
+      "family": "paraphrase",
+      "input": {
+        "query": "Give the number of pumps"
+      },
+      "gold": {
+        "operation": "count",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "aggregation_type": "count"
+        },
+        "reason": "Number of entities requests count."
+      }
+    },
+    {
+      "id": "D11",
+      "family": "literal",
+      "input": {
+        "query": "Average pressure of sensors"
+      },
+      "gold": {
+        "operation": "avg",
+        "node": "none",
+        "field": "pressure",
+        "options": {
+          "aggregation_type": "avg",
+          "aggregation_field": "pressure"
+        },
+        "reason": "Arithmetic average of explicit field."
+      }
+    },
+    {
+      "id": "D12",
+      "family": "paraphrase",
+      "input": {
+        "query": "Calculate the arithmetic mean of temperature"
+      },
+      "gold": {
+        "operation": "avg",
+        "node": "none",
+        "field": "temperature",
+        "options": {
+          "aggregation_type": "avg",
+          "aggregation_field": "temperature"
+        },
+        "reason": "Field is temperature, not the word of."
+      }
+    },
+    {
+      "id": "D13",
+      "family": "literal",
+      "input": {
+        "query": "Sum humidity of sensors"
+      },
+      "gold": {
+        "operation": "sum",
+        "node": "none",
+        "field": "humidity",
+        "options": {
+          "aggregation_type": "sum",
+          "aggregation_field": "humidity"
+        },
+        "reason": "Arithmetic sum of explicit field."
+      }
+    },
+    {
+      "id": "D14",
+      "family": "paraphrase",
+      "input": {
+        "query": "Add the power values"
+      },
+      "gold": {
+        "operation": "sum",
+        "node": "none",
+        "field": "power",
+        "options": {
+          "aggregation_type": "sum",
+          "aggregation_field": "power"
+        },
+        "reason": "Adding numeric values requests sum."
+      }
+    },
+    {
+      "id": "D15",
+      "family": "literal",
+      "input": {
+        "query": "Minimum pressure of sensors"
+      },
+      "gold": {
+        "operation": "min",
+        "node": "none",
+        "field": "pressure",
+        "options": {
+          "aggregation_type": "min",
+          "aggregation_field": "pressure"
+        },
+        "reason": "Smallest numeric value of explicit field."
+      }
+    },
+    {
+      "id": "D16",
+      "family": "paraphrase",
+      "input": {
+        "query": "Give the smallest humidity value"
+      },
+      "gold": {
+        "operation": "min",
+        "node": "none",
+        "field": "humidity",
+        "options": {
+          "aggregation_type": "min",
+          "aggregation_field": "humidity"
+        },
+        "reason": "Numeric minimum, not ranked entities."
+      }
+    },
+    {
+      "id": "D17",
+      "family": "literal",
+      "input": {
+        "query": "Maximum temperature of sensors"
+      },
+      "gold": {
+        "operation": "max",
+        "node": "none",
+        "field": "temperature",
+        "options": {
+          "aggregation_type": "max",
+          "aggregation_field": "temperature"
+        },
+        "reason": "Largest numeric value of explicit field."
+      }
+    },
+    {
+      "id": "D18",
+      "family": "paraphrase",
+      "input": {
+        "query": "Give the largest pressure value"
+      },
+      "gold": {
+        "operation": "max",
+        "node": "none",
+        "field": "pressure",
+        "options": {
+          "aggregation_type": "max",
+          "aggregation_field": "pressure"
+        },
+        "reason": "Numeric maximum, not ranked entities."
+      }
+    }
+  ]
+}

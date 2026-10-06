@@ -61,6 +61,10 @@ adding a semantic check. It cannot establish that models beat regex, BM25 or
 fusion. A fair additional comparison needs an applicable algorithm, development
 examples to set its rules/thresholds, and fresh held-out cases.
 
+The next [query-classifier experiment](../eval/query-routing/README.md) tests the
+actual rules and configured BM25 on their own intent/argument task, with a reviewed
+32-case authored cohort. It is preparation, not evidence of a model advantage.
+
 ## What we know so far
 
 | Question | Finding | Guidance today |

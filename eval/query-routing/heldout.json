@@ -1,0 +1,532 @@
+{
+  "version": 1,
+  "scope": "heldout/authored-pilot",
+  "provenance": "New authored questions for a bounded public IoT-style schema. Authors inspected classifier sources. Not sampled production traffic or evidence of absence from model training. No classifier or model has been run on these cases before freeze. Case order is intentional and frozen. Related paraphrases are not independent populations.",
+  "cases": [
+    {
+      "id": "R01",
+      "family": "ordinary",
+      "input": {
+        "query": "Describe the capabilities of gateway-main"
+      },
+      "gold": {
+        "operation": "no_override",
+        "node": "none",
+        "field": "none",
+        "options": {},
+        "reason": "A descriptive query needs no specialized hint."
+      }
+    },
+    {
+      "id": "R02",
+      "family": "ordinary",
+      "input": {
+        "query": "List the sensing assets"
+      },
+      "gold": {
+        "operation": "no_override",
+        "node": "none",
+        "field": "none",
+        "options": {},
+        "reason": "Listing entities is not counting or ranking."
+      }
+    },
+    {
+      "id": "R03",
+      "family": "ordinary",
+      "input": {
+        "query": "Show maintenance records for pump-42"
+      },
+      "gold": {
+        "operation": "no_override",
+        "node": "none",
+        "field": "none",
+        "options": {},
+        "reason": "Document lookup adds no specialized hint."
+      }
+    },
+    {
+      "id": "R04",
+      "family": "literal",
+      "input": {
+        "query": "Find assets similar to sensor-17"
+      },
+      "gold": {
+        "operation": "similarity",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "use_embeddings": true
+        },
+        "reason": "Explicit similarity; the reference stays in the original query."
+      }
+    },
+    {
+      "id": "R05",
+      "family": "paraphrase",
+      "input": {
+        "query": "Which devices resemble pump-42?"
+      },
+      "gold": {
+        "operation": "similarity",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "use_embeddings": true
+        },
+        "reason": "Resemblance asks for similarity."
+      }
+    },
+    {
+      "id": "R06",
+      "family": "paraphrase",
+      "input": {
+        "query": "Retrieve sensors with characteristics comparable to sensor-17"
+      },
+      "gold": {
+        "operation": "similarity",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "use_embeddings": true
+        },
+        "reason": "Comparable characteristics request similarity, not graph neighbors."
+      }
+    },
+    {
+      "id": "R07",
+      "family": "literal",
+      "input": {
+        "query": "What is connected to sensor-17?"
+      },
+      "gold": {
+        "operation": "path",
+        "node": "sensor-17",
+        "field": "none",
+        "options": {
+          "path_intent": true,
+          "path_start_node": "sensor-17"
+        },
+        "reason": "Follow connections from the named sensor."
+      }
+    },
+    {
+      "id": "R08",
+      "family": "paraphrase",
+      "input": {
+        "query": "Find immediate neighbors of gateway-main"
+      },
+      "gold": {
+        "operation": "path",
+        "node": "gateway-main",
+        "field": "none",
+        "options": {
+          "path_intent": true,
+          "path_start_node": "gateway-main"
+        },
+        "reason": "In this graph-search task, immediate neighbors means linked nodes."
+      }
+    },
+    {
+      "id": "R09",
+      "family": "literal",
+      "input": {
+        "query": "Follow outgoing links from pump-42"
+      },
+      "gold": {
+        "operation": "path",
+        "node": "pump-42",
+        "field": "none",
+        "options": {
+          "path_intent": true,
+          "path_start_node": "pump-42"
+        },
+        "reason": "This contract retains the original query for direction; bind its start node."
+      }
+    },
+    {
+      "id": "R10",
+      "family": "literal",
+      "input": {
+        "query": "Which devices are in zone-A?"
+      },
+      "gold": {
+        "operation": "zone",
+        "node": "zone-A",
+        "field": "none",
+        "options": {
+          "path_intent": true,
+          "path_start_node": "zone-A",
+          "path_predicates": [
+            "located_in"
+          ]
+        },
+        "reason": "Named zone uses located_in."
+      }
+    },
+    {
+      "id": "R11",
+      "family": "paraphrase",
+      "input": {
+        "query": "Find sensors located inside area-north"
+      },
+      "gold": {
+        "operation": "zone",
+        "node": "area-north",
+        "field": "none",
+        "options": {
+          "path_intent": true,
+          "path_start_node": "area-north",
+          "path_predicates": [
+            "located_in"
+          ]
+        },
+        "reason": "Named area containment uses located_in."
+      }
+    },
+    {
+      "id": "R12",
+      "family": "paraphrase",
+      "input": {
+        "query": "List occupants of zone-A"
+      },
+      "gold": {
+        "operation": "zone",
+        "node": "zone-A",
+        "field": "none",
+        "options": {
+          "path_intent": true,
+          "path_start_node": "zone-A",
+          "path_predicates": [
+            "located_in"
+          ]
+        },
+        "reason": "Occupants are entities located in the zone."
+      }
+    },
+    {
+      "id": "R13",
+      "family": "literal",
+      "input": {
+        "query": "How many pumps are active?"
+      },
+      "gold": {
+        "operation": "count",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "aggregation_type": "count"
+        },
+        "reason": "Entity count; status remains in original query."
+      }
+    },
+    {
+      "id": "R14",
+      "family": "paraphrase",
+      "input": {
+        "query": "Return the number of sensors"
+      },
+      "gold": {
+        "operation": "count",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "aggregation_type": "count"
+        },
+        "reason": "Number of entities requests count."
+      }
+    },
+    {
+      "id": "R15",
+      "family": "literal",
+      "input": {
+        "query": "Give the total number of devices"
+      },
+      "gold": {
+        "operation": "count",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "aggregation_type": "count"
+        },
+        "reason": "Total number is count, not sum of a metric."
+      }
+    },
+    {
+      "id": "R16",
+      "family": "literal",
+      "input": {
+        "query": "Average humidity of sensors"
+      },
+      "gold": {
+        "operation": "avg",
+        "node": "none",
+        "field": "humidity",
+        "options": {
+          "aggregation_type": "avg",
+          "aggregation_field": "humidity"
+        },
+        "reason": "Average the explicit humidity field."
+      }
+    },
+    {
+      "id": "R17",
+      "family": "paraphrase",
+      "input": {
+        "query": "Compute the arithmetic mean of pressure"
+      },
+      "gold": {
+        "operation": "avg",
+        "node": "none",
+        "field": "pressure",
+        "options": {
+          "aggregation_type": "avg",
+          "aggregation_field": "pressure"
+        },
+        "reason": "Arithmetic mean uses pressure, not an intervening function word."
+      }
+    },
+    {
+      "id": "R18",
+      "family": "paraphrase",
+      "input": {
+        "query": "Add the temperature readings and divide by their number"
+      },
+      "gold": {
+        "operation": "avg",
+        "node": "none",
+        "field": "temperature",
+        "options": {
+          "aggregation_type": "avg",
+          "aggregation_field": "temperature"
+        },
+        "reason": "The complete arithmetic operation is average, not sum."
+      }
+    },
+    {
+      "id": "R19",
+      "family": "literal",
+      "input": {
+        "query": "Sum power of devices"
+      },
+      "gold": {
+        "operation": "sum",
+        "node": "none",
+        "field": "power",
+        "options": {
+          "aggregation_type": "sum",
+          "aggregation_field": "power"
+        },
+        "reason": "Add numeric power values."
+      }
+    },
+    {
+      "id": "R20",
+      "family": "paraphrase",
+      "input": {
+        "query": "Add together all pressure readings"
+      },
+      "gold": {
+        "operation": "sum",
+        "node": "none",
+        "field": "pressure",
+        "options": {
+          "aggregation_type": "sum",
+          "aggregation_field": "pressure"
+        },
+        "reason": "Numeric addition is sum."
+      }
+    },
+    {
+      "id": "R21",
+      "family": "paraphrase",
+      "input": {
+        "query": "Return the combined total of humidity readings"
+      },
+      "gold": {
+        "operation": "sum",
+        "node": "none",
+        "field": "humidity",
+        "options": {
+          "aggregation_type": "sum",
+          "aggregation_field": "humidity"
+        },
+        "reason": "Total of numeric readings is sum; humidity is the field."
+      }
+    },
+    {
+      "id": "R22",
+      "family": "literal",
+      "input": {
+        "query": "Minimum humidity of sensors"
+      },
+      "gold": {
+        "operation": "min",
+        "node": "none",
+        "field": "humidity",
+        "options": {
+          "aggregation_type": "min",
+          "aggregation_field": "humidity"
+        },
+        "reason": "Smallest humidity value."
+      }
+    },
+    {
+      "id": "R23",
+      "family": "paraphrase",
+      "input": {
+        "query": "Give the smallest temperature value"
+      },
+      "gold": {
+        "operation": "min",
+        "node": "none",
+        "field": "temperature",
+        "options": {
+          "aggregation_type": "min",
+          "aggregation_field": "temperature"
+        },
+        "reason": "Numeric minimum, not entity ranking."
+      }
+    },
+    {
+      "id": "R24",
+      "family": "paraphrase",
+      "input": {
+        "query": "Return the lowest pressure reading"
+      },
+      "gold": {
+        "operation": "min",
+        "node": "none",
+        "field": "pressure",
+        "options": {
+          "aggregation_type": "min",
+          "aggregation_field": "pressure"
+        },
+        "reason": "Numeric minimum of pressure."
+      }
+    },
+    {
+      "id": "R25",
+      "family": "literal",
+      "input": {
+        "query": "Maximum power of devices"
+      },
+      "gold": {
+        "operation": "max",
+        "node": "none",
+        "field": "power",
+        "options": {
+          "aggregation_type": "max",
+          "aggregation_field": "power"
+        },
+        "reason": "Largest numeric power value."
+      }
+    },
+    {
+      "id": "R26",
+      "family": "paraphrase",
+      "input": {
+        "query": "Give the largest humidity value"
+      },
+      "gold": {
+        "operation": "max",
+        "node": "none",
+        "field": "humidity",
+        "options": {
+          "aggregation_type": "max",
+          "aggregation_field": "humidity"
+        },
+        "reason": "Numeric maximum of humidity."
+      }
+    },
+    {
+      "id": "R27",
+      "family": "paraphrase",
+      "input": {
+        "query": "Return the highest temperature reading"
+      },
+      "gold": {
+        "operation": "max",
+        "node": "none",
+        "field": "temperature",
+        "options": {
+          "aggregation_type": "max",
+          "aggregation_field": "temperature"
+        },
+        "reason": "Numeric maximum of temperature."
+      }
+    },
+    {
+      "id": "R28",
+      "family": "negation",
+      "input": {
+        "query": "Do not count sensors; list their names"
+      },
+      "gold": {
+        "operation": "no_override",
+        "node": "none",
+        "field": "none",
+        "options": {},
+        "reason": "Count is explicitly negated; ordinary listing remains."
+      }
+    },
+    {
+      "id": "R29",
+      "family": "negation",
+      "input": {
+        "query": "Show pump-42 records, not devices similar to it"
+      },
+      "gold": {
+        "operation": "no_override",
+        "node": "none",
+        "field": "none",
+        "options": {},
+        "reason": "Similarity is explicitly excluded."
+      }
+    },
+    {
+      "id": "R30",
+      "family": "quoted-mention",
+      "input": {
+        "query": "Find documents containing the phrase \"average temperature\""
+      },
+      "gold": {
+        "operation": "no_override",
+        "node": "none",
+        "field": "none",
+        "options": {},
+        "reason": "The operation words are quoted document content, not an aggregation request."
+      }
+    },
+    {
+      "id": "R31",
+      "family": "ambiguity",
+      "input": {
+        "query": "Maybe count devices or average pressure; I have not decided"
+      },
+      "gold": {
+        "operation": "no_override",
+        "node": "none",
+        "field": "none",
+        "options": {},
+        "reason": "No single operation has been selected; contract requires no override."
+      }
+    },
+    {
+      "id": "R32",
+      "family": "missing-binding",
+      "input": {
+        "query": "Show connections from that device"
+      },
+      "gold": {
+        "operation": "path",
+        "node": "none",
+        "field": "none",
+        "options": {
+          "path_intent": true
+        },
+        "reason": "Path intent is clear but no literal start node is supplied. Preserve partial intent; the caller must resolve the binding before execution. This is not native abstention or a model advantage over code."
+      }
+    }
+  ]
+}
