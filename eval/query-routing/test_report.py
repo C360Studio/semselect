@@ -80,6 +80,33 @@ class EvidenceTests(unittest.TestCase):
         self.assertEqual(result['different_raw_selection_ids'], ['R01'])
         self.assertEqual(result['different_status_ids'], [])
 
+    def test_unattempted_cases_are_not_measured_regressions_or_hardware_differences(self):
+        for status in ('not_run', 'interrupted'):
+            with self.subTest(status=status):
+                value = json.loads(self.model.read_bytes())
+                value.update(hardware='cpu-docker', status='failed')
+                for row in value['rows']:
+                    row['end_to_end_ms'] = 200
+                    if row['arm'] == 'kev' and row['view'] == 'normal' and row['id'] == 'R01':
+                        row.update(status=status, options=None)
+                        if status == 'not_run':
+                            del row['end_to_end_ms']
+                        else:
+                            row['end_to_end_ms'] = 50
+                cpu = self.root/'partial-cpu.json'
+                cpu.write_text(json.dumps(value))
+                result = report.summarize(self.code,[self.model,cpu])
+                pair = result['paired']['cpu-docker/kev']['keyword']
+                self.assertNotIn('R01',pair['regressed'])
+                self.assertEqual(pair['unassessed'],['R01'])
+                grade = result['primary']['cpu-docker/kev']
+                self.assertFalse(grade['comparison_complete'])
+                self.assertIsNone(grade['reported_accuracy'])
+                self.assertIsNone(grade['median_end_to_end_ms'])
+                self.assertIsNone(grade['p95_end_to_end_ms'])
+                self.assertEqual(result['primary']['cpu-docker/qwen_json']['median_end_to_end_ms'],200)
+                self.assertNotIn('R01',result['hardware_agreement']['kev/normal']['different_status_ids'])
+
 
 if __name__ == '__main__':
     unittest.main()

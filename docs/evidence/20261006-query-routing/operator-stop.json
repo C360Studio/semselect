@@ -1,0 +1,19 @@
+{
+  "kind": "operator-stop-supplement",
+  "recorded_at": "2026-10-06T02:44:15.486146+00:00",
+  "reason": "User explicitly chose to stop CPU Kev and preserve the partial run after discussing low value of another roughly3.5hours of CPU inference.",
+  "authorization": "Stop CPU Kev and preserve the partial run (Recommended)",
+  "action": "SIGTERM to verified owned runner PID87297; runner preserved KeyboardInterrupt and executed bounded owned runtime cleanup.",
+  "original_result_sha256": "c4cfac074174edfb3f6e865f91725e3f2d9972acb14bd7d761c6225a8bbd5ebe",
+  "original_result_status": "failed",
+  "original_error": "KeyboardInterrupt: ",
+  "runner_exit_code": 130,
+  "kev_formal": {
+    "completed_responses": 3,
+    "interrupted": 1,
+    "not_run": 60,
+    "warmups_excluded": 1
+  },
+  "interpretation": "CPU Qwen comparison is complete. CPU Kev provides only compatibility and latency observations, not cohort accuracy or a completed CPU comparison. Original failed/KeyboardInterrupt status is retained rather than relabeled as success.",
+  "shutdown": "All owned runtime records stopped=true and cleanup_errors=[]. Formal Kev container ExitCode137 during bounded stop; OOMKilled=false; host guard exit0. Peak memory unmeasured."
+}

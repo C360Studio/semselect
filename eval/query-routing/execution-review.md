@@ -58,5 +58,37 @@ three-head Kev request as the unit of application work, without claiming an
 intrinsic architecture speed comparison. The short result must preserve code
 successes lost, missing bindings and the opportunity for ordinary parser fixes.
 
-CPU formal evidence and the final combined documentation require review after
-the CPU run completes; passing preflight does not supply that approval.
+## CPU confirmation and intentional stop
+
+Independent review verified all 65 CPU Qwen request/response byte pairs, grading
+and operational records. Primary is 23/32 exact, with every raw selection matching
+Metal; reverse is 22/32. Reversed R16 alone differs across hardware, with CPU
+adding an incompatible node. Both Qwen containers exited zero without OOM.
+
+The user explicitly stopped CPU Kev after three completed formal calls took
+185–196 seconds each. One call was interrupted and 60 remain unattempted. A
+separate operational review verified preserved response/preflight counts, twelve
+completed decision heads, one interrupted head and stopped state for all four
+owned CPU containers. Formal Kev exited 137 during bounded shutdown, without OOM;
+its guard exited zero. The original failed/KeyboardInterrupt result is retained
+alongside an operator-stop supplement. This is not a completed CPU Kev comparison.
+
+A failing report regression showed that an unattempted case was previously
+counted as a paired regression and hardware difference. The report now separates
+unassessed cases and suppresses reported cohort accuracy for incomplete primary
+runs, without changing the raw records or grading of completed responses.
+All five report tests pass.
+
+The same regression was expanded to cover both interrupted and unattempted cases
+and reproduced inappropriate cohort latency summaries before a further reporting
+fix. Incomplete primary cohorts now report neither median nor percentile latency;
+completed request timings remain available in the raw records. Complete cohorts
+retain their latency summaries.
+
+The independent reviewer approved the final combined documentation, reporting
+changes and evidence archive. It passed all five report tests and verified seven
+archives, 389 original files and eleven published files. Recomputing from extracted
+code/Metal/CPU bytes matched the combined summary and source hashes, apart from
+extraction-dependent path strings. All five earlier archives and `summary-metal.json`
+remain byte-identical to commit `9db8ba1`. Approval covers completed code, Metal
+and CPU Qwen, and partial CPU Kev compatibility/timing observations only.

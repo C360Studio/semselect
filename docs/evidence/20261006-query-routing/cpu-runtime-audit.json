@@ -1,0 +1,1672 @@
+{
+  "kind": "read-only-query-routing-runtime-audit",
+  "result_status": "failed",
+  "result_sha256": "c4cfac074174edfb3f6e865f91725e3f2d9972acb14bd7d761c6225a8bbd5ebe",
+  "runtimes": [
+    {
+      "directory": "inference-kev",
+      "hardware": "cpu-docker",
+      "arm": "kev",
+      "evidence_sha256": {
+        "runtime.start.json": "3b15bcacb2b1390bf9dde0a7bd317e9e3f112b60d8ec92ac2df3bfa6df3ce2ce",
+        "runtime.json": "a032a5be706b39c5fb9db15652160fb639f70a21a272470f58a71d61397d58d7",
+        "runtime.log": "052a76f1c6da11ba79b17c61ed973905bf652f5a97dfd6fd3a7cdcb62c0da3ad"
+      },
+      "configured": {
+        "context": "4096",
+        "batch": "1024",
+        "ubatch": "512",
+        "threads": "4",
+        "batch_threads": "4",
+        "slots": "1",
+        "gpu_layers": "0",
+        "cache_ram": "0",
+        "cache_reuse": "0",
+        "no_cache_prompt": true
+      },
+      "observed": {
+        "effective_context": [
+          4096
+        ],
+        "effective_context_per_sequence": [
+          4096
+        ],
+        "effective_batch": [
+          512
+        ],
+        "effective_ubatch": [
+          512
+        ],
+        "effective_slots": [
+          1
+        ],
+        "offload": [],
+        "metal_devices": [],
+        "embedding_batch_clamp_logged": true,
+        "ram_prompt_cache_disabled_logged": true,
+        "tasks": [
+          {
+            "slot": 0,
+            "task": 0,
+            "context": 4096,
+            "prompt_tokens": 1355,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1,
+            "context": 4096,
+            "prompt_tokens": 1163,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 2,
+            "context": 4096,
+            "prompt_tokens": 1116,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 12,
+            "context": 4096,
+            "prompt_tokens": 1352,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 13,
+            "context": 4096,
+            "prompt_tokens": 1160,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 14,
+            "context": 4096,
+            "prompt_tokens": 1113,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 24,
+            "context": 4096,
+            "prompt_tokens": 1350,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 25,
+            "context": 4096,
+            "prompt_tokens": 1158,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 26,
+            "context": 4096,
+            "prompt_tokens": 1111,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 36,
+            "context": 4096,
+            "prompt_tokens": 1354,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 37,
+            "context": 4096,
+            "prompt_tokens": 1162,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 38,
+            "context": 4096,
+            "prompt_tokens": 1115,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 48,
+            "context": 4096,
+            "prompt_tokens": 1354,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": null,
+            "truncated": null
+          }
+        ],
+        "cache": {
+          "observed_tasks": 13,
+          "first_cache_reported_tasks": 13,
+          "first_cache_positive_tasks": 0,
+          "first_cache_zero_tasks": 13,
+          "prompt_eval_reported_tasks": 0,
+          "full_prompt_eval_tasks": 0,
+          "truncated_tasks": 0,
+          "release_unobserved_tasks": 1,
+          "interpretation": "First cached token count is prefix reuse. Later positive counts within a task are processed-prompt progress, not evidence of cross-request reuse. Missing observations remain unknown."
+        }
+      },
+      "token_budgets": {
+        "requests": 65,
+        "heads": 195,
+        "heads_by_question": {
+          "operation": 65,
+          "node": 65,
+          "field": 65
+        },
+        "max_prompt_tokens": 1359,
+        "max_prompt_plus_reserve": 1360,
+        "max_decision_tail_tokens": 255,
+        "observed_context": 4096,
+        "observed_batch": 512,
+        "actual_limit_violations": [],
+        "actual_limits_verified": true,
+        "all_saved_preflights_claim_fit": true,
+        "note": "Rechecks saved token arrays/counts against logged effective limits, including embedding-mode batch clamping. Does not infer full-task correctness."
+      },
+      "requested_effective_discrepancies": [
+        {
+          "setting": "batch",
+          "requested": 1024,
+          "logged_effective": [
+            512
+          ]
+        }
+      ],
+      "resources": {
+        "observed_peak_memory_bytes": null,
+        "native_quota": "not enforced for native runtime/guard",
+        "container_cpu_limit": 4.0,
+        "container_memory_limit_bytes": 8589934592,
+        "container_memory_swap_limit_bytes": 8589934592,
+        "container_state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-06T02:28:30.582454052Z",
+          "FinishedAt": "2026-10-06T02:42:35.499793054Z"
+        },
+        "note": "Docker inspect records configured/enforced quota and exit/OOM state; it is not peak RSS or peak GPU memory. A missing OOM record is unknown, not false."
+      },
+      "cleanup": {
+        "final_metadata_present": true,
+        "stopped": true,
+        "errors": [],
+        "child_exit_codes": [
+          0
+        ],
+        "confirmed": true
+      }
+    },
+    {
+      "directory": "inference-qwen_json",
+      "hardware": "cpu-docker",
+      "arm": "qwen_json",
+      "evidence_sha256": {
+        "runtime.start.json": "74c854bfac3f8a1258a721e4a1ee216375879fdde9245a2222b077e63c612095",
+        "runtime.json": "0ade49f41a55d0b0eadf874852497de88dd415e7e82c04c4476cbcd84b5faa55",
+        "runtime.log": "0075d537721dc8adc198caf0ee0bdf33a7650b025463ecb6e77bc2ddce5ca8ea"
+      },
+      "configured": {
+        "context": "4096",
+        "batch": "1024",
+        "ubatch": "512",
+        "threads": "4",
+        "batch_threads": "4",
+        "slots": "1",
+        "gpu_layers": "0",
+        "cache_ram": "0",
+        "cache_reuse": "0",
+        "no_cache_prompt": true
+      },
+      "observed": {
+        "effective_context": [
+          4096
+        ],
+        "effective_context_per_sequence": [
+          4096
+        ],
+        "effective_batch": [
+          1024
+        ],
+        "effective_ubatch": [
+          512
+        ],
+        "effective_slots": [
+          1
+        ],
+        "offload": [],
+        "metal_devices": [],
+        "embedding_batch_clamp_logged": false,
+        "ram_prompt_cache_disabled_logged": true,
+        "tasks": [
+          {
+            "slot": 0,
+            "task": 0,
+            "context": 4096,
+            "prompt_tokens": 1093,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1093,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 22,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 42,
+            "context": 4096,
+            "prompt_tokens": 1088,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1088,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 61,
+            "context": 4096,
+            "prompt_tokens": 1092,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1092,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 84,
+            "context": 4096,
+            "prompt_tokens": 1092,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1092,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 106,
+            "context": 4096,
+            "prompt_tokens": 1092,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1092,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 129,
+            "context": 4096,
+            "prompt_tokens": 1094,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1094,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 151,
+            "context": 4096,
+            "prompt_tokens": 1093,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1093,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 172,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 191,
+            "context": 4096,
+            "prompt_tokens": 1092,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1092,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 213,
+            "context": 4096,
+            "prompt_tokens": 1091,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1091,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 232,
+            "context": 4096,
+            "prompt_tokens": 1091,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1091,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 252,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 271,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 293,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 311,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 329,
+            "context": 4096,
+            "prompt_tokens": 1088,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1088,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 347,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 365,
+            "context": 4096,
+            "prompt_tokens": 1093,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1093,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 383,
+            "context": 4096,
+            "prompt_tokens": 1088,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1088,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 401,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 419,
+            "context": 4096,
+            "prompt_tokens": 1091,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1091,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 437,
+            "context": 4096,
+            "prompt_tokens": 1088,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1088,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 459,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 477,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 495,
+            "context": 4096,
+            "prompt_tokens": 1088,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1088,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 513,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 531,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 549,
+            "context": 4096,
+            "prompt_tokens": 1092,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1092,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 568,
+            "context": 4096,
+            "prompt_tokens": 1096,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1096,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 591,
+            "context": 4096,
+            "prompt_tokens": 1093,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1093,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 610,
+            "context": 4096,
+            "prompt_tokens": 1095,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1095,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 629,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 647,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 665,
+            "context": 4096,
+            "prompt_tokens": 1096,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1096,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 684,
+            "context": 4096,
+            "prompt_tokens": 1094,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1094,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 703,
+            "context": 4096,
+            "prompt_tokens": 1097,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1097,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 726,
+            "context": 4096,
+            "prompt_tokens": 1093,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1093,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 745,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 763,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 781,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 799,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 817,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 835,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 859,
+            "context": 4096,
+            "prompt_tokens": 1092,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1092,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 877,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 895,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 913,
+            "context": 4096,
+            "prompt_tokens": 1094,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1094,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 931,
+            "context": 4096,
+            "prompt_tokens": 1091,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1091,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 949,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 973,
+            "context": 4096,
+            "prompt_tokens": 1091,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1091,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 991,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1009,
+            "context": 4096,
+            "prompt_tokens": 1091,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1091,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1031,
+            "context": 4096,
+            "prompt_tokens": 1090,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1090,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1050,
+            "context": 4096,
+            "prompt_tokens": 1092,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1092,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1070,
+            "context": 4096,
+            "prompt_tokens": 1092,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1092,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1089,
+            "context": 4096,
+            "prompt_tokens": 1093,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1093,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1111,
+            "context": 4096,
+            "prompt_tokens": 1091,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1091,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1130,
+            "context": 4096,
+            "prompt_tokens": 1094,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1094,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1151,
+            "context": 4096,
+            "prompt_tokens": 1095,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1095,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1173,
+            "context": 4096,
+            "prompt_tokens": 1093,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1093,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1196,
+            "context": 4096,
+            "prompt_tokens": 1093,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1093,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1218,
+            "context": 4096,
+            "prompt_tokens": 1093,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1093,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1241,
+            "context": 4096,
+            "prompt_tokens": 1089,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1089,
+            "truncated": 0
+          },
+          {
+            "slot": 0,
+            "task": 1260,
+            "context": 4096,
+            "prompt_tokens": 1091,
+            "first_cached_tokens": 0,
+            "prompt_eval_tokens": 1091,
+            "truncated": 0
+          }
+        ],
+        "cache": {
+          "observed_tasks": 65,
+          "first_cache_reported_tasks": 65,
+          "first_cache_positive_tasks": 0,
+          "first_cache_zero_tasks": 65,
+          "prompt_eval_reported_tasks": 65,
+          "full_prompt_eval_tasks": 65,
+          "truncated_tasks": 0,
+          "release_unobserved_tasks": 0,
+          "interpretation": "First cached token count is prefix reuse. Later positive counts within a task are processed-prompt progress, not evidence of cross-request reuse. Missing observations remain unknown."
+        }
+      },
+      "token_budgets": {
+        "requests": 65,
+        "heads": 65,
+        "heads_by_question": {
+          "chat": 65
+        },
+        "max_prompt_tokens": 1097,
+        "max_prompt_plus_reserve": 1225,
+        "max_decision_tail_tokens": null,
+        "observed_context": 4096,
+        "observed_batch": 1024,
+        "actual_limit_violations": [],
+        "actual_limits_verified": true,
+        "all_saved_preflights_claim_fit": true,
+        "note": "Rechecks saved token arrays/counts against logged effective limits, including embedding-mode batch clamping. Does not infer full-task correctness."
+      },
+      "requested_effective_discrepancies": [],
+      "resources": {
+        "observed_peak_memory_bytes": null,
+        "native_quota": "not enforced for native runtime/guard",
+        "container_cpu_limit": 4.0,
+        "container_memory_limit_bytes": 8589934592,
+        "container_memory_swap_limit_bytes": 8589934592,
+        "container_state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-06T01:34:48.101359213Z",
+          "FinishedAt": "2026-10-06T02:28:29.849170219Z"
+        },
+        "note": "Docker inspect records configured/enforced quota and exit/OOM state; it is not peak RSS or peak GPU memory. A missing OOM record is unknown, not false."
+      },
+      "cleanup": {
+        "final_metadata_present": true,
+        "stopped": true,
+        "errors": [],
+        "child_exit_codes": [],
+        "confirmed": true
+      }
+    },
+    {
+      "directory": "preflight-kev",
+      "hardware": "cpu-docker",
+      "arm": "kev",
+      "evidence_sha256": {
+        "runtime.start.json": "44397cab773668660d39c87e87bcf7406cc4b06479e79fe9ae546ab05b912a43",
+        "runtime.json": "7ba64fc376ff41a047f61f670ae957a02763936f3777b8daecf1764fc9fd627d",
+        "runtime.log": "887ab29b265f3f3546ac97e7652bcdbebf5f6358b8f7ab678840fbf315e05d31"
+      },
+      "configured": {
+        "context": "4096",
+        "batch": "1024",
+        "ubatch": "512",
+        "threads": "4",
+        "batch_threads": "4",
+        "slots": "1",
+        "gpu_layers": "0",
+        "cache_ram": "0",
+        "cache_reuse": "0",
+        "no_cache_prompt": true
+      },
+      "observed": {
+        "effective_context": [
+          4096
+        ],
+        "effective_context_per_sequence": [
+          4096
+        ],
+        "effective_batch": [
+          512
+        ],
+        "effective_ubatch": [
+          512
+        ],
+        "effective_slots": [
+          1
+        ],
+        "offload": [],
+        "metal_devices": [],
+        "embedding_batch_clamp_logged": true,
+        "ram_prompt_cache_disabled_logged": true,
+        "tasks": [],
+        "cache": {
+          "observed_tasks": 0,
+          "first_cache_reported_tasks": 0,
+          "first_cache_positive_tasks": 0,
+          "first_cache_zero_tasks": 0,
+          "prompt_eval_reported_tasks": 0,
+          "full_prompt_eval_tasks": 0,
+          "truncated_tasks": 0,
+          "release_unobserved_tasks": 0,
+          "interpretation": "First cached token count is prefix reuse. Later positive counts within a task are processed-prompt progress, not evidence of cross-request reuse. Missing observations remain unknown."
+        }
+      },
+      "token_budgets": {
+        "requests": 65,
+        "heads": 195,
+        "heads_by_question": {
+          "operation": 65,
+          "node": 65,
+          "field": 65
+        },
+        "max_prompt_tokens": 1359,
+        "max_prompt_plus_reserve": 1360,
+        "max_decision_tail_tokens": 255,
+        "observed_context": 4096,
+        "observed_batch": 512,
+        "actual_limit_violations": [],
+        "actual_limits_verified": true,
+        "all_saved_preflights_claim_fit": true,
+        "note": "Rechecks saved token arrays/counts against logged effective limits, including embedding-mode batch clamping. Does not infer full-task correctness."
+      },
+      "requested_effective_discrepancies": [
+        {
+          "setting": "batch",
+          "requested": 1024,
+          "logged_effective": [
+            512
+          ]
+        }
+      ],
+      "resources": {
+        "observed_peak_memory_bytes": null,
+        "native_quota": "not enforced for native runtime/guard",
+        "container_cpu_limit": 4.0,
+        "container_memory_limit_bytes": 8589934592,
+        "container_memory_swap_limit_bytes": 8589934592,
+        "container_state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-06T01:34:26.17787305Z",
+          "FinishedAt": "2026-10-06T01:34:47.679050296Z"
+        },
+        "note": "Docker inspect records configured/enforced quota and exit/OOM state; it is not peak RSS or peak GPU memory. A missing OOM record is unknown, not false."
+      },
+      "cleanup": {
+        "final_metadata_present": true,
+        "stopped": true,
+        "errors": [],
+        "child_exit_codes": [
+          0
+        ],
+        "confirmed": true
+      }
+    },
+    {
+      "directory": "preflight-qwen_json",
+      "hardware": "cpu-docker",
+      "arm": "qwen_json",
+      "evidence_sha256": {
+        "runtime.start.json": "c551597eb141c1b4936f889b356a33199500303da2b99193edd4110ed7a72fc1",
+        "runtime.json": "4d78161f432ef5f725b20f3fbfea346fea32a92d403322d2507a51dfa35ac88a",
+        "runtime.log": "7c0b8a5ca076e72d33e0175ed376667e479e4ba685aa14dae92ce73a9460b4ef"
+      },
+      "configured": {
+        "context": "4096",
+        "batch": "1024",
+        "ubatch": "512",
+        "threads": "4",
+        "batch_threads": "4",
+        "slots": "1",
+        "gpu_layers": "0",
+        "cache_ram": "0",
+        "cache_reuse": "0",
+        "no_cache_prompt": true
+      },
+      "observed": {
+        "effective_context": [
+          4096
+        ],
+        "effective_context_per_sequence": [
+          4096
+        ],
+        "effective_batch": [
+          1024
+        ],
+        "effective_ubatch": [
+          512
+        ],
+        "effective_slots": [
+          1
+        ],
+        "offload": [],
+        "metal_devices": [],
+        "embedding_batch_clamp_logged": false,
+        "ram_prompt_cache_disabled_logged": true,
+        "tasks": [],
+        "cache": {
+          "observed_tasks": 0,
+          "first_cache_reported_tasks": 0,
+          "first_cache_positive_tasks": 0,
+          "first_cache_zero_tasks": 0,
+          "prompt_eval_reported_tasks": 0,
+          "full_prompt_eval_tasks": 0,
+          "truncated_tasks": 0,
+          "release_unobserved_tasks": 0,
+          "interpretation": "First cached token count is prefix reuse. Later positive counts within a task are processed-prompt progress, not evidence of cross-request reuse. Missing observations remain unknown."
+        }
+      },
+      "token_budgets": {
+        "requests": 65,
+        "heads": 65,
+        "heads_by_question": {
+          "chat": 65
+        },
+        "max_prompt_tokens": 1097,
+        "max_prompt_plus_reserve": 1225,
+        "max_decision_tail_tokens": null,
+        "observed_context": 4096,
+        "observed_batch": 1024,
+        "actual_limit_violations": [],
+        "actual_limits_verified": true,
+        "all_saved_preflights_claim_fit": true,
+        "note": "Rechecks saved token arrays/counts against logged effective limits, including embedding-mode batch clamping. Does not infer full-task correctness."
+      },
+      "requested_effective_discrepancies": [],
+      "resources": {
+        "observed_peak_memory_bytes": null,
+        "native_quota": "not enforced for native runtime/guard",
+        "container_cpu_limit": 4.0,
+        "container_memory_limit_bytes": 8589934592,
+        "container_memory_swap_limit_bytes": 8589934592,
+        "container_state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-06T01:34:20.203080798Z",
+          "FinishedAt": "2026-10-06T01:34:24.235104633Z"
+        },
+        "note": "Docker inspect records configured/enforced quota and exit/OOM state; it is not peak RSS or peak GPU memory. A missing OOM record is unknown, not false."
+      },
+      "cleanup": {
+        "final_metadata_present": true,
+        "stopped": true,
+        "errors": [],
+        "child_exit_codes": [],
+        "confirmed": true
+      }
+    }
+  ],
+  "preflight_sha256": {
+    "qwen_json": "1d097015570e6a69a1702d773543168afba98a4d8f85a229c69ab04dc480385f",
+    "kev": "cf1d4bcd5c4aa2fb7c63cd4a8aa75b42cc70770181669cd40081fe8011adf122"
+  },
+  "responses": {
+    "qwen_json": {
+      "planned_rows": 64,
+      "status_counts": {
+        "invalid": 18,
+        "ok": 46
+      },
+      "attempted_model_requests": 64,
+      "warmup_model_requests_separate": 1,
+      "http_status_counts": {
+        "200": 64
+      },
+      "response_timings_including_warmup": 65,
+      "response_cache_positive": 0,
+      "response_cache_zero": 65,
+      "response_cache_unreported": 0,
+      "max_response_prompt_tokens": 1097,
+      "usage_comparisons": [
+        {
+          "id": "R01",
+          "view": "normal",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R02",
+          "view": "normal",
+          "reported_input_tokens": 1088,
+          "preflight_total_input_tokens": 1088,
+          "verified": true
+        },
+        {
+          "id": "R03",
+          "view": "normal",
+          "reported_input_tokens": 1092,
+          "preflight_total_input_tokens": 1092,
+          "verified": true
+        },
+        {
+          "id": "R04",
+          "view": "normal",
+          "reported_input_tokens": 1092,
+          "preflight_total_input_tokens": 1092,
+          "verified": true
+        },
+        {
+          "id": "R05",
+          "view": "normal",
+          "reported_input_tokens": 1092,
+          "preflight_total_input_tokens": 1092,
+          "verified": true
+        },
+        {
+          "id": "R06",
+          "view": "normal",
+          "reported_input_tokens": 1094,
+          "preflight_total_input_tokens": 1094,
+          "verified": true
+        },
+        {
+          "id": "R07",
+          "view": "normal",
+          "reported_input_tokens": 1093,
+          "preflight_total_input_tokens": 1093,
+          "verified": true
+        },
+        {
+          "id": "R08",
+          "view": "normal",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R09",
+          "view": "normal",
+          "reported_input_tokens": 1092,
+          "preflight_total_input_tokens": 1092,
+          "verified": true
+        },
+        {
+          "id": "R10",
+          "view": "normal",
+          "reported_input_tokens": 1091,
+          "preflight_total_input_tokens": 1091,
+          "verified": true
+        },
+        {
+          "id": "R11",
+          "view": "normal",
+          "reported_input_tokens": 1091,
+          "preflight_total_input_tokens": 1091,
+          "verified": true
+        },
+        {
+          "id": "R12",
+          "view": "normal",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R13",
+          "view": "normal",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R14",
+          "view": "normal",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R15",
+          "view": "normal",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R16",
+          "view": "normal",
+          "reported_input_tokens": 1088,
+          "preflight_total_input_tokens": 1088,
+          "verified": true
+        },
+        {
+          "id": "R17",
+          "view": "normal",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R18",
+          "view": "normal",
+          "reported_input_tokens": 1093,
+          "preflight_total_input_tokens": 1093,
+          "verified": true
+        },
+        {
+          "id": "R19",
+          "view": "normal",
+          "reported_input_tokens": 1088,
+          "preflight_total_input_tokens": 1088,
+          "verified": true
+        },
+        {
+          "id": "R20",
+          "view": "normal",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R21",
+          "view": "normal",
+          "reported_input_tokens": 1091,
+          "preflight_total_input_tokens": 1091,
+          "verified": true
+        },
+        {
+          "id": "R22",
+          "view": "normal",
+          "reported_input_tokens": 1088,
+          "preflight_total_input_tokens": 1088,
+          "verified": true
+        },
+        {
+          "id": "R23",
+          "view": "normal",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R24",
+          "view": "normal",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R25",
+          "view": "normal",
+          "reported_input_tokens": 1088,
+          "preflight_total_input_tokens": 1088,
+          "verified": true
+        },
+        {
+          "id": "R26",
+          "view": "normal",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R27",
+          "view": "normal",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R28",
+          "view": "normal",
+          "reported_input_tokens": 1092,
+          "preflight_total_input_tokens": 1092,
+          "verified": true
+        },
+        {
+          "id": "R29",
+          "view": "normal",
+          "reported_input_tokens": 1096,
+          "preflight_total_input_tokens": 1096,
+          "verified": true
+        },
+        {
+          "id": "R30",
+          "view": "normal",
+          "reported_input_tokens": 1093,
+          "preflight_total_input_tokens": 1093,
+          "verified": true
+        },
+        {
+          "id": "R31",
+          "view": "normal",
+          "reported_input_tokens": 1095,
+          "preflight_total_input_tokens": 1095,
+          "verified": true
+        },
+        {
+          "id": "R32",
+          "view": "normal",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R32",
+          "view": "reverse",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R31",
+          "view": "reverse",
+          "reported_input_tokens": 1096,
+          "preflight_total_input_tokens": 1096,
+          "verified": true
+        },
+        {
+          "id": "R30",
+          "view": "reverse",
+          "reported_input_tokens": 1094,
+          "preflight_total_input_tokens": 1094,
+          "verified": true
+        },
+        {
+          "id": "R29",
+          "view": "reverse",
+          "reported_input_tokens": 1097,
+          "preflight_total_input_tokens": 1097,
+          "verified": true
+        },
+        {
+          "id": "R28",
+          "view": "reverse",
+          "reported_input_tokens": 1093,
+          "preflight_total_input_tokens": 1093,
+          "verified": true
+        },
+        {
+          "id": "R27",
+          "view": "reverse",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R26",
+          "view": "reverse",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R25",
+          "view": "reverse",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R24",
+          "view": "reverse",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R23",
+          "view": "reverse",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R22",
+          "view": "reverse",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R21",
+          "view": "reverse",
+          "reported_input_tokens": 1092,
+          "preflight_total_input_tokens": 1092,
+          "verified": true
+        },
+        {
+          "id": "R20",
+          "view": "reverse",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R19",
+          "view": "reverse",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R18",
+          "view": "reverse",
+          "reported_input_tokens": 1094,
+          "preflight_total_input_tokens": 1094,
+          "verified": true
+        },
+        {
+          "id": "R17",
+          "view": "reverse",
+          "reported_input_tokens": 1091,
+          "preflight_total_input_tokens": 1091,
+          "verified": true
+        },
+        {
+          "id": "R16",
+          "view": "reverse",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R15",
+          "view": "reverse",
+          "reported_input_tokens": 1091,
+          "preflight_total_input_tokens": 1091,
+          "verified": true
+        },
+        {
+          "id": "R14",
+          "view": "reverse",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R13",
+          "view": "reverse",
+          "reported_input_tokens": 1091,
+          "preflight_total_input_tokens": 1091,
+          "verified": true
+        },
+        {
+          "id": "R12",
+          "view": "reverse",
+          "reported_input_tokens": 1090,
+          "preflight_total_input_tokens": 1090,
+          "verified": true
+        },
+        {
+          "id": "R11",
+          "view": "reverse",
+          "reported_input_tokens": 1092,
+          "preflight_total_input_tokens": 1092,
+          "verified": true
+        },
+        {
+          "id": "R10",
+          "view": "reverse",
+          "reported_input_tokens": 1092,
+          "preflight_total_input_tokens": 1092,
+          "verified": true
+        },
+        {
+          "id": "R09",
+          "view": "reverse",
+          "reported_input_tokens": 1093,
+          "preflight_total_input_tokens": 1093,
+          "verified": true
+        },
+        {
+          "id": "R08",
+          "view": "reverse",
+          "reported_input_tokens": 1091,
+          "preflight_total_input_tokens": 1091,
+          "verified": true
+        },
+        {
+          "id": "R07",
+          "view": "reverse",
+          "reported_input_tokens": 1094,
+          "preflight_total_input_tokens": 1094,
+          "verified": true
+        },
+        {
+          "id": "R06",
+          "view": "reverse",
+          "reported_input_tokens": 1095,
+          "preflight_total_input_tokens": 1095,
+          "verified": true
+        },
+        {
+          "id": "R05",
+          "view": "reverse",
+          "reported_input_tokens": 1093,
+          "preflight_total_input_tokens": 1093,
+          "verified": true
+        },
+        {
+          "id": "R04",
+          "view": "reverse",
+          "reported_input_tokens": 1093,
+          "preflight_total_input_tokens": 1093,
+          "verified": true
+        },
+        {
+          "id": "R03",
+          "view": "reverse",
+          "reported_input_tokens": 1093,
+          "preflight_total_input_tokens": 1093,
+          "verified": true
+        },
+        {
+          "id": "R02",
+          "view": "reverse",
+          "reported_input_tokens": 1089,
+          "preflight_total_input_tokens": 1089,
+          "verified": true
+        },
+        {
+          "id": "R01",
+          "view": "reverse",
+          "reported_input_tokens": 1091,
+          "preflight_total_input_tokens": 1091,
+          "verified": true
+        },
+        {
+          "id": "D01",
+          "view": "warmup",
+          "reported_input_tokens": 1093,
+          "preflight_total_input_tokens": 1093,
+          "verified": true
+        }
+      ],
+      "usage_matches_preflight": 65,
+      "usage_unverified_or_mismatched": [],
+      "note": "Request counts reflect caller records, not independently confirmed server acceptance. Native per-head tasks are observed separately in runtime logs."
+    },
+    "kev": {
+      "planned_rows": 64,
+      "status_counts": {
+        "ok": 2,
+        "invalid": 1,
+        "interrupted": 1,
+        "not_run": 60
+      },
+      "attempted_model_requests": 4,
+      "warmup_model_requests_separate": 1,
+      "http_status_counts": {
+        "200": 3,
+        "absent": 61
+      },
+      "response_timings_including_warmup": 0,
+      "response_cache_positive": 0,
+      "response_cache_zero": 0,
+      "response_cache_unreported": 0,
+      "max_response_prompt_tokens": null,
+      "usage_comparisons": [
+        {
+          "id": "R01",
+          "view": "normal",
+          "reported_input_tokens": 3625,
+          "preflight_total_input_tokens": 3625,
+          "verified": true
+        },
+        {
+          "id": "R02",
+          "view": "normal",
+          "reported_input_tokens": 3619,
+          "preflight_total_input_tokens": 3619,
+          "verified": true
+        },
+        {
+          "id": "R03",
+          "view": "normal",
+          "reported_input_tokens": 3631,
+          "preflight_total_input_tokens": 3631,
+          "verified": true
+        },
+        {
+          "id": "D01",
+          "view": "warmup",
+          "reported_input_tokens": 3634,
+          "preflight_total_input_tokens": 3634,
+          "verified": true
+        }
+      ],
+      "usage_matches_preflight": 4,
+      "usage_unverified_or_mismatched": [],
+      "note": "Request counts reflect caller records, not independently confirmed server acceptance. Native per-head tasks are observed separately in runtime logs."
+    }
+  },
+  "limits": "A snapshot while a run is active is provisional. Missing final metadata is pending/unproved cleanup. No service endpoint is contacted. Configured quotas are never reported as measured peak usage."
+}

@@ -1,0 +1,30 @@
+test_hardware_agreement_exposes_different_invalid_selections (test_report.EvidenceTests.test_hardware_agreement_exposes_different_invalid_selections) ... ok
+test_rejects_results_from_a_different_design (test_report.EvidenceTests.test_rejects_results_from_a_different_design) ... ok
+test_reports_raw_changes_when_both_tuples_are_invalid (test_report.EvidenceTests.test_reports_raw_changes_when_both_tuples_are_invalid) ... ok
+test_source_hash_describes_the_bytes_actually_graded (test_report.EvidenceTests.test_source_hash_describes_the_bytes_actually_graded) ... ok
+test_unattempted_cases_are_not_measured_regressions_or_hardware_differences (test_report.EvidenceTests.test_unattempted_cases_are_not_measured_regressions_or_hardware_differences) ... 
+  test_unattempted_cases_are_not_measured_regressions_or_hardware_differences (test_report.EvidenceTests.test_unattempted_cases_are_not_measured_regressions_or_hardware_differences) (status='not_run') ... FAIL
+  test_unattempted_cases_are_not_measured_regressions_or_hardware_differences (test_report.EvidenceTests.test_unattempted_cases_are_not_measured_regressions_or_hardware_differences) (status='interrupted') ... FAIL
+
+======================================================================
+FAIL: test_unattempted_cases_are_not_measured_regressions_or_hardware_differences (test_report.EvidenceTests.test_unattempted_cases_are_not_measured_regressions_or_hardware_differences) (status='not_run')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/coby/Code/c360/semselect/eval/query-routing/test_report.py", line 105, in test_unattempted_cases_are_not_measured_regressions_or_hardware_differences
+    self.assertIsNone(grade['median_end_to_end_ms'])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 is not None
+
+======================================================================
+FAIL: test_unattempted_cases_are_not_measured_regressions_or_hardware_differences (test_report.EvidenceTests.test_unattempted_cases_are_not_measured_regressions_or_hardware_differences) (status='interrupted')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/coby/Code/c360/semselect/eval/query-routing/test_report.py", line 105, in test_unattempted_cases_are_not_measured_regressions_or_hardware_differences
+    self.assertIsNone(grade['median_end_to_end_ms'])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200.0 is not None
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.239s
+
+FAILED (failures=2)

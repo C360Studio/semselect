@@ -20,11 +20,30 @@ def view(rows, arm, order):
 
 
 def paired(model, code, cases):
-    result = {'corrected': [], 'regressed': [], 'both_correct': [], 'both_wrong': []}
+    result = {'corrected': [], 'regressed': [], 'both_correct': [], 'both_wrong': [], 'unassessed': []}
     for ident, case in cases.items():
+        if not assessed(model[ident]) or not assessed(code[ident]):
+            result['unassessed'].append(ident)
+            continue
         m, c = correct(model[ident], case), correct(code[ident], case)
         result['both_correct' if m and c else 'corrected' if m else 'regressed' if c else 'both_wrong'].append(ident)
     return result
+
+
+def assessed(row):
+    return row['status'] not in ('not_run', 'interrupted')
+
+
+def primary_grade(rows, cases, group):
+    value = runner.grade(list(rows.values()),list(cases.values()))[group]
+    value['assessed'] = sum(assessed(row) for row in rows.values())
+    value['comparison_complete'] = value['assessed'] == value['total']
+    value['reported_accuracy'] = value['exact']/value['total'] if value['comparison_complete'] else None
+    if not value['comparison_complete']:
+        value['median_end_to_end_ms'] = None
+        value['p95_end_to_end_ms'] = None
+    value['note'] = 'All planned rows remain preserved. exact is an observed count; do not interpret exact/total as accuracy when comparison_complete is false. Incomplete cohorts have no reported latency median or percentile; inspect completed request timings in the raw records.'
+    return value
 
 
 def read_run(path, design_sha):
@@ -60,7 +79,7 @@ def summarize(code_path, model_paths):
               'designated_code_arm': e.load('development-selection.json')['strongest_code_arm'], 'primary': {}, 'paired': {}, 'families': {}, 'sensitivity': {}, 'failures': {}}
     for arm in runner.ARMS:
         rows = view(code['rows'], arm, 'primary')
-        result['primary']['host/'+arm] = runner.grade(list(rows.values()), list(cases.values()))[arm+'/primary']
+        result['primary']['host/'+arm] = primary_grade(rows,cases,arm+'/primary')
     hardware_rows = {}
     for path in model_paths:
         run, run_sha = read_run(path, design_sha)
@@ -73,29 +92,31 @@ def summarize(code_path, model_paths):
         for arm in runner.MODEL_ARMS:
             name = hardware+'/'+arm
             primary, reverse = view(run['rows'], arm, 'normal'), view(run['rows'], arm, 'reverse')
-            result['primary'][name] = runner.grade(list(primary.values()), list(cases.values()))[arm+'/normal']
+            result['primary'][name] = primary_grade(primary,cases,arm+'/normal')
             result['paired'][name] = {baseline: paired(primary, view(code['rows'], baseline, 'primary'), cases) for baseline in runner.ARMS}
             result['families'][name] = {}
             for family in sorted({c['family'] for c in cases.values()}):
                 ids = [ident for ident,c in cases.items() if c['family'] == family]
-                result['families'][name][family] = {'total':len(ids),'exact':sum(correct(primary[i],cases[i]) for i in ids), 'failed_ids':[i for i in ids if not correct(primary[i],cases[i])]}
+                result['families'][name][family] = {'total':len(ids),'exact':sum(correct(primary[i],cases[i]) for i in ids), 'failed_ids':[i for i in ids if assessed(primary[i]) and not correct(primary[i],cases[i])], 'unassessed_ids':[i for i in ids if not assessed(primary[i])]}
             comparable = [i for i in cases if primary[i]['status'] == reverse[i]['status'] == 'ok']
             raw_pairs = [i for i in cases if raw_selection(primary[i]) is not None and raw_selection(reverse[i]) is not None]
             result['sensitivity'][name] = {
                 'primary_exact': sum(correct(primary[i],cases[i]) for i in cases),
                 'reverse_exact': sum(correct(reverse[i],cases[i]) for i in cases),
+                'primary_complete': all(assessed(primary[i]) for i in cases),
+                'reverse_complete': all(assessed(reverse[i]) for i in cases),
                 'valid_pairs':len(comparable),
                 'changed_options':[i for i in comparable if e.normalize(primary[i]['options']) != e.normalize(reverse[i]['options'])],
                 'not_comparable':[i for i in cases if i not in comparable],
                 'raw_selection_pairs':len(raw_pairs),
                 'changed_raw_selections':[i for i in raw_pairs if raw_selection(primary[i]) != raw_selection(reverse[i])],
-                'validity_changed':[i for i in cases if (primary[i]['status'] == 'ok') != (reverse[i]['status'] == 'ok')],
+                'validity_changed':[i for i in cases if assessed(primary[i]) and assessed(reverse[i]) and (primary[i]['status'] == 'ok') != (reverse[i]['status'] == 'ok')],
             }
             result['failures'][name] = [{'id':i,'query':cases[i]['input']['query'],'expected':cases[i]['gold']['options'],
                                         'actual':primary[i].get('options'),'status':primary[i]['status'],
                                         'raw_selection':raw_selection(primary[i]),
                                         'error':primary[i].get('error'),'reason':cases[i]['gold']['reason']}
-                                       for i in cases if not correct(primary[i],cases[i])]
+                                       for i in cases if assessed(primary[i]) and not correct(primary[i],cases[i])]
         result.setdefault('runtimes',{})[hardware] = [{'arm':rt['arm'],'status':rt.get('status'),'stopped':rt.get('stopped'),
                                                      'cleanup_errors':rt.get('cleanup_errors'), 'child_exit_codes':rt.get('child_exit_codes'),
                                                      'container_exit':rt.get('container_stopped',{}).get('State')}
@@ -123,10 +144,12 @@ def summarize(code_path, model_paths):
                 metal = view(hardware_rows['metal'], arm, order)
                 cpu = view(hardware_rows['cpu-docker'], arm, order)
                 observed = [i for i in cases if raw_selection(metal[i]) is not None and raw_selection(cpu[i]) is not None]
+                completed = [i for i in cases if assessed(metal[i]) and assessed(cpu[i])]
                 result['hardware_agreement'][arm+'/'+order] = {
                     'raw_selection_pairs': len(observed),
                     'different_raw_selection_ids': [i for i in observed if raw_selection(metal[i]) != raw_selection(cpu[i])],
-                    'different_status_ids': [i for i in cases if metal[i]['status'] != cpu[i]['status']],
+                    'completed_pairs':len(completed),
+                    'different_status_ids': [i for i in completed if metal[i]['status'] != cpu[i]['status']],
                     'not_comparable': [i for i in cases if i not in observed],
                     'note': 'Includes application-invalid tuples. Matching outputs do not establish correctness or identical probabilities.'}
     return result
@@ -143,7 +166,8 @@ def main():
         json.dump(result,out,indent=2,ensure_ascii=False,allow_nan=False)
         out.write('\n')
     for arm, row in result['primary'].items():
-        print(arm, row['exact'], '/', row['total'], row['status_counts'])
+        outcome = f"{row['exact']}/{row['total']} exact" if row['comparison_complete'] else f"incomplete: {row['assessed']}/{row['total']} assessed; no accuracy claim"
+        print(arm, outcome, row['status_counts'])
 
 
 if __name__=='__main__':

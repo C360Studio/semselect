@@ -40,6 +40,9 @@ now scores both intent and arguments. On its primary 32-case Metal view, code ge
 18 exact and Qwen JSON and Kev each get 23. Both models fix paraphrases and add
 new mistakes; Kev also invents a missing node. The short write-up shows the actual
 rules, four concrete outcomes and why inexpensive parser fixes should come first.
+CPU Qwen reproduced the primary score at a 49.25-second median. CPU Kev took
+185–196 seconds on three completed calls, so the remaining run was intentionally
+stopped; that partial check does not establish CPU Kev accuracy.
 
 The bootstrap packages **llama.cpp + Kev-4B Q4_K_M** behind a small Go request guard.
 It uses the existing `POST /v1/systemone` API. It adds no model, scoring formula,

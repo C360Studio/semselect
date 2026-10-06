@@ -94,6 +94,16 @@ from that device,” code and Qwen preserve the missing binding while Kev suppli
 requirements. The next useful comparison should strengthen code and JSON's
 cross-field constraints, then use new cases. Do not tune on these failures and
 reuse them as independent proof.
+Unlike a check of supplied authoritative facts, a regex interpretation can be
+wrong. A model fallback used only when no rule matches will not correct false
+rule matches on negation, quoted text or ambiguity; that policy needs its own test.
+
+CPU Qwen reproduces the 23/32 primary result at a 49.25-second median. CPU Kev's
+three completed calls take 185–196 seconds each; the owner stopped the remaining
+run because another roughly 3½ hours would add little to this decision. Its
+partial record establishes no cohort accuracy. Future CPU work should start with
+bounded compatibility/latency probes and expand only for a concrete CPU deployment
+question. Use the faster verified Metal path for the next quality comparison.
 
 ## A measured example: does the evidence answer the question?
 

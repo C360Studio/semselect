@@ -181,3 +181,24 @@ fallback. Preserve exact node bindings and test unsupported combinations.
 The optional gateway BM25 path and graph-query's keyword/optional-LLM path are
 different configurations. A correct library hint is not evidence of correct
 end-to-end dispatch. This is proposed follow-up work; siblings remain unchanged.
+
+The [measured classifier pilot](../eval/query-routing/README.md) makes the next
+steps concrete. These are proposals, not changes to SemStreams:
+
+1. Add regressions for extracting `of` instead of a metric (R17/R21), then improve
+   ordinary missing phrases such as “number of,” “smallest” and “highest.” Use
+   these observed failures as development cases; reserve new cases for comparison.
+2. Test negation, quoted operator words and ambiguity even when a keyword fires.
+   Calling a model only after an empty code result cannot repair those false
+   matches. A regex interpretation is not an authoritative fact.
+3. Keep literal argument binding and cross-field validation in caller code.
+   Preserve an unresolved path node instead of inventing one. Compare a stronger
+   conditional JSON schema or explicit binding step under a new frozen protocol;
+   do not silently repair this pilot's recorded invalid tuples.
+4. Verify the actual gateway-to-dispatch path before claiming a user-visible
+   search improvement. Better classifier hints alone do not demonstrate that
+   aggregation, similarity or fallback executes correctly.
+
+Only then test whether a model earns its additional calls on the remaining
+semantic cases. The current always-model comparison does not measure a hybrid
+policy's total accuracy, coverage or latency, and selects no production threshold.

@@ -1,0 +1,2620 @@
+{
+  "task": "bounded classification hints, not search execution",
+  "sources": {
+    "results/query-routing/formal-code-20261006T0035Z/result.json": "38a62a6174059c22d76df2b37b004a0597b07816a884d8823baaad9ab211d735",
+    "results/query-routing/formal-metal-attempt2/result.json": "e46d230e04f9231b3a5787a1a7c2acf916cba549e16824ce86aab540f6051b8c",
+    "results/query-routing/formal-cpu-docker/result.json": "c4cfac074174edfb3f6e865f91725e3f2d9972acb14bd7d761c6225a8bbd5ebe"
+  },
+  "design_freeze_sha256": "daaf3b6924df1644e019e59e4dcf5fb9bce40dad26ccecec1d942df7c0e15e13",
+  "execution_status": {
+    "host": "complete",
+    "metal": "complete",
+    "cpu-docker": "failed"
+  },
+  "designated_code_arm": "keyword",
+  "primary": {
+    "host/keyword": {
+      "total": 32,
+      "valid": 32,
+      "status_counts": {
+        "ok": 32
+      },
+      "exact": 18,
+      "operation_correct": 20,
+      "bound_cases": 18,
+      "bindings_correct": 9,
+      "empty_options": 11,
+      "incomplete_path_bindings": [
+        "R32"
+      ],
+      "expected_partial_path_correct": [
+        "R32"
+      ],
+      "unexpected_option_cases": [
+        "R28",
+        "R29",
+        "R30",
+        "R31"
+      ],
+      "median_end_to_end_ms": 13.830062525812536,
+      "p95_end_to_end_ms": 24.38150008674711,
+      "model_requests": 0,
+      "correct_ids": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R15",
+        "R16",
+        "R19",
+        "R22",
+        "R25",
+        "R32"
+      ],
+      "assessed": 32,
+      "comparison_complete": true,
+      "reported_accuracy": 0.5625,
+      "note": "All planned rows remain preserved. exact is an observed count; do not interpret exact/total as accuracy when comparison_complete is false. Incomplete cohorts have no reported latency median or percentile; inspect completed request timings in the raw records."
+    },
+    "host/keyword_bm25_default": {
+      "total": 32,
+      "valid": 32,
+      "status_counts": {
+        "ok": 32
+      },
+      "exact": 18,
+      "operation_correct": 20,
+      "bound_cases": 18,
+      "bindings_correct": 9,
+      "empty_options": 11,
+      "incomplete_path_bindings": [
+        "R32"
+      ],
+      "expected_partial_path_correct": [
+        "R32"
+      ],
+      "unexpected_option_cases": [
+        "R28",
+        "R29",
+        "R30",
+        "R31"
+      ],
+      "median_end_to_end_ms": 13.487708056345582,
+      "p95_end_to_end_ms": 15.957915922626853,
+      "model_requests": 0,
+      "correct_ids": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R15",
+        "R16",
+        "R19",
+        "R22",
+        "R25",
+        "R32"
+      ],
+      "assessed": 32,
+      "comparison_complete": true,
+      "reported_accuracy": 0.5625,
+      "note": "All planned rows remain preserved. exact is an observed count; do not interpret exact/total as accuracy when comparison_complete is false. Incomplete cohorts have no reported latency median or percentile; inspect completed request timings in the raw records."
+    },
+    "host/keyword_bm25_development": {
+      "total": 32,
+      "valid": 32,
+      "status_counts": {
+        "ok": 32
+      },
+      "exact": 18,
+      "operation_correct": 20,
+      "bound_cases": 18,
+      "bindings_correct": 9,
+      "empty_options": 11,
+      "incomplete_path_bindings": [
+        "R32"
+      ],
+      "expected_partial_path_correct": [
+        "R32"
+      ],
+      "unexpected_option_cases": [
+        "R28",
+        "R29",
+        "R30",
+        "R31"
+      ],
+      "median_end_to_end_ms": 14.299708476755768,
+      "p95_end_to_end_ms": 16.310542006976902,
+      "model_requests": 0,
+      "correct_ids": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R15",
+        "R16",
+        "R19",
+        "R22",
+        "R25",
+        "R32"
+      ],
+      "assessed": 32,
+      "comparison_complete": true,
+      "reported_accuracy": 0.5625,
+      "note": "All planned rows remain preserved. exact is an observed count; do not interpret exact/total as accuracy when comparison_complete is false. Incomplete cohorts have no reported latency median or percentile; inspect completed request timings in the raw records."
+    },
+    "metal/qwen_json": {
+      "total": 32,
+      "valid": 24,
+      "status_counts": {
+        "invalid": 8,
+        "ok": 24
+      },
+      "exact": 23,
+      "operation_correct": 23,
+      "bound_cases": 18,
+      "bindings_correct": 17,
+      "empty_options": 4,
+      "incomplete_path_bindings": [
+        "R32"
+      ],
+      "expected_partial_path_correct": [
+        "R32"
+      ],
+      "unexpected_option_cases": [],
+      "median_end_to_end_ms": 2380.958875466604,
+      "p95_end_to_end_ms": 2486.7065829457715,
+      "model_requests": 32,
+      "correct_ids": [
+        "R02",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R19",
+        "R20",
+        "R21",
+        "R23",
+        "R24",
+        "R25",
+        "R26",
+        "R27",
+        "R28",
+        "R30",
+        "R31",
+        "R32"
+      ],
+      "assessed": 32,
+      "comparison_complete": true,
+      "reported_accuracy": 0.71875,
+      "note": "All planned rows remain preserved. exact is an observed count; do not interpret exact/total as accuracy when comparison_complete is false. Incomplete cohorts have no reported latency median or percentile; inspect completed request timings in the raw records."
+    },
+    "metal/kev": {
+      "total": 32,
+      "valid": 26,
+      "status_counts": {
+        "ok": 26,
+        "invalid": 6
+      },
+      "exact": 23,
+      "operation_correct": 24,
+      "bound_cases": 18,
+      "bindings_correct": 18,
+      "empty_options": 2,
+      "incomplete_path_bindings": [],
+      "expected_partial_path_correct": [],
+      "unexpected_option_cases": [
+        "R01",
+        "R31",
+        "R32"
+      ],
+      "median_end_to_end_ms": 7111.37568752747,
+      "p95_end_to_end_ms": 7120.830625062808,
+      "model_requests": 32,
+      "correct_ids": [
+        "R02",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R25",
+        "R26",
+        "R27",
+        "R28"
+      ],
+      "assessed": 32,
+      "comparison_complete": true,
+      "reported_accuracy": 0.71875,
+      "note": "All planned rows remain preserved. exact is an observed count; do not interpret exact/total as accuracy when comparison_complete is false. Incomplete cohorts have no reported latency median or percentile; inspect completed request timings in the raw records."
+    },
+    "cpu-docker/qwen_json": {
+      "total": 32,
+      "valid": 24,
+      "status_counts": {
+        "invalid": 8,
+        "ok": 24
+      },
+      "exact": 23,
+      "operation_correct": 23,
+      "bound_cases": 18,
+      "bindings_correct": 17,
+      "empty_options": 4,
+      "incomplete_path_bindings": [
+        "R32"
+      ],
+      "expected_partial_path_correct": [
+        "R32"
+      ],
+      "unexpected_option_cases": [],
+      "median_end_to_end_ms": 49254.51770849759,
+      "p95_end_to_end_ms": 52563.539584050886,
+      "model_requests": 32,
+      "correct_ids": [
+        "R02",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R19",
+        "R20",
+        "R21",
+        "R23",
+        "R24",
+        "R25",
+        "R26",
+        "R27",
+        "R28",
+        "R30",
+        "R31",
+        "R32"
+      ],
+      "assessed": 32,
+      "comparison_complete": true,
+      "reported_accuracy": 0.71875,
+      "note": "All planned rows remain preserved. exact is an observed count; do not interpret exact/total as accuracy when comparison_complete is false. Incomplete cohorts have no reported latency median or percentile; inspect completed request timings in the raw records."
+    },
+    "cpu-docker/kev": {
+      "total": 32,
+      "valid": 2,
+      "status_counts": {
+        "ok": 2,
+        "invalid": 1,
+        "interrupted": 1,
+        "not_run": 28
+      },
+      "exact": 1,
+      "operation_correct": 1,
+      "bound_cases": 18,
+      "bindings_correct": 0,
+      "empty_options": 1,
+      "incomplete_path_bindings": [],
+      "expected_partial_path_correct": [],
+      "unexpected_option_cases": [
+        "R01"
+      ],
+      "median_end_to_end_ms": null,
+      "p95_end_to_end_ms": null,
+      "model_requests": 4,
+      "correct_ids": [
+        "R02"
+      ],
+      "assessed": 3,
+      "comparison_complete": false,
+      "reported_accuracy": null,
+      "note": "All planned rows remain preserved. exact is an observed count; do not interpret exact/total as accuracy when comparison_complete is false. Incomplete cohorts have no reported latency median or percentile; inspect completed request timings in the raw records."
+    }
+  },
+  "paired": {
+    "metal/qwen_json": {
+      "keyword": {
+        "corrected": [
+          "R08",
+          "R14",
+          "R17",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27",
+          "R28",
+          "R30",
+          "R31"
+        ],
+        "regressed": [
+          "R01",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R13",
+          "R22"
+        ],
+        "both_correct": [
+          "R02",
+          "R07",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R15",
+          "R16",
+          "R19",
+          "R25",
+          "R32"
+        ],
+        "both_wrong": [
+          "R18",
+          "R29"
+        ],
+        "unassessed": []
+      },
+      "keyword_bm25_default": {
+        "corrected": [
+          "R08",
+          "R14",
+          "R17",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27",
+          "R28",
+          "R30",
+          "R31"
+        ],
+        "regressed": [
+          "R01",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R13",
+          "R22"
+        ],
+        "both_correct": [
+          "R02",
+          "R07",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R15",
+          "R16",
+          "R19",
+          "R25",
+          "R32"
+        ],
+        "both_wrong": [
+          "R18",
+          "R29"
+        ],
+        "unassessed": []
+      },
+      "keyword_bm25_development": {
+        "corrected": [
+          "R08",
+          "R14",
+          "R17",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27",
+          "R28",
+          "R30",
+          "R31"
+        ],
+        "regressed": [
+          "R01",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R13",
+          "R22"
+        ],
+        "both_correct": [
+          "R02",
+          "R07",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R15",
+          "R16",
+          "R19",
+          "R25",
+          "R32"
+        ],
+        "both_wrong": [
+          "R18",
+          "R29"
+        ],
+        "unassessed": []
+      }
+    },
+    "metal/kev": {
+      "keyword": {
+        "corrected": [
+          "R08",
+          "R14",
+          "R17",
+          "R18",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27",
+          "R28"
+        ],
+        "regressed": [
+          "R01",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R32"
+        ],
+        "both_correct": [
+          "R02",
+          "R07",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R13",
+          "R15",
+          "R16",
+          "R19",
+          "R22",
+          "R25"
+        ],
+        "both_wrong": [
+          "R29",
+          "R30",
+          "R31"
+        ],
+        "unassessed": []
+      },
+      "keyword_bm25_default": {
+        "corrected": [
+          "R08",
+          "R14",
+          "R17",
+          "R18",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27",
+          "R28"
+        ],
+        "regressed": [
+          "R01",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R32"
+        ],
+        "both_correct": [
+          "R02",
+          "R07",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R13",
+          "R15",
+          "R16",
+          "R19",
+          "R22",
+          "R25"
+        ],
+        "both_wrong": [
+          "R29",
+          "R30",
+          "R31"
+        ],
+        "unassessed": []
+      },
+      "keyword_bm25_development": {
+        "corrected": [
+          "R08",
+          "R14",
+          "R17",
+          "R18",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27",
+          "R28"
+        ],
+        "regressed": [
+          "R01",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R32"
+        ],
+        "both_correct": [
+          "R02",
+          "R07",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R13",
+          "R15",
+          "R16",
+          "R19",
+          "R22",
+          "R25"
+        ],
+        "both_wrong": [
+          "R29",
+          "R30",
+          "R31"
+        ],
+        "unassessed": []
+      }
+    },
+    "cpu-docker/qwen_json": {
+      "keyword": {
+        "corrected": [
+          "R08",
+          "R14",
+          "R17",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27",
+          "R28",
+          "R30",
+          "R31"
+        ],
+        "regressed": [
+          "R01",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R13",
+          "R22"
+        ],
+        "both_correct": [
+          "R02",
+          "R07",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R15",
+          "R16",
+          "R19",
+          "R25",
+          "R32"
+        ],
+        "both_wrong": [
+          "R18",
+          "R29"
+        ],
+        "unassessed": []
+      },
+      "keyword_bm25_default": {
+        "corrected": [
+          "R08",
+          "R14",
+          "R17",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27",
+          "R28",
+          "R30",
+          "R31"
+        ],
+        "regressed": [
+          "R01",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R13",
+          "R22"
+        ],
+        "both_correct": [
+          "R02",
+          "R07",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R15",
+          "R16",
+          "R19",
+          "R25",
+          "R32"
+        ],
+        "both_wrong": [
+          "R18",
+          "R29"
+        ],
+        "unassessed": []
+      },
+      "keyword_bm25_development": {
+        "corrected": [
+          "R08",
+          "R14",
+          "R17",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27",
+          "R28",
+          "R30",
+          "R31"
+        ],
+        "regressed": [
+          "R01",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R13",
+          "R22"
+        ],
+        "both_correct": [
+          "R02",
+          "R07",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R15",
+          "R16",
+          "R19",
+          "R25",
+          "R32"
+        ],
+        "both_wrong": [
+          "R18",
+          "R29"
+        ],
+        "unassessed": []
+      }
+    },
+    "cpu-docker/kev": {
+      "keyword": {
+        "corrected": [],
+        "regressed": [
+          "R01",
+          "R03"
+        ],
+        "both_correct": [
+          "R02"
+        ],
+        "both_wrong": [],
+        "unassessed": [
+          "R04",
+          "R05",
+          "R06",
+          "R07",
+          "R08",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R13",
+          "R14",
+          "R15",
+          "R16",
+          "R17",
+          "R18",
+          "R19",
+          "R20",
+          "R21",
+          "R22",
+          "R23",
+          "R24",
+          "R25",
+          "R26",
+          "R27",
+          "R28",
+          "R29",
+          "R30",
+          "R31",
+          "R32"
+        ]
+      },
+      "keyword_bm25_default": {
+        "corrected": [],
+        "regressed": [
+          "R01",
+          "R03"
+        ],
+        "both_correct": [
+          "R02"
+        ],
+        "both_wrong": [],
+        "unassessed": [
+          "R04",
+          "R05",
+          "R06",
+          "R07",
+          "R08",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R13",
+          "R14",
+          "R15",
+          "R16",
+          "R17",
+          "R18",
+          "R19",
+          "R20",
+          "R21",
+          "R22",
+          "R23",
+          "R24",
+          "R25",
+          "R26",
+          "R27",
+          "R28",
+          "R29",
+          "R30",
+          "R31",
+          "R32"
+        ]
+      },
+      "keyword_bm25_development": {
+        "corrected": [],
+        "regressed": [
+          "R01",
+          "R03"
+        ],
+        "both_correct": [
+          "R02"
+        ],
+        "both_wrong": [],
+        "unassessed": [
+          "R04",
+          "R05",
+          "R06",
+          "R07",
+          "R08",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R13",
+          "R14",
+          "R15",
+          "R16",
+          "R17",
+          "R18",
+          "R19",
+          "R20",
+          "R21",
+          "R22",
+          "R23",
+          "R24",
+          "R25",
+          "R26",
+          "R27",
+          "R28",
+          "R29",
+          "R30",
+          "R31",
+          "R32"
+        ]
+      }
+    }
+  },
+  "families": {
+    "metal/qwen_json": {
+      "ambiguity": {
+        "total": 1,
+        "exact": 1,
+        "failed_ids": [],
+        "unassessed_ids": []
+      },
+      "literal": {
+        "total": 10,
+        "exact": 7,
+        "failed_ids": [
+          "R04",
+          "R13",
+          "R22"
+        ],
+        "unassessed_ids": []
+      },
+      "missing-binding": {
+        "total": 1,
+        "exact": 1,
+        "failed_ids": [],
+        "unassessed_ids": []
+      },
+      "negation": {
+        "total": 2,
+        "exact": 1,
+        "failed_ids": [
+          "R29"
+        ],
+        "unassessed_ids": []
+      },
+      "ordinary": {
+        "total": 3,
+        "exact": 1,
+        "failed_ids": [
+          "R01",
+          "R03"
+        ],
+        "unassessed_ids": []
+      },
+      "paraphrase": {
+        "total": 14,
+        "exact": 11,
+        "failed_ids": [
+          "R05",
+          "R06",
+          "R18"
+        ],
+        "unassessed_ids": []
+      },
+      "quoted-mention": {
+        "total": 1,
+        "exact": 1,
+        "failed_ids": [],
+        "unassessed_ids": []
+      }
+    },
+    "metal/kev": {
+      "ambiguity": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [
+          "R31"
+        ],
+        "unassessed_ids": []
+      },
+      "literal": {
+        "total": 10,
+        "exact": 9,
+        "failed_ids": [
+          "R04"
+        ],
+        "unassessed_ids": []
+      },
+      "missing-binding": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [
+          "R32"
+        ],
+        "unassessed_ids": []
+      },
+      "negation": {
+        "total": 2,
+        "exact": 1,
+        "failed_ids": [
+          "R29"
+        ],
+        "unassessed_ids": []
+      },
+      "ordinary": {
+        "total": 3,
+        "exact": 1,
+        "failed_ids": [
+          "R01",
+          "R03"
+        ],
+        "unassessed_ids": []
+      },
+      "paraphrase": {
+        "total": 14,
+        "exact": 12,
+        "failed_ids": [
+          "R05",
+          "R06"
+        ],
+        "unassessed_ids": []
+      },
+      "quoted-mention": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [
+          "R30"
+        ],
+        "unassessed_ids": []
+      }
+    },
+    "cpu-docker/qwen_json": {
+      "ambiguity": {
+        "total": 1,
+        "exact": 1,
+        "failed_ids": [],
+        "unassessed_ids": []
+      },
+      "literal": {
+        "total": 10,
+        "exact": 7,
+        "failed_ids": [
+          "R04",
+          "R13",
+          "R22"
+        ],
+        "unassessed_ids": []
+      },
+      "missing-binding": {
+        "total": 1,
+        "exact": 1,
+        "failed_ids": [],
+        "unassessed_ids": []
+      },
+      "negation": {
+        "total": 2,
+        "exact": 1,
+        "failed_ids": [
+          "R29"
+        ],
+        "unassessed_ids": []
+      },
+      "ordinary": {
+        "total": 3,
+        "exact": 1,
+        "failed_ids": [
+          "R01",
+          "R03"
+        ],
+        "unassessed_ids": []
+      },
+      "paraphrase": {
+        "total": 14,
+        "exact": 11,
+        "failed_ids": [
+          "R05",
+          "R06",
+          "R18"
+        ],
+        "unassessed_ids": []
+      },
+      "quoted-mention": {
+        "total": 1,
+        "exact": 1,
+        "failed_ids": [],
+        "unassessed_ids": []
+      }
+    },
+    "cpu-docker/kev": {
+      "ambiguity": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [],
+        "unassessed_ids": [
+          "R31"
+        ]
+      },
+      "literal": {
+        "total": 10,
+        "exact": 0,
+        "failed_ids": [],
+        "unassessed_ids": [
+          "R04",
+          "R07",
+          "R09",
+          "R10",
+          "R13",
+          "R15",
+          "R16",
+          "R19",
+          "R22",
+          "R25"
+        ]
+      },
+      "missing-binding": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [],
+        "unassessed_ids": [
+          "R32"
+        ]
+      },
+      "negation": {
+        "total": 2,
+        "exact": 0,
+        "failed_ids": [],
+        "unassessed_ids": [
+          "R28",
+          "R29"
+        ]
+      },
+      "ordinary": {
+        "total": 3,
+        "exact": 1,
+        "failed_ids": [
+          "R01",
+          "R03"
+        ],
+        "unassessed_ids": []
+      },
+      "paraphrase": {
+        "total": 14,
+        "exact": 0,
+        "failed_ids": [],
+        "unassessed_ids": [
+          "R05",
+          "R06",
+          "R08",
+          "R11",
+          "R12",
+          "R14",
+          "R17",
+          "R18",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27"
+        ]
+      },
+      "quoted-mention": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [],
+        "unassessed_ids": [
+          "R30"
+        ]
+      }
+    },
+    "host/keyword": {
+      "ambiguity": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [
+          "R31"
+        ]
+      },
+      "literal": {
+        "total": 10,
+        "exact": 10,
+        "failed_ids": []
+      },
+      "missing-binding": {
+        "total": 1,
+        "exact": 1,
+        "failed_ids": []
+      },
+      "negation": {
+        "total": 2,
+        "exact": 0,
+        "failed_ids": [
+          "R28",
+          "R29"
+        ]
+      },
+      "ordinary": {
+        "total": 3,
+        "exact": 3,
+        "failed_ids": []
+      },
+      "paraphrase": {
+        "total": 14,
+        "exact": 4,
+        "failed_ids": [
+          "R08",
+          "R14",
+          "R17",
+          "R18",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27"
+        ]
+      },
+      "quoted-mention": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [
+          "R30"
+        ]
+      }
+    },
+    "host/keyword_bm25_default": {
+      "ambiguity": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [
+          "R31"
+        ]
+      },
+      "literal": {
+        "total": 10,
+        "exact": 10,
+        "failed_ids": []
+      },
+      "missing-binding": {
+        "total": 1,
+        "exact": 1,
+        "failed_ids": []
+      },
+      "negation": {
+        "total": 2,
+        "exact": 0,
+        "failed_ids": [
+          "R28",
+          "R29"
+        ]
+      },
+      "ordinary": {
+        "total": 3,
+        "exact": 3,
+        "failed_ids": []
+      },
+      "paraphrase": {
+        "total": 14,
+        "exact": 4,
+        "failed_ids": [
+          "R08",
+          "R14",
+          "R17",
+          "R18",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27"
+        ]
+      },
+      "quoted-mention": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [
+          "R30"
+        ]
+      }
+    },
+    "host/keyword_bm25_development": {
+      "ambiguity": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [
+          "R31"
+        ]
+      },
+      "literal": {
+        "total": 10,
+        "exact": 10,
+        "failed_ids": []
+      },
+      "missing-binding": {
+        "total": 1,
+        "exact": 1,
+        "failed_ids": []
+      },
+      "negation": {
+        "total": 2,
+        "exact": 0,
+        "failed_ids": [
+          "R28",
+          "R29"
+        ]
+      },
+      "ordinary": {
+        "total": 3,
+        "exact": 3,
+        "failed_ids": []
+      },
+      "paraphrase": {
+        "total": 14,
+        "exact": 4,
+        "failed_ids": [
+          "R08",
+          "R14",
+          "R17",
+          "R18",
+          "R20",
+          "R21",
+          "R23",
+          "R24",
+          "R26",
+          "R27"
+        ]
+      },
+      "quoted-mention": {
+        "total": 1,
+        "exact": 0,
+        "failed_ids": [
+          "R30"
+        ]
+      }
+    }
+  },
+  "sensitivity": {
+    "metal/qwen_json": {
+      "primary_exact": 23,
+      "reverse_exact": 23,
+      "primary_complete": true,
+      "reverse_complete": true,
+      "valid_pairs": 23,
+      "changed_options": [],
+      "not_comparable": [
+        "R01",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R13",
+        "R18",
+        "R22",
+        "R29"
+      ],
+      "raw_selection_pairs": 32,
+      "changed_raw_selections": [
+        "R18"
+      ],
+      "validity_changed": [
+        "R18"
+      ]
+    },
+    "metal/kev": {
+      "primary_exact": 23,
+      "reverse_exact": 22,
+      "primary_complete": true,
+      "reverse_complete": true,
+      "valid_pairs": 25,
+      "changed_options": [],
+      "not_comparable": [
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R18",
+        "R29",
+        "R30"
+      ],
+      "raw_selection_pairs": 32,
+      "changed_raw_selections": [
+        "R18",
+        "R29",
+        "R30"
+      ],
+      "validity_changed": [
+        "R18",
+        "R30"
+      ]
+    },
+    "cpu-docker/qwen_json": {
+      "primary_exact": 23,
+      "reverse_exact": 22,
+      "primary_complete": true,
+      "reverse_complete": true,
+      "valid_pairs": 22,
+      "changed_options": [],
+      "not_comparable": [
+        "R01",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R13",
+        "R16",
+        "R18",
+        "R22",
+        "R29"
+      ],
+      "raw_selection_pairs": 32,
+      "changed_raw_selections": [
+        "R16",
+        "R18"
+      ],
+      "validity_changed": [
+        "R16",
+        "R18"
+      ]
+    },
+    "cpu-docker/kev": {
+      "primary_exact": 1,
+      "reverse_exact": 0,
+      "primary_complete": false,
+      "reverse_complete": false,
+      "valid_pairs": 0,
+      "changed_options": [],
+      "not_comparable": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R25",
+        "R26",
+        "R27",
+        "R28",
+        "R29",
+        "R30",
+        "R31",
+        "R32"
+      ],
+      "raw_selection_pairs": 0,
+      "changed_raw_selections": [],
+      "validity_changed": []
+    },
+    "host/keyword_bm25_default": {
+      "persistent_normal_exact": 18,
+      "persistent_reverse_exact": 18,
+      "normal_changed_from_fresh": [],
+      "reverse_changed_from_fresh": []
+    },
+    "host/keyword_bm25_development": {
+      "persistent_normal_exact": 18,
+      "persistent_reverse_exact": 18,
+      "normal_changed_from_fresh": [],
+      "reverse_changed_from_fresh": []
+    }
+  },
+  "failures": {
+    "metal/qwen_json": [
+      {
+        "id": "R01",
+        "query": "Describe the capabilities of gateway-main",
+        "expected": {},
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "no_override",
+          "node": "gateway-main",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "A descriptive query needs no specialized hint."
+      },
+      {
+        "id": "R03",
+        "query": "Show maintenance records for pump-42",
+        "expected": {},
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "no_override",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Document lookup adds no specialized hint."
+      },
+      {
+        "id": "R04",
+        "query": "Find assets similar to sensor-17",
+        "expected": {
+          "use_embeddings": true
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "similarity",
+          "node": "sensor-17",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Explicit similarity; the reference stays in the original query."
+      },
+      {
+        "id": "R05",
+        "query": "Which devices resemble pump-42?",
+        "expected": {
+          "use_embeddings": true
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "similarity",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Resemblance asks for similarity."
+      },
+      {
+        "id": "R06",
+        "query": "Retrieve sensors with characteristics comparable to sensor-17",
+        "expected": {
+          "use_embeddings": true
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "similarity",
+          "node": "sensor-17",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Comparable characteristics request similarity, not graph neighbors."
+      },
+      {
+        "id": "R13",
+        "query": "How many pumps are active?",
+        "expected": {
+          "aggregation_type": "count"
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "count",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Entity count; status remains in original query."
+      },
+      {
+        "id": "R18",
+        "query": "Add the temperature readings and divide by their number",
+        "expected": {
+          "aggregation_type": "avg",
+          "aggregation_field": "temperature"
+        },
+        "actual": {
+          "aggregation_type": "sum",
+          "aggregation_field": "temperature"
+        },
+        "status": "ok",
+        "raw_selection": {
+          "operation": "sum",
+          "node": "none",
+          "field": "temperature"
+        },
+        "error": null,
+        "reason": "The complete arithmetic operation is average, not sum."
+      },
+      {
+        "id": "R22",
+        "query": "Minimum humidity of sensors",
+        "expected": {
+          "aggregation_type": "min",
+          "aggregation_field": "humidity"
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "min",
+          "node": "sensor-17",
+          "field": "humidity"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Smallest humidity value."
+      },
+      {
+        "id": "R29",
+        "query": "Show pump-42 records, not devices similar to it",
+        "expected": {},
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "no_override",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Similarity is explicitly excluded."
+      }
+    ],
+    "metal/kev": [
+      {
+        "id": "R01",
+        "query": "Describe the capabilities of gateway-main",
+        "expected": {},
+        "actual": {
+          "path_intent": true,
+          "path_start_node": "gateway-main"
+        },
+        "status": "ok",
+        "raw_selection": {
+          "operation": "path",
+          "node": "gateway-main",
+          "field": "none"
+        },
+        "error": null,
+        "reason": "A descriptive query needs no specialized hint."
+      },
+      {
+        "id": "R03",
+        "query": "Show maintenance records for pump-42",
+        "expected": {},
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "no_override",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Document lookup adds no specialized hint."
+      },
+      {
+        "id": "R04",
+        "query": "Find assets similar to sensor-17",
+        "expected": {
+          "use_embeddings": true
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "similarity",
+          "node": "sensor-17",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Explicit similarity; the reference stays in the original query."
+      },
+      {
+        "id": "R05",
+        "query": "Which devices resemble pump-42?",
+        "expected": {
+          "use_embeddings": true
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "similarity",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Resemblance asks for similarity."
+      },
+      {
+        "id": "R06",
+        "query": "Retrieve sensors with characteristics comparable to sensor-17",
+        "expected": {
+          "use_embeddings": true
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "similarity",
+          "node": "sensor-17",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Comparable characteristics request similarity, not graph neighbors."
+      },
+      {
+        "id": "R29",
+        "query": "Show pump-42 records, not devices similar to it",
+        "expected": {},
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "no_override",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Similarity is explicitly excluded."
+      },
+      {
+        "id": "R30",
+        "query": "Find documents containing the phrase \"average temperature\"",
+        "expected": {},
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "no_override",
+          "node": "none",
+          "field": "temperature"
+        },
+        "error": "ValueError: field is only valid for metric aggregation",
+        "reason": "The operation words are quoted document content, not an aggregation request."
+      },
+      {
+        "id": "R31",
+        "query": "Maybe count devices or average pressure; I have not decided",
+        "expected": {},
+        "actual": {
+          "aggregation_type": "avg",
+          "aggregation_field": "pressure"
+        },
+        "status": "ok",
+        "raw_selection": {
+          "operation": "avg",
+          "node": "none",
+          "field": "pressure"
+        },
+        "error": null,
+        "reason": "No single operation has been selected; contract requires no override."
+      },
+      {
+        "id": "R32",
+        "query": "Show connections from that device",
+        "expected": {
+          "path_intent": true
+        },
+        "actual": {
+          "path_intent": true,
+          "path_start_node": "sensor-17"
+        },
+        "status": "ok",
+        "raw_selection": {
+          "operation": "path",
+          "node": "sensor-17",
+          "field": "none"
+        },
+        "error": null,
+        "reason": "Path intent is clear but no literal start node is supplied. Preserve partial intent; the caller must resolve the binding before execution. This is not native abstention or a model advantage over code."
+      }
+    ],
+    "cpu-docker/qwen_json": [
+      {
+        "id": "R01",
+        "query": "Describe the capabilities of gateway-main",
+        "expected": {},
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "no_override",
+          "node": "gateway-main",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "A descriptive query needs no specialized hint."
+      },
+      {
+        "id": "R03",
+        "query": "Show maintenance records for pump-42",
+        "expected": {},
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "no_override",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Document lookup adds no specialized hint."
+      },
+      {
+        "id": "R04",
+        "query": "Find assets similar to sensor-17",
+        "expected": {
+          "use_embeddings": true
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "similarity",
+          "node": "sensor-17",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Explicit similarity; the reference stays in the original query."
+      },
+      {
+        "id": "R05",
+        "query": "Which devices resemble pump-42?",
+        "expected": {
+          "use_embeddings": true
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "similarity",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Resemblance asks for similarity."
+      },
+      {
+        "id": "R06",
+        "query": "Retrieve sensors with characteristics comparable to sensor-17",
+        "expected": {
+          "use_embeddings": true
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "similarity",
+          "node": "sensor-17",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Comparable characteristics request similarity, not graph neighbors."
+      },
+      {
+        "id": "R13",
+        "query": "How many pumps are active?",
+        "expected": {
+          "aggregation_type": "count"
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "count",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Entity count; status remains in original query."
+      },
+      {
+        "id": "R18",
+        "query": "Add the temperature readings and divide by their number",
+        "expected": {
+          "aggregation_type": "avg",
+          "aggregation_field": "temperature"
+        },
+        "actual": {
+          "aggregation_type": "sum",
+          "aggregation_field": "temperature"
+        },
+        "status": "ok",
+        "raw_selection": {
+          "operation": "sum",
+          "node": "none",
+          "field": "temperature"
+        },
+        "error": null,
+        "reason": "The complete arithmetic operation is average, not sum."
+      },
+      {
+        "id": "R22",
+        "query": "Minimum humidity of sensors",
+        "expected": {
+          "aggregation_type": "min",
+          "aggregation_field": "humidity"
+        },
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "min",
+          "node": "sensor-17",
+          "field": "humidity"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Smallest humidity value."
+      },
+      {
+        "id": "R29",
+        "query": "Show pump-42 records, not devices similar to it",
+        "expected": {},
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "no_override",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Similarity is explicitly excluded."
+      }
+    ],
+    "cpu-docker/kev": [
+      {
+        "id": "R01",
+        "query": "Describe the capabilities of gateway-main",
+        "expected": {},
+        "actual": {
+          "path_intent": true,
+          "path_start_node": "gateway-main"
+        },
+        "status": "ok",
+        "raw_selection": {
+          "operation": "path",
+          "node": "gateway-main",
+          "field": "none"
+        },
+        "error": null,
+        "reason": "A descriptive query needs no specialized hint."
+      },
+      {
+        "id": "R03",
+        "query": "Show maintenance records for pump-42",
+        "expected": {},
+        "actual": null,
+        "status": "invalid",
+        "raw_selection": {
+          "operation": "no_override",
+          "node": "pump-42",
+          "field": "none"
+        },
+        "error": "ValueError: node is only valid for path or zone",
+        "reason": "Document lookup adds no specialized hint."
+      }
+    ],
+    "host/keyword": [
+      {
+        "id": "R08",
+        "query": "Find immediate neighbors of gateway-main",
+        "expected": {
+          "path_intent": true,
+          "path_start_node": "gateway-main"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "In this graph-search task, immediate neighbors means linked nodes."
+      },
+      {
+        "id": "R14",
+        "query": "Return the number of sensors",
+        "expected": {
+          "aggregation_type": "count"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Number of entities requests count."
+      },
+      {
+        "id": "R17",
+        "query": "Compute the arithmetic mean of pressure",
+        "expected": {
+          "aggregation_type": "avg",
+          "aggregation_field": "pressure"
+        },
+        "actual": {
+          "aggregation_field": "of",
+          "aggregation_type": "avg"
+        },
+        "status": "ok",
+        "reason": "Arithmetic mean uses pressure, not an intervening function word."
+      },
+      {
+        "id": "R18",
+        "query": "Add the temperature readings and divide by their number",
+        "expected": {
+          "aggregation_type": "avg",
+          "aggregation_field": "temperature"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "The complete arithmetic operation is average, not sum."
+      },
+      {
+        "id": "R20",
+        "query": "Add together all pressure readings",
+        "expected": {
+          "aggregation_type": "sum",
+          "aggregation_field": "pressure"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric addition is sum."
+      },
+      {
+        "id": "R21",
+        "query": "Return the combined total of humidity readings",
+        "expected": {
+          "aggregation_type": "sum",
+          "aggregation_field": "humidity"
+        },
+        "actual": {
+          "aggregation_field": "of",
+          "aggregation_type": "sum"
+        },
+        "status": "ok",
+        "reason": "Total of numeric readings is sum; humidity is the field."
+      },
+      {
+        "id": "R23",
+        "query": "Give the smallest temperature value",
+        "expected": {
+          "aggregation_type": "min",
+          "aggregation_field": "temperature"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric minimum, not entity ranking."
+      },
+      {
+        "id": "R24",
+        "query": "Return the lowest pressure reading",
+        "expected": {
+          "aggregation_type": "min",
+          "aggregation_field": "pressure"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric minimum of pressure."
+      },
+      {
+        "id": "R26",
+        "query": "Give the largest humidity value",
+        "expected": {
+          "aggregation_type": "max",
+          "aggregation_field": "humidity"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric maximum of humidity."
+      },
+      {
+        "id": "R27",
+        "query": "Return the highest temperature reading",
+        "expected": {
+          "aggregation_type": "max",
+          "aggregation_field": "temperature"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric maximum of temperature."
+      },
+      {
+        "id": "R28",
+        "query": "Do not count sensors; list their names",
+        "expected": {},
+        "actual": {
+          "aggregation_type": "count"
+        },
+        "status": "ok",
+        "reason": "Count is explicitly negated; ordinary listing remains."
+      },
+      {
+        "id": "R29",
+        "query": "Show pump-42 records, not devices similar to it",
+        "expected": {},
+        "actual": {
+          "use_embeddings": true
+        },
+        "status": "ok",
+        "reason": "Similarity is explicitly excluded."
+      },
+      {
+        "id": "R30",
+        "query": "Find documents containing the phrase \"average temperature\"",
+        "expected": {},
+        "actual": {
+          "aggregation_field": "temperature",
+          "aggregation_type": "avg"
+        },
+        "status": "ok",
+        "reason": "The operation words are quoted document content, not an aggregation request."
+      },
+      {
+        "id": "R31",
+        "query": "Maybe count devices or average pressure; I have not decided",
+        "expected": {},
+        "actual": {
+          "aggregation_type": "count"
+        },
+        "status": "ok",
+        "reason": "No single operation has been selected; contract requires no override."
+      }
+    ],
+    "host/keyword_bm25_default": [
+      {
+        "id": "R08",
+        "query": "Find immediate neighbors of gateway-main",
+        "expected": {
+          "path_intent": true,
+          "path_start_node": "gateway-main"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "In this graph-search task, immediate neighbors means linked nodes."
+      },
+      {
+        "id": "R14",
+        "query": "Return the number of sensors",
+        "expected": {
+          "aggregation_type": "count"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Number of entities requests count."
+      },
+      {
+        "id": "R17",
+        "query": "Compute the arithmetic mean of pressure",
+        "expected": {
+          "aggregation_type": "avg",
+          "aggregation_field": "pressure"
+        },
+        "actual": {
+          "aggregation_field": "of",
+          "aggregation_type": "avg"
+        },
+        "status": "ok",
+        "reason": "Arithmetic mean uses pressure, not an intervening function word."
+      },
+      {
+        "id": "R18",
+        "query": "Add the temperature readings and divide by their number",
+        "expected": {
+          "aggregation_type": "avg",
+          "aggregation_field": "temperature"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "The complete arithmetic operation is average, not sum."
+      },
+      {
+        "id": "R20",
+        "query": "Add together all pressure readings",
+        "expected": {
+          "aggregation_type": "sum",
+          "aggregation_field": "pressure"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric addition is sum."
+      },
+      {
+        "id": "R21",
+        "query": "Return the combined total of humidity readings",
+        "expected": {
+          "aggregation_type": "sum",
+          "aggregation_field": "humidity"
+        },
+        "actual": {
+          "aggregation_field": "of",
+          "aggregation_type": "sum"
+        },
+        "status": "ok",
+        "reason": "Total of numeric readings is sum; humidity is the field."
+      },
+      {
+        "id": "R23",
+        "query": "Give the smallest temperature value",
+        "expected": {
+          "aggregation_type": "min",
+          "aggregation_field": "temperature"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric minimum, not entity ranking."
+      },
+      {
+        "id": "R24",
+        "query": "Return the lowest pressure reading",
+        "expected": {
+          "aggregation_type": "min",
+          "aggregation_field": "pressure"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric minimum of pressure."
+      },
+      {
+        "id": "R26",
+        "query": "Give the largest humidity value",
+        "expected": {
+          "aggregation_type": "max",
+          "aggregation_field": "humidity"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric maximum of humidity."
+      },
+      {
+        "id": "R27",
+        "query": "Return the highest temperature reading",
+        "expected": {
+          "aggregation_type": "max",
+          "aggregation_field": "temperature"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric maximum of temperature."
+      },
+      {
+        "id": "R28",
+        "query": "Do not count sensors; list their names",
+        "expected": {},
+        "actual": {
+          "aggregation_type": "count"
+        },
+        "status": "ok",
+        "reason": "Count is explicitly negated; ordinary listing remains."
+      },
+      {
+        "id": "R29",
+        "query": "Show pump-42 records, not devices similar to it",
+        "expected": {},
+        "actual": {
+          "use_embeddings": true
+        },
+        "status": "ok",
+        "reason": "Similarity is explicitly excluded."
+      },
+      {
+        "id": "R30",
+        "query": "Find documents containing the phrase \"average temperature\"",
+        "expected": {},
+        "actual": {
+          "aggregation_field": "temperature",
+          "aggregation_type": "avg"
+        },
+        "status": "ok",
+        "reason": "The operation words are quoted document content, not an aggregation request."
+      },
+      {
+        "id": "R31",
+        "query": "Maybe count devices or average pressure; I have not decided",
+        "expected": {},
+        "actual": {
+          "aggregation_type": "count"
+        },
+        "status": "ok",
+        "reason": "No single operation has been selected; contract requires no override."
+      }
+    ],
+    "host/keyword_bm25_development": [
+      {
+        "id": "R08",
+        "query": "Find immediate neighbors of gateway-main",
+        "expected": {
+          "path_intent": true,
+          "path_start_node": "gateway-main"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "In this graph-search task, immediate neighbors means linked nodes."
+      },
+      {
+        "id": "R14",
+        "query": "Return the number of sensors",
+        "expected": {
+          "aggregation_type": "count"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Number of entities requests count."
+      },
+      {
+        "id": "R17",
+        "query": "Compute the arithmetic mean of pressure",
+        "expected": {
+          "aggregation_type": "avg",
+          "aggregation_field": "pressure"
+        },
+        "actual": {
+          "aggregation_field": "of",
+          "aggregation_type": "avg"
+        },
+        "status": "ok",
+        "reason": "Arithmetic mean uses pressure, not an intervening function word."
+      },
+      {
+        "id": "R18",
+        "query": "Add the temperature readings and divide by their number",
+        "expected": {
+          "aggregation_type": "avg",
+          "aggregation_field": "temperature"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "The complete arithmetic operation is average, not sum."
+      },
+      {
+        "id": "R20",
+        "query": "Add together all pressure readings",
+        "expected": {
+          "aggregation_type": "sum",
+          "aggregation_field": "pressure"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric addition is sum."
+      },
+      {
+        "id": "R21",
+        "query": "Return the combined total of humidity readings",
+        "expected": {
+          "aggregation_type": "sum",
+          "aggregation_field": "humidity"
+        },
+        "actual": {
+          "aggregation_field": "of",
+          "aggregation_type": "sum"
+        },
+        "status": "ok",
+        "reason": "Total of numeric readings is sum; humidity is the field."
+      },
+      {
+        "id": "R23",
+        "query": "Give the smallest temperature value",
+        "expected": {
+          "aggregation_type": "min",
+          "aggregation_field": "temperature"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric minimum, not entity ranking."
+      },
+      {
+        "id": "R24",
+        "query": "Return the lowest pressure reading",
+        "expected": {
+          "aggregation_type": "min",
+          "aggregation_field": "pressure"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric minimum of pressure."
+      },
+      {
+        "id": "R26",
+        "query": "Give the largest humidity value",
+        "expected": {
+          "aggregation_type": "max",
+          "aggregation_field": "humidity"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric maximum of humidity."
+      },
+      {
+        "id": "R27",
+        "query": "Return the highest temperature reading",
+        "expected": {
+          "aggregation_type": "max",
+          "aggregation_field": "temperature"
+        },
+        "actual": {},
+        "status": "ok",
+        "reason": "Numeric maximum of temperature."
+      },
+      {
+        "id": "R28",
+        "query": "Do not count sensors; list their names",
+        "expected": {},
+        "actual": {
+          "aggregation_type": "count"
+        },
+        "status": "ok",
+        "reason": "Count is explicitly negated; ordinary listing remains."
+      },
+      {
+        "id": "R29",
+        "query": "Show pump-42 records, not devices similar to it",
+        "expected": {},
+        "actual": {
+          "use_embeddings": true
+        },
+        "status": "ok",
+        "reason": "Similarity is explicitly excluded."
+      },
+      {
+        "id": "R30",
+        "query": "Find documents containing the phrase \"average temperature\"",
+        "expected": {},
+        "actual": {
+          "aggregation_field": "temperature",
+          "aggregation_type": "avg"
+        },
+        "status": "ok",
+        "reason": "The operation words are quoted document content, not an aggregation request."
+      },
+      {
+        "id": "R31",
+        "query": "Maybe count devices or average pressure; I have not decided",
+        "expected": {},
+        "actual": {
+          "aggregation_type": "count"
+        },
+        "status": "ok",
+        "reason": "No single operation has been selected; contract requires no override."
+      }
+    ]
+  },
+  "runtimes": {
+    "metal": [
+      {
+        "arm": "qwen_json",
+        "status": "ready",
+        "stopped": true,
+        "cleanup_errors": [],
+        "child_exit_codes": [
+          0
+        ],
+        "container_exit": null
+      },
+      {
+        "arm": "kev",
+        "status": "ready",
+        "stopped": true,
+        "cleanup_errors": [],
+        "child_exit_codes": [
+          0,
+          0
+        ],
+        "container_exit": null
+      },
+      {
+        "arm": "qwen_json",
+        "status": "ready",
+        "stopped": true,
+        "cleanup_errors": [],
+        "child_exit_codes": [
+          0
+        ],
+        "container_exit": null
+      },
+      {
+        "arm": "kev",
+        "status": "ready",
+        "stopped": true,
+        "cleanup_errors": [],
+        "child_exit_codes": [
+          0,
+          0
+        ],
+        "container_exit": null
+      }
+    ],
+    "cpu-docker": [
+      {
+        "arm": "qwen_json",
+        "status": "ready",
+        "stopped": true,
+        "cleanup_errors": [],
+        "child_exit_codes": [],
+        "container_exit": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-06T01:34:20.203080798Z",
+          "FinishedAt": "2026-10-06T01:34:24.235104633Z"
+        }
+      },
+      {
+        "arm": "kev",
+        "status": "ready",
+        "stopped": true,
+        "cleanup_errors": [],
+        "child_exit_codes": [
+          0
+        ],
+        "container_exit": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-06T01:34:26.17787305Z",
+          "FinishedAt": "2026-10-06T01:34:47.679050296Z"
+        }
+      },
+      {
+        "arm": "qwen_json",
+        "status": "ready",
+        "stopped": true,
+        "cleanup_errors": [],
+        "child_exit_codes": [],
+        "container_exit": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-06T01:34:48.101359213Z",
+          "FinishedAt": "2026-10-06T02:28:29.849170219Z"
+        }
+      },
+      {
+        "arm": "kev",
+        "status": "ready",
+        "stopped": true,
+        "cleanup_errors": [],
+        "child_exit_codes": [
+          0
+        ],
+        "container_exit": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-06T02:28:30.582454052Z",
+          "FinishedAt": "2026-10-06T02:42:35.499793054Z"
+        }
+      }
+    ]
+  },
+  "hardware_agreement": {
+    "qwen_json/normal": {
+      "raw_selection_pairs": 32,
+      "different_raw_selection_ids": [],
+      "completed_pairs": 32,
+      "different_status_ids": [],
+      "not_comparable": [],
+      "note": "Includes application-invalid tuples. Matching outputs do not establish correctness or identical probabilities."
+    },
+    "qwen_json/reverse": {
+      "raw_selection_pairs": 32,
+      "different_raw_selection_ids": [
+        "R16"
+      ],
+      "completed_pairs": 32,
+      "different_status_ids": [
+        "R16"
+      ],
+      "not_comparable": [],
+      "note": "Includes application-invalid tuples. Matching outputs do not establish correctness or identical probabilities."
+    },
+    "kev/normal": {
+      "raw_selection_pairs": 3,
+      "different_raw_selection_ids": [],
+      "completed_pairs": 3,
+      "different_status_ids": [],
+      "not_comparable": [
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R25",
+        "R26",
+        "R27",
+        "R28",
+        "R29",
+        "R30",
+        "R31",
+        "R32"
+      ],
+      "note": "Includes application-invalid tuples. Matching outputs do not establish correctness or identical probabilities."
+    },
+    "kev/reverse": {
+      "raw_selection_pairs": 0,
+      "different_raw_selection_ids": [],
+      "completed_pairs": 0,
+      "different_status_ids": [],
+      "not_comparable": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R25",
+        "R26",
+        "R27",
+        "R28",
+        "R29",
+        "R30",
+        "R31",
+        "R32"
+      ],
+      "note": "Includes application-invalid tuples. Matching outputs do not establish correctness or identical probabilities."
+    }
+  }
+}

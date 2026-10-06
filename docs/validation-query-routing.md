@@ -135,6 +135,62 @@ It therefore counts operation-correct **valid tuples**, not correct raw operatio
 heads regardless of argument errors. Exact complete hints remain the primary
 measure; original selections are available for inspecting argument failures.
 
+## Completed CPU Qwen confirmation
+
+All 64 formal Qwen calls and the excluded warmup returned HTTP 200. Primary is
+23/32 exact with eight invalid tuples, matching every Metal primary selection.
+Median primary end-to-end time is 49,254.518 ms; p95 is 52,563.540 ms.
+Reverse is 22/32 exact with ten invalid tuples; median is 49,017.439 ms and p95
+51,568.480 ms. Only reversed R16 differs from Metal: for “Average humidity of
+sensors,” CPU adds `sensor-17` instead of `none`, making the tuple invalid.
+The cause of that hardware difference was not established. CPU order changes
+R16 and R18, both from valid to invalid tuples.
+
+Independent review verified all 65 frozen request/response byte pairs, tuple
+validation, typed-options grading and the cross-hardware comparison. Operational
+review confirmed every token count against preflight, zero prefix-cache reuse
+on all 65 tasks, full prompt evaluation and no truncation. Qwen's preflight and
+formal containers exited zero, without OOM or cleanup errors. These findings
+cover Qwen; they do not establish a completed CPU Kev comparison.
+
+## Intentional CPU Kev stop
+
+After reviewing the cost, the user explicitly chose to stop the remaining CPU
+Kev run and preserve it as partial compatibility/latency evidence. The first
+three formal calls completed in 185.066, 196.122 and 190.524 seconds; the excluded
+warmup took 202.758 seconds. Finishing 64 calls at that rate offered little value
+for the current deployment decision. This was a change to the original full-run
+plan, not a preselected three-case accuracy study.
+
+R01 is a valid but wrong path classification, R02 is correct, and R03 has an
+incompatible node. All match the corresponding Metal selections. R04 was
+interrupted after 55.904 seconds; the other 60 formal cases remain `not_run`.
+All planned rows remain present. Do not calculate or report CPU Kev cohort
+accuracy, paired superiority, order stability or a cohort latency percentile
+from this partial execution.
+
+SIGTERM to the verified owned runner preserved `KeyboardInterrupt` and invoked
+its bounded cleanup; the runner exited 130. All four owned CPU containers are
+confirmed stopped. Formal Kev exited **137**, `OOMKilled=false`, during the
+bounded stop; its host guard exited zero. The other three containers exited zero.
+The [operator-stop supplement](evidence/20261006-query-routing/README.md) explains
+the intentional stop without relabeling the raw failed/interrupted status as a
+successful full run.
+
+The operational audit matches all four completed Kev responses, including warmup,
+to exact preflight token totals. Logs contain twelve completed decision heads
+without truncation and one interrupted head without a release. All thirteen
+started heads report zero initial cached tokens. No completion is inferred for
+the interrupted head or the two other requested heads with no observed start.
+
+The derived report preserves raw observed counts and planned denominators, but
+sets accuracy and cohort latency summaries to `null` when a primary cohort is
+incomplete; interrupted-request timing is not a completed latency. It separates
+unassessed cases from measured errors, paired regressions and hardware differences.
+A failing regression demonstrated that the earlier report could misclassify an
+unattempted case as a regression; the fix changes reporting only, not frozen
+requests, inference records, labels or grading of completed responses.
+
 ## Reproduce
 
 Use the pinned caches and native build described in the
@@ -157,3 +213,8 @@ Output directories must be new. Runs are sequential and take the repository's
 native-operation lock. The runner owns only its new processes and UUID-labeled
 containers, records their shutdown, and retains stopped containers and logs.
 Existing unrelated containers are left alone.
+
+These commands reproduce the original full experiment plan. The recorded CPU
+Kev run was intentionally stopped; repeating its complete matrix would take
+hours. Future CPU work should start with bounded compatibility/latency probes
+and expand only to answer a concrete CPU deployment question.

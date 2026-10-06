@@ -28,7 +28,8 @@ before execution. These are classifier outputs, not graph-query execution or RAG
 answerability. See the [four worked examples](../eval/query-routing/README.md) and
 [full validation](validation-query-routing.md).
 The [evidence archive](evidence/20261006-query-routing/README.md) preserves every
-code/Metal row and the earlier failed startup without inference.
+code/Metal row, complete CPU Qwen, partial CPU Kev and the earlier failed startup
+without inference.
 
 | Primary normal-order result | Exact / 32 | Invalid tuples | Code errors corrected | Code successes lost | Median request time |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -37,8 +38,20 @@ code/Metal row and the earlier failed startup without inference.
 | Rules + BM25, development-selected 0.9 | 18 | 0 | — | — | See code timing below |
 | Qwen JSON, Metal | 23 | 8 | 12 | 7 | 2,381 ms |
 | Kev, Metal | 23 | 6 | 11 | 6 | 7,111 ms |
+| Qwen JSON, Docker Linux/ARM64 CPU | 23 | 8 | 12 | 7 | 49,255 ms |
 
-CPU Docker confirmation is in progress under the same frozen request contract.
+CPU Qwen reproduces all 32 Metal primary selections. Its reversed view scores
+22/32 with ten invalid tuples: R16 alone differs from Metal by adding an
+inappropriate `sensor-17` node. Primary p95 is 52,564 ms; Metal Qwen/Kev primary
+p95 values are 2,487/7,121 ms. The cause of the hardware-dependent selection was
+not established.
+
+**CPU Kev was intentionally stopped at the user's request.** Its three completed
+formal calls took 185–196 seconds each; one further call was interrupted and
+60 remained unattempted. The excluded warmup took 203 seconds. These observations
+establish a functioning native path and costly requests under this profile,
+not CPU Kev cohort accuracy. The original plan, raw interruption status and
+operator-stop supplement are preserved. Full CPU Qwen was already complete.
 
 Keyword was the designated comparator after a development tie. Both configured
 BM25 arms produce identical held-out options and accept no example matches;
@@ -72,6 +85,10 @@ cached tokens; all saved prompts fit actual context/batch limits. Kev clamps the
 requested batch 1024 to 512, still above the longest 255-token decision tail.
 A preserved earlier Metal attempt failed during runtime handover with zero
 inference calls; its reviewed port-check fix changed no requests or grading.
+All owned CPU runtimes are also stopped. Formal Kev exited 137 during bounded
+shutdown, with no OOM; its guard and the other three CPU containers exited zero.
+Unattempted/interrupted cases are not published as measured regressions or
+hardware label differences, and no accuracy rate is reported for partial Kev.
 
 ## 2026-10-05 — actual SemStreams answer-synthesis replay
 

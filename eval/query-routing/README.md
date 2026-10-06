@@ -1,52 +1,16 @@
 # Can a model improve on our existing query classifier?
 
-**Both models fix code misses and introduce new mistakes.** On the primary
-32-case Metal view, the actual SemStreams code scores 18/32; Qwen JSON and Kev
-both score 23/32. This is evidence of useful paraphrase interpretation, with no
-observed primary accuracy advantage for Kev. It is not a drop-in replacement
-recommendation. Metal's reversed order scores Qwen 23/32 and Kev 22/32. CPU
-confirmation and its order-sensitivity check are still being collected under
-the same frozen contract.
+**Both models fix code misses and add new mistakes.** On 32 authored Metal cases,
+actual SemStreams code gets 18 exact classifications; Qwen JSON and Kev each get
+23. That shows useful interpretation of varied wording, with no primary accuracy
+advantage for Kev. It does not justify replacing working code indiscriminately.
 
-This task asks what a query requests and which arguments belong to it. The driver
-imports the actual SemStreams classifier library at `v1.0.0-beta.160`. It does not
-execute searches or judge whether retrieved passages answer a question.
+This task classifies **intent and arguments**. It does not execute graph searches
+or judge whether retrieved evidence answers a question. CPU Qwen is complete;
+CPU Kev was intentionally stopped after three completed calls because finishing
+the matrix offered little value for another roughly 3½ hours of inference.
 
-## A few results you can inspect
-
-| Question | Actual code | Qwen JSON, Metal | Kev, Metal |
-| --- | --- | --- | --- |
-| “Compute the arithmetic mean of pressure” | Average of **`of`**: wrong field | Average of pressure ✓ | Average of pressure ✓ |
-| “Show maintenance records for pump-42” | No specialized hints ✓ | Unneeded node makes tuple invalid | Unneeded node makes tuple invalid |
-| “Maybe count devices or average pressure; I have not decided” | Count: premature choice | No specialized hints ✓ | Average pressure: premature choice |
-| “Show connections from that device” | Path with unresolved node ✓ | Path with unresolved node ✓ | Invents `sensor-17` as the node |
-
-These are R17, R03, R31 and R32 in the [frozen cases](heldout.json).
-R32 is a correct **partial classification**, not permission to execute: the caller
-must resolve the missing node. Empty options mean no specialized hint; native
-code has no abstain label, and its empty fallback does not prove understanding.
-
-## What the code does
-
-**Rules:** regular expressions recognize phrases such as “how many,” “similar,”
-or “connected to.” They produce search hints: count entities, use similarity,
-or follow graph links from a literal node. Rules can also extract a metric name.
-They do not read the corpus or call an LLM.
-
-**Rules plus BM25 examples:** try those same rules first. If none matches, turn
-the query into a word-weighted vector and compare it with labeled examples.
-Above a similarity threshold, copy the closest example's stored options. This
-uses word statistics and feature hashing, with no learned embedding model.
-It **copies that example's arguments; it does not extract fresh arguments**.
-A keyword match bypasses BM25 even when the keyword result is wrong.
-
-The [driver explanation and source pins](driver/README.md) show the actual
-functions and a synthetic example of an old node ID being copied. BM25 is
-available upstream, but the audited graph-query component does not enable it.
-Our configured BM25 arms supply new training examples; “default” refers only
-to the upstream threshold of `0.7`, not a shipped example configuration.
-
-## The comparison
+## The result
 
 | Primary approach | Exact / 32 | Invalid tuples | Median time |
 | --- | ---: | ---: | ---: |
@@ -55,72 +19,75 @@ to the upstream threshold of `0.7`, not a shipped example configuration.
 | Rules + BM25 at development-selected `0.9`, native host | 18 | 0 | 0.034 ms |
 | Qwen3.5-4B JSON, Metal | 23 | 8 | 2,381 ms |
 | Kev-4B native Choice, Metal | 23 | 6 | 7,111 ms |
+| Qwen3.5-4B JSON, Docker Linux/ARM64 CPU | 23 | 8 | 49,255 ms |
 
-Code time covers the classifier call on Darwin; model time covers the complete
-HTTP request and response validation. Constructor/cold-process times are recorded
-separately. These are not matched service-level latencies. The models receive the
-same query, full 20 training examples, choices and instructions; Qwen emits one
-JSON object, while Kev answers operation, node and field as three Choice heads.
-The [preserved evidence](../../docs/evidence/20261006-query-routing/README.md)
-contains the complete rows and timing conditions.
+CPU Kev's three completed calls took **185–196 seconds each**. One further call
+was interrupted and 60 remained unattempted. This is partial compatibility/latency
+evidence, **not a CPU Kev accuracy result**; the original full plan and stop record
+remain preserved.
 
-Against the designated keyword comparator, Qwen fixes 12 errors and loses seven
-successes; Kev fixes 11 and loses six. Both configured BM25 arms produce the same
-held-out options as keyword rules, with no example matches accepted at these
-thresholds. BM25's `0.9` threshold and keyword's comparator status were selected
-on 18 development cases, before these outcomes were known.
+Code time covers a classifier call on Darwin; model time covers the full HTTP
+request and response validation. These are not matched service-level latencies.
+Qwen emits one JSON object; Kev answers three Choice heads in one request.
 
-The **32 held-out authored questions** cover ordinary text, similarity, paths,
-zones and five numeric aggregations. They include paraphrases, negation, quoted
-operator words, ambiguity and missing bindings. Fixed node/metric vocabularies
-are identical for every arm. This is bounded selection, not open-vocabulary
-extraction. Authors inspected the implementation and related phrases cross the
-development/test split; this pilot does not establish broad generalization.
+Qwen fixes **12 code errors but loses seven code successes**. Kev fixes **11 but
+loses six**. On Metal, reversed order scores Qwen 23/32 and Kev 22/32; raw
+selections change on one and three cases respectively. CPU Qwen matches every
+Metal primary selection but scores 22/32 reversed: it adds an invalid node on
+R16. These are repeated views of the same cases.
 
-Score exact search hints, including arguments and unwanted flags. Invalid model
-combinations remain failures. Report corrections and regressions against a code
-baseline selected on development, plus each other code arm. Correct partial
-intent remains distinct from readiness to execute.
+## Four examples explain the tradeoff
 
-BM25 updates its statistics as it sees queries. Primary cases use fresh
-classifiers; separate persistent forward/reverse runs test order sensitivity.
-Record construction, classification and process time separately. Qwen emits one
-JSON object; Kev makes three decisions in one HTTP request. Count the full work.
+| Question | Actual code | Qwen, Metal | Kev, Metal |
+| --- | --- | --- | --- |
+| “Compute the arithmetic mean of pressure” | Average of **`of`**: wrong field | Average of pressure ✓ | Average of pressure ✓ |
+| “Show maintenance records for pump-42” | No specialized hints ✓ | Unneeded node makes tuple invalid | Unneeded node makes tuple invalid |
+| “Maybe count devices or average pressure; I have not decided” | Count: premature choice | No specialized hints ✓ | Average pressure: premature choice |
+| “Show connections from that device” | Path with unresolved node ✓ | Path with unresolved node ✓ | Invents `sensor-17` |
 
-## What to do with this result
+These are [R17, R03, R31 and R32](heldout.json). R32 is a correct partial
+classification: the caller must resolve the node before execution. Empty code
+output means no specialized hint, not proven understanding or a native abstention.
 
-**Improve the inexpensive baseline before adding inference.** Several code misses
-are ordinary missing phrases (“number of,” “smallest,” “highest”) or extraction
-of `of` instead of a metric. Fixing those may be cheaper and easier to validate
-than operating a model. Test any fixes on new cases; these observed failures are
-now development material, not a fresh test set.
+## How the existing code works
 
-Models can help interpret the remaining varied wording, but they must preserve
-existing successes and return coherent arguments. The frozen Qwen schema constrains
-keys and individual enums; cross-field rules are checked afterward. Its invalid
-results are schema-valid JSON with incompatible search hints. A conditional schema
-or caller-owned binding step is a stronger follow-up baseline, not a repair we
-silently apply to these scores. Kev's three heads can also disagree.
+The driver imports the actual SemStreams `v1.0.0-beta.160` library:
 
-**Use a model when** a recurring semantic residual survives maintainable code and
-a fresh comparison shows useful corrections at acceptable errors and total cost.
+- **Keyword rules:** regular expressions recognize phrases such as “how many,”
+  “similar” and “connected to,” then extract search hints and literal arguments.
+- **Optional BM25 examples:** only when rules produce no hints, compare
+  word-weighted vectors against 20 labeled examples. Above a threshold, copy
+  the closest example's options. This uses statistics, not learned embeddings,
+  and **copies arguments rather than extracting new ones**. A wrong keyword match
+  still bypasses BM25.
+
+Neither BM25 threshold adds an accepted match on this set. The `0.9` threshold
+and keyword comparator were selected on 18 development cases before testing.
+The audited graph-query component does not enable BM25; these are explicitly
+configured comparison arms. See the [driver and source pins](driver/README.md).
+
+## What to do next
+
+**Improve inexpensive rules/extraction first.** Several misses are ordinary
+phrases (“number of,” “smallest,” “highest”) or the `of` extraction bug. Test fixes
+on new cases; the failures shown here are now development material.
+Rule matches are not authoritative facts: a fallback used only when rules miss
+will retain their false matches on negation, quoted text and ambiguity.
+
+Also strengthen the JSON baseline. Its frozen schema constrains keys/types/enums,
+but application validation rejects incompatible combinations afterward. Thus
+“invalid” here includes **schema-valid JSON with unusable arguments**. Conditional
+schema constraints or caller-owned binding logic need a new comparison; no output
+was silently repaired. Kev's separate heads can also disagree.
+
+**Use a model when** varied semantic wording survives maintainable code and a
+fresh test demonstrates useful corrections at acceptable errors and cost.
 **Prefer code when** known patterns and authoritative fields suffice. This run
-does not establish a reason to prefer Kev over schema-constrained Qwen.
+does not establish a reason to choose Kev over schema-constrained Qwen.
 
-## Reproduction and limits
-
-The [preparation review](review.md) and [design freeze](freeze.json) predate
-held-out execution. The [execution manifest](execution.json) separately pins the
-runner and runtime. The [detailed validation](../../docs/validation-query-routing.md)
-records the startup failure, amendment, actual token budgets, cache observations,
-resource bounds, raw evidence and reproduction commands.
-
-Run `task routing:validate` for fixture/request/freeze checks, `task routing:test`
-for offline tests, and `task routing:execution:validate` for the frozen runner and
-driver binary. Real runs use `task routing:code`, `task routing:metal` or
-`task routing:cpu`, each followed by `-- --output NEW_DIRECTORY`.
-
-Relative time, geography, ranking and composed operations are outside this slice.
-Actual graph-query dispatch is separate: its resolver differs from the library's
-`InferStrategy`. See the [integration follow-up](../../docs/semstreams-integration.md#classifier-hints-and-production-dispatch).
-No sibling repository or production classifier was changed.
+The authors inspected the source, and related phrases cross the development/test
+split. Fixed node/metric choices, one trial and 32 authored cases do not establish
+broad generalization. Runtime details, failures, tests and reproduction commands
+are in [validation](../../docs/validation-query-routing.md); complete requests,
+responses and source snapshots are in the [evidence archive](../../docs/evidence/20261006-query-routing/README.md).
+No sibling or production classifier was changed.
