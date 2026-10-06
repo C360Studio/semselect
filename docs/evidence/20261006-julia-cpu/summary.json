@@ -1,0 +1,94 @@
+{
+  "kind": "julia-cpu-feasibility-diagnostic-summary",
+  "run_status": "complete",
+  "hardware": "Linux/ARM64 CPU Docker on Apple M3 Pro",
+  "model": "Julia-1 Q8_0",
+  "formal_observations": 48,
+  "unique_cases": 24,
+  "correct": 24,
+  "unnecessary_fallbacks": 23,
+  "wrong_nonfallback_routes": 1,
+  "expected_fallbacks_correct": 16,
+  "summary": {
+    "total": 48,
+    "valid": 48,
+    "correct": 24,
+    "accuracy": 0.5,
+    "status_counts": {
+      "ok": 48
+    },
+    "unknown_selections": 39,
+    "unknown_selection_rate": 0.8125,
+    "unknown_policy": {
+      "accepted": 9,
+      "coverage": 0.1875,
+      "errors": 1,
+      "error_rate_when_accepted": 0.1111111111111111
+    },
+    "native_confidence_available": true,
+    "pmax_thresholds": [
+      {
+        "pmax_at_least": 0.0,
+        "accepted": 9,
+        "coverage": 0.1875,
+        "errors": 1,
+        "error_rate_when_accepted": 0.1111111111111111
+      },
+      {
+        "pmax_at_least": 0.5,
+        "accepted": 9,
+        "coverage": 0.1875,
+        "errors": 1,
+        "error_rate_when_accepted": 0.1111111111111111
+      },
+      {
+        "pmax_at_least": 0.7,
+        "accepted": 7,
+        "coverage": 0.14583333333333334,
+        "errors": 0,
+        "error_rate_when_accepted": 0.0
+      },
+      {
+        "pmax_at_least": 0.9,
+        "accepted": 6,
+        "coverage": 0.125,
+        "errors": 0,
+        "error_rate_when_accepted": 0.0
+      }
+    ],
+    "order_comparison": {
+      "total_pairs": 24,
+      "valid_pairs": 24,
+      "flips": 7,
+      "flip_rate_valid_pairs": 0.2916666666666667
+    },
+    "latency_ms": {
+      "p50": 158.64414547104388,
+      "p95": 169.73033302929252,
+      "max": 176.40654207207263
+    },
+    "complete": true
+  },
+  "cgroup_memory_peak_bytes": 555900928,
+  "cgroup_memory_peak_mib": 530.1484375,
+  "inference_and_preflight_wall_seconds": 11.324860875029117,
+  "concurrent_containers": 16,
+  "stop_state": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-06T15:46:15.208957387Z",
+    "FinishedAt": "2026-10-06T15:46:28.536628046Z"
+  },
+  "cleanup_errors": [],
+  "formal_prompt_token_range": [
+    195,
+    215
+  ]
+}

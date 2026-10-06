@@ -1,6 +1,8 @@
 # Evaluation results history
 
-The [README](../README.md) links the latest useful comparisons.
+The CPU/Metal research phase closed out on 2026-10-06. The [README](../README.md)
+links the decision summary; [reopening conditions](when-to-use.md#research-closeout-and-reopening-conditions)
+make further experiments conditional.
 This page preserves the complete published experiment history; linked
 JSON contains the per-request evidence and is the source for table values.
 Detailed validation reports explain conditions, failures and interpretation.
@@ -18,6 +20,34 @@ compare valid pairs. Other sections define their own datasets, metrics and order
 comparisons. These are small evaluations, not production benchmarks or calibration
 studies. Model probabilities are not established probabilities of correctness.
 
+## 2026-10-06 — Julia CPU feasibility diagnostic
+
+**Short CPU requests are inexpensive; this configuration's routing quality is
+weak.** Julia-1 Q8_0 completed all 48 existing ticket observations with valid
+native responses: 24 correct, 39 `unknown` selections and seven of 24 cases
+changing label under candidate reversal. Of its errors, 23 were unnecessary
+fallbacks and one was a wrong concrete route. Normal/reverse views scored
+11/24 and 13/24. All 16 expected fallback observations were correct.
+
+Median/p95 HTTP latency was 158.64/169.73 ms, maximum 176.41 ms. Cgroup memory
+peaked at 555,900,928 bytes (530.15 MiB) under a 2 GiB cap. This was the pinned
+Linux/ARM64 CPU image on the M3 Pro, four threads/four-CPU quota, one slot and
+1,024-token context/batch/physical batch. Sixteen other containers were active.
+Differences in precision and runtime profile prevent an intrinsic speedup claim
+against earlier Kev/Qwen runs.
+
+All 53 planned calls completed, including a primitive shape smoke, warmup and
+three latency-gate calls excluded from the 48-row score. Every request passed
+exact native token parity and input-truncation checks before inference. Formal
+prompts were 195–215 tokens; prompt caching was disabled. The inference/preflight
+phase took 11.32 seconds. Shutdown exited zero without OOM or cleanup errors.
+
+This inspected fixture is a diagnostic, not fresh community-evidence validation,
+a throughput test or proof that Julia should replace the current alternatives.
+See the [plain-language result](../eval/julia/README.md),
+[compact summary](evidence/20261006-julia-cpu/summary.json) and
+[complete evidence](evidence/20261006-julia-cpu/README.md).
+
 ## 2026-10-05 — actual SemStreams query-classifier comparison
 
 Separate task: exact classifier hints, including arguments, on 32 authored cases.
@@ -31,7 +61,7 @@ The [evidence archive](evidence/20261006-query-routing/README.md) preserves ever
 code/Metal row, complete CPU Qwen, partial CPU Kev and the earlier failed startup
 without inference.
 
-| Primary normal-order result | Exact / 32 | Invalid tuples | Code errors corrected | Code successes lost | Median request time |
+| Primary normal-order result | Exact / 32 | Invalid tuples | Code errors corrected | Code successes lost | Median request time, measured profile |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Actual keyword rules, native host | 18 | 0 | — | — | See code timing below |
 | Rules + BM25, threshold 0.7 | 18 | 0 | — | — | See code timing below |
@@ -39,6 +69,13 @@ without inference.
 | Qwen JSON, Metal | 23 | 8 | 12 | 7 | 2,381 ms |
 | Kev, Metal | 23 | 6 | 11 | 6 | 7,111 ms |
 | Qwen JSON, Docker Linux/ARM64 CPU | 23 | 8 | 12 | 7 | 49,255 ms |
+
+**Timing qualification:** the one-slot Kev profile processes three native heads
+without shared-prefix reuse; Qwen emits one compound JSON result. Native code
+supports sharing across slots, but its benefit under a revised profile is
+unmeasured. These timings describe deployed task configurations, not inherent
+model speed. The earlier ticket pilot also had unequal Qwen/Kev prefix reuse.
+See the [source audit](research-and-decision.md#closeout-review-2026-10-06).
 
 CPU Qwen reproduces all 32 Metal primary selections. Its reversed view scores
 22/32 with ten invalid tuples: R16 alone differs from Metal by adding an

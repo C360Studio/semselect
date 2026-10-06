@@ -1,0 +1,21 @@
+{
+  "README.md": "2991cbeab7ca3627909402e9ed82a461fa1d19bbd5d3206f0d70072316808443",
+  "cleanup-confirmation.json": "146254ad5095ec15ce30b1fa940a3e45726a1ce60d4d8ce26b2403499e9a0b2c",
+  "host.json": "028d891e7e19020336a02e8c13f988b0d08aa7f77ff0f3e7f0ec1455eb4033f9",
+  "provenance.json": "7824f09168e94204f5d4fd2f865325f1bb60978e971a717a90a20d90621b6f98",
+  "requests.json": "5f6424d72c39ee11a8b2960645134ac7e2aca0bede6b25de9d6c98bec4442790",
+  "results.json": "87f69148c5799886f221a240291d4d70871ea258e7ce4729bb231042753a309d",
+  "runtime.json": "f1c76057d139cbba5ef16efa8ada70df5086f80710fe3b05b127fbb9baa91efe",
+  "runtime.log": "22f46aee2190cf36a8727665b53218f3bc5a97fcda5caa6a43a36b23ff7eafcb",
+  "source/Dockerfile": "875521ae3c5d0e5008843795810037dab01514d2c108d45eb8e5370b7fe36828",
+  "source/eval/julia/gguf-metadata.json": "0e60547f999b11b93bece92b6f23d849737fa64d9be7501a96eaf5eb08846251",
+  "source/eval/julia/models.lock.json": "3faaa9029f8dcdbc26dfd6c0ce4abd84b7d1ea895b5f1c06400289aaa1c6541a",
+  "source/eval/julia/preflight.py": "2fc7603e8e45930c25a43c7ab26ef196961a08a3641d02b4243f9209c3891779",
+  "source/eval/julia/probe.py": "20b63b64004769a67401a5417f98a71577a6622a448a6e2bab983635add1a8a5",
+  "source/eval/julia/protocol.json": "3b70f8753c8a705d207ca5768816e162b265a097c112216c218e327a5aeebfcb",
+  "source/eval/routing-smoke.json": "81590b0d2e0773f49b7b1c524729acb96d37a74b29ca134c710701a0037b5d2a",
+  "source/examples/decision.json": "ea2b0c716bc958056e57939a0a50d3631aedbb498117899c829010ad3a04aa84",
+  "source/scripts/evaluate.py": "b448c23d910b57c383b53ea90f5684f8400e0f6bec1a75027a08a060ad9260b7",
+  "source/scripts/model.py": "eda4d6bfef779e1622f33df722c9f4459e5857262121cb3732d4d2880adf5824",
+  "summary.json": "b63956422f598c579dcf4793fea4c3530a0d89e6a7e634cb0bedb1c961a429f5"
+}

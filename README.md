@@ -3,75 +3,95 @@
 **Help skeptical developers decide when a Jev-like decision model is worth using,
 through a tested local service, reproducible comparisons, and plain-language guidance.**
 
-semselect is a small, local decision service and evaluation project for the
-c360studio sem* ecosystem. Its deliverables are a working service, a comparison
-matrix with inspectable evidence, and an explanation of when each approach earns
-its place. A result recommending ordinary code or schema-constrained Qwen is a
-useful outcome. **Start with code and the existing retrieval/generation path;
-add a classifier when a fair task comparison shows that it earns its cost.**
-Our service runs Kev. These experiments do not establish the quality of Jev itself.
+semselect packages llama.cpp's native decision API for the c360studio sem* ecosystem.
+It is also a completed CPU/Metal research baseline, with inspectable experiments
+and a guide to choosing code, ordinary model output, or a specialized decision model.
 
-The bootstrap packages **llama.cpp + Kev-4B Q4_K_M** behind a small Go request guard.
-It uses the existing `POST /v1/systemone` API. It adds no model, scoring formula,
-agent loop, NATS dependency or durable application state. Callers supply context
-and permissible answers, and own routing, authorization, thresholds, fallback and
-execution. A model decision is not permission to act.
+**Research closeout — 2026-10-06: retain semselect as an evaluation/reference
+service. We have not demonstrated a production sem* task that justifies adding
+this service. For the routing tasks tested here, improve existing code first and
+use schema-constrained Qwen as the first model baseline.**
 
-## What the evidence says
+That is a usable research outcome. We verified the integration, found benefits
+and failures, and identified what would change the recommendation. This phase
+ends here; additional models, full CPU Kev, SGLang performance and CUDA experiments
+are not required to complete it. Our service runs Kev; these experiments do not
+establish Jev's quality or rule out other decision models.
 
-These are small, workload-specific experiments. Each link explains the task with
-worked examples and points to the complete evidence; rows are not one shared
-benchmark. Repeated orders/trials reuse the same cases.
+## Answers we can give today
 
-| Task | Measured finding | Decision today |
+| Question | What we measured | Decision it supports |
 | --- | --- | --- |
-| [Actual SemStreams query classification](eval/query-routing/README.md) | On the primary 32-case Metal view, keyword rules and both configured BM25 arms get 18 exact; Qwen JSON and Kev each get 23. Qwen fixes 12 code errors but loses seven successes; Kev fixes 11 and loses six. | Improve ordinary rules/extraction and argument constraints first. No primary Kev accuracy advantage. |
-| [Evidence sufficiency on source passages](eval/answerability/heldout/README.md) | On 24 primary cases, Kev gets 19 correct and Qwen 16. Kev still allows 5/12 unsupported inputs. Both share the same code precheck. | A useful Kev lead on this pilot, sufficient to test downstream effects; neither is a reliable production gate from this evidence. |
-| [Actual captured answer-generation inputs](eval/synthesis/README.md) | On 12 usable captures, either gate reduces the 4B generator's unsupported assertions from three to zero, preserving one useful partial answer. No capture fully answers its question. | No Kev advantage observed. Improve evidence and test a balanced set before recommending a gate. |
-| [Simple ticket routing](docs/results.md#2026-10-05--matched-4b-models-on-native-metal) | Matched 4B Metal comparison: Qwen JSON gets 46/48 correct; Kev gets 43/48, over 24 cases in two orders. | Keep Qwen JSON as the practical model baseline. |
-| [Qwen JSON versus one-token scores](docs/validation-scoring.md) | Same Qwen model on Metal: identical labels, both 92/96 correct, with 28% lower median inference HTTP latency for scores. CPU saves 3.4% but abstains more. | A conditional format-efficiency benefit, with no demonstrated accuracy gain. |
+| Do these routing tasks need a specialized model? | Qwen JSON beat Kev on tickets: **46/48 vs 43/48**. Both got **23/32** query classifications exact. | No measured routing reason to prefer Kev. [Results](docs/results.md). |
+| Can a model replace our query rules? | Code got **18/32**. Qwen fixed 12 code errors but lost seven successes; Kev fixed 11 but lost six. | Fix parser/binding defects; a hybrid needs its own validation. [Four examples](eval/query-routing/README.md#four-examples-explain-the-tradeoff). |
+| Can a semantic evidence gate help? | On 12 captured inputs, either gate reduced the 4B generator's unsupported assertions from **3 to 0**, preserving one useful partial answer. None had a complete answer. | Useful behavior on that capture; false deferrals of fully answerable inputs remain unknown. [Answer replay](eval/synthesis/README.md). |
+| Did Kev show any quality benefit? | **19/24 vs Qwen's 16/24** on source passages; four fixes and one regression. The later captured-summary gates made identical decisions. | A small pilot lead, not a demonstrated advantage in the captured answer path. [Source pilot](eval/answerability/heldout/README.md). |
+| Can ordinary Qwen return decisions more cheaply? | On Metal, one-token scoring preserved all JSON labels at **28% lower median HTTP latency**. CPU saved **3.4%** with more abstention. | A measured output-format benefit without specialized training. This still generates one token; it is not a zero-output decision head. [Format comparison](docs/validation-scoring.md). |
+| Are 4B models practical on this laptop's CPU? | Richer query requests: Qwen **49.25 s** CPU vs **2.38 s** Metal median. Kev's three completed CPU calls took **185–196 s** before the run was intentionally stopped. | Use Metal for this 4B workload; retain partial CPU evidence without cohort accuracy. [Hardware observations](eval/query-routing/README.md#the-result). |
+| Can a small decision model be fast on CPU? | Julia: **159 ms** median, **530 MiB** cgroup peak, but **24/48 correct**, 23 unnecessary fallbacks and seven order-sensitive cases. | Short-input CPU feasibility is demonstrated; this configuration is not a useful general router. [Julia diagnostic](eval/julia/README.md#result-cpu-speed-is-promising-routing-quality-is-not). |
 
-The **code baseline differs by task**. Query classification imports the real
-SemStreams regex and optional BM25 classifiers. Answerability uses a small
-metadata/exact-fact precheck, then lets unresolved text through in the control;
-it is not a general code-only text classifier. See [how both work](docs/when-to-use.md#what-our-code-baseline-actually-does).
+These are small task evaluations, not production benchmarks. Repeated orders and
+trials reuse cases. Latency belongs to the measured runtime profile: Kev's three
+query heads reprocessed shared state with one slot, and the ticket comparison
+had unequal prefix-cache reuse. Neither proves an intrinsic model speed ranking.
+Qwen is the post-trained 4B release; Kev was trained from its Base sibling, so this
+is not an identical-backbone control. See the [closeout audit](docs/research-and-decision.md#closeout-review-2026-10-06).
 
-Qwen JSON comparisons use llama.cpp's chat API directly. They evaluate a
-seminstruct-style approach; the existing seminstruct release has not been
-upgraded or validated by these runs. Semselect continues to serve Kev's native
-Choice/Score/Noul readouts.
+## When should a skeptic care?
 
-The latest query experiment also completed CPU Qwen: 23/32 primary at a
-49.25-second median, matching all Metal primary selections. **CPU Kev was
-intentionally stopped** after three completed calls at 185–196 seconds each:
-one call was interrupted and 60 were unattempted. That partial run supplies
-compatibility/timing observations, not cohort accuracy. Its original interruption
-record and the completed runs are in the [verified archive](docs/evidence/20261006-query-routing/README.md).
+A bounded semantic decision is useful when text requires interpretation and the
+caller already knows the permissible outcomes: for example, judging whether
+supplied evidence supports a claim. Caller-provided descriptions can change
+without training a new classifier. That flexibility is not exclusive to Jev-like
+models; Qwen JSON can supply it too.
 
-SGLang/MLX has a separate [one-fixture compatibility result](docs/sglang-investigation.md)
-with caching disabled, alongside preserved startup failures. It has no matched
-workload or performance result here. Calibration and the workload value of
-probabilities and Score/Noul remain unproved despite successful API operation.
+Reach for a specialized decision implementation when it **measurably improves
+quality or the cost of an existing semantic judgment**. A compact response or a
+probability field alone is not that evidence. Use code for exact facts, permissions
+and transitions; keep existing retrieval/ranking for finding evidence. With stable
+labels and training data, include a small trained classifier in the comparison—we
+have not tested one here. The [when-to-use guide](docs/when-to-use.md#choose-by-the-job)
+makes these choices explicit.
+
+A possible Tier 2 community-evidence use remains worth remembering: prioritize
+which retrieved communities to inspect, or replace an existing expensive LLM
+review. First supply the missing source evidence and compare with existing ranking.
+We have not shown that an added classifier improves that path. A high event rate
+alone does not require a model call per event.
+
+## What is implemented and tested
+
+The service packages **llama.cpp + Kev-4B Q4_K_M** behind a small Go request guard,
+using `POST /v1/systemone`. Callers supply context and permissible answers, and own
+authorization, thresholds, fallback and execution. No model decision authorizes
+an action. Kev remains the pinned reference, not a proven best-of-breed choice;
+Julia is an isolated evaluation, not a supported service-model replacement.
+See the [model selection review](docs/research-and-decision.md#is-kev-our-best-open-source-choice).
+
+The **code baseline differs by task**. Query classification imports the actual
+SemStreams regex and optional BM25 classifiers. Answerability uses a supplied
+metadata/exact-fact precheck, not a general code-only text classifier.
+[How the code works](docs/when-to-use.md#what-our-code-baseline-actually-does).
+
+CPU results are **Linux/ARM64 Docker on an M3 Pro**; Metal results are native on
+that laptop. They establish neither AMD64 nor CUDA performance. Qwen comparisons
+use llama.cpp chat directly and do not upgrade or validate the existing seminstruct
+release. SGLang/MLX has only a separate [one-fixture compatibility result](docs/sglang-investigation.md),
+with caching disabled and earlier failures preserved. Calibration and the workload
+benefit of native probabilities, Score and Noul remain unproved.
 
 ## Team review
 
-Start with the [when-to-use guide](docs/when-to-use.md) and the query experiment's
-[four worked examples](eval/query-routing/README.md#four-examples-explain-the-tradeoff).
-Use the [results history](docs/results.md) for conditions and raw proof. The main
-review questions are:
+Review the [selection guide and reopening conditions](docs/when-to-use.md#research-closeout-and-reopening-conditions),
+then use the [results history](docs/results.md) for full tables and raw proof.
+The [closeout audit](docs/research-and-decision.md#closeout-review-2026-10-06)
+records what we accepted and corrected from outside critique.
 
-- Do the authored queries and expected arguments represent our actual callers?
-- Which failures deserve ordinary parser/binding fixes, and which require a
-  semantic judgment? Review the [proposed SemStreams work](docs/semstreams-integration.md#classifier-hints-and-production-dispatch).
-- What error and latency budget would justify an added model call, and what
-  caller decision would benefit from a distribution rather than a JSON label?
-
-The proposed next experiment strengthens code and JSON constraints, then freezes
-fresh cases for Metal evaluation. Observed failures become development material.
-For answerability, improve source evidence and include fully answerable inputs.
-Use bounded CPU compatibility/latency probes before committing to a full CPU run;
-CUDA work remains deferred. These are proposals, not production or sibling-repo
-changes. The [research decision](docs/research-and-decision.md) records the original scope.
+A useful review identifies a real caller, an error budget and a rate/latency need
+that the current path cannot meet. Without that, more model shopping would not
+answer the adoption question. Parser fixes and a possible typed decision contract
+are [proposed SemStreams work](docs/semstreams-integration.md), not sibling changes
+or a committed integration roadmap.
 
 ## Capabilities and target
 
@@ -261,7 +281,8 @@ quality and domain calibration need separate evaluation. Native Kev omits Python
 Score/Noul run but have only contract/smoke validation, not workload accuracy studies.
 See [upstream licenses and attribution](THIRD_PARTY_NOTICES.md).
 
-SemStreams needs a small typed `/v1/systemone` client to preserve distributions.
-No sibling repository was modified. A future seminstruct decision-model image
+If a native decision backend earns adoption, SemStreams would need a small typed
+`/v1/systemone` client to preserve its distributions. No sibling repository was
+modified. A future seminstruct decision-model image
 variant could share or absorb this packaging; a second inference implementation
 is unnecessary.

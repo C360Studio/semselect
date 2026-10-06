@@ -19,9 +19,12 @@ The algorithms audited here are **not the small code precheck in semselect's
 answerability tables**. That precheck filters caller-supplied metadata and checks
 supplied exact facts; the no-added-gate control then allows unresolved cases.
 See [its complete rules and example](when-to-use.md#what-our-code-baseline-actually-does).
-Neither those tables nor this source audit establish that a model outperforms
-an applicable regex/BM25 classifier on the same task. That direct comparison
-remains open.
+Neither the answerability tables nor this source audit establish that a model
+outperforms an applicable text classifier on answerability. The later
+[query-routing comparison](../eval/query-routing/README.md) does test the actual
+regex/BM25 implementations on their own task. The
+[research closeout](when-to-use.md#research-closeout-and-reopening-conditions)
+makes further comparisons conditional on a real caller need.
 
 ## Where SemEngine and fusion fit
 

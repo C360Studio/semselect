@@ -1,0 +1,1162 @@
+{
+  "owner": "9a5890d7fb95455e92c0f73de05dadce",
+  "name": "semselect-julia-9a5890d7fb95",
+  "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+  "image_tag": "semselect-runtime:dev",
+  "hardware": "cpu-docker",
+  "started_at": "2026-10-06T15:46:14.921140+00:00",
+  "resources": {
+    "cpus": 4,
+    "memory_bytes": 2147483648,
+    "gpu_layers": 0,
+    "threads": 4,
+    "context": 1024,
+    "batch": 1024,
+    "ubatch": 1024,
+    "slots": 1
+  },
+  "image": {
+    "Id": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+    "RepoTags": [
+      "semselect-runtime:dev"
+    ],
+    "RepoDigests": [
+      "semselect-runtime@sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1"
+    ],
+    "Comment": "buildkit.dockerfile.v0",
+    "Created": "2026-10-05T13:50:04.072146171Z",
+    "Config": {
+      "User": "65532:65532",
+      "ExposedPorts": {
+        "8080/tcp": {}
+      },
+      "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LD_LIBRARY_PATH=/opt/llama"
+      ],
+      "Entrypoint": [
+        "/opt/llama/llama-server"
+      ],
+      "Labels": {
+        "com.docker.compose.project": "semselect",
+        "com.docker.compose.service": "runtime",
+        "com.docker.compose.version": "5.5.1",
+        "io.semselect.llama-revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+        "org.opencontainers.image.source": "https://github.com/C360Studio/semselect",
+        "org.opencontainers.image.version": "24.04"
+      }
+    },
+    "Architecture": "arm64",
+    "Os": "linux",
+    "Size": 192527929,
+    "RootFS": {
+      "Type": "layers",
+      "Layers": [
+        "sha256:1e9178dc90058fa454a60803300219ee8c17e515be8718817ed824b96fa1207b",
+        "sha256:b6ba6791e50949c81f6cdbaa359dfa1938bab0b7b2c80c0bd4356d25b2adfdfc",
+        "sha256:cd97f5380fae7f20bd1b8dde9a543f41af816844f6598c11ea555af538b0a4ce",
+        "sha256:bb1d6588f81a18108d66dd2e79e02f0043f9fe1f9c6d82be0e238515c599567d",
+        "sha256:2c45742ff0f2d5d4413483c7fc7abc53e9895cf98fb7cf3054b3cb108fea8d93",
+        "sha256:89cc4f550ac939aee6aeeaafaed399eeae63992c86e8dd431ad8b9314d34d692",
+        "sha256:13992274c26b1971017a599709e04c76ec5ec60c65c1fa423cc03eb2e0a4275d"
+      ]
+    },
+    "Metadata": {
+      "LastTagTime": "2026-10-05T13:50:04.662079421Z"
+    },
+    "Descriptor": {
+      "mediaType": "application/vnd.oci.image.index.v1+json",
+      "digest": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+      "size": 856
+    },
+    "Identity": {
+      "Build": [
+        {
+          "Ref": "c3toju1d7lcmpxcnontvaegmq",
+          "CreatedAt": "2026-10-05T13:50:04.816149629Z"
+        }
+      ]
+    }
+  },
+  "image_id": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+  "tested_architecture": "arm64",
+  "create_command": [
+    "docker",
+    "create",
+    "--pull=never",
+    "--name",
+    "semselect-julia-9a5890d7fb95",
+    "--label",
+    "io.semselect.experiment=julia-cpu",
+    "--label",
+    "io.semselect.owner=9a5890d7fb95455e92c0f73de05dadce",
+    "--cpus",
+    "4",
+    "--memory",
+    "2147483648",
+    "--memory-swap",
+    "2147483648",
+    "--read-only",
+    "--tmpfs",
+    "/tmp:rw,nosuid,size=64m",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges:true",
+    "--pids-limit",
+    "128",
+    "--network",
+    "bridge",
+    "--publish",
+    "127.0.0.1:18094:8080",
+    "--mount",
+    "type=bind,source=/Users/coby/Code/c360/semselect/models/Julia-1-Q8_0.gguf,target=/models/model.gguf,readonly",
+    "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+    "-m",
+    "/models/model.gguf",
+    "--alias",
+    "semselect-julia-1",
+    "--host",
+    "0.0.0.0",
+    "--port",
+    "8080",
+    "-ngl",
+    "0",
+    "-t",
+    "4",
+    "-tb",
+    "4",
+    "-c",
+    "1024",
+    "-b",
+    "1024",
+    "-ub",
+    "1024",
+    "-np",
+    "1",
+    "--no-context-shift",
+    "--no-cache-prompt",
+    "--cache-reuse",
+    "0",
+    "--cache-ram",
+    "0",
+    "-lv",
+    "4"
+  ],
+  "container_id": "7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f",
+  "container_created": {
+    "Id": "7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f",
+    "Created": "2026-10-06T15:46:15.090227846Z",
+    "Path": "/opt/llama/llama-server",
+    "Args": [
+      "-m",
+      "/models/model.gguf",
+      "--alias",
+      "semselect-julia-1",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8080",
+      "-ngl",
+      "0",
+      "-t",
+      "4",
+      "-tb",
+      "4",
+      "-c",
+      "1024",
+      "-b",
+      "1024",
+      "-ub",
+      "1024",
+      "-np",
+      "1",
+      "--no-context-shift",
+      "--no-cache-prompt",
+      "--cache-reuse",
+      "0",
+      "--cache-ram",
+      "0",
+      "-lv",
+      "4"
+    ],
+    "State": {
+      "Status": "created",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "0001-01-01T00:00:00Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "Image": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+    "ResolvConfPath": "",
+    "HostnamePath": "",
+    "HostsPath": "",
+    "LogPath": "",
+    "Name": "/semselect-julia-9a5890d7fb95",
+    "RestartCount": 0,
+    "Driver": "overlayfs",
+    "Platform": "linux",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "AppArmorProfile": "",
+    "ExecIDs": null,
+    "HostConfig": {
+      "Binds": null,
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "json-file",
+        "Config": {}
+      },
+      "NetworkMode": "bridge",
+      "PortBindings": {
+        "8080/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18094"
+          }
+        ]
+      },
+      "RestartPolicy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CgroupnsMode": "private",
+      "Dns": null,
+      "DnsOptions": [],
+      "DnsSearch": [],
+      "ExtraHosts": null,
+      "GroupAdd": null,
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": false,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": true,
+      "SecurityOpt": [
+        "no-new-privileges:true"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,size=64m"
+      },
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 2147483648,
+      "NanoCpus": 4000000000,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": [],
+      "BlkioDeviceReadBps": [],
+      "BlkioDeviceWriteBps": [],
+      "BlkioDeviceReadIOps": [],
+      "BlkioDeviceWriteIOps": [],
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": [],
+      "DeviceCgroupRules": null,
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 2147483648,
+      "MemorySwappiness": null,
+      "OomKillDisable": false,
+      "PidsLimit": 128,
+      "Ulimits": null,
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/Users/coby/Code/c360/semselect/models/Julia-1-Q8_0.gguf",
+          "Target": "/models/model.gguf",
+          "ReadOnly": true
+        }
+      ],
+      "MaskedPaths": [
+        "/proc/acpi",
+        "/proc/asound",
+        "/proc/interrupts",
+        "/proc/kcore",
+        "/proc/keys",
+        "/proc/latency_stats",
+        "/proc/sched_debug",
+        "/proc/scsi",
+        "/proc/timer_list",
+        "/proc/timer_stats",
+        "/sys/devices/virtual/powercap",
+        "/sys/firmware"
+      ],
+      "ReadonlyPaths": [
+        "/proc/bus",
+        "/proc/fs",
+        "/proc/irq",
+        "/proc/sys",
+        "/proc/sysrq-trigger"
+      ]
+    },
+    "Storage": {
+      "RootFS": {
+        "Snapshot": {
+          "Name": "overlayfs"
+        }
+      }
+    },
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/Users/coby/Code/c360/semselect/models/Julia-1-Q8_0.gguf",
+        "Destination": "/models/model.gguf",
+        "Mode": "",
+        "RW": false,
+        "Propagation": "rprivate"
+      }
+    ],
+    "Config": {
+      "Hostname": "7a37b09c43fe",
+      "Domainname": "",
+      "User": "65532:65532",
+      "AttachStdin": false,
+      "AttachStdout": true,
+      "AttachStderr": true,
+      "ExposedPorts": {
+        "8080/tcp": {}
+      },
+      "Tty": false,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LD_LIBRARY_PATH=/opt/llama"
+      ],
+      "Cmd": [
+        "-m",
+        "/models/model.gguf",
+        "--alias",
+        "semselect-julia-1",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8080",
+        "-ngl",
+        "0",
+        "-t",
+        "4",
+        "-tb",
+        "4",
+        "-c",
+        "1024",
+        "-b",
+        "1024",
+        "-ub",
+        "1024",
+        "-np",
+        "1",
+        "--no-context-shift",
+        "--no-cache-prompt",
+        "--cache-reuse",
+        "0",
+        "--cache-ram",
+        "0",
+        "-lv",
+        "4"
+      ],
+      "Image": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+      "Volumes": null,
+      "WorkingDir": "",
+      "Entrypoint": [
+        "/opt/llama/llama-server"
+      ],
+      "Labels": {
+        "com.docker.compose.project": "semselect",
+        "com.docker.compose.service": "runtime",
+        "com.docker.compose.version": "5.5.1",
+        "io.semselect.experiment": "julia-cpu",
+        "io.semselect.llama-revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+        "io.semselect.owner": "9a5890d7fb95455e92c0f73de05dadce",
+        "org.opencontainers.image.source": "https://github.com/C360Studio/semselect",
+        "org.opencontainers.image.version": "24.04"
+      }
+    },
+    "NetworkSettings": {
+      "SandboxID": "",
+      "SandboxKey": "",
+      "Ports": {},
+      "Networks": {
+        "bridge": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": null,
+          "DriverOpts": null,
+          "GwPriority": 0,
+          "NetworkID": "",
+          "EndpointID": "",
+          "Gateway": "",
+          "IPAddress": "",
+          "MacAddress": "",
+          "IPPrefixLen": 0,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "DNSNames": null
+        }
+      }
+    },
+    "ImageManifestDescriptor": {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:c1530bf8a7abce5e5150b885c63488905a2e10b6f5743e5a770a2ca370327138",
+      "size": 1623,
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux"
+      }
+    }
+  },
+  "runtime_props": {
+    "default_generation_settings": {
+      "params": {
+        "seed": 4294967295,
+        "temperature": 0.800000011920929,
+        "dynatemp_range": 0.0,
+        "dynatemp_exponent": 1.0,
+        "top_k": 40,
+        "top_p": 0.949999988079071,
+        "min_p": 0.05000000074505806,
+        "top_n_sigma": -1.0,
+        "xtc_probability": 0.0,
+        "xtc_threshold": 0.10000000149011612,
+        "typical_p": 1.0,
+        "repeat_last_n": 64,
+        "repeat_penalty": 1.0,
+        "presence_penalty": 0.0,
+        "frequency_penalty": 0.0,
+        "dry_multiplier": 0.0,
+        "dry_base": 1.75,
+        "dry_allowed_length": 2,
+        "dry_penalty_last_n": 64,
+        "mirostat": 0,
+        "mirostat_tau": 5.0,
+        "mirostat_eta": 0.10000000149011612,
+        "adaptive_target": -1.0,
+        "adaptive_decay": 0.8999999761581421,
+        "max_tokens": -1,
+        "n_predict": -1,
+        "n_keep": 0,
+        "n_discard": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "n_probs": 0,
+        "min_keep": 0,
+        "chat_format": "Content-only",
+        "reasoning_format": "none",
+        "reasoning_in_content": false,
+        "generation_prompt": "",
+        "samplers": [
+          "penalties",
+          "dry",
+          "top_n_sigma",
+          "top_k",
+          "typ_p",
+          "top_p",
+          "min_p",
+          "xtc",
+          "temperature"
+        ],
+        "speculative.types": "none",
+        "timings_per_token": false,
+        "post_sampling_probs": false,
+        "backend_sampling": false,
+        "lora": []
+      },
+      "n_ctx": 1024
+    },
+    "total_slots": 1,
+    "model_alias": "semselect-julia-1",
+    "model_ftype": "Q8_0",
+    "model_path": "/models/model.gguf",
+    "modalities": {
+      "vision": false,
+      "video": false,
+      "audio": false
+    },
+    "media_marker": "<__media_TXh27SJOTxeHLAmH0bCHp0rgSh6kTkEF__>",
+    "endpoint_slots": true,
+    "endpoint_props": false,
+    "endpoint_metrics": false,
+    "ui": true,
+    "ui_settings": {},
+    "chat_template": "{%- for message in messages -%}\n  {{- '<|im_start|>' + message.role + '\n' + message.content + '<|im_end|>\n' -}}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n  {{- '<|im_start|>assistant\n' -}}\n{%- endif -%}",
+    "chat_template_caps": {
+      "supports_object_arguments": false,
+      "supports_parallel_tool_calls": false,
+      "supports_preserve_reasoning": false,
+      "supports_reasoning_effort": false,
+      "supports_string_content": true,
+      "supports_system_role": true,
+      "supports_tool_calls": false,
+      "supports_tools": false,
+      "supports_typed_content": false
+    },
+    "bos_token": "<bos>",
+    "eos_token": "<eos>",
+    "build_info": "b0-unknown",
+    "is_sleeping": false,
+    "cors_proxy_enabled": false
+  },
+  "runtime_files_sha256": [
+    "fb85943749fd82842334ff104753cfe9f6dddd7dcf266d110956f218961b29fd  /opt/llama/llama-server",
+    "128b09ab9677fb83b52635eb99969a60a5aec6b1ae985facb6b09db65b3afb19  /opt/llama/libggml-base.so",
+    "128b09ab9677fb83b52635eb99969a60a5aec6b1ae985facb6b09db65b3afb19  /opt/llama/libggml-base.so.0",
+    "128b09ab9677fb83b52635eb99969a60a5aec6b1ae985facb6b09db65b3afb19  /opt/llama/libggml-base.so.0.25.3",
+    "64770f45a6f229d4edd5557345f5718cdfe990382b20a4b9087c3f41f6fc69c2  /opt/llama/libggml-cpu.so",
+    "64770f45a6f229d4edd5557345f5718cdfe990382b20a4b9087c3f41f6fc69c2  /opt/llama/libggml-cpu.so.0",
+    "64770f45a6f229d4edd5557345f5718cdfe990382b20a4b9087c3f41f6fc69c2  /opt/llama/libggml-cpu.so.0.25.3",
+    "fde75f50dbf5598becfcf95246afff77667b360bee83b3c4ee12994e6b2ba87d  /opt/llama/libggml.so",
+    "fde75f50dbf5598becfcf95246afff77667b360bee83b3c4ee12994e6b2ba87d  /opt/llama/libggml.so.0",
+    "fde75f50dbf5598becfcf95246afff77667b360bee83b3c4ee12994e6b2ba87d  /opt/llama/libggml.so.0.25.3",
+    "7487d03967b94f73fb1f24eb5f31582c0f88bb277691d5bcecc4e7640d10ee83  /opt/llama/libllama-common.so",
+    "7487d03967b94f73fb1f24eb5f31582c0f88bb277691d5bcecc4e7640d10ee83  /opt/llama/libllama-common.so.0",
+    "7487d03967b94f73fb1f24eb5f31582c0f88bb277691d5bcecc4e7640d10ee83  /opt/llama/libllama-common.so.0.5.0",
+    "e282d6a9238d5123625f7748ec00e3558def88f1895cd710d20975a1896d8bd8  /opt/llama/libllama-server-impl.so",
+    "ba6ae32110bb741c831c6fef5be01edc0f35a32bb0cb4d424deb4818741bde4d  /opt/llama/libllama.so",
+    "ba6ae32110bb741c831c6fef5be01edc0f35a32bb0cb4d424deb4818741bde4d  /opt/llama/libllama.so.0",
+    "ba6ae32110bb741c831c6fef5be01edc0f35a32bb0cb4d424deb4818741bde4d  /opt/llama/libllama.so.0.5.0",
+    "d6dbf8ec3d200aacdddb372b610217a0db73cbe120c608023cd6a55c6963d2e4  /opt/llama/libmtmd.so",
+    "d6dbf8ec3d200aacdddb372b610217a0db73cbe120c608023cd6a55c6963d2e4  /opt/llama/libmtmd.so.0",
+    "d6dbf8ec3d200aacdddb372b610217a0db73cbe120c608023cd6a55c6963d2e4  /opt/llama/libmtmd.so.0.5.0"
+  ],
+  "status": "ready",
+  "ready_at": "2026-10-06T15:46:16.777307+00:00",
+  "container_before_stop": {
+    "Id": "7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f",
+    "Created": "2026-10-06T15:46:15.090227846Z",
+    "Path": "/opt/llama/llama-server",
+    "Args": [
+      "-m",
+      "/models/model.gguf",
+      "--alias",
+      "semselect-julia-1",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8080",
+      "-ngl",
+      "0",
+      "-t",
+      "4",
+      "-tb",
+      "4",
+      "-c",
+      "1024",
+      "-b",
+      "1024",
+      "-ub",
+      "1024",
+      "-np",
+      "1",
+      "--no-context-shift",
+      "--no-cache-prompt",
+      "--cache-reuse",
+      "0",
+      "--cache-ram",
+      "0",
+      "-lv",
+      "4"
+    ],
+    "State": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 96934,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-06T15:46:15.208957387Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "Image": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+    "ResolvConfPath": "/var/lib/docker/containers/7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f/resolv.conf",
+    "HostnamePath": "/var/lib/docker/containers/7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f/hostname",
+    "HostsPath": "/var/lib/docker/containers/7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f/hosts",
+    "LogPath": "/var/lib/docker/containers/7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f/7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f-json.log",
+    "Name": "/semselect-julia-9a5890d7fb95",
+    "RestartCount": 0,
+    "Driver": "overlayfs",
+    "Platform": "linux",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "AppArmorProfile": "",
+    "ExecIDs": null,
+    "HostConfig": {
+      "Binds": null,
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "json-file",
+        "Config": {}
+      },
+      "NetworkMode": "bridge",
+      "PortBindings": {
+        "8080/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18094"
+          }
+        ]
+      },
+      "RestartPolicy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CgroupnsMode": "private",
+      "Dns": null,
+      "DnsOptions": [],
+      "DnsSearch": [],
+      "ExtraHosts": null,
+      "GroupAdd": null,
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": false,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": true,
+      "SecurityOpt": [
+        "no-new-privileges:true"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,size=64m"
+      },
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 2147483648,
+      "NanoCpus": 4000000000,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": [],
+      "BlkioDeviceReadBps": [],
+      "BlkioDeviceWriteBps": [],
+      "BlkioDeviceReadIOps": [],
+      "BlkioDeviceWriteIOps": [],
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": [],
+      "DeviceCgroupRules": null,
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 2147483648,
+      "MemorySwappiness": null,
+      "OomKillDisable": null,
+      "PidsLimit": 128,
+      "Ulimits": null,
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/Users/coby/Code/c360/semselect/models/Julia-1-Q8_0.gguf",
+          "Target": "/models/model.gguf",
+          "ReadOnly": true
+        }
+      ],
+      "MaskedPaths": [
+        "/proc/acpi",
+        "/proc/asound",
+        "/proc/interrupts",
+        "/proc/kcore",
+        "/proc/keys",
+        "/proc/latency_stats",
+        "/proc/sched_debug",
+        "/proc/scsi",
+        "/proc/timer_list",
+        "/proc/timer_stats",
+        "/sys/devices/virtual/powercap",
+        "/sys/firmware"
+      ],
+      "ReadonlyPaths": [
+        "/proc/bus",
+        "/proc/fs",
+        "/proc/irq",
+        "/proc/sys",
+        "/proc/sysrq-trigger"
+      ]
+    },
+    "Storage": {
+      "RootFS": {
+        "Snapshot": {
+          "Name": "overlayfs"
+        }
+      }
+    },
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/Users/coby/Code/c360/semselect/models/Julia-1-Q8_0.gguf",
+        "Destination": "/models/model.gguf",
+        "Mode": "",
+        "RW": false,
+        "Propagation": "rprivate"
+      }
+    ],
+    "Config": {
+      "Hostname": "7a37b09c43fe",
+      "Domainname": "",
+      "User": "65532:65532",
+      "AttachStdin": false,
+      "AttachStdout": true,
+      "AttachStderr": true,
+      "ExposedPorts": {
+        "8080/tcp": {}
+      },
+      "Tty": false,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LD_LIBRARY_PATH=/opt/llama"
+      ],
+      "Cmd": [
+        "-m",
+        "/models/model.gguf",
+        "--alias",
+        "semselect-julia-1",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8080",
+        "-ngl",
+        "0",
+        "-t",
+        "4",
+        "-tb",
+        "4",
+        "-c",
+        "1024",
+        "-b",
+        "1024",
+        "-ub",
+        "1024",
+        "-np",
+        "1",
+        "--no-context-shift",
+        "--no-cache-prompt",
+        "--cache-reuse",
+        "0",
+        "--cache-ram",
+        "0",
+        "-lv",
+        "4"
+      ],
+      "Image": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+      "Volumes": null,
+      "WorkingDir": "",
+      "Entrypoint": [
+        "/opt/llama/llama-server"
+      ],
+      "Labels": {
+        "com.docker.compose.project": "semselect",
+        "com.docker.compose.service": "runtime",
+        "com.docker.compose.version": "5.5.1",
+        "io.semselect.experiment": "julia-cpu",
+        "io.semselect.llama-revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+        "io.semselect.owner": "9a5890d7fb95455e92c0f73de05dadce",
+        "org.opencontainers.image.source": "https://github.com/C360Studio/semselect",
+        "org.opencontainers.image.version": "24.04"
+      }
+    },
+    "NetworkSettings": {
+      "SandboxID": "8d6f1314902e486dbf4c69247d540362261bd2766d6d4376024ee01c43cb51c5",
+      "SandboxKey": "/var/run/docker/netns/8d6f1314902e",
+      "Ports": {
+        "8080/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18094"
+          }
+        ]
+      },
+      "Networks": {
+        "bridge": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": null,
+          "DriverOpts": null,
+          "GwPriority": 0,
+          "NetworkID": "76d98d1b3ad922e3ee102679ed2be7159fc25c4140ee52275e787fa8049db4bb",
+          "EndpointID": "febd14da69c5324f84582aae71bcf172cdb5931f55f4d02ad3abe59e2c89b44b",
+          "Gateway": "172.17.0.1",
+          "IPAddress": "172.17.0.2",
+          "MacAddress": "2a:ae:f2:0c:26:b4",
+          "IPPrefixLen": 16,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "DNSNames": null
+        }
+      }
+    },
+    "ImageManifestDescriptor": {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:c1530bf8a7abce5e5150b885c63488905a2e10b6f5743e5a770a2ca370327138",
+      "size": 1623,
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux"
+      }
+    }
+  },
+  "cgroup_before_stop": {
+    "memory.current": "553582592",
+    "memory.peak": "555900928",
+    "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0"
+  },
+  "container_stopped": {
+    "Id": "7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f",
+    "Created": "2026-10-06T15:46:15.090227846Z",
+    "Path": "/opt/llama/llama-server",
+    "Args": [
+      "-m",
+      "/models/model.gguf",
+      "--alias",
+      "semselect-julia-1",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8080",
+      "-ngl",
+      "0",
+      "-t",
+      "4",
+      "-tb",
+      "4",
+      "-c",
+      "1024",
+      "-b",
+      "1024",
+      "-ub",
+      "1024",
+      "-np",
+      "1",
+      "--no-context-shift",
+      "--no-cache-prompt",
+      "--cache-reuse",
+      "0",
+      "--cache-ram",
+      "0",
+      "-lv",
+      "4"
+    ],
+    "State": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-06T15:46:15.208957387Z",
+      "FinishedAt": "2026-10-06T15:46:28.536628046Z"
+    },
+    "Image": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+    "ResolvConfPath": "/var/lib/docker/containers/7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f/resolv.conf",
+    "HostnamePath": "/var/lib/docker/containers/7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f/hostname",
+    "HostsPath": "/var/lib/docker/containers/7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f/hosts",
+    "LogPath": "/var/lib/docker/containers/7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f/7a37b09c43fe3780ed5d501425c8dab1bf86f2f8ea5c6103be9390bbc15b8f2f-json.log",
+    "Name": "/semselect-julia-9a5890d7fb95",
+    "RestartCount": 0,
+    "Driver": "overlayfs",
+    "Platform": "linux",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "AppArmorProfile": "",
+    "ExecIDs": null,
+    "HostConfig": {
+      "Binds": null,
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "json-file",
+        "Config": {}
+      },
+      "NetworkMode": "bridge",
+      "PortBindings": {
+        "8080/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18094"
+          }
+        ]
+      },
+      "RestartPolicy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CgroupnsMode": "private",
+      "Dns": null,
+      "DnsOptions": [],
+      "DnsSearch": [],
+      "ExtraHosts": null,
+      "GroupAdd": null,
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": false,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": true,
+      "SecurityOpt": [
+        "no-new-privileges:true"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,size=64m"
+      },
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 2147483648,
+      "NanoCpus": 4000000000,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": [],
+      "BlkioDeviceReadBps": [],
+      "BlkioDeviceWriteBps": [],
+      "BlkioDeviceReadIOps": [],
+      "BlkioDeviceWriteIOps": [],
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": [],
+      "DeviceCgroupRules": null,
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 2147483648,
+      "MemorySwappiness": null,
+      "OomKillDisable": null,
+      "PidsLimit": 128,
+      "Ulimits": null,
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/Users/coby/Code/c360/semselect/models/Julia-1-Q8_0.gguf",
+          "Target": "/models/model.gguf",
+          "ReadOnly": true
+        }
+      ],
+      "MaskedPaths": [
+        "/proc/acpi",
+        "/proc/asound",
+        "/proc/interrupts",
+        "/proc/kcore",
+        "/proc/keys",
+        "/proc/latency_stats",
+        "/proc/sched_debug",
+        "/proc/scsi",
+        "/proc/timer_list",
+        "/proc/timer_stats",
+        "/sys/devices/virtual/powercap",
+        "/sys/firmware"
+      ],
+      "ReadonlyPaths": [
+        "/proc/bus",
+        "/proc/fs",
+        "/proc/irq",
+        "/proc/sys",
+        "/proc/sysrq-trigger"
+      ]
+    },
+    "Storage": {
+      "RootFS": {
+        "Snapshot": {
+          "Name": "overlayfs"
+        }
+      }
+    },
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/Users/coby/Code/c360/semselect/models/Julia-1-Q8_0.gguf",
+        "Destination": "/models/model.gguf",
+        "Mode": "",
+        "RW": false,
+        "Propagation": "rprivate"
+      }
+    ],
+    "Config": {
+      "Hostname": "7a37b09c43fe",
+      "Domainname": "",
+      "User": "65532:65532",
+      "AttachStdin": false,
+      "AttachStdout": true,
+      "AttachStderr": true,
+      "ExposedPorts": {
+        "8080/tcp": {}
+      },
+      "Tty": false,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LD_LIBRARY_PATH=/opt/llama"
+      ],
+      "Cmd": [
+        "-m",
+        "/models/model.gguf",
+        "--alias",
+        "semselect-julia-1",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8080",
+        "-ngl",
+        "0",
+        "-t",
+        "4",
+        "-tb",
+        "4",
+        "-c",
+        "1024",
+        "-b",
+        "1024",
+        "-ub",
+        "1024",
+        "-np",
+        "1",
+        "--no-context-shift",
+        "--no-cache-prompt",
+        "--cache-reuse",
+        "0",
+        "--cache-ram",
+        "0",
+        "-lv",
+        "4"
+      ],
+      "Image": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+      "Volumes": null,
+      "WorkingDir": "",
+      "Entrypoint": [
+        "/opt/llama/llama-server"
+      ],
+      "Labels": {
+        "com.docker.compose.project": "semselect",
+        "com.docker.compose.service": "runtime",
+        "com.docker.compose.version": "5.5.1",
+        "io.semselect.experiment": "julia-cpu",
+        "io.semselect.llama-revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+        "io.semselect.owner": "9a5890d7fb95455e92c0f73de05dadce",
+        "org.opencontainers.image.source": "https://github.com/C360Studio/semselect",
+        "org.opencontainers.image.version": "24.04"
+      }
+    },
+    "NetworkSettings": {
+      "SandboxID": "",
+      "SandboxKey": "",
+      "Ports": {},
+      "Networks": {
+        "bridge": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": null,
+          "DriverOpts": null,
+          "GwPriority": 0,
+          "NetworkID": "76d98d1b3ad922e3ee102679ed2be7159fc25c4140ee52275e787fa8049db4bb",
+          "EndpointID": "",
+          "Gateway": "",
+          "IPAddress": "",
+          "MacAddress": "",
+          "IPPrefixLen": 0,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "DNSNames": null
+        }
+      }
+    },
+    "ImageManifestDescriptor": {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:c1530bf8a7abce5e5150b885c63488905a2e10b6f5743e5a770a2ca370327138",
+      "size": 1623,
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux"
+      }
+    }
+  },
+  "stopped_at": "2026-10-06T15:46:28.771711+00:00",
+  "stopped": true,
+  "cleanup_errors": [],
+  "other_running_container_count": 16,
+  "publication_note": "Derived from original runtime.json: unrelated Docker inventory omitted; count retained. Original local runtime.json is retained in the ignored results directory. All fields describing this experiment are unchanged.",
+  "original_runtime_json_sha256": "68e8b30c7a2a4dab85e4130479ceeca4f94c094e33c9b013f1f18ff2f931d0f2"
+}

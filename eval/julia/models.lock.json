@@ -1,0 +1,14 @@
+{
+  "repository": "ggml-org/Julia-1-GGUF",
+  "revision": "16fee17949206fbf58da9347daea44d792a81211",
+  "filename": "Julia-1-Q8_0.gguf",
+  "size_bytes": 168166496,
+  "sha256": "1ea6a7e87156eeeda88cb7a36a61265b37ba7b993897b7289b99aea5b5e47069",
+  "license": "Apache-2.0",
+  "alias": "semselect-julia-1",
+  "source_repository": "SupersonicLabs/Julia-1",
+  "conversion_source_revision": "a85b127321d580d65176c89ced8273f305745d85",
+  "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+  "metadata_source": "https://huggingface.co/api/models/ggml-org/Julia-1-GGUF/revision/16fee17949206fbf58da9347daea44d792a81211?blobs=true",
+  "scope": "Isolated evaluation candidate; does not replace models.lock.json or establish CPU/Metal support."
+}

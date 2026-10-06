@@ -11,6 +11,12 @@
   attribution when redistributing weights. See `licenses/Apache-2.0.txt`.
 - Ubuntu and Go images contain software under their respective package licenses;
   image digests and the Ubuntu package snapshot are pinned in the Dockerfile.
+- Optional Julia evaluation candidate: Julia-1, Supersonic Labs, based on
+  JHU CLSP's mmBERT-small; the source card and ggml-org distribution declare
+  Apache-2.0. The unmodified Q8_0 artifact and conversion source revision are
+  pinned in `eval/julia/models.lock.json`. Preserve attribution and
+  `licenses/Apache-2.0.txt` with redistributed weights. The private training
+  pipeline is not part of this repository.
 - Optional matched-size chat baseline: Qwen3.5-4B, Qwen Team / Alibaba Cloud,
   Apache-2.0, distributed as a Q4_K_M GGUF by Unsloth. The exact artifact revision,
   size and SHA-256 are recorded in `models.baseline.lock.json`. Its model card
@@ -31,3 +37,7 @@ Baseline sources: [pinned Unsloth model card](https://huggingface.co/unsloth/Qwe
 Jev and System One identify TypeSafe's product and API. semselect is independent
 and does not contain proprietary Jev code or weights. API compatibility is not
 a claim of equivalent quality, calibration, latency, or endorsement.
+
+Julia sources: [pinned source model card](https://huggingface.co/SupersonicLabs/Julia-1/blob/a85b127321d580d65176c89ced8273f305745d85/README.md),
+[pinned GGUF card](https://huggingface.co/ggml-org/Julia-1-GGUF/blob/16fee17949206fbf58da9347daea44d792a81211/README.md),
+[base encoder](https://huggingface.co/jhu-clsp/mmBERT-small).

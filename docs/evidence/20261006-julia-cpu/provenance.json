@@ -1,0 +1,34 @@
+{
+  "model_lock": {
+    "repository": "ggml-org/Julia-1-GGUF",
+    "revision": "16fee17949206fbf58da9347daea44d792a81211",
+    "filename": "Julia-1-Q8_0.gguf",
+    "size_bytes": 168166496,
+    "sha256": "1ea6a7e87156eeeda88cb7a36a61265b37ba7b993897b7289b99aea5b5e47069",
+    "license": "Apache-2.0",
+    "alias": "semselect-julia-1",
+    "source_repository": "SupersonicLabs/Julia-1",
+    "conversion_source_revision": "a85b127321d580d65176c89ced8273f305745d85",
+    "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+    "metadata_source": "https://huggingface.co/api/models/ggml-org/Julia-1-GGUF/revision/16fee17949206fbf58da9347daea44d792a81211?blobs=true",
+    "scope": "Isolated evaluation candidate; does not replace models.lock.json or establish CPU/Metal support."
+  },
+  "model_verified": true,
+  "recorded_at": "2026-10-06T15:46:14.906034+00:00",
+  "source_sha256": {
+    "eval/julia/models.lock.json": "3faaa9029f8dcdbc26dfd6c0ce4abd84b7d1ea895b5f1c06400289aaa1c6541a",
+    "eval/routing-smoke.json": "81590b0d2e0773f49b7b1c524729acb96d37a74b29ca134c710701a0037b5d2a",
+    "examples/decision.json": "ea2b0c716bc958056e57939a0a50d3631aedbb498117899c829010ad3a04aa84",
+    "Dockerfile": "875521ae3c5d0e5008843795810037dab01514d2c108d45eb8e5370b7fe36828",
+    "scripts/model.py": "eda4d6bfef779e1622f33df722c9f4459e5857262121cb3732d4d2880adf5824",
+    "scripts/evaluate.py": "b448c23d910b57c383b53ea90f5684f8400e0f6bec1a75027a08a060ad9260b7",
+    "eval/julia/probe.py": "20b63b64004769a67401a5417f98a71577a6622a448a6e2bab983635add1a8a5",
+    "eval/julia/preflight.py": "2fc7603e8e45930c25a43c7ab26ef196961a08a3641d02b4243f9209c3891779",
+    "eval/julia/protocol.json": "3b70f8753c8a705d207ca5768816e162b265a097c112216c218e327a5aeebfcb",
+    "eval/julia/gguf-metadata.json": "0e60547f999b11b93bece92b6f23d849737fa64d9be7501a96eaf5eb08846251"
+  },
+  "client_platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "client_machine": "arm64",
+  "python_version": "3.14.5",
+  "requests_sha256": "5f6424d72c39ee11a8b2960645134ac7e2aca0bede6b25de9d6c98bec4442790"
+}

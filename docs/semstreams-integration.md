@@ -1,10 +1,31 @@
 # Proposed SemStreams integration
 
+**Closeout status, 2026-10-06: proposal only.** The CPU/Metal research did not
+establish a production adoption case. No adapter or new provider framework is
+required to complete it. Revisit this design only for a caller that meets the
+[reopening conditions](when-to-use.md#research-closeout-and-reopening-conditions).
+
 semselect packages llama.cpp's native `POST /v1/systemone` endpoint for a pinned
 decision model. The initial local profile uses textual state and bounded requests.
 It keeps the upstream Choice, Score, and Noul wire shapes; a new semselect selection
 protocol is unnecessary. This document proposes future SemStreams work. No sibling
 repository is changed by this bootstrap.
+
+## Typed decisions can use an existing model
+
+A narrow caller contract could separate a permitted label, explicit abstention,
+model/method identity, and optional score evidence from transport failures. Start
+with an existing caller that needs those distinctions. Qwen JSON can return a
+label without a distribution; the measured one-token Qwen path can additionally
+supply raw option scores. Neither needs a specialized model to make the result
+typed. Keep absent evidence absent, and keep raw scores distinct from calibrated
+correctness estimates.
+
+The hardcoded `0.9` and generated confidence values in the inventory below deserve
+clearer semantics. They do not justify replacing them with unvalidated native
+probabilities or building a general provider layer. Compare a proposed Qwen-backed
+contract at one real call site before committing to any integration. The native
+client design below applies only if a specialized backend later earns its place.
 
 ## Responsibility boundary
 
@@ -72,13 +93,13 @@ The inventory below describes local SemStreams commit
 Changing an OpenAI endpoint URL is insufficient. The query component explicitly
 constructs a chat client and `LLMClassifier` in
 [`processor/graph-query/component.go:422`](https://github.com/c360studio/semstreams/blob/1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a/processor/graph-query/component.go#L422),
-and the chain retains concrete classifier types. It needs an explicit decision-client
-branch or a narrow injectable classifier seam. A compatibility adapter that emits
-generated search-options JSON would lose the evidence semselect is intended to expose.
+and the chain retains concrete classifier types. If native decision integration
+is justified, it needs an explicit client branch or a narrow injectable classifier
+seam. A label-only compatibility adapter cannot preserve a native distribution.
 
 ## Smallest proposed adapter
 
-Add one System One HTTP client, with an injected `http.Client`, base URL, and
+If native integration earns adoption, add one System One HTTP client, with an injected `http.Client`, base URL, and
 per-call `context.Context`. Use Go request/response types mirroring the native
 endpoint and typed methods for its three question kinds. The following signatures
 are a proposal, not an existing SemStreams package or a new HTTP API:
@@ -124,8 +145,8 @@ parallel result; either requires explicit downstream handling and tests.
 
 Callers may abstain when `unknown` wins, the highest probability is below a configured
 threshold, or the first/second margin is too small. These are application policy,
-not calibration claims. Select thresholds on held-out data and report coverage and
-error together. The caller chooses keyword fallback, another model, clarification,
+not calibration claims. Fit thresholds on development data, confirm on separate
+held-out data, and report coverage and error together. The caller chooses keyword fallback, another model, clarification,
 or no action; semselect does not execute the routing decision.
 
 ## Integration acceptance checks
@@ -182,8 +203,9 @@ The optional gateway BM25 path and graph-query's keyword/optional-LLM path are
 different configurations. A correct library hint is not evidence of correct
 end-to-end dispatch. This is proposed follow-up work; siblings remain unchanged.
 
-The [measured classifier pilot](../eval/query-routing/README.md) makes the next
-steps concrete. These are proposals, not changes to SemStreams:
+The [measured classifier pilot](../eval/query-routing/README.md) identifies
+concrete improvements for SemStreams owners to consider. They are not remaining
+requirements of the semselect research phase or changes to SemStreams:
 
 1. Add regressions for extracting `of` instead of a metric (R17/R21), then improve
    ordinary missing phrases such as “number of,” “smallest” and “highest.” Use

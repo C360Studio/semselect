@@ -1,0 +1,598 @@
+2026-10-06T15:46:15.304432471Z warning: no usable GPU found, --gpu-layers option will be ignored
+2026-10-06T15:46:15.304474221Z warning: one possible reason is that llama.cpp was compiled without GPU support
+2026-10-06T15:46:15.304476762Z warning: consult docs/build.md for compilation instructions
+2026-10-06T15:46:15.304751471Z 0.00.002.654 I srv  llama_server: initializing ...
+2026-10-06T15:46:15.304759221Z 0.00.002.716 I cmn  common_param: common_params_print_info: build 0 (unknown) with GNU 13.3.0 for Linux aarch64
+2026-10-06T15:46:15.304760512Z 0.00.002.717 I cmn  common_param: common_params_print_info: verbosity = 4 (adjust with the `-lv N` CLI arg)
+2026-10-06T15:46:15.304761471Z 0.00.002.717 I cmn  common_param: device_info:
+2026-10-06T15:46:15.304943804Z 0.00.002.753 I cmn  common_param:   - CPU     : CPU (23742 MiB, 23742 MiB free)
+2026-10-06T15:46:15.304947679Z 0.00.002.912 I cmn  common_param: system_info: n_threads = 4 (n_threads_batch = 4) / 12 | CPU : NEON = 1 | ARM_FMA = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+2026-10-06T15:46:15.305699637Z 0.00.003.429 I srv          init: using 11 threads for HTTP server
+2026-10-06T15:46:15.305715554Z 0.00.003.486 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+2026-10-06T15:46:15.307369346Z 0.00.005.313 I srv    load_model: loading model '/models/model.gguf'
+2026-10-06T15:46:15.307409387Z 0.00.005.320 I srv    load_model: local path '/models/model.gguf'
+2026-10-06T15:46:15.307413012Z 0.00.005.345 I cmn  common_init_: fitting params to device memory ...
+2026-10-06T15:46:15.307414096Z 0.00.005.345 I cmn  common_init_: (for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on)
+2026-10-06T15:46:15.307421971Z 0.00.005.392 I common_params_fit_impl: getting device memory data for initial parameters:
+2026-10-06T15:46:15.900463388Z 0.00.598.277 I common_memory_breakdown_print: | memory breakdown [MiB] | total   free    self   model   context   compute    unaccounted |
+2026-10-06T15:46:15.900505763Z 0.00.598.289 I common_memory_breakdown_print: |   - Host               |                  171 =   146 +       0 +      25                |
+2026-10-06T15:46:16.019306638Z 0.00.717.245 I common_params_fit_impl: projected to use 171 MiB of host memory vs. 23742 MiB of total host memory
+2026-10-06T15:46:16.019330471Z 0.00.717.256 I common_params_fit_impl: will leave 23571 >= 1024 MiB of system memory, no changes needed
+2026-10-06T15:46:16.019332263Z 0.00.717.256 I common_fit_params: successfully fit params to free device memory
+2026-10-06T15:46:16.019333346Z 0.00.717.260 I common_fit_params: fitting params to free memory took 0.71 seconds
+2026-10-06T15:46:16.057365513Z 0.00.755.300 I llama_model_loader: loaded meta data with 48 key-value pairs and 165 tensors from /models/model.gguf (version GGUF V3 (latest))
+2026-10-06T15:46:16.057386888Z 0.00.755.316 I llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+2026-10-06T15:46:16.057388138Z 0.00.755.319 I llama_model_loader: - kv   0:                       general.architecture str              = modern-bert
+2026-10-06T15:46:16.057396263Z 0.00.755.320 I llama_model_loader: - kv   1:                               general.type str              = model
+2026-10-06T15:46:16.057397054Z 0.00.755.320 I llama_model_loader: - kv   2:                               general.name str              = Julia-1
+2026-10-06T15:46:16.057397846Z 0.00.755.321 I llama_model_loader: - kv   3:                         general.size_label str              = 144M
+2026-10-06T15:46:16.057398596Z 0.00.755.321 I llama_model_loader: - kv   4:                            general.license str              = apache-2.0
+2026-10-06T15:46:16.057399346Z 0.00.755.322 I llama_model_loader: - kv   5:                   general.base_model.count u32              = 1
+2026-10-06T15:46:16.057400096Z 0.00.755.322 I llama_model_loader: - kv   6:                  general.base_model.0.name str              = mmBERT Small
+2026-10-06T15:46:16.057400888Z 0.00.755.323 I llama_model_loader: - kv   7:          general.base_model.0.organization str              = Jhu Clsp
+2026-10-06T15:46:16.057401638Z 0.00.755.324 I llama_model_loader: - kv   8:              general.base_model.0.repo_url str              = https://huggingface.co/jhu-clsp/mmBER...
+2026-10-06T15:46:16.057402471Z 0.00.755.332 I llama_model_loader: - kv   9:                               general.tags arr[str,4]       = ["decision-model", "text-classificati...
+2026-10-06T15:46:16.057403429Z 0.00.755.333 I llama_model_loader: - kv  10:                    modern-bert.block_count u32              = 24
+2026-10-06T15:46:16.057404179Z 0.00.755.333 I llama_model_loader: - kv  11:                 modern-bert.context_length u32              = 8192
+2026-10-06T15:46:16.057404929Z 0.00.755.334 I llama_model_loader: - kv  12:               modern-bert.embedding_length u32              = 384
+2026-10-06T15:46:16.057405679Z 0.00.755.336 I llama_model_loader: - kv  13:            modern-bert.feed_forward_length arr[i32,24]      = [1152, 1152, 1152, 1152, 1152, 1152, ...
+2026-10-06T15:46:16.057407138Z 0.00.755.336 I llama_model_loader: - kv  14:           modern-bert.attention.head_count u32              = 6
+2026-10-06T15:46:16.057407888Z 0.00.755.340 I llama_model_loader: - kv  15:                 modern-bert.rope.freq_base f32              = 160000.000000
+2026-10-06T15:46:16.057408638Z 0.00.755.341 I llama_model_loader: - kv  16:             modern-bert.rope.freq_base_swa f32              = 160000.000000
+2026-10-06T15:46:16.057411179Z 0.00.755.342 I llama_model_loader: - kv  17: modern-bert.attention.layer_norm_rms_epsilon f32              = 0.000010
+2026-10-06T15:46:16.057411929Z 0.00.755.342 I llama_model_loader: - kv  18:   modern-bert.attention.layer_norm_epsilon f32              = 0.000010
+2026-10-06T15:46:16.057412679Z 0.00.755.342 I llama_model_loader: - kv  19:               modern-bert.attention.causal bool             = false
+2026-10-06T15:46:16.057413429Z 0.00.755.343 I llama_model_loader: - kv  20:        modern-bert.classifier.pooling_type u32              = 1
+2026-10-06T15:46:16.057414179Z 0.00.755.343 I llama_model_loader: - kv  21:       modern-bert.attention.sliding_window u32              = 128
+2026-10-06T15:46:16.057416971Z 0.00.755.343 I llama_model_loader: - kv  22: modern-bert.attention.sliding_window_pattern u32              = 3
+2026-10-06T15:46:16.057417763Z 0.00.755.343 I llama_model_loader: - kv  23:              modern-bert.rope.scaling.type str              = none
+2026-10-06T15:46:16.057418513Z 0.00.755.344 I llama_model_loader: - kv  24:                     modern-bert.vocab_size u32              = 256000
+2026-10-06T15:46:16.057419263Z 0.00.755.344 I llama_model_loader: - kv  25:              modern-bert.hidden_activation str              = gelu
+2026-10-06T15:46:16.057420013Z 0.00.755.344 I llama_model_loader: - kv  26:                  modern-bert.decision.type str              = laya
+2026-10-06T15:46:16.057420763Z 0.00.755.344 I llama_model_loader: - kv  27:           modern-bert.decision.block_count u32              = 2
+2026-10-06T15:46:16.057421471Z 0.00.755.345 I llama_model_loader: - kv  28:       modern-bert.decision.max_head_tokens u32              = 256
+2026-10-06T15:46:16.057422221Z 0.00.755.345 I llama_model_loader: - kv  29:               tokenizer.ggml.add_bos_token bool             = true
+2026-10-06T15:46:16.057422971Z 0.00.755.345 I llama_model_loader: - kv  30:               tokenizer.ggml.add_eos_token bool             = true
+2026-10-06T15:46:16.057423721Z 0.00.755.345 I llama_model_loader: - kv  31:               tokenizer.ggml.add_sep_token bool             = false
+2026-10-06T15:46:16.057424554Z 0.00.755.346 I llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+2026-10-06T15:46:16.057425304Z 0.00.755.346 I llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = mmbert
+2026-10-06T15:46:16.072451679Z 0.00.770.375 I llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,256000]  = ["<pad>", "<eos>", "<bos>", "<unk>", ...
+2026-10-06T15:46:16.076595013Z 0.00.774.579 I llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,256000]  = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, ...
+2026-10-06T15:46:16.109533304Z 0.00.807.450 I llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,580604]  = ["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n", ...
+2026-10-06T15:46:16.109557138Z 0.00.807.467 I llama_model_loader: - kv  37:                tokenizer.ggml.bos_token_id u32              = 2
+2026-10-06T15:46:16.109558638Z 0.00.807.468 I llama_model_loader: - kv  38:                tokenizer.ggml.eos_token_id u32              = 1
+2026-10-06T15:46:16.109559554Z 0.00.807.468 I llama_model_loader: - kv  39:            tokenizer.ggml.unknown_token_id u32              = 3
+2026-10-06T15:46:16.109560346Z 0.00.807.468 I llama_model_loader: - kv  40:          tokenizer.ggml.seperator_token_id u32              = 1
+2026-10-06T15:46:16.109561138Z 0.00.807.469 I llama_model_loader: - kv  41:            tokenizer.ggml.padding_token_id u32              = 0
+2026-10-06T15:46:16.109561929Z 0.00.807.469 I llama_model_loader: - kv  42:               tokenizer.ggml.mask_token_id u32              = 4
+2026-10-06T15:46:16.109562679Z 0.00.807.469 I llama_model_loader: - kv  43:            tokenizer.ggml.token_type_count u32              = 3
+2026-10-06T15:46:16.109574971Z 0.00.807.471 I llama_model_loader: - kv  44:          tokenizer.chat_template.systemone str              = <bos>{{ type }} question: {{ instruct...
+2026-10-06T15:46:16.109576221Z 0.00.807.475 I llama_model_loader: - kv  45:                   tokenizer.chat_templates arr[str,1]       = ["systemone"]
+2026-10-06T15:46:16.109577138Z 0.00.807.475 I llama_model_loader: - kv  46:               general.quantization_version u32              = 2
+2026-10-06T15:46:16.109577929Z 0.00.807.475 I llama_model_loader: - kv  47:                          general.file_type u32              = 7
+2026-10-06T15:46:16.109578679Z 0.00.807.477 I llama_model_loader: - type  f32:   66 tensors
+2026-10-06T15:46:16.109579429Z 0.00.807.477 I llama_model_loader: - type q8_0:   98 tensors
+2026-10-06T15:46:16.109580096Z 0.00.807.478 I llama_model_loader: - type bf16:    1 tensors
+2026-10-06T15:46:16.109580804Z 0.00.807.479 I print_info: file format = GGUF V3 (latest)
+2026-10-06T15:46:16.109581513Z 0.00.807.479 I print_info: file type   = Q8_0
+2026-10-06T15:46:16.109582221Z 0.00.807.482 I print_info: file size   = 146.19 MiB (8.50 BPW) 
+2026-10-06T15:46:16.387228013Z 0.01.085.158 I load: 100 unused tokens
+2026-10-06T15:46:16.396213221Z 0.01.094.160 W load: control-looking token:    213 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+2026-10-06T15:46:16.422718096Z 0.01.120.630 I load: printing all EOG tokens:
+2026-10-06T15:46:16.422741721Z 0.01.120.640 I load:   - 1 ('<eos>')
+2026-10-06T15:46:16.422743430Z 0.01.120.641 I load:   - 107 ('<end_of_turn>')
+2026-10-06T15:46:16.422744263Z 0.01.120.642 I load:   - 213 ('</s>')
+2026-10-06T15:46:16.422886721Z 0.01.120.909 I load: special tokens cache size = 219
+2026-10-06T15:46:16.436989013Z 0.01.134.889 I load: token to piece cache size = 1.6026 MB
+2026-10-06T15:46:16.437005555Z 0.01.134.915 I print_info: arch                  = modern-bert
+2026-10-06T15:46:16.437006721Z 0.01.134.916 I print_info: vocab_only            = 0
+2026-10-06T15:46:16.437007471Z 0.01.134.916 I print_info: no_alloc              = 0
+2026-10-06T15:46:16.437008180Z 0.01.134.916 I print_info: n_ctx_train           = 8192
+2026-10-06T15:46:16.437009096Z 0.01.134.916 I print_info: n_embd_inp            = 384
+2026-10-06T15:46:16.437009971Z 0.01.134.917 I print_info: n_embd                = 384
+2026-10-06T15:46:16.437010721Z 0.01.134.917 I print_info: n_embd_out            = 3
+2026-10-06T15:46:16.437011471Z 0.01.134.917 I print_info: n_layer               = 24
+2026-10-06T15:46:16.437012138Z 0.01.134.917 I print_info: n_layer_all           = 24
+2026-10-06T15:46:16.437012846Z 0.01.134.925 I print_info: n_head                = 6
+2026-10-06T15:46:16.437013555Z 0.01.134.925 I print_info: n_head_kv             = 6
+2026-10-06T15:46:16.437014305Z 0.01.134.926 I print_info: n_rot                 = 64
+2026-10-06T15:46:16.437028263Z 0.01.134.926 I print_info: n_swa                 = 128
+2026-10-06T15:46:16.437030180Z 0.01.134.926 I print_info: is_swa_any            = 1
+2026-10-06T15:46:16.437031055Z 0.01.134.926 I print_info: non_causal_type       = 0
+2026-10-06T15:46:16.437031930Z 0.01.134.926 I print_info: n_embd_head_k         = 64
+2026-10-06T15:46:16.437032805Z 0.01.134.927 I print_info: n_embd_head_v         = 64
+2026-10-06T15:46:16.437033638Z 0.01.134.927 I print_info: n_gqa                 = 1
+2026-10-06T15:46:16.437034471Z 0.01.134.929 I print_info: n_embd_k_gqa          = 384
+2026-10-06T15:46:16.437035305Z 0.01.134.930 I print_info: n_embd_v_gqa          = 384
+2026-10-06T15:46:16.437036221Z 0.01.134.931 I print_info: f_norm_eps            = 1.0e-05
+2026-10-06T15:46:16.437037180Z 0.01.134.931 I print_info: f_norm_rms_eps        = 0.0e+00
+2026-10-06T15:46:16.437038096Z 0.01.134.932 I print_info: f_clamp_kqv           = 0.0e+00
+2026-10-06T15:46:16.437038930Z 0.01.134.932 I print_info: f_max_alibi_bias      = 0.0e+00
+2026-10-06T15:46:16.437039805Z 0.01.134.932 I print_info: f_logit_scale         = 0.0e+00
+2026-10-06T15:46:16.437040596Z 0.01.134.932 I print_info: f_attn_scale          = 0.0e+00
+2026-10-06T15:46:16.437041305Z 0.01.134.932 I print_info: f_attn_value_scale    = 0.0000
+2026-10-06T15:46:16.437042055Z 0.01.134.936 I print_info: n_ff                  = [1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1152, 1536, 1536]
+2026-10-06T15:46:16.437043680Z 0.01.134.936 I print_info: n_expert              = 0
+2026-10-06T15:46:16.437044388Z 0.01.134.936 I print_info: n_expert_used         = 0
+2026-10-06T15:46:16.437045055Z 0.01.134.936 I print_info: n_expert_groups       = 0
+2026-10-06T15:46:16.437045763Z 0.01.134.937 I print_info: n_group_used          = 0
+2026-10-06T15:46:16.437046471Z 0.01.134.937 I print_info: causal attn           = 0
+2026-10-06T15:46:16.437048013Z 0.01.134.937 I print_info: pooling type          = -1
+2026-10-06T15:46:16.437048721Z 0.01.134.937 I print_info: rope type             = 2
+2026-10-06T15:46:16.437049388Z 0.01.134.937 I print_info: rope scaling          = none
+2026-10-06T15:46:16.437050096Z 0.01.134.938 I print_info: freq_base_train       = 160000.0
+2026-10-06T15:46:16.437050805Z 0.01.134.939 I print_info: freq_scale_train      = 1
+2026-10-06T15:46:16.437051513Z 0.01.134.939 I print_info: freq_base_swa         = 160000.0
+2026-10-06T15:46:16.437052221Z 0.01.134.939 I print_info: freq_scale_swa        = 1
+2026-10-06T15:46:16.437052888Z 0.01.134.939 I print_info: n_embd_head_k_swa     = 64
+2026-10-06T15:46:16.437053596Z 0.01.134.940 I print_info: n_embd_head_v_swa     = 64
+2026-10-06T15:46:16.437054263Z 0.01.134.940 I print_info: n_rot_swa             = 64
+2026-10-06T15:46:16.437056971Z 0.01.134.940 I print_info: n_ctx_orig_yarn       = 8192
+2026-10-06T15:46:16.437057680Z 0.01.134.940 I print_info: rope_yarn_log_mul     = 0.0000
+2026-10-06T15:46:16.437058388Z 0.01.134.940 I print_info: rope_finetuned        = unknown
+2026-10-06T15:46:16.437059055Z 0.01.134.941 I print_info: model type            = ?B
+2026-10-06T15:46:16.437059763Z 0.01.134.942 I print_info: model params          = 144.19 M
+2026-10-06T15:46:16.437060471Z 0.01.134.942 I print_info: general.name          = Julia-1
+2026-10-06T15:46:16.437061138Z 0.01.134.943 I print_info: vocab type            = BPE
+2026-10-06T15:46:16.437061846Z 0.01.134.943 I print_info: n_vocab               = 256000
+2026-10-06T15:46:16.437062513Z 0.01.134.943 I print_info: n_merges              = 580604
+2026-10-06T15:46:16.437063221Z 0.01.134.943 I print_info: BOS token             = 2 '<bos>'
+2026-10-06T15:46:16.437064180Z 0.01.134.944 I print_info: EOS token             = 1 '<eos>'
+2026-10-06T15:46:16.437064930Z 0.01.134.944 I print_info: EOT token             = 107 '<end_of_turn>'
+2026-10-06T15:46:16.437065680Z 0.01.134.944 I print_info: UNK token             = 3 '<unk>'
+2026-10-06T15:46:16.437066430Z 0.01.134.944 I print_info: SEP token             = 1 '<eos>'
+2026-10-06T15:46:16.437067138Z 0.01.134.945 I print_info: PAD token             = 0 '<pad>'
+2026-10-06T15:46:16.437067846Z 0.01.134.945 I print_info: MASK token            = 4 '<mask>'
+2026-10-06T15:46:16.437068596Z 0.01.134.945 I print_info: LF token              = 108 '
+2026-10-06T15:46:16.437069305Z '
+2026-10-06T15:46:16.437069971Z 0.01.134.945 I print_info: EOG token             = 1 '<eos>'
+2026-10-06T15:46:16.437070721Z 0.01.134.945 I print_info: EOG token             = 107 '<end_of_turn>'
+2026-10-06T15:46:16.437071471Z 0.01.134.946 I print_info: EOG token             = 213 '</s>'
+2026-10-06T15:46:16.437072180Z 0.01.134.946 I print_info: max token length      = 93
+2026-10-06T15:46:16.437072930Z 0.01.134.947 I load_tensors: loading model tensors, this can take a while... (load_mode = mmap)
+2026-10-06T15:46:16.504802846Z 0.01.202.759 I load_tensors:   CPU_Mapped model buffer size =   146.19 MiB
+2026-10-06T15:46:16.506499346Z 0.01.204.492 I decision model reads the embeddings output, enabling embedding mode
+2026-10-06T15:46:16.506511513Z 0.01.204.511 I cmn  common_init_: added <eos> logit bias = -inf
+2026-10-06T15:46:16.506513096Z 0.01.204.514 I cmn  common_init_: added <end_of_turn> logit bias = -inf
+2026-10-06T15:46:16.506514221Z 0.01.204.516 I cmn  common_init_: added </s> logit bias = -inf
+2026-10-06T15:46:16.508001013Z 0.01.206.003 W llama_init_from_model: model default pooling_type is [-1], but [0] was specified
+2026-10-06T15:46:16.508007346Z 0.01.206.018 I llama_context: constructing llama_context
+2026-10-06T15:46:16.508015263Z 0.01.206.019 I llama_context: n_seq_max             = 1
+2026-10-06T15:46:16.508016263Z 0.01.206.020 I llama_context: n_ctx                 = 1024
+2026-10-06T15:46:16.508017138Z 0.01.206.020 I llama_context: n_ctx_seq             = 1024
+2026-10-06T15:46:16.508018013Z 0.01.206.020 I llama_context: n_batch               = 1024
+2026-10-06T15:46:16.508018888Z 0.01.206.020 I llama_context: n_ubatch              = 1024
+2026-10-06T15:46:16.508019721Z 0.01.206.020 I llama_context: causal_attn           = 0
+2026-10-06T15:46:16.508020596Z 0.01.206.021 I llama_context: flash_attn            = auto
+2026-10-06T15:46:16.508021555Z 0.01.206.022 I llama_context: kv_unified            = false
+2026-10-06T15:46:16.508022555Z 0.01.206.023 I llama_context: freq_base             = 160000.0
+2026-10-06T15:46:16.508023430Z 0.01.206.024 I llama_context: freq_scale            = 1
+2026-10-06T15:46:16.508024346Z 0.01.206.024 I llama_context: n_rs_seq              = 0
+2026-10-06T15:46:16.508025263Z 0.01.206.024 I llama_context: n_outputs_max         = 1024
+2026-10-06T15:46:16.508026180Z 0.01.206.024 I llama_context: n_outputs_max_per_seq = 1
+2026-10-06T15:46:16.508027180Z 0.01.206.024 I llama_context: n_ctx_seq (1024) < n_ctx_train (8192) -- the full capacity of the model will not be utilized
+2026-10-06T15:46:16.508028346Z 0.01.206.046 I llama_context:        CPU  output buffer size =     0.98 MiB
+2026-10-06T15:46:16.508029305Z 0.01.206.051 I sched_reserve: reserving ...
+2026-10-06T15:46:16.508276180Z 0.01.206.305 I resolve_fused_ops: Flash Attention enabled
+2026-10-06T15:46:16.508280888Z 0.01.206.310 I resolve_fused_ops: resolving fused DeepSeek V4 HC support:
+2026-10-06T15:46:16.508452346Z 0.01.206.480 I resolve_fused_ops: fused DeepSeek V4 HC pre enabled
+2026-10-06T15:46:16.508612888Z 0.01.206.651 I resolve_fused_ops: fused DeepSeek V4 HC comb enabled
+2026-10-06T15:46:16.508773471Z 0.01.206.809 I resolve_fused_ops: fused DeepSeek V4 HC post enabled
+2026-10-06T15:46:16.509442805Z 0.01.207.470 I sched_reserve:        CPU compute buffer size =    25.02 MiB
+2026-10-06T15:46:16.509446430Z 0.01.207.474 I sched_reserve: graph: nodes = 740, splits = 1, input objects = 4, input tensors = 8
+2026-10-06T15:46:16.509447513Z 0.01.207.475 I sched_reserve: reserve took 1.42 ms, sched copies = 1
+2026-10-06T15:46:16.509477596Z 0.01.207.529 I cmn          init: llama threadpool init, n_threads = 4
+2026-10-06T15:46:16.509481888Z 0.01.207.554 I cmn  common_init_: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+2026-10-06T15:46:16.509565346Z 0.01.207.601 W init: embeddings required but some input tokens were not marked as outputs -> overriding
+2026-10-06T15:46:16.525372888Z 0.01.223.353 I srv          init: decision model type: laya
+2026-10-06T15:46:16.525392180Z 0.01.223.367 W srv    load_model: speculative decoding not supported by this context
+2026-10-06T15:46:16.525393513Z 0.01.223.367 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 1024, kv_unified = 'false'
+2026-10-06T15:46:16.525401971Z 0.01.223.374 I slot   load_model: id  0 | task -1 | new slot, n_ctx = 1024
+2026-10-06T15:46:16.525402805Z 0.01.223.382 I srv    load_model: prompt cache is disabled - use `--cache-ram N` to enable it
+2026-10-06T15:46:16.525403596Z 0.01.223.382 I srv    load_model: for more info see https://github.com/ggml-org/llama.cpp/pull/16391
+2026-10-06T15:46:16.525404388Z 0.01.223.382 I srv    load_model: context checkpoints enabled, max = 32, min spacing = 8192
+2026-10-06T15:46:16.525405138Z 0.01.223.426 W srv          init: --cache-idle-slots requires --cache-ram, disabling
+2026-10-06T15:46:16.528351430Z 0.01.226.342 I srv          init: init: chat template, example_format: '<|im_start|>system
+2026-10-06T15:46:16.528362055Z You are a helpful assistant<|im_end|>
+2026-10-06T15:46:16.528363471Z <|im_start|>user
+2026-10-06T15:46:16.528364388Z Hello<|im_end|>
+2026-10-06T15:46:16.528365138Z <|im_start|>assistant
+2026-10-06T15:46:16.528366096Z Hi there<|im_end|>
+2026-10-06T15:46:16.528366930Z <|im_start|>user
+2026-10-06T15:46:16.528367638Z How are you?<|im_end|>
+2026-10-06T15:46:16.528368305Z <|im_start|>assistant
+2026-10-06T15:46:16.528369013Z '
+2026-10-06T15:46:16.528908055Z 0.01.226.939 I srv          init: init: chat template, thinking = 0
+2026-10-06T15:46:16.528911221Z 0.01.226.950 I srv          init: preserve_reasoning kwarg: not supported by template
+2026-10-06T15:46:16.528977680Z 0.01.226.979 I srv  llama_server: model loaded
+2026-10-06T15:46:16.528980138Z 0.01.226.985 I srv  llama_server: listening on http://0.0.0.0:8080
+2026-10-06T15:46:16.528981096Z 0.01.226.986 W srv  llama_server: notice: server default port will be changed to :9931 in a future release (ref: https://github.com/ggml-org/llama.cpp/pull/26508)
+2026-10-06T15:46:16.529063055Z 0.01.227.101 I srv  update_slots: all slots are idle
+2026-10-06T15:46:18.765123625Z 0.03.463.027 I slot get_availabl: id  0 | task -1 |  - skipping, slot is empty
+2026-10-06T15:46:18.765151750Z 0.03.463.035 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+2026-10-06T15:46:18.765154708Z 0.03.463.044 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+2026-10-06T15:46:18.765156625Z 0.03.463.046 I slot get_availabl: id  0 | task 0 |  - skipping, is_processing = 1
+2026-10-06T15:46:18.765158500Z 0.03.463.049 I slot get_availabl: id  0 | task 0 |  - skipping, is_processing = 1
+2026-10-06T15:46:18.765160208Z 0.03.463.063 I slot   operator(): id  0 | task 0 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 61
+2026-10-06T15:46:18.765162083Z 0.03.463.065 I slot   operator(): id  0 | task 0 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:18.826062083Z 0.03.524.031 I slot      release: id  0 | task 0 | stop processing: n_tokens = 61, truncated = 0
+2026-10-06T15:46:18.826095583Z 0.03.524.045 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.026 (1/39) > 0.100
+2026-10-06T15:46:18.826097541Z 0.03.524.045 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 413128219295
+2026-10-06T15:46:18.826098625Z 0.03.524.048 I slot launch_slot_: id  0 | task 1 | processing task, is_child = 0
+2026-10-06T15:46:18.826099541Z 0.03.524.054 I slot   operator(): id  0 | task 1 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 39
+2026-10-06T15:46:18.826100500Z 0.03.524.055 I slot   operator(): id  0 | task 1 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:18.852360458Z 0.03.550.339 I slot      release: id  0 | task 1 | stop processing: n_tokens = 39, truncated = 0
+2026-10-06T15:46:18.852377291Z 0.03.550.352 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.030 (1/33) > 0.100
+2026-10-06T15:46:18.852378666Z 0.03.550.352 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 413128245605
+2026-10-06T15:46:18.852379458Z 0.03.550.354 I slot launch_slot_: id  0 | task 2 | processing task, is_child = 0
+2026-10-06T15:46:18.852380166Z 0.03.550.358 I slot   operator(): id  0 | task 2 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 33
+2026-10-06T15:46:18.852381000Z 0.03.550.359 I slot   operator(): id  0 | task 2 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:18.874693000Z 0.03.572.663 I slot      release: id  0 | task 2 | stop processing: n_tokens = 33, truncated = 0
+2026-10-06T15:46:18.874715375Z 0.03.572.674 I srv  update_slots: all slots are idle
+2026-10-06T15:46:18.888705875Z 0.03.586.706 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.005 (1/201) > 0.100
+2026-10-06T15:46:18.888723500Z 0.03.586.710 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 413128267928
+2026-10-06T15:46:18.888724916Z 0.03.586.712 I slot launch_slot_: id  0 | task 6 | processing task, is_child = 0
+2026-10-06T15:46:18.888725750Z 0.03.586.716 I slot   operator(): id  0 | task 6 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 201
+2026-10-06T15:46:18.888726541Z 0.03.586.717 I slot   operator(): id  0 | task 6 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:19.082919083Z 0.03.780.853 I slot      release: id  0 | task 6 | stop processing: n_tokens = 201, truncated = 0
+2026-10-06T15:46:19.082954958Z 0.03.780.866 I srv  update_slots: all slots are idle
+2026-10-06T15:46:19.098416667Z 0.03.796.333 I slot get_availabl: id  0 | task -1 |  - checking sim = 1.000 (201/201) > 0.100
+2026-10-06T15:46:19.098439667Z 0.03.796.338 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 1.000 (> 0.100 thold), f_keep = 1.000
+2026-10-06T15:46:19.098441708Z 0.03.796.342 I slot launch_slot_: id  0 | task 8 | processing task, is_child = 0
+2026-10-06T15:46:19.098442583Z 0.03.796.350 I slot   operator(): id  0 | task 8 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 201
+2026-10-06T15:46:19.098443417Z 0.03.796.351 I slot   operator(): id  0 | task 8 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:19.255034083Z 0.03.952.986 I slot      release: id  0 | task 8 | stop processing: n_tokens = 201, truncated = 0
+2026-10-06T15:46:19.255060333Z 0.03.952.998 I srv  update_slots: all slots are idle
+2026-10-06T15:46:19.268575625Z 0.03.966.559 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.913 (190/208) > 0.100
+2026-10-06T15:46:19.268600042Z 0.03.966.564 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.913 (> 0.100 thold), f_keep = 0.945
+2026-10-06T15:46:19.268602250Z 0.03.966.568 I slot launch_slot_: id  0 | task 10 | processing task, is_child = 0
+2026-10-06T15:46:19.268603167Z 0.03.966.573 I slot   operator(): id  0 | task 10 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 208
+2026-10-06T15:46:19.268604083Z 0.03.966.575 I slot   operator(): id  0 | task 10 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:19.437068208Z 0.04.135.042 I slot      release: id  0 | task 10 | stop processing: n_tokens = 208, truncated = 0
+2026-10-06T15:46:19.437090333Z 0.04.135.054 I srv  update_slots: all slots are idle
+2026-10-06T15:46:19.456706625Z 0.04.154.674 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.936 (190/203) > 0.100
+2026-10-06T15:46:19.456726875Z 0.04.154.679 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.936 (> 0.100 thold), f_keep = 0.913
+2026-10-06T15:46:19.456728250Z 0.04.154.682 I slot launch_slot_: id  0 | task 12 | processing task, is_child = 0
+2026-10-06T15:46:19.456729208Z 0.04.154.688 I slot   operator(): id  0 | task 12 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 203
+2026-10-06T15:46:19.456730042Z 0.04.154.689 I slot   operator(): id  0 | task 12 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:19.614846292Z 0.04.312.787 I slot      release: id  0 | task 12 | stop processing: n_tokens = 203, truncated = 0
+2026-10-06T15:46:19.614871042Z 0.04.312.799 I srv  update_slots: all slots are idle
+2026-10-06T15:46:19.631761333Z 0.04.329.686 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.945 (190/201) > 0.100
+2026-10-06T15:46:19.631782833Z 0.04.329.692 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.945 (> 0.100 thold), f_keep = 0.936
+2026-10-06T15:46:19.631784417Z 0.04.329.695 I slot launch_slot_: id  0 | task 14 | processing task, is_child = 0
+2026-10-06T15:46:19.631785333Z 0.04.329.700 I slot   operator(): id  0 | task 14 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 201
+2026-10-06T15:46:19.631786167Z 0.04.329.702 I slot   operator(): id  0 | task 14 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:19.787322792Z 0.04.485.287 I slot      release: id  0 | task 14 | stop processing: n_tokens = 201, truncated = 0
+2026-10-06T15:46:19.787346250Z 0.04.485.301 I srv  update_slots: all slots are idle
+2026-10-06T15:46:19.803723834Z 0.04.501.701 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.547 (110/201) > 0.100
+2026-10-06T15:46:19.803742250Z 0.04.501.706 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.547 (> 0.100 thold), f_keep = 0.547
+2026-10-06T15:46:19.803752209Z 0.04.501.709 I slot launch_slot_: id  0 | task 16 | processing task, is_child = 0
+2026-10-06T15:46:19.803753209Z 0.04.501.714 I slot   operator(): id  0 | task 16 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 201
+2026-10-06T15:46:19.803754084Z 0.04.501.715 I slot   operator(): id  0 | task 16 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:19.954178375Z 0.04.652.138 I slot      release: id  0 | task 16 | stop processing: n_tokens = 201, truncated = 0
+2026-10-06T15:46:19.954197584Z 0.04.652.150 I srv  update_slots: all slots are idle
+2026-10-06T15:46:19.979960000Z 0.04.677.951 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.529 (110/208) > 0.100
+2026-10-06T15:46:19.979976375Z 0.04.677.956 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.529 (> 0.100 thold), f_keep = 0.547
+2026-10-06T15:46:19.979977584Z 0.04.677.959 I slot launch_slot_: id  0 | task 18 | processing task, is_child = 0
+2026-10-06T15:46:19.979978500Z 0.04.677.965 I slot   operator(): id  0 | task 18 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 208
+2026-10-06T15:46:19.979979417Z 0.04.677.967 I slot   operator(): id  0 | task 18 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:20.137777250Z 0.04.835.746 I slot      release: id  0 | task 18 | stop processing: n_tokens = 208, truncated = 0
+2026-10-06T15:46:20.137800875Z 0.04.835.760 I srv  update_slots: all slots are idle
+2026-10-06T15:46:20.154743625Z 0.04.852.729 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.529 (110/208) > 0.100
+2026-10-06T15:46:20.154759625Z 0.04.852.734 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.529 (> 0.100 thold), f_keep = 0.529
+2026-10-06T15:46:20.154761125Z 0.04.852.737 I slot launch_slot_: id  0 | task 20 | processing task, is_child = 0
+2026-10-06T15:46:20.154762084Z 0.04.852.749 I slot   operator(): id  0 | task 20 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 208
+2026-10-06T15:46:20.154762917Z 0.04.852.750 I slot   operator(): id  0 | task 20 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:20.309864417Z 0.05.007.820 I slot      release: id  0 | task 20 | stop processing: n_tokens = 208, truncated = 0
+2026-10-06T15:46:20.309888875Z 0.05.007.831 I srv  update_slots: all slots are idle
+2026-10-06T15:46:20.323031417Z 0.05.021.027 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.542 (110/203) > 0.100
+2026-10-06T15:46:20.323051125Z 0.05.021.031 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.542 (> 0.100 thold), f_keep = 0.529
+2026-10-06T15:46:20.323052459Z 0.05.021.034 I slot launch_slot_: id  0 | task 22 | processing task, is_child = 0
+2026-10-06T15:46:20.323053292Z 0.05.021.040 I slot   operator(): id  0 | task 22 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 203
+2026-10-06T15:46:20.323054125Z 0.05.021.041 I slot   operator(): id  0 | task 22 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:20.479116667Z 0.05.177.071 I slot      release: id  0 | task 22 | stop processing: n_tokens = 203, truncated = 0
+2026-10-06T15:46:20.479140167Z 0.05.177.085 I srv  update_slots: all slots are idle
+2026-10-06T15:46:20.494948417Z 0.05.192.927 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.542 (110/203) > 0.100
+2026-10-06T15:46:20.494970626Z 0.05.192.931 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.542 (> 0.100 thold), f_keep = 0.542
+2026-10-06T15:46:20.494972001Z 0.05.192.934 I slot launch_slot_: id  0 | task 24 | processing task, is_child = 0
+2026-10-06T15:46:20.494973001Z 0.05.192.940 I slot   operator(): id  0 | task 24 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 203
+2026-10-06T15:46:20.494973834Z 0.05.192.941 I slot   operator(): id  0 | task 24 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:20.647096417Z 0.05.345.068 I slot      release: id  0 | task 24 | stop processing: n_tokens = 203, truncated = 0
+2026-10-06T15:46:20.647119584Z 0.05.345.080 I srv  update_slots: all slots are idle
+2026-10-06T15:46:20.664934709Z 0.05.362.926 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.547 (110/201) > 0.100
+2026-10-06T15:46:20.664949501Z 0.05.362.931 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.547 (> 0.100 thold), f_keep = 0.542
+2026-10-06T15:46:20.664950792Z 0.05.362.934 I slot launch_slot_: id  0 | task 26 | processing task, is_child = 0
+2026-10-06T15:46:20.664951626Z 0.05.362.939 I slot   operator(): id  0 | task 26 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 201
+2026-10-06T15:46:20.664952542Z 0.05.362.940 I slot   operator(): id  0 | task 26 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:20.816417167Z 0.05.514.382 I slot      release: id  0 | task 26 | stop processing: n_tokens = 201, truncated = 0
+2026-10-06T15:46:20.816438251Z 0.05.514.396 I srv  update_slots: all slots are idle
+2026-10-06T15:46:20.841425251Z 0.05.539.426 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.547 (110/201) > 0.100
+2026-10-06T15:46:20.841445501Z 0.05.539.430 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.547 (> 0.100 thold), f_keep = 0.547
+2026-10-06T15:46:20.841446751Z 0.05.539.433 I slot launch_slot_: id  0 | task 28 | processing task, is_child = 0
+2026-10-06T15:46:20.841447584Z 0.05.539.438 I slot   operator(): id  0 | task 28 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 201
+2026-10-06T15:46:20.841448417Z 0.05.539.439 I slot   operator(): id  0 | task 28 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:20.999473792Z 0.05.697.437 I slot      release: id  0 | task 28 | stop processing: n_tokens = 201, truncated = 0
+2026-10-06T15:46:20.999502626Z 0.05.697.449 I srv  update_slots: all slots are idle
+2026-10-06T15:46:21.012417001Z 0.05.710.409 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.531 (110/207) > 0.100
+2026-10-06T15:46:21.012442334Z 0.05.710.414 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.531 (> 0.100 thold), f_keep = 0.547
+2026-10-06T15:46:21.012443501Z 0.05.710.417 I slot launch_slot_: id  0 | task 30 | processing task, is_child = 0
+2026-10-06T15:46:21.012444334Z 0.05.710.423 I slot   operator(): id  0 | task 30 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 207
+2026-10-06T15:46:21.012445126Z 0.05.710.424 I slot   operator(): id  0 | task 30 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:21.170742834Z 0.05.868.734 I slot      release: id  0 | task 30 | stop processing: n_tokens = 207, truncated = 0
+2026-10-06T15:46:21.170765167Z 0.05.868.751 I srv  update_slots: all slots are idle
+2026-10-06T15:46:21.183351001Z 0.05.881.355 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.531 (110/207) > 0.100
+2026-10-06T15:46:21.183367042Z 0.05.881.360 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.531 (> 0.100 thold), f_keep = 0.531
+2026-10-06T15:46:21.183368167Z 0.05.881.363 I slot launch_slot_: id  0 | task 32 | processing task, is_child = 0
+2026-10-06T15:46:21.183369001Z 0.05.881.369 I slot   operator(): id  0 | task 32 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 207
+2026-10-06T15:46:21.183369792Z 0.05.881.370 I slot   operator(): id  0 | task 32 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:21.340025209Z 0.06.037.984 I slot      release: id  0 | task 32 | stop processing: n_tokens = 207, truncated = 0
+2026-10-06T15:46:21.340050834Z 0.06.037.998 I srv  update_slots: all slots are idle
+2026-10-06T15:46:21.353330668Z 0.06.051.317 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.542 (110/203) > 0.100
+2026-10-06T15:46:21.353351626Z 0.06.051.321 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.542 (> 0.100 thold), f_keep = 0.531
+2026-10-06T15:46:21.353353251Z 0.06.051.325 I slot launch_slot_: id  0 | task 34 | processing task, is_child = 0
+2026-10-06T15:46:21.353354084Z 0.06.051.331 I slot   operator(): id  0 | task 34 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 203
+2026-10-06T15:46:21.353355168Z 0.06.051.333 I slot   operator(): id  0 | task 34 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:21.508638626Z 0.06.206.598 I slot      release: id  0 | task 34 | stop processing: n_tokens = 203, truncated = 0
+2026-10-06T15:46:21.508672793Z 0.06.206.612 I srv  update_slots: all slots are idle
+2026-10-06T15:46:21.522055126Z 0.06.220.047 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.542 (110/203) > 0.100
+2026-10-06T15:46:21.522072918Z 0.06.220.051 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.542 (> 0.100 thold), f_keep = 0.542
+2026-10-06T15:46:21.522074126Z 0.06.220.054 I slot launch_slot_: id  0 | task 36 | processing task, is_child = 0
+2026-10-06T15:46:21.522075126Z 0.06.220.060 I slot   operator(): id  0 | task 36 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 203
+2026-10-06T15:46:21.522086001Z 0.06.220.061 I slot   operator(): id  0 | task 36 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:21.676875751Z 0.06.374.837 I slot      release: id  0 | task 36 | stop processing: n_tokens = 203, truncated = 0
+2026-10-06T15:46:21.676898834Z 0.06.374.849 I srv  update_slots: all slots are idle
+2026-10-06T15:46:21.689718126Z 0.06.387.694 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.545 (110/202) > 0.100
+2026-10-06T15:46:21.689738918Z 0.06.387.698 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.545 (> 0.100 thold), f_keep = 0.542
+2026-10-06T15:46:21.689740126Z 0.06.387.701 I slot launch_slot_: id  0 | task 38 | processing task, is_child = 0
+2026-10-06T15:46:21.689743543Z 0.06.387.707 I slot   operator(): id  0 | task 38 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 202
+2026-10-06T15:46:21.689744376Z 0.06.387.708 I slot   operator(): id  0 | task 38 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:21.842561876Z 0.06.540.530 I slot      release: id  0 | task 38 | stop processing: n_tokens = 202, truncated = 0
+2026-10-06T15:46:21.842580876Z 0.06.540.541 I srv  update_slots: all slots are idle
+2026-10-06T15:46:21.862525543Z 0.06.560.525 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.545 (110/202) > 0.100
+2026-10-06T15:46:21.862547459Z 0.06.560.529 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.545 (> 0.100 thold), f_keep = 0.545
+2026-10-06T15:46:21.862548959Z 0.06.560.532 I slot launch_slot_: id  0 | task 40 | processing task, is_child = 0
+2026-10-06T15:46:21.862549834Z 0.06.560.537 I slot   operator(): id  0 | task 40 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 202
+2026-10-06T15:46:21.862550668Z 0.06.560.538 I slot   operator(): id  0 | task 40 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:22.018055710Z 0.06.716.034 I slot      release: id  0 | task 40 | stop processing: n_tokens = 202, truncated = 0
+2026-10-06T15:46:22.018079543Z 0.06.716.046 I srv  update_slots: all slots are idle
+2026-10-06T15:46:22.034875710Z 0.06.732.855 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.545 (110/202) > 0.100
+2026-10-06T15:46:22.034897335Z 0.06.732.862 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.545 (> 0.100 thold), f_keep = 0.545
+2026-10-06T15:46:22.034898876Z 0.06.732.866 I slot launch_slot_: id  0 | task 42 | processing task, is_child = 0
+2026-10-06T15:46:22.034899835Z 0.06.732.871 I slot   operator(): id  0 | task 42 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 202
+2026-10-06T15:46:22.034900668Z 0.06.732.872 I slot   operator(): id  0 | task 42 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:22.189045501Z 0.06.887.007 I slot      release: id  0 | task 42 | stop processing: n_tokens = 202, truncated = 0
+2026-10-06T15:46:22.189070210Z 0.06.887.023 I srv  update_slots: all slots are idle
+2026-10-06T15:46:22.204485043Z 0.06.902.480 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.545 (110/202) > 0.100
+2026-10-06T15:46:22.204514876Z 0.06.902.485 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.545 (> 0.100 thold), f_keep = 0.545
+2026-10-06T15:46:22.204516335Z 0.06.902.487 I slot launch_slot_: id  0 | task 44 | processing task, is_child = 0
+2026-10-06T15:46:22.204517251Z 0.06.902.492 I slot   operator(): id  0 | task 44 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 202
+2026-10-06T15:46:22.204518085Z 0.06.902.493 I slot   operator(): id  0 | task 44 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:22.357261876Z 0.07.055.215 I slot      release: id  0 | task 44 | stop processing: n_tokens = 202, truncated = 0
+2026-10-06T15:46:22.357288126Z 0.07.055.231 I srv  update_slots: all slots are idle
+2026-10-06T15:46:22.383527751Z 0.07.081.518 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.542 (110/203) > 0.100
+2026-10-06T15:46:22.383549418Z 0.07.081.524 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.542 (> 0.100 thold), f_keep = 0.545
+2026-10-06T15:46:22.383550876Z 0.07.081.527 I slot launch_slot_: id  0 | task 46 | processing task, is_child = 0
+2026-10-06T15:46:22.383551793Z 0.07.081.534 I slot   operator(): id  0 | task 46 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 203
+2026-10-06T15:46:22.383552585Z 0.07.081.535 I slot   operator(): id  0 | task 46 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:22.535457418Z 0.07.233.434 I slot      release: id  0 | task 46 | stop processing: n_tokens = 203, truncated = 0
+2026-10-06T15:46:22.535478210Z 0.07.233.447 I srv  update_slots: all slots are idle
+2026-10-06T15:46:22.551089751Z 0.07.249.079 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.542 (110/203) > 0.100
+2026-10-06T15:46:22.551105001Z 0.07.249.084 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.542 (> 0.100 thold), f_keep = 0.542
+2026-10-06T15:46:22.551106126Z 0.07.249.088 I slot launch_slot_: id  0 | task 48 | processing task, is_child = 0
+2026-10-06T15:46:22.551106918Z 0.07.249.094 I slot   operator(): id  0 | task 48 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 203
+2026-10-06T15:46:22.551107835Z 0.07.249.095 I slot   operator(): id  0 | task 48 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:22.703421210Z 0.07.401.387 I slot      release: id  0 | task 48 | stop processing: n_tokens = 203, truncated = 0
+2026-10-06T15:46:22.703445793Z 0.07.401.399 I srv  update_slots: all slots are idle
+2026-10-06T15:46:22.722907835Z 0.07.420.903 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.553 (110/199) > 0.100
+2026-10-06T15:46:22.722927043Z 0.07.420.907 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.553 (> 0.100 thold), f_keep = 0.542
+2026-10-06T15:46:22.722928543Z 0.07.420.911 I slot launch_slot_: id  0 | task 50 | processing task, is_child = 0
+2026-10-06T15:46:22.722929460Z 0.07.420.916 I slot   operator(): id  0 | task 50 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 199
+2026-10-06T15:46:22.722940168Z 0.07.420.917 I slot   operator(): id  0 | task 50 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:22.873439710Z 0.07.571.418 I slot      release: id  0 | task 50 | stop processing: n_tokens = 199, truncated = 0
+2026-10-06T15:46:22.873463418Z 0.07.571.430 I srv  update_slots: all slots are idle
+2026-10-06T15:46:22.902093293Z 0.07.600.080 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.553 (110/199) > 0.100
+2026-10-06T15:46:22.902109168Z 0.07.600.085 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.553 (> 0.100 thold), f_keep = 0.553
+2026-10-06T15:46:22.902110377Z 0.07.600.089 I slot launch_slot_: id  0 | task 52 | processing task, is_child = 0
+2026-10-06T15:46:22.902111252Z 0.07.600.094 I slot   operator(): id  0 | task 52 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 199
+2026-10-06T15:46:22.902112085Z 0.07.600.095 I slot   operator(): id  0 | task 52 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:23.075569877Z 0.07.773.204 I slot      release: id  0 | task 52 | stop processing: n_tokens = 199, truncated = 0
+2026-10-06T15:46:23.076222085Z 0.07.773.222 I srv  update_slots: all slots are idle
+2026-10-06T15:46:23.090614502Z 0.07.788.532 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.564 (110/195) > 0.100
+2026-10-06T15:46:23.090632210Z 0.07.788.539 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.564 (> 0.100 thold), f_keep = 0.553
+2026-10-06T15:46:23.090633543Z 0.07.788.543 I slot launch_slot_: id  0 | task 54 | processing task, is_child = 0
+2026-10-06T15:46:23.090634502Z 0.07.788.550 I slot   operator(): id  0 | task 54 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 195
+2026-10-06T15:46:23.090635418Z 0.07.788.551 I slot   operator(): id  0 | task 54 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:23.260096627Z 0.07.958.075 I slot      release: id  0 | task 54 | stop processing: n_tokens = 195, truncated = 0
+2026-10-06T15:46:23.260118543Z 0.07.958.088 I srv  update_slots: all slots are idle
+2026-10-06T15:46:23.290083377Z 0.07.988.094 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.564 (110/195) > 0.100
+2026-10-06T15:46:23.290101252Z 0.07.988.098 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.564 (> 0.100 thold), f_keep = 0.564
+2026-10-06T15:46:23.290102752Z 0.07.988.101 I slot launch_slot_: id  0 | task 56 | processing task, is_child = 0
+2026-10-06T15:46:23.290103835Z 0.07.988.106 I slot   operator(): id  0 | task 56 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 195
+2026-10-06T15:46:23.290104669Z 0.07.988.107 I slot   operator(): id  0 | task 56 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:23.436130127Z 0.08.134.106 I slot      release: id  0 | task 56 | stop processing: n_tokens = 195, truncated = 0
+2026-10-06T15:46:23.436145419Z 0.08.134.119 I srv  update_slots: all slots are idle
+2026-10-06T15:46:23.462726502Z 0.08.160.713 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.556 (110/198) > 0.100
+2026-10-06T15:46:23.462757752Z 0.08.160.718 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.556 (> 0.100 thold), f_keep = 0.564
+2026-10-06T15:46:23.462759377Z 0.08.160.722 I slot launch_slot_: id  0 | task 58 | processing task, is_child = 0
+2026-10-06T15:46:23.462760377Z 0.08.160.728 I slot   operator(): id  0 | task 58 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 198
+2026-10-06T15:46:23.462761210Z 0.08.160.729 I slot   operator(): id  0 | task 58 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:23.612162710Z 0.08.310.136 I slot      release: id  0 | task 58 | stop processing: n_tokens = 198, truncated = 0
+2026-10-06T15:46:23.612185127Z 0.08.310.149 I srv  update_slots: all slots are idle
+2026-10-06T15:46:23.629300752Z 0.08.327.290 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.556 (110/198) > 0.100
+2026-10-06T15:46:23.629321460Z 0.08.327.296 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.556 (> 0.100 thold), f_keep = 0.556
+2026-10-06T15:46:23.629323044Z 0.08.327.299 I slot launch_slot_: id  0 | task 60 | processing task, is_child = 0
+2026-10-06T15:46:23.629324002Z 0.08.327.304 I slot   operator(): id  0 | task 60 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 198
+2026-10-06T15:46:23.629324960Z 0.08.327.305 I slot   operator(): id  0 | task 60 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:23.777062919Z 0.08.475.041 I slot      release: id  0 | task 60 | stop processing: n_tokens = 198, truncated = 0
+2026-10-06T15:46:23.777082627Z 0.08.475.053 I srv  update_slots: all slots are idle
+2026-10-06T15:46:23.804035710Z 0.08.502.041 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.524 (110/210) > 0.100
+2026-10-06T15:46:23.804052044Z 0.08.502.046 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.524 (> 0.100 thold), f_keep = 0.556
+2026-10-06T15:46:23.804053419Z 0.08.502.049 I slot launch_slot_: id  0 | task 62 | processing task, is_child = 0
+2026-10-06T15:46:23.804054252Z 0.08.502.054 I slot   operator(): id  0 | task 62 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 210
+2026-10-06T15:46:23.804055085Z 0.08.502.055 I slot   operator(): id  0 | task 62 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:23.964729377Z 0.08.662.686 I slot      release: id  0 | task 62 | stop processing: n_tokens = 210, truncated = 0
+2026-10-06T15:46:23.964752502Z 0.08.662.697 I srv  update_slots: all slots are idle
+2026-10-06T15:46:23.983179835Z 0.08.681.173 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.524 (110/210) > 0.100
+2026-10-06T15:46:23.983199377Z 0.08.681.179 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.524 (> 0.100 thold), f_keep = 0.524
+2026-10-06T15:46:23.983200752Z 0.08.681.182 I slot launch_slot_: id  0 | task 64 | processing task, is_child = 0
+2026-10-06T15:46:23.983201669Z 0.08.681.187 I slot   operator(): id  0 | task 64 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 210
+2026-10-06T15:46:23.983211585Z 0.08.681.188 I slot   operator(): id  0 | task 64 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:24.150303252Z 0.08.848.308 I slot      release: id  0 | task 64 | stop processing: n_tokens = 210, truncated = 0
+2026-10-06T15:46:24.150321544Z 0.08.848.318 I srv  update_slots: all slots are idle
+2026-10-06T15:46:24.163350294Z 0.08.861.344 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.526 (110/209) > 0.100
+2026-10-06T15:46:24.163369169Z 0.08.861.348 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.526 (> 0.100 thold), f_keep = 0.524
+2026-10-06T15:46:24.163370752Z 0.08.861.351 I slot launch_slot_: id  0 | task 66 | processing task, is_child = 0
+2026-10-06T15:46:24.163371669Z 0.08.861.356 I slot   operator(): id  0 | task 66 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 209
+2026-10-06T15:46:24.163372502Z 0.08.861.358 I slot   operator(): id  0 | task 66 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:24.321760002Z 0.09.019.717 I slot      release: id  0 | task 66 | stop processing: n_tokens = 209, truncated = 0
+2026-10-06T15:46:24.321784252Z 0.09.019.730 I srv  update_slots: all slots are idle
+2026-10-06T15:46:24.334713086Z 0.09.032.708 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.526 (110/209) > 0.100
+2026-10-06T15:46:24.334734294Z 0.09.032.712 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.526 (> 0.100 thold), f_keep = 0.526
+2026-10-06T15:46:24.334735627Z 0.09.032.715 I slot launch_slot_: id  0 | task 68 | processing task, is_child = 0
+2026-10-06T15:46:24.334736877Z 0.09.032.722 I slot   operator(): id  0 | task 68 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 209
+2026-10-06T15:46:24.334737794Z 0.09.032.723 I slot   operator(): id  0 | task 68 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:24.495928419Z 0.09.193.866 I slot      release: id  0 | task 68 | stop processing: n_tokens = 209, truncated = 0
+2026-10-06T15:46:24.495951252Z 0.09.193.879 I srv  update_slots: all slots are idle
+2026-10-06T15:46:24.510856711Z 0.09.208.846 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.521 (110/211) > 0.100
+2026-10-06T15:46:24.510878169Z 0.09.208.851 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.521 (> 0.100 thold), f_keep = 0.526
+2026-10-06T15:46:24.510879627Z 0.09.208.855 I slot launch_slot_: id  0 | task 70 | processing task, is_child = 0
+2026-10-06T15:46:24.510880544Z 0.09.208.862 I slot   operator(): id  0 | task 70 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 211
+2026-10-06T15:46:24.510881377Z 0.09.208.863 I slot   operator(): id  0 | task 70 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:24.674924794Z 0.09.372.892 I slot      release: id  0 | task 70 | stop processing: n_tokens = 211, truncated = 0
+2026-10-06T15:46:24.674946877Z 0.09.372.904 I srv  update_slots: all slots are idle
+2026-10-06T15:46:24.698030544Z 0.09.396.055 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.521 (110/211) > 0.100
+2026-10-06T15:46:24.698053169Z 0.09.396.060 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.521 (> 0.100 thold), f_keep = 0.521
+2026-10-06T15:46:24.698054336Z 0.09.396.063 I slot launch_slot_: id  0 | task 72 | processing task, is_child = 0
+2026-10-06T15:46:24.698055128Z 0.09.396.067 I slot   operator(): id  0 | task 72 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 211
+2026-10-06T15:46:24.698056086Z 0.09.396.068 I slot   operator(): id  0 | task 72 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:24.855155503Z 0.09.553.127 I slot      release: id  0 | task 72 | stop processing: n_tokens = 211, truncated = 0
+2026-10-06T15:46:24.855176503Z 0.09.553.140 I srv  update_slots: all slots are idle
+2026-10-06T15:46:24.887837794Z 0.09.585.831 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.531 (110/207) > 0.100
+2026-10-06T15:46:24.887860586Z 0.09.585.836 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.531 (> 0.100 thold), f_keep = 0.521
+2026-10-06T15:46:24.887862128Z 0.09.585.839 I slot launch_slot_: id  0 | task 74 | processing task, is_child = 0
+2026-10-06T15:46:24.887862961Z 0.09.585.846 I slot   operator(): id  0 | task 74 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 207
+2026-10-06T15:46:24.887863794Z 0.09.585.847 I slot   operator(): id  0 | task 74 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:25.044349128Z 0.09.742.315 I slot      release: id  0 | task 74 | stop processing: n_tokens = 207, truncated = 0
+2026-10-06T15:46:25.044368294Z 0.09.742.329 I srv  update_slots: all slots are idle
+2026-10-06T15:46:25.062234753Z 0.09.760.234 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.531 (110/207) > 0.100
+2026-10-06T15:46:25.062252961Z 0.09.760.238 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.531 (> 0.100 thold), f_keep = 0.531
+2026-10-06T15:46:25.062254419Z 0.09.760.242 I slot launch_slot_: id  0 | task 76 | processing task, is_child = 0
+2026-10-06T15:46:25.062255378Z 0.09.760.248 I slot   operator(): id  0 | task 76 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 207
+2026-10-06T15:46:25.062256211Z 0.09.760.249 I slot   operator(): id  0 | task 76 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:25.225598503Z 0.09.923.566 I slot      release: id  0 | task 76 | stop processing: n_tokens = 207, truncated = 0
+2026-10-06T15:46:25.225620961Z 0.09.923.578 I srv  update_slots: all slots are idle
+2026-10-06T15:46:25.259095128Z 0.09.956.983 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.529 (110/208) > 0.100
+2026-10-06T15:46:25.259128961Z 0.09.956.992 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.529 (> 0.100 thold), f_keep = 0.531
+2026-10-06T15:46:25.259131294Z 0.09.956.998 I slot launch_slot_: id  0 | task 78 | processing task, is_child = 0
+2026-10-06T15:46:25.259132961Z 0.09.957.007 I slot   operator(): id  0 | task 78 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 208
+2026-10-06T15:46:25.259151628Z 0.09.957.015 I slot   operator(): id  0 | task 78 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:25.422012753Z 0.10.119.972 I slot      release: id  0 | task 78 | stop processing: n_tokens = 208, truncated = 0
+2026-10-06T15:46:25.422043461Z 0.10.119.985 I srv  update_slots: all slots are idle
+2026-10-06T15:46:25.452585920Z 0.10.150.568 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.529 (110/208) > 0.100
+2026-10-06T15:46:25.452609586Z 0.10.150.572 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.529 (> 0.100 thold), f_keep = 0.529
+2026-10-06T15:46:25.452611170Z 0.10.150.577 I slot launch_slot_: id  0 | task 80 | processing task, is_child = 0
+2026-10-06T15:46:25.452612295Z 0.10.150.583 I slot   operator(): id  0 | task 80 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 208
+2026-10-06T15:46:25.452613503Z 0.10.150.585 I slot   operator(): id  0 | task 80 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:25.610388503Z 0.10.308.338 I slot      release: id  0 | task 80 | stop processing: n_tokens = 208, truncated = 0
+2026-10-06T15:46:25.610416336Z 0.10.308.352 I srv  update_slots: all slots are idle
+2026-10-06T15:46:25.624666753Z 0.10.322.640 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.521 (110/211) > 0.100
+2026-10-06T15:46:25.624691836Z 0.10.322.645 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.521 (> 0.100 thold), f_keep = 0.529
+2026-10-06T15:46:25.624693170Z 0.10.322.649 I slot launch_slot_: id  0 | task 82 | processing task, is_child = 0
+2026-10-06T15:46:25.624694086Z 0.10.322.656 I slot   operator(): id  0 | task 82 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 211
+2026-10-06T15:46:25.624694961Z 0.10.322.657 I slot   operator(): id  0 | task 82 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:25.785755711Z 0.10.483.718 I slot      release: id  0 | task 82 | stop processing: n_tokens = 211, truncated = 0
+2026-10-06T15:46:25.785778295Z 0.10.483.729 I srv  update_slots: all slots are idle
+2026-10-06T15:46:25.799875920Z 0.10.497.865 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.521 (110/211) > 0.100
+2026-10-06T15:46:25.799896211Z 0.10.497.869 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.521 (> 0.100 thold), f_keep = 0.521
+2026-10-06T15:46:25.799897753Z 0.10.497.872 I slot launch_slot_: id  0 | task 84 | processing task, is_child = 0
+2026-10-06T15:46:25.799898670Z 0.10.497.878 I slot   operator(): id  0 | task 84 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 211
+2026-10-06T15:46:25.799899545Z 0.10.497.880 I slot   operator(): id  0 | task 84 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:25.958586920Z 0.10.656.564 I slot      release: id  0 | task 84 | stop processing: n_tokens = 211, truncated = 0
+2026-10-06T15:46:25.958611795Z 0.10.656.575 I srv  update_slots: all slots are idle
+2026-10-06T15:46:25.980447170Z 0.10.678.447 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.556 (110/198) > 0.100
+2026-10-06T15:46:25.980476920Z 0.10.678.451 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.556 (> 0.100 thold), f_keep = 0.521
+2026-10-06T15:46:25.980478086Z 0.10.678.455 I slot launch_slot_: id  0 | task 86 | processing task, is_child = 0
+2026-10-06T15:46:25.980478920Z 0.10.678.461 I slot   operator(): id  0 | task 86 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 198
+2026-10-06T15:46:25.980479711Z 0.10.678.462 I slot   operator(): id  0 | task 86 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:26.129854587Z 0.10.827.825 I slot      release: id  0 | task 86 | stop processing: n_tokens = 198, truncated = 0
+2026-10-06T15:46:26.129876837Z 0.10.827.841 I srv  update_slots: all slots are idle
+2026-10-06T15:46:26.146297503Z 0.10.844.288 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.556 (110/198) > 0.100
+2026-10-06T15:46:26.146316837Z 0.10.844.293 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.556 (> 0.100 thold), f_keep = 0.556
+2026-10-06T15:46:26.146318087Z 0.10.844.296 I slot launch_slot_: id  0 | task 88 | processing task, is_child = 0
+2026-10-06T15:46:26.146318920Z 0.10.844.305 I slot   operator(): id  0 | task 88 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 198
+2026-10-06T15:46:26.146319795Z 0.10.844.306 I slot   operator(): id  0 | task 88 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:26.295421128Z 0.10.993.396 I slot      release: id  0 | task 88 | stop processing: n_tokens = 198, truncated = 0
+2026-10-06T15:46:26.295442003Z 0.10.993.408 I srv  update_slots: all slots are idle
+2026-10-06T15:46:26.318672462Z 0.11.016.645 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.553 (110/199) > 0.100
+2026-10-06T15:46:26.318694712Z 0.11.016.650 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.553 (> 0.100 thold), f_keep = 0.556
+2026-10-06T15:46:26.318696212Z 0.11.016.654 I slot launch_slot_: id  0 | task 90 | processing task, is_child = 0
+2026-10-06T15:46:26.318697212Z 0.11.016.661 I slot   operator(): id  0 | task 90 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 199
+2026-10-06T15:46:26.318698253Z 0.11.016.662 I slot   operator(): id  0 | task 90 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:26.474767587Z 0.11.172.715 I slot      release: id  0 | task 90 | stop processing: n_tokens = 199, truncated = 0
+2026-10-06T15:46:26.474795962Z 0.11.172.730 I srv  update_slots: all slots are idle
+2026-10-06T15:46:26.492444962Z 0.11.190.437 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.553 (110/199) > 0.100
+2026-10-06T15:46:26.492461712Z 0.11.190.442 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.553 (> 0.100 thold), f_keep = 0.553
+2026-10-06T15:46:26.492462837Z 0.11.190.445 I slot launch_slot_: id  0 | task 92 | processing task, is_child = 0
+2026-10-06T15:46:26.492463837Z 0.11.190.451 I slot   operator(): id  0 | task 92 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 199
+2026-10-06T15:46:26.492474712Z 0.11.190.452 I slot   operator(): id  0 | task 92 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:26.644680712Z 0.11.342.645 I slot      release: id  0 | task 92 | stop processing: n_tokens = 199, truncated = 0
+2026-10-06T15:46:26.644705087Z 0.11.342.657 I srv  update_slots: all slots are idle
+2026-10-06T15:46:26.660026087Z 0.11.358.029 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.529 (110/208) > 0.100
+2026-10-06T15:46:26.660047670Z 0.11.358.033 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.529 (> 0.100 thold), f_keep = 0.553
+2026-10-06T15:46:26.660049170Z 0.11.358.036 I slot launch_slot_: id  0 | task 94 | processing task, is_child = 0
+2026-10-06T15:46:26.660050170Z 0.11.358.041 I slot   operator(): id  0 | task 94 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 208
+2026-10-06T15:46:26.660051003Z 0.11.358.043 I slot   operator(): id  0 | task 94 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:26.814059587Z 0.11.512.042 I slot      release: id  0 | task 94 | stop processing: n_tokens = 208, truncated = 0
+2026-10-06T15:46:26.814073587Z 0.11.512.057 I srv  update_slots: all slots are idle
+2026-10-06T15:46:26.843106587Z 0.11.541.114 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.529 (110/208) > 0.100
+2026-10-06T15:46:26.843126670Z 0.11.541.119 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.529 (> 0.100 thold), f_keep = 0.529
+2026-10-06T15:46:26.843128212Z 0.11.541.122 I slot launch_slot_: id  0 | task 96 | processing task, is_child = 0
+2026-10-06T15:46:26.843129045Z 0.11.541.127 I slot   operator(): id  0 | task 96 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 208
+2026-10-06T15:46:26.843129920Z 0.11.541.128 I slot   operator(): id  0 | task 96 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:26.996811087Z 0.11.694.736 I slot      release: id  0 | task 96 | stop processing: n_tokens = 208, truncated = 0
+2026-10-06T15:46:26.996829295Z 0.11.694.757 I srv  update_slots: all slots are idle
+2026-10-06T15:46:27.017163795Z 0.11.715.157 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.553 (110/199) > 0.100
+2026-10-06T15:46:27.017183170Z 0.11.715.161 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.553 (> 0.100 thold), f_keep = 0.529
+2026-10-06T15:46:27.017184587Z 0.11.715.164 I slot launch_slot_: id  0 | task 98 | processing task, is_child = 0
+2026-10-06T15:46:27.017185629Z 0.11.715.169 I slot   operator(): id  0 | task 98 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 199
+2026-10-06T15:46:27.017186420Z 0.11.715.171 I slot   operator(): id  0 | task 98 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:27.169364462Z 0.11.867.342 I slot      release: id  0 | task 98 | stop processing: n_tokens = 199, truncated = 0
+2026-10-06T15:46:27.169383254Z 0.11.867.354 I srv  update_slots: all slots are idle
+2026-10-06T15:46:27.190444420Z 0.11.888.441 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.553 (110/199) > 0.100
+2026-10-06T15:46:27.190472712Z 0.11.888.446 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.553 (> 0.100 thold), f_keep = 0.553
+2026-10-06T15:46:27.190474212Z 0.11.888.449 I slot launch_slot_: id  0 | task 100 | processing task, is_child = 0
+2026-10-06T15:46:27.190475087Z 0.11.888.454 I slot   operator(): id  0 | task 100 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 199
+2026-10-06T15:46:27.190475962Z 0.11.888.455 I slot   operator(): id  0 | task 100 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:27.340200087Z 0.12.038.175 I slot      release: id  0 | task 100 | stop processing: n_tokens = 199, truncated = 0
+2026-10-06T15:46:27.340229587Z 0.12.038.189 I srv  update_slots: all slots are idle
+2026-10-06T15:46:27.368360004Z 0.12.066.360 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.512 (110/215) > 0.100
+2026-10-06T15:46:27.368381254Z 0.12.066.365 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.512 (> 0.100 thold), f_keep = 0.553
+2026-10-06T15:46:27.368383545Z 0.12.066.368 I slot launch_slot_: id  0 | task 102 | processing task, is_child = 0
+2026-10-06T15:46:27.368384587Z 0.12.066.374 I slot   operator(): id  0 | task 102 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 215
+2026-10-06T15:46:27.368385420Z 0.12.066.376 I slot   operator(): id  0 | task 102 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:27.533755129Z 0.12.231.717 I slot      release: id  0 | task 102 | stop processing: n_tokens = 215, truncated = 0
+2026-10-06T15:46:27.533777796Z 0.12.231.730 I srv  update_slots: all slots are idle
+2026-10-06T15:46:27.555605629Z 0.12.253.586 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.512 (110/215) > 0.100
+2026-10-06T15:46:27.555624087Z 0.12.253.591 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.512 (> 0.100 thold), f_keep = 0.512
+2026-10-06T15:46:27.555625462Z 0.12.253.594 I slot launch_slot_: id  0 | task 104 | processing task, is_child = 0
+2026-10-06T15:46:27.555626379Z 0.12.253.600 I slot   operator(): id  0 | task 104 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 215
+2026-10-06T15:46:27.555627296Z 0.12.253.602 I slot   operator(): id  0 | task 104 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:27.719552629Z 0.12.417.532 I slot      release: id  0 | task 104 | stop processing: n_tokens = 215, truncated = 0
+2026-10-06T15:46:27.719575046Z 0.12.417.543 I srv  update_slots: all slots are idle
+2026-10-06T15:46:27.750977504Z 0.12.448.892 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.516 (110/213) > 0.100
+2026-10-06T15:46:27.750996171Z 0.12.448.897 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.516 (> 0.100 thold), f_keep = 0.512
+2026-10-06T15:46:27.750997671Z 0.12.448.900 I slot launch_slot_: id  0 | task 106 | processing task, is_child = 0
+2026-10-06T15:46:27.750999046Z 0.12.448.906 I slot   operator(): id  0 | task 106 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 213
+2026-10-06T15:46:27.751009254Z 0.12.448.907 I slot   operator(): id  0 | task 106 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:27.916969587Z 0.12.614.911 I slot      release: id  0 | task 106 | stop processing: n_tokens = 213, truncated = 0
+2026-10-06T15:46:27.916997046Z 0.12.614.925 I srv  update_slots: all slots are idle
+2026-10-06T15:46:27.931373087Z 0.12.629.367 I slot get_availabl: id  0 | task -1 |  - checking sim = 0.516 (110/213) > 0.100
+2026-10-06T15:46:27.931394837Z 0.12.629.371 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.516 (> 0.100 thold), f_keep = 0.516
+2026-10-06T15:46:27.931396296Z 0.12.629.375 I slot launch_slot_: id  0 | task 108 | processing task, is_child = 0
+2026-10-06T15:46:27.931397171Z 0.12.629.380 I slot   operator(): id  0 | task 108 | new prompt, n_ctx_slot = 1024, n_keep = 0, task.n_tokens = 213
+2026-10-06T15:46:27.931398129Z 0.12.629.382 I slot   operator(): id  0 | task 108 | cached n_tokens = 0, memory_seq_rm [0, end)
+2026-10-06T15:46:28.094938379Z 0.12.792.905 I slot      release: id  0 | task 108 | stop processing: n_tokens = 213, truncated = 0
+2026-10-06T15:46:28.094963712Z 0.12.792.918 I srv  update_slots: all slots are idle
+2026-10-06T15:46:28.388497088Z 0.13.086.474 I srv    operator(): operator(): cleaning up before exit...
+2026-10-06T15:46:28.388964254Z 0.13.086.975 I common_memory_breakdown_print: | memory breakdown [MiB] | total   free    self   model   context   compute    unaccounted |
+2026-10-06T15:46:28.388976046Z 0.13.086.981 I common_memory_breakdown_print: |   - Host               |                  171 =   146 +       0 +      25                |

@@ -116,3 +116,12 @@ tasks:
   routing:cpu:
     desc: Run the frozen model comparison on CPU Docker; pass -- --output NEW_DIRECTORY
     cmds: ['python3 eval/query-routing/runner.py --stage models --hardware cpu-docker {{.CLI_ARGS}}']
+  julia:fetch:
+    desc: Download and checksum the isolated Julia Q8 evaluation candidate (168 MB)
+    cmds: [python3 scripts/model.py --lock eval/julia/models.lock.json]
+  julia:test:
+    desc: Test Julia probe bounds and input preflight offline
+    cmds: [python3 -m unittest discover -s eval/julia -p 'test_*.py' -v]
+  julia:cpu:
+    desc: Run the bounded CPU feasibility diagnostic; pass -- --output NEW_DIRECTORY
+    cmds: ['python3 eval/julia/probe.py {{.CLI_ARGS}}']

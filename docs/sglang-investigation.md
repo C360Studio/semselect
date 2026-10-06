@@ -1,6 +1,10 @@
 # Bounded SGLang investigation
 
-Status: local compatibility checkpoint complete, 2026-10-05. Matched llama.cpp
+**Closeout status, 2026-10-06: compatibility checked; performance investigation
+deferred unless a concrete caller meets the [reopening conditions](when-to-use.md#research-closeout-and-reopening-conditions).**
+The design below is retained for a possible future experiment, not an active backlog.
+
+Local compatibility checkpoint completed 2026-10-05. Matched llama.cpp
 CPU/Docker and Metal [format experiments](validation-scoring.md) are preserved.
 SGLang/MLX failed warmup with its initial cache settings, then passed schema JSON,
 scores and decision-bundle checks after adding `--disable-radix-cache`.
@@ -8,17 +12,16 @@ The [initial failures](evidence/20261005T151940Z-sglang-metal/README.md) and
 [successful one-fixture probe](evidence/20261005T154252Z-sglang-metal-cache-disabled/README.md)
 remain separate. Shutdown was bounded but not graceful. This is endpoint
 compatibility, not a SGLang quality, calibration or performance result. The matched
-SGLang workload comparison below remains future work.
+SGLang workload comparison below was not executed.
 
 The [real-source answerability pilot](../eval/answerability/heldout/README.md) showed
 a limited aggregate quality advantage for Kev. The subsequent
 [answer-synthesis replay](../eval/synthesis/README.md) found identical gate decisions
 and no Kev advantage on captured summaries, all lacking a complete answer. The
 [actual-code query comparison](../eval/query-routing/README.md) also found no primary
-Kev accuracy advantage over Qwen, with costly CPU requests. Current priorities are
-stronger applicable baselines, better evidence and fresh cases. Return to this
-serving comparison when a workload result makes runtime cost or scoring mechanics
-the next useful question.
+Kev accuracy advantage over Qwen, with costly CPU requests. The research phase
+closes without a production adoption case. Return to this serving comparison only
+when a workload result makes runtime cost or scoring mechanics a concrete blocker.
 
 ## Question and architecture boundary
 

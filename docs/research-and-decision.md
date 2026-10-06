@@ -1,6 +1,118 @@
-# Research and initial backend decision
+# Research closeout and backend decision
 
-Checked 2026-10-05. Initial deployment target: CPU-only Linux container. This document separates source review from the [local validation record](validation.md); numbers attributed to upstream are not local measurements.
+Initial decision checked 2026-10-05; research closed out 2026-10-06. Initial deployment target: CPU-only Linux container. This document separates source review from the [local validation record](validation.md); numbers attributed to upstream are not local measurements.
+
+## Closeout review 2026-10-06
+
+**Keep semselect as a working evaluation/reference service. No measured production
+sem* use case currently justifies adopting it.** This closes the CPU/Metal research
+phase. The [selection guide](when-to-use.md) is the current recommendation; earlier
+experiment proposals below are history or conditional designs, not an active backlog.
+
+The owner supplied Fable's outside critique. We checked its claims against the
+pinned source, preserved runs and cited primary material. Its useful contribution
+is separating three questions: **is a semantic judgment needed, does a typed
+interface help, and does a specialized model earn its cost?** Our evidence supports
+some semantic judgments and a Qwen output-format saving; it does not yet support
+adding this specialized service to production. The critique itself is not evidence
+that every untested alternative would fail.
+
+| Point raised | What the closeout accepts or corrects |
+| --- | --- |
+| Kev's three query heads repeat shared context | **Confirmed for our one-slot profile.** The saved run has 195 heads with zero cached starts. Native grouping uses available slots and can copy a shared prefix to child slots. `-np 3 --kv-unified` is an untested optimization, not a guaranteed removal of the measured 7.11 s versus 2.38 s gap. [Grouping source](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-decision.cpp#L810-L839), [prefix copy](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3676-L3691). |
+| Ticket latency measures inherent model speed | **It does not.** Qwen reused prefixes in 47/48 measured rows; Kev reprocessed them. The observed hybrid path lacks the completion-only rollback checkpoints. This confounds 449 versus 288 ms without establishing how much of the gap it explains. Decision tasks do enter prefix-reuse logic; “decision models cannot cache” is too broad. [Reuse](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3440-L3448), [checkpoint restriction](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3708-L3721). |
+| Calibration was omitted or explicitly required a Q4 refit | **Shipped calibration was applied; workload calibration is unvalidated.** Conversion preserves the learned temperature and the runtime applies it (logged as 2.406050). The reviewed card recommends workload-specific validation/refitting, but does not substantiate the claimed BF16-fit/Q4-specific instruction. Positive scalar temperature cannot repair a single-variant Choice argmax error. [Conversion](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/conversion/lev.py#L196-L201), [runtime](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-decision.cpp#L737-L758), [model guidance](https://huggingface.co/jaredpalmer/kev-4b#bias-risks-and-ethical-considerations). |
+| Qwen was Kev's identical backbone control | **Incorrect.** Kev uses Qwen3.5-4B-Base plus its trained adapter/head; our baseline is the post-trained Qwen3.5-4B release. Same family and size do not isolate training, weights or readout effects. [Kev details](https://huggingface.co/jaredpalmer/kev-4b#model-details), [Qwen card](https://huggingface.co/Qwen/Qwen3.5-4B). |
+| Argument selection makes the query task invalid | **Too strong.** The [frozen task](../eval/query-routing/protocol.json) uses finite operation/node/field choices and excludes open-vocabulary extraction. Kev's [intended uses](https://huggingface.co/jaredpalmer/kev-4b#intended-uses) include extraction choices. Independent heads can create inconsistent tuples; selecting a supplied node when `none` is correct remains an application error. This tests a compound caller task, not isolated architecture. |
+| A small trained classifier is missing | **Agreed for stable-label workloads with training data.** Embeddings plus a trained linear head or a fine-tuned encoder is a relevant additional baseline. Neither our rules/BM25 nor zero-shot Julia substitutes for that comparison. Its local quality, training cost and serving cost remain unmeasured; no new training experiment is needed to close this phase. |
+| The small quality leads settle adoption | **They do not.** Source-passage Kev fixed four Qwen errors and introduced one on 24 cases. That is a pilot observation, not a reliable population advantage. Julia's 50% on our ticket fixture is also not a replication of a different published banking task. No universal sample count substitutes for representative cases and an explicit error budget. |
+
+### What the outside comparisons add
+
+[LangWatch's measurement report](https://langwatch.ai/compare/jev-vs-all), reviewed
+2026-10-06, reports SemIf/Qwen3.5-4B at 72.7% versus Jev at **81.4% on the same
+nine tasks**; Jev's 81.9% headline covers eleven. Eikos-27B's 80.0% compares with
+Jev's 79.9% on the same eight tasks. These averages mix different metrics and are
+not a universal ranking. LangWatch discloses that its Instant Evals product uses
+Jev, that the runs included uncommitted harness changes, and that the full open-model
+harness/framings are not public. Treat the report as external evidence, not our
+replication or a matched CPU/Metal cost comparison. It supports keeping the
+question workload-specific; it does not establish our local best model.
+
+The [MindStudio article](https://www.mindstudio.ai/blog/jev-vs-classic-classifiers-benchmark)
+reviewed for this closeout does not identify or link the underlying independent
+benchmark it describes. We therefore do not import its encoder accuracy, CPU
+latency or calibration numbers as verified evidence. Its suggested trained-small-model
+comparison remains a sensible hypothesis without those numbers.
+
+We also do not adopt the critique's claims that Jev's advantage is caused by an
+undisclosed large backbone, that only 27B-class alternatives merit testing, or that
+runtime fixes cannot change the conclusion. Those causal and exclusion claims are
+not established. A possible future typed contract should first serve an existing
+caller and may use ordinary Qwen; it is not a reason to build a provider framework.
+See the [conditional SemStreams proposal](semstreams-integration.md).
+
+The critique's later “training tax versus labeled-data tax” distinction is useful
+when stated narrowly: zero-shot use avoids task-specific training, not validation.
+All deployment routes need representative labeled evaluation, including larger
+open models and reused Qwen. Neither “27B requires a GPU” nor “CPU-only means train
+and tune” follows from these experiments. System One compatibility permits common
+transport; it does not make input limits, model quality or calibration interchangeable.
+The [selection guide](when-to-use.md#choose-by-the-job) records those tradeoffs.
+
+## Is Kev our best open-source choice?
+
+**Kev is our locally validated starting choice; we have not established that it
+is best of breed.** We selected it for a trained decision head, permissively
+licensed artifacts, native llama.cpp integration and reproducible upstream work.
+That was a packaging decision, not the result of a comparison among decision
+models. Our Qwen comparisons cannot establish a conclusion about the whole
+decision-model category.
+
+Follow-up: the owner approved Julia as the single evaluation challenger. Its
+[first CPU diagnostic](../eval/julia/README.md) completed at 159 ms median and
+24/48 correct, with excessive deferral. That supports the CPU cost hypothesis
+for short requests but does not establish sufficient routing quality. The source
+screen below records why we selected that experiment; it is not its result.
+
+For semselect, the useful selection question is: **which model meets the target
+workload's error budget at the lowest acceptable CPU/Metal operating cost?**
+Restricting every challenger to 4B parameters would miss smaller models that
+might solve the hardware problem. A larger model's published quality lead would
+not by itself establish acceptable cost. This source review considered native
+integration, artifact terms, quality evidence, input limits and resource class:
+
+| Candidate | What the source review establishes | Selection consequence |
+| --- | --- | --- |
+| **Kev-4B** | Working, pinned CPU/Metal service here; upstream publishes checkpoints, evaluations and limitations. Our routing results do not favor it over Qwen JSON. | Retain as the measured reference, without a best-of-breed claim. |
+| **Julia-1, 144M** | Apache-2.0; [native SystemOne GGUF](https://huggingface.co/ggml-org/Julia-1-GGUF), 168 MB Q8 / 303 MB BF16 downloads. Its [author reports](https://huggingface.co/SupersonicLabs/Julia-1) 73.15% on 2,000 typed decisions, using H200 BF16 and 1,024-token inputs; CPU reproduction differs. The training pipeline is private and 8k task accuracy is unestablished. | **Completed single challenger diagnostic.** Short-input CPU cost was low; local routing quality did not justify adoption. |
+| **Lev, 4B** | [Native SystemOne GGUF](https://huggingface.co/ggml-org/lev-GGUF). Its [author reports](https://huggingface.co/interfaze-ai/lev) summary-faithfulness accuracy of 27.1% versus its untuned backbone's 82.6%, and flags noncommercial terms in some training data despite Apache adapter metadata. | Closest same-size technical alternative, but weak evidence for our community-evidence task and unresolved provenance questions. Do not select it merely for API compatibility. |
+| **Eval Engine Decision-4B** | [Author comparison](https://huggingface.co/evalengine/decision-4b): 79.1% versus Kev's 64.8%, but familiar training-source distributions and differing interfaces/precisions; the reviewed card/CSV does not identify the installed Kev revision. Its [GGUF recipe](https://huggingface.co/evalengine/decision-4b-gguf) uses one-token chat/logprobs. | Interesting quality claim, not a matched native-SystemOne replacement result. |
+| **Laya** | Its [published limitations](https://github.com/NandhaKishorM/laya/blob/main/BENCHMARKS.md) distinguish weak base typed-decision results from a checkpoint trained on that benchmark's training split. | No stronger reason than Julia to spend our one small-model experiment here. |
+| **Clef-Flash 9B / Clef 27B; larger Kev** | Cloudflare's [internal comparison](https://huggingface.co/Cloudflare/clef-flash) favors Clef variants on many tasks, but Flash trails Kev-9B on RAGTruth (35.6 versus 46.2 F1). [Flash's native GGUF](https://huggingface.co/ggml-org/Clef-Flash-GGUF) is 6.49 GB Q4. Kev also publishes [larger checkpoints](https://github.com/jaredpalmer/kev/blob/main/PLAN.md). | A broader resource budget needs a new selection decision. Neither vendor tables nor parameter counts settle our workload. |
+
+Download sizes are not resident memory or latency. These are author/package
+sources, not a common independent leaderboard. In particular, Kev's research
+record identifies its Decision Index 0.2 entry as an older checkpoint; do not use
+that ranking to grade our pinned artifact. Source inspection finds Julia and Lev
+conversion support in our pinned runtime. Julia has since been executed in the
+linked diagnostic; Lev has not.
+OpenJev's noncommercial artifact restriction and ordinary-model scoring adapters
+remain covered in the original shortlist below.
+
+**Closeout selection: retain Kev as the reference and stop expanding the roster.**
+Julia tested the distinct small-model CPU hypothesis; it did not qualify as a
+service replacement. No best-of-breed claim follows. Reopen model selection only
+for a named workload under the [reopening conditions](when-to-use.md#research-closeout-and-reopening-conditions).
+Native input fit, error/deferral limits, fresh evidence and measured resource cost
+remain necessary for any later candidate. Larger inputs, concurrency and a
+production rate requirement cannot be inferred from this short-input diagnostic.
+
+The candidate table began as a source-only screen; Julia's linked run is the
+subsequent local evidence. The material below preserves the original integration
+rationale and earlier plans. It does not add obligations to the completed phase.
+
+## Original bootstrap evidence
 
 Follow-up: [native Metal validation](validation-metal.md) on the M3 Pro now compares
 both 4B models at Q4_K_M on the same runtime. Qwen3.5-4B returned 46/48 correct
@@ -9,7 +121,7 @@ for retaining seminstruct as the routing reference and positioning semselect
 around typed model readouts. The earlier CPU/0.6B comparison below remains a
 bootstrap record, not a fair model-size comparison.
 
-## Project stance and next investigation — 2026-10-05
+## Historical project stance and investigation — 2026-10-05
 
 The mission is to teach a skeptical developer when a Jev-like decision model is
 worth using, with inspectable evidence. A tested service, reproducible comparison
@@ -40,10 +152,11 @@ training advantage or a need to replace an adequate coded pipeline.
 
 SGLang/MLX also passed a one-fixture endpoint probe after disabling radix caching;
 its earlier startup failures and bounded, non-graceful shutdown remain documented.
-A matched SGLang workload comparison is still future work. SGLang supplies serving
+A matched SGLang workload comparison remains unperformed and conditional on
+a new caller need; it is not required for this closeout. SGLang supplies serving
 mechanisms, not Jev's training. See the [bounded investigation](sglang-investigation.md).
 This supersedes the initial shortlist's decision to defer SGLang research while
-leaving the production llama.cpp deployment and historical results unchanged.
+leaving the reference llama.cpp deployment and historical results unchanged.
 
 ## Decision
 

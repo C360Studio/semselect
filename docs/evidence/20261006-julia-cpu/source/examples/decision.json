@@ -1,0 +1,25 @@
+{
+  "model": "semselect-kev-4b",
+  "state": "I was charged twice for my subscription. Please refund the duplicate.",
+  "questions": {
+    "route": {
+      "type": "choice",
+      "instructions": "Which team should handle this request? Choose unknown if no category fits.",
+      "criteria": {
+        "billing": "Charges, invoices, payments and refunds",
+        "technical": "Software faults and troubleshooting",
+        "account": "Login, password and account access",
+        "unknown": "None of the supplied categories applies"
+      }
+    },
+    "urgency": {
+      "type": "score",
+      "instructions": "Evaluate urgency using only the supplied message.",
+      "criteria": ["Can wait", "Needs attention soon", "Immediate service disruption"]
+    },
+    "refund": {
+      "type": "noul",
+      "instructions": "Does the message explicitly request a refund?"
+    }
+  }
+}
