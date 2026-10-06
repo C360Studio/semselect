@@ -104,3 +104,15 @@ tasks:
     dir: eval/query-routing/driver
     cmds:
       - GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off GOCACHE=/tmp/semselect-query-routing-gocache go test -mod=readonly -race ./...
+  routing:execution:validate:
+    desc: Verify frozen execution sources and the recorded driver binary without inference
+    cmds: [python3 eval/query-routing/runner.py --stage validate]
+  routing:code:
+    desc: Run the actual code classifier cohort; pass -- --output NEW_DIRECTORY
+    cmds: ['python3 eval/query-routing/runner.py --stage code {{.CLI_ARGS}}']
+  routing:metal:
+    desc: Run the frozen model comparison on Metal; pass -- --output NEW_DIRECTORY
+    cmds: ['python3 eval/query-routing/runner.py --stage models --hardware metal {{.CLI_ARGS}}']
+  routing:cpu:
+    desc: Run the frozen model comparison on CPU Docker; pass -- --output NEW_DIRECTORY
+    cmds: ['python3 eval/query-routing/runner.py --stage models --hardware cpu-docker {{.CLI_ARGS}}']

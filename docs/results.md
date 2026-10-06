@@ -8,14 +8,70 @@ The [when-to-use guide](when-to-use.md) turns these comparisons into guidance fo
 choosing code, schema-constrained chat or a decision model. A working endpoint,
 a workload advantage and an untested hypothesis are different evidence states.
 
-The routing runs below use the same [routing smoke dataset](../eval/routing-smoke.json),
+The older routing-smoke comparisons use the same [routing smoke dataset](../eval/routing-smoke.json),
 SHA-256 `81590b0d2e0773f49b7b1c524729acb96d37a74b29ca134c710701a0037b5d2a`:
 24 labeled cases, each in two candidate orders. The resulting observations are
 correlated; repeats do not add independent examples. Warmups are excluded as
 specified for each experiment. Accuracy includes invalid/error calls
-in its denominator. Latency covers measured calls; order flips compare valid
-pairs. These are small smoke evaluations, not a production benchmark or calibration
-study. Model probabilities are not established probabilities of correctness.
+in its denominator. In those tables, latency covers measured calls and order flips
+compare valid pairs. Other sections define their own datasets, metrics and order
+comparisons. These are small evaluations, not production benchmarks or calibration
+studies. Model probabilities are not established probabilities of correctness.
+
+## 2026-10-05 — actual SemStreams query-classifier comparison
+
+Separate task: exact classifier hints, including arguments, on 32 authored cases.
+The actual pinned SemStreams keyword chain and two configured BM25 variants are
+compared with Qwen3.5-4B JSON and Kev-4B's three native Choice heads. Training,
+development selection, held-out labels and exact model request bytes were frozen
+before execution. These are classifier outputs, not graph-query execution or RAG
+answerability. See the [four worked examples](../eval/query-routing/README.md) and
+[full validation](validation-query-routing.md).
+The [evidence archive](evidence/20261006-query-routing/README.md) preserves every
+code/Metal row and the earlier failed startup without inference.
+
+| Primary normal-order result | Exact / 32 | Invalid tuples | Code errors corrected | Code successes lost | Median request time |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Actual keyword rules, native host | 18 | 0 | — | — | See code timing below |
+| Rules + BM25, threshold 0.7 | 18 | 0 | — | — | See code timing below |
+| Rules + BM25, development-selected 0.9 | 18 | 0 | — | — | See code timing below |
+| Qwen JSON, Metal | 23 | 8 | 12 | 7 | 2,381 ms |
+| Kev, Metal | 23 | 6 | 11 | 6 | 7,111 ms |
+
+CPU Docker confirmation is in progress under the same frozen request contract.
+
+Keyword was the designated comparator after a development tie. Both configured
+BM25 arms produce identical held-out options and accept no example matches;
+persistent normal/reversed code views also remain 18/32. Native classification
+medians are 0.032–0.034 ms, constructor medians 0.0002–0.036 ms and cold-process
+medians 13.5–14.3 ms including disk persistence. Those host Darwin timings do not
+establish a matched Linux or service-level speed comparison.
+
+All 128 Metal formal requests return HTTP 200. Invalid tuples remain failures:
+Qwen's are schema-valid JSON with incompatible search hints, and Kev's separate
+heads also create incompatible combinations. Reverse order gives Qwen 23/32 and
+Kev 22/32. Raw selections change on one Qwen case and three Kev cases, including
+invalid pairs. Repeats remain the same 32 questions.
+
+Both correct code's mistaken field `of` in “arithmetic mean of pressure.” Both
+also attach an inappropriate node to an ordinary maintenance-record request.
+On “Show connections from that device,” code and Qwen retain an unresolved
+binding; Kev invents `sensor-17`. No primary Kev accuracy advantage appears here,
+and its complete three-head request takes about three times as long on Metal.
+This is application-task timing, not an isolated architecture comparison.
+
+Verdict: **improve ordinary rules/extraction first**, then evaluate the remaining
+semantic cases with coherent argument validation. Models show useful corrections
+and consequential regressions. Conditional JSON schemas and caller binding logic
+are stronger follow-up baselines; they were not retroactively applied to scores.
+New fixes need fresh cases. Neither model nor existing code is certified for
+production by this small source-informed authored set.
+
+All Metal runtimes stopped cleanly. Every Qwen task and Kev head starts with zero
+cached tokens; all saved prompts fit actual context/batch limits. Kev clamps the
+requested batch 1024 to 512, still above the longest 255-token decision tail.
+A preserved earlier Metal attempt failed during runtime handover with zero
+inference calls; its reviewed port-check fix changed no requests or grading.
 
 ## 2026-10-05 — actual SemStreams answer-synthesis replay
 

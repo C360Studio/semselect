@@ -1,0 +1,15 @@
+test_hardware_agreement_exposes_different_invalid_selections (test_report.EvidenceTests.test_hardware_agreement_exposes_different_invalid_selections) ... ok
+test_rejects_results_from_a_different_design (test_report.EvidenceTests.test_rejects_results_from_a_different_design) ... ok
+test_reports_raw_changes_when_both_tuples_are_invalid (test_report.EvidenceTests.test_reports_raw_changes_when_both_tuples_are_invalid) ... ok
+test_source_hash_describes_the_bytes_actually_graded (test_report.EvidenceTests.test_source_hash_describes_the_bytes_actually_graded) ... ok
+test_limits_are_not_peaks_and_pending_cleanup_is_unproved (test_audit_runtime.AuditTests.test_limits_are_not_peaks_and_pending_cleanup_is_unproved) ... ok
+test_missing_actual_context_remains_unproved (test_audit_runtime.AuditTests.test_missing_actual_context_remains_unproved) ... ok
+test_native_usage_compares_sum_of_all_three_question_prompts (test_audit_runtime.AuditTests.test_native_usage_compares_sum_of_all_three_question_prompts) ... ok
+test_prefix_cache_distinguished_from_processing_progress (test_audit_runtime.AuditTests.test_prefix_cache_distinguished_from_processing_progress) ... ok
+test_saved_prompt_count_checked_against_tokens (test_audit_runtime.AuditTests.test_saved_prompt_count_checked_against_tokens) ... ok
+test_token_budget_uses_actual_clamped_batch (test_audit_runtime.AuditTests.test_token_budget_uses_actual_clamped_batch) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.158s
+
+OK

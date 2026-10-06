@@ -7,7 +7,7 @@ semselect is a small, local decision service and evaluation project for the
 c360studio sem* ecosystem. Its deliverables are a working service, a comparison
 matrix with inspectable evidence, and an explanation of when each approach earns
 its place. A result recommending ordinary code or schema-constrained Qwen is a
-useful outcome. The latest experiments show why workload matters: Kev led a small
+useful outcome. The experiments show why workload matters: Kev led a small
 controlled source-passage test, but made the same gate decisions as Qwen JSON on
 actual captured community summaries.
 
@@ -35,9 +35,11 @@ metadata and exact facts. The control lets unresolved text pass through; it is
 not a general code-only text classifier. See [the rules and a worked example](docs/when-to-use.md#what-our-code-baseline-actually-does)
 before interpreting the model comparisons.
 
-Next is a [comparison with the actual SemStreams query classifiers](eval/query-routing/README.md),
-scoring both intent and arguments. Its design and fixtures precede any held-out
-results; it does not establish that a model is needed.
+The [comparison with actual SemStreams query classifiers](eval/query-routing/README.md)
+now scores both intent and arguments. On its primary 32-case Metal view, code gets
+18 exact and Qwen JSON and Kev each get 23. Both models fix paraphrases and add
+new mistakes; Kev also invents a missing node. The short write-up shows the actual
+rules, four concrete outcomes and why inexpensive parser fixes should come first.
 
 The bootstrap packages **llama.cpp + Kev-4B Q4_K_M** behind a small Go request guard.
 It uses the existing `POST /v1/systemone` API. It adds no model, scoring formula,
@@ -72,9 +74,9 @@ For this laptop, after fetching the model, run `task metal:build`, `task down`
 port 8084. This serves Kev. Ctrl-C stops the native runtime and guard.
 See the [laptop/GPU workflow](docs/laptop-and-gpu.md).
 
-## Latest routing results
+## Ticket-routing smoke results
 
-The latest experiment holds **Qwen3.5-4B Q4_K_M and llama.cpp fixed** and compares
+The format experiment holds **Qwen3.5-4B Q4_K_M and llama.cpp fixed** and compares
 JSON labels with one-token option scores. Each row has 96/96 valid calls: 24 cases,
 two candidate orders and two trials. Prompt-prefix reuse is disabled; output-format
 instructions differ. These are small smoke results on the same M3 Pro laptop.

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "kind": "query-routing-execution",
+  "frozen_at": "2026-10-06T01:16:23.014439+00:00",
+  "design_freeze_sha256": "daaf3b6924df1644e019e59e4dcf5fb9bce40dad26ccecec1d942df7c0e15e13",
+  "profile": {
+    "context": 4096,
+    "batch": 1024,
+    "ubatch": 512,
+    "threads": 4,
+    "slots": 1,
+    "timeout_seconds": 240,
+    "request_timeout_seconds": 245,
+    "readiness_timeout_seconds": 240,
+    "cpu_image_id": "sha256:a24e5693f8e9634ded5a8b29a438ad87035a8e23a5ac182485d5eaee13c85db1",
+    "cpu_cores": 4,
+    "cpu_memory_bytes": 8589934592,
+    "cache": "--no-cache-prompt --cache-reuse 0 --cache-ram 0"
+  },
+  "planned_rows": {
+    "code_primary": 96,
+    "code_persistent_sensitivity": 128,
+    "metal_models": 128,
+    "cpu_models": 128
+  },
+  "warmups": "D01 once per model per hardware, excluded from metrics. Both arms preflight before either generates. No response-dependent retries, prompt changes or candidate changes.",
+  "profile_note": "Batch1024 rather than bootstrap512 accommodates the long native per-choice tail. Same profile for both models and hardware. CPU quota applies only to runtime; Kev native host guard outside quota. Code measurements run natively on Darwin, not in Linux container.",
+  "review": "Independent read-only routing_contract review; bugs reproduced in failing offline tests before fixes. Response-byte losslessness added with failing UTF-8 regression before execution.",
+  "files": {
+    "runner.py": "bb0aa5cc9e5ed632ab7fac67a2e9ebac81efea24d544661491e729c4bc431dfe",
+    "test_runner.py": "8a6c0f7b1ebcf5d1c92f4cde7c39bcb6782d57ba5e533d7bc76081b7313d73cd",
+    "runtime.py": "287a6928c7cc6b348c20ad04d3d76163200b95c7c1008e917aeba27f3de18a2d",
+    "test_runtime.py": "595a3c9e0136dcf56c1688003b0011821d6995601da0abd4c0157fe802314689",
+    "../../scripts/evaluate.py": "b448c23d910b57c383b53ea90f5684f8400e0f6bec1a75027a08a060ad9260b7",
+    "../../scripts/metal.py": "115291eb7e669d000343975cad3d5a3e92cf2a54a7b50c3c1433d7c6d872804f",
+    "../../scripts/model.py": "eda4d6bfef779e1622f33df722c9f4459e5857262121cb3732d4d2880adf5824",
+    "../../scripts/compare_scoring.py": "fe38643869f2e0f475ab1a81acf432f16fb21e22e38a4eada888ae1e779ef573",
+    "../synthesis/context_preflight.py": "a59fd4456931e9d5423a6953383041240e5160d023206452e47dea0deb313c39"
+  }
+}

@@ -1,0 +1,45 @@
+task: [routing:validate] python3 eval/query-routing/experiment.py
+{"valid": true, "counts": {"development.json": 18, "heldout.json": 32}, "freeze_verified": true, "inference_run": false}
+task: [routing:test] python3 -m unittest discover -s eval/query-routing -p 'test_*.py' -v
+test_all_fixture_tuples_and_request_sizes_validate (test_experiment.ContractTests.test_all_fixture_tuples_and_request_sizes_validate) ... ok
+test_decoder_preserves_missing_binding_and_rejects_incompatible_fields (test_experiment.ContractTests.test_decoder_preserves_missing_binding_and_rejects_incompatible_fields) ... ok
+test_empty_freeze_is_rejected (test_experiment.ContractTests.test_empty_freeze_is_rejected) ... ok
+test_gold_boolean_cannot_be_numeric_one (test_experiment.ContractTests.test_gold_boolean_cannot_be_numeric_one) ... ok
+test_mismatched_runtime_locks_rejected (test_experiment.ContractTests.test_mismatched_runtime_locks_rejected) ... ok
+test_model_and_driver_requests_exclude_gold_and_review_metadata (test_experiment.ContractTests.test_model_and_driver_requests_exclude_gold_and_review_metadata) ... ok
+test_same_state_and_complete_fixed_choices_for_both_models (test_experiment.ContractTests.test_same_state_and_complete_fixed_choices_for_both_models) ... ok
+test_wrong_or_extra_binding_is_not_hidden_by_right_intent (test_experiment.ContractTests.test_wrong_or_extra_binding_is_not_hidden_by_right_intent) ... ok
+test_exact_wire_bytes_and_invalid_response_stays_failure (test_runner.ExecutionTests.test_exact_wire_bytes_and_invalid_response_stays_failure) ... ok
+test_failure_denominators_and_conflicting_flags (test_runner.ExecutionTests.test_failure_denominators_and_conflicting_flags) ... ok
+test_interrupted_call_preserves_attempt_in_pending_row (test_runner.ExecutionTests.test_interrupted_call_preserves_attempt_in_pending_row) ... ok
+test_invalid_utf8_is_preserved_losslessly_and_not_repaired (test_runner.ExecutionTests.test_invalid_utf8_is_preserved_losslessly_and_not_repaired) ... ok
+test_json_rejects_truncation_duplicate_keys_and_wrong_types (test_runner.ExecutionTests.test_json_rejects_truncation_duplicate_keys_and_wrong_types) ... ok
+test_malformed_choice_container_is_invalid_not_an_interruption (test_runner.ExecutionTests.test_malformed_choice_container_is_invalid_not_an_interruption) ... ok
+test_manifest_mismatch_stops_before_http (test_runner.ExecutionTests.test_manifest_mismatch_stops_before_http) ... ok
+test_native_requires_every_choice_and_rejects_incompatible_tuple (test_runner.ExecutionTests.test_native_requires_every_choice_and_rejects_incompatible_tuple) ... ok
+test_second_arm_preflight_failure_prevents_all_inference_and_stops_both (test_runner.ExecutionTests.test_second_arm_preflight_failure_prevents_all_inference_and_stops_both) ... metal/qwen_json: all request contexts fit; no inference yet
+ok
+test_cancel_during_guard_readiness_reaps_both_native_children (test_runtime.LifecycleTests.test_cancel_during_guard_readiness_reaps_both_native_children) ... ok
+test_changed_ownership_prevents_container_stop (test_runtime.LifecycleTests.test_changed_ownership_prevents_container_stop) ... ok
+test_cpu_failure_stops_only_owned_container_and_retains_inspection (test_runtime.LifecycleTests.test_cpu_failure_stops_only_owned_container_and_retains_inspection) ... ok
+test_docker_logs_preserves_stderr_with_stdout (test_runtime.LifecycleTests.test_docker_logs_preserves_stderr_with_stdout) ... ok
+test_existing_run_directory_is_not_reused (test_runtime.LifecycleTests.test_existing_run_directory_is_not_reused) ... ok
+test_live_listener_blocks_start_port (test_runtime.LifecycleTests.test_live_listener_blocks_start_port) ... ok
+test_native_owned_cleanup_and_idempotence (test_runtime.LifecycleTests.test_native_owned_cleanup_and_idempotence) ... ok
+test_only_refused_connection_proves_port_closed (test_runtime.LifecycleTests.test_only_refused_connection_proves_port_closed) ... ok
+test_refused_listener_allows_reuse_when_plain_bind_sees_time_wait (test_runtime.LifecycleTests.test_refused_listener_allows_reuse_when_plain_bind_sees_time_wait) ... ok
+test_stubborn_owned_child_is_killed_and_reaped (test_runtime.LifecycleTests.test_stubborn_owned_child_is_killed_and_reaped) ... ok
+test_unknown_connect_error_blocks_start_port (test_runtime.LifecycleTests.test_unknown_connect_error_blocks_start_port) ... ok
+test_all_three_choice_heads_escape_text_preserve_order_and_no_bos (test_runtime.PreflightTests.test_all_three_choice_heads_escape_text_preserve_order_and_no_bos) ... ok
+test_batch_tail_and_marker_layout_limits_are_enforced (test_runtime.PreflightTests.test_batch_tail_and_marker_layout_limits_are_enforced) ... ok
+test_chat_output_reserve_is_included (test_runtime.PreflightTests.test_chat_output_reserve_is_included) ... ok
+test_chat_uses_actual_apply_template_and_includes_special_tokens (test_runtime.PreflightTests.test_chat_uses_actual_apply_template_and_includes_special_tokens) ... ok
+test_context_overflow_records_all_heads_without_truncation (test_runtime.PreflightTests.test_context_overflow_records_all_heads_without_truncation) ... ok
+test_effective_context_mismatch_stops_before_tokenization (test_runtime.PreflightTests.test_effective_context_mismatch_stops_before_tokenization) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.038s
+
+OK
+task: [routing:driver:test] GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off GOCACHE=/tmp/semselect-query-routing-gocache go test -mod=readonly -race ./...
+ok  	github.com/c360studio/semselect/eval/query-routing/driver	(cached)

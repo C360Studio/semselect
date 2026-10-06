@@ -61,9 +61,14 @@ adding a semantic check. It cannot establish that models beat regex, BM25 or
 fusion. A fair additional comparison needs an applicable algorithm, development
 examples to set its rules/thresholds, and fresh held-out cases.
 
-The next [query-classifier experiment](../eval/query-routing/README.md) tests the
+The [query-classifier experiment](../eval/query-routing/README.md) now tests the
 actual rules and configured BM25 on their own intent/argument task, with a reviewed
-32-case authored cohort. It is preparation, not evidence of a model advantage.
+32-case authored cohort. On its primary Metal view, all three code arms get
+18/32 exact; Qwen JSON and Kev each get 23/32. Qwen fixes 12 code errors but loses
+seven code successes; Kev fixes 11 and loses six. Their extra mistakes include
+incompatible arguments, and Kev invents a node for an unresolved reference.
+Neither is a drop-in improvement on every case. This remains a different task
+from answerability and does not establish superiority over code on that task.
 
 ## What we know so far
 
@@ -71,6 +76,7 @@ actual rules and configured BM25 on their own intent/argument task, with a revie
 | --- | --- | --- |
 | Does existing fusion need another classifier for loose wording? | Semsource's historical scorecard passed all seven tested loose-language queries with its existing fusion path | No demonstrated need on that set; fusion can include learned embeddings |
 | Does Kev beat ordinary Qwen for simple ticket routing? | The matched 4B smoke comparison favored Qwen JSON | Keep Qwen as the practical baseline |
+| Does a model improve actual query-classifier hints? | On 32 authored Metal cases, code gets 18 exact and both models get 23, with different regressions; Kev takes about three times the request time | Fix ordinary rule/parser gaps first; test any model fallback on fresh residual cases |
 | Does direct scoring make Qwen more useful? | Metal preserved labels with 28% lower median inference HTTP latency; CPU saved 3.4% but abstained more | A conditional efficiency benefit, with no demonstrated accuracy gain |
 | Can a model distinguish relevant text from sufficient evidence? | On 24 new source cases, Kev allowed 5/12 unsupported inputs and preserved all 12 supported cases; Qwen allowed 7/12 unsupported inputs and preserved 11/12 | Kev earns a downstream comparison; both retain consequential omissions |
 | Does a gate improve the existing generator's answers? | On 12 usable captured summary inputs, both gates reduced unsupported assertions; with the 4B generator, 3 became 0 and one useful partial answer remained | No Kev advantage observed; all captures lacked a full answer, so improve evidence and test a balanced set |
@@ -79,6 +85,15 @@ actual rules and configured BM25 on their own intent/argument task, with a revie
 These are small, workload-specific findings. Full conditions, failures and raw
 results remain in the [results history](results.md). The
 [algorithm audit](code-baselines-and-rag.md) is supporting detail.
+
+For the query-classifier task, “arithmetic mean of pressure” exposes a code parser
+that captures `of`; both models return the right field. That is a measured model
+correction, but also a concrete candidate for a small code fix. On “Show connections
+from that device,” code and Qwen preserve the missing binding while Kev supplies
+`sensor-17`. Recognizing meaning and returning a safe-to-use argument are separate
+requirements. The next useful comparison should strengthen code and JSON's
+cross-field constraints, then use new cases. Do not tune on these failures and
+reuse them as independent proof.
 
 ## A measured example: does the evidence answer the question?
 
