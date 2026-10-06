@@ -10,11 +10,15 @@ remain separate. Shutdown was bounded but not graceful. This is endpoint
 compatibility, not a SGLang quality, calibration or performance result. The matched
 SGLang workload comparison below remains future work.
 
-The [real-source answerability pilot](../eval/answerability/heldout/README.md) shows
-a limited aggregate quality advantage for Kev, with omissions still missed by both
-models. The immediate priority is downstream benefit using the
-[existing answer path](answering-path.md). Return to this serving comparison when a
-workload result makes runtime cost or scoring mechanics the next useful question.
+The [real-source answerability pilot](../eval/answerability/heldout/README.md) showed
+a limited aggregate quality advantage for Kev. The subsequent
+[answer-synthesis replay](../eval/synthesis/README.md) found identical gate decisions
+and no Kev advantage on captured summaries, all lacking a complete answer. The
+[actual-code query comparison](../eval/query-routing/README.md) also found no primary
+Kev accuracy advantage over Qwen, with costly CPU requests. Current priorities are
+stronger applicable baselines, better evidence and fresh cases. Return to this
+serving comparison when a workload result makes runtime cost or scoring mechanics
+the next useful question.
 
 ## Question and architecture boundary
 

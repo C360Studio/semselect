@@ -138,7 +138,9 @@ question. A gate decision is not permission to execute an action.
 That capture contained no fully answerable questions: broad community descriptions
 and headings had lost details available in the source documents. The next priority
 is better evidence and a balanced downstream set that can reveal unnecessary
-deferrals. Confirm any useful result with CPU-only gates before seeking CUDA help.
+deferrals. Start CPU confirmation with bounded compatibility/latency probes;
+expand to a full CPU gate comparison only for a concrete deployment question.
+CUDA work remains deferred.
 
 ## How each experiment should read
 

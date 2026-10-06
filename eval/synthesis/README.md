@@ -80,8 +80,9 @@ unsupported answers while preserving useful supported answers at acceptable cost
 standard. Improve missing source evidence before expecting a selector to repair it.
 
 Next: compare this community-summary input with the relevant verbatim source
-passages, retaining answerable and incomplete cases. Confirm any useful result
-with CPU-only gates before asking for CUDA work. The
+passages, retaining answerable and incomplete cases. Start CPU confirmation with
+bounded compatibility/latency probes, expanding only for a concrete deployment
+question; CUDA work remains deferred. The
 [validation record](../../docs/validation-synthesis.md),
 [frozen evidence rubric](captured/evidence-review.json) and
 [complete run](../../docs/evidence/20261005T184218Z-synthesis-replay/README.md)
