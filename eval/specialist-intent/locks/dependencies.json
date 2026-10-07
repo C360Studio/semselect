@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "status": "direct pins audited; CPU ARM64 wheel closure and container unresolved",
+  "direct_versions": {
+    "gliclass": "0.1.20",
+    "torch": "2.14.1+cpu",
+    "transformers": "5.19.0",
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "sentencepiece": "0.2.2",
+    "safetensors": "0.8.0"
+  },
+  "gliclass_wheel": {
+    "url": "https://files.pythonhosted.org/packages/4e/ab/b37dd1e5365dd738e3398ca5c73a49b229dc03b1f187260b5933c6877a95/gliclass-0.1.20-py3-none-any.whl",
+    "sha256": "554005810fc18155bd4dd506f08785196005d1414ba5beddd2533121b6dd98ba",
+    "pipeline_sha256": "389fc107a1c7a3ebe8d69d4809090a0a3bf23057c0d938a4cf2051f6dc6a1c3b",
+    "verification": "wheel downloaded, source inspected; not installed"
+  },
+  "container_image": null,
+  "architecture_tested": null,
+  "transitive_closure_verified": false
+}

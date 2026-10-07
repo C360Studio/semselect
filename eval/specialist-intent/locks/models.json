@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "gliclass": "gliclass.json",
+  "deberta": "deberta.json",
+  "qwen": "../../../models.baseline.lock.json",
+  "embeddings": {
+    "model": "Snowflake/snowflake-arctic-embed-s",
+    "revision": "e596f507467533e48a2e17c007f0e1dacc837b33",
+    "artifact_lock": "../../../docs/evidence/20261005-synthesis-acquisition/provenance/embedding-files.json",
+    "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+    "runtime_reverified": false,
+    "onnx_precision": "unverified for this experiment"
+  }
+}

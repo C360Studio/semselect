@@ -1,0 +1,59 @@
+{
+  "alias": "qwen3-1.7b",
+  "artifact_path": "/Users/coby/Code/c360/semselect/results/qwen-size/20261007/setup/runtime/qwen3_17b/Qwen3-1.7B-Q4_K_M.gguf",
+  "artifact_relative_path": "results/qwen-size/20261007/setup/runtime/qwen3_17b/Qwen3-1.7B-Q4_K_M.gguf",
+  "filename": "Qwen3-1.7B-Q4_K_M.gguf",
+  "license": "Apache-2.0",
+  "metadata_sha256": "0c645ef48de62c28f75e1e56ffe0b192b6f82fd7abe79c3bd9acc5c8a1fa3222",
+  "metadata_source": "https://huggingface.co/api/models/unsloth/Qwen3-1.7B-GGUF/revision/d7f544eead698dbd1f15126ef60b45a1e1933222?blobs=true",
+  "precision": "Q4_K_M",
+  "provenance": [
+    {
+      "path": "results/qwen-size/20261007/setup/runtime/qwen3_17b/README.md",
+      "seconds": 0.10028219223022461,
+      "sha256": "bd3c097093e5292cbaa76dbb7f8ecde3ce4dc3354f9daa160e5515a580ad587d",
+      "size_bytes": 17080,
+      "url": "https://huggingface.co/unsloth/Qwen3-1.7B-GGUF/resolve/d7f544eead698dbd1f15126ef60b45a1e1933222/README.md"
+    },
+    {
+      "path": "results/qwen-size/20261007/setup/runtime/qwen3_17b/upstream-metadata.json",
+      "seconds": 0.06115078926086426,
+      "sha256": "fe1681f0061b5eb452a9bb7575b599a3396f54f11b614be8176a2a68f9899dcc",
+      "size_bytes": 10257,
+      "url": "https://huggingface.co/api/models/Qwen/Qwen3-1.7B?blobs=true"
+    },
+    {
+      "path": "results/qwen-size/20261007/setup/runtime/qwen3_17b/upstream-README.md",
+      "seconds": 0.07656192779541016,
+      "sha256": "257e52c419dac2258852643f18af6c974f21f8c6c1b6f371b6cca6201cf29091",
+      "size_bytes": 13963,
+      "url": "https://huggingface.co/Qwen/Qwen3-1.7B/resolve/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/README.md"
+    },
+    {
+      "path": "results/qwen-size/20261007/setup/runtime/qwen3_17b/upstream-LICENSE",
+      "seconds": 0.08090019226074219,
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "size_bytes": 11343,
+      "url": "https://huggingface.co/Qwen/Qwen3-1.7B/resolve/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/LICENSE"
+    }
+  ],
+  "repository": "unsloth/Qwen3-1.7B-GGUF",
+  "revision": "d7f544eead698dbd1f15126ef60b45a1e1933222",
+  "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+  "sha256": "b139949c5bd74937ad8ed8c8cf3d9ffb1e99c866c823204dc42c0d91fa181897",
+  "size_bytes": 1107409472,
+  "source_current_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "source_repository": "Qwen/Qwen3-1.7B",
+  "source_revision_note": "GGUF publisher identifies upstream model but does not pin the conversion source revision. source_current_revision is acquired provenance, not a claimed conversion source. Distributed GGUF bytes are pinned above.",
+  "verified_artifact": {
+    "artifact": {
+      "path": "results/qwen-size/20261007/setup/runtime/qwen3_17b/Qwen3-1.7B-Q4_K_M.gguf",
+      "seconds": 23.55836796760559,
+      "sha256": "b139949c5bd74937ad8ed8c8cf3d9ffb1e99c866c823204dc42c0d91fa181897",
+      "size_bytes": 1107409472,
+      "url": "https://huggingface.co/unsloth/Qwen3-1.7B-GGUF/resolve/d7f544eead698dbd1f15126ef60b45a1e1933222/Qwen3-1.7B-Q4_K_M.gguf"
+    },
+    "setup_elapsed_seconds": 106.51168417930603,
+    "verified": true
+  }
+}

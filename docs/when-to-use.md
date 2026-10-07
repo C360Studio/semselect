@@ -1,6 +1,6 @@
 # When to use a decision classifier
 
-**Research closeout, 2026-10-06: keep semselect as an evaluation/reference
+**Evidence update, 2026-10-07: keep semselect as an evaluation/reference
 service. No production sem* integration is recommended from these results.** We have measured useful
 model behavior, but have not yet identified a production task where this service
 earns its additional cost over the applicable alternatives.
@@ -11,6 +11,31 @@ Kev was selected for integration fit and reproducibility; we have not establishe
 that it is the best open-source decision model. See the bounded
 [selection review](research-and-decision.md#is-kev-our-best-open-source-choice)
 before generalizing these results to other decision models.
+
+## Current query-classification decision
+
+**Keep Qwen3.5-4B JSON as the model baseline alongside the improved-code baseline.**
+This is our starting point for the app's routing work, not a claim that either
+already satisfies the full acceptance gates. On the same 120 operation cases,
+4B obtained 111 correct, eight wrong and one defer; improved rules obtained
+95 correct and 25 wrong. The rules remain evaluation-local. The combined caller
+policy and its end-to-end quality/latency are still unmeasured.
+
+| Question we need to answer | Current answer |
+| --- | --- |
+| Should we replace 4B with a smaller pretrained Qwen? | No, on these fixed configurations: 2B got 84/120 and 1.7B 93/120. Both failed quality and uncached CPU latency. [Evidence](validation-qwen-size.md). |
+| Should we add a specialist backend? | No measured benefit here. The selected DeBERTa accepted only 13 correct cases and deferred 106; GLiClass was also weak. [Evidence](validation-specialist-intent.md). |
+| Must we do our own training? | That has not been established. A supervised small classifier remains unmeasured. Evaluation labels are necessary regardless of whether we train. |
+| Is 4B already fast enough? | Its 867/1,044 ms Metal median/p95 misses the accepted 250/750 ms classifier budget. Retaining it as a quality baseline does not waive the latency target. Small-model Metal and shared-prefix optimizations were not tested. |
+| Do we need serious-scale infrastructure? | No such requirement has been established beyond a small team. Concurrency/load checks did not run because prerequisite gates failed. Avoid a new service or provider framework on this evidence. |
+| What should app work focus on? | Bring measured rule/binding improvements into caller tests, retain Qwen4B for semantic comparison, and measure any proposed fallback policy on representative fresh queries. [Proposed integration work](semstreams-integration.md#query-classification-baseline-and-next-app-work). |
+
+The common mistake is treating a selected operation as proof that a specialized
+operation applies. The smaller Qwens recognized most explicit operations but
+frequently overrode ordinary search. Code still owns binding, validation,
+authorization and actions. No measured result establishes that 4B is the minimum
+possible size, that all small models need training, or that a code-plus-model
+router meets the app's targets without its own evaluation.
 
 ## Choose by the job
 
@@ -58,12 +83,34 @@ Kev at 23/32. Kev's native distribution API has not demonstrated a routing benef
 that changes this recommendation. See the [routing results](results.md).
 
 **Improve the existing query rules and binding logic before replacing them.**
-Models corrected real language failures: code got 18/32 exact, compared with
+The earlier full query-plan comparison showed real language failures: code got 18/32 exact, compared with
 23/32 for either model. But Qwen lost seven existing successes and Kev lost six;
 Kev also invented a missing node. We found concrete parser defects such as
-extracting `of` instead of `pressure`. Fixing them is a justified next step, not
-proof that improved code will beat a model—we have not run that comparison.
-See the [worked cases](../eval/query-routing/README.md).
+extracting `of` instead of `pressure`. See the
+[worked cases](../eval/query-routing/README.md).
+
+The new [bounded specialist pilot](validation-specialist-intent.md) separates
+operation selection from shared coded binding. On 120 fresh held-out cases,
+existing keyword/BM25 obtained 61 correct operations, evaluation-local improved
+rules 95, and Qwen JSON 111. The preselected DeBERTa specialist accepted only
+13 correct operations, made one wrong specialized selection and deferred 106;
+its CPU median/p95 were 1.13/2.05 seconds. GLiClass achieved 37 raw correct and
+changed 15 of 24 decisions when label order reversed. **Keep the baseline; these
+specialists did not earn an integration prototype.** The improved rules and
+Qwen still accepted 25 and eight wrong operations respectively. These authored
+operation-only results do not certify automatic actions, and the experimental
+rules have not been shipped to the caller.
+
+The [smaller-Qwen follow-up](validation-qwen-size.md) tested Qwen3.5-2B and
+Qwen3-1.7B on that same 120-case cohort. They obtained 84 and 93 correct operations,
+with 36 and 27 wrong accepts, compared with the historical 4B's 111 correct.
+Their uncached four-thread ARM64 CPU median/p95 latencies were 5.93/6.13 seconds
+and 5.27/5.48 seconds, exceeding the accepted 250/750 ms target. **Neither smaller
+pretrained model qualifies on this contract.** Most errors selected a specialized
+operation when ordinary search should remain in control. These results do not
+prove that 4B is the smallest model that could work, or that custom training is
+required; they reject these two fixed configurations. The cohort was reused,
+and no small-model Metal or shared-prefix-cache result is established.
 
 **For answering, improve the evidence before adopting an added gate.** Either
 gate reduced the 4B generator's unsupported assertions from three to zero on
@@ -102,9 +149,12 @@ We have answered enough to make that decision even though we have not found a
 positive adoption case. SGLang performance, CUDA and more model candidates are
 conditional investigations, not unfinished requirements of this phase.
 
-Three gaps limit broader conclusions. Improved code and conditional JSON have
-not been compared on fresh cases; a small trained classifier is missing for
-stable-label tasks; and useful confidence-based deferral has not been demonstrated.
+Several gaps limit broader conclusions. The fresh specialist pilot now compares
+improved rules, reused embeddings and operation-only Qwen with shared binding,
+but full caller integration and production traffic remain untested. A small
+trained classifier is still missing for stable-label tasks, and specialist
+confidence thresholds did not provide useful coverage within the frozen error
+and latency budgets.
 The [closeout audit](research-and-decision.md#closeout-review-2026-10-06) also records
 serving confounds: one-slot repeated state processing, unequal cache reuse, and
 unvalidated calibration after quantization. Those gaps prevent a universal model

@@ -7,35 +7,40 @@ semselect packages llama.cpp's native decision API for the c360studio sem* ecosy
 It is also a completed CPU/Metal research baseline, with inspectable experiments
 and a guide to choosing code, ordinary model output, or a specialized decision model.
 
-**Research closeout — 2026-10-06: retain semselect as an evaluation/reference
-service. We have not demonstrated a production sem* task that justifies adding
-this service. For the routing tasks tested here, improve existing code first and
-use schema-constrained Qwen as the first model baseline.**
+**Query-classification decision — 2026-10-07: keep Qwen3.5-4B JSON and the
+improved-code baseline.** Qwen remains our model quality reference; improve the
+coded routing and binding path before adding a specialized backend or starting
+custom training. The improved rules remain evaluation-local, and a combined app
+router still needs validation. semselect remains an evaluation/reference service;
+its packaged native System One runtime continues to use Kev.
 
-That is a usable research outcome. We verified the integration, found benefits
-and failures, and identified what would change the recommendation. This phase
-ends here; additional models, full CPU Kev, SGLang performance and CUDA experiments
-are not required to complete it. Our service runs Kev; these experiments do not
-establish Jev's quality or rule out other decision models.
+The bounded specialist and smaller-Qwen follow-ups are complete. Their negative
+results narrow the choice without establishing that 4B is the smallest possible
+solution or that task-specific training is required. Use the measured small-team
+requirements; no serious-scale requirement has been established.
 
 ## Answers we can give today
 
 | Question | What we measured | Decision it supports |
 | --- | --- | --- |
-| Do these routing tasks need a specialized model? | Qwen JSON beat Kev on tickets: **46/48 vs 43/48**. Both got **23/32** query classifications exact. | No measured routing reason to prefer Kev. [Results](docs/results.md). |
-| Can a model replace our query rules? | Code got **18/32**. Qwen fixed 12 code errors but lost seven successes; Kev fixed 11 but lost six. | Fix parser/binding defects; a hybrid needs its own validation. [Four examples](eval/query-routing/README.md#four-examples-explain-the-tradeoff). |
-| Can a semantic evidence gate help? | On 12 captured inputs, either gate reduced the 4B generator's unsupported assertions from **3 to 0**, preserving one useful partial answer. None had a complete answer. | Useful behavior on that capture; false deferrals of fully answerable inputs remain unknown. [Answer replay](eval/synthesis/README.md). |
-| Did Kev show any quality benefit? | **19/24 vs Qwen's 16/24** on source passages; four fixes and one regression. The later captured-summary gates made identical decisions. | A small pilot lead, not a demonstrated advantage in the captured answer path. [Source pilot](eval/answerability/heldout/README.md). |
-| Can ordinary Qwen return decisions more cheaply? | On Metal, one-token scoring preserved all JSON labels at **28% lower median HTTP latency**. CPU saved **3.4%** with more abstention. | A measured output-format benefit without specialized training. This still generates one token; it is not a zero-output decision head. [Format comparison](docs/validation-scoring.md). |
-| Are 4B models practical on this laptop's CPU? | Richer query requests: Qwen **49.25 s** CPU vs **2.38 s** Metal median. Kev's three completed CPU calls took **185–196 s** before the run was intentionally stopped. | Use Metal for this 4B workload; retain partial CPU evidence without cohort accuracy. [Hardware observations](eval/query-routing/README.md#the-result). |
-| Can a small decision model be fast on CPU? | Julia: **159 ms** median, **530 MiB** cgroup peak, but **24/48 correct**, 23 unnecessary fallbacks and seven order-sensitive cases. | Short-input CPU feasibility is demonstrated; this configuration is not a useful general router. [Julia diagnostic](eval/julia/README.md#result-cpu-speed-is-promising-routing-quality-is-not). |
+| What is our query-classification baseline? | On the same 120 operation cases, **Qwen3.5-4B: 111 correct, eight wrong, one defer**; **improved code: 95 correct, 25 wrong**. | Keep both as the model and code references. Neither certifies automatic routing. [Current decision](docs/when-to-use.md#current-query-classification-decision). |
+| Can a smaller Qwen do the job? | **Qwen3.5-2B: 84/120**; **Qwen3-1.7B: 93/120**, with 36 and 27 wrong accepts. Most errors overrode ordinary search. | Neither fixed configuration qualifies. 1.7B outperformed 2B here, but both fell short of 4B and improved code. [Smaller-Qwen report](docs/validation-qwen-size.md). |
+| Did a specialist earn its place? | The development-selected DeBERTa accepted **13 correct, one wrong, 106 deferred**; GLiClass got **37 raw correct**. | Keep the existing baselines; no specialist integration from this evidence. [Specialist report](docs/validation-specialist-intent.md). |
+| Have we met the 250 ms median / 750 ms p95 budget? | 4B JSON on Metal: **867 / 1,044 ms**. Smaller Qwens on four-thread ARM64 CPU: **5.93 / 6.13 s** and **5.27 / 5.48 s**. | No tested Qwen configuration on this query contract meets that latency budget. These are different hardware operating points, not CPU speed ratios. [Conditions and limits](docs/results.md#2026-10-07--query-classification-decision). |
+| Do we need to train our own model? | No task-trained small classifier has been evaluated. Pretrained 4B is the strongest measured operation classifier, with remaining errors. | Training is an unproved option, not a requirement. Keep labeled evaluation separate from a training project. [Decision guide](docs/when-to-use.md#current-query-classification-decision). |
+| Are memory or serious scale driving the choice? | Small Qwen cgroup peaks were **1.54 / 1.62 GiB**. Load checks were skipped after quality/latency failures; no large-team throughput requirement was established. | Size for the current small team. These results do not justify a new serving or scaling framework. [Resource record](docs/validation-qwen-size.md#resources-sensitivity-and-the-bound). |
+| Are the improved rules or a hybrid already shipped? | The improved rules are an evaluation comparator; full caller integration and a code-plus-Qwen policy remain untested. | Carry over measured fixes through the caller's tests, retaining explicit fallback and coded policy. [Proposed app work](docs/semstreams-integration.md#query-classification-baseline-and-next-app-work). |
+| Can ordinary Qwen reduce output cost? | On the earlier Metal ticket task, one-token scoring preserved JSON labels at **28% lower median HTTP latency**. | A measured format saving without specialized training; it does not prove our query latency target. [Format comparison](docs/validation-scoring.md). |
+| Can an evidence gate help answering? | On 12 captured inputs, either gate reduced unsupported assertions from **three to zero**, preserving one useful partial answer. None had a complete answer. | Improve the supplied evidence; false deferrals of fully answerable inputs remain unknown. [Answer replay](eval/synthesis/README.md). |
 
 These are small task evaluations, not production benchmarks. Repeated orders and
-trials reuse cases. Latency belongs to the measured runtime profile: Kev's three
-query heads reprocessed shared state with one slot, and the ticket comparison
-had unequal prefix-cache reuse. Neither proves an intrinsic model speed ranking.
-Qwen is the post-trained 4B release; Kev was trained from its Base sibling, so this
-is not an identical-backbone control. See the [closeout audit](docs/research-and-decision.md#closeout-review-2026-10-06).
+trials reuse cases. Latency belongs to the measured runtime profile. The earlier
+Kev query heads reprocessed shared state with one slot, and the ticket comparison
+had unequal prefix-cache reuse; the later Qwen operation runs verified zero reuse.
+These results do not establish an intrinsic model speed ranking. In the 4B
+comparison, Qwen is the post-trained release and Kev was trained from its Base
+sibling, so this is not an identical-backbone control. See the
+[closeout audit](docs/research-and-decision.md#closeout-review-2026-10-06).
 
 ## When should a skeptic care?
 
@@ -65,7 +70,8 @@ The service packages **llama.cpp + Kev-4B Q4_K_M** behind a small Go request gua
 using `POST /v1/systemone`. Callers supply context and permissible answers, and own
 authorization, thresholds, fallback and execution. No model decision authorizes
 an action. Kev remains the pinned reference, not a proven best-of-breed choice;
-Julia is an isolated evaluation, not a supported service-model replacement.
+Julia, the specialist classifiers and smaller Qwen models are isolated evaluations.
+They do not change the supported service model.
 See the [model selection review](docs/research-and-decision.md#is-kev-our-best-open-source-choice).
 
 The **code baseline differs by task**. Query classification imports the actual
@@ -83,7 +89,8 @@ benefit of native probabilities, Score and Noul remain unproved.
 ## Team review
 
 Review the [selection guide and reopening conditions](docs/when-to-use.md#research-closeout-and-reopening-conditions),
-then use the [results history](docs/results.md) for full tables and raw proof.
+then use the [latest query comparison](docs/results.md#2026-10-07--query-classification-decision)
+and results history for full tables and raw proof.
 The [closeout audit](docs/research-and-decision.md#closeout-review-2026-10-06)
 records what we accepted and corrected from outside critique.
 
@@ -246,6 +253,8 @@ Native error status/body is preserved; local errors use
 
 ```sh
 task check          # offline contract/evaluator tests, Go race detector/vet, Compose
+task specialist:test # offline specialist harness and pinned classifier driver
+python3 -m unittest discover -s eval/qwen-size -p 'test_*.py' -v # smaller-Qwen harness
 task smoke          # requires running model; all three native primitives
 task evaluate       # 24 fixed cases × two candidate orders; results/semselect.json
 task baseline:up    # optional pinned ARM64 seminstruct image, port 8083

@@ -2,6 +2,30 @@
 
 Initial decision checked 2026-10-05; research closed out 2026-10-06. Initial deployment target: CPU-only Linux container. This document separates source review from the [local validation record](validation.md); numbers attributed to upstream are not local measurements.
 
+## Query-classification follow-up 2026-10-07
+
+**Retain Qwen3.5-4B JSON and improved code as the query-classification baselines.**
+The [bounded specialist evaluation](validation-specialist-intent.md) found no
+specialist adoption case. On its 120 primary operation cases, improved code got
+95 correct and Qwen4B 111. The [smaller-Qwen follow-up](validation-qwen-size.md)
+reused that cohort: 2B got 84 correct and 1.7B 93. Both missed the accepted
+250/750 ms latency budget on four-thread ARM64 CPU and overrode ordinary search
+too often. 4B's 867/1,044 ms Metal result also misses that budget.
+
+The decision concerns our comparison and app-design starting point. Improved
+rules remain evaluation-local; a combined caller policy still needs end-to-end
+validation. Our native System One packaging remains pinned to Kev. A working
+native API, the best tested semantic baseline and a qualified app router are
+separate claims.
+
+Custom training is not established as necessary, and no serious-scale requirement
+has emerged beyond a small team. Keep code responsible for binding and policy;
+use representative caller errors to justify any later model, training or serving
+work. The [current decision table](when-to-use.md#current-query-classification-decision)
+and [full comparison](results.md#2026-10-07--query-classification-decision) supersede
+older selection proposals for this workload. Historical evidence below remains
+useful without creating a new research backlog.
+
 ## Closeout review 2026-10-06
 
 **Keep semselect as a working evaluation/reference service. No measured production
@@ -100,7 +124,7 @@ linked diagnostic; Lev has not.
 OpenJev's noncommercial artifact restriction and ordinary-model scoring adapters
 remain covered in the original shortlist below.
 
-**Closeout selection: retain Kev as the reference and stop expanding the roster.**
+**Native-System-One closeout selection: retain Kev as the packaging reference.**
 Julia tested the distinct small-model CPU hypothesis; it did not qualify as a
 service replacement. No best-of-breed claim follows. Reopen model selection only
 for a named workload under the [reopening conditions](when-to-use.md#research-closeout-and-reopening-conditions).

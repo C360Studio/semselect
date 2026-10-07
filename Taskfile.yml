@@ -125,3 +125,12 @@ tasks:
   julia:cpu:
     desc: Run the bounded CPU feasibility diagnostic; pass -- --output NEW_DIRECTORY
     cmds: ['python3 eval/julia/probe.py {{.CLI_ARGS}}']
+  specialist:test:
+    desc: Offline specialist-intent harness tests, including the real pinned classifier driver
+    cmds:
+      - task: routing:driver:test
+      - GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off GOCACHE=/tmp/semselect-query-routing-gocache go -C eval/query-routing/driver build -mod=readonly -o /tmp/semselect-specialist-query-driver .
+      - SEMSELECT_QUERY_DRIVER=/tmp/semselect-specialist-query-driver python3 -m unittest discover -s eval/specialist-intent -p 'test_*.py' -v
+  specialist:prepare:
+    desc: Freeze specialist pilot inputs without inference; pass -- --run NEW_RESULTS_DIRECTORY --driver DRIVER
+    cmds: ['python3 eval/specialist-intent/runner.py prepare {{.CLI_ARGS}}']

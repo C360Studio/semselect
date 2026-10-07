@@ -1,0 +1,169 @@
+{
+  "reviewer": "/root/small_qwen_review",
+  "independent": true,
+  "reviewed_at": "2026-10-07T17:34:18.300722+00:00",
+  "status": "approved_original_results_with_disclosed_limitations",
+  "freeze_sha256": "06ea8a033d987b3cbfb79097c57b26df6f6f04ba9b34b2b0b4804b3f7060b027",
+  "selection_sha256": "3ec0d013c2adddf08d9b89e9666d9972155dbde5a0afda4e242c633373dba234",
+  "report_path": "results/qwen-size/20261007/run/reports/20261007T173251.585278+0000/summary.json",
+  "report_sha256": "00c486690d885435b1aad8f09a98a1ca16bb31c399ed29b6c2bf0dfb75237d22",
+  "source_snapshot_count": 63,
+  "planned_rows_including_warmups": 618,
+  "all_row_status_counts": {
+    "selected": 598,
+    "error": 1,
+    "unattempted": 19
+  },
+  "arms": {
+    "qwen35_2b": {
+      "primary": {
+        "valid": 120,
+        "raw_correct": 84,
+        "wrong_accepted": 36,
+        "wrong_specialized": 35,
+        "median_ms": 5927.557312999852,
+        "p95_ms": 6127.456750022247
+      },
+      "selection_eligible": false,
+      "stages": {
+        "development": {
+          "planned": 135,
+          "status_counts": {
+            "selected": 135
+          },
+          "accounted_seconds": 869.8214325779118,
+          "stop_reason": null,
+          "rows_sha256": "3e65f92deb306d4f4fce327400cb67b85dc50eae514286cabbbdadd13a457196",
+          "lifecycle_result_sha256": "ac163cea893136d17188a747c8bc046c5e99ffaae69cd4063d7aece914ecbb4b"
+        },
+        "primary": {
+          "planned": 123,
+          "status_counts": {
+            "selected": 123
+          },
+          "accounted_seconds": 739.3483944169711,
+          "stop_reason": null,
+          "rows_sha256": "5f85369a99c581683a4d6597af058aa4f758787d8c3d2db561b13b87a69d2be6",
+          "lifecycle_result_sha256": "d56005f277334d3b7d9542bc870277ef628443bf8fa2f74ad93f111fbb5ecf83"
+        },
+        "sensitivity": {
+          "planned": 51,
+          "status_counts": {
+            "selected": 31,
+            "error": 1,
+            "unattempted": 19
+          },
+          "accounted_seconds": 190.8750469633378,
+          "stop_reason": "inference budget exhausted",
+          "rows_sha256": "5e0e90ee6cb9f6a74b7f0aa4776ec480628ca7d0107a79f0f2ffe4ddff92fae3",
+          "lifecycle_result_sha256": "bd3f84b0665d21ba4d42e19cad0f2f0470b8fce84795e602bf7afac4abe064d0"
+        }
+      },
+      "sensitivities": {
+        "reverse": {
+          "planned": 24,
+          "valid": 24,
+          "changes": 7,
+          "new_wrong_specialized": 1,
+          "complete": true
+        },
+        "remap": {
+          "planned": 24,
+          "valid": 4,
+          "changes": 22,
+          "new_wrong_specialized": 1,
+          "complete": false
+        }
+      },
+      "total_accounted_seconds": 1800.0448739582207,
+      "budget_overshoot_seconds": 0.04487395822070539,
+      "peak_memory_bytes": 1657524224,
+      "readiness_seconds": 2.8512032909784466,
+      "all_cleanup_verified": true,
+      "recorded_verdict": "inconclusive",
+      "load": "skipped: failed prerequisites"
+    },
+    "qwen3_17b": {
+      "primary": {
+        "valid": 120,
+        "raw_correct": 93,
+        "wrong_accepted": 27,
+        "wrong_specialized": 24,
+        "median_ms": 5267.258312553167,
+        "p95_ms": 5479.79470808059
+      },
+      "selection_eligible": false,
+      "stages": {
+        "development": {
+          "planned": 135,
+          "status_counts": {
+            "selected": 135
+          },
+          "accounted_seconds": 731.6902277474292,
+          "stop_reason": null,
+          "rows_sha256": "470c583a6ec92fe14a7383dbcbcdab4ae311182047e4287f9c5573a4617abffc",
+          "lifecycle_result_sha256": "b9847c8027a5247fa745ddc0ec814f4b9b8ac31f92433e25f27101bf18fb8787"
+        },
+        "primary": {
+          "planned": 123,
+          "status_counts": {
+            "selected": 123
+          },
+          "accounted_seconds": 659.3353517064825,
+          "stop_reason": null,
+          "rows_sha256": "7593415cf4985286616b3dc0ccd9c9b0e95f340f941b70255c0e79f10fd02ec5",
+          "lifecycle_result_sha256": "d1118881d13cd86a035d6816091460912f64ba21e55f9c58fb25e1139def40a0"
+        },
+        "sensitivity": {
+          "planned": 51,
+          "status_counts": {
+            "selected": 51
+          },
+          "accounted_seconds": 285.77348770480603,
+          "stop_reason": null,
+          "rows_sha256": "61a6d7ea78b018f94cba63d01352bb705d223fca3ab8fb63d70990ee1b35fee7",
+          "lifecycle_result_sha256": "726db05ecd00834dfb5efe6b15b04dc9717f556d83756c35335b4bcaa0424897"
+        }
+      },
+      "sensitivities": {
+        "reverse": {
+          "planned": 24,
+          "valid": 24,
+          "changes": 6,
+          "new_wrong_specialized": 2,
+          "complete": true
+        },
+        "remap": {
+          "planned": 24,
+          "valid": 24,
+          "changes": 13,
+          "new_wrong_specialized": 1,
+          "complete": true
+        }
+      },
+      "total_accounted_seconds": 1676.7990671587177,
+      "budget_overshoot_seconds": 0,
+      "peak_memory_bytes": 1742696448,
+      "readiness_seconds": 0.8985430411994457,
+      "all_cleanup_verified": true,
+      "recorded_verdict": "does not meet targets",
+      "load": "skipped: failed prerequisites"
+    }
+  },
+  "audit_checks": [
+    "Source and payload freezes unchanged; selection hashes and development rows verified.",
+    "Every completed raw HTTP response hash, JSON decoding, frozen model alias, full token count, zero cache count and output mapping independently checked.",
+    "Both primary cohorts contain all120unique cases; metric counts and median/nearest-rankp95 independently recomputed.",
+    "All48planned sensitivity outcomes per arm retained; changes and new false specialized routes independently recomputed.",
+    "All6model lifecycles serialized, startup-inclusive cgroup resources verified, final log hashes match, all owned containers stopped and CLIs reaped.",
+    "No load execution occurred because primary quality, CPU latency and stability prerequisites failed."
+  ],
+  "verdict": "Neither requested smaller pretrained Qwen meets quality or latency targets under this frozen CPUARM64 uncached contract.2B overall protocol completion remains inconclusive solely because sensitivity exhausted the bound; its primary quality/latency failure is fully measured.1.7B completed all stages and does not meet targets.",
+  "limitations": [
+    "Both variants are diagnostic because development eligibility failed; R3 omitted that flag from automatic promotion. No actual outcome or load decision changes because both candidates independently fail quality/cost/stability. A separately reviewed post-run harness correction may prevent future false promotion.",
+    "2B consumed1800.044874seconds in outer request accounting, approximately45ms deadline/cancellation overhead; one interrupted request is an error and19remaining sensitivity rows are unattempted. No budget extension or extra completed request.",
+    "The authored cohort was already used; no fresh confirmation,production-traffic,AMD64,CUDA,Metal-small-model or training-necessity claims.",
+    "Setup source-conversion revision remains unproved; distributed GGUF bytes and runtime image/binary are exactly pinned."
+  ],
+  "post_run_code_changes_reviewed": false
+}

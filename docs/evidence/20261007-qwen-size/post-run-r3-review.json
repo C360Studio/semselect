@@ -1,0 +1,32 @@
+{
+  "reviewer": "/root/small_qwen_review",
+  "independent": true,
+  "reviewed_at": "2026-10-07T17:37:06.001921+00:00",
+  "status": "approved_post_run_r3_fix",
+  "scope": "Narrow post-execution promotion eligibility correction; original experiment, outputs, selection, frozen source and report remain unchanged.",
+  "original_freeze_sha256": "06ea8a033d987b3cbfb79097c57b26df6f6f04ba9b34b2b0b4804b3f7060b027",
+  "original_report_sha256": "00c486690d885435b1aad8f09a98a1ca16bb31c399ed29b6c2bf0dfb75237d22",
+  "source_hashes": {
+    "evaluate.py": {
+      "frozen_sha256": "7e4169657f878a43abe692009000e48326bebfeddbffe6f698d58185fa4ba301",
+      "current_sha256": "f1c1c3623cc976fd5ecdb363b202a21c81044a8dc652a89984ca89c113ab0817"
+    },
+    "test_evaluate.py": {
+      "frozen_sha256": "aff09b26e9a8db4bed67035e7893c0f525b5fcfb9bcf77f8dff3bf14764364a0",
+      "current_sha256": "423a1992485d8de2fac8623ecaa46a9a8979bfaadf3111cf27b87a455646fc1a"
+    }
+  },
+  "checks": [
+    "Evaluator diff is exactly one promotion predicate: development eligibility must be true in addition to primary quality/cost/stability.",
+    "Preserved red regression fails on original behavior;23current tests independently pass.",
+    "Independent positive/negative control confirms qualified choices can still require load while diagnostic choices cannot.",
+    "Current sources correctly reject the old source freeze; replay uses preserved original source rather than rewriting experiment evidence.",
+    "Original report and freeze hashes exactly match the prior independent result approval."
+  ],
+  "red_log_sha256": "051cc5c1a96e4f31f89fbf0073fedc9cd2a6998142dea40148a3761e141d92df",
+  "green_log_sha256": "00fab290636d930f66c023d39584c9e31ecb539aeeae0b82e201dc3d04a29d40",
+  "observed_result_impact": "None: both measured candidates already failed primary quality,cost,andstability; both load checks were correctly skipped and all model calls preceded this change.",
+  "replay_record_sha256": "c993cbf5930bd89461aef668968d3b8100c3c642073e216fa0e74e338e55af38",
+  "replay_note": "Parent supplied preserved-source offline replay reports exact result equivalence except timestamp; reviewer checked record and original hashes, but did not rerun that full copy workflow.",
+  "pending": "Evidence archive/index final packaging and prose post-run note are owned by root; no further inference or source correction required."
+}

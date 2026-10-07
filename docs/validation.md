@@ -1,5 +1,9 @@
 # Bootstrap validation — 2026-10-05
 
+For the current app decision, see the [2026-10-07 query comparison](results.md#2026-10-07--query-classification-decision)
+and [baseline guidance](when-to-use.md#current-query-classification-decision).
+This page preserves the original bootstrap measurements.
+
 This is the original **CPU** record. The later
 [native Metal comparison](validation-metal.md) uses a matched 4B chat baseline and
 changes the routing comparison: Qwen3.5-4B was faster and more accurate than Kev

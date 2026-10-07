@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "repository": "MoritzLaurer/deberta-v3-base-zeroshot-v2.0-c",
+  "revision": "bddf8c5411c34ac3565e16e04384fd68b2618dda",
+  "license": "MIT",
+  "metadata_source": "https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v2.0-c/revision/bddf8c5411c34ac3565e16e04384fd68b2618dda?blobs=true",
+  "files": {
+    "README.md": {
+      "size_bytes": 21118,
+      "sha256": "75a2af474babafe0c57db14352013c8152442122e02aaf4e4c94eee5e5d39534",
+      "verification": "downloaded_metadata_sha256"
+    },
+    "added_tokens.json": {
+      "size_bytes": 23,
+      "sha256": "dc046d04c9b0ada7ae6f1dc89c465801799acdf0c9a6aab8c15a1b2d5ca4e91f",
+      "verification": "downloaded_metadata_sha256"
+    },
+    "config.json": {
+      "size_bytes": 1016,
+      "sha256": "a1c8011b852ae46d6ac26160d358fa595861d261352885f8f7bfcd2811030d9f",
+      "verification": "downloaded_metadata_sha256"
+    },
+    "model.safetensors": {
+      "size_bytes": 368871908,
+      "sha256": "605e40d2020f4c66666db3e98a4bc277b6214565eac95f35c1a5027a93ee0ef0",
+      "verification": "publisher_lfs_digest_only"
+    },
+    "special_tokens_map.json": {
+      "size_bytes": 286,
+      "sha256": "9463f61e1b109a8eb4688b829260d7c6b1e6dff04c98ff7269bb89e2b92369b9",
+      "verification": "downloaded_metadata_sha256"
+    },
+    "spm.model": {
+      "size_bytes": 2464616,
+      "sha256": "c679fbf93643d19aab7ee10c0b99e460bdbc02fedf34b92b05af343b4af586fd",
+      "verification": "publisher_lfs_digest_only"
+    },
+    "tokenizer.json": {
+      "size_bytes": 8656646,
+      "sha256": "05402ffae6dd382a8491b1d29bfc139bec5d332662e86a026f433ce54c25c202",
+      "verification": "downloaded_metadata_sha256"
+    },
+    "tokenizer_config.json": {
+      "size_bytes": 1256,
+      "sha256": "f5a1a74a632c0e9225e09a21ddf60c2e70ef5d3bfc1f261a24fd8ddab27254d2",
+      "verification": "downloaded_metadata_sha256"
+    }
+  },
+  "weights_locally_verified": false,
+  "architecture_tested": null
+}
