@@ -1,5 +1,13 @@
 # Routing smoke evaluation
 
+For the current **query-classification** decision, start with the
+[120-case comparison](../docs/results.md#2026-10-07--query-classification-decision).
+The [specialist harness](specialist-intent/README.md) compares actual code,
+improved rules, embeddings, specialists and Qwen4B; the
+[smaller-Qwen harness](qwen-size/README.md) tests 2B and 1.7B on that same cohort.
+Both runs are complete and retain Qwen4B plus improved code as the baselines.
+The ticket smoke instructions below describe an earlier, separate workload.
+
 For the separate **answerability** workload, start with the
 [real-source pilot](answerability/heldout/README.md) or the earlier
 [12 teaching examples](answerability/README.md).

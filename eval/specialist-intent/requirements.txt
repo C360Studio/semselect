@@ -1,0 +1,9 @@
+# Setup seeds only. Resolve the full wheel closure on Linux ARM64, then freeze
+# with locks/prepare.py wheels before building the immutable experiment image.
+gliclass==0.1.20
+torch==2.14.1+cpu
+transformers==5.19.0
+numpy==2.5.3
+scikit-learn==1.9.1
+sentencepiece==0.2.2
+safetensors==0.8.0

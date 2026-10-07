@@ -2,6 +2,7 @@
 /models/*
 !/models/.gitkeep
 /results/
+/.enjoy-logs/
 /bin/
 /.native/
 /.sglang/

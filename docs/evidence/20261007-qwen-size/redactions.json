@@ -1,0 +1,152 @@
+{
+  "original_archive_sha256": "3e96ce24949d4a580a726e131ef1d33c60a264a5e4f8fea93407d94f7ba4d321",
+  "public_archive_sha256": "e191912891f4b9fc557b8ac81d0327714cc870d62c52d3954c994ccdec8fed32",
+  "original_retained_locally": true,
+  "scope": "Publication-only privacy redactions of unrelated prelaunch host/container inventories. Frozen sources, requests, model responses, tokens, selections, model/resource limits, metrics and original review records remain unchanged.",
+  "changed_members": [
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen35_2b-development/launch.json",
+      "original_sha256": "16e5bc5cedc10690848fc6a188f76d4bbd090dbc7ec1794774b6d6cdf44b1b3f",
+      "public_sha256": "7f337e4be7bf918b3aacea68b7109f87e894612072d773d6d929f465de04a73a",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 730
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen35_2b-development/result.json",
+      "original_sha256": "ac163cea893136d17188a747c8bc046c5e99ffaae69cd4063d7aece914ecbb4b",
+      "public_sha256": "b067ab1b8f5c6ff7e2dcb3c5fef318a7e06b3601006a91bbd40852dbb6ce80f8",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 730
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen35_2b-primary/launch.json",
+      "original_sha256": "89db898ffae9c2798c13b86022f48177ec638c616f522ccbe3b878cd46e96401",
+      "public_sha256": "cb24d70962c37c2e97fd8138b7b9fe5bb0ef841c5bd1a16467e18b8f4768b0c0",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 699
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen35_2b-primary/result.json",
+      "original_sha256": "d56005f277334d3b7d9542bc870277ef628443bf8fa2f74ad93f111fbb5ecf83",
+      "public_sha256": "a56f0295895bcef96e3eb8cc5819981fa2b453c0d0396ca4dc16a0ae9fd56825",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 699
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen35_2b-sensitivity/launch.json",
+      "original_sha256": "edcb8d14a6c186d2f2d9071d8b51c3451a7bc64c76f6cf2ed1450c74fdc22db1",
+      "public_sha256": "d17b799590ac56739592596eb069167db4920926025385d8bf4572a561be0e53",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 695
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen35_2b-sensitivity/result.json",
+      "original_sha256": "bd3f84b0665d21ba4d42e19cad0f2f0470b8fce84795e602bf7afac4abe064d0",
+      "public_sha256": "ea6467ab39bc279c33e048ce989e1243bcfe75606121605515240ef4dad2111f",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 695
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen3_17b-development/launch.json",
+      "original_sha256": "c5c249ad9e81969089d35463bddea1555dfb1b0364f56f846732ff29d7856f13",
+      "public_sha256": "d9e5033fb8da25f48a3db4a654efe4ff52bb30bae4587a88188cace1a8620730",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 684
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen3_17b-development/result.json",
+      "original_sha256": "b9847c8027a5247fa745ddc0ec814f4b9b8ac31f92433e25f27101bf18fb8787",
+      "public_sha256": "4f6528cec14c43b3835cfbb0f21abb60f7334ed25ac426742da78e9dbf5b6141",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 684
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen3_17b-primary/launch.json",
+      "original_sha256": "f501e6c0be5b57e3eee30ae9925b21c8c3e348d7fa1a022929e7e0e61e944ede",
+      "public_sha256": "77cbb1043c0191aa14fbc8cdcba204d71aa99a2c51985ad93ce4f1f45af9d4ce",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 696
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen3_17b-primary/result.json",
+      "original_sha256": "d1118881d13cd86a035d6816091460912f64ba21e55f9c58fb25e1139def40a0",
+      "public_sha256": "d520b2df1398a60df9a3ad71e1312f015e07622db5731204975795d3470b407a",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 696
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen3_17b-sensitivity/launch.json",
+      "original_sha256": "3b213da32d6ef28552366afdf2a43df3b12557c7ad143cfc2935df54351386f9",
+      "public_sha256": "0af11817aefb0dd32f76b0ecf651212ce7b8ab45b7a7ef248b05ff4f6782987e",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 696
+        }
+      ]
+    },
+    {
+      "path": "results/qwen-size/20261007/run/lifecycle/qwen3_17b-sensitivity/result.json",
+      "original_sha256": "726db05ecd00834dfb5efe6b15b04dc9717f556d83756c35335b4bcaa0424897",
+      "public_sha256": "7403242517991d869f8d1d254bc529f9f18760aa165e4b10b27b659da65a663e",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 696
+        }
+      ]
+    }
+  ]
+}

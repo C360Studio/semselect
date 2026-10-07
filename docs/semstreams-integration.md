@@ -11,6 +11,33 @@ It keeps the upstream Choice, Score, and Noul wire shapes; a new semselect selec
 protocol is unnecessary. This document proposes future SemStreams work. No sibling
 repository is changed by this bootstrap.
 
+## Query-classification baseline and next app work
+
+**The agreed starting point is Qwen3.5-4B JSON plus improved code.** The latest
+[120-case operation comparison](results.md#2026-10-07--query-classification-decision)
+returned 111 correct operations for 4B and 95 for evaluation-local improved rules.
+The tested specialists and smaller Qwens did not qualify as replacements. This
+does not ship the rules, enable a code-plus-model policy, or change the packaged
+Kev runtime. No sibling repository has been changed.
+
+Proposed caller work should stay narrow:
+
+1. Bring the demonstrated rule and binding fixes into SemStreams with failing
+   caller regressions and representative fresh cases. Preserve ordinary search
+   when a specialized operation does not apply; weak keyword guesses need checks.
+2. Retain schema-constrained Qwen4B as the semantic reference. Any policy deciding
+   when to invoke it or fall back needs its own quality and end-to-end latency
+   measurement. Individual component results do not establish a hybrid's result.
+3. Keep binding, validation, authorization, timeouts and actions in caller code.
+   Evaluate errors and deferrals separately under the 250 ms median / 750 ms p95
+   budget. The measured 4B Metal configuration currently misses that budget.
+
+There is no established need for custom training, a specialist service or
+serious-scale infrastructure. A small team is the current scope; load checks in
+the bounded follow-ups were skipped after prerequisite failures. If actual
+caller traffic exposes a remaining gap, choose the smallest targeted improvement
+and validate it rather than treating this proposal as a provider-framework roadmap.
+
 ## Typed decisions can use an existing model
 
 A narrow caller contract could separate a permitted label, explicit abstention,

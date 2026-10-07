@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "status": "author_checked_independent_review_pending",
+  "reviewer_role": "separate_fixture_author",
+  "independent_approval": false,
+  "candidate_outputs_seen": false,
+  "date": "2026-10-07",
+  "checks": [
+    "Each case manually authored with a unique intended operation under the single-operation convention.",
+    "Negated and quoted cases contain no remaining affirmative specialized request.",
+    "Composed and unresolved-operation-choice cases map to no_override; unresolved binding alone retains specialized intent.",
+    "Required literal bindings and partial options checked mechanically against case catalogs.",
+    "All intended scenario/paraphrase families contained in one split; generic operation wording still overlaps.",
+    "Exact strata, operation, missing-binding counts and preselected subsets recorded before any candidate outputs."
+  ],
+  "limitations": [
+    "The same fixture owner supplied the labels and author review; this is not independent approval.",
+    "No real traffic supplied; synthetic wording cannot exclude pretraining overlap.",
+    "Shared-workspace access convention cannot technically prevent a tuner from reading heldout material."
+  ],
+  "required_before_inference": "Independent read-only label/contract review with no candidate outputs. Record approval or defects separately; preserve this frozen author-check record."
+}

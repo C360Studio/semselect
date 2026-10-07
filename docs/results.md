@@ -1,7 +1,8 @@
 # Evaluation results history
 
-The CPU/Metal research phase closed out on 2026-10-06. The [README](../README.md)
-links the decision summary; [reopening conditions](when-to-use.md#research-closeout-and-reopening-conditions)
+The initial CPU/Metal research phase closed out on 2026-10-06; the bounded
+specialist and smaller-Qwen follow-ups completed on 2026-10-07. The [README](../README.md)
+links the current decision summary; [reopening conditions](when-to-use.md#research-closeout-and-reopening-conditions)
 make further experiments conditional.
 This page preserves the complete published experiment history; linked
 JSON contains the per-request evidence and is the source for table values.
@@ -19,6 +20,58 @@ in its denominator. In those tables, latency covers measured calls and order fli
 compare valid pairs. Other sections define their own datasets, metrics and order
 comparisons. These are small evaluations, not production benchmarks or calibration
 studies. Model probabilities are not established probabilities of correctness.
+
+## 2026-10-07 — Query-classification decision
+
+**Keep Qwen3.5-4B JSON and the improved-code baseline.** The additional models
+did not earn replacement or integration. This selects the references for app
+work; it does not certify an implemented hybrid or establish a need for training.
+
+The specialist pilot used 60 development queries and 120 previously unused
+primary queries, with shared literal binding and fixed selection rules. The
+smaller-Qwen follow-up reused that 120-case cohort with alias-only request changes.
+Thus it is a fixed comparative screen, not another fresh confirmation set.
+
+| Arm / measured runtime | Raw correct / 120 | Correct accepted | Wrong accepted | Deferred | Errors | HTTP median / p95 |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Existing SemStreams keyword or BM25, each | 61 | 61 | 53 | 0 | 6 | Different execution boundary |
+| Evaluation-local improved code | 95 | 95 | 25 | 0 | 0 | Different execution boundary |
+| semembed nearest example, ARM64 CPU | 34 | 0 | 0 | 120 | 0 | 23 / 29 ms |
+| GLiClass diagnostic, ARM64 CPU | 37 | 37 | 83 | 0 | 0 | 253 / 483 ms |
+| DeBERTa, preselected specialist, ARM64 CPU | 22 | 13 | 1 | 106 | 0 | 1,134 / 2,049 ms |
+| **Qwen3.5-4B Q4_K_M JSON, Metal** | **111** | **111** | **8** | **1** | **0** | **867 / 1,044 ms** |
+| Qwen3.5-2B Q4_K_M JSON, ARM64 CPU | 84 | 84 | 36 | 0 | 0 | 5,928 / 6,127 ms |
+| Qwen3-1.7B Q4_K_M JSON, ARM64 CPU | 93 | 93 | 27 | 0 | 0 | 5,267 / 5,480 ms |
+
+All learned primary arms completed 120 valid calls. Raw correct precedes
+thresholding; correct accepted applies the development-selected policy. Existing
+code's six native-output errors remain errors in the denominator. Improved code's
+local wrapper p95 was 0.031 ms; it has no matched HTTP serving measurement.
+These operation counts are separate from argument binding and executable plans.
+
+The quality screen required at least 108 raw correct and 96 correct accepts,
+at most three wrong accepts, zero wrong specialized routes on `no_override` and
+zero gold-argument mismatches after shared binding. No row qualifies under the
+full quality screen. The accepted classifier latency target remains **250 ms
+median / 750 ms p95**. 4B misses it even at the measured Metal operating point.
+Its timing is not a CPU speed comparison with the smaller Qwens.
+
+The small models used four CPU threads, a four-CPU quota, one slot, Q4_K_M,
+thinking disabled and verified zero prefix reuse. Peaks were 1.544 GiB for 2B
+and 1.623 GiB for 1.7B. Both passed the 2 GiB memory gate but failed quality,
+latency and the completed reverse-order checks. 2B reached its 30-minute cap
+during remap sensitivity: that view is incomplete, while all primary results
+above are complete. 1.7B completed the whole bounded screen. Load checks were
+skipped after prerequisite failures; no throughput or large-team claim follows.
+
+Use the [specialist report](validation-specialist-intent.md) and its
+[evidence archive](evidence/20261007-specialist-intent/README.md) for the original
+comparison, and the [smaller-Qwen report](validation-qwen-size.md),
+[summary JSON](evidence/20261007-qwen-size/summary.json) and
+[evidence index](evidence/20261007-qwen-size/README.md) for the follow-up. Both
+retain exact pins, raw responses, selection, resource limits, independent reviews,
+failure denominators and shutdown evidence. The [decision guide](when-to-use.md#current-query-classification-decision)
+explains what to do with these results; [app work remains proposed](semstreams-integration.md#query-classification-baseline-and-next-app-work).
 
 ## 2026-10-06 — Julia CPU feasibility diagnostic
 

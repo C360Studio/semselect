@@ -1,0 +1,12 @@
+{
+  "public_archive_member_hashes_verified": {
+    "20261007-qwen-size": 291,
+    "20261007-specialist-intent": 536
+  },
+  "public_qwen_offline_replay_exact_except_timestamp": true,
+  "inference_run": false,
+  "public_archive_sha256": {
+    "20261007-qwen-size": "e191912891f4b9fc557b8ac81d0327714cc870d62c52d3954c994ccdec8fed32",
+    "20261007-specialist-intent": "01cb07b4cb7d714a9bd0f94452d28af0d65afb4898652c685f8587b01fd5f4e7"
+  }
+}

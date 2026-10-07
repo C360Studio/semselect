@@ -1,0 +1,284 @@
+{
+  "original_archive_sha256": "994079fa5b270dd656faa1b0339e7b20d75d14a08c642fe74923349c28b8411c",
+  "public_archive_sha256": "01cb07b4cb7d714a9bd0f94452d28af0d65afb4898652c685f8587b01fd5f4e7",
+  "original_retained_locally": true,
+  "scope": "Publication-only privacy redactions of unrelated prelaunch host/container inventories. Frozen sources, requests, model responses, tokens, selections, model/resource limits, metrics and original review records remain unchanged.",
+  "changed_members": [
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/deberta-development/launch.json",
+      "original_sha256": "64d65c3ecfb280cf4de0a4032e69694502c4f38047ce526680a31e77f0c5b924",
+      "public_sha256": "d474709f765d42c8c029b9681b91dc3d29db2179402da104f321d117df5d20d1",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 687
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/deberta-development/result.json",
+      "original_sha256": "ddf1b1eacde5a53c7eb2567a066eafc283651b19d194f97a33322ab7a7188e81",
+      "public_sha256": "5546afb8a1700c88c261a52ed1f8a33809d90053f4ed9077cc41f2eddde0d1ec",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 687
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/deberta-primary/launch.json",
+      "original_sha256": "331dc5673a5adc669b0d20c8823a6531be15089a347f874ffdf82218628d42e5",
+      "public_sha256": "082e796e5a5d15a1e0e8ee4b9a42046172bf173e261842d1cfa50eba5d0b8be2",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 720
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/deberta-primary/result.json",
+      "original_sha256": "8a60d28d9c247ca1e93bd0f65d4914f2b11a94582465351b694cd0d945d90258",
+      "public_sha256": "76eace32d24bc3c0f9cab4e9d5217db59321561c493d47fb23a950bd91523f3b",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 720
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/deberta-sensitivity/launch.json",
+      "original_sha256": "30ee9419c54084aea58a75727491f6612895601c70c35159166438618c97f60e",
+      "public_sha256": "9e8894be2cf4adb2ff210cf9b7bb9ac8979835fa44c0f9604c8241471919c642",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 700
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/deberta-sensitivity/result.json",
+      "original_sha256": "cec3f5635fa249f448a754ecf06ba9339dd2ad9ed2a4c49589fb8321a187722e",
+      "public_sha256": "838abdf0e8fdad42394d3fac32cbb9ebb7937735fe7560306ed4749129283eaf",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 700
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/embeddings-primary/launch.json",
+      "original_sha256": "60c9d4033c51da263874d90a3213f6add4e56ba88d427e173d7e2ae784036a49",
+      "public_sha256": "736e83eb39ac844871144604413f68bb584eca63cfc6f92e6a85335981ed14e1",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 696
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/embeddings-primary/result.json",
+      "original_sha256": "b18fc1263525f2b2c34a757b4a8714a66c46d80e3628b4fd1dc72e6a09da2de1",
+      "public_sha256": "146a3ebcacad8d1b19bb6b10bdc95aade56876cd9629b98d37d47201f3430f0c",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 696
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/gliclass-primary/launch.json",
+      "original_sha256": "d49ae9e45dbe55c04be6cf2f42b54c97057803ebb902adf489e5d244894dc3fe",
+      "public_sha256": "30024f646ed6dfeacc89f0fca7be233c7621f386647b23c9518ff7ab81e42d7d",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 698
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/gliclass-primary/result.json",
+      "original_sha256": "5396613a026a62ed0028c1b7279a090be7dbb3169c94da409822e00b2f83fcf2",
+      "public_sha256": "a0c46f3afdf46edeb850bfbda15cbf8530366b9427ac7534f1a435b5d661afc4",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 698
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/gliclass-sensitivity/launch.json",
+      "original_sha256": "f39827edcd36cbe91b34d91791fc6da0107a97b4e496f5377986a73de0c429e8",
+      "public_sha256": "82f91492ec952e490a9b5e5d6cb316b4251b4ff601da66f0a2fdb46db9de1c1b",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 696
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/gliclass-sensitivity/result.json",
+      "original_sha256": "786213d5783fc2644e46aa7d5a52404d011e1daa7827238eaf224cce91488ea4",
+      "public_sha256": "df4fd4880973556a40e92b2a81e2f67f0852e5de13d6998ccf18439ac35ebb4e",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 696
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/qwen-development/launch.json",
+      "original_sha256": "61fe65dcc92f2fd72dca983085fb80a619d2037485d6ae5034a2153059109fd9",
+      "public_sha256": "a77e569ad7c09a1fed8b443fb43d9b761a75604d189b2d4ee7b591b1a5855c0b",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 698
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/qwen-development/result.json",
+      "original_sha256": "acfcf16246693f431348e04dfc8c3a1293a21befa36ad5a12ac140bbe6626e9b",
+      "public_sha256": "39c3eb0019f136e237c9ca00709f083fa23a785cf1065729f9cd797e468fd4c8",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 698
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/qwen-primary/launch.json",
+      "original_sha256": "edf28f2a854542ff852aa202a2578eb2b8e6ddd0a6ba1b78a24f5fd1adb9af23",
+      "public_sha256": "e844079b4184794fdaac135a86183d8e0b88515a90d159cdb847f8f56c28332c",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 701
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/qwen-primary/result.json",
+      "original_sha256": "41d3262258fa344c94260cc35d7845388aa6a115cc85c14db01816ee444b6d27",
+      "public_sha256": "83e2b8079c3cf8d571a87fab4b55f6a38ddc75574c6a13ccfede3555dcb5318c",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 701
+        },
+        {
+          "path": ".prelaunch_inventory.docker",
+          "method": "Replace unrelated container details with running-container count.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/qwen-sensitivity/launch.json",
+      "original_sha256": "9842f7db0f3b7260305484cd3010836587976eab077de04b201b419723131fbf",
+      "public_sha256": "34fc5308812f005eb0ca1490b16e8750603bfa5ef5d801b29ace252ad56087d9",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 697
+        }
+      ]
+    },
+    {
+      "path": "results/specialist-intent/20261007-execution/lifecycle/qwen-sensitivity/result.json",
+      "original_sha256": "64afa851d2e842de65e5b607d2d9e34fbab3ab20ee64fa10bf2762dba4047c46",
+      "public_sha256": "492c09a471e1f44bea48f873a7fe97d17858ea5d1f11c15f5299a3e8a3c77588",
+      "edits": [
+        {
+          "path": ".prelaunch_inventory.processes",
+          "method": "Replace COMM values only; preserve header, PID, CPU, RSS, ordering and numeric-field whitespace.",
+          "rows": 697
+        }
+      ]
+    }
+  ]
+}

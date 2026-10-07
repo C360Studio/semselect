@@ -26,6 +26,14 @@ regex/BM25 implementations on their own task. The
 [research closeout](when-to-use.md#research-closeout-and-reopening-conditions)
 makes further comparisons conditional on a real caller need.
 
+The later [bounded operation-classification comparison](results.md#2026-10-07--query-classification-decision)
+adds improved rules, the existing semembed model and CPU specialists against
+Qwen4B on 120 cases with shared binding. Improved code obtained 95 correct
+operations and Qwen4B 111. This supports retaining both query-classification
+baselines; it does not establish an answerability or retrieval advantage.
+The improved rules remain evaluation-local, with caller changes proposed in the
+[integration guidance](semstreams-integration.md#query-classification-baseline-and-next-app-work).
+
 ## Where SemEngine and fusion fit
 
 SemEngine at clean commit `2ec3bcf08bc1d2794d6cb1081ebd1982e08cf2c5` has a documented

@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "repository": "knowledgator/gliclass-instruct-base-v1.0",
+  "revision": "4f6a108b08a5537f395521d19b5073e197923dd3",
+  "license": "Apache-2.0",
+  "metadata_source": "https://huggingface.co/api/models/knowledgator/gliclass-instruct-base-v1.0/revision/4f6a108b08a5537f395521d19b5073e197923dd3?blobs=true",
+  "files": {
+    "README.md": {
+      "size_bytes": 8947,
+      "sha256": "31ccc583329ad64da81a02e465707ca16def806a08ec09c3d0c3a463464d8d12",
+      "verification": "downloaded_metadata_sha256"
+    },
+    "added_tokens.json": {
+      "size_bytes": 92,
+      "sha256": "bb34d14eaa664accefb609fec933f157a496b08bffc16c71c78093b34cebcd13",
+      "verification": "downloaded_metadata_sha256"
+    },
+    "config.json": {
+      "size_bytes": 4149,
+      "sha256": "fe28f5df83b9bc62cb975073c0bdcebc8117362eb25664a5618be5fd9f2376f7",
+      "verification": "downloaded_metadata_sha256"
+    },
+    "model.safetensors": {
+      "size_bytes": 746224192,
+      "sha256": "ab6ce13c9ca472a72bded2f0333534d5631aa52b6eb5b38d5df32b080501e4b6",
+      "verification": "publisher_lfs_digest_only"
+    },
+    "special_tokens_map.json": {
+      "size_bytes": 970,
+      "sha256": "b2f1b2f15f29a6b6d9d6ea4eca1675d2c231a71477f151d48f79cc83a625ba21",
+      "verification": "downloaded_metadata_sha256"
+    },
+    "spm.model": {
+      "size_bytes": 2464616,
+      "sha256": "c679fbf93643d19aab7ee10c0b99e460bdbc02fedf34b92b05af343b4af586fd",
+      "verification": "publisher_lfs_digest_only"
+    },
+    "tokenizer.json": {
+      "size_bytes": 8649676,
+      "sha256": "d05acaafc9edfc327f2b7c03576100925d7f69c3085b27a62288958246510677",
+      "verification": "downloaded_metadata_sha256"
+    },
+    "tokenizer_config.json": {
+      "size_bytes": 1843,
+      "sha256": "32154241472870be1e317105ce4765903515b4291b4add85a8d4322fda53ffe2",
+      "verification": "downloaded_metadata_sha256"
+    }
+  },
+  "weights_locally_verified": false,
+  "architecture_tested": null
+}

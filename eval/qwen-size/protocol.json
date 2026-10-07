@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "arms": ["qwen35_2b", "qwen3_17b"],
+  "seed": 20261007,
+  "request_seconds": 30,
+  "inference_seconds": 1800,
+  "setup_seconds": 1800,
+  "readiness_seconds": 120,
+  "lifecycle_seconds": 1920,
+  "quality": {"raw_correct": 108, "accepted_correct": 96, "wrong_accepted_max": 3, "wrong_specialized_max": 0, "invented_binding_max": 0},
+  "cost": {"median_ms": 250, "p95_ms": 750, "peak_memory_bytes": 2147483648, "readiness_seconds": 60},
+  "retention": {"accepted_correct": 108, "wrong_accepted_max": 8},
+  "sensitivity_changes_max": 1,
+  "load": {"requests": 200, "concurrency": 2, "seconds": 300, "p95_ms": 1500},
+  "scope": "Fixed pretrained smaller-model screen on an already-used authored cohort; fresh confirmation required before adoption. CPU ARM64 results only."
+}
