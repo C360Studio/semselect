@@ -1,0 +1,17 @@
+# semselect-owned override for the legacy SemSource stack (tier-1 family capture).
+# Used only as: docker compose -p semselect-tier1-capture \
+#   -f <semsource>/docker-compose.yml -f <this file> ...
+# Paths come from run-family.sh as absolute host paths. One family is mounted
+# at /workspace/<family-id> so the embedding index holds that family alone;
+# semembed stays enabled (the base file's HTTP embedder and health gate).
+services:
+  semsource:
+    volumes: !override
+      - ${TIER1_CONFIG_DIR:?set by run-family.sh}:/etc/semsource:ro
+      - ${TIER1_FAMILY_DIR:?set by run-family.sh}:/workspace/${TIER1_FAMILY_ID:?set by run-family.sh}:ro
+    command: !override
+      - run
+      - --config
+      - /etc/semsource/${TIER1_FAMILY_ID}.tier1.json
+      - --log-level
+      - ${LOG_LEVEL:-info}

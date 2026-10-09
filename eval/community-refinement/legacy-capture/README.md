@@ -155,3 +155,44 @@ without rebuilding the stack.
 
 This is one corpus, one run on one machine. It is not a benchmark, and the
 similarity values are not calibrated probabilities.
+
+## Structural freeze (`cmd/structural`)
+
+`cmd/structural` freezes the structural side of one family capture from the
+same live legacy stack, read-only (protocol freeze step 1, used per family by
+`eval/community-refinement/fixtures/tier1-capture/run-family.sh`). It reads
+five KV buckets and reproduces, outside the stack, what the legacy clustering
+provider chain (`kvProvider -> EntityIDProvider`, SemStreams `v1.0.0-beta.160`)
+hands the LPA vote:
+
+| Legacy behavior | Reproduction |
+| --- | --- |
+| `kvProvider.GetAllEntityIDs` lists `ENTITY_STATES` | Same; sorted |
+| `bothNeighborSet(A)` = `OUTGOING_INDEX(A)` targets ∪ sources of `INCOMING_INDEX` keys `A.<source>.<hex predicate>`; a row with an entry lacking `to_entity_id` is rejected whole | Same; both indexes are read in full and compared, and every disagreement is reported (`outgoing_only`, `incoming_only`) |
+| `EntityIDProvider.GetNeighbors`: explicit ∪ siblings (same five-part prefix, sorted, self and explicit excluded, capped) ∪ system peers (same system, sorted, self, explicit and the *listed* siblings excluded, capped) | Same, per voter (`voting_edges.jsonl`, `listed_as`) |
+| `GetEdgeWeight` cascade: explicit 1.0, else sibling weight if same prefix, else system-peer weight if same system | Same, evaluated on identity, so a sibling cut by the sibling cap and listed as a system peer votes at the sibling weight (`weight_tier`) |
+| `COMMUNITY_INDEX`: `{level}.{id}` holds the community, `entity.{level}.{id}` its members' back-pointers; LPA with a fixed seed is reproducible for a fixed graph | Read in full; level 0 must cover `ENTITY_STATES` exactly, be disjoint and agree with the back-pointers, and the whole bucket must be byte-identical across one settle interval (default 35 s, longer than the 30 s detection interval) before it is frozen |
+
+The identity weights and caps default to the semantic profile's structural
+baseline (`processor/graph-clustering` `semanticEnabledEntityIDBaseline`:
+sibling 0.7 capped at 5, system peer 0.2 capped at 8), which the runner also
+passes to SemSource as `graph.entity_id_edges`. That is the chain the protocol
+names: the semantic profile's structural weights retained, semantic influence
+off. SemSource cannot enable the semantic tier, so the live partition is
+structural-only by construction. The structural default profile (0.7/10,
+0.3/15) would give a different partition; it is not what is frozen.
+
+Outputs: `entities.jsonl` (ID parts, embedded or not, explicit degrees, listed
+identity neighbours, community per level), `explicit_edges.jsonl`,
+`voting_edges.jsonl` (one line per voter and listed neighbour with tier,
+weight and whether the pair crosses the level-0 partition), `partition.json`
+(every stored community with its raw value, back-pointers, per-level size
+histograms and the level-0 checks) and `structural.json` (counts, index
+consistency, settle reads, checks, embedded run metadata). It exits non-zero
+when the partition did not settle, does not cover the entities, is not disjoint
+or disagrees with its back-pointers, or the graph moved while the topology was
+read; outputs are still written. Index disagreement and malformed entity IDs
+are reported but do not fail the run, because the capture records what the
+stack served. Offline tests run the tool against an embedded `nats-server`
+with seeded buckets, including a partition that appears late and one that
+never settles.
