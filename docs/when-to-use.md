@@ -1,9 +1,17 @@
-# When to use a decision classifier
+# When to use a bounded decision model
 
 **Evidence update, 2026-10-07: keep semselect as an evaluation/reference
 service. No production sem* integration is recommended from these results.** We have measured useful
 model behavior, but have not yet identified a production task where this service
 earns its additional cost over the applicable alternatives.
+
+**Scope update, 2026-10-08:** this recommendation describes the workloads tested.
+Community formation/refinement and graph maintenance remain unmeasured. The
+[new evaluation design](../eval/community-refinement/README.md) targets SemEngine,
+which will replace SemStreams when ready. It does not turn routing failures into
+a conclusion about graph decisions, or a promising graph hypothesis into adoption
+evidence. The required clustering/semantic-edge port is not present in the audited
+SemEngine main or ingest PR yet.
 
 "Jev-like" describes the bounded decision interface. Our service runs Kev; our
 comparisons also use Qwen. Those results do not establish Jev's quality.
@@ -43,6 +51,7 @@ router meets the app's targets without its own evaluation.
 | --- | --- | --- |
 | Check an exact fact, permission or allowed transition | Caller code and authoritative data | Text interpretation may supply a hint; it never replaces the check. |
 | Retrieve relevant documents or communities | Existing lexical/statistical ranking, embeddings and applicable reranking | A remaining semantic judgment improves downstream answers, rather than merely producing another relevance score. |
+| Improve community boundaries or semantic graph hints | Existing weighted clustering, identity/explicit edges and tuned semantic-neighbor selection | Reviewing bounded proposals improves the resulting communities and retrieved evidence within a background-processing budget. This workload is **unmeasured here**. |
 | Assign stable labels with representative training data | A small supervised classifier, such as embeddings plus a trained linear head | It beats that trained baseline after including labeling, training and serving costs. This baseline is **unmeasured here**. |
 | Interpret text with changing caller-defined choices and little labeled data | Schema-constrained Qwen as the first model baseline | A specialized model improves the actual caller's errors, abstention or total cost. |
 | Reduce the cost of an existing bounded LLM judgment | Measure output overhead, then compare ordinary-model one-token scoring and native decision heads | The cheaper implementation preserves acceptable decisions at the required input size and concurrency. |
@@ -77,10 +86,21 @@ Qwen's chat/scoring path is not automatically a native System One replacement.
 
 ## Decisions the evidence supports today
 
-**For our routing tasks, use Qwen JSON as the first model baseline.** The matched
-4B ticket test favored Qwen, and the primary query-classifier test tied Qwen and
-Kev at 23/32. Kev's native distribution API has not demonstrated a routing benefit
-that changes this recommendation. See the [routing results](results.md).
+**For our routing tasks, use Qwen JSON as the first model comparison baseline,
+not as a latency-qualified deployment.** On Metal, the ticket test favored Qwen
+in both quality (46/48 versus Kev's 43/48) and median latency (288 versus 449 ms).
+The full query-classifier task tied at 23/32, but Qwen's median was 2.38 seconds
+and Kev's 7.11 seconds. Kev was not the faster routing alternative in those runs.
+Cache reuse and Kev's three-head execution limit architectural comparisons; the
+observed serving cost still matters. See the [paired quality and latency table](../README.md#qwen-versus-kev-quality-and-latency).
+
+The later **250 ms median / 750 ms p95 CPU target** belongs to the separate
+120-case operation-only contract. Its Qwen3.5-4B quality reference ran on Metal at
+867/1,044 ms median/p95, with eight wrong accepts; it was not a CPU qualification.
+**Kev was not tested on that contract.** The earlier three-head task is neither
+a passing result nor a direct operation-only latency measurement for Kev. No
+model in the later CPU comparison qualified on both quality and latency. A
+recommendation to compare against Qwen does not waive either requirement.
 
 **Improve the existing query rules and binding logic before replacing them.**
 The earlier full query-plan comparison showed real language failures: code got 18/32 exact, compared with
@@ -143,11 +163,14 @@ See the [Julia diagnostic](../eval/julia/README.md).
 
 ## Research closeout and reopening conditions
 
-**The CPU/Metal research phase is complete. Keep the working reference service
-and its evidence; do not add a specialized decision service to sem* on this basis.**
-We have answered enough to make that decision even though we have not found a
-positive adoption case. SGLang performance, CUDA and more model candidates are
-conditional investigations, not unfinished requirements of this phase.
+**The initial CPU/Metal phase is complete for its routing and evidence-judgment
+workloads. Keep the reference service and evidence; those results do not justify
+production integration.** That closeout did not evaluate graph refinement.
+The owner requested a separate SemEngine community-refinement design on
+2026-10-08. Execution depends on the port and fixture readiness described in its
+[protocol](../eval/community-refinement/README.md), not another query classifier.
+SGLang performance, CUDA and more model candidates remain conditional
+investigations, not unfinished requirements of the initial phase.
 
 Several gaps limit broader conclusions. The fresh specialist pilot now compares
 improved rules, reused embeddings and operation-only Qwen with shared binding,
@@ -160,7 +183,7 @@ serving confounds: one-slot repeated state processing, unequal cache reuse, and
 unvalidated calibration after quantization. Those gaps prevent a universal model
 ranking. They do not create a reason to deploy a service without a measured benefit.
 
-Reopen only when a team can name:
+Before executing a new workload comparison, name:
 
 1. **A caller and a shortfall:** a necessary semantic judgment whose error rate,
    latency or required decisions per second exceeds the current path's budget.
@@ -176,15 +199,22 @@ CPU, Metal, CUDA nor a particular parameter count is automatically the right
 answer. Calibration/thresholds need development data and separate confirmation;
 a normalized distribution is not a correctness probability.
 
-A credible future Tier 2 case is selecting which retrieved communities to expand,
-or replacing an existing LLM review of uncertain graph candidates. First hydrate
-the evidence and compare with existing embedding/ranking paths; for a ranking
-question, include an applicable reranker. Measure supported answers retained per
-context budget and the cost of discarding the only answer-bearing community.
-Prefer prioritization over irreversible pruning until that cost is understood.
-This remains a hypothesis, not a demonstrated need for semselect. The relevant
-[retrieval audit](code-baselines-and-rag.md) and
-[answer-path audit](answering-path.md) preserve the source context.
+The [SemEngine pilot](../eval/community-refinement/README.md) starts earlier in
+the graph lifecycle: review semantic co-location hints, rerun the existing
+clustering algorithm, and measure harmful grouping, useful evidence retained and
+total pilot-cycle cost. It compares the structural and tuned embedding paths,
+a trained edge reviewer, Qwen and Kev. It preserves explicit facts and identity
+edges, and leaves the baseline unchanged on deferral or failure. Its background
+budget is distinct from the query router's subsecond target.
+
+Missing-edge proposals, membership moves, merge/split choices, factual anomaly
+review and summary validation are separate untested graph tasks. Selecting which
+retrieved communities to expand is another retrieval task, requiring applicable
+ranking/reranking baselines and a measure of losing the only answer-bearing
+community. The historical [retrieval audit](code-baselines-and-rag.md) and
+[answer-path audit](answering-path.md) do not establish SemEngine integration or
+community-refinement quality. New proposals belong in
+[SemEngine integration](semengine-integration.md).
 
 ## What our code baseline actually does
 

@@ -1,4 +1,12 @@
-# Routing smoke evaluation
+# Evaluations
+
+The [SemEngine community-refinement evaluation](community-refinement/README.md)
+is a new **design-only** track. It compares existing graph algorithms and
+semantic edges with bounded review, measuring resulting communities, retrieved
+evidence and background-processing cost. The required SemEngine port and fixture
+freeze precede any run; there is no runnable driver or quality result yet.
+
+The routing and evidence evaluations below remain separate measured workloads.
 
 For the current **query-classification** decision, start with the
 [120-case comparison](../docs/results.md#2026-10-07--query-classification-decision).
@@ -7,6 +15,8 @@ improved rules, embeddings, specialists and Qwen4B; the
 [smaller-Qwen harness](qwen-size/README.md) tests 2B and 1.7B on that same cohort.
 Both runs are complete and retain Qwen4B plus improved code as the baselines.
 The ticket smoke instructions below describe an earlier, separate workload.
+
+## Routing smoke evaluation
 
 For the separate **answerability** workload, start with the
 [real-source pilot](answerability/heldout/README.md) or the earlier

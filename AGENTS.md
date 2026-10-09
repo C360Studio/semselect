@@ -13,8 +13,9 @@
   and state transitions. Use models for the remaining semantic judgments, with
   explicit abstention/fallback and caller-enforced action policy.
 - Include the strongest applicable existing algorithms in comparisons, including
-  semsource/SemStreams retrieval and query routing. Separate deterministic rules,
-  statistical retrieval, learned embeddings and generative/decision models.
+  SemSource/SemEngine graph, community and retrieval paths. Preserve pinned
+  SemStreams comparisons as historical evidence during the migration. Separate
+  deterministic rules, statistical retrieval, learned embeddings and generative/decision models.
   Use the same task and evidence; a taxonomy mismatch is not a model advantage.
 - SGLang/direct-scoring investigations belong in isolated evaluation work. They
   do not change the default runtime or justify a new provider framework. Follow
@@ -32,7 +33,9 @@
 - Run `task check` for service changes. Use a failing regression before bug fixes.
   `task smoke` and `task evaluate` require real inference; offline tests do not
   establish model accuracy. Record failures, coverage, latency and resource limits.
-- Keep sibling repositories unchanged; propose SemStreams work in
-  `docs/semstreams-integration.md`. Preserve other work in the shared workspace.
+- Keep sibling repositories unchanged; propose new integration work in
+  `docs/semengine-integration.md`. `docs/semstreams-integration.md` is historical.
+  Distinguish planned SemEngine ports from implemented and tested capabilities.
+  Preserve other work in the shared workspace.
 - Do not label small smoke results as benchmarks or model probabilities as
   calibrated correctness. See `docs/validation.md` for the current evidence.

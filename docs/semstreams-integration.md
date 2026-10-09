@@ -1,4 +1,11 @@
-# Proposed SemStreams integration
+# Historical SemStreams integration proposal
+
+**Target update, 2026-10-08:** SemStreams will be archived in favor of SemEngine
+when it is ready. New proposals belong in [SemEngine integration](semengine-integration.md)
+and the [community-refinement design](../eval/community-refinement/README.md).
+The remainder of this document preserves the earlier source audit and proposal;
+its paths and client designs are not claims that the corresponding SemEngine
+ports or capabilities exist. No new SemStreams implementation is proposed here.
 
 **Closeout status, 2026-10-06: proposal only.** The CPU/Metal research did not
 establish a production adoption case. No adapter or new provider framework is
