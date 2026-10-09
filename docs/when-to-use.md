@@ -86,10 +86,21 @@ Qwen's chat/scoring path is not automatically a native System One replacement.
 
 ## Decisions the evidence supports today
 
-**For our routing tasks, use Qwen JSON as the first model baseline.** The matched
-4B ticket test favored Qwen, and the primary query-classifier test tied Qwen and
-Kev at 23/32. Kev's native distribution API has not demonstrated a routing benefit
-that changes this recommendation. See the [routing results](results.md).
+**For our routing tasks, use Qwen JSON as the first model comparison baseline,
+not as a latency-qualified deployment.** On Metal, the ticket test favored Qwen
+in both quality (46/48 versus Kev's 43/48) and median latency (288 versus 449 ms).
+The full query-classifier task tied at 23/32, but Qwen's median was 2.38 seconds
+and Kev's 7.11 seconds. Kev was not the faster routing alternative in those runs.
+Cache reuse and Kev's three-head execution limit architectural comparisons; the
+observed serving cost still matters. See the [paired quality and latency table](../README.md#qwen-versus-kev-quality-and-latency).
+
+The later **250 ms median / 750 ms p95 CPU target** belongs to the separate
+120-case operation-only contract. Its Qwen3.5-4B quality reference ran on Metal at
+867/1,044 ms median/p95, with eight wrong accepts; it was not a CPU qualification.
+**Kev was not tested on that contract.** The earlier three-head task is neither
+a passing result nor a direct operation-only latency measurement for Kev. No
+model in the later CPU comparison qualified on both quality and latency. A
+recommendation to compare against Qwen does not waive either requirement.
 
 **Improve the existing query rules and binding logic before replacing them.**
 The earlier full query-plan comparison showed real language failures: code got 18/32 exact, compared with
