@@ -1,0 +1,50 @@
+2026-10-09T17:23:08Z iteration iter1: semsource 4093d3ce421371f4a99d7168e372552899bf6795
+semselect-service: 4 files, code=True docs=True unmatched=[]
+semselect-docs: 19 files, code=False docs=True unmatched=[]
+semengine-natsclient: 27 files, code=True docs=True unmatched=[]
+semengine-message: 16 files, code=True docs=False unmatched=[]
+semstreams-graph-clustering: 8 files, code=True docs=True unmatched=[]
+semstreams-rule: 53 files, code=True docs=False unmatched=[]
+semstreams-service: 34 files, code=True docs=False unmatched=[]
+semstreams-component: 31 files, code=True docs=False unmatched=[]
+semstreams-agentic-loop: 37 files, code=True docs=False unmatched=[]
+semsource-source-manifest: 16 files, code=True docs=True unmatched=[]
+semsource-cli: 17 files, code=True docs=False unmatched=[]
+semsource-ui: 28 files, code=True docs=False unmatched=[]
+dupcheck: 290 files hashed (66 development, 224 held-out); 0 identical, 23 same-basename pairs, max ratio 0.2081; flagged []
+ Volume semselect-family-count_nats-data Creating 
+ Volume semselect-family-count_nats-data Creating 
+ Network semselect-family-count_c360 Creating 
+ Network semselect-family-count_c360 Creating 
+ Volume semselect-family-count_nats-data Created 
+ Volume semselect-family-count_nats-data Created 
+ Network semselect-family-count_c360 Created 
+ Network semselect-family-count_c360 Created 
+ Container semselect-family-count-nats-1 Creating 
+ Container semselect-family-count-nats-1 Created 
+ Container semselect-family-count-semsource-1 Creating 
+ Container semselect-family-count-semsource-1 Created 
+ Container semselect-family-count-nats-1 Starting 
+ Container semselect-family-count-nats-1 Started 
+ Container semselect-family-count-nats-1 Waiting 
+ Container semselect-family-count-nats-1 Healthy 
+ Container semselect-family-count-semsource-1 Starting 
+ Container semselect-family-count-semsource-1 Started 
+2026-10-09T17:23:14Z image sha256:08801743b4eeb774ee5818d23c238757cbb25bccc039766f85939a8a2d0b394f
+2026-10-09T17:23:19Z semsource healthy after 11s
+2026-10-09T17:23:19Z status {"phase":"ready","total_entities":4673,"index_ready":false,"embedding_ready":true}
+2026-10-09T17:23:29Z status {"phase":"ready","total_entities":4673,"index_ready":true,"embedding_ready":true}
+2026-10-09T17:23:29Z ready after 10s from healthy
+ Container semselect-family-count-semsource-1 Stopping 
+ Container semselect-family-count-semsource-1 Stopped 
+ Container semselect-family-count-semsource-1 Removing 
+ Container semselect-family-count-semsource-1 Removed 
+ Container semselect-family-count-nats-1 Stopping 
+ Container semselect-family-count-nats-1 Stopped 
+ Container semselect-family-count-nats-1 Removing 
+ Container semselect-family-count-nats-1 Removed 
+ Volume semselect-family-count_nats-data Removing 
+ Network semselect-family-count_c360 Removing 
+ Volume semselect-family-count_nats-data Removed 
+ Network semselect-family-count_c360 Removed 
+2026-10-09T17:23:31Z teardown complete (exit 1)

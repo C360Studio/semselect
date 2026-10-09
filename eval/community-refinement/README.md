@@ -135,6 +135,15 @@ objective. Use real SemSource captures once its SemEngine path is available.
 Until then fixture preparation may use source material, but must identify it as
 authored or captured from a legacy system. Never call either a SemEngine capture.
 
+Owner rulings, 2026-10-09 (issue #5): the families come from the C360 `sem*`
+product repositories only, assigned whole to a split, with two Apache-2.0
+public families (nats.go `micro`, commons-csv) kept as a generalization set
+outside the promotion rule; the second annotator may
+be a Codex session with the owner resolving disagreements, disclosed in the
+evidence record; the "distance from `0.8`" priority key below is reconsidered
+after the first real tier-1 family capture, because on the measured embedder
+nearly every mutual pair scores above 0.85 (see [scale.md](scale.md)).
+
 Assign repositories or genuinely independent subject families to splits before
 annotation. Related modules, duplicate passages, graph versions, paraphrases and
 all perturbations stay in the same family. Do not split edges randomly: many share

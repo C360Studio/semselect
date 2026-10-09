@@ -4,6 +4,8 @@
 # ENTITY_STATES / OUTGOING_INDEX keys, and always tear the stack down.
 #
 # Usage: run.sh <iteration-label> <evidence-dir>
+# The fixture repositories are exported from sibling checkouts with git archive
+# (families.py prepare); the SemSource stack itself is built from SEMSOURCE_DIR.
 # Env:   SEMSOURCE_DIR (default: sibling ../semsource checkout)
 #        READY_CAP_SECONDS (default 900, measured from semsource healthy)
 set -euo pipefail
@@ -18,6 +20,7 @@ ready_cap=${READY_CAP_SECONDS:-900}
 status_url=http://localhost:18080/source-manifest/status
 
 mkdir -p "$out"
+out=$(cd "$out" && pwd) # the counter runs from $here, so a relative path would break
 log() { printf '%s %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" | tee -a "$out/run.log"; }
 
 export NATS_HOST_PORT=14222 NATS_MONITOR_HOST_PORT=18222 SEMSOURCE_HTTP_PORT=18080
@@ -41,6 +44,9 @@ done
 log "iteration $label: semsource $(git -C "$semsource" rev-parse HEAD)$(git -C "$semsource" diff --quiet || echo ' (dirty)')"
 python3 -I "$here/families.py" prepare --input "$here/families.input.json" \
   --config-out "$here/family-count.tier0.json" --manifest-out "$out/manifest.json" | tee -a "$out/run.log"
+python3 -I "$here/families.py" dupcheck --manifest "$out/manifest.json" \
+  --out "$out/dupcheck.json" | tee -a "$out/run.log"
+cp "$here/families.input.json" "$out/families.input.json"
 cp "$here/family-count.tier0.json" "$out/family-count.tier0.json"
 compose config > "$out/compose.resolved.yml"
 

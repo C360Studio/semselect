@@ -1,5 +1,5 @@
 {
-  "schema": "semselect.legacy-family-count/v1",
+  "schema": "semselect.legacy-family-count/v2",
   "status": "measured family candidate list before capture and labeling",
   "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
   "capture_profile": {
@@ -12,22 +12,1435 @@
       "go",
       "typescript",
       "javascript",
-      "java",
-      "python",
       "svelte",
-      "c"
+      "python"
     ],
     "entity_range": [
       50,
       250
     ],
-    "evidence": "docs/evidence/20261009T163623Z-legacy-family-counts"
+    "evidence": "docs/evidence/20261009T172300Z-legacy-family-counts-semrepos",
+    "runtime_note": "semstreams_version is the library SemSource links at runtime; the fixture source commits are under repositories"
+  },
+  "repositories": {
+    "semselect": {
+      "url": "https://github.com/C360Studio/semselect",
+      "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+      "tree": "fa391199782e82dff3808fc2246b452ecb382421",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "split": "development",
+      "export": "git archive of the commit (committed files only)",
+      "export_exclude": [
+        ".venv/**",
+        ".kev/**",
+        ".synthesis/**",
+        ".sglang/**",
+        "**/node_modules/**",
+        "docs/evidence/**",
+        "models/**",
+        "results/**"
+      ]
+    },
+    "semengine": {
+      "url": "https://github.com/C360Studio/semengine",
+      "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+      "tree": "8615f51c59eb75e1db7701f0d21df6d92f354303",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "split": "development",
+      "export": "git archive of the commit (committed files only)",
+      "export_exclude": [
+        ".worktrees/**",
+        "**/node_modules/**"
+      ]
+    },
+    "semstreams": {
+      "url": "https://github.com/C360Studio/semstreams",
+      "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "tree": "391d3351425f3ec8ebb32341a45af32a936c4b8e",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "split": "held-out",
+      "export": "git archive of the commit (committed files only)",
+      "export_exclude": []
+    },
+    "semsource": {
+      "url": "https://github.com/C360Studio/semsource",
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "tree": "76941feed96fae180a6a339754cd303dc09d9ee1",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "split": "held-out",
+      "export": "git archive of the commit (committed files only)",
+      "export_exclude": [
+        "**/node_modules/**",
+        "ui/build/**",
+        "ui/dist/**",
+        "**/coverage.out"
+      ]
+    }
+  },
+  "duplicate_check": {
+    "rule": "identical SHA-256, or same basename with more than 80% of the longer file's lines unchanged by diff",
+    "evidence": "docs/evidence/20261009T172300Z-legacy-family-counts-semrepos/iter2/dupcheck.json",
+    "files_hashed": 166,
+    "identical": 0,
+    "same_basename_pairs": 18,
+    "max_ratio": 0.2081,
+    "flagged_development_files": [],
+    "result": "nothing flagged; no file was moved out of a development family"
   },
   "exclusions": "No labels, embeddings, neighbour results, mutual pairs, partitions, review packets, constraints or retrieval questions exist yet. Counts are entity totals from a legacy SemStreams capture, not a SemEngine capture.",
   "families": [
     {
-      "id": "nats-go-micro",
+      "id": "semselect-service",
       "split": "development",
+      "role": "code and doc about the same responsibility",
+      "language": "Go + Markdown",
+      "repo": "https://github.com/C360Studio/semselect",
+      "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semselect-service",
+      "include": [
+        "internal",
+        "cmd",
+        "README.md"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "README.md",
+        "cmd/semselect/main.go",
+        "internal/guard/guard.go",
+        "internal/guard/json.go"
+      ],
+      "workspace_sha256": "f00b031de9f674f48b867bba4a0465db482a3b8ea82be4c8b9c235b22e66ed8f",
+      "entities_total": 56,
+      "entities_by_type": {
+        "chunk": 31,
+        "const": 2,
+        "doc": 1,
+        "file": 3,
+        "folder": 4,
+        "function": 8,
+        "method": 2,
+        "repo": 1,
+        "struct": 4
+      },
+      "entities_by_domain": {
+        "code": 5,
+        "golang": 19,
+        "web": 32
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 56,
+        "edges": 103,
+        "induced_edges": 89,
+        "cross_system_edges": 0,
+        "dangling_edges": 14,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 21,
+          "code.relationship.parameter": 1,
+          "code.relationship.receiver": 2,
+          "code.relationship.references": 1,
+          "code.relationship.returns": 1,
+          "code.structure.belongs": 54,
+          "code.structure.contains": 23
+        },
+        "non_containment_edges": 26
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "internal",
+            "cmd",
+            "README.md"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*"
+          ],
+          "max_file_bytes": null,
+          "files": 4,
+          "entities": 56
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "internal",
+            "cmd",
+            "README.md"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*"
+          ],
+          "max_file_bytes": null,
+          "files": 4,
+          "entities": 56
+        }
+      ],
+      "notes": "Owner subtree: internal/ and cmd/ non-test Go plus the root README.md.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semselect-docs",
+      "split": "development",
+      "role": "docs with multiple topics; isolated entities",
+      "language": "Markdown",
+      "repo": "https://github.com/C360Studio/semselect",
+      "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semselect-docs",
+      "include": [
+        "docs/*.md"
+      ],
+      "exclude": [],
+      "max_file_bytes": 50000,
+      "unmatched_includes": [],
+      "files": [
+        "docs/answering-path.md",
+        "docs/code-baselines-and-rag.md",
+        "docs/laptop-and-gpu.md",
+        "docs/research-and-decision.md",
+        "docs/results.md",
+        "docs/semengine-integration.md",
+        "docs/semstreams-integration.md",
+        "docs/sglang-investigation.md",
+        "docs/validation-answerability-source.md",
+        "docs/validation-answerability.md",
+        "docs/validation-metal.md",
+        "docs/validation-query-routing.md",
+        "docs/validation-qwen-size.md",
+        "docs/validation-scoring.md",
+        "docs/validation-specialist-intent.md",
+        "docs/validation-synthesis.md",
+        "docs/validation.md",
+        "docs/when-to-use.md"
+      ],
+      "workspace_sha256": "2e11ee13a4691e0358f2b5a45459a3c27a61280cc509a81f70bbf99ef3f93548",
+      "entities_total": 242,
+      "entities_by_type": {
+        "chunk": 224,
+        "doc": 18
+      },
+      "entities_by_domain": {
+        "web": 242
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 242,
+        "edges": 224,
+        "induced_edges": 224,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.structure.belongs": 224
+        },
+        "non_containment_edges": 0
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "docs/*.md"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 19,
+          "entities": 303
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "docs/*.md"
+          ],
+          "exclude": [],
+          "max_file_bytes": 50000,
+          "files": 18,
+          "entities": 242
+        }
+      ],
+      "notes": "Owner subtree docs/*.md (top level; docs/evidence excluded) trimmed by the owner's size rule: files of 50,000 bytes or more are dropped, which removes only validation-throughput.md (57,502 bytes, 61 entities). The remaining 18 documents keep every topic the docs cover.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semengine-natsclient",
+      "split": "development",
+      "role": "one subject with boilerplate hubs",
+      "language": "Go + Markdown",
+      "repo": "https://github.com/C360Studio/semengine",
+      "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semengine-natsclient",
+      "include": [
+        "natsclient/README.md",
+        "natsclient/client.go",
+        "natsclient/doc.go",
+        "natsclient/errors.go",
+        "natsclient/heartbeat.go",
+        "natsclient/kv.go",
+        "natsclient/options.go",
+        "natsclient/trace.go"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "natsclient/README.md",
+        "natsclient/client.go",
+        "natsclient/doc.go",
+        "natsclient/errors.go",
+        "natsclient/heartbeat.go",
+        "natsclient/kv.go",
+        "natsclient/options.go",
+        "natsclient/trace.go"
+      ],
+      "workspace_sha256": "160273dacc04ca4fca0f23f9e47fd6680c2eaa70397d474626b32d176d65d725",
+      "entities_total": 226,
+      "entities_by_type": {
+        "chunk": 20,
+        "const": 24,
+        "doc": 1,
+        "file": 7,
+        "folder": 1,
+        "function": 45,
+        "interface": 1,
+        "method": 101,
+        "repo": 1,
+        "struct": 11,
+        "type": 3,
+        "var": 11
+      },
+      "entities_by_domain": {
+        "code": 2,
+        "golang": 203,
+        "web": 21
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 226,
+        "edges": 805,
+        "induced_edges": 614,
+        "cross_system_edges": 0,
+        "dangling_edges": 191,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 235,
+          "code.relationship.parameter": 8,
+          "code.relationship.receiver": 101,
+          "code.relationship.references": 5,
+          "code.relationship.returns": 28,
+          "code.structure.belongs": 224,
+          "code.structure.contains": 204
+        },
+        "non_containment_edges": 377
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "natsclient"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*"
+          ],
+          "max_file_bytes": null,
+          "files": 27,
+          "entities": 653
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "natsclient/README.md",
+            "natsclient/client.go",
+            "natsclient/doc.go",
+            "natsclient/errors.go",
+            "natsclient/heartbeat.go",
+            "natsclient/kv.go",
+            "natsclient/options.go",
+            "natsclient/trace.go"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*"
+          ],
+          "max_file_bytes": null,
+          "files": 8,
+          "entities": 226
+        }
+      ],
+      "notes": "natsclient/ is one directory, so it is trimmed by file to the subject its README documents: the Client connection hub (client.go), its options, errors, heartbeat, the KVStore abstraction (kv.go), tracing and the package doc. Stream, consumer, delivery-settlement, request, KV key-contract/spec/retention, JetStream metrics and the storage_* observability files are excluded; references to them are dangling edges.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semengine-message",
+      "split": "development",
+      "role": "multiple legitimate topics",
+      "language": "Go",
+      "repo": "https://github.com/C360Studio/semengine",
+      "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semengine-message",
+      "include": [
+        "message",
+        "payloadregistry"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "message/base_message.go",
+        "message/behaviors.go",
+        "message/content_storable.go",
+        "message/decoder.go",
+        "message/doc.go",
+        "message/generic_json.go",
+        "message/message.go",
+        "message/meta.go",
+        "message/meta_default.go",
+        "message/payload.go",
+        "message/rule_readable.go",
+        "message/storable.go",
+        "message/triple.go",
+        "message/triple_identity.go",
+        "message/types.go",
+        "payloadregistry/registry.go"
+      ],
+      "workspace_sha256": "f849efeefa27a653ebc204fcf3896a0c553231fda9cffe5cda8f8859105354f9",
+      "entities_total": 111,
+      "entities_by_type": {
+        "const": 6,
+        "file": 16,
+        "folder": 2,
+        "function": 25,
+        "interface": 9,
+        "method": 33,
+        "repo": 1,
+        "struct": 12,
+        "type": 7
+      },
+      "entities_by_domain": {
+        "code": 3,
+        "golang": 108
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 111,
+        "edges": 343,
+        "induced_edges": 307,
+        "cross_system_edges": 0,
+        "dangling_edges": 36,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 54,
+          "code.relationship.embeds": 2,
+          "code.relationship.parameter": 10,
+          "code.relationship.receiver": 33,
+          "code.relationship.references": 6,
+          "code.relationship.returns": 18,
+          "code.structure.belongs": 110,
+          "code.structure.contains": 110
+        },
+        "non_containment_edges": 123
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "message",
+            "payloadregistry"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": null,
+          "files": 16,
+          "entities": 111
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "message",
+            "payloadregistry"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": null,
+          "files": 16,
+          "entities": 111
+        }
+      ],
+      "notes": "Owner subtree: message/ and payloadregistry/ non-test Go; message/README.md is not Go and is excluded.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semstreams-graph-clustering",
+      "split": "held-out",
+      "role": "cross-type, code and doc",
+      "language": "Go + Markdown",
+      "repo": "https://github.com/C360Studio/semstreams",
+      "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semstreams-graph-clustering",
+      "include": [
+        "processor/graph-clustering"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "processor/graph-clustering/README.md",
+        "processor/graph-clustering/anomaly.go",
+        "processor/graph-clustering/component.go",
+        "processor/graph-clustering/doc.go",
+        "processor/graph-clustering/metrics.go",
+        "processor/graph-clustering/query.go",
+        "processor/graph-clustering/similarity.go",
+        "processor/graph-clustering/structural.go"
+      ],
+      "workspace_sha256": "812aeaccca05f630a3ebb9f7fce2c7f26fed122271ed3fb88bdbe8bb8a77832f",
+      "entities_total": 175,
+      "entities_by_type": {
+        "chunk": 13,
+        "const": 8,
+        "doc": 1,
+        "file": 7,
+        "folder": 2,
+        "function": 22,
+        "interface": 4,
+        "method": 83,
+        "repo": 1,
+        "struct": 26,
+        "var": 8
+      },
+      "entities_by_domain": {
+        "code": 3,
+        "golang": 158,
+        "web": 14
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 175,
+        "edges": 626,
+        "induced_edges": 483,
+        "cross_system_edges": 0,
+        "dangling_edges": 143,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 169,
+          "code.relationship.parameter": 10,
+          "code.relationship.receiver": 83,
+          "code.relationship.references": 18,
+          "code.relationship.returns": 11,
+          "code.structure.belongs": 173,
+          "code.structure.contains": 162
+        },
+        "non_containment_edges": 291
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "processor/graph-clustering"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*"
+          ],
+          "max_file_bytes": null,
+          "files": 8,
+          "entities": 175
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "processor/graph-clustering"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*"
+          ],
+          "max_file_bytes": null,
+          "files": 8,
+          "entities": 175
+        }
+      ],
+      "notes": "Owner subtree: processor/graph-clustering/ non-test Go plus its README.md.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semstreams-rule",
+      "split": "held-out",
+      "role": "multiple topics in one package",
+      "language": "Go",
+      "repo": "https://github.com/C360Studio/semstreams",
+      "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semstreams-rule",
+      "include": [
+        "processor/rule/doc.go",
+        "processor/rule/cron_metrics.go",
+        "processor/rule/cron_rule.go",
+        "processor/rule/cron_scheduler.go",
+        "processor/rule/cron_substitution.go",
+        "processor/rule/schedule_tracker.go",
+        "processor/rule/caller_substitution.go",
+        "processor/rule/entity_substitution.go",
+        "processor/rule/lifecycle_substitution.go",
+        "processor/rule/message_substitution.go",
+        "processor/rule/typed_substitution.go",
+        "processor/rule/state_tracker.go",
+        "processor/rule/stateful_evaluator.go",
+        "processor/rule/payload_projection.go",
+        "processor/rule/projection_derivation.go",
+        "processor/rule/projection_targets.go"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "processor/rule/caller_substitution.go",
+        "processor/rule/cron_metrics.go",
+        "processor/rule/cron_rule.go",
+        "processor/rule/cron_scheduler.go",
+        "processor/rule/cron_substitution.go",
+        "processor/rule/doc.go",
+        "processor/rule/entity_substitution.go",
+        "processor/rule/lifecycle_substitution.go",
+        "processor/rule/message_substitution.go",
+        "processor/rule/payload_projection.go",
+        "processor/rule/projection_derivation.go",
+        "processor/rule/projection_targets.go",
+        "processor/rule/schedule_tracker.go",
+        "processor/rule/state_tracker.go",
+        "processor/rule/stateful_evaluator.go",
+        "processor/rule/typed_substitution.go"
+      ],
+      "workspace_sha256": "8e8b560b67aaee170cfde788d0d939162ecbbe5c165de625958bd36b9d0e14ec",
+      "entities_total": 162,
+      "entities_by_type": {
+        "const": 13,
+        "file": 16,
+        "folder": 2,
+        "function": 39,
+        "interface": 1,
+        "method": 54,
+        "repo": 1,
+        "struct": 21,
+        "type": 1,
+        "var": 14
+      },
+      "entities_by_domain": {
+        "code": 3,
+        "golang": 159
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 162,
+        "edges": 598,
+        "induced_edges": 446,
+        "cross_system_edges": 0,
+        "dangling_edges": 152,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 151,
+          "code.relationship.parameter": 32,
+          "code.relationship.receiver": 54,
+          "code.relationship.references": 20,
+          "code.relationship.returns": 19,
+          "code.structure.belongs": 161,
+          "code.structure.contains": 161
+        },
+        "non_containment_edges": 276
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "processor/rule"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": null,
+          "files": 53,
+          "entities": 747
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "processor/rule/doc.go",
+            "processor/rule/cron_metrics.go",
+            "processor/rule/cron_rule.go",
+            "processor/rule/cron_scheduler.go",
+            "processor/rule/cron_substitution.go",
+            "processor/rule/schedule_tracker.go",
+            "processor/rule/caller_substitution.go",
+            "processor/rule/entity_substitution.go",
+            "processor/rule/lifecycle_substitution.go",
+            "processor/rule/message_substitution.go",
+            "processor/rule/typed_substitution.go",
+            "processor/rule/state_tracker.go",
+            "processor/rule/stateful_evaluator.go",
+            "processor/rule/payload_projection.go",
+            "processor/rule/projection_derivation.go",
+            "processor/rule/projection_targets.go"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": null,
+          "files": 16,
+          "entities": 162
+        }
+      ],
+      "notes": "processor/rule/ is trimmed by file to four topics named by the files' own package comments: cron scheduling (cron_*, schedule_tracker), substitution contexts (*_substitution), stateful evaluation (state_tracker, stateful_evaluator) and payload projection (payload_projection, projection_*), plus the package doc. The processor hub, actions, entity watcher, configuration, factories and the expression/ subpackage are excluded; references to them are dangling edges.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semstreams-service",
+      "split": "held-out",
+      "role": "lexically similar helpers",
+      "language": "Go",
+      "repo": "https://github.com/C360Studio/semstreams",
+      "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semstreams-service",
+      "include": [
+        "service"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md"
+      ],
+      "max_file_bytes": 12000,
+      "unmatched_includes": [],
+      "files": [
+        "service/component_manager_config.go",
+        "service/configurable.go",
+        "service/dependencies.go",
+        "service/doc.go",
+        "service/graph_runtime.go",
+        "service/graph_triples_http.go",
+        "service/heartbeat.go",
+        "service/log_forwarder.go",
+        "service/message_logger_kv_watch.go",
+        "service/metrics.go",
+        "service/middleware.go",
+        "service/milestone_service.go",
+        "service/openapi.go",
+        "service/openapi_registry.go",
+        "service/openapi_types.go",
+        "service/pprof.go",
+        "service/register.go",
+        "service/registry.go",
+        "service/rule_pack_bind.go",
+        "service/schema.go",
+        "service/service_configs.go",
+        "service/service_manager_config.go",
+        "service/startup_metrics.go",
+        "service/storage_observability_http.go",
+        "service/stream_override_expiry.go"
+      ],
+      "workspace_sha256": "9003c0fa3b7e20c5dc454f13f3e732f25f117954f63d0a3aff8469165d7da153",
+      "entities_total": 202,
+      "entities_by_type": {
+        "const": 11,
+        "file": 25,
+        "folder": 1,
+        "function": 46,
+        "interface": 8,
+        "method": 67,
+        "repo": 1,
+        "struct": 38,
+        "type": 2,
+        "var": 3
+      },
+      "entities_by_domain": {
+        "code": 2,
+        "golang": 200
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 202,
+        "edges": 679,
+        "induced_edges": 536,
+        "cross_system_edges": 0,
+        "dangling_edges": 143,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 139,
+          "code.relationship.embeds": 4,
+          "code.relationship.parameter": 19,
+          "code.relationship.receiver": 67,
+          "code.relationship.references": 25,
+          "code.relationship.returns": 23,
+          "code.structure.belongs": 201,
+          "code.structure.contains": 201
+        },
+        "non_containment_edges": 277
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "service"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": null,
+          "files": 34,
+          "entities": 541
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "service"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": 12000,
+          "files": 25,
+          "entities": 202
+        }
+      ],
+      "notes": "service/ is one directory of helpers, so it is trimmed by a size rule: files of 12,000 bytes or more are dropped. This removes the hubs (service_manager, component_manager, message_logger, base, storage_observability and its metrics, metrics_forwarder, message_logger_http, component_manager_http) and keeps the 25 smaller helper files, including the lexically similar *_http, *_config, metrics, forwarder and registry helpers.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semstreams-component",
+      "split": "held-out",
+      "role": "lifecycle boilerplate hubs",
+      "language": "Go",
+      "repo": "https://github.com/C360Studio/semstreams",
+      "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semstreams-component",
+      "include": [
+        "component"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md",
+        "component/flowgraph/*",
+        "component/lifecycle_test_suite.go",
+        "component/test_helpers.go",
+        "component/port_codec.go",
+        "component/port_facts.go",
+        "component/schema.go",
+        "component/schema_tags.go",
+        "component/validation.go",
+        "component/config_validator.go"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "component/dependencies.go",
+        "component/discovery.go",
+        "component/doc.go",
+        "component/lifecycle.go",
+        "component/logging.go",
+        "component/metrics.go",
+        "component/port.go",
+        "component/port_file.go",
+        "component/port_httpclient.go",
+        "component/port_jetstream.go",
+        "component/port_kv.go",
+        "component/port_nats.go",
+        "component/port_network.go",
+        "component/port_provide.go",
+        "component/port_resolver.go",
+        "component/port_store.go",
+        "component/port_timer.go",
+        "component/ports.go",
+        "component/registerable.go",
+        "component/registry.go"
+      ],
+      "workspace_sha256": "b7fee656072eb3d805a36dce3dafb9906e6dc1fb0c6a7e935ffc95516d57c31a",
+      "entities_total": 226,
+      "entities_by_type": {
+        "const": 38,
+        "file": 20,
+        "folder": 1,
+        "function": 42,
+        "interface": 7,
+        "method": 76,
+        "repo": 1,
+        "struct": 33,
+        "type": 8
+      },
+      "entities_by_domain": {
+        "code": 2,
+        "golang": 224
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 226,
+        "edges": 820,
+        "induced_edges": 726,
+        "cross_system_edges": 0,
+        "dangling_edges": 94,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 122,
+          "code.relationship.embeds": 1,
+          "code.relationship.parameter": 58,
+          "code.relationship.receiver": 76,
+          "code.relationship.references": 60,
+          "code.relationship.returns": 53,
+          "code.structure.belongs": 225,
+          "code.structure.contains": 225
+        },
+        "non_containment_edges": 370
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "component"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": null,
+          "files": 31,
+          "entities": 452
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "component"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md",
+            "component/flowgraph/*",
+            "component/lifecycle_test_suite.go",
+            "component/test_helpers.go",
+            "component/port_codec.go",
+            "component/port_facts.go",
+            "component/schema.go",
+            "component/schema_tags.go",
+            "component/validation.go",
+            "component/config_validator.go"
+          ],
+          "max_file_bytes": null,
+          "files": 20,
+          "entities": 226
+        }
+      ],
+      "notes": "component/ is trimmed to component lifecycle, ports and the registry hub. Excluded: the flowgraph/ subpackage; lifecycle_test_suite.go and test_helpers.go, which are test support although not *_test.go; the port codec and port facts files; and the schema and validation files. References to them are dangling edges.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semstreams-agentic-loop",
+      "split": "held-out",
+      "role": "one long responsibility",
+      "language": "Go",
+      "repo": "https://github.com/C360Studio/semstreams",
+      "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semstreams-agentic-loop",
+      "include": [
+        "processor/agentic-loop/doc.go",
+        "processor/agentic-loop/handlers.go",
+        "processor/agentic-loop/state.go"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "processor/agentic-loop/doc.go",
+        "processor/agentic-loop/handlers.go",
+        "processor/agentic-loop/state.go"
+      ],
+      "workspace_sha256": "0d97e0498498866ff973c46b8819f7c1a386ff0b58dc42aed11bbffdd737c793",
+      "entities_total": 207,
+      "entities_by_type": {
+        "const": 3,
+        "file": 3,
+        "folder": 2,
+        "function": 20,
+        "interface": 1,
+        "method": 155,
+        "repo": 1,
+        "struct": 8,
+        "type": 2,
+        "var": 12
+      },
+      "entities_by_domain": {
+        "code": 3,
+        "golang": 204
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 207,
+        "edges": 1072,
+        "induced_edges": 635,
+        "cross_system_edges": 0,
+        "dangling_edges": 437,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 429,
+          "code.relationship.parameter": 43,
+          "code.relationship.receiver": 155,
+          "code.relationship.references": 13,
+          "code.relationship.returns": 20,
+          "code.structure.belongs": 206,
+          "code.structure.contains": 206
+        },
+        "non_containment_edges": 660
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "processor/agentic-loop"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": null,
+          "files": 37,
+          "entities": 805
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "processor/agentic-loop/doc.go",
+            "processor/agentic-loop/handlers.go",
+            "processor/agentic-loop/state.go"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": null,
+          "files": 3,
+          "entities": 207
+        }
+      ],
+      "notes": "processor/agentic-loop/ is trimmed to the loop's lifecycle in two long files: state.go (LoopManager, loop entity lifecycle and state) and handlers.go (the handlers that drive the loop), plus the package doc. component.go, the trajectory, governance, approval, context and metrics files and the internal/, lessonmatch/ and prompt/ subpackages are excluded; references to them are dangling edges.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semsource-source-manifest",
+      "split": "held-out",
+      "role": "cross-type",
+      "language": "Go + Markdown",
+      "repo": "https://github.com/C360Studio/semsource",
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semsource-source-manifest",
+      "include": [
+        "processor/source-manifest",
+        "configs/tiers/README.md"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "processor/source-manifest/workbench_capabilities.go"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "configs/tiers/README.md",
+        "processor/source-manifest/component.go",
+        "processor/source-manifest/config.go",
+        "processor/source-manifest/factory.go",
+        "processor/source-manifest/http_sources.go",
+        "processor/source-manifest/ingest.go",
+        "processor/source-manifest/lifecycle_scope.go",
+        "processor/source-manifest/payload_ingest.go",
+        "processor/source-manifest/payload_predicates.go",
+        "processor/source-manifest/payload_registry.go",
+        "processor/source-manifest/payload_status.go",
+        "processor/source-manifest/payload_summary.go",
+        "processor/source-manifest/payloads.go",
+        "processor/source-manifest/readiness.go",
+        "processor/source-manifest/status.go"
+      ],
+      "workspace_sha256": "c9e2d72f455cda98b7f3cb79ca26e35fa38c52b71c7620352d74f6467e4a21f1",
+      "entities_total": 223,
+      "entities_by_type": {
+        "chunk": 23,
+        "const": 36,
+        "doc": 1,
+        "file": 14,
+        "folder": 2,
+        "function": 27,
+        "interface": 1,
+        "method": 80,
+        "repo": 1,
+        "struct": 26,
+        "type": 2,
+        "var": 10
+      },
+      "entities_by_domain": {
+        "code": 3,
+        "golang": 196,
+        "web": 24
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 223,
+        "edges": 695,
+        "induced_edges": 589,
+        "cross_system_edges": 0,
+        "dangling_edges": 106,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 133,
+          "code.relationship.parameter": 15,
+          "code.relationship.receiver": 80,
+          "code.relationship.references": 32,
+          "code.relationship.returns": 16,
+          "code.structure.belongs": 221,
+          "code.structure.contains": 198
+        },
+        "non_containment_edges": 276
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "processor/source-manifest",
+            "configs/tiers/README.md"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*"
+          ],
+          "max_file_bytes": null,
+          "files": 16,
+          "entities": 255
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "processor/source-manifest",
+            "configs/tiers/README.md"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "processor/source-manifest/workbench_capabilities.go"
+          ],
+          "max_file_bytes": null,
+          "files": 15,
+          "entities": 223
+        }
+      ],
+      "notes": "Owner subtree processor/source-manifest/ non-test Go plus configs/tiers/README.md, less workbench_capabilities.go (32 entities), the UI capability advertisement, which the tiers README does not discuss.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semsource-cli",
+      "split": "held-out",
+      "role": "many small commands",
+      "language": "Go",
+      "repo": "https://github.com/C360Studio/semsource",
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semsource-cli",
+      "include": [
+        "cli"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "cli/add.go",
+        "cli/detect.go",
+        "cli/registry.go",
+        "cli/remove.go",
+        "cli/sources.go",
+        "cli/term.go",
+        "cli/validate.go",
+        "cli/wizard.go",
+        "cli/wizard_ast.go",
+        "cli/wizard_audio.go",
+        "cli/wizard_cfg.go",
+        "cli/wizard_doc.go",
+        "cli/wizard_git.go",
+        "cli/wizard_image.go",
+        "cli/wizard_repo.go",
+        "cli/wizard_url.go",
+        "cli/wizard_video.go"
+      ],
+      "workspace_sha256": "02b9bfb04d39ee387dd4444f631711b8dcb4516b48b1e3d3fe6deb468c1084de",
+      "entities_total": 143,
+      "entities_by_type": {
+        "const": 5,
+        "file": 17,
+        "folder": 1,
+        "function": 52,
+        "interface": 1,
+        "method": 54,
+        "repo": 1,
+        "struct": 11,
+        "var": 1
+      },
+      "entities_by_domain": {
+        "code": 2,
+        "golang": 141
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 143,
+        "edges": 435,
+        "induced_edges": 430,
+        "cross_system_edges": 0,
+        "dangling_edges": 5,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 68,
+          "code.relationship.parameter": 25,
+          "code.relationship.receiver": 54,
+          "code.relationship.references": 1,
+          "code.relationship.returns": 3,
+          "code.structure.belongs": 142,
+          "code.structure.contains": 142
+        },
+        "non_containment_edges": 151
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "cli"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": null,
+          "files": 17,
+          "entities": 143
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "cli"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*/testdata/*",
+            "*.md"
+          ],
+          "max_file_bytes": null,
+          "files": 17,
+          "entities": 143
+        }
+      ],
+      "notes": "Owner subtree: cli/ non-test Go.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "semsource-ui",
+      "split": "held-out",
+      "role": "sparse explicit topology",
+      "language": "Svelte + TypeScript",
+      "repo": "https://github.com/C360Studio/semsource",
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "MIT License",
+      "system_segment": "semsource-ui",
+      "include": [
+        "ui/src"
+      ],
+      "exclude": [
+        "*.test.ts",
+        "*.spec.ts",
+        "ui/src/tests/*",
+        "*.css",
+        "*.html",
+        "ui/src/lib/contracts/*",
+        "ui/src/lib/graph/*"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "ui/src/app.d.ts",
+        "ui/src/lib/api/advertisedRoute.ts",
+        "ui/src/lib/api/graph.ts",
+        "ui/src/lib/api/http.ts",
+        "ui/src/lib/api/search.ts",
+        "ui/src/lib/api/workbench.ts",
+        "ui/src/lib/components/CapabilityCard.svelte",
+        "ui/src/lib/components/GraphPanel.svelte",
+        "ui/src/lib/components/GraphView.svelte",
+        "ui/src/lib/components/SearchPanel.svelte",
+        "ui/src/lib/components/WorkbenchShell.svelte",
+        "ui/src/lib/state/bootstrap.ts",
+        "ui/src/lib/state/readiness.ts",
+        "ui/src/lib/state/readinessPoller.ts",
+        "ui/src/routes/+layout.svelte",
+        "ui/src/routes/+page.svelte"
+      ],
+      "workspace_sha256": "0b4539115bfa5979e2b7ec14740936ef24006bbe5c63966e44ec7eee386de495",
+      "entities_total": 206,
+      "entities_by_type": {
+        "class": 3,
+        "component": 7,
+        "const": 51,
+        "file": 16,
+        "folder": 7,
+        "function": 47,
+        "interface": 4,
+        "repo": 1,
+        "type": 7,
+        "var": 63
+      },
+      "entities_by_domain": {
+        "code": 8,
+        "svelte": 130,
+        "typescript": 68
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 206,
+        "edges": 484,
+        "induced_edges": 453,
+        "cross_system_edges": 0,
+        "dangling_edges": 31,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 31,
+          "code.relationship.parameter": 25,
+          "code.relationship.references": 5,
+          "code.relationship.returns": 8,
+          "code.structure.belongs": 205,
+          "code.structure.contains": 210
+        },
+        "non_containment_edges": 69
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "ui/src"
+          ],
+          "exclude": [
+            "*.test.ts",
+            "*.spec.ts",
+            "ui/src/tests/*",
+            "*.css",
+            "*.html"
+          ],
+          "max_file_bytes": null,
+          "files": 28,
+          "entities": 432
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "ui/src"
+          ],
+          "exclude": [
+            "*.test.ts",
+            "*.spec.ts",
+            "ui/src/tests/*",
+            "*.css",
+            "*.html",
+            "ui/src/lib/contracts/*",
+            "ui/src/lib/graph/*"
+          ],
+          "max_file_bytes": null,
+          "files": 16,
+          "entities": 206
+        }
+      ],
+      "notes": "ui/src/ Svelte and TypeScript without tests (*.test.ts and ui/src/tests/); app.css and app.html are not parsed. Trimmed to the UI shell: routes, components, API clients and state. The typed contracts (lib/contracts/) and the graph layout and rendering engine (lib/graph/) are excluded; references to them are dangling edges. No file carries a generated-code marker; app.d.ts is the hand-kept SvelteKit ambient stub.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "nats-go-micro",
+      "split": "generalization",
       "role": "code and doc about the same responsibility",
       "language": "Go + Markdown",
       "repo": "https://github.com/nats-io/nats.go",
@@ -123,11 +1536,14 @@
         }
       ],
       "notes": "Owner subtree unchanged; micro/ includes its tests and micro/README.md.",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+      "copied_from": "f10aff606fd0a28ee0e320ab5f446a3f35986887:eval/community-refinement/fixtures/families.json",
+      "evidence": "docs/evidence/20261009T163623Z-legacy-family-counts",
+      "generalization_note": "Owner ruling 4 (issue #5): kept from the earlier public-repo list under split 'generalization' as a check that a sem* result carries over to external code with an unambiguous licence. Copied verbatim from the earlier measurement and not re-measured; outside the four development and eight held-out families and not counted toward the promotion rule."
     },
     {
       "id": "commons-csv",
-      "split": "development",
+      "split": "generalization",
       "role": "one topic with builder boilerplate hubs",
       "language": "Java + Markdown",
       "repo": "https://github.com/apache/commons-csv",
@@ -229,971 +1645,10 @@
         }
       ],
       "notes": "The package is one directory, so it is trimmed by file: the CSVFormat builder hub is kept with CSVPrinter, QuoteMode, DuplicateHeaderMode, CSVException and package-info. The parser/lexer/record side is excluded; references to it are dangling edges.",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
-    },
-    {
-      "id": "flask-core",
-      "split": "development",
-      "role": "multiple legitimate topics in one package",
-      "language": "Python",
-      "repo": "https://github.com/pallets/flask",
-      "commit": "d086db856be187255b8ec61ef409357393020f32",
-      "license": "BSD-3-Clause",
-      "license_file": "LICENSE.txt",
-      "license_file_first_line": "Copyright 2010 Pallets",
-      "system_segment": "flask-core",
-      "include": [
-        "src/flask/__init__.py",
-        "src/flask/config.py",
-        "src/flask/json",
-        "src/flask/logging.py",
-        "src/flask/sessions.py",
-        "src/flask/signals.py",
-        "src/flask/templating.py",
-        "src/flask/testing.py",
-        "src/flask/views.py"
-      ],
-      "exclude": [],
-      "max_file_bytes": null,
-      "unmatched_includes": [],
-      "files": [
-        "src/flask/__init__.py",
-        "src/flask/config.py",
-        "src/flask/json/__init__.py",
-        "src/flask/json/provider.py",
-        "src/flask/json/tag.py",
-        "src/flask/logging.py",
-        "src/flask/sessions.py",
-        "src/flask/signals.py",
-        "src/flask/templating.py",
-        "src/flask/testing.py",
-        "src/flask/views.py"
-      ],
-      "workspace_sha256": "dd47fcc2b50ec80b61b0569947e3211135a843ef410d85aab986951da7b66037",
-      "entities_total": 173,
-      "entities_by_type": {
-        "class": 26,
-        "const": 2,
-        "file": 11,
-        "folder": 3,
-        "function": 18,
-        "method": 97,
-        "repo": 1,
-        "var": 15
-      },
-      "entities_by_domain": {
-        "code": 4,
-        "python": 169
-      },
-      "in_range": true,
-      "edge_proxy": {
-        "source_keys": 173,
-        "edges": 647,
-        "induced_edges": 595,
-        "cross_system_edges": 0,
-        "dangling_edges": 52,
-        "undecodable_values": 0,
-        "predicates": {
-          "code.relationship.calls": 31,
-          "code.relationship.extends": 13,
-          "code.relationship.parameter": 46,
-          "code.relationship.receiver": 97,
-          "code.relationship.returns": 13,
-          "code.structure.belongs": 172,
-          "code.structure.contains": 275
-        },
-        "non_containment_edges": 200
-      },
-      "iterations": [
-        {
-          "iteration": "iter1",
-          "include": [
-            "src/flask"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 26,
-          "entities": 495
-        },
-        {
-          "iteration": "iter2",
-          "include": [
-            "src/flask/__init__.py",
-            "src/flask/config.py",
-            "src/flask/json",
-            "src/flask/logging.py",
-            "src/flask/sessions.py",
-            "src/flask/signals.py",
-            "src/flask/templating.py",
-            "src/flask/testing.py",
-            "src/flask/views.py"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 11,
-          "entities": 173
-        }
-      ],
-      "notes": "Nine top-level modules with distinct topics are kept: package init, configuration, JSON serialization (json/), logging, sessions, signals, templating, test client and class-based views. The app, blueprint, sansio, cli, ctx and helper machinery is excluded.",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
-    },
-    {
-      "id": "express-lib",
-      "split": "development",
-      "role": "sparse explicit topology, small",
-      "language": "JavaScript + Markdown",
-      "repo": "https://github.com/expressjs/express",
-      "commit": "a419aa7350389a275ab45fde2e849ed1f02449ef",
-      "license": "MIT",
-      "license_file": "LICENSE",
-      "license_file_first_line": "(The MIT License)",
-      "system_segment": "express-lib",
-      "include": [
-        "lib",
-        "Readme.md"
-      ],
-      "exclude": [],
-      "max_file_bytes": null,
-      "unmatched_includes": [],
-      "files": [
-        "Readme.md",
-        "lib/application.js",
-        "lib/express.js",
-        "lib/request.js",
-        "lib/response.js",
-        "lib/utils.js",
-        "lib/view.js"
-      ],
-      "workspace_sha256": "efb6065f1d289f33c900e762002c009b252f7f6f51dea7f536187b83f037c1a5",
-      "entities_total": 235,
-      "entities_by_type": {
-        "chunk": 26,
-        "const": 6,
-        "doc": 1,
-        "file": 6,
-        "folder": 1,
-        "function": 18,
-        "repo": 1,
-        "var": 176
-      },
-      "entities_by_domain": {
-        "code": 2,
-        "javascript": 206,
-        "web": 27
-      },
-      "in_range": true,
-      "edge_proxy": {
-        "source_keys": 235,
-        "edges": 485,
-        "induced_edges": 485,
-        "cross_system_edges": 0,
-        "dangling_edges": 0,
-        "undecodable_values": 0,
-        "predicates": {
-          "code.structure.belongs": 233,
-          "code.structure.contains": 252
-        },
-        "non_containment_edges": 0
-      },
-      "iterations": [
-        {
-          "iteration": "iter1",
-          "include": [
-            "lib",
-            "Readme.md"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 7,
-          "entities": 235
-        },
-        {
-          "iteration": "iter2",
-          "include": [
-            "lib",
-            "Readme.md"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 7,
-          "entities": 235
-        }
-      ],
-      "notes": "Owner subtree unchanged.",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
-    },
-    {
-      "id": "osh-module",
-      "split": "held-out",
-      "role": "continuity with the recorded 6,685-entity baseline; cross-type",
-      "language": "Java + Markdown",
-      "repo": "https://github.com/opensensorhub/osh-core",
-      "commit": "9a43f9ec42315e5a22e5e5d90a4ba79eef9cea08",
-      "license": "MPL-2.0",
-      "license_file": "LICENSE",
-      "license_file_first_line": "Mozilla Public License, version 2.0",
-      "system_segment": "osh-module",
-      "include": [
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module",
-        "README.md"
-      ],
-      "exclude": [
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/InMemoryConfigDb.java",
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/ModuleConfigJsonFile.java",
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/RobustConnection.java",
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/RobustConnectionConfig.java"
-      ],
-      "max_file_bytes": null,
-      "unmatched_includes": [],
-      "files": [
-        "README.md",
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/AbstractModule.java",
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/AbstractSubModule.java",
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/DefaultModuleStateManager.java",
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/JarModuleProvider.java",
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/ModuleClassFinder.java",
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/ModuleRegistry.java",
-        "sensorhub-core/src/main/java/org/sensorhub/impl/module/ModuleSecurity.java"
-      ],
-      "workspace_sha256": "c78c6d73f62d5fc6e9ab51a9e2d825a16b309addd2cb78d9df9b3eaafd509574",
-      "entities_total": 202,
-      "entities_by_type": {
-        "chunk": 5,
-        "class": 8,
-        "doc": 1,
-        "file": 7,
-        "folder": 8,
-        "method": 132,
-        "repo": 1,
-        "var": 40
-      },
-      "entities_by_domain": {
-        "code": 9,
-        "java": 187,
-        "web": 6
-      },
-      "in_range": true,
-      "edge_proxy": {
-        "source_keys": 202,
-        "edges": 735,
-        "induced_edges": 630,
-        "cross_system_edges": 0,
-        "dangling_edges": 105,
-        "undecodable_values": 0,
-        "predicates": {
-          "code.dependency.imports": 3,
-          "code.relationship.calls": 81,
-          "code.relationship.parameter": 39,
-          "code.relationship.receiver": 132,
-          "code.relationship.references": 24,
-          "code.relationship.returns": 39,
-          "code.structure.belongs": 200,
-          "code.structure.contains": 217
-        },
-        "non_containment_edges": 318
-      },
-      "iterations": [
-        {
-          "iteration": "iter1",
-          "include": [
-            "sensorhub-core/src/main/java/org/sensorhub/impl/module",
-            "README.md"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 12,
-          "entities": 266
-        },
-        {
-          "iteration": "iter2",
-          "include": [
-            "sensorhub-core/src/main/java/org/sensorhub/impl/module",
-            "README.md"
-          ],
-          "exclude": [
-            "sensorhub-core/src/main/java/org/sensorhub/impl/module/InMemoryConfigDb.java",
-            "sensorhub-core/src/main/java/org/sensorhub/impl/module/ModuleConfigJsonFile.java",
-            "sensorhub-core/src/main/java/org/sensorhub/impl/module/RobustConnection.java",
-            "sensorhub-core/src/main/java/org/sensorhub/impl/module/RobustConnectionConfig.java"
-          ],
-          "max_file_bytes": null,
-          "files": 8,
-          "entities": 202
-        }
-      ],
-      "notes": "Config persistence (InMemoryConfigDb, ModuleConfigJsonFile) and connection retry (RobustConnection*) are excluded; module lifecycle, registry, state, security and discovery are kept. This is a subset of the code behind the recorded 6,685-entity baseline, not a recapture of it.",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
-    },
-    {
-      "id": "ogcapi-cs-sections",
-      "split": "held-out",
-      "role": "docs-only, lexically similar sections",
-      "language": "AsciiDoc",
-      "repo": "https://github.com/opengeospatial/ogcapi-connected-systems",
-      "commit": "fb858be23aa03e2b824ec50b5a97ac2c2a1d3fec",
-      "license": "LicenseRef-OGC-Software-License",
-      "license_file": "LICENSE",
-      "license_file_first_line": "Permission is hereby granted by the Open Geospatial Consortium, (\"Licensor\"), free of charge and subject to the terms set forth below, to any person obtaining a copy of this Intellectual Property and any associated documentation, to deal in the Intellectual Property without restriction (except as set forth below), including without limitation the rights to implement, use, copy, modify, merge, publish, distribute, and/or sublicense copies of the Intellectual Property, and to permit persons to whom the Intellectual Property is furnished to do so, provided that all copyright notices on the intellectual property are retained intact and that each person to whom the Intellectual Property is furnished agrees to the terms of this Agreement.",
-      "system_segment": "ogcapi-cs-sections",
-      "include": [
-        "api/part1/standard/sections/clause_*.adoc"
-      ],
-      "exclude": [],
-      "max_file_bytes": null,
-      "unmatched_includes": [],
-      "files": [
-        "api/part1/standard/sections/clause_0_front_material.adoc",
-        "api/part1/standard/sections/clause_10_requirements_class_deployment_features.adoc",
-        "api/part1/standard/sections/clause_11_requirements_class_subdeployments.adoc",
-        "api/part1/standard/sections/clause_12_requirements_class_procedure_features.adoc",
-        "api/part1/standard/sections/clause_13_requirements_class_sampling_features.adoc",
-        "api/part1/standard/sections/clause_14_requirements_class_property_definitions.adoc",
-        "api/part1/standard/sections/clause_15_requirements_class_advanced_filtering.adoc",
-        "api/part1/standard/sections/clause_16_requirements_class_create_replace_delete.adoc",
-        "api/part1/standard/sections/clause_17_requirements_class_update.adoc",
-        "api/part1/standard/sections/clause_1_scope.adoc",
-        "api/part1/standard/sections/clause_20_requirements_class_geojson_encoding.adoc",
-        "api/part1/standard/sections/clause_21_requirements_class_sensorml_encoding.adoc",
-        "api/part1/standard/sections/clause_2_conformance.adoc",
-        "api/part1/standard/sections/clause_3_references.adoc",
-        "api/part1/standard/sections/clause_4_terms_and_definitions.adoc",
-        "api/part1/standard/sections/clause_5_conventions.adoc",
-        "api/part1/standard/sections/clause_6_overview.adoc",
-        "api/part1/standard/sections/clause_7_requirements_class_common.adoc",
-        "api/part1/standard/sections/clause_8_requirements_class_system_features.adoc",
-        "api/part1/standard/sections/clause_9_requirements_class_subsystems.adoc"
-      ],
-      "workspace_sha256": "c3d91cee4f0ec60c21823dd45d05e2e09fdbff49ee670151a49267dbab5ff377",
-      "entities_total": 187,
-      "entities_by_type": {
-        "chunk": 167,
-        "doc": 20
-      },
-      "entities_by_domain": {
-        "web": 187
-      },
-      "in_range": true,
-      "edge_proxy": {
-        "source_keys": 187,
-        "edges": 167,
-        "induced_edges": 167,
-        "cross_system_edges": 0,
-        "dangling_edges": 0,
-        "undecodable_values": 0,
-        "predicates": {
-          "code.structure.belongs": 167
-        },
-        "non_containment_edges": 0
-      },
-      "iterations": [
-        {
-          "iteration": "iter1",
-          "include": [
-            "api/part1/standard/sections"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 25,
-          "entities": 274
-        },
-        {
-          "iteration": "iter2",
-          "include": [
-            "api/part1/standard/sections/clause_*.adoc"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 20,
-          "entities": 187
-        }
-      ],
-      "notes": "The AsciiDoc sections directory under api/part1 is api/part1/standard/sections. Its five annex files are excluded and the 20 clause_* files are kept.",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
-    },
-    {
-      "id": "mavlink-minimal",
-      "split": "held-out",
-      "role": "generated boilerplate hubs",
-      "language": "C headers",
-      "repo": "https://github.com/mavlink/c_library_v2",
-      "commit": "28eae47457249ab6c8c1cadd104fcbe25eacd7a3",
-      "license": "NOASSERTION",
-      "license_file": null,
-      "license_file_first_line": null,
-      "system_segment": "mavlink-minimal",
-      "include": [
-        "minimal",
-        "protocol.h",
-        "mavlink_types.h",
-        "mavlink_helpers.h",
-        "checksum.h",
-        "mavlink_conversions.h",
-        "mavlink_sha256.h"
-      ],
-      "exclude": [],
-      "max_file_bytes": null,
-      "unmatched_includes": [],
-      "files": [
-        "checksum.h",
-        "mavlink_conversions.h",
-        "mavlink_helpers.h",
-        "mavlink_sha256.h",
-        "mavlink_types.h",
-        "minimal/mavlink.h",
-        "minimal/mavlink_msg_heartbeat.h",
-        "minimal/minimal.h",
-        "minimal/testsuite.h",
-        "minimal/version.h",
-        "protocol.h"
-      ],
-      "workspace_sha256": "065eeecea3a78838c6a9ca441ea0678a56ff50932bea2fbf03e4255fefb35690",
-      "entities_total": 129,
-      "entities_by_type": {
-        "const": 53,
-        "file": 11,
-        "folder": 1,
-        "function": 61,
-        "repo": 1,
-        "struct": 1,
-        "type": 1
-      },
-      "entities_by_domain": {
-        "c": 127,
-        "code": 2
-      },
-      "in_range": true,
-      "edge_proxy": {
-        "source_keys": 129,
-        "edges": 294,
-        "induced_edges": 294,
-        "cross_system_edges": 0,
-        "dangling_edges": 0,
-        "undecodable_values": 0,
-        "predicates": {
-          "code.relationship.calls": 15,
-          "code.structure.belongs": 128,
-          "code.structure.contains": 151
-        },
-        "non_containment_edges": 15
-      },
-      "iterations": [
-        {
-          "iteration": "iter1",
-          "include": [
-            "minimal"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 5,
-          "entities": 47
-        },
-        {
-          "iteration": "iter2",
-          "include": [
-            "minimal",
-            "protocol.h",
-            "mavlink_types.h",
-            "mavlink_helpers.h",
-            "checksum.h",
-            "mavlink_conversions.h",
-            "mavlink_sha256.h"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 11,
-          "entities": 129
-        }
-      ],
-      "notes": "c_library_v2 has no README.md and no LICENSE file at this commit; nothing was substituted, and the licence needs an owner ruling before redistribution. Widened from minimal/ alone (47) to the minimal dialect include closure in the same repo: protocol.h, mavlink_types.h, mavlink_helpers.h, checksum.h, mavlink_conversions.h and mavlink_sha256.h (which carries its own KTH BSD-style header).",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
-    },
-    {
-      "id": "sveltekit-server-runtime",
-      "split": "held-out",
-      "role": "many small helpers",
-      "language": "JavaScript/TypeScript",
-      "repo": "https://github.com/sveltejs/kit",
-      "commit": "a06817e90049f15465eca140a07c5218d439dc37",
-      "license": "MIT",
-      "license_file": "LICENSE",
-      "license_file_first_line": "Copyright (c) 2020 [these people](https://github.com/sveltejs/kit/graphs/contributors)",
-      "system_segment": "sveltekit-server-runtime",
-      "include": [
-        "packages/kit/src/runtime/server/*.js"
-      ],
-      "exclude": [
-        "*.spec.js",
-        "packages/kit/src/runtime/server/remote-functions.js",
-        "packages/kit/src/runtime/server/respond.js",
-        "packages/kit/src/runtime/server/sourcemaps.js"
-      ],
-      "max_file_bytes": null,
-      "unmatched_includes": [],
-      "files": [
-        "packages/kit/src/runtime/server/constants.js",
-        "packages/kit/src/runtime/server/cookie.js",
-        "packages/kit/src/runtime/server/csrf.js",
-        "packages/kit/src/runtime/server/dev.js",
-        "packages/kit/src/runtime/server/endpoint.js",
-        "packages/kit/src/runtime/server/env_module.js",
-        "packages/kit/src/runtime/server/errors.js",
-        "packages/kit/src/runtime/server/fetch.js",
-        "packages/kit/src/runtime/server/index.js",
-        "packages/kit/src/runtime/server/instance.js",
-        "packages/kit/src/runtime/server/internal.js",
-        "packages/kit/src/runtime/server/state.js",
-        "packages/kit/src/runtime/server/utils.js",
-        "packages/kit/src/runtime/server/validate-headers.js"
-      ],
-      "workspace_sha256": "64ce23bf8bab9fa932dd923b745438ff8e828dce6d31e555fc8630ebf2efb286",
-      "entities_total": 192,
-      "entities_by_type": {
-        "class": 1,
-        "const": 98,
-        "file": 14,
-        "folder": 5,
-        "function": 49,
-        "method": 2,
-        "repo": 1,
-        "var": 22
-      },
-      "entities_by_domain": {
-        "code": 6,
-        "javascript": 186
-      },
-      "in_range": true,
-      "edge_proxy": {
-        "source_keys": 192,
-        "edges": 412,
-        "induced_edges": 412,
-        "cross_system_edges": 0,
-        "dangling_edges": 0,
-        "undecodable_values": 0,
-        "predicates": {
-          "code.relationship.calls": 18,
-          "code.structure.belongs": 191,
-          "code.structure.contains": 203
-        },
-        "non_containment_edges": 18
-      },
-      "iterations": [
-        {
-          "iteration": "iter1",
-          "include": [
-            "packages/kit/src/runtime/server"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 40,
-          "entities": 789
-        },
-        {
-          "iteration": "iter2",
-          "include": [
-            "packages/kit/src/runtime/server/*.js"
-          ],
-          "exclude": [
-            "*.spec.js",
-            "packages/kit/src/runtime/server/remote-functions.js",
-            "packages/kit/src/runtime/server/respond.js",
-            "packages/kit/src/runtime/server/sourcemaps.js"
-          ],
-          "max_file_bytes": null,
-          "files": 14,
-          "entities": 192
-        }
-      ],
-      "notes": "Only top-level server/*.js helper modules are kept. The *.spec.js tests, the page/ and data/ subdirectories, and the three largest modules (respond.js, remote-functions.js, sourcemaps.js) are excluded.",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
-    },
-    {
-      "id": "homebrew-docs",
-      "split": "held-out",
-      "role": "docs with multiple topics and boilerplate pages; isolated entities",
-      "language": "Markdown",
-      "repo": "https://github.com/Homebrew/brew",
-      "commit": "7a8f775358a0ab6a2945bdc3d63834ec6f76673c",
-      "license": "BSD-2-Clause",
-      "license_file": "LICENSE.txt",
-      "license_file_first_line": "BSD 2-Clause License",
-      "system_segment": "homebrew-docs",
-      "include": [
-        "docs/*.md"
-      ],
-      "exclude": [],
-      "max_file_bytes": 3000,
-      "unmatched_includes": [],
-      "files": [
-        "docs/AGENTS.md",
-        "docs/Autobump.md",
-        "docs/BrewTestBot-For-Maintainers.md",
-        "docs/BrewTestBot.md",
-        "docs/Building-Against-Non-Homebrew-Dependencies.md",
-        "docs/C++-Standard-Libraries.md",
-        "docs/Checksum-Requirements.md",
-        "docs/Command-Not-Found.md",
-        "docs/Common-Issues-for-Maintainers.md",
-        "docs/Creating-a-Homebrew-Issue.md",
-        "docs/Custom-GCC-and-cross-compilers.md",
-        "docs/Homebrew-Governance-Archives.md",
-        "docs/Homebrew-Leadership-Responsibilities.md",
-        "docs/How-to-Build-Software-Outside-Homebrew-with-Homebrew-keg-only-Dependencies.md",
-        "docs/Interesting-Taps-and-Forks.md",
-        "docs/Linux-CI.md",
-        "docs/MCP-Server.md",
-        "docs/Maintainers-Avoiding-Burnout.md",
-        "docs/Migrating-A-Formula-To-A-Tap.md",
-        "docs/README.md",
-        "docs/Rename-A-Formula.md",
-        "docs/Taps.md",
-        "docs/Troubleshooting.md",
-        "docs/Updating-Software-in-Homebrew.md",
-        "docs/Xcode.md"
-      ],
-      "workspace_sha256": "3484c0bbdf39d208302ed5682aed69b03ea50b8ca6bd8741415b52b474d7a5f2",
-      "entities_total": 152,
-      "entities_by_type": {
-        "chunk": 127,
-        "doc": 25
-      },
-      "entities_by_domain": {
-        "web": 152
-      },
-      "in_range": true,
-      "edge_proxy": {
-        "source_keys": 152,
-        "edges": 127,
-        "induced_edges": 127,
-        "cross_system_edges": 0,
-        "dangling_edges": 0,
-        "undecodable_values": 0,
-        "predicates": {
-          "code.structure.belongs": 127
-        },
-        "non_containment_edges": 0
-      },
-      "iterations": [
-        {
-          "iteration": "iter1",
-          "include": [
-            "docs/*.md"
-          ],
-          "exclude": [],
-          "max_file_bytes": 5000,
-          "files": 40,
-          "entities": 327
-        },
-        {
-          "iteration": "iter2",
-          "include": [
-            "docs/*.md"
-          ],
-          "exclude": [],
-          "max_file_bytes": 3000,
-          "files": 25,
-          "entities": 152
-        }
-      ],
-      "notes": "Rule-based subset, not hand-picked: every top-level docs/*.md under 3,000 bytes (25 pages). Iteration 1 used an under-5,000-byte rule (40 pages, 327 entities).",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
-    },
-    {
-      "id": "zlib-core",
-      "split": "held-out",
-      "role": "C with macros; isolated entities",
-      "language": "C",
-      "repo": "https://github.com/madler/zlib",
-      "commit": "767c4c947852e143f582c85f14cf573411df1b35",
-      "license": "Zlib",
-      "license_file": "LICENSE",
-      "license_file_first_line": "Copyright notice:",
-      "system_segment": "zlib-core",
-      "include": [
-        "deflate.c",
-        "deflate.h",
-        "trees.c",
-        "trees.h",
-        "zutil.h"
-      ],
-      "exclude": [],
-      "max_file_bytes": null,
-      "unmatched_includes": [],
-      "files": [
-        "deflate.c",
-        "deflate.h",
-        "trees.c",
-        "trees.h",
-        "zutil.h"
-      ],
-      "workspace_sha256": "b355bc6a6221fd672de977e6589850100eafd767f57d57bf31031c84b44c83c6",
-      "entities_total": 186,
-      "entities_by_type": {
-        "const": 81,
-        "file": 5,
-        "function": 49,
-        "repo": 1,
-        "struct": 7,
-        "type": 15,
-        "var": 28
-      },
-      "entities_by_domain": {
-        "c": 185,
-        "code": 1
-      },
-      "in_range": true,
-      "edge_proxy": {
-        "source_keys": 186,
-        "edges": 451,
-        "induced_edges": 451,
-        "cross_system_edges": 0,
-        "dangling_edges": 0,
-        "undecodable_values": 0,
-        "predicates": {
-          "code.relationship.calls": 27,
-          "code.structure.belongs": 185,
-          "code.structure.contains": 239
-        },
-        "non_containment_edges": 27
-      },
-      "iterations": [
-        {
-          "iteration": "iter1",
-          "include": [
-            "*.c",
-            "*.h"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 26,
-          "entities": 637
-        },
-        {
-          "iteration": "iter2",
-          "include": [
-            "deflate.c",
-            "deflate.h",
-            "trees.c",
-            "trees.h",
-            "zutil.h"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 5,
-          "entities": 186
-        }
-      ],
-      "notes": "Root files only, narrowed to the deflate engine: deflate.c, deflate.h, trees.c, trees.h and the macro-heavy zutil.h. zconf.h (187 prefix macros) and the inflate, gz and checksum files are excluded.",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
-    },
-    {
-      "id": "requests-core",
-      "split": "held-out",
-      "role": "client library sharing vocabulary with D3 but an independent subject",
-      "language": "Python",
-      "repo": "https://github.com/psf/requests",
-      "commit": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60",
-      "license": "Apache-2.0",
-      "license_file": "LICENSE",
-      "license_file_first_line": "Apache License",
-      "system_segment": "requests-core",
-      "include": [
-        "src/requests/__init__.py",
-        "src/requests/adapters.py",
-        "src/requests/api.py",
-        "src/requests/auth.py",
-        "src/requests/exceptions.py",
-        "src/requests/hooks.py",
-        "src/requests/models.py",
-        "src/requests/sessions.py",
-        "src/requests/status_codes.py",
-        "src/requests/structures.py"
-      ],
-      "exclude": [],
-      "max_file_bytes": null,
-      "unmatched_includes": [],
-      "files": [
-        "src/requests/__init__.py",
-        "src/requests/adapters.py",
-        "src/requests/api.py",
-        "src/requests/auth.py",
-        "src/requests/exceptions.py",
-        "src/requests/hooks.py",
-        "src/requests/models.py",
-        "src/requests/sessions.py",
-        "src/requests/status_codes.py",
-        "src/requests/structures.py"
-      ],
-      "workspace_sha256": "abdc043e4c32139a0969e7d1edb19724fa0eee6d63008aa408268b8eaf435a34",
-      "entities_total": 206,
-      "entities_by_type": {
-        "class": 40,
-        "const": 13,
-        "file": 10,
-        "folder": 2,
-        "function": 18,
-        "method": 119,
-        "repo": 1,
-        "var": 3
-      },
-      "entities_by_domain": {
-        "code": 3,
-        "python": 203
-      },
-      "in_range": true,
-      "edge_proxy": {
-        "source_keys": 206,
-        "edges": 882,
-        "induced_edges": 813,
-        "cross_system_edges": 0,
-        "dangling_edges": 69,
-        "undecodable_values": 0,
-        "predicates": {
-          "code.relationship.calls": 69,
-          "code.relationship.extends": 40,
-          "code.relationship.parameter": 51,
-          "code.relationship.receiver": 119,
-          "code.relationship.references": 1,
-          "code.relationship.returns": 45,
-          "code.structure.belongs": 205,
-          "code.structure.contains": 352
-        },
-        "non_containment_edges": 325
-      },
-      "iterations": [
-        {
-          "iteration": "iter1",
-          "include": [
-            "src/requests"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 20,
-          "entities": 364
-        },
-        {
-          "iteration": "iter2",
-          "include": [
-            "src/requests/__init__.py",
-            "src/requests/adapters.py",
-            "src/requests/api.py",
-            "src/requests/auth.py",
-            "src/requests/exceptions.py",
-            "src/requests/hooks.py",
-            "src/requests/models.py",
-            "src/requests/sessions.py",
-            "src/requests/status_codes.py",
-            "src/requests/structures.py"
-          ],
-          "exclude": [],
-          "max_file_bytes": null,
-          "files": 10,
-          "entities": 206
-        }
-      ],
-      "notes": "The client API core is kept: __init__, api, sessions, models, adapters, auth, exceptions, structures, hooks and status_codes. utils, cookies, compat, typing, version and internal helpers are excluded.",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
-    },
-    {
-      "id": "cobra-root",
-      "split": "held-out",
-      "role": "CLI framework, independent of D1",
-      "language": "Go + Markdown",
-      "repo": "https://github.com/spf13/cobra",
-      "commit": "adbc8813901bba65827259daa8e22ff94ec1f30e",
-      "license": "Apache-2.0",
-      "license_file": "LICENSE.txt",
-      "license_file_first_line": "Apache License",
-      "system_segment": "cobra-root",
-      "include": [
-        "*.go",
-        "README.md"
-      ],
-      "exclude": [
-        "*_test.go",
-        "*completions*.go",
-        "active_help.go"
-      ],
-      "max_file_bytes": null,
-      "unmatched_includes": [],
-      "files": [
-        "README.md",
-        "args.go",
-        "cobra.go",
-        "command.go",
-        "command_notwin.go",
-        "command_win.go",
-        "flag_groups.go"
-      ],
-      "workspace_sha256": "3619273a4773c4486a1945929b0d89189e914556f940f0bf6c1732090b21b118",
-      "entities_total": 218,
-      "entities_by_type": {
-        "chunk": 12,
-        "const": 17,
-        "doc": 1,
-        "file": 6,
-        "function": 40,
-        "method": 124,
-        "repo": 1,
-        "struct": 3,
-        "type": 3,
-        "var": 11
-      },
-      "entities_by_domain": {
-        "code": 1,
-        "golang": 204,
-        "web": 13
-      },
-      "in_range": true,
-      "edge_proxy": {
-        "source_keys": 218,
-        "edges": 695,
-        "induced_edges": 612,
-        "cross_system_edges": 0,
-        "dangling_edges": 83,
-        "undecodable_values": 0,
-        "predicates": {
-          "code.relationship.calls": 114,
-          "code.relationship.parameter": 8,
-          "code.relationship.receiver": 124,
-          "code.relationship.references": 13,
-          "code.relationship.returns": 16,
-          "code.structure.belongs": 216,
-          "code.structure.contains": 204
-        },
-        "non_containment_edges": 275
-      },
-      "iterations": [
-        {
-          "iteration": "iter1",
-          "include": [
-            "*.go",
-            "README.md"
-          ],
-          "exclude": [
-            "*_test.go"
-          ],
-          "max_file_bytes": null,
-          "files": 15,
-          "entities": 336
-        },
-        {
-          "iteration": "iter2",
-          "include": [
-            "*.go",
-            "README.md"
-          ],
-          "exclude": [
-            "*_test.go",
-            "*completions*.go",
-            "active_help.go"
-          ],
-          "max_file_bytes": null,
-          "files": 7,
-          "entities": 218
-        }
-      ],
-      "notes": "Root non-test Go files minus the shell-completion generators (*completions*.go, active_help.go), plus README.md.",
-      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+      "copied_from": "f10aff606fd0a28ee0e320ab5f446a3f35986887:eval/community-refinement/fixtures/families.json",
+      "evidence": "docs/evidence/20261009T163623Z-legacy-family-counts",
+      "generalization_note": "Owner ruling 4 (issue #5): kept from the earlier public-repo list under split 'generalization' as a check that a sem* result carries over to external code with an unambiguous licence. Copied verbatim from the earlier measurement and not re-measured; outside the four development and eight held-out families and not counted toward the promotion rule."
     }
   ]
 }

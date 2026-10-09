@@ -1,0 +1,35 @@
+semselect-service	README.md	32	30244
+semselect-service	TOTAL	32
+semselect-docs	docs/answering-path.md	9	10873
+semselect-docs	docs/code-baselines-and-rag.md	12	15074
+semselect-docs	docs/laptop-and-gpu.md	12	6345
+semselect-docs	docs/research-and-decision.md	36	44296
+semselect-docs	docs/results.md	26	33234
+semselect-docs	docs/semengine-integration.md	5	4756
+semselect-docs	docs/semstreams-integration.md	16	18009
+semselect-docs	docs/sglang-investigation.md	12	16679
+semselect-docs	docs/validation-answerability-source.md	9	8854
+semselect-docs	docs/validation-answerability.md	8	8068
+semselect-docs	docs/validation-metal.md	8	6665
+semselect-docs	docs/validation-query-routing.md	14	13107
+semselect-docs	docs/validation-qwen-size.md	9	9373
+semselect-docs	docs/validation-scoring.md	12	15579
+semselect-docs	docs/validation-specialist-intent.md	8	8862
+semselect-docs	docs/validation-synthesis.md	12	11497
+semselect-docs	docs/validation-throughput.md	61	57502
+semselect-docs	docs/validation.md	13	9365
+semselect-docs	docs/when-to-use.md	21	26306
+semselect-docs	TOTAL	303
+semengine-natsclient	natsclient/README.md	21	11094
+semengine-natsclient	TOTAL	21
+semengine-message	TOTAL	0
+semstreams-graph-clustering	processor/graph-clustering/README.md	14	8924
+semstreams-graph-clustering	TOTAL	14
+semstreams-rule	TOTAL	0
+semstreams-service	TOTAL	0
+semstreams-component	TOTAL	0
+semstreams-agentic-loop	TOTAL	0
+semsource-source-manifest	configs/tiers/README.md	24	18796
+semsource-source-manifest	TOTAL	24
+semsource-cli	TOTAL	0
+semsource-ui	TOTAL	0

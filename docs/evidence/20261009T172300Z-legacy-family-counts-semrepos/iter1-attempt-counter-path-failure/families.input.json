@@ -88,8 +88,7 @@
         "docs/*.md"
       ],
       "exclude": [],
-      "notes": "Owner subtree docs/*.md (top level; docs/evidence excluded) trimmed by the owner's size rule: files of 50,000 bytes or more are dropped, which removes only validation-throughput.md (57,502 bytes, 61 entities). The remaining 18 documents keep every topic the docs cover.",
-      "max_file_bytes": 50000
+      "notes": "Owner subtree: top-level docs/*.md only; docs/evidence is excluded by the non-recursive glob and the export."
     },
     {
       "id": "semengine-natsclient",
@@ -98,20 +97,13 @@
       "role": "one subject with boilerplate hubs",
       "language": "Go + Markdown",
       "include": [
-        "natsclient/README.md",
-        "natsclient/client.go",
-        "natsclient/doc.go",
-        "natsclient/errors.go",
-        "natsclient/heartbeat.go",
-        "natsclient/kv.go",
-        "natsclient/options.go",
-        "natsclient/trace.go"
+        "natsclient"
       ],
       "exclude": [
         "*_test.go",
         "*/testdata/*"
       ],
-      "notes": "natsclient/ is one directory, so it is trimmed by file to the subject its README documents: the Client connection hub (client.go), its options, errors, heartbeat, the KVStore abstraction (kv.go), tracing and the package doc. Stream, consumer, delivery-settlement, request, KV key-contract/spec/retention, JetStream metrics and the storage_* observability files are excluded; references to them are dangling edges."
+      "notes": "Owner subtree: natsclient/ non-test Go plus natsclient/README.md."
     },
     {
       "id": "semengine-message",
@@ -152,29 +144,14 @@
       "role": "multiple topics in one package",
       "language": "Go",
       "include": [
-        "processor/rule/doc.go",
-        "processor/rule/cron_metrics.go",
-        "processor/rule/cron_rule.go",
-        "processor/rule/cron_scheduler.go",
-        "processor/rule/cron_substitution.go",
-        "processor/rule/schedule_tracker.go",
-        "processor/rule/caller_substitution.go",
-        "processor/rule/entity_substitution.go",
-        "processor/rule/lifecycle_substitution.go",
-        "processor/rule/message_substitution.go",
-        "processor/rule/typed_substitution.go",
-        "processor/rule/state_tracker.go",
-        "processor/rule/stateful_evaluator.go",
-        "processor/rule/payload_projection.go",
-        "processor/rule/projection_derivation.go",
-        "processor/rule/projection_targets.go"
+        "processor/rule"
       ],
       "exclude": [
         "*_test.go",
         "*/testdata/*",
         "*.md"
       ],
-      "notes": "processor/rule/ is trimmed by file to four topics named by the files' own package comments: cron scheduling (cron_*, schedule_tracker), substitution contexts (*_substitution), stateful evaluation (state_tracker, stateful_evaluator) and payload projection (payload_projection, projection_*), plus the package doc. The processor hub, actions, entity watcher, configuration, factories and the expression/ subpackage are excluded; references to them are dangling edges."
+      "notes": "Owner subtree: processor/rule/ non-test Go."
     },
     {
       "id": "semstreams-service",
@@ -190,8 +167,7 @@
         "*/testdata/*",
         "*.md"
       ],
-      "notes": "service/ is one directory of helpers, so it is trimmed by a size rule: files of 12,000 bytes or more are dropped. This removes the hubs (service_manager, component_manager, message_logger, base, storage_observability and its metrics, metrics_forwarder, message_logger_http, component_manager_http) and keeps the 25 smaller helper files, including the lexically similar *_http, *_config, metrics, forwarder and registry helpers.",
-      "max_file_bytes": 12000
+      "notes": "Owner subtree: service/ non-test Go."
     },
     {
       "id": "semstreams-component",
@@ -205,18 +181,9 @@
       "exclude": [
         "*_test.go",
         "*/testdata/*",
-        "*.md",
-        "component/flowgraph/*",
-        "component/lifecycle_test_suite.go",
-        "component/test_helpers.go",
-        "component/port_codec.go",
-        "component/port_facts.go",
-        "component/schema.go",
-        "component/schema_tags.go",
-        "component/validation.go",
-        "component/config_validator.go"
+        "*.md"
       ],
-      "notes": "component/ is trimmed to component lifecycle, ports and the registry hub. Excluded: the flowgraph/ subpackage; lifecycle_test_suite.go and test_helpers.go, which are test support although not *_test.go; the port codec and port facts files; and the schema and validation files. References to them are dangling edges."
+      "notes": "Owner subtree: component/ non-test Go."
     },
     {
       "id": "semstreams-agentic-loop",
@@ -225,16 +192,14 @@
       "role": "one long responsibility",
       "language": "Go",
       "include": [
-        "processor/agentic-loop/doc.go",
-        "processor/agentic-loop/handlers.go",
-        "processor/agentic-loop/state.go"
+        "processor/agentic-loop"
       ],
       "exclude": [
         "*_test.go",
         "*/testdata/*",
         "*.md"
       ],
-      "notes": "processor/agentic-loop/ is trimmed to the loop's lifecycle in two long files: state.go (LoopManager, loop entity lifecycle and state) and handlers.go (the handlers that drive the loop), plus the package doc. component.go, the trajectory, governance, approval, context and metrics files and the internal/, lessonmatch/ and prompt/ subpackages are excluded; references to them are dangling edges."
+      "notes": "Owner subtree: processor/agentic-loop/ non-test Go."
     },
     {
       "id": "semsource-source-manifest",
@@ -248,10 +213,9 @@
       ],
       "exclude": [
         "*_test.go",
-        "*/testdata/*",
-        "processor/source-manifest/workbench_capabilities.go"
+        "*/testdata/*"
       ],
-      "notes": "Owner subtree processor/source-manifest/ non-test Go plus configs/tiers/README.md, less workbench_capabilities.go (32 entities), the UI capability advertisement, which the tiers README does not discuss."
+      "notes": "Owner subtree: processor/source-manifest/ non-test Go plus configs/tiers/README.md."
     },
     {
       "id": "semsource-cli",
@@ -283,11 +247,9 @@
         "*.spec.ts",
         "ui/src/tests/*",
         "*.css",
-        "*.html",
-        "ui/src/lib/contracts/*",
-        "ui/src/lib/graph/*"
+        "*.html"
       ],
-      "notes": "ui/src/ Svelte and TypeScript without tests (*.test.ts and ui/src/tests/); app.css and app.html are not parsed. Trimmed to the UI shell: routes, components, API clients and state. The typed contracts (lib/contracts/) and the graph layout and rendering engine (lib/graph/) are excluded; references to them are dangling edges. No file carries a generated-code marker; app.d.ts is the hand-kept SvelteKit ambient stub."
+      "notes": "Owner subtree: ui/src/ Svelte and TypeScript without tests (*.test.ts and ui/src/tests/); app.css and app.html are not parsed. No file carries a generated-code marker; app.d.ts is the hand-kept SvelteKit ambient stub."
     }
   ],
   "generalization": {

@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """Prepare legacy family workspaces and assemble the measured family manifest.
 
-prepare: shallow-clone each family repo at its pinned commit (reusing an
-existing clone), copy only the chosen subtree into its own workspace directory
-and write a per-file manifest plus the SemSource tier-0 config.
+prepare: export each repository's committed tree at its pinned commit from the
+local sibling checkout (`git archive`, so uncommitted files are never read),
+copy only the chosen subtree into its own workspace directory and write a
+per-file manifest plus the SemSource tier-0 config.
+
+dupcheck: hash every captured file and compare development families with
+held-out families: identical SHA-256, and same-basename files whose lines are
+more than 80% identical according to `diff`.
 
 assemble: combine the input spec, per-iteration manifests and KV counts into
 eval/community-refinement/fixtures/families.json.
@@ -15,20 +20,23 @@ import argparse
 import fnmatch
 import glob
 import hashlib
+import io
+import itertools
 import json
 import os
 import shutil
 import subprocess
 import sys
+import tarfile
 
-CODE_EXT = {".go", ".java", ".py", ".js", ".mjs", ".cjs", ".jsx", ".ts", ".tsx", ".mts", ".cts",
-            ".svelte", ".c", ".h"}
+CODE_EXT = {".go", ".py", ".js", ".mjs", ".cjs", ".jsx", ".ts", ".tsx", ".mts", ".cts", ".svelte"}
 DOC_EXT = {".md", ".mdx", ".adoc", ".txt"}
-# cpp is deliberately omitted: semsource routes ".h" to the C++ parser whenever
-# cpp is declared (processor/ast-source/routing.go), and no family is C++.
-LANGUAGES = ["go", "typescript", "javascript", "java", "python", "svelte", "c"]
+# c and cpp are omitted: no family carries C or C++ sources.
+LANGUAGES = ["go", "typescript", "javascript", "svelte", "python"]
 PROVENANCE = ("legacy SemStreams capture (SemSource {semsource}, SemStreams {semstreams}); "
               "not a SemEngine result")
+NEAR_DUPLICATE_RATIO = 0.8
+HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 def git(*args, cwd=None):
@@ -36,15 +44,24 @@ def git(*args, cwd=None):
                           text=True).stdout.strip()
 
 
-def ensure_clone(fam, src_root):
-    repo = os.path.join(src_root, fam["id"], "repo")
-    if not os.path.isdir(repo):
-        os.makedirs(os.path.dirname(repo), exist_ok=True)
-        git("clone", "--quiet", "--depth", "1", fam["repo"], repo)
-    if fam.get("commit") and git("rev-parse", "HEAD", cwd=repo) != fam["commit"]:
-        git("fetch", "--quiet", "--depth", "1", "origin", fam["commit"], cwd=repo)
-        git("checkout", "--quiet", fam["commit"], cwd=repo)
-    return repo, git("rev-parse", "HEAD", cwd=repo)
+def export_repo(name, spec, repos_root, src_root):
+    """Extract the committed tree of a local checkout into src_root/<name>@<commit>."""
+    local = os.path.join(repos_root, spec["local"])
+    commit = git("rev-parse", "--verify", spec["commit"] + "^{commit}", cwd=local)
+    dest = os.path.join(src_root, f"{name}@{commit}")
+    marker = os.path.join(dest, ".semselect-export")
+    if not (os.path.isfile(marker) and open(marker).read().strip() == commit):
+        if os.path.exists(dest):
+            shutil.rmtree(dest)
+        os.makedirs(dest)
+        pathspec = ["."] + [f":(exclude,glob){p}" for p in spec.get("export_exclude", [])]
+        tar = subprocess.run(["git", "archive", "--format=tar", commit, "--", *pathspec],
+                             cwd=local, check=True, capture_output=True).stdout
+        with tarfile.open(fileobj=io.BytesIO(tar)) as tf:
+            tf.extractall(dest, filter="data")
+        with open(marker, "w") as fh:
+            fh.write(commit + "\n")
+    return dest, commit, git("rev-parse", commit + "^{tree}", cwd=local)
 
 
 def select_files(fam, repo):
@@ -96,9 +113,21 @@ def prepare(args):
     if os.path.basename(ws_root) != "semselect-families":
         sys.exit(f"refusing to manage workspace root {ws_root}")
     os.makedirs(ws_root, exist_ok=True)
-    manifest = {"workspace_root": ws_root, "families": []}
+    # Workspaces of families no longer in the spec would still be mounted.
+    for stale in set(os.listdir(ws_root)) - {f["id"] for f in spec["families"]}:
+        if os.path.isdir(os.path.join(ws_root, stale)):
+            shutil.rmtree(os.path.join(ws_root, stale))
+    manifest = {"workspace_root": ws_root, "repositories": {}, "families": []}
+    exports = {}
+    for name, rspec in spec["repositories"].items():
+        path, commit, tree = export_repo(name, rspec, args.repos_root, args.src_root)
+        exports[name] = (path, commit)
+        manifest["repositories"][name] = {"commit": commit, "tree": tree,
+                                          "export_exclude": rspec.get("export_exclude", []),
+                                          "license_file_first_line":
+                                              license_line(path, rspec.get("license_file"))}
     for fam in spec["families"]:
-        repo, head = ensure_clone(fam, args.src_root)
+        repo, head = exports[fam["repository"]]
         files, unmatched = select_files(fam, repo)
         ws = os.path.join(ws_root, fam["id"])
         if os.path.exists(ws):
@@ -112,12 +141,15 @@ def prepare(args):
         listing = "".join(f"{e['sha256']}  {e['path']}\n" for e in entries)
         manifest["families"].append({
             "id": fam["id"],
+            "split": fam["split"],
+            "repository": fam["repository"],
             "commit": head,
             "include": fam["include"],
             "exclude": fam.get("exclude", []),
             "max_file_bytes": fam.get("max_file_bytes"),
             "unmatched_includes": unmatched,
-            "license_file_first_line": license_line(repo, fam.get("license_file")),
+            "license_file_first_line": manifest["repositories"][fam["repository"]][
+                "license_file_first_line"],
             "has_code": any(os.path.splitext(e["path"])[1] in CODE_EXT for e in entries),
             "has_docs": any(os.path.splitext(e["path"])[1].lower() in DOC_EXT for e in entries),
             "files": entries,
@@ -148,6 +180,61 @@ def prepare(args):
               f"docs={fam['has_docs']} unmatched={fam['unmatched_includes']}")
 
 
+def line_count(path):
+    data = open(path, "rb").read()
+    return data.count(b"\n") + (1 if data and not data.endswith(b"\n") else 0)
+
+
+def diff_overlap(a, b):
+    """Lines `diff` leaves unchanged, as a share of the longer file."""
+    res = subprocess.run(["diff", a, b], capture_output=True)
+    if res.returncode > 1:
+        raise RuntimeError(f"diff {a} {b}: {res.stderr.decode(errors='replace')}")
+    la, lb = line_count(a), line_count(b)
+    only_a = sum(1 for line in res.stdout.split(b"\n") if line.startswith(b"<"))
+    common = la - only_a
+    return common, la, lb, (common / max(la, lb) if max(la, lb) else 1.0)
+
+
+def dupcheck(args):
+    manifest = json.load(open(args.manifest))
+    root = manifest["workspace_root"]
+    files = [(fam["split"], fam["id"], e["path"], e["sha256"])
+             for fam in manifest["families"] for e in fam["files"]]
+    dev = [f for f in files if f[0] == "development"]
+    held = [f for f in files if f[0] == "held-out"]
+    identical, pairs = [], []
+    for d, h in itertools.product(dev, held):
+        if d[3] == h[3]:
+            identical.append({"sha256": d[3], "development": f"{d[1]}/{d[2]}",
+                              "held_out": f"{h[1]}/{h[2]}"})
+        if os.path.basename(d[2]) == os.path.basename(h[2]):
+            common, la, lb, ratio = diff_overlap(os.path.join(root, d[1], d[2]),
+                                                 os.path.join(root, h[1], h[2]))
+            pairs.append({"basename": os.path.basename(d[2]), "development": f"{d[1]}/{d[2]}",
+                          "held_out": f"{h[1]}/{h[2]}", "development_lines": la,
+                          "held_out_lines": lb, "unchanged_lines": common,
+                          "ratio": round(ratio, 4)})
+    flagged = sorted({p["development"] for p in identical} |
+                     {p["development"] for p in pairs if p["ratio"] > NEAR_DUPLICATE_RATIO})
+    out = {
+        "rule": ("identical SHA-256, or same basename with more than "
+                 f"{NEAR_DUPLICATE_RATIO:.0%} of the longer file's lines unchanged by diff"),
+        "files_hashed": len(files),
+        "development_files": len(dev),
+        "held_out_files": len(held),
+        "identical": identical,
+        "same_basename_pairs": sorted(pairs, key=lambda p: -p["ratio"]),
+        "flagged_development_files": flagged,
+    }
+    with open(args.out, "w") as fh:
+        json.dump(out, fh, indent=2)
+        fh.write("\n")
+    print(f"dupcheck: {len(files)} files hashed ({len(dev)} development, {len(held)} held-out); "
+          f"{len(identical)} identical, {len(pairs)} same-basename pairs, "
+          f"max ratio {max((p['ratio'] for p in pairs), default=0)}; flagged {flagged}")
+
+
 def assemble(args):
     spec = json.load(open(args.input))
     lo, hi = spec["entity_range"]
@@ -157,8 +244,10 @@ def assemble(args):
         counts = json.load(open(os.path.join(it_dir, "counts.json")))
         iterations.append((os.path.basename(it_dir.rstrip("/")), manifest, counts))
     label = PROVENANCE.format(semsource=args.semsource, semstreams=args.semstreams)
+    final_manifest = iterations[-1][1]
+    dup = json.load(open(os.path.join(args.iteration[-1], "dupcheck.json")))
     out = {
-        "schema": "semselect.legacy-family-count/v1",
+        "schema": "semselect.legacy-family-count/v2",
         "status": "measured family candidate list before capture and labeling",
         "provenance": label,
         "capture_profile": {
@@ -170,6 +259,30 @@ def assemble(args):
             "ast_languages": LANGUAGES,
             "entity_range": [lo, hi],
             "evidence": args.evidence,
+            "runtime_note": ("semstreams_version is the library SemSource links at runtime; the "
+                             "fixture source commits are under repositories"),
+        },
+        "repositories": {
+            name: {"url": r["url"], "commit": final_manifest["repositories"][name]["commit"],
+                   "tree": final_manifest["repositories"][name]["tree"],
+                   "license": r["license"], "license_file": r["license_file"],
+                   "license_file_first_line":
+                       final_manifest["repositories"][name]["license_file_first_line"],
+                   "split": r["split"], "export": "git archive of the commit (committed files only)",
+                   "export_exclude": r.get("export_exclude", [])}
+            for name, r in spec["repositories"].items()},
+        "duplicate_check": {
+            "rule": dup["rule"],
+            "evidence": os.path.join(args.evidence, os.path.basename(args.iteration[-1].rstrip("/")),
+                                     "dupcheck.json"),
+            "files_hashed": dup["files_hashed"],
+            "identical": len(dup["identical"]),
+            "same_basename_pairs": len(dup["same_basename_pairs"]),
+            "max_ratio": max((p["ratio"] for p in dup["same_basename_pairs"]), default=None),
+            "flagged_development_files": dup["flagged_development_files"],
+            "result": ("nothing flagged; no file was moved out of a development family"
+                       if not dup["flagged_development_files"] else
+                       "flagged files must be moved out of their development family"),
         },
         "exclusions": ("No labels, embeddings, neighbour results, mutual pairs, partitions, "
                        "review packets, constraints or retrieval questions exist yet. Counts are "
@@ -198,10 +311,10 @@ def assemble(args):
             "split": fam["split"],
             "role": fam["role"],
             "language": fam["language"],
-            "repo": fam["repo"],
+            "repo": spec["repositories"][fam["repository"]]["url"],
             "commit": m["commit"],
-            "license": fam["license"],
-            "license_file": fam["license_file"],
+            "license": spec["repositories"][fam["repository"]]["license"],
+            "license_file": spec["repositories"][fam["repository"]]["license_file"],
             "license_file_first_line": m["license_file_first_line"],
             "system_segment": fam["id"],
             "include": m["include"],
@@ -219,6 +332,18 @@ def assemble(args):
             "notes": fam.get("notes"),
             "provenance": label,
         })
+    gen = spec.get("generalization")
+    if gen:
+        # Copied, not re-measured (owner ruling 4, issue #5).
+        root = os.path.abspath(os.path.join(HERE, "..", "..", "..", ".."))
+        earlier = json.loads(git("show", f"{gen['manifest_commit']}:{gen['manifest']}", cwd=root))
+        for fid in gen["ids"]:
+            entry = dict(next(f for f in earlier["families"] if f["id"] == fid))
+            entry["split"] = "generalization"
+            entry["copied_from"] = f"{gen['manifest_commit']}:{gen['manifest']}"
+            entry["evidence"] = gen["evidence"]
+            entry["generalization_note"] = gen["note"]
+            out["families"].append(entry)
     with open(args.out, "w") as fh:
         json.dump(out, fh, indent=2)
         fh.write("\n")
@@ -233,8 +358,13 @@ def main():
     pp.add_argument("--input", required=True)
     pp.add_argument("--src-root", default="/tmp/semselect-families-src")
     pp.add_argument("--ws-root", default="/tmp/semselect-families")
+    pp.add_argument("--repos-root", default=os.path.join(HERE, "..", "..", "..", "..", ".."),
+                    help="directory holding the sibling repository checkouts")
     pp.add_argument("--config-out", required=True)
     pp.add_argument("--manifest-out", required=True)
+    pd = sub.add_parser("dupcheck")
+    pd.add_argument("--manifest", required=True)
+    pd.add_argument("--out", required=True)
     pa = sub.add_parser("assemble")
     pa.add_argument("--input", required=True)
     pa.add_argument("--iteration", action="append", required=True,
@@ -245,7 +375,7 @@ def main():
     pa.add_argument("--image", required=True, help="semsource image ID used for the final iteration")
     pa.add_argument("--out", required=True)
     args = p.parse_args()
-    prepare(args) if args.cmd == "prepare" else assemble(args)
+    {"prepare": prepare, "dupcheck": dupcheck, "assemble": assemble}[args.cmd](args)
 
 
 if __name__ == "__main__":
