@@ -134,3 +134,12 @@ tasks:
   specialist:prepare:
     desc: Freeze specialist pilot inputs without inference; pass -- --run NEW_RESULTS_DIRECTORY --driver DRIVER
     cmds: ['python3 eval/specialist-intent/runner.py prepare {{.CLI_ARGS}}']
+  throughput:validate:
+    desc: Verify frozen throughput inputs, rebuild requests and print planned cells; no inference
+    cmds: [python3 eval/throughput/run.py --validate]
+  throughput:test:
+    desc: Offline throughput harness tests with loopback stub servers; no inference
+    cmds: [python3 -m unittest discover -s eval/throughput -p 'test_*.py' -v]
+  throughput:metal:
+    desc: Run Metal llama.cpp throughput cells for one model; pass -- --model kev|qwen [--cells ...] [--output NEW_DIRECTORY]
+    cmds: ['python3 eval/throughput/run.py --runtime llamacpp {{.CLI_ARGS}}']
