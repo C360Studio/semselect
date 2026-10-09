@@ -40,12 +40,17 @@ and 8 slots for both models, so with fresh evidence in each request every path
 landed near one decision per second; extra slots mostly added queueing. Kev
 gained only from grouping three questions over one shared state (2.35×,
 identical labels) and stayed slower than Qwen JSON, which gained from slots
-only with a warm prefix cache. SGLang MLX and Kev's own MLX server have no
-results yet, and nothing here describes CUDA hardware.
+only with a warm prefix cache. SGLang MLX served Qwen at one running request
+only; four crashed at its pinned revision. Kev's own MLX server tested the
+cached-state claim: once it held a state, each further question cost about
+365 ms, against 1,970 ms for one question on a new state. Nothing here
+describes CUDA hardware.
 
-Headline cells, llama.cpp Metal, Q4_K_M, guard bypassed. W1 is the 22-case
-source-evidence pilot in both orders; W2 is the 32-case query task, three
-questions per request. Latency includes queueing at the server.
+Headline cells on Metal, guard bypassed: llama.cpp with Q4_K_M files, and two
+rows from Kev's own MLX server with bf16 weights (marked Kev MLX), a
+different artifact. W1 is the 22-case source-evidence pilot in both orders; W2
+is the 32-case query task, three questions per request. Latency includes
+queueing at the server.
 
 | Cell (slots × clients) | Decisions/s | p50 ms | p95 ms | Labels matched |
 | --- | ---: | ---: | ---: | ---: |
@@ -57,9 +62,14 @@ questions per request. Latency includes queueing at the server.
 | W1 Qwen JSON, 8 × 8, `-b 4096` (diagnostic) | 4.43 | 917 | 4,581 | 88/88 |
 | W2 Qwen JSON, 1 × 1 | 1.30 | 2,297 | 2,401 | 96/96 |
 | W2 Qwen JSON, 8 × 8 | 1.38 | 17,079 | 27,443 | 96/96 |
+| W1 Kev MLX, 1 × 1 | 1.18 | 773 | 1,158 | 88/88 |
+| W2 Kev MLX, cached state, 1 × 1 | 1.11 | 1,349 | 1,971 | 96/96 |
 
-"Labels matched" compares each answer with the same model's earlier serial run;
-it shows whether labels moved, not whether they are correct.
+"Labels matched" compares each answer with the same model's earlier serial run,
+or for Kev MLX with the same server's one-client, new-state cell; it shows
+whether labels moved, not whether they are correct. The cached-state row
+alternates one question on a new state (median 1,970 ms) with two questions on
+that state once cached (730 ms).
 
 ## Qwen versus Kev: quality and latency
 
@@ -94,7 +104,8 @@ those actual deployments, not an intrinsic speed ranking of model architectures.
 Head grouping with four slots later narrowed but did not close the query gap:
 Kev's median fell from 6,998 to 2,972 ms against Qwen's 2,297 ms in the
 [throughput screen](docs/validation-throughput.md). Keeping a state cached
-between requests remains unmeasured. See the
+between requests was measured only on Kev's own MLX server, a different
+artifact, where two follow-up questions took 730 ms. See the
 [runtime audit](docs/research-and-decision.md#closeout-review-2026-10-06).
 
 Existing rules and BM25 got **18/32** on the full query task. Both models corrected
@@ -180,14 +191,14 @@ for the RTX PRO 6000 row.
 
 **Cached** means the state was already sent, so only the new questions are paid
 for. Those figures apply only when you ask more questions about a document you
-already sent. Each request in our measurements carried its own evidence; we
-never sent a document once and then asked follow-up questions against it, so
-the cached column describes a case we have not tested. The new-state column is
-the closer comparison with our numbers, and it is still a different machine,
-runtime and precision from our M3 Pro with Q4_K_M GGUF files.
+already sent. Most of our measurements carry their own evidence in every
+request. One cell on Kev's own MLX server sent each query's state with one
+question and then asked two more against the cached state; it is our only
+cached-state measurement (below). The author's figures are still a different
+machine, and their state sizes and question counts differ from ours.
 
-What we have tested of each claim, on llama.cpp Metal on our M3 Pro
-([throughput record](docs/validation-throughput.md)):
+What we have tested of each claim on our M3 Pro, on llama.cpp Metal, SGLang MLX
+and Kev's own MLX server ([throughput record](docs/validation-throughput.md)):
 
 - **No decode step:** true, but not where the time goes on this laptop.
   Prompt processing at about 500 tokens per second is most of the cost: all of
@@ -196,7 +207,10 @@ What we have tested of each claim, on llama.cpp Metal on our M3 Pro
   per second) because its request leaves the prompt cache off and it processed
   more prompt tokens. An earlier uncached comparison, where scoring cut median
   latency by 28% ([record](docs/validation-scoring.md)), is an output-format
-  effect on an ordinary model, not Kev's native head.
+  effect on an ordinary model, not Kev's native head. SGLang MLX showed the
+  same direction with the cache off in every arm: no decode step raised Qwen
+  from 0.78 decisions per second (JSON) to 0.98 (`/v1/score`, the same 50,460
+  prompt tokens) and 0.99 (`/v1/decisions`), and cut the median by 22%.
 - **One state, many questions:** real within one request, now measured. With
   four slots and one client, llama.cpp grouped Kev's three query heads and
   evaluated their shared prefix of about 1,070 tokens once: 2.35× more questions
@@ -204,18 +218,23 @@ What we have tested of each claim, on llama.cpp Metal on our M3 Pro
   free slots, so the one-slot service profile cannot use it, and grouped Kev
   (1.01 questions/s) was still slower than Qwen JSON (1.30 to 1.39). Kev reused
   no prompt tokens across requests on this build, so each request re-reads its
-  state; the author's cached-state column remains untested. Unified KV
-  (`--kv-unified`) added nothing measurable.
+  state. Unified KV (`--kv-unified`) added nothing measurable. Kev's own MLX
+  server keeps a state between requests, and there a cached state made further
+  questions cheap: two more questions on it took 730 ms, about 365 ms each,
+  against 1,970 ms for one question on a new state, with all labels unchanged.
 - **Batching:** measured on Metal, and it does not speed up prompt processing.
   The only cells that gained were Qwen JSON with a warm prefix cache, where
   little prompt was left and the short answers shared decode steps.
   llama.cpp's decision-model path evaluates one slot's prompt per compute step
-  by construction (from the pinned source). Datacenter GPUs are untested.
+  by construction (from the pinned source). SGLang MLX crashed at four running
+  requests at its pinned revision, and Kev's own MLX server runs one request at
+  a time: 1.18 to 1.19 decisions per second at 1, 4 and 8 clients. Datacenter
+  GPUs are untested.
 
 With fresh evidence in every request, every path on this laptop lands near one
 decision per second, whichever model. The lever is bundling questions per
-shared state, not concurrency. This says nothing about CUDA hardware, Jev or
-decision quality.
+shared state, or keeping that state cached between requests, not concurrency.
+This says nothing about CUDA hardware, Jev or decision quality.
 
 Whether a decision model is worth using for your job is the question for the
 [selection guide](docs/when-to-use.md). This section only says what the pitch
@@ -266,16 +285,20 @@ provide the earlier experiment and backend rationale.
 | Path | Model artifact | Status here |
 | --- | --- | --- |
 | llama.cpp native | Kev, Qwen GGUF Q4_K_M | **Measured**, serial and 1/4/8 slots |
-| SGLang MLX | Qwen MLX 4-bit | **Probed**, one fixture; throughput **running**, no results yet; Kev not documented |
-| Kev's own MLX server | Kev bf16 | **Author-reported** only; throughput **running**, no results yet |
+| SGLang MLX | Qwen MLX 4-bit | **Measured** at one running request only; more than one crashes this pin; Kev not documented |
+| Kev's own MLX server | Kev bf16 | **Measured**, including cached state |
 
-- **llama.cpp native** produced every latency above: the comparison tables one
-  request at a time, and the [throughput screen](docs/validation-throughput.md)
-  at 1, 4 and 8 slots for both models.
+- **llama.cpp native** produced every latency above except the two Kev MLX rows:
+  the comparison tables one request at a time, and the
+  [throughput screen](docs/validation-throughput.md) at 1, 4 and 8 slots for
+  both models.
 - **SGLang MLX** served Qwen3.5-4B (mlx-community 4-bit) for JSON chat,
   `/v1/score` and `/v1/decisions` on this M3 Pro on 2026-10-05, after adding
   `--disable-radix-cache`. That was one fixture and one running request, with
   no throughput. See the [compatibility record](docs/sglang-investigation.md).
+  The 2026-10-09 throughput run measured the three paths at one running
+  request; four running requests crashed the scheduler and the radix cache
+  still crashed ([record](docs/validation-throughput.md#sglang-mlx)).
   SGLang's [documentation](https://docs.sglang.io/docs/supported-models/decision_models)
   names trained decision checkpoints (PPLX-Decider, Clef) that answer through
   `/v1/systemone`, and mentions a `decision_config.json` for them. It does not
@@ -284,9 +307,10 @@ provide the earlier experiment and backend rationale.
   through `/v1/decisions`.
 - **Kev's own MLX server** (`python -m kev.serve`) exposes `/v1/systemone` and
   picks MLX in bf16 on Apple Silicon automatically, per the
-  [Kev model card](https://huggingface.co/jaredpalmer/kev-4b). Its numbers
-  appear only in the author-reported table above. Its throughput run has no
-  results yet.
+  [Kev model card](https://huggingface.co/jaredpalmer/kev-4b). On this M3 Pro
+  it ran W1 at 1.18 decisions per second whatever the client count, and a
+  cached state cut the cost of a further question to about 365 ms
+  ([record](docs/validation-throughput.md#kev-mlx-server)).
 
 ## Capabilities and target
 

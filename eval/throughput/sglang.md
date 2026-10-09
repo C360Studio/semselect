@@ -1,8 +1,12 @@
 # Does SGLang on MLX serve several Qwen decisions at once usefully?
 
-**Design 2026-10-09; no inference results yet.** This is the protocol for
-`run_sglang.py`, a sibling of the llama.cpp runner in [README.md](README.md). It
-reuses that runner's fixtures, cell runner, stop rules, summary shape and report.
+**Design 2026-10-09; results recorded 2026-10-09** in the [throughput
+record](../../docs/validation-throughput.md#sglang-mlx): one running request
+only, because four crashed at this pin. The protocol text below is unchanged
+from the design, including its statements that nothing had run yet. This is
+the protocol for `run_sglang.py`, a sibling of the llama.cpp runner in
+[README.md](README.md). It reuses that runner's fixtures, cell runner, stop
+rules, summary shape and report.
 Nothing below is a measurement. It stays inside the scope and evidence rules of
 the [bounded SGLang investigation](../../docs/sglang-investigation.md): isolated
 evaluation work that changes neither the default runtime nor the service.

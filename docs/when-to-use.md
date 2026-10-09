@@ -21,9 +21,13 @@ whatever the slot count, so with fresh evidence in each request every path
 landed near one decision per second. Kev gained only from grouping questions
 over one shared state (2.35×, identical labels) and stayed slower than Qwen
 JSON; Qwen JSON gained from slots only with a warm prefix cache. Neither
-pre-declared reading favoured batching or Kev. SGLang MLX and Kev's own MLX
-server have no results yet, and nothing here describes CUDA hardware. The graph
-pilot's serving profile now follows this result. See
+pre-declared llama.cpp reading favoured batching or Kev. Kev's own MLX server,
+the only runtime here that keeps a state between requests, answered each
+further question on a cached state in about 365 ms, against 1,970 ms for one
+question on a new state, with labels unchanged. SGLang MLX at its pinned
+revision served Qwen at one running request only; four running requests
+crashed its scheduler. Nothing here describes CUDA hardware. The graph pilot's
+serving profile now follows this result. See
 [why per-request latency is the wrong yardstick](#why-per-request-latency-is-the-wrong-yardstick-for-background-work).
 
 "Jev-like" describes the bounded decision interface. Our service runs Kev; our
@@ -130,8 +134,13 @@ entity is the shape that lets any runtime reuse state: one entity's passage is
 the shared state, and each neighbour is a question against it. The
 [per-entity bundle variant](../eval/community-refinement/README.md#per-entity-bundle-variant)
 describes that contract. On llama.cpp, Kev reused state within a bundle (head
-grouping) but not across requests; the SGLang MLX and Kev MLX runs of the
-[throughput experiment](../eval/throughput/README.md) have no results yet.
+grouping) but not across requests. Kev's own MLX server reused it across
+requests too: with the state cached, each further question cost about 365 ms
+against 1,970 ms for one question on a new state
+([record](validation-throughput.md#kev-mlx-server)). SGLang MLX could not test
+concurrent bundles here, because at its pinned revision it served one running
+request at a time and crashed at four
+([record](validation-throughput.md#sglang-mlx)).
 
 ## Decisions the evidence supports today
 

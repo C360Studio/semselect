@@ -1,6 +1,9 @@
 # Kev MLX arm: does Kev's own server batch, and does its state cache pay off?
 
-**Design 2026-10-09; no inference results yet.** This file fixes the protocol
+**Design 2026-10-09; results recorded 2026-10-09** in the [throughput
+record](../../docs/validation-throughput.md#kev-mlx-server), including the
+cached-state cell. The protocol text below is unchanged from the design,
+including its statements that nothing had run yet. This file fixes the protocol
 for one more arm of the [throughput screen](README.md): Kev's own server,
 `kev.serve`, running Kev-4B on MLX. Nothing below is a measurement. Source
 citations are to [jaredpalmer/kev at `5e42a7a0`][kev] unless they name a

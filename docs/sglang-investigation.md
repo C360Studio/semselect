@@ -14,13 +14,31 @@ remain separate. Shutdown was bounded but not graceful. This is endpoint
 compatibility, not a SGLang quality, calibration or performance result. The matched
 SGLang workload comparison below was not executed.
 
-**Update, 2026-10-09:** a bounded Metal throughput rerun is **designed, not
-run**; see the [throughput protocol](../eval/throughput/README.md) and issue
-[#3](https://github.com/C360Studio/semselect/issues/3). It reuses the pinned venv
-and the Qwen3.5-4B MLX 4-bit model from the probe above, both still on disk, and
-asks how many decisions per second SGLang's JSON, `/v1/decisions` and `/v1/score`
-paths complete. It is the one performance check taken up since the closeout; the
-rest of the deferral stands.
+**Update, 2026-10-09:** a bounded Metal throughput rerun was designed and run
+the same day; see the [throughput protocol](../eval/throughput/README.md) and
+issue [#3](https://github.com/C360Studio/semselect/issues/3). It reuses the
+pinned venv and the Qwen3.5-4B MLX 4-bit model from the probe above, both still
+on disk, and asks how many decisions per second SGLang's JSON, `/v1/decisions`
+and `/v1/score` paths complete. It is the one performance check taken up since
+the closeout; the rest of the deferral stands.
+
+**2026-10-09 throughput rerun.** Four invocations on this M3 Pro, with the
+probe's pinned venv, model and degraded flags
+([record](validation-throughput.md#sglang-mlx)). What passed: overlap
+scheduling, re-enabled at one running request, answered one fixture twice with
+identical results (probed). What crashed: re-enabling the radix cache crashed
+the server's own startup warmup with the `mamba_checkpoint_grid` error from
+2026-10-05; the one cell tried with four running requests crashed the scheduler
+on its first requests (`Expected all tensors to be on the same device ...
+mps:0 and cpu!`); and the three-question `/v1/decisions` cell on the query task
+ran out of Metal memory after answering 45 requests at one running request.
+What that leaves runnable at this pin is one running request with the radix
+cache off: JSON chat, `/v1/score` and one-question `/v1/decisions` completed
+every request (0.78, 0.98 and 0.99 decisions per second on the 22-case
+pilot), and JSON completed the query task (1.21 questions per second). No
+batching reading could be evaluated, and ten multi-request cells were never
+attempted. None of it is a quality result: labels were compared within the
+runtime and, as a diagnostic, with llama.cpp labels from different weights.
 
 The [real-source answerability pilot](../eval/answerability/heldout/README.md) showed
 a limited aggregate quality advantage for Kev. The subsequent

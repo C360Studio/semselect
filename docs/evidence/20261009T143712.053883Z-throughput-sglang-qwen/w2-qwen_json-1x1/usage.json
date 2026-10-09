@@ -1,0 +1,642 @@
+[
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 0,
+    "case_id": "R01",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1090,
+    "completion_tokens": 15
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 1,
+    "case_id": "R02",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1088,
+    "completion_tokens": 15
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 2,
+    "case_id": "R03",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1092,
+    "completion_tokens": 19
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 3,
+    "case_id": "R04",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1092,
+    "completion_tokens": 32
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 4,
+    "case_id": "R05",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1092,
+    "completion_tokens": 19
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 5,
+    "case_id": "R06",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1094,
+    "completion_tokens": 32
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 6,
+    "case_id": "R07",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1093,
+    "completion_tokens": 17
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 7,
+    "case_id": "R08",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1090,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 8,
+    "case_id": "R09",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1092,
+    "completion_tokens": 32
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 9,
+    "case_id": "R10",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1091,
+    "completion_tokens": 15
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 10,
+    "case_id": "R11",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1091,
+    "completion_tokens": 30
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 11,
+    "case_id": "R12",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 12,
+    "case_id": "R13",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1090,
+    "completion_tokens": 14
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 13,
+    "case_id": "R14",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 14,
+    "case_id": "R15",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1090,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 15,
+    "case_id": "R16",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1088,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 16,
+    "case_id": "R17",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1090,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 17,
+    "case_id": "R18",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1093,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 18,
+    "case_id": "R19",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1088,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 19,
+    "case_id": "R20",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 14
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 20,
+    "case_id": "R21",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1091,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 21,
+    "case_id": "R22",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1088,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 22,
+    "case_id": "R23",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 23,
+    "case_id": "R24",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 14
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 24,
+    "case_id": "R25",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1088,
+    "completion_tokens": 15
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 25,
+    "case_id": "R26",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 26,
+    "case_id": "R27",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 27,
+    "case_id": "R28",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1092,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 28,
+    "case_id": "R29",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1096,
+    "completion_tokens": 33
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 29,
+    "case_id": "R30",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1093,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 30,
+    "case_id": "R31",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1095,
+    "completion_tokens": 15
+  },
+  {
+    "phase": "warmup",
+    "pass_number": 0,
+    "sequence": 31,
+    "case_id": "R32",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 0,
+    "case_id": "R01",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1090,
+    "completion_tokens": 15
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 1,
+    "case_id": "R02",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1088,
+    "completion_tokens": 15
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 2,
+    "case_id": "R03",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1092,
+    "completion_tokens": 19
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 3,
+    "case_id": "R04",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1092,
+    "completion_tokens": 32
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 4,
+    "case_id": "R05",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1092,
+    "completion_tokens": 19
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 5,
+    "case_id": "R06",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1094,
+    "completion_tokens": 32
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 6,
+    "case_id": "R07",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1093,
+    "completion_tokens": 17
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 7,
+    "case_id": "R08",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1090,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 8,
+    "case_id": "R09",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1092,
+    "completion_tokens": 32
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 9,
+    "case_id": "R10",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1091,
+    "completion_tokens": 15
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 10,
+    "case_id": "R11",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1091,
+    "completion_tokens": 30
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 11,
+    "case_id": "R12",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 12,
+    "case_id": "R13",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1090,
+    "completion_tokens": 14
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 13,
+    "case_id": "R14",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 14,
+    "case_id": "R15",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1090,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 15,
+    "case_id": "R16",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1088,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 16,
+    "case_id": "R17",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1090,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 17,
+    "case_id": "R18",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1093,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 18,
+    "case_id": "R19",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1088,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 19,
+    "case_id": "R20",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 14
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 20,
+    "case_id": "R21",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1091,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 21,
+    "case_id": "R22",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1088,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 22,
+    "case_id": "R23",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 23,
+    "case_id": "R24",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 14
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 24,
+    "case_id": "R25",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1088,
+    "completion_tokens": 15
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 25,
+    "case_id": "R26",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 28
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 26,
+    "case_id": "R27",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 27,
+    "case_id": "R28",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1092,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 28,
+    "case_id": "R29",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1096,
+    "completion_tokens": 33
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 29,
+    "case_id": "R30",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1093,
+    "completion_tokens": 29
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 30,
+    "case_id": "R31",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1095,
+    "completion_tokens": 15
+  },
+  {
+    "phase": "measured",
+    "pass_number": 1,
+    "sequence": 31,
+    "case_id": "R32",
+    "order": "normal",
+    "status": "ok",
+    "prompt_tokens": 1089,
+    "completion_tokens": 28
+  }
+]

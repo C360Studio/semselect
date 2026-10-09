@@ -1,0 +1,865 @@
+{
+  "kind": "throughput-screen-not-benchmark",
+  "run_id": "20261009T143712.053883Z",
+  "runtime": "sglang-mlx",
+  "model": "qwen",
+  "workloads": [
+    "w2"
+  ],
+  "planned_probes": [],
+  "planned_cells": [
+    "w2-qwen_json-1x1",
+    "w2-qwen_decisions-1x1"
+  ],
+  "conditional_cells": {},
+  "budget_seconds": 2700,
+  "protocol": {
+    "version": 3,
+    "amendments": [
+      "1, 2026-10-09: warmup errors are recorded but no longer count toward the consecutive-error stop; the count starts at zero when the measured passes begin. See eval/throughput/README.md.",
+      "2, 2026-10-09: adds cells w1-kev-8x8-b4096 and w1-qwen_json-8x8-b4096 (-b 4096 -ub 512, -c 32768, no unified KV) to separate slot starvation under a 512-token logical batch from saturated compute; profiles record n_batch and n_ubatch, verified from the startup log. Added before any Qwen cell ran. The pre-declared readings are unchanged and use the -b 512 cells; the b4096 cells are a diagnostic. On the pinned build a decision model runs in embedding mode, which sets n_batch = n_ubatch (common/common.cpp:1261-1266), so the startup check is expected to refuse the Kev b4096 cell rather than measure it at n_batch 512. See eval/throughput/README.md."
+    ],
+    "question": "Does SGLang on MLX deliver materially more decisions per second than its own one-running-request profile at unchanged labels, per arm: Qwen JSON, /v1/decisions and /v1/score?",
+    "yardstick": "decisions_per_s = valid questions answered / measured elapsed seconds (warmup excluded); W2 Kev counts three heads per request and W2 Qwen JSON three fields.",
+    "guard": "Not applicable: clients call the SGLang server directly; semselect never fronted SGLang.",
+    "runtime": "The 2026-10-05 cache-disabled probe launch (docs/evidence/20261005T154252Z-sglang-metal-cache-disabled/probe.json) with --max-running-requests N, --max-total-tokens max(8192, 4096 x N) so each running request can hold a full 4096-token context as each llama.cpp slot does, port 30111 and served name qwen35-4b-mlx; 4096-token context and default chunked prefill (4096) in every cell; fresh runtime per cell. The 4x4-overlap and 4x4-radix cells drop exactly one degraded flag and run only if their one-fixture probe passed.",
+    "cache": "Radix cache disabled at the server in every cell except 4x4-radix. cache_prompt is a llama.cpp field and is dropped. Prompt tokens computed and reused come from the scheduler \"Prefill batch\" log lines.",
+    "failures": "No retries. 30 s per-request timeout includes queueing. Three consecutive runtime errors in the measured passes stop a cell; warmup errors are recorded but do not count. Unstarted requests are not_run and stay in denominators.",
+    "budget": "45 minutes wall clock per invocation, including startup, warmup and shutdown. W1 and W2 run as separate invocations, each with its own budget; the re-probes run in the W1 invocation because the cells they gate are W1 cells.",
+    "readings": "The README \"batches usefully\" reading, applied per arm (8x8 vs 1x1). The Kev shared-state reading does not apply: SGLang does not serve Kev here.",
+    "agreement": "Primary: within-runtime, every cell against measured pass 1 of the same arm's 1x1 cell in this invocation. Diagnostic: cross-runtime against the serial llama.cpp Qwen JSON labels.",
+    "quantization": "mlx affine 4-bit, group 64 (mlx-community/Qwen3.5-4B-4bit); the llama.cpp runner serves GGUF Q4_K_M. Cross-runtime comparisons are of throughput shape only."
+  },
+  "request_mapping": {
+    "qwen_json": {
+      "source": "fixtures.w1_jobs / w2_jobs(\"qwen_json\"): the llama.cpp Qwen JSON bodies, byte-verified",
+      "endpoint": "llama.cpp /v1/chat/completions -> SGLang /v1/chat/completions",
+      "changed": [
+        "model: llama.cpp alias \"qwen3.5-4b\" -> SGLang served name \"qwen35-4b-mlx\". SGLang echoes it and parses it only for a \"base:adapter\" LoRA suffix (entrypoints/openai/serving_base.py:39-52).",
+        "cache_prompt removed (W1 true, W2 false): a llama.cpp field; SGLang ChatCompletionRequest has no such field and ignores unknown ones (entrypoints/openai/protocol.py:858). Prefix reuse is a server setting here: --disable-radix-cache in every cell except 4x4-radix."
+      ],
+      "unchanged": [
+        "messages (system and user text)",
+        "temperature 0",
+        "max_tokens 128",
+        "seed 0",
+        "chat_template_kwargs {\"enable_thinking\": false}",
+        "response_format json_schema (strict)",
+        "key order and JSON encoding of the source body"
+      ],
+      "semantics": [
+        "seed is accepted but ignored on MLX unless --enable-deterministic-inference (hardware_backend/mlx/sampling.py:76-86); temperature 0 is greedy on both runtimes.",
+        "max_tokens is deprecated in SGLang in favour of max_completion_tokens but still honoured (entrypoints/openai/protocol.py:870-874); the probe used it.",
+        "The JSON schema is enforced by --grammar-backend llguidance, not llama.cpp grammar sampling."
+      ],
+      "parser": "shared: evaluate.validate_baseline (W1) and fixtures W2 qwen_json parser; same OpenAI chat shape"
+    },
+    "qwen_decisions": {
+      "source": "fixtures.w1_jobs / w2_jobs(\"kev\"): the Kev /v1/systemone bodies, byte-verified; Qwen is served",
+      "endpoint": "llama.cpp Kev /v1/systemone -> SGLang /v1/decisions on Qwen (SGLang does not serve Kev)",
+      "changed": [
+        "state -> input: the same string; render_text returns strings verbatim (entrypoints/openai/serving_decisions.py:449-454).",
+        "questions {id: {type: choice, instructions, criteria}} -> questions [{id, type: choice, question: instructions, options: [{name, description}] in criteria order}], in head order. This is the mapping SGLang's own /v1/systemone applies for a chat model (entrypoints/systemone/serving.py:80-110, 214-221).",
+        "model: Kev alias -> SGLang served name (echoed only).",
+        "added prompt_format_version 1: pins the server-owned wording; another served version returns 400.",
+        "added return_prompt_token_ids true, as in the probe: each answer carries its rendered prompt and label token ids, so a run can be replayed through /v1/score.",
+        "temperature omitted (default 1.0): it scales probabilities only, never the argmax choice."
+      ],
+      "unchanged": [
+        "state text",
+        "instructions text",
+        "criteria names, descriptions and candidate order",
+        "W1 normal and reverse orders",
+        "W2: one request carrying all three heads (SGLang's bundled path)"
+      ],
+      "semantics": [
+        "Prompt wrapper differs from Kev's runtime: SGLang renders each question as one user message with thinking off: input, blank line, \"Question: <instructions>\", \"A: <name> - <description>\" per option, \"Answer with the letter of one option only.\" (serving_decisions.py:514-547). Labels are letters A.. in option order; each head is scored by one prefill.",
+        "usage.prompt_tokens counts every question's prompt, so a W2 request counts the state three times (serving_decisions.py:441-444)."
+      ],
+      "parser": "sglang_requests.validate_decision: shape differs from evaluate.validate_native (no confidence; label_mass and token ids instead); per-head validity as in the Kev W2 parser"
+    },
+    "qwen_score": {
+      "source": "fixtures.w1_jobs(\"qwen_score\"): the evidence text and labels the llama.cpp one-token arm scores",
+      "endpoint": "llama.cpp /completion (n_predict 1, letter grammar, n_probs 256) -> SGLang /v1/score",
+      "changed": [
+        "Template and tokens: llama.cpp /apply-template + /tokenize -> SGLang /v1/tokenize (messages, enable_thinking false), /v1/detokenize, /v1/tokenize (prompt + each letter, add_special_tokens false), exactly the probe's preparation; built after startup, before warmup, outside the timed window.",
+        "Body: {model, query: [], items: [prompt_ids], label_token_ids, apply_softmax: true, return_token_logprobs: true}, the probe's independent /v1/score call. No token is generated.",
+        "cache_prompt false and seed 0 have no counterpart: nothing is sampled and the radix cache is off."
+      ],
+      "unchanged": [
+        "messages from compare_scoring.score_messages (same system and user text)",
+        "letters A.. in candidate order",
+        "one distinct token per label at the answer position"
+      ],
+      "semantics": [
+        "Choice is the argmax of the label softmax (first on ties); llama.cpp's is the greedy grammar-constrained token. Same label set, different readout."
+      ],
+      "parser": "sglang_requests.validate_score: the /v1/score shape differs from llama.cpp /completion"
+    }
+  },
+  "started_at": "2026-10-09T14:37:12.054160+00:00",
+  "status": "failed",
+  "stop_reason": null,
+  "probes": [],
+  "cells": [
+    {
+      "cell": "w2-qwen_json-1x1",
+      "workload": "w2",
+      "arm": "qwen_json",
+      "model": "qwen",
+      "profile": {
+        "slots": 1,
+        "concurrency": 1,
+        "kv_unified": false,
+        "n_ctx_total": 8192,
+        "n_ctx_per_slot": 4096,
+        "warmup_passes": 1,
+        "measured_passes": 1,
+        "timeout_s": 30,
+        "command": [
+          "/Users/coby/Code/c360/semselect/.sglang/venv/bin/python",
+          "-m",
+          "sglang.launch_server",
+          "--model-path",
+          "/Users/coby/Code/c360/semselect/.sglang/models/Qwen3.5-4B-4bit",
+          "--served-model-name",
+          "qwen35-4b-mlx",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "30111",
+          "--disable-cuda-graph",
+          "--mlx-enable-sampling",
+          "--context-length",
+          "4096",
+          "--max-total-tokens",
+          "8192",
+          "--max-running-requests",
+          "1",
+          "--mem-fraction-static",
+          "0.5",
+          "--grammar-backend",
+          "llguidance",
+          "--mamba-radix-cache-strategy",
+          "no_buffer",
+          "--disable-overlap-schedule",
+          "--disable-radix-cache"
+        ],
+        "n_ctx_per_slot_observed": 4096,
+        "max_running_requests": 1,
+        "max_total_tokens": 8192,
+        "context_length": 4096,
+        "chunked_prefill_size": 4096,
+        "variant": "",
+        "dropped_flag": null,
+        "slots_meaning": "SGLang --max-running-requests; one shared pool of max(8192, 4096 x N) tokens"
+      },
+      "reference": {
+        "path": "docs/evidence/20261006-query-routing/metal.tar.gz!metal/result.json",
+        "sha256": "e46d230e04f9231b3a5787a1a7c2acf916cba549e16824ce86aab540f6051b8c",
+        "arm": "qwen_json",
+        "view": "llama.cpp serial Qwen JSON, normal order"
+      },
+      "protocol_version": 3,
+      "started_at": "2026-10-09T14:37:12.122755+00:00",
+      "status": "complete",
+      "runtime": {
+        "command": [
+          "/Users/coby/Code/c360/semselect/.sglang/venv/bin/python",
+          "-m",
+          "sglang.launch_server",
+          "--model-path",
+          "/Users/coby/Code/c360/semselect/.sglang/models/Qwen3.5-4B-4bit",
+          "--served-model-name",
+          "qwen35-4b-mlx",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "30111",
+          "--disable-cuda-graph",
+          "--mlx-enable-sampling",
+          "--context-length",
+          "4096",
+          "--max-total-tokens",
+          "8192",
+          "--max-running-requests",
+          "1",
+          "--mem-fraction-static",
+          "0.5",
+          "--grammar-backend",
+          "llguidance",
+          "--mamba-radix-cache-strategy",
+          "no_buffer",
+          "--disable-overlap-schedule",
+          "--disable-radix-cache"
+        ],
+        "endpoint_base": "http://127.0.0.1:30111",
+        "variant": "",
+        "dropped_flag": null,
+        "environment": {
+          "SGLANG_USE_MLX": "1",
+          "HF_HUB_OFFLINE": "1",
+          "TRANSFORMERS_OFFLINE": "1",
+          "HF_HOME": "/Users/coby/Code/c360/semselect/.sglang/hf",
+          "XDG_CACHE_HOME": "/Users/coby/Code/c360/semselect/.sglang/cache",
+          "SGLANG_MLX_CACHE_LIMIT_GB": "1"
+        },
+        "stripped_environment": [],
+        "guard": "not applicable: clients call the SGLang server directly",
+        "ready": true,
+        "pid": 6395,
+        "startup_seconds": 17.799884208012372,
+        "server_args": {
+          "model_path": "/Users/coby/Code/c360/semselect/.sglang/models/Qwen3.5-4B-4bit",
+          "served_model_name": "qwen35-4b-mlx",
+          "host": "127.0.0.1",
+          "port": 30111,
+          "context_length": 4096,
+          "max_total_tokens": 8192,
+          "max_running_requests": 1,
+          "mem_fraction_static": 0.5,
+          "grammar_backend": "llguidance",
+          "mamba_radix_cache_strategy": "no_buffer",
+          "disable_overlap_schedule": true,
+          "disable_radix_cache": true,
+          "disable_cuda_graph": true,
+          "mlx_enable_sampling": true,
+          "chunked_prefill_size": 4096,
+          "max_prefill_tokens": 16384,
+          "schedule_policy": "fcfs",
+          "enable_mixed_chunk": false,
+          "page_size": 1,
+          "random_seed": 691319458,
+          "enable_deterministic_inference": false,
+          "enable_metrics": false,
+          "enable_cache_report": false,
+          "decode_log_interval": 40,
+          "log_level": "info",
+          "version": "0.0.0.dev0"
+        },
+        "models": {
+          "object": "list",
+          "data": [
+            {
+              "id": "qwen35-4b-mlx",
+              "object": "model",
+              "created": 1791556649,
+              "owned_by": "sglang",
+              "root": "qwen35-4b-mlx",
+              "parent": null,
+              "max_model_len": 4096
+            }
+          ]
+        },
+        "startup": {
+          "mlx_runner": true,
+          "max_total_num_tokens": 8192,
+          "chunked_prefill_size": 4096,
+          "max_prefill_tokens": 16384,
+          "max_running_requests": 1,
+          "context_len": 4096,
+          "available_gpu_mem_gb": 22.88,
+          "mlx_pool_max_total_num_tokens": 8192,
+          "mlx_pool_max_running_requests": 1,
+          "mlx_model_load_s": 0.96,
+          "mlx_buffer_cache_limit_gb": 1.0,
+          "wired_memory_limit_gb": 28.1,
+          "tree_cache": "source=default impl=UnifiedRadixCache hybrid_swa=False hybrid_ssm=True hicache_attached=False",
+          "n_ctx_slot": 4096
+        },
+        "exit_code": -9,
+        "sigkill_sent": false,
+        "cleanup_errors": [],
+        "wall_seconds": 183.67841904098168,
+        "child_cpu_seconds": 39.345546,
+        "largest_child_peak_rss_bytes_so_far": 4255252480
+      },
+      "preparation_s": 1.25030055642128e-07,
+      "largest_child_peak_rss_bytes_so_far": 4255252480,
+      "planned": 32,
+      "planned_questions": 96,
+      "valid": 32,
+      "valid_questions": 96,
+      "invalid": 0,
+      "not_run": 0,
+      "errors": {
+        "total": 0,
+        "by_kind": {}
+      },
+      "elapsed_s": 79.31413675006479,
+      "decisions_per_s": 1.2103769130403046,
+      "requests_per_s": 0.40345897101343486,
+      "request_ms": {
+        "p50": 2562.8629165003076,
+        "p95": 2668.526916997507,
+        "samples": 32
+      },
+      "label_agreement": {
+        "total": 96,
+        "reference_arm": "qwen_json",
+        "primary": true,
+        "matched": 96,
+        "reference_path": "results/throughput/20261009T143712.053883Z-sglang-qwen/w2-qwen_json-1x1/journal.jsonl",
+        "reference_sha256": "dbb40eab9613432246a4715b5c8dcddb93ec7f2ac2dc488474460b44594de6d8",
+        "reference_view": "measured pass 1 of w2-qwen_json-1x1 (same runtime and arm)",
+        "reference_valid_questions": 96
+      },
+      "tokens_per_request": {
+        "prompt_tokens": {
+          "requests": 32,
+          "sum": 34899,
+          "mean": 1090.59375
+        },
+        "completion_tokens": {
+          "requests": 32,
+          "sum": 785,
+          "mean": 24.53125
+        }
+      },
+      "stop_reason": null,
+      "warmup": {
+        "planned": 32,
+        "attempted": 32,
+        "ok": 32,
+        "errors": 0
+      },
+      "metrics": {
+        "snapshots": {
+          "start": {
+            "prompt_tokens_total": 7,
+            "prompt_tokens_cached_total": 0,
+            "prefill_batches_total": 2,
+            "prefill_sequences_total": 2,
+            "max_sequences_in_one_prefill_batch": 1,
+            "max_queue_requests": 0,
+            "log_bytes": 29604
+          },
+          "after_warmup": {
+            "prompt_tokens_total": 34906,
+            "prompt_tokens_cached_total": 0,
+            "prefill_batches_total": 34,
+            "prefill_sequences_total": 34,
+            "max_sequences_in_one_prefill_batch": 1,
+            "max_queue_requests": 0,
+            "log_bytes": 43787
+          },
+          "end": {
+            "prompt_tokens_total": 69805,
+            "prompt_tokens_cached_total": 0,
+            "prefill_batches_total": 66,
+            "prefill_sequences_total": 66,
+            "max_sequences_in_one_prefill_batch": 1,
+            "max_queue_requests": 0,
+            "log_bytes": 57781
+          }
+        },
+        "measured_delta": {
+          "prompt_tokens_total": 34899,
+          "prompt_tokens_cached_total": 0,
+          "prefill_batches_total": 32,
+          "prefill_sequences_total": 32,
+          "max_sequences_in_one_prefill_batch": 1,
+          "max_queue_requests": 0,
+          "sequences_per_prefill_batch": 1.0,
+          "source": "runtime.log \"Prefill batch\" lines (SGLang serves no /metrics without --enable-metrics)"
+        },
+        "warmup_delta": {
+          "prompt_tokens_total": 34899,
+          "prompt_tokens_cached_total": 0,
+          "prefill_batches_total": 32,
+          "prefill_sequences_total": 32,
+          "max_sequences_in_one_prefill_batch": 1,
+          "max_queue_requests": 0,
+          "sequences_per_prefill_batch": 1.0,
+          "source": "runtime.log \"Prefill batch\" lines (SGLang serves no /metrics without --enable-metrics)"
+        }
+      },
+      "finished_at": "2026-10-09T14:40:15.801864+00:00",
+      "request_mapping": {
+        "source": "fixtures.w1_jobs / w2_jobs(\"qwen_json\"): the llama.cpp Qwen JSON bodies, byte-verified",
+        "endpoint": "llama.cpp /v1/chat/completions -> SGLang /v1/chat/completions",
+        "changed": [
+          "model: llama.cpp alias \"qwen3.5-4b\" -> SGLang served name \"qwen35-4b-mlx\". SGLang echoes it and parses it only for a \"base:adapter\" LoRA suffix (entrypoints/openai/serving_base.py:39-52).",
+          "cache_prompt removed (W1 true, W2 false): a llama.cpp field; SGLang ChatCompletionRequest has no such field and ignores unknown ones (entrypoints/openai/protocol.py:858). Prefix reuse is a server setting here: --disable-radix-cache in every cell except 4x4-radix."
+        ],
+        "unchanged": [
+          "messages (system and user text)",
+          "temperature 0",
+          "max_tokens 128",
+          "seed 0",
+          "chat_template_kwargs {\"enable_thinking\": false}",
+          "response_format json_schema (strict)",
+          "key order and JSON encoding of the source body"
+        ],
+        "semantics": [
+          "seed is accepted but ignored on MLX unless --enable-deterministic-inference (hardware_backend/mlx/sampling.py:76-86); temperature 0 is greedy on both runtimes.",
+          "max_tokens is deprecated in SGLang in favour of max_completion_tokens but still honoured (entrypoints/openai/protocol.py:870-874); the probe used it.",
+          "The JSON schema is enforced by --grammar-backend llguidance, not llama.cpp grammar sampling."
+        ],
+        "parser": "shared: evaluate.validate_baseline (W1) and fixtures W2 qwen_json parser; same OpenAI chat shape"
+      },
+      "label_agreement_cross_runtime": {
+        "matched": 85,
+        "total": 96,
+        "reference_path": "docs/evidence/20261006-query-routing/metal.tar.gz!metal/result.json",
+        "reference_sha256": "e46d230e04f9231b3a5787a1a7c2acf916cba549e16824ce86aab540f6051b8c",
+        "reference_arm": "qwen_json",
+        "reference_view": "llama.cpp serial Qwen JSON, normal order",
+        "diagnostic": "diagnostic only: serial llama.cpp Qwen JSON labels from GGUF Q4_K_M weights; this runtime serves MLX affine 4-bit, group 64. Different quantization, kernels and (for decisions and score) prompt wrapper; not a correctness or batching reading."
+      }
+    },
+    {
+      "cell": "w2-qwen_decisions-1x1",
+      "workload": "w2",
+      "arm": "qwen_decisions",
+      "model": "qwen",
+      "profile": {
+        "slots": 1,
+        "concurrency": 1,
+        "kv_unified": false,
+        "n_ctx_total": 8192,
+        "n_ctx_per_slot": 4096,
+        "warmup_passes": 1,
+        "measured_passes": 1,
+        "timeout_s": 30,
+        "command": [
+          "/Users/coby/Code/c360/semselect/.sglang/venv/bin/python",
+          "-m",
+          "sglang.launch_server",
+          "--model-path",
+          "/Users/coby/Code/c360/semselect/.sglang/models/Qwen3.5-4B-4bit",
+          "--served-model-name",
+          "qwen35-4b-mlx",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "30111",
+          "--disable-cuda-graph",
+          "--mlx-enable-sampling",
+          "--context-length",
+          "4096",
+          "--max-total-tokens",
+          "8192",
+          "--max-running-requests",
+          "1",
+          "--mem-fraction-static",
+          "0.5",
+          "--grammar-backend",
+          "llguidance",
+          "--mamba-radix-cache-strategy",
+          "no_buffer",
+          "--disable-overlap-schedule",
+          "--disable-radix-cache"
+        ],
+        "n_ctx_per_slot_observed": 4096,
+        "max_running_requests": 1,
+        "max_total_tokens": 8192,
+        "context_length": 4096,
+        "chunked_prefill_size": 4096,
+        "variant": "",
+        "dropped_flag": null,
+        "slots_meaning": "SGLang --max-running-requests; one shared pool of max(8192, 4096 x N) tokens"
+      },
+      "reference": {
+        "path": "docs/evidence/20261006-query-routing/metal.tar.gz!metal/result.json",
+        "sha256": "e46d230e04f9231b3a5787a1a7c2acf916cba549e16824ce86aab540f6051b8c",
+        "arm": "qwen_json",
+        "view": "llama.cpp serial Qwen JSON, normal order"
+      },
+      "protocol_version": 3,
+      "started_at": "2026-10-09T14:40:15.827016+00:00",
+      "status": "stopped",
+      "runtime": {
+        "command": [
+          "/Users/coby/Code/c360/semselect/.sglang/venv/bin/python",
+          "-m",
+          "sglang.launch_server",
+          "--model-path",
+          "/Users/coby/Code/c360/semselect/.sglang/models/Qwen3.5-4B-4bit",
+          "--served-model-name",
+          "qwen35-4b-mlx",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "30111",
+          "--disable-cuda-graph",
+          "--mlx-enable-sampling",
+          "--context-length",
+          "4096",
+          "--max-total-tokens",
+          "8192",
+          "--max-running-requests",
+          "1",
+          "--mem-fraction-static",
+          "0.5",
+          "--grammar-backend",
+          "llguidance",
+          "--mamba-radix-cache-strategy",
+          "no_buffer",
+          "--disable-overlap-schedule",
+          "--disable-radix-cache"
+        ],
+        "endpoint_base": "http://127.0.0.1:30111",
+        "variant": "",
+        "dropped_flag": null,
+        "environment": {
+          "SGLANG_USE_MLX": "1",
+          "HF_HUB_OFFLINE": "1",
+          "TRANSFORMERS_OFFLINE": "1",
+          "HF_HOME": "/Users/coby/Code/c360/semselect/.sglang/hf",
+          "XDG_CACHE_HOME": "/Users/coby/Code/c360/semselect/.sglang/cache",
+          "SGLANG_MLX_CACHE_LIMIT_GB": "1"
+        },
+        "stripped_environment": [],
+        "guard": "not applicable: clients call the SGLang server directly",
+        "ready": true,
+        "pid": 6915,
+        "startup_seconds": 16.761405458906665,
+        "server_args": {
+          "model_path": "/Users/coby/Code/c360/semselect/.sglang/models/Qwen3.5-4B-4bit",
+          "served_model_name": "qwen35-4b-mlx",
+          "host": "127.0.0.1",
+          "port": 30111,
+          "context_length": 4096,
+          "max_total_tokens": 8192,
+          "max_running_requests": 1,
+          "mem_fraction_static": 0.5,
+          "grammar_backend": "llguidance",
+          "mamba_radix_cache_strategy": "no_buffer",
+          "disable_overlap_schedule": true,
+          "disable_radix_cache": true,
+          "disable_cuda_graph": true,
+          "mlx_enable_sampling": true,
+          "chunked_prefill_size": 4096,
+          "max_prefill_tokens": 16384,
+          "schedule_policy": "fcfs",
+          "enable_mixed_chunk": false,
+          "page_size": 1,
+          "random_seed": 565238021,
+          "enable_deterministic_inference": false,
+          "enable_metrics": false,
+          "enable_cache_report": false,
+          "decode_log_interval": 40,
+          "log_level": "info",
+          "version": "0.0.0.dev0"
+        },
+        "models": {
+          "object": "list",
+          "data": [
+            {
+              "id": "qwen35-4b-mlx",
+              "object": "model",
+              "created": 1791556832,
+              "owned_by": "sglang",
+              "root": "qwen35-4b-mlx",
+              "parent": null,
+              "max_model_len": 4096
+            }
+          ]
+        },
+        "startup": {
+          "mlx_runner": true,
+          "max_total_num_tokens": 8192,
+          "chunked_prefill_size": 4096,
+          "max_prefill_tokens": 16384,
+          "max_running_requests": 1,
+          "context_len": 4096,
+          "available_gpu_mem_gb": 22.77,
+          "mlx_pool_max_total_num_tokens": 8192,
+          "mlx_pool_max_running_requests": 1,
+          "mlx_model_load_s": 0.94,
+          "mlx_buffer_cache_limit_gb": 1.0,
+          "wired_memory_limit_gb": 28.1,
+          "tree_cache": "source=default impl=UnifiedRadixCache hybrid_swa=False hybrid_ssm=True hicache_attached=False",
+          "n_ctx_slot": 4096
+        },
+        "exit_code": -9,
+        "sigkill_sent": false,
+        "cleanup_errors": [
+          "stop: PermissionError: [Errno 1] Operation not permitted"
+        ],
+        "wall_seconds": 323.6170484998729,
+        "child_cpu_seconds": 30.906370000000003,
+        "largest_child_peak_rss_bytes_so_far": 4255252480
+      },
+      "preparation_s": 1.6693957149982452e-07,
+      "largest_child_peak_rss_bytes_so_far": 4255252480,
+      "planned": 32,
+      "planned_questions": 96,
+      "valid": 13,
+      "valid_questions": 39,
+      "invalid": 0,
+      "not_run": 16,
+      "errors": {
+        "total": 3,
+        "by_kind": {
+          "connection": 3
+        }
+      },
+      "elapsed_s": 96.79053079197183,
+      "decisions_per_s": 0.4029319777553571,
+      "requests_per_s": 0.1343106592517857,
+      "request_ms": {
+        "p50": 6564.092687447555,
+        "p95": 11361.83941597119,
+        "samples": 16
+      },
+      "label_agreement": {
+        "total": 96,
+        "reference_arm": "qwen_decisions",
+        "primary": true,
+        "matched": 39,
+        "reference_path": "results/throughput/20261009T143712.053883Z-sglang-qwen/w2-qwen_decisions-1x1/journal.jsonl",
+        "reference_sha256": "fbbd07ce084e1ed26497b1035e465f596e42584644fb29a19f73fe53593e0b76",
+        "reference_view": "measured pass 1 of w2-qwen_decisions-1x1 (same runtime and arm)",
+        "reference_valid_questions": 39
+      },
+      "tokens_per_request": {
+        "prompt_tokens": {
+          "requests": 13,
+          "sum": 48259,
+          "mean": 3712.230769230769
+        },
+        "completion_tokens": {
+          "requests": 13,
+          "sum": 0,
+          "mean": 0.0
+        }
+      },
+      "stop_reason": "three consecutive runtime errors",
+      "warmup": {
+        "planned": 32,
+        "attempted": 32,
+        "ok": 32,
+        "errors": 0
+      },
+      "metrics": {
+        "snapshots": {
+          "start": {
+            "prompt_tokens_total": 7,
+            "prompt_tokens_cached_total": 0,
+            "prefill_batches_total": 2,
+            "prefill_sequences_total": 2,
+            "max_sequences_in_one_prefill_batch": 1,
+            "max_queue_requests": 0,
+            "log_bytes": 29604
+          },
+          "after_warmup": {
+            "prompt_tokens_total": 118752,
+            "prompt_tokens_cached_total": 0,
+            "prefill_batches_total": 98,
+            "prefill_sequences_total": 98,
+            "max_sequences_in_one_prefill_batch": 1,
+            "max_queue_requests": 2,
+            "log_bytes": 55634
+          },
+          "end": {
+            "prompt_tokens_total": 169578,
+            "prompt_tokens_cached_total": 0,
+            "prefill_batches_total": 139,
+            "prefill_sequences_total": 139,
+            "max_sequences_in_one_prefill_batch": 1,
+            "max_queue_requests": 2,
+            "log_bytes": 71076
+          }
+        },
+        "measured_delta": {
+          "prompt_tokens_total": 50826,
+          "prompt_tokens_cached_total": 0,
+          "prefill_batches_total": 41,
+          "prefill_sequences_total": 41,
+          "max_sequences_in_one_prefill_batch": 1,
+          "max_queue_requests": 2,
+          "sequences_per_prefill_batch": 1.0,
+          "source": "runtime.log \"Prefill batch\" lines (SGLang serves no /metrics without --enable-metrics)"
+        },
+        "warmup_delta": {
+          "prompt_tokens_total": 118745,
+          "prompt_tokens_cached_total": 0,
+          "prefill_batches_total": 96,
+          "prefill_sequences_total": 96,
+          "max_sequences_in_one_prefill_batch": 1,
+          "max_queue_requests": 2,
+          "sequences_per_prefill_batch": 1.0,
+          "source": "runtime.log \"Prefill batch\" lines (SGLang serves no /metrics without --enable-metrics)"
+        }
+      },
+      "finished_at": "2026-10-09T14:45:39.445365+00:00",
+      "request_mapping": {
+        "source": "fixtures.w1_jobs / w2_jobs(\"kev\"): the Kev /v1/systemone bodies, byte-verified; Qwen is served",
+        "endpoint": "llama.cpp Kev /v1/systemone -> SGLang /v1/decisions on Qwen (SGLang does not serve Kev)",
+        "changed": [
+          "state -> input: the same string; render_text returns strings verbatim (entrypoints/openai/serving_decisions.py:449-454).",
+          "questions {id: {type: choice, instructions, criteria}} -> questions [{id, type: choice, question: instructions, options: [{name, description}] in criteria order}], in head order. This is the mapping SGLang's own /v1/systemone applies for a chat model (entrypoints/systemone/serving.py:80-110, 214-221).",
+          "model: Kev alias -> SGLang served name (echoed only).",
+          "added prompt_format_version 1: pins the server-owned wording; another served version returns 400.",
+          "added return_prompt_token_ids true, as in the probe: each answer carries its rendered prompt and label token ids, so a run can be replayed through /v1/score.",
+          "temperature omitted (default 1.0): it scales probabilities only, never the argmax choice."
+        ],
+        "unchanged": [
+          "state text",
+          "instructions text",
+          "criteria names, descriptions and candidate order",
+          "W1 normal and reverse orders",
+          "W2: one request carrying all three heads (SGLang's bundled path)"
+        ],
+        "semantics": [
+          "Prompt wrapper differs from Kev's runtime: SGLang renders each question as one user message with thinking off: input, blank line, \"Question: <instructions>\", \"A: <name> - <description>\" per option, \"Answer with the letter of one option only.\" (serving_decisions.py:514-547). Labels are letters A.. in option order; each head is scored by one prefill.",
+          "usage.prompt_tokens counts every question's prompt, so a W2 request counts the state three times (serving_decisions.py:441-444)."
+        ],
+        "parser": "sglang_requests.validate_decision: shape differs from evaluate.validate_native (no confidence; label_mass and token ids instead); per-head validity as in the Kev W2 parser"
+      },
+      "label_agreement_cross_runtime": {
+        "matched": 32,
+        "total": 96,
+        "reference_path": "docs/evidence/20261006-query-routing/metal.tar.gz!metal/result.json",
+        "reference_sha256": "e46d230e04f9231b3a5787a1a7c2acf916cba549e16824ce86aab540f6051b8c",
+        "reference_arm": "qwen_json",
+        "reference_view": "llama.cpp serial Qwen JSON, normal order",
+        "diagnostic": "diagnostic only: serial llama.cpp Qwen JSON labels from GGUF Q4_K_M weights; this runtime serves MLX affine 4-bit, group 64. Different quantization, kernels and (for decisions and score) prompt wrapper; not a correctness or batching reading."
+      }
+    }
+  ],
+  "provenance": {
+    "code_commit": "454405ff516cb6fa672691eb88d6fbedeeed1e8e",
+    "working_tree_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "git_status_porcelain": "?? docs/evidence/20261009T132345.224681Z-throughput-llamacpp-kev/\n?? docs/evidence/20261009T140002.987772Z-throughput-llamacpp-qwen/\n?? docs/evidence/20261009T141930.309707Z-throughput-llamacpp-kev/\n",
+    "source_sha256": {
+      "eval/throughput/fixtures.py": "a2d057c5d5f9bf6842b8d3b1c18bc974ad182b769e9c39e5454c56b4f7276572",
+      "eval/throughput/runner.py": "5ba524ecd3e7ca79fd888381366b5bfb658d49c65061982855c4a7e709e9ed12",
+      "eval/throughput/llamacpp.py": "7da06f89924e64eb1ebdc5ea377c1c0f0f2cfe67cadf285675d68eb00a8c7116",
+      "eval/throughput/report.py": "34283d6d3d4acaecdbc74c40d84afb0bae96ebef190ba061b13bfa53f2780d55",
+      "eval/throughput/run.py": "a940f91158defb0fa1f2f845abf8b2f2e64ecc4a183e6fa6bb8297e7d3ca92e0",
+      "scripts/answerability.py": "d9d25ad39ca75d9d355c14c0b1cc9913d83883b0f733439993a218a75e76dc20",
+      "scripts/evaluate.py": "b448c23d910b57c383b53ea90f5684f8400e0f6bec1a75027a08a060ad9260b7",
+      "scripts/compare_scoring.py": "fe38643869f2e0f475ab1a81acf432f16fb21e22e38a4eada888ae1e779ef573",
+      "scripts/metal.py": "115291eb7e669d000343975cad3d5a3e92cf2a54a7b50c3c1433d7c6d872804f",
+      "scripts/model.py": "eda4d6bfef779e1622f33df722c9f4459e5857262121cb3732d4d2880adf5824",
+      "eval/query-routing/experiment.py": "7ce07108ed4738b308e4bb0003dabb5de86ee439ddd7d6997a46fc7ec9fc38a9",
+      "eval/query-routing/runner.py": "bb0aa5cc9e5ed632ab7fac67a2e9ebac81efea24d544661491e729c4bc431dfe",
+      "eval/throughput/sglang_runtime.py": "f71fba1ca0419e2c155d37169c79d6161ecb55bfdd1d2c2362b30200db5c1dc3",
+      "eval/throughput/sglang_requests.py": "7a91e985219d906bf4f2115a75c632deaaddb0ea96781a63741ba2aead464f03",
+      "eval/throughput/run_sglang.py": "a8aaa95e2f28947dbd0e6d395c74f20391078daf0fa4422d3a65aaaf16d124f1",
+      "eval/throughput/sglang.md": "b392459622be3e39fec853faa1e5f1b2bd9aac62f93326c9c611b4329feb0577"
+    },
+    "datasets": {
+      "w1": {
+        "path": "eval/answerability/heldout/cases.json",
+        "sha256": "74066d02a4fcff48b8363478dcbc22f9e08bc6cef5be668c859a7a50ee536594"
+      },
+      "w2": {
+        "path": "eval/query-routing/heldout.json",
+        "sha256": "01e484b73969cd35684a4153f33248af509b35c19a59bfe87ed8e51c33eac39a",
+        "freeze_sha256": "daaf3b6924df1644e019e59e4dcf5fb9bce40dad26ccecec1d942df7c0e15e13"
+      }
+    },
+    "hardware": {
+      "cpu": "Apple M3 Pro",
+      "memory_bytes": 38654705664,
+      "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+      "machine": "arm64",
+      "tested_path": "native macOS Metal through MLX (SGLang); not CPU Docker, AMD64 or CUDA"
+    },
+    "runtime": {
+      "runtime": "sglang-mlx",
+      "source_repository": "https://github.com/sgl-project/sglang",
+      "source_revision": "efb62ce269b499123e2d1c89005ee4cea8c31098",
+      "source_tar_sha256": "be56a65499e7b308a1935cda270b2ac97c58f4ae9013f008acd9498542cc09b1",
+      "source_archive": ".sglang/source-efb62ce.tar.gz",
+      "source_files_verified": 5310,
+      "source_files_not_in_archive": [
+        "python/sglang/_version.py"
+      ],
+      "editable_install": "file:///Users/coby/Code/c360/semselect/.sglang/sglang-efb62ce269b499123e2d1c89005ee4cea8c31098/python",
+      "python": "CPython3.12.13 uv-managed standalone build",
+      "source_configuration": "Copied python/pyproject_other.toml to python/pyproject.toml as Apple guide instructs; selected serving-only srt_mps extra, SGLANG_BUILD_RUST_EXTS=none. No runtime source code changes. No optional native Metal kernels built.",
+      "dependency_freeze": {
+        "path": "docs/evidence/20261005T154252Z-sglang-metal-cache-disabled/dependencies.txt",
+        "sha256": "aa2f1bd3dac7a7342761a7e74a2b30b32563ebf4b20a1550705a5ec6a4d720ae",
+        "compared_with_venv": false
+      },
+      "model": {
+        "repository": "mlx-community/Qwen3.5-4B-4bit",
+        "revision": "0e7ffd5c629ef7719d4cbc04069232580bfa9d9c",
+        "quantization": "mlx affine 4-bit, group 64",
+        "quantization_config": {
+          "group_size": 64,
+          "bits": 4,
+          "mode": "affine"
+        },
+        "path": ".sglang/models/Qwen3.5-4B-4bit",
+        "files": [
+          {
+            "name": ".gitattributes",
+            "bytes": 1570,
+            "sha256": "34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930"
+          },
+          {
+            "name": "chat_template.jinja",
+            "bytes": 7756,
+            "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+          },
+          {
+            "name": "config.json",
+            "bytes": 3366,
+            "sha256": "f3efc81b2ea8d96a45301037d3ccccbcccdef44a961845c87f286aaddbc6eaaa"
+          },
+          {
+            "name": "model.safetensors",
+            "bytes": 3034300695,
+            "sha256": "5fb9acd0246866381cf8c5c354c6db1019f6498eec4ccb4f5edcc71ffeacb2db"
+          },
+          {
+            "name": "model.safetensors.index.json",
+            "bytes": 101944,
+            "sha256": "52e534c41f7b97708329c85f762e5882bf48bd5955a422c6ae74eba321e6048a"
+          },
+          {
+            "name": "preprocessor_config.json",
+            "bytes": 390,
+            "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+          },
+          {
+            "name": "processor_config.json",
+            "bytes": 1300,
+            "sha256": "14932921ca485d458a04dafd8069fbb0a4505622a48208d19ed247115801385b"
+          },
+          {
+            "name": "tokenizer.json",
+            "bytes": 19989343,
+            "sha256": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4"
+          },
+          {
+            "name": "tokenizer_config.json",
+            "bytes": 1139,
+            "sha256": "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182"
+          },
+          {
+            "name": "video_preprocessor_config.json",
+            "bytes": 385,
+            "sha256": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13"
+          },
+          {
+            "name": "vocab.json",
+            "bytes": 6722759,
+            "sha256": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+          }
+        ],
+        "provenance_limitation": "HF repo has no model card and does not identify original checkpoint revision or conversion command; this is not the same quantization as GGUF Q4_K_M."
+      },
+      "probe_evidence": {
+        "provenance": "docs/evidence/20261005T154252Z-sglang-metal-cache-disabled/provenance.json",
+        "sha256": "748c3faf8e5f772f1e3e18140d0dae842222d57eb639eb2fec15a45c1cc2ff5b",
+        "launch_record": "docs/evidence/20261005T154252Z-sglang-metal-cache-disabled/probe.json"
+      }
+    },
+    "quantization": "mlx affine 4-bit, group 64",
+    "cross_runtime_reference_lock": {
+      "path": "models.baseline.lock.json",
+      "sha256": "c218e6b307360c4098e6454839b319948a4bfe4744344ccd859dde83b0c84ae5",
+      "note": "GGUF Q4_K_M pin of the llama.cpp labels used only as the cross-runtime diagnostic"
+    }
+  },
+  "error": "RuntimeError: owned runtime cleanup failed; no further cell was launched",
+  "finished_at": "2026-10-09T14:45:39.461033+00:00"
+}

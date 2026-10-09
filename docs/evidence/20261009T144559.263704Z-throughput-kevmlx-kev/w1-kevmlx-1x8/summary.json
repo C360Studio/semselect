@@ -1,0 +1,400 @@
+{
+  "cell": "w1-kevmlx-1x8",
+  "workload": "w1",
+  "arm": "kevmlx",
+  "model": "kev",
+  "profile": {
+    "slots": 1,
+    "concurrency": 8,
+    "kv_unified": false,
+    "n_ctx_total": null,
+    "n_ctx_per_slot": null,
+    "warmup_passes": 1,
+    "measured_passes": 2,
+    "timeout_s": 30,
+    "n_batch": null,
+    "n_ubatch": null,
+    "command": [
+      "/Users/coby/Code/c360/semselect/.kev/venv/bin/python",
+      "-I",
+      "-m",
+      "kev.serve",
+      "--run",
+      "/Users/coby/Code/c360/semselect/.kev/hf/hub/models--jaredpalmer--kev-4b/snapshots/6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+      "--fallback",
+      "/Users/coby/Code/c360/semselect/.kev/hf/hub/models--jaredpalmer--kev-4b/snapshots/6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "18096"
+    ],
+    "n_ctx_per_slot_observed": null,
+    "prefix_cache_states": 0,
+    "server": "kev.serve: one model thread drains up to 64 queued requests into a batch (serve.py:34,150-170) and answers them all when the batch ends; on MLX a batch runs one request at a time (mlx_model.py:226-229); a request's questions share one state pass (mlx_model.py:176-205)",
+    "request_shape": "one request per case with all of its questions"
+  },
+  "reference": {
+    "path": "docs/evidence/20261005T174941.125801Z-answerability-source-metal/comparison.json",
+    "sha256": "22c405872621264ba7e73b0349c34595c8343ddad191f073a31595c91b83b606",
+    "arm": "kev",
+    "view": "trial 1, both candidate orders",
+    "runtime": "llama.cpp serial, GGUF Q4_K_M",
+    "caveat": "different precision and implementation; diagnostic only"
+  },
+  "protocol_version": 3,
+  "started_at": "2026-10-09T14:50:19.203564+00:00",
+  "status": "complete",
+  "runtime": {
+    "command": [
+      "/Users/coby/Code/c360/semselect/.kev/venv/bin/python",
+      "-I",
+      "-m",
+      "kev.serve",
+      "--run",
+      "/Users/coby/Code/c360/semselect/.kev/hf/hub/models--jaredpalmer--kev-4b/snapshots/6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+      "--fallback",
+      "/Users/coby/Code/c360/semselect/.kev/hf/hub/models--jaredpalmer--kev-4b/snapshots/6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "18096"
+    ],
+    "cwd": "/Users/coby/Code/c360/semselect/.kev",
+    "endpoint_base": "http://127.0.0.1:18096",
+    "env": {
+      "HF_HOME": "/Users/coby/Code/c360/semselect/.kev/hf",
+      "HF_HUB_CACHE": "/Users/coby/Code/c360/semselect/.kev/hf/hub",
+      "HF_HUB_DISABLE_TELEMETRY": "1",
+      "HF_HUB_OFFLINE": "1",
+      "KEV_BACKEND": "mlx",
+      "KEV_DATE_FACTS": "0",
+      "KEV_DTYPE": "bf16",
+      "KEV_PREFIX_CACHE": "0",
+      "KEV_TRUNCATE_STATES": "0",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "kev_dtype_env": "bf16",
+    "prefix_cache_states": 0,
+    "guard": "none: clients call kev.serve directly; semselect has no Kev MLX service path",
+    "startup_seconds": 4.940871000057086,
+    "listener_pids": [
+      7706
+    ],
+    "models": {
+      "models": [
+        {
+          "name": "kev-latest",
+          "description": "Kev pointer head on Qwen/Qwen3.5-4B-Base, serving /Users/coby/Code/c360/semselect/.kev/hf/hub/models--jaredpalmer--kev-4b/snapshots/6cfce5c2fa4b4bd64026336ab649c5ca78857d52 at temperature 2.41",
+          "release_date": "2026-10-09",
+          "run": "/Users/coby/Code/c360/semselect/.kev/hf/hub/models--jaredpalmer--kev-4b/snapshots/6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+          "base": "Qwen/Qwen3.5-4B-Base",
+          "lora": 16,
+          "device": "mps",
+          "backend": "mlx",
+          "dtype": "bfloat16",
+          "temperature": 2.406050072164233,
+          "max_state_tokens": 65536,
+          "truncate_states": false,
+          "cuda_graphs": null,
+          "prefix_cache": {
+            "size": 0,
+            "min_state_tokens": 0,
+            "max_tokens": 65536,
+            "hits": 0,
+            "misses": 0,
+            "cached_states": 0,
+            "oom_retries": 0
+          },
+          "batches": {
+            "count": 0,
+            "requests": 0,
+            "queued": 0
+          }
+        },
+        {
+          "name": "jev-latest",
+          "description": "Kev pointer head on Qwen/Qwen3.5-4B-Base, serving /Users/coby/Code/c360/semselect/.kev/hf/hub/models--jaredpalmer--kev-4b/snapshots/6cfce5c2fa4b4bd64026336ab649c5ca78857d52 at temperature 2.41",
+          "release_date": "2026-10-09",
+          "run": "/Users/coby/Code/c360/semselect/.kev/hf/hub/models--jaredpalmer--kev-4b/snapshots/6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+          "base": "Qwen/Qwen3.5-4B-Base",
+          "lora": 16,
+          "device": "mps",
+          "backend": "mlx",
+          "dtype": "bfloat16",
+          "temperature": 2.406050072164233,
+          "max_state_tokens": 65536,
+          "truncate_states": false,
+          "cuda_graphs": null,
+          "prefix_cache": {
+            "size": 0,
+            "min_state_tokens": 0,
+            "max_tokens": 65536,
+            "hits": 0,
+            "misses": 0,
+            "cached_states": 0,
+            "oom_retries": 0
+          },
+          "batches": {
+            "count": 0,
+            "requests": 0,
+            "queued": 0
+          }
+        }
+      ]
+    },
+    "backend": "mlx",
+    "dtype_loaded": "bfloat16",
+    "device": "mps",
+    "startup": {
+      "run": "/Users/coby/Code/c360/semselect/.kev/hf/hub/models--jaredpalmer--kev-4b/snapshots/6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+      "path": "/Users/coby/Code/c360/semselect/.kev/hf/hub/models--jaredpalmer--kev-4b/snapshots/6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+      "device": "mps",
+      "backend": "mlx",
+      "dtype": "bfloat16",
+      "host": "127.0.0.1",
+      "port": 18096,
+      "max_state": 65536,
+      "policy": "refused (422)",
+      "uvicorn": "http://127.0.0.1:18096"
+    },
+    "exit_code": -15,
+    "cleanup_errors": [],
+    "wall_seconds": 116.48454970889725,
+    "child_cpu_seconds": 11.603459999999998,
+    "largest_child_peak_rss_bytes_so_far": 16849764352
+  },
+  "preparation_s": 1.2919772416353226e-06,
+  "largest_child_peak_rss_bytes_so_far": 16849764352,
+  "planned": 88,
+  "planned_questions": 88,
+  "valid": 88,
+  "valid_questions": 88,
+  "invalid": 0,
+  "not_run": 0,
+  "errors": {
+    "total": 0,
+    "by_kind": {}
+  },
+  "elapsed_s": 74.12980862497352,
+  "decisions_per_s": 1.1871068013300357,
+  "requests_per_s": 1.1871068013300357,
+  "request_ms": {
+    "p50": 6486.149687552825,
+    "p95": 8901.687166886404,
+    "samples": 88
+  },
+  "label_agreement": {
+    "matched": 88,
+    "total": 88,
+    "kind": "within-runtime",
+    "reference_cell": "w1-kevmlx-1x1",
+    "reference_view": "measured pass 1",
+    "reference_path": "w1-kevmlx-1x1/journal.jsonl"
+  },
+  "tokens_per_request": {
+    "input_tokens": {
+      "requests": 88,
+      "sum": 47908,
+      "mean": 544.4090909090909
+    }
+  },
+  "stop_reason": null,
+  "warmup": {
+    "planned": 44,
+    "attempted": 44,
+    "ok": 44,
+    "errors": 0
+  },
+  "metrics": {
+    "snapshots": {
+      "start": {
+        "batches": 0,
+        "batched_requests": 0,
+        "queued": 0,
+        "prefix_cache_hits": 0,
+        "prefix_cache_misses": 0,
+        "prefix_cache_states": 0,
+        "prefix_cache_oom_retries": 0
+      },
+      "after_warmup": {
+        "batches": 12,
+        "batched_requests": 44,
+        "queued": 0,
+        "prefix_cache_hits": 0,
+        "prefix_cache_misses": 0,
+        "prefix_cache_states": 0,
+        "prefix_cache_oom_retries": 0
+      },
+      "end": {
+        "batches": 34,
+        "batched_requests": 132,
+        "queued": 0,
+        "prefix_cache_hits": 0,
+        "prefix_cache_misses": 0,
+        "prefix_cache_states": 0,
+        "prefix_cache_oom_retries": 0
+      }
+    },
+    "measured_delta": {
+      "batches": 22,
+      "batched_requests": 88,
+      "prefix_cache_hits": 0,
+      "prefix_cache_misses": 0,
+      "prefix_cache_oom_retries": 0,
+      "requests_per_batch": 4.0
+    },
+    "warmup_delta": {
+      "batches": 12,
+      "batched_requests": 44,
+      "prefix_cache_hits": 0,
+      "prefix_cache_misses": 0,
+      "prefix_cache_oom_retries": 0,
+      "requests_per_batch": 3.6666666666666665
+    },
+    "source": "kev.serve /v1/models counters (serve.py:309-311); it has no llama.cpp /metrics"
+  },
+  "finished_at": "2026-10-09T14:52:15.688679+00:00",
+  "kev_server": {
+    "latency_ms": {
+      "p50": 4833.8,
+      "p95": 7926.6,
+      "samples": 88,
+      "meaning": "model time of the server batch the request ran in (serve.py:186-190)"
+    },
+    "measured_requests_attempted": 88,
+    "measured_batched_requests": 88,
+    "requests_per_batch": 4.0
+  },
+  "cache_check": {
+    "ok": true,
+    "expected": {
+      "prefix_cache_hits": 0,
+      "prefix_cache_misses": 0
+    },
+    "observed": {
+      "prefix_cache_hits": 0,
+      "prefix_cache_misses": 0
+    }
+  },
+  "label_agreement_cross_runtime": {
+    "matched": 84,
+    "total": 88,
+    "reference_path": "docs/evidence/20261005T174941.125801Z-answerability-source-metal/comparison.json",
+    "reference_sha256": "22c405872621264ba7e73b0349c34595c8343ddad191f073a31595c91b83b606",
+    "reference_arm": "kev",
+    "reference_view": "trial 1, both candidate orders",
+    "kind": "cross-runtime diagnostic",
+    "caveat": "serial llama.cpp labels from GGUF Q4_K_M; MLX runs bf16 through Kev's own encoder and head"
+  },
+  "provenance": {
+    "code_commit": "2c5aad469411343ba47e7d6ae49ea82ab11eb8b5",
+    "working_tree_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "git_status_porcelain": "",
+    "source_sha256": {
+      "eval/throughput/fixtures.py": "a2d057c5d5f9bf6842b8d3b1c18bc974ad182b769e9c39e5454c56b4f7276572",
+      "eval/throughput/runner.py": "5ba524ecd3e7ca79fd888381366b5bfb658d49c65061982855c4a7e709e9ed12",
+      "eval/throughput/llamacpp.py": "7da06f89924e64eb1ebdc5ea377c1c0f0f2cfe67cadf285675d68eb00a8c7116",
+      "eval/throughput/report.py": "34283d6d3d4acaecdbc74c40d84afb0bae96ebef190ba061b13bfa53f2780d55",
+      "eval/throughput/run.py": "a940f91158defb0fa1f2f845abf8b2f2e64ecc4a183e6fa6bb8297e7d3ca92e0",
+      "scripts/answerability.py": "d9d25ad39ca75d9d355c14c0b1cc9913d83883b0f733439993a218a75e76dc20",
+      "scripts/evaluate.py": "b448c23d910b57c383b53ea90f5684f8400e0f6bec1a75027a08a060ad9260b7",
+      "scripts/compare_scoring.py": "fe38643869f2e0f475ab1a81acf432f16fb21e22e38a4eada888ae1e779ef573",
+      "scripts/metal.py": "115291eb7e669d000343975cad3d5a3e92cf2a54a7b50c3c1433d7c6d872804f",
+      "scripts/model.py": "eda4d6bfef779e1622f33df722c9f4459e5857262121cb3732d4d2880adf5824",
+      "eval/query-routing/experiment.py": "7ce07108ed4738b308e4bb0003dabb5de86ee439ddd7d6997a46fc7ec9fc38a9",
+      "eval/query-routing/runner.py": "bb0aa5cc9e5ed632ab7fac67a2e9ebac81efea24d544661491e729c4bc431dfe",
+      "eval/throughput/kevmlx_setup.py": "6bde08032ffceb898fbc63cd85e7e712b8d7f2f3e3586f42bbe4d2b79af1864e",
+      "eval/throughput/kevmlx_runtime.py": "71117cc29ddb693834c4770d49cf6ded1fc5d06f4a7afab6a8f5806d1a389ad6",
+      "eval/throughput/kevmlx_requests.py": "a868564726b5a01d1dec0a2a934b8d350f7f13a100c1e2bdc73b29ed2ac7871d",
+      "eval/throughput/run_kevmlx.py": "e55841a1bd094247f28eb60e67f42b4b912f4a0eb017d09023b20b78c343fc08",
+      "eval/throughput/kevmlx.md": "f300fd49573ac4002dec33bfc1c3880cf7f1624a2676e0e2b16360780f80d7a0"
+    },
+    "datasets": {
+      "w1": {
+        "path": "eval/answerability/heldout/cases.json",
+        "sha256": "74066d02a4fcff48b8363478dcbc22f9e08bc6cef5be668c859a7a50ee536594"
+      },
+      "w2": {
+        "path": "eval/query-routing/heldout.json",
+        "sha256": "01e484b73969cd35684a4153f33248af509b35c19a59bfe87ed8e51c33eac39a",
+        "freeze_sha256": "daaf3b6924df1644e019e59e4dcf5fb9bce40dad26ccecec1d942df7c0e15e13"
+      }
+    },
+    "kev": {
+      "repository": "https://github.com/jaredpalmer/kev",
+      "commit": "5e42a7a03f28134853dd3ff77461457e921e5ec1",
+      "commit_date": "2026-10-05T20:43:29Z",
+      "archive_sha256": "946ea7489be0217146a004ccaa8e12b1c7b40129a83eec8b8c172c0e5be5cbdf",
+      "license": "Apache-2.0"
+    },
+    "adapter": {
+      "repository": "jaredpalmer/kev-4b",
+      "revision": "6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+      "license": "apache-2.0",
+      "bytes": 159727524
+    },
+    "base": {
+      "repository": "Qwen/Qwen3.5-4B-Base",
+      "revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+      "license": "apache-2.0",
+      "bytes": 9342823181
+    },
+    "quantization": "bf16",
+    "dtype": {
+      "KEV_DTYPE": "bf16",
+      "backend": "mlx",
+      "loaded": "per cell: runtime.dtype_loaded from /v1/models",
+      "note": "MLX runs the backbone as stored (bf16) and Kev's pointer head in fp32 (checkpoint.py:110-112, mlx_model.py:158-163)"
+    },
+    "head_meta": {
+      "base": "Qwen/Qwen3.5-4B-Base",
+      "base_revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+      "lora": 16,
+      "head_dim": 256,
+      "option_isolation": false,
+      "special_embeddings": false,
+      "weights_dtype": "fp32",
+      "temperature": 2.406050072164233,
+      "lora_placement": "full"
+    },
+    "dependency_freeze": {
+      "path": ".kev/requirements.freeze.txt",
+      "copy": "requirements.freeze.txt",
+      "sha256": "f959c314a7022deb5e7663ed09c14b376ec1dd55d3cbb6bda2947da80e891a7d"
+    },
+    "packages": {
+      "fastapi": "0.143.0",
+      "huggingface-hub": "1.33.0",
+      "mlx": "0.32.3",
+      "mlx-lm": "0.31.3",
+      "mlx-metal": "0.32.3",
+      "numpy": "2.5.3",
+      "pydantic": "2.14.0",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.23.2",
+      "torch": "2.8.0",
+      "transformers": "5.19.0",
+      "uvicorn": "0.54.0"
+    },
+    "setup_provenance": {
+      "path": ".kev/provenance.json",
+      "copy": "kev-provenance.json",
+      "sha256": "333a23bb527f8e3cc9f897101d42ea012b428176ae0bf19b79587a1a4244885d",
+      "verified_at": "2026-10-09T14:45:59.263567+00:00"
+    },
+    "cross_runtime_reference_model": {
+      "lock": "models.lock.json",
+      "lock_sha256": "a79136a2c946e1fdbbdfc79f9e21bb47aa466adf19ba25d7cefe11f37c6d8b16",
+      "filename": "Kev-4B-Q4_K_M.gguf",
+      "quantization": "Q4_K_M",
+      "conversion_source_revision": "6cfce5c2fa4b4bd64026336ab649c5ca78857d52"
+    },
+    "hardware": {
+      "cpu": "Apple M3 Pro",
+      "memory_bytes": 38654705664,
+      "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+      "machine": "arm64",
+      "tested_path": "native macOS MLX on Metal; not CPU Docker, AMD64 or CUDA"
+    }
+  }
+}

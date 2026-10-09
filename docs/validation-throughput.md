@@ -1,4 +1,4 @@
-# Metal throughput screen on llama.cpp: 2026-10-09
+# Metal throughput screen on llama.cpp, SGLang MLX and Kev MLX: 2026-10-09
 
 On this Apple M3 Pro, more llama.cpp slots and more concurrent clients did not
 make prompt processing faster for either model. Prompt processing ran at about
@@ -7,7 +7,17 @@ request every path landed near **one decision per second**. Kev gained only
 from grouping three questions over one shared state: **2.35× faster with
 identical labels**, and still slower than Qwen JSON. Qwen JSON gained from
 extra slots only where a warm prefix cache had already removed most of each
-prompt. Neither pre-declared reading came out yes.
+prompt. Neither pre-declared llama.cpp reading came out yes.
+
+SGLang MLX served Qwen at one running request only: the one cell tried with
+four running requests crashed its scheduler, and at one request its two
+no-decode endpoints ran at 0.98 and 0.99 decisions per second against 0.78 for
+JSON. Kev's own MLX server, at bf16, ran every planned cell: more clients added
+nothing (1.18 to 1.19 decisions per second on W1), but once it had cached a
+state, **each further question cost about 365 ms, against 1,970 ms for one
+question on a new state**, and its pre-declared cached-state reading came out
+yes. That cache exists only in Kev's server; llama.cpp reused no Kev state
+across requests.
 
 This is a small screen on one shared laptop, not a benchmark. It says nothing
 about CUDA hardware, Jev or decision quality. The frozen protocol, both
@@ -16,9 +26,11 @@ amendments and the source citations are in
 [results history](results.md) for earlier runs.
 
 Labels used below: **measured** means read from the saved run summaries and
-runtime logs linked at the end; **from the pinned source** means taken from the
-llama.cpp source the protocol cites, not measured; **inference** marks a
-reading the cells do not isolate; **author-reported** figures are not ours.
+runtime logs linked from each section; **probed** means a one-fixture check
+that an endpoint answers; **from the pinned source** means taken from the
+llama.cpp, SGLang or Kev source the protocols cite, not measured;
+**inference** marks a reading the cells do not isolate; **author-reported**
+figures are not ours.
 
 ## Method
 
@@ -330,7 +342,8 @@ a cross-format difference between scoring and JSON, not an effect of slots.
 - Not novel traffic: measured passes repeat warmup prompts, which favours any
   prompt cache.
 - Not other hardware or runtimes: Metal on ARM64 only. No CUDA, AMD64 or CPU
-  Docker inference; no SGLang or Kev MLX results yet; nothing about Jev.
+  Docker inference; SGLang MLX and Kev MLX have their own sections below;
+  nothing about Jev.
 
 ## The decision-model pitch, checked on this laptop
 
@@ -350,8 +363,8 @@ lists the three claims behind the pitch's speed figures.
    identical labels (finding 4). It needs at least three free slots in
    llama.cpp, so the one-slot service profile cannot use it, and the state is
    still re-read on every request because Kev had zero cross-request cache hits
-   on this build. The author-reported cached-state figures, where the state is
-   kept between requests, remain untested here.
+   on this build. Keeping the state between requests needs Kev's own server,
+   where it is measured: see [Kev MLX server](#kev-mlx-server).
 3. **"Batching."** It did not speed up prompt processing on this GPU at all
    (finding 2). The only cells that gained were Qwen JSON with a warm prefix
    cache (finding 5). llama.cpp's decision-model path cannot batch prompts
@@ -467,17 +480,452 @@ evidence. A new run writes its own directory under `results/throughput/`.
 Each holds the run summary, the executed sources, the working-tree diff and,
 per cell, the summary, the request journal and the runtime log. Journals and
 logs are gzip-compressed; `requests.json` is omitted because it duplicates the
-frozen fixtures that `task throughput:validate` rebuilds.
+frozen fixtures that `task throughput:validate` rebuilds. The SGLang MLX and
+Kev MLX evidence is linked from their own sections below.
 
 ## SGLang MLX
 
-Running, no results yet. Protocol: [`eval/throughput/sglang.md`](../eval/throughput/sglang.md).
+Protocol: [`eval/throughput/sglang.md`](../eval/throughput/sglang.md). SGLang
+does not serve Kev here, so every SGLang cell is Qwen. Four invocations ran
+between 14:24 and 14:46 UTC, and three of them ended on a server crash.
+
+### SGLang method
+
+- **Runtime.** SGLang source `efb62ce269b499123e2d1c89005ee4cea8c31098` on
+  its MLX backend (`SGLANG_USE_MLX=1`), from the pinned venv of the 2026-10-05
+  probe. Every run verified 5,310 source files against the checksummed archive
+  before launching.
+- **Model.** `mlx-community/Qwen3.5-4B-4bit` revision `0e7ffd5c…`, MLX affine
+  4-bit, group 64. These are not the GGUF Q4_K_M weights of the llama.cpp
+  cells.
+- **Launch profile.** The probe's command, flag for flag, including the flags
+  added because the default path failed on 2026-10-05
+  (`--disable-radix-cache`, `--disable-overlap-schedule`,
+  `--mamba-radix-cache-strategy no_buffer`), plus `--mlx-enable-sampling`,
+  `--grammar-backend llguidance` and `--mem-fraction-static 0.5`, at a
+  4,096-token context. A cell sets `--max-running-requests N` and a token pool
+  of max(8,192, 4,096 × N). Every launched cell's `/get_server_info` shows the
+  planned flags, running requests and pool.
+- **Re-probes.** `probe-overlap` and `probe-radix` each drop one of the first
+  two flags at one running request and send the first W1 decisions request
+  twice. A pass adds one 4 × 4 W1 decisions cell with that flag dropped.
+- **Arms.** `qwen_json` through `/v1/chat/completions` with the llama.cpp Qwen
+  JSON bodies (served model name changed, `cache_prompt` dropped);
+  `qwen_decisions` through `/v1/decisions`, built from the Kev bodies by
+  SGLang's own System One mapping; `qwen_score` through `/v1/score` with the
+  one-token arm's text and labels, W1 only.
+- **Workloads, load and stops.** As for llama.cpp, except that W1 and W2 run
+  as separate invocations, each with its own 45-minute budget.
+- **Yardstick.** As for llama.cpp. This profile serves no `/metrics`, so
+  prompt tokens come from the scheduler's `Prefill batch` log lines and the
+  busy-slot column stays empty; every call's server-reported `usage` is saved.
+  Label agreement is within the runtime, against measured pass 1 of the same
+  arm's 1 × 1 cell. Agreement with the serial llama.cpp Qwen JSON labels is
+  kept as a cross-runtime diagnostic.
+
+| Run | Invocation | Time (UTC) | Run status | Ended by |
+| --- | --- | --- | --- | --- |
+| `20261009T142410.714460Z` | W1, both re-probes first | 14:24:10 to 14:24:59 | failed | `probe-radix` crash; no cell launched |
+| `20261009T142639.150858Z` | W1, `probe-overlap` only | 14:26:39 to 14:30:44 | failed | `w1-qwen_json-4x4` crash |
+| `20261009T143126.613254Z` | W1, `w1-qwen_decisions-1x1` and `w1-qwen_score-1x1` | 14:31:26 to 14:36:43 | complete | n/a |
+| `20261009T143712.053883Z` | W2, the two 1 × 1 cells | 14:37:12 to 14:45:39 | failed | `w2-qwen_decisions-1x1` out of memory |
+
+All four ran semselect `454405f` with an empty `working-tree.diff`. The later
+runs selected their probes and cells, as each summary's `planned_probes` and
+`planned_cells` record; the command lines themselves were not saved.
+
+### SGLang results
+
+Generated by `report.py` from the four runs together; numbers are copied
+unchanged, with n/a where the script prints a dash. Each cell ID comes from one
+run: `w1-qwen_json-*` from `20261009T142639.150858Z`, the other two W1 cells
+from `20261009T143126.613254Z` and both W2 cells from
+`20261009T143712.053883Z`. The 0 ms request times of `w1-qwen_json-4x4` are six
+refused connections, not service times.
+
+| Cell | Slots × clients | Unified KV | Valid / planned questions | Questions/s | Requests/s | p50 ms | p95 ms | Label agreement | Prompt tokens processed / cached | Busy slots per decode | Warmup ok / errors / attempted / planned | Status |
+| --- | ---: | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| `w1-qwen_json-1x1` | 1 × 1 | no | 88 / 88 | 0.78 | 0.78 | 1,182 | 1,655 | 88 / 88 | 50,460 / 0 | n/a | 44 / 0 / 44 / 44 | complete |
+| `w1-qwen_json-4x4` | 4 × 4 | no | 0 / 88 | 0.00 | 0.00 | 0 | 0 | 0 / 88 | 0 / 0 | n/a | 0 / 44 / 44 / 44 | stopped (three consecutive runtime errors) |
+| `w1-qwen_decisions-1x1` | 1 × 1 | no | 88 / 88 | 0.99 | 0.99 | 926 | 1,401 | 88 / 88 | 49,932 / 0 | n/a | 44 / 0 / 44 / 44 | complete |
+| `w1-qwen_score-1x1` | 1 × 1 | no | 88 / 88 | 0.98 | 0.98 | 923 | 1,387 | 88 / 88 | 50,460 / 0 | n/a | 44 / 0 / 44 / 44 | complete |
+| `w2-qwen_json-1x1` | 1 × 1 | no | 96 / 96 | 1.21 | 0.40 | 2,563 | 2,669 | 96 / 96 | 34,899 / 0 | n/a | 32 / 0 / 32 / 32 | complete |
+| `w2-qwen_decisions-1x1` | 1 × 1 | no | 39 / 96 | 0.40 | 0.13 | 6,564 | 11,362 | 39 / 96 | 50,826 / 0 | n/a | 32 / 0 / 32 / 32 | stopped (three consecutive runtime errors) |
+
+Pre-declared readings, as printed by `report.py`:
+
+| Reading | Runs (1×1 / 8×8) | Speedup (8×8 / 1×1) | p95 ratio | Agreement drop | Result |
+| --- | --- | ---: | ---: | ---: | --- |
+| W1 qwen_decisions batches usefully | 20261009T143126.613254Z / n/a | n/a | n/a | n/a | not evaluable |
+| W1 qwen_json batches usefully | 20261009T142639.150858Z / n/a | n/a | n/a | n/a | not evaluable |
+| W1 qwen_score batches usefully | 20261009T143126.613254Z / n/a | n/a | n/a | n/a | not evaluable |
+| W2 qwen_decisions batches usefully | 20261009T143712.053883Z / n/a | n/a | n/a | n/a | not evaluable |
+| W2 qwen_json batches usefully | 20261009T143712.053883Z / n/a | n/a | n/a | n/a | not evaluable |
+
+Kev shared-state advantage: **not evaluable** (not evaluable: every planned W2
+kev cell must complete)
+
+No 8 × 8 cell ran, so no batching reading can be evaluated. The shared-state
+reading never applied: SGLang does not serve Kev here, as the protocol says.
+
+Server-reported tokens and both label comparisons, from each cell summary
+(measured, totals over the measured passes):
+
+| Cell | Prompt tokens | Generated tokens | Within-runtime labels | Versus serial llama.cpp Qwen JSON (diagnostic) |
+| --- | ---: | ---: | ---: | ---: |
+| `w1-qwen_json-1x1` | 50,460 | 1,056 | 88 / 88 | 66 / 88 |
+| `w1-qwen_decisions-1x1` | 49,932 | 0 | 88 / 88 | 46 / 88 |
+| `w1-qwen_score-1x1` | 50,460 | 0 | 88 / 88 | 54 / 88 |
+| `w2-qwen_json-1x1` | 34,899 | 785 | 96 / 96 | 85 / 96 |
+| `w2-qwen_decisions-1x1` | 48,259 (13 requests) | 0 | 39 / 96 | 32 / 96 |
+| `w1-qwen_json-4x4` | none | none | 0 / 88 | 0 / 88 |
+
+A decisions request counts its shared input once per question. The diagnostic
+column crosses quantization and, for decisions and score, a different prompt
+wrapper and readout. It is not an error rate and not a batching effect.
+
+### Crashes, as recorded
+
+Three crashes, each in SGLang's scheduler process. Each time SGLang's own
+handler then killed its process tree (`kill_process_tree`, the last line of each
+log). The runner's stop got `PermissionError: [Errno 1] Operation not permitted`
+when it signalled the server's process group, recorded that as a cleanup error
+and, by its rule, launched nothing further: `RuntimeError: owned runtime
+cleanup failed; no further cell was launched`. Line numbers refer to the
+decompressed runtime logs in the evidence.
+
+1. **`probe-radix`** (run `20261009T142410.714460Z`), the one-request profile
+   with `--disable-radix-cache` dropped. The server started listening, then
+   crashed on its own startup warmup, before it reported ready:
+   `AttributeError: 'MlxAuxiliaryStateComponent' object has no attribute
+   'mamba_checkpoint_grid'`, raised in
+   `mem_cache/unified_cache/components/mamba.py:176`
+   (`probe-radix/runtime.log`, lines 78 to 123). It is the error that stopped
+   the first probe on 2026-10-05. The probe recorded `ConnectionResetError:
+   [Errno 54] Connection reset by peer` and sent neither of its requests.
+   `w1-qwen_decisions-4x4-radix` was not added, and no W1 cell ran in that
+   invocation.
+2. **`w1-qwen_json-4x4`** (run `20261009T142639.150858Z`): four running
+   requests and a 16,384-token pool, with overlap scheduling still disabled
+   (its `server-info.json` shows `disable_overlap_schedule: true`). Startup
+   and the server's own warmup succeeded. After the first 392-token prefill of
+   the cell's warmup, the scheduler raised `RuntimeError: Expected all tensors
+   to be on the same device, but found at least two devices, mps:0 and cpu!`
+   in `managers/overlap_utils.py:608` (`stash`, called from
+   `scheduler.py:4700`) (`w1-qwen_json-4x4/runtime.log`, lines 91 to 120). The
+   four requests in flight ended `RemoteDisconnected` after about 10.8 s and
+   every later request was refused: all 44 warmup requests and the 6 measured
+   requests attempted failed, 82 were `not_run`, and the cell stopped on three
+   consecutive errors. The same profile at one running request had just
+   answered all 132 requests of `w1-qwen_json-1x1`; the only differences were
+   the running-request limit and the pool.
+3. **`w2-qwen_decisions-1x1`** (run `20261009T143712.053883Z`), one running
+   request. The server answered 32 warmup and 13 measured three-question
+   requests, the measured ones in 6.56 to 6.60 s each, then crashed in a
+   prefill of measured request R14: `RuntimeError: [METAL] Command buffer
+   execution failed: Insufficient Memory
+   (00000008:kIOGPUCommandBufferCallbackErrorOutOfMemory)`, raised by `mx.eval`
+   in `hardware_backend/mlx/kv_cache/auxiliary_state.py:77`
+   (`_snapshot_cache`) (`w2-qwen_decisions-1x1/runtime.log`, lines 274 to
+   317). R14 ended `RemoteDisconnected` at 11.4 s, R15 and R16 were refused,
+   and the cell stopped with 39 of 96 questions valid and 16 requests
+   `not_run`. Startup had reported 22.77 GB of available GPU memory; what else
+   held memory on the shared laptop at 14:45 is not recorded. It was the last
+   cell of its invocation.
+
+**What was left unrun.** After the 4 × 4 crash the later invocations selected
+1 × 1 cells only, so no other multi-request cell was attempted. Ten planned
+cells are unrun, not failed on their own: `w1-qwen_json-8x8`;
+`w1-qwen_decisions-4x4`, `-8x8` and `-4x4-overlap`; `w1-qwen_score-4x4` and
+`-8x8`; `w2-qwen_json-4x4` and `-8x8`; `w2-qwen_decisions-4x4` and `-8x8`.
+**At this pin, SGLang MLX serves Qwen at one running request only**: four
+crashed on the first requests, and eight was never tried.
+
+### What the SGLang cells establish
+
+1. **Overlap scheduling answered at one running request (probed).**
+   `probe-overlap` passed in both W1 invocations: both repeats answered `defer`
+   for case H03 in 717 to 735 ms, with identical probabilities. That is one
+   fixture. Its gated 4 × 4 cell never ran, so nothing here says the overlap
+   scheduler is faster, or correct under load.
+2. **The radix cache still crashes at this pin (measured).** Prefix reuse on
+   MLX stays unavailable, so every SGLang cell computed every prompt token.
+3. **No decode step was faster on the same server (measured).** With the cache
+   off in all three arms, `/v1/score` and `/v1/decisions` reached 0.98 and 0.99
+   decisions per second against 0.78 for JSON, with medians of 923 and 926 ms
+   against 1,182 ms, 22% lower. JSON and scoring processed the same number of
+   prompt tokens (50,460); JSON also generated 1,056 tokens, 12 per request.
+   This is an output-format comparison within one runtime, and it agrees in
+   direction with the earlier uncached llama.cpp comparison (28% lower median,
+   [record](validation-scoring.md)).
+4. **Prompt processing ran at llama.cpp's rate (measured; different
+   artifacts).** The two no-decode arms processed 559 prompt tokens per
+   measured second (49,932 tokens in 89.2 s; 50,460 in 90.2 s). llama.cpp's
+   one-token scoring processed the same 50,460 tokens at 558 per second
+   (90.4 s).
+5. **Three questions re-read the input three times (measured).** Each W2
+   decisions request ran one prefill per question with nothing reused, about
+   3,712 prompt tokens per request, and took 6.56 to 6.60 s. That is close to
+   llama.cpp Kev at one slot (6,998 ms median), which also re-read the state
+   for each head. JSON on the same server answered the same three questions in
+   one compound object in 2,563 ms.
+6. **Labels were stable within the runtime (measured).** In each W1 1 × 1
+   cell, the second measured pass matched the first on all 44 requests.
+
+### What the SGLang cells do not establish
+
+- Not an SGLang batching result. Every reading is not evaluable: four running
+  requests crashed and eight never ran. This is a compatibility finding about
+  this pin on this laptop, not a measured throughput limit of SGLang.
+- Not quality. The cross-runtime counts mix quantization, kernels and prompt
+  wrappers.
+- Not later SGLang revisions, other hardware, or Kev on SGLang, which was not
+  attempted.
+- Not a memory limit: one out-of-memory event on a shared host.
+
+### SGLang reproduction and evidence
+
+```sh
+python3 eval/throughput/run_sglang.py --validate
+python3 eval/throughput/run_sglang.py --model qwen --workload w1
+python3 eval/throughput/run_sglang.py --model qwen --workload w2
+python3 eval/throughput/report.py \
+  docs/evidence/20261009T142410.714460Z-throughput-sglang-qwen \
+  docs/evidence/20261009T142639.150858Z-throughput-sglang-qwen \
+  docs/evidence/20261009T143126.613254Z-throughput-sglang-qwen \
+  docs/evidence/20261009T143712.053883Z-throughput-sglang-qwen
+```
+
+- [Re-probes, W1](evidence/20261009T142410.714460Z-throughput-sglang-qwen/README.md)
+- [W1 JSON and the 4 × 4 crash](evidence/20261009T142639.150858Z-throughput-sglang-qwen/README.md)
+- [W1 decisions and score](evidence/20261009T143126.613254Z-throughput-sglang-qwen/README.md)
+- [W2 JSON and decisions](evidence/20261009T143712.053883Z-throughput-sglang-qwen/README.md)
+
+Each holds the run summary, the executed sources and the working-tree diff;
+per cell or probe, the summary or probe record, `server-info.json`,
+`models.json`, `usage.json` and, gzip-compressed, the request journal and the
+server log. `requests.json` is omitted, as for llama.cpp.
 
 ## Kev MLX server
 
-Running, no results yet. Protocol: [`eval/throughput/kevmlx.md`](../eval/throughput/kevmlx.md).
+Protocol: [`eval/throughput/kevmlx.md`](../eval/throughput/kevmlx.md).
+`kev.serve` is Kev's reference implementation: its own encoder and pointer head
+over unquantized weights, and the only runtime here that keeps a state between
+requests.
+
+### Kev MLX method
+
+- **Pins.** Kev `jaredpalmer/kev` commit `5e42a7a0…` (Apache-2.0; 37 pinned
+  files checked against their git blob SHA-1s); adapter `jaredpalmer/kev-4b`
+  revision `6cfce5c2…` (14 files, 159,727,524 bytes); base
+  `Qwen/Qwen3.5-4B-Base` revision `1001bb4d…` (12 files, 9,342,823,181 bytes).
+  The adapter's `head.pt` records LoRA rank 16, an fp32 head and temperature
+  2.406.
+- **Environment.** CPython 3.13.7 in a uv venv resolved with
+  `--exclude-newer 2026-10-09T00:00:00Z`: MLX 0.32.3, mlx-lm 0.31.3, torch
+  2.8.0, transformers 5.19.0. The full freeze and the environment record
+  (`.kev/provenance.json`, copied as `kev-provenance.json`) are in the evidence.
+- **Server.** `python -I -m kev.serve --run <adapter snapshot> --fallback <same
+  snapshot> --host 127.0.0.1 --port 18096`, offline, with `KEV_BACKEND=mlx`,
+  `KEV_DTYPE=bf16` and `KEV_PREFIX_CACHE` set per cell. Every cell's
+  `/v1/models` reported `mlx`, `bfloat16`, `mps`, LoRA 16, temperature 2.41
+  and the planned cache size. A fresh server ran per cell; the first took
+  30.7 s to become ready and the others about 4.9 s. Every server exited on
+  SIGTERM with no cleanup error.
+- **Requests.** The frozen Kev `/v1/systemone` bodies, byte for byte. The
+  cached-state cell splits each W2 request into A (`operation`, on a new state)
+  and B (`node` and `field`, on the state A left in the cache), spliced from the
+  frozen bytes and sent in that order by one client.
+- **Cells.** "1 × C" is one model thread and C clients. Six new-state cells
+  with the cache off (`KEV_PREFIX_CACHE=0`) at 1, 4 and 8 clients per workload,
+  and `w2-kevmlx-cached-1x1` with the default four-state cache. With 32 states
+  and four cache entries each measured A should miss and each B hit; the cell
+  checks the server's counters against that plan and would stop otherwise.
+- **Agreement.** Within the runtime, against measured pass 1 of the workload's
+  1 × 1 cell; the cached cell against `w2-kevmlx-1x1`. The serial llama.cpp Kev
+  labels (Q4_K_M) are a cross-runtime diagnostic.
+- **Run.** `20261009T144559.263704Z`, 14:45:59 to 15:05:34 UTC, semselect
+  `2c5aad4`, clean working tree, status complete. Budgets and stop rules as
+  for llama.cpp; none triggered.
+
+### Kev MLX results
+
+Generated by `report.py` from this run; numbers are copied unchanged, with n/a
+where the script prints a dash. kev.serve serves no `/metrics`, so the token
+and busy-slot columns are empty.
+
+| Cell | Slots × clients | Unified KV | Valid / planned questions | Questions/s | Requests/s | p50 ms | p95 ms | Label agreement | Prompt tokens processed / cached | Busy slots per decode | Warmup ok / errors / attempted / planned | Status |
+| --- | ---: | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| `w1-kevmlx-1x1` | 1 × 1 | no | 88 / 88 | 1.18 | 1.18 | 773 | 1,158 | 88 / 88 | n/a / n/a | n/a | 44 / 0 / 44 / 44 | complete |
+| `w1-kevmlx-1x4` | 1 × 4 | no | 88 / 88 | 1.19 | 1.19 | 2,739 | 4,807 | 88 / 88 | n/a / n/a | n/a | 44 / 0 / 44 / 44 | complete |
+| `w1-kevmlx-1x8` | 1 × 8 | no | 88 / 88 | 1.19 | 1.19 | 6,486 | 8,902 | 88 / 88 | n/a / n/a | n/a | 44 / 0 / 44 / 44 | complete |
+| `w2-kevmlx-1x1` | 1 × 1 | no | 96 / 96 | 0.95 | 0.32 | 3,153 | 3,164 | 96 / 96 | n/a / n/a | n/a | 32 / 0 / 32 / 32 | complete |
+| `w2-kevmlx-1x4` | 1 × 4 | no | 96 / 96 | 0.95 | 0.32 | 12,604 | 12,612 | 96 / 96 | n/a / n/a | n/a | 32 / 0 / 32 / 32 | complete |
+| `w2-kevmlx-1x8` | 1 × 8 | no | 96 / 96 | 0.95 | 0.32 | 25,232 | 25,239 | 96 / 96 | n/a / n/a | n/a | 32 / 0 / 32 / 32 | complete |
+| `w2-kevmlx-cached-1x1` | 1 × 1 | no | 96 / 96 | 1.11 | 0.74 | 1,349 | 1,971 | 96 / 96 | n/a / n/a | n/a | 64 / 0 / 64 / 64 | complete |
+
+`report.py`'s own readings over this run, as printed:
+
+| Reading | Runs (1×1 / 8×8) | Speedup (8×8 / 1×1) | p95 ratio | Agreement drop | Result |
+| --- | --- | ---: | ---: | ---: | --- |
+| W1 kevmlx batches usefully | n/a / n/a | n/a | n/a | n/a | not evaluable |
+| W2 kevmlx batches usefully | n/a / n/a | n/a | n/a | n/a | not evaluable |
+| W2 kevmlx_cached batches usefully | n/a / n/a | n/a | n/a | n/a | not evaluable |
+
+Kev shared-state advantage: **not evaluable** (not evaluable: every planned W2
+kev cell must complete)
+
+These are not evaluable by construction. `report.py` looks for a 1 × 1 and an
+eight-slot, eight-client cell at llama.cpp's batch size of 512. These cells
+record no batch size, so it finds neither (its runs column is empty), and this
+arm has 1 × 8 rather than 8 × 8 cells anyway. For the same reason the script
+prints its note on the `-b 4096` diagnostics, though this run has none. The arm's
+pre-declared readings were fixed in `kevmlx.md` before inference and are
+computed by `run_kevmlx.py`, which saved them in the run summary and
+`report.md`:
+
+| Reading | Speedup (1×8 / 1×1) | p95 ratio | Agreement drop | Result |
+| --- | ---: | ---: | ---: | --- |
+| W1 Kev MLX batches usefully | 1.00 | 7.69 | 0 | no |
+| W2 Kev MLX batches usefully | 1.00 | 7.98 | 0 | no |
+
+| Reading | A p50 ms (operation, new state) | B p50 ms (node + field, cached) | B / A | Cached ms per question | Agreement drop | Result |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Cached state is materially cheaper | 1,970 | 730 | 0.37 | 365 | 0 | yes |
+
+kev.serve's own counters over the measured passes, from the same output:
+
+| Cell | KEV_PREFIX_CACHE | Requests attempted / batched | Requests per server batch | Prefix hits / misses | Cache accounting | Server batch latency_ms p50 |
+| --- | ---: | ---: | ---: | ---: | --- | ---: |
+| `w1-kevmlx-1x1` | 0 | 88 / 88 | 1.00 | 0 / 0 | as planned | 771 |
+| `w1-kevmlx-1x4` | 0 | 88 / 88 | 2.00 | 0 / 0 | as planned | 2,094 |
+| `w1-kevmlx-1x8` | 0 | 88 / 88 | 4.00 | 0 / 0 | as planned | 4,834 |
+| `w2-kevmlx-1x1` | 0 | 32 / 32 | 1.00 | 0 / 0 | as planned | 3,149 |
+| `w2-kevmlx-1x4` | 0 | 32 / 32 | 2.00 | 0 / 0 | as planned | 9,449 |
+| `w2-kevmlx-1x8` | 0 | 32 / 32 | 4.00 | 0 / 0 | as planned | 22,074 |
+| `w2-kevmlx-cached-1x1` | 4 | 64 / 64 | 1.00 | 32 / 32 | as planned | 1,346 |
+
+### What the Kev MLX cells establish
+
+1. **More clients add no throughput (measured; cause in the pinned source).**
+   W1 ran at 1.18, 1.19 and 1.19 decisions per second at 1, 4 and 8 clients,
+   and W2 at 0.95 questions per second at each. The server gathered 2 and then
+   4 queued requests per batch, but on MLX it runs a batch one request at a
+   time ([`mlx_model.py:226-229`][kev-one-at-a-time]), and every request waits
+   for its whole batch. Medians therefore grew with the client count: 773,
+   2,739 and 6,486 ms on W1; 3,153, 12,604 and 25,232 ms on W2. No request
+   failed and every label matched. Both batching readings: no.
+2. **A cached state made further questions cheap (measured).** This tests the
+   author's cached-state claim on this laptop:
+
+   | `w2-kevmlx-cached-1x1` | A: one question, new state | B: two questions, cached state |
+   | --- | ---: | ---: |
+   | Requests | 32 | 32 |
+   | Median / p95 request | 1,970 / 1,973 ms | 730 / 732 ms |
+   | Median per question | 1,970 ms | 365 ms |
+   | Valid questions | 32 / 32 | 64 / 64 |
+   | Prefix cache, measured pass | 32 misses | 32 hits |
+
+   In plain words: once Kev's server held a query's state, each further
+   question cost about 365 ms, roughly a fifth of the 1,970 ms that one
+   question cost when the state was new. B asked twice as many questions as A
+   in 37% of A's time, and all 96 labels matched the new-state cell. Each
+   request still sent the whole state, about 1,350 input tokens either way, so
+   the saving is work the server skipped, not a shorter request. Over the whole
+   cell, alternating A and B gave 1.11 questions per second, against 0.95 when
+   every request carried a new state.
+
+   It needed Kev's own server. On llama.cpp, Kev reused no prompt tokens across
+   requests in any cell (finding 4); the cache B used exists only in kev.serve
+   ([`serve.py:38-61`][kev-cache], from the pinned source). The author's M5
+   figures, 721 ms for five questions on a new state of about 270 tokens and
+   136 ms cached, remain author-reported. Our split asks a different number of
+   questions per request over longer states on a different chip, so the two
+   ratios are not comparable; the direction is the same.
+3. **Kev's bf16 server answered faster than llama.cpp's Q4_K_M Kev at one
+   request (measured; cause not isolated).** W1: 1.18 against 0.94 decisions
+   per second, medians 773 against 939 ms; both runtimes counted 47,908 input
+   tokens over the 88 measured requests, though equal counts do not show
+   identical tokens. W2: 0.95 against 0.43 questions per second. kev.serve runs
+   a request's state once for all its questions
+   ([`mlx_model.py:176-215`][kev-prefix], from the pinned source) and counted
+   about 1,770 input tokens per W2 request, where llama.cpp at one slot
+   processed about 3,627 prompt tokens per request because each head re-read
+   the state. llama.cpp's head grouping at four slots reached 1.01. Weights,
+   precision, kernels and request encoding all differ, so none of this says
+   which difference mattered.
+4. **Labels (measured).** Within the runtime every cell matched its 1 × 1
+   reference, and W1's two passes agreed. Against the serial llama.cpp Kev
+   labels (diagnostic): 84/88 on W1, where H14 in normal order and H24 reversed
+   went from `allow` to `defer` in both passes, and 95/96 on W2, where R31's
+   `operation` went from `avg` to `no_override`. Precision and implementation
+   differ; neither runtime is shown wrong.
+5. **Memory (measured).** The largest child lifetime peak RSS, cumulative
+   across cells, was 16,849,764,352 bytes (15.7 GiB) and already at that value
+   after the first cell, with the caveats of the
+   [memory section](#memory-from-startup-logs-measured).
+
+### What the Kev MLX cells do not establish
+
+- Not batching: on MLX this server runs one request at a time by construction.
+- Not the cache under real traffic. Four cache entries and the A-then-B order
+  guarantee a hit for every B. A caller gains only when it asks again about a
+  state still among the four most recent, and it still sends the whole state.
+- Not the author's longer states (8,192 and 65,000 tokens) or M5 timings.
+- Not semselect's service: semselect has no Kev MLX path, and the guard was not
+  involved.
+- Not decision quality.
+
+### Kev MLX reproduction and evidence
+
+```sh
+python3 eval/throughput/kevmlx_setup.py            # network, once
+python3 eval/throughput/kevmlx_setup.py --verify
+python3 eval/throughput/run_kevmlx.py
+python3 eval/throughput/report.py \
+  docs/evidence/20261009T144559.263704Z-throughput-kevmlx-kev
+```
+
+The [evidence README](evidence/20261009T144559.263704Z-throughput-kevmlx-kev/README.md)
+also gives the command that re-renders the arm's own readings from the saved
+summary. It holds the run summary, the executed sources, the working-tree diff,
+the environment provenance and freeze and, per cell, the summary, `models.json`
+and the gzip-compressed journal and server log.
+
+## Three runtimes at one request
+
+Each column is a different artifact: GGUF Q4_K_M on llama.cpp, MLX affine 4-bit
+on SGLang and bf16 on Kev's own server, each with its own kernels and request
+wrapper. Read a row as "this runtime with this artifact on this laptop", not as
+a ranking of models or runtimes. Questions per measured second in the 1 × 1
+cells (measured):
+
+| Arm | llama.cpp, Q4_K_M | SGLang MLX, 4-bit | Kev MLX server, bf16 |
+| --- | ---: | ---: | ---: |
+| W1 Qwen JSON | 1.06 (warm prefix cache) | 0.78 (no cache) | not served |
+| W1 Qwen, no decode | 0.97 (one-token scoring) | 0.98 (`/v1/score`), 0.99 (`/v1/decisions`) | not served |
+| W1 Kev | 0.94 | not served | 1.18 |
+| W2 Qwen JSON | 1.30 | 1.21 | not served |
+| W2 Qwen decisions | no counterpart | 0.40 (stopped, 39/96) | not served |
+| W2 Kev, new state | 0.43 | not served | 0.95 |
+| W2 Kev, cached state (A then B) | no cross-request cache | not served | 1.11 |
+
+llama.cpp served 20,195 of W1 Qwen JSON's 50,460 prompt tokens from its cache;
+SGLang computed all of them. W2 Qwen JSON processed the same 34,899 prompt
+tokens on both runtimes, and SGLang generated 785 tokens to llama.cpp's 497.
+
+With fresh evidence in each request, every runtime landed between 0.78 and 1.18
+decisions per second on W1. The larger differences follow how often a W2
+request re-reads its shared state: once per question for Kev on llama.cpp at
+one slot and for SGLang decisions; once per request for Kev's own server and
+for Qwen JSON on either runtime; and not at all for a B request on a cached
+state. On llama.cpp, sharing Kev's state within a request needs four slots
+(1.01 questions per second, finding 4).
 
 [kev-embd]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/common/common.cpp#L1246-L1266
 [output-all]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L1736-L1737
 [hybrid-split]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-memory-hybrid.cpp#L74-L90
 [split-seq]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-batch.cpp#L774-L813
+[kev-one-at-a-time]: https://github.com/jaredpalmer/kev/blob/5e42a7a03f28134853dd3ff77461457e921e5ec1/kev/mlx_model.py#L226-L229
+[kev-prefix]: https://github.com/jaredpalmer/kev/blob/5e42a7a03f28134853dd3ff77461457e921e5ec1/kev/mlx_model.py#L176-L215
+[kev-cache]: https://github.com/jaredpalmer/kev/blob/5e42a7a03f28134853dd3ff77461457e921e5ec1/kev/serve.py#L38-L61

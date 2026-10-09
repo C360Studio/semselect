@@ -36,15 +36,14 @@ What is measured, probed, designed and only reported by others:
   M3 Pro after `--disable-radix-cache`. One fixture, one running request, no
   throughput. The [compatibility record](sglang-investigation.md) keeps it
   apart from any performance claim. The venv and model are still on disk.
-- **Designed; llama.cpp cells run 2026-10-09:** the
+- **Designed and run 2026-10-09:** the
   [throughput experiment](../eval/throughput/README.md).
   It compares three serving paths on this laptop, reusing the 24-case
   source-evidence pilot (independent decisions) and the 32-case query-routing
   task (three questions over one shared state), at 1, 4 and 8 slots, with Kev
   head grouping and unified KV cells. SGLang MLX cells cover Qwen JSON,
   `/v1/decisions` and `/v1/score`; Kev's own MLX server includes a cached-state
-  cell. The llama.cpp cells ran on 2026-10-09 (outcome below); the SGLang MLX
-  and Kev MLX cells are running, with no results yet.
+  cell. All three paths ran on 2026-10-09 (outcomes below).
 - **Author-reported, not ours:** the figures in the README's
   [pitch table](../README.md#what-the-decision-model-pitch-claims-in-plain-language),
   and the SGLang and openjev-sglang statements below.
@@ -64,6 +63,24 @@ from slots only with a warm prefix cache. Neither pre-declared reading came out
 yes: no arm batched usefully, and Kev showed no shared-state advantage. The
 lever on this hardware is fewer processed tokens per decision, not concurrency.
 This says nothing about CUDA hardware, Jev or decision quality.
+
+**Outcome on SGLang MLX and Kev's own MLX server, 2026-10-09 (measured).** The
+same workloads ran on two more serving paths, each with a different artifact
+([record](validation-throughput.md#three-runtimes-at-one-request)). SGLang MLX
+(Qwen, MLX 4-bit) served one running request only at its pinned revision: four
+running requests crashed the scheduler, the radix cache still crashed and the
+three-question decisions cell ran out of Metal memory, so no SGLang batching
+reading could be evaluated. At one request its no-decode endpoints ran at 0.98
+and 0.99 decisions per second against 0.78 for JSON. Kev's own server (bf16)
+gained nothing from more clients, because on MLX it runs one request at a time,
+but it is the only runtime here that keeps a state between requests: once a
+state was cached, each further question cost about 365 ms, against 1,970 ms for
+one question on a new state, with labels unchanged, and its pre-declared
+cached-state reading came out yes. At one request the three runtimes landed
+between 0.78 and 1.18 decisions per second on the source-evidence pilot. The
+lever is unchanged, fewer processed tokens per decision, and on Kev's own server
+that now includes a cached state. This says nothing about CUDA hardware, Jev or
+decision quality.
 
 **SGLang does not document Kev support.** SGLang's
 [decision-model documentation](https://docs.sglang.io/docs/supported-models/decision_models),
@@ -90,8 +107,8 @@ describe batching limits or prefix caching on MLX.
 which exposes `/v1/systemone` and selects MLX automatically on Apple Silicon
 (bf16). The artifact is a LoRA adapter plus a pointer head with fitted
 temperature 2.41, under Apache-2.0. Its authors report Apple M5 and H100 numbers
-(see the README table); we have not run it, and an M5 with bf16 weights is a
-different machine and precision from our M3 Pro with Q4_K_M files.
+(see the README table). We ran it on 2026-10-09 (outcome above); an M5 is still
+a different machine from our M3 Pro.
 
 **A "neither runtime batches usefully on Metal" result is a valid outcome.** The
 experiment is isolated evaluation work. It changes neither the default runtime
