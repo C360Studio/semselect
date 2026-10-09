@@ -16,6 +16,17 @@ edges or anomaly review. SemEngine's plan reserves LLM-backed features for
 separate admission. A source package in the extraction plan is not an available
 SemEngine caller.
 
+SemSource itself has never exposed the legacy semantic tier: its graph
+configuration carries clustering, LLM-summary and identity-edge switches only,
+so no SemSource deployment has produced semantic virtual edges, and the recorded
+real graphs ran with the tier off. The scale number for the pilot was measured by
+reproducing the legacy provider's query externally against a live legacy stack,
+labeled as SemStreams evidence; see the
+[scale note](../eval/community-refinement/scale.md). The port should expose the
+candidate generation parameters (`k`, threshold, weight), the per-pair candidate
+set with its embedding revision, and explicit-edge dominance, so a reviewer can
+be driven and cached outside the clustering tick.
+
 The immediate deliverable is therefore an evaluation contract. Execution needs
 the actual ported algorithm/provider chain and a pinned SemEngine revision. Do
 not build another graph implementation in semselect to fill the port gap, or

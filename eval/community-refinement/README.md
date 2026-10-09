@@ -308,7 +308,7 @@ Proposed **pilot screening thresholds**, to freeze before execution:
   snapshots do not establish 250-entity capacity. These are pilot budgets, not
   production SLOs or the query router's subsecond latency target.
 - Name the real scale before the pilot: candidates per cycle and refresh cadence
-  on a representative SemSource graph. Required decisions per second equals
+  on a representative SemSource graph (recorded in [scale.md](scale.md)). Required decisions per second equals
   candidates divided by the cadence in seconds. Compare it with the selected
   profile's measured decisions per second from the
   [throughput experiment](../throughput/README.md). If the requirement exceeds
