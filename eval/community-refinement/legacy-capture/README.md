@@ -22,30 +22,57 @@ stack, read-only, against a live legacy tier-1 deployment:
 
 | Legacy behavior (SemStreams `v1.0.0-beta.160`) | Reproduction |
 | --- | --- |
-| `refreshCache` asks `graph.embedding.query.similar` with `{"entity_id", "limit": k}` per entity | Same request per `EMBEDDING_INDEX` key, `k=8`, bounded concurrency |
+| `refreshCache` asks `graph.embedding.query.similar` with `{"entity_id", "limit": k}` per `ENTITY_STATES` entity, 30 s timeout | Same request per entity in both `ENTITY_STATES` and `EMBEDDING_INDEX`, `k=8`, 30 s timeout, bounded concurrency |
 | `parseSimilarResponse` keeps `similarity >= 0.75` | Same inclusive client-side threshold |
 | `refreshCache` drops self-edges; directed sets are sets | Self and duplicate IDs dropped, reply order kept, capped at `k` |
 | `computeMutual` intersects directed sets | Verbatim copy of `computeMutual` |
 | An `embedding_unavailable` reply is a definitive empty | Recorded as `embedding_unavailable`, not retried, counts as answered |
 | Explicit edges dominate (`kvProvider` "both" = outgoing ∪ incoming) | `explicit_dominated` if either endpoint's `OUTGOING_INDEX` row names the other |
 
-Querying only embedded entities is equivalent to the provider's
-all-`ENTITY_STATES` sweep: the handler only ranks entities with generated
-embeddings, so an entity without one cannot appear in any directed set.
+Skipping `ENTITY_STATES` entities without an embedding is equivalent to the
+provider's sweep: the handler only ranks entities with generated embeddings,
+so such an entity cannot appear in any directed set. An `EMBEDDING_INDEX` key
+absent from `ENTITY_STATES` is an orphan the provider never queries. The tool
+reports orphans as `embedded_not_in_entity_states` and exits non-zero before
+the sweep when there are any, unless `-allow-orphan-embeddings` is set; they
+are then reported and left unqueried.
 
 Differences from the in-process provider, stated so the numbers are not
 over-read:
 
 - Transient NATS failures are retried at most twice; the sweep aborts once
-  more than 10% of entities fail, mirroring the provider's coverage threshold.
-  The provider instead re-queries failed entities next cycle.
+  failures exceed 10% of the `ENTITY_STATES` count, mirroring the provider's
+  coverage threshold and its denominator. The provider instead re-queries
+  failed entities next cycle.
+- A failed or unqueried entity has no directed set, so any mutual pair
+  through it is missing: `mutual_pairs_is_lower_bound` is then true.
+  `directed_edges_to_unanswered` counts directed edges from answered entities
+  to unanswered ones, an upper bound on pairs lost with one answered endpoint.
+  A pair between two unanswered entities cannot be observed.
 - A reply naming a different `entity_id`, an oversized reply or a parse error
   is a failure, never an empty set.
 - The explicit-edge check reads `OUTGOING_INDEX` for both endpoints instead of
   `OUTGOING_INDEX ∪ INCOMING_INDEX` for one. These agree whenever the two
-  indexes are consistent; the capture does not verify that.
+  indexes are consistent; the capture does not verify that. A row with an
+  entry lacking `to_entity_id` is rejected whole, as the provider's
+  `getNeighborsFromBucket` does; its predicate and entity-ID validation are
+  not replicated.
+- If any mutual pair stays unresolved, or the run is interrupted after the
+  sweep, the outputs are still written with the unknown counts null and the
+  tool exits non-zero.
 - It records candidates only. The provider's edge weight (0.9), structural
   tiers and label propagation are not run.
+
+The published osh capture
+(`docs/evidence/20261009T163957Z-legacy-capture-osh-mutualknn/`) predates the
+30 s default and the `ENTITY_STATES` denominator: it ran with a 10 s
+per-request timeout (`parameters.timeout_ms: 10000` in its `summary.json`) and
+a failure budget over the embedded count. Neither changes its numbers. It had
+zero failures and `embedded_not_in_entity_states: 0`, so the overlap sweep
+covers the same 6,689 entities, and the fields added since
+(`embedded_in_entity_states`, `directed_edges_to_unanswered`,
+`mutual_pairs_is_lower_bound`) would read 6,689, 0 and false. Its
+`status-after-capture.json` matches its status at capture.
 
 ## No deployment has produced these edges
 
@@ -81,10 +108,13 @@ The script:
    containers or volumes.
 3. Polls `GET /source-manifest/status` and records `containers_healthy`,
    `phase_ready`, `index_ready` and `embedding_ready`. If `embedding.ready` is
-   not true within 30 minutes of healthy containers, it stops and records the
-   failure.
+   not true within 30 minutes of healthy containers, or `nats`, `semembed` or
+   `semsource` stops running, it stops and records the failure.
 4. Runs `cmd/mutualknn` into
-   `docs/evidence/<UTC timestamp>-legacy-capture-osh-mutualknn/`.
+   `docs/evidence/<UTC timestamp>-legacy-capture-osh-mutualknn/`, then reads
+   the status again. Unless the entity count, `embedding.ready` and the
+   embedding revisions equal the status that gated the capture, and that count
+   equals the tool's `total_entities`, the run fails.
 5. Saves the SemSource log (gzip), its graph-embedding/graph-clustering lines,
    all Compose logs (gzip), `SHA256SUMS`, and always runs `down -v`.
 
@@ -98,10 +128,15 @@ go build -o /tmp/mutualknn ./cmd/mutualknn
   -config-path .../mvp.json
 ```
 
-Provenance flags are required. Offline checks: `gofmt -l .`, `go vet ./...`
-and `go test -race ./...` from this directory. The tests cover the pure
-functions and the retry and classification policy with a fake requester; no
-NATS server is involved.
+Provenance flags are required. `-output` must not exist and its parent must;
+a run that fails before writing anything removes it. `-timeout` (30 s) bounds
+one similar request and `-list-timeout` (120 s) bounds listing one bucket.
+
+Offline checks: `gofmt -l .`, `go vet ./...` and `go test -race ./...` from
+this directory. Unit tests cover the pure functions and the retry and
+classification policy with a fake requester. End-to-end tests run the tool
+against an embedded `nats-server` with seeded KV buckets and a scripted
+similar responder. Neither involves Docker, SemSource or a model.
 
 ## Outputs
 
@@ -112,7 +147,7 @@ NATS server is involved.
 | `directed.jsonl` | One line per embedded entity: status, attempts, latency, the raw `similar` reply in order and the thresholded directed set (gzip if 20 MB or larger) |
 | `mutual_pairs.jsonl` | One line per mutual pair: both similarities and ranks, system/type of each endpoint and `explicit_dominated` |
 | `milestones.json`, `run.json` | Readiness milestones, outcome and the status payload at capture |
-| `status-after-capture.json` | Status after the sweep, to show the graph did not change during it |
+| `status-after-capture.json` | Status after the sweep; the `graph_unchanged_check` milestone records its comparison with the status at capture |
 
 `directed.jsonl` keeps every returned neighbour, including those below the
 threshold, so any other threshold, or any k up to 8, can be evaluated offline

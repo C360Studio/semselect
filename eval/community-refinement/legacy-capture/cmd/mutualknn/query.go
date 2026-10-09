@@ -37,9 +37,10 @@ const (
 	// maxOutgoingValueBytes bounds one OUTGOING_INDEX value.
 	maxOutgoingValueBytes = 8 << 20
 
-	// abortFailureFraction mirrors the legacy maxTransientErrorFraction (0.10):
-	// once more than this fraction of the embedded set has failed, the sweep is
-	// abandoned rather than ground out against a wedged responder.
+	// abortFailureFraction mirrors the legacy maxTransientErrorFraction (0.10)
+	// and its denominator, the ENTITY_STATES count: once more than this
+	// fraction has failed, the sweep is abandoned rather than ground out
+	// against a wedged responder.
 	abortFailureFraction = 0.10
 )
 
@@ -120,6 +121,10 @@ func querySimilar(ctx context.Context, r requester, id string, k int, threshold 
 			}
 			select {
 			case <-ctx.Done():
+				// The run is stopping: not a transport or handler failure, and
+				// not one that may count toward the failure budget.
+				res.FailureKind = failureCancelled
+				res.Error = fmt.Sprintf("%v during retry backoff; last error: %s", ctx.Err(), res.Error)
 				return false
 			case <-time.After(time.Duration(attempt) * backoff):
 				return true
@@ -205,15 +210,15 @@ func handlerMessage(data []byte) string {
 
 // sweep queries every id with bounded concurrency. Results are indexed like
 // ids; entities never dispatched keep status not_queried. It returns a
-// non-nil abort error when the failure budget is exhausted.
-func sweep(ctx context.Context, r requester, ids []string, k int, threshold float64,
+// non-nil abort error once failures exceed abortFailureFraction of
+// budgetTotal, the legacy provider's ENTITY_STATES denominator.
+func sweep(ctx context.Context, r requester, ids []string, budgetTotal, k int, threshold float64,
 	timeout, backoff time.Duration, concurrency int, progress func(done int),
 ) ([]queryResult, error) {
 	results := make([]queryResult, len(ids))
 	for i, id := range ids {
 		results[i] = queryResult{EntityID: id, Status: statusNotQueried, Similar: []neighbor{}, Directed: []neighbor{}}
 	}
-	budget := int(abortFailureFraction * float64(len(ids)))
 
 	ctx, cancel := context.WithCancelCause(ctx)
 	defer cancel(nil)
@@ -233,8 +238,9 @@ func sweep(ctx context.Context, r requester, ids []string, k int, threshold floa
 				res := querySimilar(ctx, r, ids[i], k, threshold, timeout, backoff)
 				results[i] = res
 				if res.Status == statusFailed && res.FailureKind != failureCancelled {
-					if int(failed.Add(1)) > budget {
-						cancel(fmt.Errorf("%w: more than %d of %d entities failed", errBudget, budget, len(ids)))
+					if n := failed.Add(1); overFailureBudget(int(n), budgetTotal) {
+						cancel(fmt.Errorf("%w: %d failures exceed %.0f%% of %d entities",
+							errBudget, n, 100*abortFailureFraction, budgetTotal))
 					}
 				}
 				if n := int(done.Add(1)); progress != nil {
@@ -260,8 +266,14 @@ feed:
 	return results, nil
 }
 
+// overFailureBudget is the legacy overCoverageThreshold: failed/total strictly
+// above abortFailureFraction, never for an empty denominator.
+func overFailureBudget(failed, total int) bool {
+	return failed > 0 && total > 0 && float64(failed)/float64(total) > abortFailureFraction
+}
+
 // listKeys returns the deduplicated keys of a KV bucket, failing rather than
-// truncating when the bucket holds more than maxKeys.
+// truncating when the bucket holds more than maxKeys or ctx ends.
 func listKeys(ctx context.Context, kv jetstream.KeyValue, maxKeys int) ([]string, error) {
 	lister, err := kv.ListKeys(ctx)
 	if err != nil {
@@ -276,6 +288,11 @@ func listKeys(ctx context.Context, kv jetstream.KeyValue, maxKeys int) ([]string
 			return nil, ctx.Err()
 		case key, ok := <-lister.Keys():
 			if !ok {
+				// jetstream closes the channel when ctx ends as well as when the
+				// listing completes; only the latter is a full key set.
+				if err := ctx.Err(); err != nil {
+					return nil, err
+				}
 				return keys, nil
 			}
 			if seen[key] {
@@ -303,7 +320,7 @@ type kvGetter interface {
 // loadOutgoing reads the OUTGOING_INDEX row (a JSON array of
 // {to_entity_id, predicate}, keyed by source entity ID) for each id with
 // bounded concurrency. A missing key is an entity with no outgoing edges.
-// Per-id read or decode failures are returned in errsByID.
+// Per-id read, decode or row-shape failures are returned in errsByID.
 func loadOutgoing(ctx context.Context, kv kvGetter, ids []string, concurrency int,
 ) (out map[string]map[string]bool, errsByID map[string]string) {
 	out = make(map[string]map[string]bool, len(ids))
@@ -370,10 +387,13 @@ func readOutgoing(ctx context.Context, kv kvGetter, id string) (map[string]bool,
 		return nil, fmt.Errorf("decode OUTGOING_INDEX row: %w", err)
 	}
 	set := make(map[string]bool, len(entries))
-	for _, e := range entries {
-		if e.ToEntityID != "" {
-			set[e.ToEntityID] = true
+	for i, e := range entries {
+		// As legacy getNeighborsFromBucket: an entry without a target poisons
+		// the whole row rather than being skipped.
+		if e.ToEntityID == "" {
+			return nil, fmt.Errorf("OUTGOING_INDEX row entry %d is missing to_entity_id", i)
 		}
+		set[e.ToEntityID] = true
 	}
 	return set, nil
 }

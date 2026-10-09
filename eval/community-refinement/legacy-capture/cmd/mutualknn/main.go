@@ -1,8 +1,8 @@
 // Command mutualknn reproduces, externally and read-only, the candidate
 // generation of the legacy SemStreams SemanticEdgeProvider against a live
 // legacy tier-1 stack: one graph.embedding.query.similar request per embedded
-// entity, a client-side similarity threshold, and the symmetric mutual-kNN
-// intersection. Its output is a legacy SemStreams capture, never a SemEngine
+// ENTITY_STATES entity, a client-side similarity threshold, and the symmetric
+// mutual-kNN intersection. Its output is a legacy SemStreams capture, never a SemEngine
 // result.
 package main
 
@@ -49,8 +49,11 @@ type options struct {
 	concurrency int
 	timeout     time.Duration
 	backoff     time.Duration
+	listTimeout time.Duration
 	output      string
 	maxEntities int
+
+	allowOrphanEmbeddings bool
 
 	corpusRepo        string
 	corpusCommit      string
@@ -72,10 +75,13 @@ func parseFlags(args []string) (options, error) {
 	fs.IntVar(&o.k, "k", 8, "mutual-kNN k (legacy DefaultSemanticMaxNeighbors)")
 	fs.Float64Var(&o.threshold, "threshold", 0.75, "client-side similarity threshold (legacy DefaultSemanticThreshold)")
 	fs.IntVar(&o.concurrency, "concurrency", 8, "concurrent similar requests")
-	fs.DurationVar(&o.timeout, "timeout", 10*time.Second, "timeout per similar request")
+	fs.DurationVar(&o.timeout, "timeout", 30*time.Second, "timeout per similar request (legacy similarQueryTimeout)")
 	fs.DurationVar(&o.backoff, "retry-backoff", 250*time.Millisecond, "linear backoff unit between transient retries")
-	fs.StringVar(&o.output, "output", "", "output directory; must not exist")
+	fs.DurationVar(&o.listTimeout, "list-timeout", 120*time.Second, "deadline for opening and listing one KV bucket")
+	fs.StringVar(&o.output, "output", "", "output directory; must not exist, its parent must")
 	fs.IntVar(&o.maxEntities, "max-entities", 50000, "abort if a bucket holds more keys than this")
+	fs.BoolVar(&o.allowOrphanEmbeddings, "allow-orphan-embeddings", false,
+		"capture even when EMBEDDING_INDEX holds keys absent from ENTITY_STATES (they are not queried)")
 
 	fs.StringVar(&o.corpusRepo, "corpus-repo", "", "corpus repository URL (provenance)")
 	fs.StringVar(&o.corpusCommit, "corpus-commit", "", "corpus commit (provenance)")
@@ -100,8 +106,8 @@ func parseFlags(args []string) (options, error) {
 		return o, errors.New("-threshold must be in (0,1]")
 	case o.concurrency < 1 || o.concurrency > 64:
 		return o, errors.New("-concurrency must be in 1..64")
-	case o.timeout <= 0 || o.backoff < 0:
-		return o, errors.New("-timeout must be positive and -retry-backoff non-negative")
+	case o.timeout <= 0 || o.listTimeout <= 0 || o.backoff < 0:
+		return o, errors.New("-timeout and -list-timeout must be positive and -retry-backoff non-negative")
 	case o.maxEntities < 1:
 		return o, errors.New("-max-entities must be positive")
 	}
@@ -128,17 +134,26 @@ func main() {
 	}
 }
 
-func run(ctx context.Context, args []string, logger *slog.Logger) error {
+func run(ctx context.Context, args []string, logger *slog.Logger) (err error) {
 	started := time.Now().UTC()
 	o, err := parseFlags(args)
 	if err != nil {
 		return err
 	}
-	if _, err := os.Lstat(o.output); err == nil {
-		return fmt.Errorf("output %s already exists", o.output)
-	} else if !errors.Is(err, os.ErrNotExist) {
-		return err
+	// Mkdir refuses an existing output atomically. A failure before anything
+	// is written removes the still-empty directory, so it cannot be mistaken
+	// for a capture.
+	if err := os.Mkdir(o.output, 0o755); err != nil {
+		return fmt.Errorf("create output: %w", err)
 	}
+	wrote := false
+	defer func() {
+		if err != nil && !wrote {
+			if rmErr := os.Remove(o.output); rmErr != nil {
+				err = errors.Join(err, fmt.Errorf("remove empty output: %w", rmErr))
+			}
+		}
+	}()
 	// Hash provenance inputs before touching the stack so a bad path fails fast.
 	hashes, err := hashFiles(map[string]string{
 		"config": o.configPath, "compose_file": o.composeFile, "compose_override": o.composeOverride,
@@ -152,10 +167,6 @@ func run(ctx context.Context, args []string, logger *slog.Logger) error {
 			return err
 		}
 	}
-	if err := os.MkdirAll(o.output, 0o755); err != nil {
-		return err
-	}
-
 	nc, err := nats.Connect(o.natsURL, nats.Name("semselect-legacy-capture"), nats.Timeout(5*time.Second))
 	if err != nil {
 		return fmt.Errorf("connect %s: %w", o.natsURL, err)
@@ -166,21 +177,28 @@ func run(ctx context.Context, args []string, logger *slog.Logger) error {
 		return err
 	}
 
-	entityIDs, err := bucketKeys(ctx, js, bucketEntityStates, o.maxEntities)
+	entityIDs, err := bucketKeys(ctx, js, bucketEntityStates, o.maxEntities, o.listTimeout)
 	if err != nil {
 		return err
 	}
-	embeddedIDs, err := bucketKeys(ctx, js, bucketEmbeddingIndex, o.maxEntities)
+	embeddedIDs, err := bucketKeys(ctx, js, bucketEmbeddingIndex, o.maxEntities, o.listTimeout)
 	if err != nil {
 		return err
 	}
-	logger.Info("listed buckets", "entities", len(entityIDs), "embedded", len(embeddedIDs))
+	sweepIDs, orphans := sweepSet(entityIDs, embeddedIDs)
+	logger.Info("listed buckets", "entities", len(entityIDs), "embedded", len(embeddedIDs),
+		"swept", len(sweepIDs), "embedded_not_in_entity_states", len(orphans))
+	if len(orphans) > 0 && !o.allowOrphanEmbeddings {
+		return fmt.Errorf("%d %s keys are not in %s (first: %s); the legacy provider never queries them, "+
+			"so the graph is inconsistent: rerun with -allow-orphan-embeddings to capture anyway",
+			len(orphans), bucketEmbeddingIndex, bucketEntityStates, orphans[0])
+	}
 
 	queryStart := time.Now()
-	results, abortErr := sweep(ctx, nc, embeddedIDs, o.k, o.threshold, o.timeout, o.backoff, o.concurrency,
-		func(done int) {
-			if done%500 == 0 || done == len(embeddedIDs) {
-				logger.Info("similar queries", "done", done, "of", len(embeddedIDs))
+	results, abortErr := sweep(ctx, nc, sweepIDs, len(entityIDs), o.k, o.threshold, o.timeout, o.backoff,
+		o.concurrency, func(done int) {
+			if done%500 == 0 || done == len(sweepIDs) {
+				logger.Info("similar queries", "done", done, "of", len(sweepIDs))
 			}
 		})
 	queryPhase := time.Since(queryStart)
@@ -195,7 +213,11 @@ func run(ctx context.Context, args []string, logger *slog.Logger) error {
 	}
 
 	lines := resolveExplicit(ctx, js, pairs, o.concurrency, &sum, logger)
+	// The outputs are written either way; an incomplete or interrupted
+	// explicit-edge phase still fails the run.
+	explicitErr := explicitPhaseErr(ctx, sum)
 
+	wrote = true
 	if err := writeJSONL(filepath.Join(o.output, "directed.jsonl"), results); err != nil {
 		return err
 	}
@@ -213,23 +235,43 @@ func run(ctx context.Context, args []string, logger *slog.Logger) error {
 	}
 	logger.Info("capture written", "output", o.output, "mutual_pairs", sum.MutualPairs,
 		"failed", sum.Failed, "aborted", sum.Aborted)
-	if abortErr != nil {
-		return abortErr
-	}
-	return nil
+	return errors.Join(abortErr, explicitErr)
 }
 
-func bucketKeys(ctx context.Context, js jetstream.JetStream, bucket string, maxKeys int) ([]string, error) {
+// bucketKeys opens and lists one bucket within timeout, sorted.
+func bucketKeys(ctx context.Context, js jetstream.JetStream, bucket string, maxKeys int,
+	timeout time.Duration,
+) ([]string, error) {
+	ctx, cancel := context.WithTimeout(ctx, timeout)
+	defer cancel()
 	kv, err := js.KeyValue(ctx, bucket)
 	if err != nil {
 		return nil, fmt.Errorf("open %s: %w", bucket, err)
 	}
 	keys, err := listKeys(ctx, kv, maxKeys)
 	if err != nil {
-		return nil, fmt.Errorf("list %s: %w", bucket, err)
+		return nil, fmt.Errorf("list %s (-list-timeout %s): %w", bucket, timeout, err)
 	}
 	sort.Strings(keys)
 	return keys, nil
+}
+
+// sweepSet splits the sorted embedded IDs into those the legacy provider
+// queries (also in ENTITY_STATES, which it iterates) and orphan embeddings
+// it never queries.
+func sweepSet(entityIDs, embeddedIDs []string) (swept, orphans []string) {
+	known := make(map[string]bool, len(entityIDs))
+	for _, id := range entityIDs {
+		known[id] = true
+	}
+	for _, id := range embeddedIDs {
+		if known[id] {
+			swept = append(swept, id)
+		} else {
+			orphans = append(orphans, id)
+		}
+	}
+	return swept, orphans
 }
 
 type summary struct {
@@ -245,6 +287,7 @@ type summary struct {
 	TotalEntities             int            `json:"total_entities"`
 	EmbeddedEntities          int            `json:"embedded_entities"`
 	EmbeddedNotInEntityStates int            `json:"embedded_not_in_entity_states"`
+	EmbeddedInEntityStates    int            `json:"embedded_in_entity_states"` // the swept set
 	MalformedEntityIDs        int            `json:"malformed_entity_ids"`
 	EntitiesByType            map[string]int `json:"entities_by_type"`
 	EntitiesBySystem          map[string]int `json:"entities_by_system"`
@@ -263,8 +306,13 @@ type summary struct {
 	SimilarReturned              int `json:"similar_returned"`
 	DirectedPairsAtThreshold     int `json:"directed_pairs_at_threshold"`
 	NeighborIDsNotInEntityStates int `json:"neighbor_ids_not_in_entity_states"`
+	// DirectedEdgesToUnanswered counts directed edges from answered entities to
+	// failed or not-queried ones: an upper bound on mutual pairs lost with one
+	// answered endpoint. A pair between two unanswered entities is unobservable.
+	DirectedEdgesToUnanswered int `json:"directed_edges_to_unanswered"`
 
 	MutualPairs                         int            `json:"mutual_pairs"`
+	MutualPairsIsLowerBound             bool           `json:"mutual_pairs_is_lower_bound"`
 	MutualPairsExplicitDominated        *int           `json:"mutual_pairs_explicit_dominated"`
 	MutualPairsExplicitDominatedReason  string         `json:"mutual_pairs_explicit_dominated_null_reason,omitempty"`
 	MutualPairsReviewCandidates         *int           `json:"mutual_pairs_review_candidates"`
@@ -313,7 +361,9 @@ func summarize(o options, entityIDs, embeddedIDs []string, results []queryResult
 		s.EntitiesBySystem[p.System]++
 	}
 	for _, id := range embeddedIDs {
-		if !known[id] {
+		if known[id] {
+			s.EmbeddedInEntityStates++
+		} else {
 			s.EmbeddedNotInEntityStates++
 		}
 		if p := parseEntityID(id); p.Valid {
@@ -321,6 +371,15 @@ func summarize(o options, entityIDs, embeddedIDs []string, results []queryResult
 		}
 	}
 	s.TotalEntities, s.EmbeddedEntities = len(entityIDs), len(embeddedIDs)
+
+	// A failed or never-queried entity has no directed set, so every mutual
+	// pair through it is missing from the count.
+	unanswered := make(map[string]bool)
+	for _, r := range results {
+		if r.Status == statusFailed || r.Status == statusNotQueried {
+			unanswered[r.EntityID] = true
+		}
+	}
 
 	// The legacy provider caches a definitive (possibly empty) directed set for
 	// every answered entity, including embedding_unavailable misses.
@@ -351,6 +410,9 @@ func summarize(o options, entityIDs, embeddedIDs []string, results []queryResult
 				if !known[n.EntityID] {
 					s.NeighborIDsNotInEntityStates++
 				}
+				if unanswered[n.EntityID] {
+					s.DirectedEdgesToUnanswered++
+				}
 			}
 			directed[r.EntityID] = set
 			s.SimilarReturned += len(r.Similar)
@@ -366,6 +428,7 @@ func summarize(o options, entityIDs, embeddedIDs []string, results []queryResult
 			s.NotQueried++
 		}
 	}
+	s.MutualPairsIsLowerBound = s.Failed+s.NotQueried > 0
 	s.Latency = summarizeLatency(latencies)
 	s.SimilarityHistogramDirected = similarityHistogram(directedSims, o.threshold)
 
@@ -489,6 +552,18 @@ func resolveExplicit(ctx context.Context, js jetstream.JetStream, pairs []pairIn
 	candidates := len(pairs) - dominated
 	s.MutualPairsExplicitDominated, s.MutualPairsReviewCandidates = &dominated, &candidates
 	return lines
+}
+
+// explicitPhaseErr fails a run whose explicit-edge phase was interrupted or
+// left the review-candidate count unknown.
+func explicitPhaseErr(ctx context.Context, s summary) error {
+	if err := ctx.Err(); err != nil {
+		return fmt.Errorf("interrupted during explicit-edge resolution: %w", err)
+	}
+	if s.MutualPairsReviewCandidates == nil {
+		return fmt.Errorf("explicit-edge resolution incomplete: %s", s.MutualPairsExplicitDominatedReason)
+	}
+	return nil
 }
 
 // explicitEdge reports whether an explicit edge joins a and b in either

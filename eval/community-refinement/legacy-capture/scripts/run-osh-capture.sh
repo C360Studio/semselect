@@ -83,7 +83,10 @@ milestone() {
 cleanup() {
 	local rc=$?
 	set +e
-	trap - EXIT INT TERM
+	trap - EXIT
+	# Ignore INT/TERM from here on: a second Ctrl-C must not kill the script
+	# before `down -v` has run.
+	trap '' INT TERM
 	if [[ $rc -ne 0 && -z $FAILURE ]]; then
 		FAILURE="exited with status $rc"
 	fi
@@ -159,8 +162,12 @@ HEALTHY_AT=$(now_s)
 
 phase_ready=0 index_ready=0 embedding_ready=0 last_report=0 last_body=""
 while :; do
-	running=$(compose ps --status running --services | wc -l | tr -d ' ') || fail "docker compose ps failed"
-	((running >= 3)) || fail "a service stopped running: $(compose ps -a 2>&1)"
+	# Name the core services: a count would still pass with one of them down
+	# whenever COMPOSE_PROFILES starts extra services (ui, caddy).
+	running=$(compose ps --status running --services) || fail "docker compose ps failed"
+	for svc in nats semembed semsource; do
+		grep -qx "$svc" <<<"$running" || fail "service $svc is not running: $(compose ps -a 2>&1)"
+	done
 	if body=$(curl -fsS --max-time 5 "$STATUS_URL" 2>/dev/null) && jq -e . >/dev/null 2>&1 <<<"$body"; then
 		last_body=$body
 		snap=$(jq -c '{phase, total_entities, index: (.index | {ready, state, lag}), embedding: (.embedding | {ready, state, lag})}' <<<"$body")
@@ -242,9 +249,24 @@ milestone capture_start
 	2>&1 | tee "$WORK/mutualknn.log" || fail "mutualknn failed: $(tail -n 5 "$WORK/mutualknn.log")"
 milestone capture_done
 
-# The graph must not have moved underneath the capture.
+# The graph must not have moved underneath the capture: the entity count and
+# embedding readiness/revision after the sweep must equal the status that gated
+# it, and that count must equal the ENTITY_STATES count the tool listed.
 curl -fsS --max-time 5 "$STATUS_URL" >"$EVIDENCE/status-after-capture.json" ||
-	echo "warning: could not read status after capture" >&2
+	fail "could not read status after capture"
+graph_check=$(jq -cn --argjson before "$STATUS_AT_CAPTURE" \
+	--slurpfile after "$EVIDENCE/status-after-capture.json" \
+	--slurpfile summary "$EVIDENCE/summary.json" '
+	def sig: {total_entities, embedding_ready: .embedding.ready,
+		embedding_indexed_revision: .embedding.indexed_revision,
+		embedding_target_revision: .embedding.target_revision, embedding_revision: .embedding.revision};
+	{before: ($before | sig), after: ($after[0] | sig), summary_total_entities: $summary[0].total_entities}
+	| .unchanged = (.before == .after and .after.embedding_ready == true
+		and .before.total_entities != null and .before.embedding_indexed_revision != null
+		and .before.total_entities == .summary_total_entities)') ||
+	fail "could not compare status before and after capture"
+milestone graph_unchanged_check "$graph_check"
+[[ $(jq -r .unchanged <<<"$graph_check") == true ]] || fail "graph moved during capture: $graph_check"
 
 directed_bytes=$(wc -c <"$EVIDENCE/directed.jsonl" | tr -d ' ')
 if ((directed_bytes >= DIRECTED_RAW_LIMIT_BYTES)); then
