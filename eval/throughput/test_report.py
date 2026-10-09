@@ -42,6 +42,23 @@ class ReadingTests(unittest.TestCase):
         self.assertIn('| `w2-kev-4x4-kvu` | 4 × 4 | yes | 88 / 88 |', markdown)
         self.assertIn('Kev shared-state advantage: **yes**', markdown)
 
+    def test_stopped_cell_without_valid_requests_renders(self):
+        # The shape of w1-kev-8x8 in run 20261009T132345.224681Z-llamacpp-kev: stopped in warmup, nothing measured.
+        stopped = dict(cell('w1', 'kev', 8, 8, None, 0, 0, status='stopped'), valid_questions=0,
+                       stop_reason='three consecutive runtime errors', request_ms={'p50': None, 'p95': None, 'samples': 0},
+                       warmup={'planned': 44, 'attempted': 35, 'ok': 30, 'errors': 5},
+                       metrics={'measured_delta': {'prompt_tokens_total': 0.0, 'prompt_tokens_cached_total': 0.0,
+                                                   'busy_slots_per_decode': None}})
+        original = {'runtime': 'llamacpp', 'model': 'kev', 'run_id': 'original', 'protocol': {'question': 'q'},
+                    'cells': [cell('w1', 'kev', 1, 1, 1.0, 1000, 88), stopped]}
+        rerun = {'runtime': 'llamacpp', 'model': 'kev', 'run_id': 'rerun', 'protocol': {'version': 2}, 'cells': []}
+        markdown = report.render([original, rerun])
+        self.assertIn('| `w1-kev-8x8` | 8 × 8 | no | 0 / 88 | — | — | — | — | 0 / 88 | 0 / 0 | — '
+                      '| 30 / 5 / 35 / 44 | stopped (three consecutive runtime errors) |', markdown)
+        self.assertIn('| W1 kev batches usefully | — | — | — | not evaluable |', markdown)
+        self.assertIn('run original, protocol version 1', markdown)
+        self.assertIn('run rerun, protocol version 2', markdown)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -4,7 +4,8 @@
 --validate builds every request offline, verifies the frozen inputs and prints the
 planned cells; no model runs. A run starts one owned llama-server per cell, sends one
 warmup pass and the measured passes directly to it, and stops on the 45-minute
-per-model budget or three consecutive runtime errors. Small pilot; not a benchmark.
+per-model budget or three consecutive runtime errors in the measured passes (warmup
+errors are recorded but do not count; protocol amendment 1). Small pilot; not a benchmark.
 """
 from __future__ import annotations
 
@@ -34,6 +35,10 @@ SOURCES = ('eval/throughput/fixtures.py', 'eval/throughput/runner.py', 'eval/thr
            'scripts/evaluate.py', 'scripts/compare_scoring.py', 'scripts/metal.py', 'scripts/model.py',
            'eval/query-routing/experiment.py', 'eval/query-routing/runner.py')
 PROTOCOL = {
+    # Version 1 (no 'version' key in the summary) is the protocol as frozen; bump on every amendment.
+    'version': 2,
+    'amendments': ['1, 2026-10-09: warmup errors are recorded but no longer count toward the consecutive-error '
+                   'stop; the count starts at zero when the measured passes begin. See eval/throughput/README.md.'],
     'question': 'Does any Metal serving path deliver materially more decisions per second than the one-slot '
                 'serial profile at unchanged labels, and does Kev gain more than Qwen from slots or shared state?',
     'yardstick': 'decisions_per_s = valid questions answered / measured elapsed seconds (warmup excluded); '
@@ -45,8 +50,9 @@ PROTOCOL = {
     'cache': 'Frozen requests keep their cache fields: W1 Qwen JSON cache_prompt=true, W1 one-token scoring '
              'cache_prompt=false, W2 Qwen JSON cache_prompt=false, Kev uses the server default. Measured passes '
              'repeat warmup prompts, so the RAM prompt cache can serve repeats; processed/cached counts are recorded.',
-    'failures': 'No retries. 30 s per-request timeout includes queueing. Three consecutive runtime errors stop '
-                'a cell; unstarted requests are not_run and stay in denominators.',
+    'failures': 'No retries. 30 s per-request timeout includes queueing. Three consecutive runtime errors in the '
+                'measured passes stop a cell; warmup errors are recorded but do not count. Unstarted requests '
+                'are not_run and stay in denominators.',
     'budget': f'{BUDGET_SECONDS // 60} minutes wall clock per runtime x model invocation, including startup, '
               'warmup and shutdown.',
     'readings': 'Screening readings in eval/throughput/README.md, fixed before inference; not adoption gates.',
@@ -88,7 +94,8 @@ def run_cell(cell, cell_dir, jobs, reference, make_runtime, deadline, finalize=N
                           'n_ctx_total': cell.n_ctx_total, 'n_ctx_per_slot': cell.n_ctx_per_slot,
                           'warmup_passes': fixtures.WARMUP_PASSES, 'measured_passes': cell.measured_passes,
                           'timeout_s': runner.TIMEOUT_SECONDS},
-              'reference': reference, 'started_at': now(), 'status': 'running'}
+              'reference': reference, 'protocol_version': PROTOCOL['version'], 'started_at': now(),
+              'status': 'running'}
     state = {'consecutive_errors': 0, 'stop_reason': None}
     phases = {'warmup': {}, 'measured': {}}
     metrics = {}
@@ -120,7 +127,8 @@ def run_cell(cell, cell_dir, jobs, reference, make_runtime, deadline, finalize=N
                 send = lambda job, timeout: runner.call(runtime.base, job, timeout, clock, origin)  # noqa: E731
                 warmup = fixtures.traversal(jobs, 1)
                 metrics['start'] = runtime.metrics()
-                runner.run_jobs(warmup, send, cell.concurrency, deadline, clock, writer('warmup', [0] * len(warmup)), state)
+                runner.run_jobs(warmup, send, cell.concurrency, deadline, clock, writer('warmup', [0] * len(warmup)), state,
+                                count_errors=False)
                 metrics['after_warmup'] = runtime.metrics()
                 measured, pass_numbers = measured_order(jobs, cell)
                 _, elapsed = runner.run_jobs(measured, send, cell.concurrency, deadline, clock,
@@ -215,7 +223,8 @@ def run(args, cells, workloads):
                 summary['stop_reason'] = 'budget'
             save(output / 'summary.json', summary)
             print(f'{cell.id}: {result["status"]}; {result["valid_questions"]}/{result["planned_questions"]} questions; '
-                  f'{report.number(result["decisions_per_s"], 2)} questions/s; stop: {result["stop_reason"]}', flush=True)
+                  f'{report.number(result["decisions_per_s"], 2)} questions/s; stop: {result["stop_reason"]}; '
+                  f'warmup {report.warmup(result)} ok/errors/attempted/planned', flush=True)
             if (result.get('runtime') or {}).get('cleanup_errors'):
                 raise RuntimeError('owned runtime cleanup failed; no further cell was launched')
         summary['status'] = 'complete' if all(c['status'] == 'complete' for c in summary['cells']) else 'stopped'

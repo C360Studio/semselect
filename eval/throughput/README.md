@@ -200,7 +200,8 @@ reviewed guard change; this screen does not make or justify one.
   clients wait for slots; a timeout there is a measured outcome, not a harness
   fault. **No retries.**
 - **Three consecutive runtime errors** (non-200, timeout, connection failure)
-  stop the cell. The count runs across warmup and measurement.
+  in the measured passes stop the cell. As first frozen, the count ran across
+  warmup and measurement; Amendment 1 below changed that.
 - **45 minutes wall clock per runtime × model**, covering startup, warmup and
   shutdown. Run both workloads in one invocation (the default) so the budget
   covers them together. The deadline also bounds the readiness wait and each
@@ -210,6 +211,53 @@ reviewed guard change; this screen does not make or justify one.
   `ok`, `invalid`, `error` or `not_run`. Denominators never shrink.
 - Planned load from `--validate`: Kev 8 cells, 716 requests (424 measured);
   Qwen 9 cells, 984 requests (624 measured).
+
+### Amendment 1, 2026-10-09: warmup errors no longer trigger the stop
+
+**Observed.** In run `20261009T132345.224681Z-llamacpp-kev`, cell `w1-kev-8x8`
+stopped during its warmup pass with `three consecutive runtime errors`. Its
+first wave of eight concurrent cold requests was sent together: five hit the
+30 s timeout and three completed in 1.1–3.1 s. Of 44 planned warmup requests,
+35 were attempted: 30 ok (median 3.0 s) and the 5 timeouts, which were recorded
+together at 30 s and met the stop rule. No measured request was sent: `valid 0`,
+`not_run 88`. The cell's `runtime.log` shows a clean shutdown with 23,935 of
+28,753 MiB of Metal memory free. It also shows the five timed-out requests
+assigned to slots 3–7 at about 1 s: slots 4–7 released theirs at about 34 s with
+no prompt tokens processed, slot 3 had processed part of its prompt, and slots
+0–2 served all 30 completed requests. Why those slots stalled is not
+established here.
+
+**Why the rule changed.** The count carried from warmup into measurement, so a
+cold burst at the start of a cell stopped the high-concurrency cells this screen
+exists to measure before any measured request was sent, on warmup evidence that
+is excluded from every metric.
+
+**Amended rule.** Warmup errors are still recorded in `journal.jsonl`, counted in
+the cell's `warmup` summary (`planned`, `attempted`, `ok`, `errors`) and shown in
+the report, but they do not count toward the consecutive-error stop and do not
+stop the cell. The count starts at zero when the measured passes begin.
+Everything else is unchanged: 30 s per request including queueing, no retries,
+three consecutive runtime errors in the measured passes stop the cell,
+unstarted requests are `not_run`, and the budget stop applies in every phase.
+The amendment only removes stops: given the same responses, a cell that
+completed under the original rule runs identically under the amended one. One
+cost: a runtime that fails every warmup request is no longer stopped early; with
+timeouts that can take a full warmup pass, bounded by the 45-minute budget.
+
+**Timing and results.** The rule was changed after that stop and before any
+Qwen cell ran. The pre-declared readings are unchanged. The original Kev run is
+kept and reported as recorded, including the stopped `w1-kev-8x8` cell. That
+run was still in progress when the harness changed; it had loaded the original
+code at start, so its remaining cells also run under the original rule. The
+affected Kev cell will be rerun under the amended rule as a separate run in its
+own output directory, and both results will be published.
+
+**Versioning.** Runs under the amended rule record `"version": 2` and the
+amendment text in `protocol` in the invocation `summary.json`, and
+`"protocol_version": 2` in each cell `summary.json`; `report.py` prints the
+protocol version for each run. Summaries written before the amendment have no
+version field and are reported as version 1. Their copied `source/` files and
+the `source_sha256` entries for `runner.py`, `run.py` and `report.py` also differ.
 
 ## Pre-declared readings
 

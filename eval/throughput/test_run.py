@@ -10,6 +10,7 @@ import unittest
 from unittest import mock
 
 import fixtures
+import report
 import run
 from test_runner import Stub, answer, jobs
 
@@ -41,6 +42,22 @@ class FakeRuntime:
 
 def journal(directory):
     return [json.loads(line) for line in (directory / 'journal.jsonl').read_text().splitlines()]
+
+
+def scripted(pattern):
+    """Answer requests in arrival order: 'e' is HTTP 500, 'o' a valid answer; valid answers after the script."""
+    calls = iter(pattern)
+    return lambda path, body: (500, b'{}') if next(calls, 'o') == 'e' else answer('allow')
+
+
+def run_scripted(pattern, cases):
+    """One client, so arrival order is warmup (cases requests) then two measured passes."""
+    cell = fixtures.Cell('w1', 'kev', 1, 1)
+    with tempfile.TemporaryDirectory() as temp, Stub(scripted(pattern)) as stub:
+        result = run.run_cell(cell, Path(temp) / cell.id, jobs(cases), REFERENCE, lambda c, d: FakeRuntime(stub.url),
+                              time.monotonic() + 60)
+        lines = journal(Path(temp) / cell.id)
+    return result, lines
 
 
 class CellTests(unittest.TestCase):
@@ -89,13 +106,32 @@ class CellTests(unittest.TestCase):
         self.assertIn('Full Metal offload', result['stop_reason'])
         self.assertEqual((result['planned'], result['not_run'], result['decisions_per_s']), (4, 4, None))
 
-    def test_consecutive_warmup_errors_stop_before_measurement(self):
-        cell = fixtures.Cell('w1', 'kev', 1, 1)
-        with tempfile.TemporaryDirectory() as temp, Stub(lambda path, body: (500, b'{}')) as stub:
-            result = run.run_cell(cell, Path(temp) / cell.id, jobs(5), REFERENCE, lambda c, d: FakeRuntime(stub.url),
-                                  time.monotonic() + 60)
-        self.assertEqual(result['stop_reason'], 'three consecutive runtime errors')
-        self.assertEqual((result['warmup']['errors'], result['not_run'], result['planned']), (3, 10, 10))
+    # Protocol amendment 1 (2026-10-09): warmup errors are recorded but never stop a cell.
+    def test_warmup_errors_do_not_stop_the_cell(self):
+        result, lines = run_scripted('eeeoeeo', 7)  # five warmup errors, three of them consecutive
+        self.assertEqual((result['status'], result['stop_reason'], result['protocol_version']), ('complete', None, 2))
+        self.assertEqual(result['warmup'], {'planned': 7, 'attempted': 7, 'ok': 2, 'errors': 5})
+        self.assertEqual([r['status'] for r in lines if r['phase'] == 'warmup'].count('error'), 5)
+        self.assertEqual((result['planned'], result['valid'], result['not_run'], result['errors']['total']), (14, 14, 0, 0))
+
+    def test_three_consecutive_measured_errors_still_stop_the_cell(self):
+        result, lines = run_scripted('eoeo' + 'eee', 4)
+        self.assertEqual((result['status'], result['stop_reason']), ('stopped', 'three consecutive runtime errors'))
+        self.assertEqual(result['warmup'], {'planned': 4, 'attempted': 4, 'ok': 2, 'errors': 2})
+        measured = sorted((r for r in lines if r['phase'] == 'measured'), key=lambda r: r['sequence'])
+        self.assertEqual([r['status'] for r in measured], ['error'] * 3 + ['not_run'] * 5)
+        self.assertEqual((result['valid'], result['not_run']), (0, 5))
+        # A stopped cell with no valid request renders with its stop reason and warmup counts.
+        markdown = report.render([{'runtime': 'llamacpp', 'model': 'kev', 'protocol': run.PROTOCOL, 'cells': [result]}])
+        self.assertIn('| `w1-kev-1x1` | 1 × 1 | no | 0 / 8 | 0.00 |', markdown)
+        self.assertIn('| 2 / 2 / 4 / 4 | stopped (three consecutive runtime errors) |', markdown)
+
+    def test_consecutive_count_does_not_carry_over_from_warmup(self):
+        # Two trailing warmup errors plus two leading measured errors would be four if the count carried over.
+        result, _ = run_scripted('ooee' + 'ee', 4)
+        self.assertEqual((result['status'], result['stop_reason']), ('complete', None))
+        self.assertEqual((result['warmup']['errors'], result['errors']['total'], result['valid'], result['not_run']),
+                         (2, 2, 6, 0))
 
 
 class SelectionTests(unittest.TestCase):

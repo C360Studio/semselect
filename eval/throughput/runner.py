@@ -106,11 +106,13 @@ def not_run(job, reason):
 
 
 def run_jobs(jobs, send, concurrency, deadline, clock=time.monotonic, on_row=None, state=None,
-             timeout=TIMEOUT_SECONDS):
+             timeout=TIMEOUT_SECONDS, count_errors=True):
     """Keep up to `concurrency` requests in flight until done, out of budget, or failing.
 
     send(job, timeout) returns one row. state carries the consecutive-error count and
-    stop reason across the phases of one cell. Unstarted requests become not_run rows.
+    stop reason across the phases of one cell. With count_errors=False (warmup, protocol
+    amendment 1) error rows are still returned but leave the count untouched and never
+    stop the phase; only the budget does. Unstarted requests become not_run rows.
     Returns rows in job order and the elapsed time from first submission to last completion."""
     state = state if state is not None else {}
     state.setdefault('consecutive_errors', 0)
@@ -137,9 +139,10 @@ def run_jobs(jobs, send, concurrency, deadline, clock=time.monotonic, on_row=Non
                 index = pending.pop(future)
                 rows[index] = future.result()
                 last = clock()
-                state['consecutive_errors'] = state['consecutive_errors'] + 1 if rows[index]['status'] == 'error' else 0
-                if state['consecutive_errors'] >= MAX_CONSECUTIVE_ERRORS and state['stop_reason'] is None:
-                    state['stop_reason'] = 'three consecutive runtime errors'
+                if count_errors:
+                    state['consecutive_errors'] = state['consecutive_errors'] + 1 if rows[index]['status'] == 'error' else 0
+                    if state['consecutive_errors'] >= MAX_CONSECUTIVE_ERRORS and state['stop_reason'] is None:
+                        state['stop_reason'] = 'three consecutive runtime errors'
                 if on_row:
                     on_row(index, rows[index])
     for index, row in enumerate(rows):

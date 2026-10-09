@@ -72,9 +72,10 @@ def jobs(count, reference='allow'):
                          {'action': reference}, lambda response: {'action': response['label']}) for i in range(count)]
 
 
-def execute(stub, items, concurrency, timeout=runner.TIMEOUT_SECONDS, state=None):
+def execute(stub, items, concurrency, timeout=runner.TIMEOUT_SECONDS, state=None, count_errors=True):
     send = lambda job, limit: runner.call(stub.url, job, limit)  # noqa: E731
-    return runner.run_jobs(items, send, concurrency, time.monotonic() + 60, state=state, timeout=timeout)
+    return runner.run_jobs(items, send, concurrency, time.monotonic() + 60, state=state, timeout=timeout,
+                           count_errors=count_errors)
 
 
 class ConcurrencyTests(unittest.TestCase):
@@ -149,6 +150,16 @@ class FailureTests(unittest.TestCase):
         self.assertEqual([r['status'] for r in rows], ['error'] * 3 + ['not_run'] * 7)
         self.assertEqual(state['stop_reason'], 'three consecutive runtime errors')
         self.assertTrue(all(r['error'] == state['stop_reason'] for r in rows[3:]))
+
+    def test_uncounted_errors_are_recorded_but_never_stop(self):
+        # Warmup under protocol amendment 1: every error is a row, none counts toward the stop.
+        items = jobs(5)
+        with Stub(lambda path, body: (503, b'{"error":"loading"}')) as stub:
+            state = {}
+            rows, _ = execute(stub, items, concurrency=1, state=state, count_errors=False)
+        self.assertEqual(sum(stub.hits.values()), 5)
+        self.assertEqual([r['status'] for r in rows], ['error'] * 5)
+        self.assertEqual((state['consecutive_errors'], state['stop_reason']), (0, None))
 
     def test_errors_separated_by_success_do_not_stop(self):
         items = jobs(6)

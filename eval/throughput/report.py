@@ -21,6 +21,18 @@ def number(value, digits=0):
     return '—' if value is None else f'{value:,.{digits}f}'
 
 
+def warmup(cell):
+    """Warmup ok / errors / attempted / planned; warmup is excluded from every metric."""
+    counts = cell.get('warmup') or {}
+    return ' / '.join(number(counts.get(key)) for key in ('ok', 'errors', 'attempted', 'planned'))
+
+
+def protocol_version(summary):
+    """Summaries written before amendment 1 carry a protocol without a version: version 1."""
+    protocol = summary.get('protocol')
+    return protocol.get('version', 1) if isinstance(protocol, dict) else None
+
+
 def complete(cell):
     return cell is not None and cell.get('status') == 'complete'
 
@@ -74,8 +86,9 @@ def verdict(value):
 
 def table(cells):
     lines = ['| Cell | Slots × clients | Unified KV | Valid / planned questions | Questions/s | Requests/s '
-             '| p50 ms | p95 ms | Label agreement | Prompt tokens processed / cached | Busy slots per decode | Status |',
-             '| --- | ---: | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |']
+             '| p50 ms | p95 ms | Label agreement | Prompt tokens processed / cached | Busy slots per decode '
+             '| Warmup ok / errors / attempted / planned | Status |',
+             '| --- | ---: | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |']
     for cell in cells:
         profile = cell['profile']
         delta = (cell.get('metrics') or {}).get('measured_delta') or {}
@@ -87,7 +100,7 @@ def table(cells):
             f'| {number(cell["requests_per_s"], 2)} | {number(cell["request_ms"]["p50"])} | {number(cell["request_ms"]["p95"])} '
             f'| {agreement["matched"]} / {agreement["total"]} '
             f'| {number(delta.get("prompt_tokens_total"))} / {number(delta.get("prompt_tokens_cached_total"))} '
-            f'| {number(delta.get("busy_slots_per_decode"), 2)} | {status} |')
+            f'| {number(delta.get("busy_slots_per_decode"), 2)} | {warmup(cell)} | {status} |')
     return '\n'.join(lines)
 
 
@@ -97,10 +110,12 @@ def render(summaries):
     lines = ['# Throughput screen', '',
              'Small pilot on one laptop; screening readings, not adoption gates or a benchmark. '
              'Questions/s counts valid answers over measured passes only; latency includes queueing. '
-             'Prompt tokens and busy slots come from the runtime `/metrics` delta over measured passes.', '']
+             'Prompt tokens and busy slots come from the runtime `/metrics` delta over measured passes. '
+             'Warmup counts are shown for diagnosis only; from protocol version 2 warmup errors do not stop a cell.', '']
     for summary in summaries:
         lines.append(f'- `{summary.get("runtime")}` / `{summary.get("model")}`: status {summary.get("status")}, '
-                     f'stop reason {summary.get("stop_reason")}, run {summary.get("run_id")}')
+                     f'stop reason {summary.get("stop_reason")}, run {summary.get("run_id")}, '
+                     f'protocol version {number(protocol_version(summary))}')
     lines += ['', table(cells), '', '## Pre-declared readings', '',
               '| Reading | Speedup (8×8 / 1×1) | p95 ratio | Agreement drop | Result |', '| --- | ---: | ---: | ---: | --- |']
     for reading in result['batches_usefully']:
