@@ -1,0 +1,1199 @@
+{
+  "schema": "semselect.legacy-family-count/v1",
+  "status": "measured family candidate list before capture and labeling",
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "capture_profile": {
+    "semsource_commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+    "semstreams_version": "v1.0.0-beta.160",
+    "semsource_image": "sha256:08801743b4eeb774ee5818d23c238757cbb25bccc039766f85939a8a2d0b394f",
+    "tier": "0 (graph.embedder_type=bm25; no HTTP embedder, no semembed, no LLM)",
+    "config": "eval/community-refinement/fixtures/legacy-count/family-count.tier0.json",
+    "ast_languages": [
+      "go",
+      "typescript",
+      "javascript",
+      "java",
+      "python",
+      "svelte",
+      "c"
+    ],
+    "entity_range": [
+      50,
+      250
+    ],
+    "evidence": "docs/evidence/20261009T163623Z-legacy-family-counts"
+  },
+  "exclusions": "No labels, embeddings, neighbour results, mutual pairs, partitions, review packets, constraints or retrieval questions exist yet. Counts are entity totals from a legacy SemStreams capture, not a SemEngine capture.",
+  "families": [
+    {
+      "id": "nats-go-micro",
+      "split": "development",
+      "role": "code and doc about the same responsibility",
+      "language": "Go + Markdown",
+      "repo": "https://github.com/nats-io/nats.go",
+      "commit": "31a3ee4cf0fef9e2dc2d85d5068087b46236cd12",
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "license_file_first_line": "Apache License",
+      "system_segment": "nats-go-micro",
+      "include": [
+        "micro",
+        "README.md"
+      ],
+      "exclude": [],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "README.md",
+        "micro/README.md",
+        "micro/error_test.go",
+        "micro/example_handler_test.go",
+        "micro/example_package_test.go",
+        "micro/example_test.go",
+        "micro/request.go",
+        "micro/service.go",
+        "micro/service_internal_test.go",
+        "micro/test/main_test.go",
+        "micro/test/service_test.go",
+        "micro/test/testservice_helper_test.go"
+      ],
+      "workspace_sha256": "748217ef6f458befadcba49f16e98ca7490896fc0828ce274c2bf6c74f8236d3",
+      "entities_total": 217,
+      "entities_by_type": {
+        "chunk": 55,
+        "const": 10,
+        "doc": 2,
+        "file": 10,
+        "folder": 2,
+        "function": 57,
+        "interface": 4,
+        "method": 37,
+        "repo": 1,
+        "struct": 19,
+        "type": 9,
+        "var": 11
+      },
+      "entities_by_domain": {
+        "code": 3,
+        "golang": 157,
+        "web": 57
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 217,
+        "edges": 547,
+        "induced_edges": 477,
+        "cross_system_edges": 0,
+        "dangling_edges": 70,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 85,
+          "code.relationship.embeds": 5,
+          "code.relationship.parameter": 15,
+          "code.relationship.receiver": 37,
+          "code.relationship.references": 14,
+          "code.relationship.returns": 18,
+          "code.structure.belongs": 214,
+          "code.structure.contains": 159
+        },
+        "non_containment_edges": 174
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "micro",
+            "README.md"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 12,
+          "entities": 217
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "micro",
+            "README.md"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 12,
+          "entities": 217
+        }
+      ],
+      "notes": "Owner subtree unchanged; micro/ includes its tests and micro/README.md.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "commons-csv",
+      "split": "development",
+      "role": "one topic with builder boilerplate hubs",
+      "language": "Java + Markdown",
+      "repo": "https://github.com/apache/commons-csv",
+      "commit": "26f2e869625ba102f5b6386d9799817e523637f7",
+      "license": "Apache-2.0",
+      "license_file": "LICENSE.txt",
+      "license_file_first_line": "Apache License",
+      "system_segment": "commons-csv",
+      "include": [
+        "src/main/java/org/apache/commons/csv",
+        "README.md"
+      ],
+      "exclude": [
+        "src/main/java/org/apache/commons/csv/CSVParser.java",
+        "src/main/java/org/apache/commons/csv/CSVRecord.java",
+        "src/main/java/org/apache/commons/csv/Constants.java",
+        "src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java",
+        "src/main/java/org/apache/commons/csv/Lexer.java",
+        "src/main/java/org/apache/commons/csv/Token.java"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "README.md",
+        "src/main/java/org/apache/commons/csv/CSVException.java",
+        "src/main/java/org/apache/commons/csv/CSVFormat.java",
+        "src/main/java/org/apache/commons/csv/CSVPrinter.java",
+        "src/main/java/org/apache/commons/csv/DuplicateHeaderMode.java",
+        "src/main/java/org/apache/commons/csv/QuoteMode.java",
+        "src/main/java/org/apache/commons/csv/package-info.java"
+      ],
+      "workspace_sha256": "bb2a011af72febb1fe175c12bf04c148e70b5dd321b1c5fdd202d956f32480c2",
+      "entities_total": 223,
+      "entities_by_type": {
+        "chunk": 8,
+        "class": 4,
+        "doc": 1,
+        "enum": 3,
+        "file": 6,
+        "folder": 7,
+        "method": 129,
+        "repo": 1,
+        "var": 64
+      },
+      "entities_by_domain": {
+        "code": 8,
+        "java": 206,
+        "web": 9
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 223,
+        "edges": 833,
+        "induced_edges": 760,
+        "cross_system_edges": 0,
+        "dangling_edges": 73,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.dependency.imports": 9,
+          "code.relationship.calls": 110,
+          "code.relationship.parameter": 27,
+          "code.relationship.receiver": 129,
+          "code.relationship.references": 19,
+          "code.relationship.returns": 58,
+          "code.structure.belongs": 221,
+          "code.structure.contains": 260
+        },
+        "non_containment_edges": 352
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "src/main/java/org/apache/commons/csv",
+            "README.md"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 13,
+          "entities": 414
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "src/main/java/org/apache/commons/csv",
+            "README.md"
+          ],
+          "exclude": [
+            "src/main/java/org/apache/commons/csv/CSVParser.java",
+            "src/main/java/org/apache/commons/csv/CSVRecord.java",
+            "src/main/java/org/apache/commons/csv/Constants.java",
+            "src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java",
+            "src/main/java/org/apache/commons/csv/Lexer.java",
+            "src/main/java/org/apache/commons/csv/Token.java"
+          ],
+          "max_file_bytes": null,
+          "files": 7,
+          "entities": 223
+        }
+      ],
+      "notes": "The package is one directory, so it is trimmed by file: the CSVFormat builder hub is kept with CSVPrinter, QuoteMode, DuplicateHeaderMode, CSVException and package-info. The parser/lexer/record side is excluded; references to it are dangling edges.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "flask-core",
+      "split": "development",
+      "role": "multiple legitimate topics in one package",
+      "language": "Python",
+      "repo": "https://github.com/pallets/flask",
+      "commit": "d086db856be187255b8ec61ef409357393020f32",
+      "license": "BSD-3-Clause",
+      "license_file": "LICENSE.txt",
+      "license_file_first_line": "Copyright 2010 Pallets",
+      "system_segment": "flask-core",
+      "include": [
+        "src/flask/__init__.py",
+        "src/flask/config.py",
+        "src/flask/json",
+        "src/flask/logging.py",
+        "src/flask/sessions.py",
+        "src/flask/signals.py",
+        "src/flask/templating.py",
+        "src/flask/testing.py",
+        "src/flask/views.py"
+      ],
+      "exclude": [],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "src/flask/__init__.py",
+        "src/flask/config.py",
+        "src/flask/json/__init__.py",
+        "src/flask/json/provider.py",
+        "src/flask/json/tag.py",
+        "src/flask/logging.py",
+        "src/flask/sessions.py",
+        "src/flask/signals.py",
+        "src/flask/templating.py",
+        "src/flask/testing.py",
+        "src/flask/views.py"
+      ],
+      "workspace_sha256": "dd47fcc2b50ec80b61b0569947e3211135a843ef410d85aab986951da7b66037",
+      "entities_total": 173,
+      "entities_by_type": {
+        "class": 26,
+        "const": 2,
+        "file": 11,
+        "folder": 3,
+        "function": 18,
+        "method": 97,
+        "repo": 1,
+        "var": 15
+      },
+      "entities_by_domain": {
+        "code": 4,
+        "python": 169
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 173,
+        "edges": 647,
+        "induced_edges": 595,
+        "cross_system_edges": 0,
+        "dangling_edges": 52,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 31,
+          "code.relationship.extends": 13,
+          "code.relationship.parameter": 46,
+          "code.relationship.receiver": 97,
+          "code.relationship.returns": 13,
+          "code.structure.belongs": 172,
+          "code.structure.contains": 275
+        },
+        "non_containment_edges": 200
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "src/flask"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 26,
+          "entities": 495
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "src/flask/__init__.py",
+            "src/flask/config.py",
+            "src/flask/json",
+            "src/flask/logging.py",
+            "src/flask/sessions.py",
+            "src/flask/signals.py",
+            "src/flask/templating.py",
+            "src/flask/testing.py",
+            "src/flask/views.py"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 11,
+          "entities": 173
+        }
+      ],
+      "notes": "Nine top-level modules with distinct topics are kept: package init, configuration, JSON serialization (json/), logging, sessions, signals, templating, test client and class-based views. The app, blueprint, sansio, cli, ctx and helper machinery is excluded.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "express-lib",
+      "split": "development",
+      "role": "sparse explicit topology, small",
+      "language": "JavaScript + Markdown",
+      "repo": "https://github.com/expressjs/express",
+      "commit": "a419aa7350389a275ab45fde2e849ed1f02449ef",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "(The MIT License)",
+      "system_segment": "express-lib",
+      "include": [
+        "lib",
+        "Readme.md"
+      ],
+      "exclude": [],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "Readme.md",
+        "lib/application.js",
+        "lib/express.js",
+        "lib/request.js",
+        "lib/response.js",
+        "lib/utils.js",
+        "lib/view.js"
+      ],
+      "workspace_sha256": "efb6065f1d289f33c900e762002c009b252f7f6f51dea7f536187b83f037c1a5",
+      "entities_total": 235,
+      "entities_by_type": {
+        "chunk": 26,
+        "const": 6,
+        "doc": 1,
+        "file": 6,
+        "folder": 1,
+        "function": 18,
+        "repo": 1,
+        "var": 176
+      },
+      "entities_by_domain": {
+        "code": 2,
+        "javascript": 206,
+        "web": 27
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 235,
+        "edges": 485,
+        "induced_edges": 485,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.structure.belongs": 233,
+          "code.structure.contains": 252
+        },
+        "non_containment_edges": 0
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "lib",
+            "Readme.md"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 7,
+          "entities": 235
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "lib",
+            "Readme.md"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 7,
+          "entities": 235
+        }
+      ],
+      "notes": "Owner subtree unchanged.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "osh-module",
+      "split": "held-out",
+      "role": "continuity with the recorded 6,685-entity baseline; cross-type",
+      "language": "Java + Markdown",
+      "repo": "https://github.com/opensensorhub/osh-core",
+      "commit": "9a43f9ec42315e5a22e5e5d90a4ba79eef9cea08",
+      "license": "MPL-2.0",
+      "license_file": "LICENSE",
+      "license_file_first_line": "Mozilla Public License, version 2.0",
+      "system_segment": "osh-module",
+      "include": [
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module",
+        "README.md"
+      ],
+      "exclude": [
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/InMemoryConfigDb.java",
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/ModuleConfigJsonFile.java",
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/RobustConnection.java",
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/RobustConnectionConfig.java"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "README.md",
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/AbstractModule.java",
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/AbstractSubModule.java",
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/DefaultModuleStateManager.java",
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/JarModuleProvider.java",
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/ModuleClassFinder.java",
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/ModuleRegistry.java",
+        "sensorhub-core/src/main/java/org/sensorhub/impl/module/ModuleSecurity.java"
+      ],
+      "workspace_sha256": "c78c6d73f62d5fc6e9ab51a9e2d825a16b309addd2cb78d9df9b3eaafd509574",
+      "entities_total": 202,
+      "entities_by_type": {
+        "chunk": 5,
+        "class": 8,
+        "doc": 1,
+        "file": 7,
+        "folder": 8,
+        "method": 132,
+        "repo": 1,
+        "var": 40
+      },
+      "entities_by_domain": {
+        "code": 9,
+        "java": 187,
+        "web": 6
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 202,
+        "edges": 735,
+        "induced_edges": 630,
+        "cross_system_edges": 0,
+        "dangling_edges": 105,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.dependency.imports": 3,
+          "code.relationship.calls": 81,
+          "code.relationship.parameter": 39,
+          "code.relationship.receiver": 132,
+          "code.relationship.references": 24,
+          "code.relationship.returns": 39,
+          "code.structure.belongs": 200,
+          "code.structure.contains": 217
+        },
+        "non_containment_edges": 318
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "sensorhub-core/src/main/java/org/sensorhub/impl/module",
+            "README.md"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 12,
+          "entities": 266
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "sensorhub-core/src/main/java/org/sensorhub/impl/module",
+            "README.md"
+          ],
+          "exclude": [
+            "sensorhub-core/src/main/java/org/sensorhub/impl/module/InMemoryConfigDb.java",
+            "sensorhub-core/src/main/java/org/sensorhub/impl/module/ModuleConfigJsonFile.java",
+            "sensorhub-core/src/main/java/org/sensorhub/impl/module/RobustConnection.java",
+            "sensorhub-core/src/main/java/org/sensorhub/impl/module/RobustConnectionConfig.java"
+          ],
+          "max_file_bytes": null,
+          "files": 8,
+          "entities": 202
+        }
+      ],
+      "notes": "Config persistence (InMemoryConfigDb, ModuleConfigJsonFile) and connection retry (RobustConnection*) are excluded; module lifecycle, registry, state, security and discovery are kept. This is a subset of the code behind the recorded 6,685-entity baseline, not a recapture of it.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "ogcapi-cs-sections",
+      "split": "held-out",
+      "role": "docs-only, lexically similar sections",
+      "language": "AsciiDoc",
+      "repo": "https://github.com/opengeospatial/ogcapi-connected-systems",
+      "commit": "fb858be23aa03e2b824ec50b5a97ac2c2a1d3fec",
+      "license": "LicenseRef-OGC-Software-License",
+      "license_file": "LICENSE",
+      "license_file_first_line": "Permission is hereby granted by the Open Geospatial Consortium, (\"Licensor\"), free of charge and subject to the terms set forth below, to any person obtaining a copy of this Intellectual Property and any associated documentation, to deal in the Intellectual Property without restriction (except as set forth below), including without limitation the rights to implement, use, copy, modify, merge, publish, distribute, and/or sublicense copies of the Intellectual Property, and to permit persons to whom the Intellectual Property is furnished to do so, provided that all copyright notices on the intellectual property are retained intact and that each person to whom the Intellectual Property is furnished agrees to the terms of this Agreement.",
+      "system_segment": "ogcapi-cs-sections",
+      "include": [
+        "api/part1/standard/sections/clause_*.adoc"
+      ],
+      "exclude": [],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "api/part1/standard/sections/clause_0_front_material.adoc",
+        "api/part1/standard/sections/clause_10_requirements_class_deployment_features.adoc",
+        "api/part1/standard/sections/clause_11_requirements_class_subdeployments.adoc",
+        "api/part1/standard/sections/clause_12_requirements_class_procedure_features.adoc",
+        "api/part1/standard/sections/clause_13_requirements_class_sampling_features.adoc",
+        "api/part1/standard/sections/clause_14_requirements_class_property_definitions.adoc",
+        "api/part1/standard/sections/clause_15_requirements_class_advanced_filtering.adoc",
+        "api/part1/standard/sections/clause_16_requirements_class_create_replace_delete.adoc",
+        "api/part1/standard/sections/clause_17_requirements_class_update.adoc",
+        "api/part1/standard/sections/clause_1_scope.adoc",
+        "api/part1/standard/sections/clause_20_requirements_class_geojson_encoding.adoc",
+        "api/part1/standard/sections/clause_21_requirements_class_sensorml_encoding.adoc",
+        "api/part1/standard/sections/clause_2_conformance.adoc",
+        "api/part1/standard/sections/clause_3_references.adoc",
+        "api/part1/standard/sections/clause_4_terms_and_definitions.adoc",
+        "api/part1/standard/sections/clause_5_conventions.adoc",
+        "api/part1/standard/sections/clause_6_overview.adoc",
+        "api/part1/standard/sections/clause_7_requirements_class_common.adoc",
+        "api/part1/standard/sections/clause_8_requirements_class_system_features.adoc",
+        "api/part1/standard/sections/clause_9_requirements_class_subsystems.adoc"
+      ],
+      "workspace_sha256": "c3d91cee4f0ec60c21823dd45d05e2e09fdbff49ee670151a49267dbab5ff377",
+      "entities_total": 187,
+      "entities_by_type": {
+        "chunk": 167,
+        "doc": 20
+      },
+      "entities_by_domain": {
+        "web": 187
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 187,
+        "edges": 167,
+        "induced_edges": 167,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.structure.belongs": 167
+        },
+        "non_containment_edges": 0
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "api/part1/standard/sections"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 25,
+          "entities": 274
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "api/part1/standard/sections/clause_*.adoc"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 20,
+          "entities": 187
+        }
+      ],
+      "notes": "The AsciiDoc sections directory under api/part1 is api/part1/standard/sections. Its five annex files are excluded and the 20 clause_* files are kept.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "mavlink-minimal",
+      "split": "held-out",
+      "role": "generated boilerplate hubs",
+      "language": "C headers",
+      "repo": "https://github.com/mavlink/c_library_v2",
+      "commit": "28eae47457249ab6c8c1cadd104fcbe25eacd7a3",
+      "license": "NOASSERTION",
+      "license_file": null,
+      "license_file_first_line": null,
+      "system_segment": "mavlink-minimal",
+      "include": [
+        "minimal",
+        "protocol.h",
+        "mavlink_types.h",
+        "mavlink_helpers.h",
+        "checksum.h",
+        "mavlink_conversions.h",
+        "mavlink_sha256.h"
+      ],
+      "exclude": [],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "checksum.h",
+        "mavlink_conversions.h",
+        "mavlink_helpers.h",
+        "mavlink_sha256.h",
+        "mavlink_types.h",
+        "minimal/mavlink.h",
+        "minimal/mavlink_msg_heartbeat.h",
+        "minimal/minimal.h",
+        "minimal/testsuite.h",
+        "minimal/version.h",
+        "protocol.h"
+      ],
+      "workspace_sha256": "065eeecea3a78838c6a9ca441ea0678a56ff50932bea2fbf03e4255fefb35690",
+      "entities_total": 129,
+      "entities_by_type": {
+        "const": 53,
+        "file": 11,
+        "folder": 1,
+        "function": 61,
+        "repo": 1,
+        "struct": 1,
+        "type": 1
+      },
+      "entities_by_domain": {
+        "c": 127,
+        "code": 2
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 129,
+        "edges": 294,
+        "induced_edges": 294,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 15,
+          "code.structure.belongs": 128,
+          "code.structure.contains": 151
+        },
+        "non_containment_edges": 15
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "minimal"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 5,
+          "entities": 47
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "minimal",
+            "protocol.h",
+            "mavlink_types.h",
+            "mavlink_helpers.h",
+            "checksum.h",
+            "mavlink_conversions.h",
+            "mavlink_sha256.h"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 11,
+          "entities": 129
+        }
+      ],
+      "notes": "c_library_v2 has no README.md and no LICENSE file at this commit; nothing was substituted, and the licence needs an owner ruling before redistribution. Widened from minimal/ alone (47) to the minimal dialect include closure in the same repo: protocol.h, mavlink_types.h, mavlink_helpers.h, checksum.h, mavlink_conversions.h and mavlink_sha256.h (which carries its own KTH BSD-style header).",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "sveltekit-server-runtime",
+      "split": "held-out",
+      "role": "many small helpers",
+      "language": "JavaScript/TypeScript",
+      "repo": "https://github.com/sveltejs/kit",
+      "commit": "a06817e90049f15465eca140a07c5218d439dc37",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_file_first_line": "Copyright (c) 2020 [these people](https://github.com/sveltejs/kit/graphs/contributors)",
+      "system_segment": "sveltekit-server-runtime",
+      "include": [
+        "packages/kit/src/runtime/server/*.js"
+      ],
+      "exclude": [
+        "*.spec.js",
+        "packages/kit/src/runtime/server/remote-functions.js",
+        "packages/kit/src/runtime/server/respond.js",
+        "packages/kit/src/runtime/server/sourcemaps.js"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "packages/kit/src/runtime/server/constants.js",
+        "packages/kit/src/runtime/server/cookie.js",
+        "packages/kit/src/runtime/server/csrf.js",
+        "packages/kit/src/runtime/server/dev.js",
+        "packages/kit/src/runtime/server/endpoint.js",
+        "packages/kit/src/runtime/server/env_module.js",
+        "packages/kit/src/runtime/server/errors.js",
+        "packages/kit/src/runtime/server/fetch.js",
+        "packages/kit/src/runtime/server/index.js",
+        "packages/kit/src/runtime/server/instance.js",
+        "packages/kit/src/runtime/server/internal.js",
+        "packages/kit/src/runtime/server/state.js",
+        "packages/kit/src/runtime/server/utils.js",
+        "packages/kit/src/runtime/server/validate-headers.js"
+      ],
+      "workspace_sha256": "64ce23bf8bab9fa932dd923b745438ff8e828dce6d31e555fc8630ebf2efb286",
+      "entities_total": 192,
+      "entities_by_type": {
+        "class": 1,
+        "const": 98,
+        "file": 14,
+        "folder": 5,
+        "function": 49,
+        "method": 2,
+        "repo": 1,
+        "var": 22
+      },
+      "entities_by_domain": {
+        "code": 6,
+        "javascript": 186
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 192,
+        "edges": 412,
+        "induced_edges": 412,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 18,
+          "code.structure.belongs": 191,
+          "code.structure.contains": 203
+        },
+        "non_containment_edges": 18
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "packages/kit/src/runtime/server"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 40,
+          "entities": 789
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "packages/kit/src/runtime/server/*.js"
+          ],
+          "exclude": [
+            "*.spec.js",
+            "packages/kit/src/runtime/server/remote-functions.js",
+            "packages/kit/src/runtime/server/respond.js",
+            "packages/kit/src/runtime/server/sourcemaps.js"
+          ],
+          "max_file_bytes": null,
+          "files": 14,
+          "entities": 192
+        }
+      ],
+      "notes": "Only top-level server/*.js helper modules are kept. The *.spec.js tests, the page/ and data/ subdirectories, and the three largest modules (respond.js, remote-functions.js, sourcemaps.js) are excluded.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "homebrew-docs",
+      "split": "held-out",
+      "role": "docs with multiple topics and boilerplate pages; isolated entities",
+      "language": "Markdown",
+      "repo": "https://github.com/Homebrew/brew",
+      "commit": "7a8f775358a0ab6a2945bdc3d63834ec6f76673c",
+      "license": "BSD-2-Clause",
+      "license_file": "LICENSE.txt",
+      "license_file_first_line": "BSD 2-Clause License",
+      "system_segment": "homebrew-docs",
+      "include": [
+        "docs/*.md"
+      ],
+      "exclude": [],
+      "max_file_bytes": 3000,
+      "unmatched_includes": [],
+      "files": [
+        "docs/AGENTS.md",
+        "docs/Autobump.md",
+        "docs/BrewTestBot-For-Maintainers.md",
+        "docs/BrewTestBot.md",
+        "docs/Building-Against-Non-Homebrew-Dependencies.md",
+        "docs/C++-Standard-Libraries.md",
+        "docs/Checksum-Requirements.md",
+        "docs/Command-Not-Found.md",
+        "docs/Common-Issues-for-Maintainers.md",
+        "docs/Creating-a-Homebrew-Issue.md",
+        "docs/Custom-GCC-and-cross-compilers.md",
+        "docs/Homebrew-Governance-Archives.md",
+        "docs/Homebrew-Leadership-Responsibilities.md",
+        "docs/How-to-Build-Software-Outside-Homebrew-with-Homebrew-keg-only-Dependencies.md",
+        "docs/Interesting-Taps-and-Forks.md",
+        "docs/Linux-CI.md",
+        "docs/MCP-Server.md",
+        "docs/Maintainers-Avoiding-Burnout.md",
+        "docs/Migrating-A-Formula-To-A-Tap.md",
+        "docs/README.md",
+        "docs/Rename-A-Formula.md",
+        "docs/Taps.md",
+        "docs/Troubleshooting.md",
+        "docs/Updating-Software-in-Homebrew.md",
+        "docs/Xcode.md"
+      ],
+      "workspace_sha256": "3484c0bbdf39d208302ed5682aed69b03ea50b8ca6bd8741415b52b474d7a5f2",
+      "entities_total": 152,
+      "entities_by_type": {
+        "chunk": 127,
+        "doc": 25
+      },
+      "entities_by_domain": {
+        "web": 152
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 152,
+        "edges": 127,
+        "induced_edges": 127,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.structure.belongs": 127
+        },
+        "non_containment_edges": 0
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "docs/*.md"
+          ],
+          "exclude": [],
+          "max_file_bytes": 5000,
+          "files": 40,
+          "entities": 327
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "docs/*.md"
+          ],
+          "exclude": [],
+          "max_file_bytes": 3000,
+          "files": 25,
+          "entities": 152
+        }
+      ],
+      "notes": "Rule-based subset, not hand-picked: every top-level docs/*.md under 3,000 bytes (25 pages). Iteration 1 used an under-5,000-byte rule (40 pages, 327 entities).",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "zlib-core",
+      "split": "held-out",
+      "role": "C with macros; isolated entities",
+      "language": "C",
+      "repo": "https://github.com/madler/zlib",
+      "commit": "767c4c947852e143f582c85f14cf573411df1b35",
+      "license": "Zlib",
+      "license_file": "LICENSE",
+      "license_file_first_line": "Copyright notice:",
+      "system_segment": "zlib-core",
+      "include": [
+        "deflate.c",
+        "deflate.h",
+        "trees.c",
+        "trees.h",
+        "zutil.h"
+      ],
+      "exclude": [],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "deflate.c",
+        "deflate.h",
+        "trees.c",
+        "trees.h",
+        "zutil.h"
+      ],
+      "workspace_sha256": "b355bc6a6221fd672de977e6589850100eafd767f57d57bf31031c84b44c83c6",
+      "entities_total": 186,
+      "entities_by_type": {
+        "const": 81,
+        "file": 5,
+        "function": 49,
+        "repo": 1,
+        "struct": 7,
+        "type": 15,
+        "var": 28
+      },
+      "entities_by_domain": {
+        "c": 185,
+        "code": 1
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 186,
+        "edges": 451,
+        "induced_edges": 451,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 27,
+          "code.structure.belongs": 185,
+          "code.structure.contains": 239
+        },
+        "non_containment_edges": 27
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "*.c",
+            "*.h"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 26,
+          "entities": 637
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "deflate.c",
+            "deflate.h",
+            "trees.c",
+            "trees.h",
+            "zutil.h"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 5,
+          "entities": 186
+        }
+      ],
+      "notes": "Root files only, narrowed to the deflate engine: deflate.c, deflate.h, trees.c, trees.h and the macro-heavy zutil.h. zconf.h (187 prefix macros) and the inflate, gz and checksum files are excluded.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "requests-core",
+      "split": "held-out",
+      "role": "client library sharing vocabulary with D3 but an independent subject",
+      "language": "Python",
+      "repo": "https://github.com/psf/requests",
+      "commit": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60",
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "license_file_first_line": "Apache License",
+      "system_segment": "requests-core",
+      "include": [
+        "src/requests/__init__.py",
+        "src/requests/adapters.py",
+        "src/requests/api.py",
+        "src/requests/auth.py",
+        "src/requests/exceptions.py",
+        "src/requests/hooks.py",
+        "src/requests/models.py",
+        "src/requests/sessions.py",
+        "src/requests/status_codes.py",
+        "src/requests/structures.py"
+      ],
+      "exclude": [],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "src/requests/__init__.py",
+        "src/requests/adapters.py",
+        "src/requests/api.py",
+        "src/requests/auth.py",
+        "src/requests/exceptions.py",
+        "src/requests/hooks.py",
+        "src/requests/models.py",
+        "src/requests/sessions.py",
+        "src/requests/status_codes.py",
+        "src/requests/structures.py"
+      ],
+      "workspace_sha256": "abdc043e4c32139a0969e7d1edb19724fa0eee6d63008aa408268b8eaf435a34",
+      "entities_total": 206,
+      "entities_by_type": {
+        "class": 40,
+        "const": 13,
+        "file": 10,
+        "folder": 2,
+        "function": 18,
+        "method": 119,
+        "repo": 1,
+        "var": 3
+      },
+      "entities_by_domain": {
+        "code": 3,
+        "python": 203
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 206,
+        "edges": 882,
+        "induced_edges": 813,
+        "cross_system_edges": 0,
+        "dangling_edges": 69,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 69,
+          "code.relationship.extends": 40,
+          "code.relationship.parameter": 51,
+          "code.relationship.receiver": 119,
+          "code.relationship.references": 1,
+          "code.relationship.returns": 45,
+          "code.structure.belongs": 205,
+          "code.structure.contains": 352
+        },
+        "non_containment_edges": 325
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "src/requests"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 20,
+          "entities": 364
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "src/requests/__init__.py",
+            "src/requests/adapters.py",
+            "src/requests/api.py",
+            "src/requests/auth.py",
+            "src/requests/exceptions.py",
+            "src/requests/hooks.py",
+            "src/requests/models.py",
+            "src/requests/sessions.py",
+            "src/requests/status_codes.py",
+            "src/requests/structures.py"
+          ],
+          "exclude": [],
+          "max_file_bytes": null,
+          "files": 10,
+          "entities": 206
+        }
+      ],
+      "notes": "The client API core is kept: __init__, api, sessions, models, adapters, auth, exceptions, structures, hooks and status_codes. utils, cookies, compat, typing, version and internal helpers are excluded.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    },
+    {
+      "id": "cobra-root",
+      "split": "held-out",
+      "role": "CLI framework, independent of D1",
+      "language": "Go + Markdown",
+      "repo": "https://github.com/spf13/cobra",
+      "commit": "adbc8813901bba65827259daa8e22ff94ec1f30e",
+      "license": "Apache-2.0",
+      "license_file": "LICENSE.txt",
+      "license_file_first_line": "Apache License",
+      "system_segment": "cobra-root",
+      "include": [
+        "*.go",
+        "README.md"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*completions*.go",
+        "active_help.go"
+      ],
+      "max_file_bytes": null,
+      "unmatched_includes": [],
+      "files": [
+        "README.md",
+        "args.go",
+        "cobra.go",
+        "command.go",
+        "command_notwin.go",
+        "command_win.go",
+        "flag_groups.go"
+      ],
+      "workspace_sha256": "3619273a4773c4486a1945929b0d89189e914556f940f0bf6c1732090b21b118",
+      "entities_total": 218,
+      "entities_by_type": {
+        "chunk": 12,
+        "const": 17,
+        "doc": 1,
+        "file": 6,
+        "function": 40,
+        "method": 124,
+        "repo": 1,
+        "struct": 3,
+        "type": 3,
+        "var": 11
+      },
+      "entities_by_domain": {
+        "code": 1,
+        "golang": 204,
+        "web": 13
+      },
+      "in_range": true,
+      "edge_proxy": {
+        "source_keys": 218,
+        "edges": 695,
+        "induced_edges": 612,
+        "cross_system_edges": 0,
+        "dangling_edges": 83,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 114,
+          "code.relationship.parameter": 8,
+          "code.relationship.receiver": 124,
+          "code.relationship.references": 13,
+          "code.relationship.returns": 16,
+          "code.structure.belongs": 216,
+          "code.structure.contains": 204
+        },
+        "non_containment_edges": 275
+      },
+      "iterations": [
+        {
+          "iteration": "iter1",
+          "include": [
+            "*.go",
+            "README.md"
+          ],
+          "exclude": [
+            "*_test.go"
+          ],
+          "max_file_bytes": null,
+          "files": 15,
+          "entities": 336
+        },
+        {
+          "iteration": "iter2",
+          "include": [
+            "*.go",
+            "README.md"
+          ],
+          "exclude": [
+            "*_test.go",
+            "*completions*.go",
+            "active_help.go"
+          ],
+          "max_file_bytes": null,
+          "files": 7,
+          "entities": 218
+        }
+      ],
+      "notes": "Root non-test Go files minus the shell-completion generators (*completions*.go, active_help.go), plus README.md.",
+      "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+    }
+  ]
+}

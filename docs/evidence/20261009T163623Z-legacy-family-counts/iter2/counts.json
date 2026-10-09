@@ -1,0 +1,387 @@
+{
+  "nats_url": "nats://localhost:14222",
+  "collected_at": "2026-10-09T16:41:00Z",
+  "entity_keys": 2320,
+  "malformed_keys": [],
+  "systems": {
+    "cobra-root": {
+      "entities": 218,
+      "by_type": {
+        "chunk": 12,
+        "const": 17,
+        "doc": 1,
+        "file": 6,
+        "function": 40,
+        "method": 124,
+        "repo": 1,
+        "struct": 3,
+        "type": 3,
+        "var": 11
+      },
+      "by_domain": {
+        "code": 1,
+        "golang": 204,
+        "web": 13
+      },
+      "edge_proxy": {
+        "source_keys": 218,
+        "edges": 695,
+        "induced_edges": 612,
+        "cross_system_edges": 0,
+        "dangling_edges": 83,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 114,
+          "code.relationship.parameter": 8,
+          "code.relationship.receiver": 124,
+          "code.relationship.references": 13,
+          "code.relationship.returns": 16,
+          "code.structure.belongs": 216,
+          "code.structure.contains": 204
+        }
+      }
+    },
+    "commons-csv": {
+      "entities": 223,
+      "by_type": {
+        "chunk": 8,
+        "class": 4,
+        "doc": 1,
+        "enum": 3,
+        "file": 6,
+        "folder": 7,
+        "method": 129,
+        "repo": 1,
+        "var": 64
+      },
+      "by_domain": {
+        "code": 8,
+        "java": 206,
+        "web": 9
+      },
+      "edge_proxy": {
+        "source_keys": 223,
+        "edges": 833,
+        "induced_edges": 760,
+        "cross_system_edges": 0,
+        "dangling_edges": 73,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.dependency.imports": 9,
+          "code.relationship.calls": 110,
+          "code.relationship.parameter": 27,
+          "code.relationship.receiver": 129,
+          "code.relationship.references": 19,
+          "code.relationship.returns": 58,
+          "code.structure.belongs": 221,
+          "code.structure.contains": 260
+        }
+      }
+    },
+    "express-lib": {
+      "entities": 235,
+      "by_type": {
+        "chunk": 26,
+        "const": 6,
+        "doc": 1,
+        "file": 6,
+        "folder": 1,
+        "function": 18,
+        "repo": 1,
+        "var": 176
+      },
+      "by_domain": {
+        "code": 2,
+        "javascript": 206,
+        "web": 27
+      },
+      "edge_proxy": {
+        "source_keys": 235,
+        "edges": 485,
+        "induced_edges": 485,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.structure.belongs": 233,
+          "code.structure.contains": 252
+        }
+      }
+    },
+    "flask-core": {
+      "entities": 173,
+      "by_type": {
+        "class": 26,
+        "const": 2,
+        "file": 11,
+        "folder": 3,
+        "function": 18,
+        "method": 97,
+        "repo": 1,
+        "var": 15
+      },
+      "by_domain": {
+        "code": 4,
+        "python": 169
+      },
+      "edge_proxy": {
+        "source_keys": 173,
+        "edges": 647,
+        "induced_edges": 595,
+        "cross_system_edges": 0,
+        "dangling_edges": 52,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 31,
+          "code.relationship.extends": 13,
+          "code.relationship.parameter": 46,
+          "code.relationship.receiver": 97,
+          "code.relationship.returns": 13,
+          "code.structure.belongs": 172,
+          "code.structure.contains": 275
+        }
+      }
+    },
+    "homebrew-docs": {
+      "entities": 152,
+      "by_type": {
+        "chunk": 127,
+        "doc": 25
+      },
+      "by_domain": {
+        "web": 152
+      },
+      "edge_proxy": {
+        "source_keys": 152,
+        "edges": 127,
+        "induced_edges": 127,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.structure.belongs": 127
+        }
+      }
+    },
+    "mavlink-minimal": {
+      "entities": 129,
+      "by_type": {
+        "const": 53,
+        "file": 11,
+        "folder": 1,
+        "function": 61,
+        "repo": 1,
+        "struct": 1,
+        "type": 1
+      },
+      "by_domain": {
+        "c": 127,
+        "code": 2
+      },
+      "edge_proxy": {
+        "source_keys": 129,
+        "edges": 294,
+        "induced_edges": 294,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 15,
+          "code.structure.belongs": 128,
+          "code.structure.contains": 151
+        }
+      }
+    },
+    "nats-go-micro": {
+      "entities": 217,
+      "by_type": {
+        "chunk": 55,
+        "const": 10,
+        "doc": 2,
+        "file": 10,
+        "folder": 2,
+        "function": 57,
+        "interface": 4,
+        "method": 37,
+        "repo": 1,
+        "struct": 19,
+        "type": 9,
+        "var": 11
+      },
+      "by_domain": {
+        "code": 3,
+        "golang": 157,
+        "web": 57
+      },
+      "edge_proxy": {
+        "source_keys": 217,
+        "edges": 547,
+        "induced_edges": 477,
+        "cross_system_edges": 0,
+        "dangling_edges": 70,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 85,
+          "code.relationship.embeds": 5,
+          "code.relationship.parameter": 15,
+          "code.relationship.receiver": 37,
+          "code.relationship.references": 14,
+          "code.relationship.returns": 18,
+          "code.structure.belongs": 214,
+          "code.structure.contains": 159
+        }
+      }
+    },
+    "ogcapi-cs-sections": {
+      "entities": 187,
+      "by_type": {
+        "chunk": 167,
+        "doc": 20
+      },
+      "by_domain": {
+        "web": 187
+      },
+      "edge_proxy": {
+        "source_keys": 187,
+        "edges": 167,
+        "induced_edges": 167,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.structure.belongs": 167
+        }
+      }
+    },
+    "osh-module": {
+      "entities": 202,
+      "by_type": {
+        "chunk": 5,
+        "class": 8,
+        "doc": 1,
+        "file": 7,
+        "folder": 8,
+        "method": 132,
+        "repo": 1,
+        "var": 40
+      },
+      "by_domain": {
+        "code": 9,
+        "java": 187,
+        "web": 6
+      },
+      "edge_proxy": {
+        "source_keys": 202,
+        "edges": 735,
+        "induced_edges": 630,
+        "cross_system_edges": 0,
+        "dangling_edges": 105,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.dependency.imports": 3,
+          "code.relationship.calls": 81,
+          "code.relationship.parameter": 39,
+          "code.relationship.receiver": 132,
+          "code.relationship.references": 24,
+          "code.relationship.returns": 39,
+          "code.structure.belongs": 200,
+          "code.structure.contains": 217
+        }
+      }
+    },
+    "requests-core": {
+      "entities": 206,
+      "by_type": {
+        "class": 40,
+        "const": 13,
+        "file": 10,
+        "folder": 2,
+        "function": 18,
+        "method": 119,
+        "repo": 1,
+        "var": 3
+      },
+      "by_domain": {
+        "code": 3,
+        "python": 203
+      },
+      "edge_proxy": {
+        "source_keys": 206,
+        "edges": 882,
+        "induced_edges": 813,
+        "cross_system_edges": 0,
+        "dangling_edges": 69,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 69,
+          "code.relationship.extends": 40,
+          "code.relationship.parameter": 51,
+          "code.relationship.receiver": 119,
+          "code.relationship.references": 1,
+          "code.relationship.returns": 45,
+          "code.structure.belongs": 205,
+          "code.structure.contains": 352
+        }
+      }
+    },
+    "sveltekit-server-runtime": {
+      "entities": 192,
+      "by_type": {
+        "class": 1,
+        "const": 98,
+        "file": 14,
+        "folder": 5,
+        "function": 49,
+        "method": 2,
+        "repo": 1,
+        "var": 22
+      },
+      "by_domain": {
+        "code": 6,
+        "javascript": 186
+      },
+      "edge_proxy": {
+        "source_keys": 192,
+        "edges": 412,
+        "induced_edges": 412,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 18,
+          "code.structure.belongs": 191,
+          "code.structure.contains": 203
+        }
+      }
+    },
+    "zlib-core": {
+      "entities": 186,
+      "by_type": {
+        "const": 81,
+        "file": 5,
+        "function": 49,
+        "repo": 1,
+        "struct": 7,
+        "type": 15,
+        "var": 28
+      },
+      "by_domain": {
+        "c": 185,
+        "code": 1
+      },
+      "edge_proxy": {
+        "source_keys": 186,
+        "edges": 451,
+        "induced_edges": 451,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 27,
+          "code.structure.belongs": 185,
+          "code.structure.contains": 239
+        }
+      }
+    }
+  }
+}

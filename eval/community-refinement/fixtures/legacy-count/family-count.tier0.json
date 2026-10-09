@@ -1,0 +1,213 @@
+{
+  "namespace": "semselect",
+  "sources": [
+    {
+      "type": "ast",
+      "path": "/workspace/nats-go-micro",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/nats-go-micro"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/commons-csv",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/commons-csv"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/flask-core",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/express-lib",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/express-lib"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/osh-module",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/osh-module"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/ogcapi-cs-sections"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/mavlink-minimal",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/sveltekit-server-runtime",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/homebrew-docs"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/zlib-core",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/requests-core",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/cobra-root",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/cobra-root"
+      ],
+      "watch": false
+    }
+  ],
+  "source_roots": [
+    "/workspace/nats-go-micro",
+    "/workspace/commons-csv",
+    "/workspace/flask-core",
+    "/workspace/express-lib",
+    "/workspace/osh-module",
+    "/workspace/ogcapi-cs-sections",
+    "/workspace/mavlink-minimal",
+    "/workspace/sveltekit-server-runtime",
+    "/workspace/homebrew-docs",
+    "/workspace/zlib-core",
+    "/workspace/requests-core",
+    "/workspace/cobra-root"
+  ],
+  "graph": {
+    "embedder_type": "bm25",
+    "index_workers": 4,
+    "coalesce_ms": 200
+  }
+}

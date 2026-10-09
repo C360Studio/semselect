@@ -1,0 +1,32 @@
+2026-10-09T16:40:48Z iteration iter2: semsource 4093d3ce421371f4a99d7168e372552899bf6795
+nats-go-micro: 12 files, code=True docs=True unmatched=[]
+commons-csv: 7 files, code=True docs=True unmatched=[]
+flask-core: 11 files, code=True docs=False unmatched=[]
+express-lib: 7 files, code=True docs=True unmatched=[]
+osh-module: 8 files, code=True docs=True unmatched=[]
+ogcapi-cs-sections: 20 files, code=False docs=True unmatched=[]
+mavlink-minimal: 11 files, code=True docs=False unmatched=[]
+sveltekit-server-runtime: 14 files, code=True docs=False unmatched=[]
+homebrew-docs: 25 files, code=False docs=True unmatched=[]
+zlib-core: 5 files, code=True docs=False unmatched=[]
+requests-core: 10 files, code=True docs=False unmatched=[]
+cobra-root: 7 files, code=True docs=True unmatched=[]
+2026-10-09T16:40:54Z image sha256:08801743b4eeb774ee5818d23c238757cbb25bccc039766f85939a8a2d0b394f
+2026-10-09T16:40:59Z semsource healthy after 11s
+2026-10-09T16:40:59Z status {"phase":"ready","total_entities":2320,"index_ready":true,"embedding_ready":true}
+2026-10-09T16:40:59Z ready after 0s from healthy
+2026-10-09T16:41:15Z entity keys: 2320, recheck after 15s: 2320
+cobra-root	218
+commons-csv	223
+express-lib	235
+flask-core	173
+homebrew-docs	152
+mavlink-minimal	129
+nats-go-micro	217
+ogcapi-cs-sections	187
+osh-module	202
+requests-core	206
+sveltekit-server-runtime	192
+zlib-core	186
+2026-10-09T16:41:15Z iteration wall-clock 27s
+2026-10-09T16:41:16Z teardown complete (exit 0)

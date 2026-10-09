@@ -1,0 +1,59 @@
+nats-go-micro	README.md	23	13793
+nats-go-micro	micro/README.md	34	8808
+nats-go-micro	TOTAL	57
+commons-csv	README.md	9	6564
+commons-csv	TOTAL	9
+flask-core	TOTAL	0
+express-lib	Readme.md	27	10371
+express-lib	TOTAL	27
+osh-module	README.md	6	5581
+osh-module	TOTAL	6
+ogcapi-cs-sections	api/part1/standard/sections/clause_0_front_material.adoc	5	5497
+ogcapi-cs-sections	api/part1/standard/sections/clause_10_requirements_class_deployment_features.adoc	8	7468
+ogcapi-cs-sections	api/part1/standard/sections/clause_11_requirements_class_subdeployments.adoc	6	4287
+ogcapi-cs-sections	api/part1/standard/sections/clause_12_requirements_class_procedure_features.adoc	8	7106
+ogcapi-cs-sections	api/part1/standard/sections/clause_13_requirements_class_sampling_features.adoc	11	11405
+ogcapi-cs-sections	api/part1/standard/sections/clause_14_requirements_class_property_definitions.adoc	6	5072
+ogcapi-cs-sections	api/part1/standard/sections/clause_15_requirements_class_advanced_filtering.adoc	38	27510
+ogcapi-cs-sections	api/part1/standard/sections/clause_16_requirements_class_create_replace_delete.adoc	11	8743
+ogcapi-cs-sections	api/part1/standard/sections/clause_17_requirements_class_update.adoc	7	2752
+ogcapi-cs-sections	api/part1/standard/sections/clause_1_scope.adoc	2	1645
+ogcapi-cs-sections	api/part1/standard/sections/clause_20_requirements_class_geojson_encoding.adoc	11	12224
+ogcapi-cs-sections	api/part1/standard/sections/clause_21_requirements_class_sensorml_encoding.adoc	11	13340
+ogcapi-cs-sections	api/part1/standard/sections/clause_2_conformance.adoc	3	2703
+ogcapi-cs-sections	api/part1/standard/sections/clause_3_references.adoc	4	2422
+ogcapi-cs-sections	api/part1/standard/sections/clause_4_terms_and_definitions.adoc	9	4257
+ogcapi-cs-sections	api/part1/standard/sections/clause_5_conventions.adoc	3	2119
+ogcapi-cs-sections	api/part1/standard/sections/clause_6_overview.adoc	19	18092
+ogcapi-cs-sections	api/part1/standard/sections/clause_7_requirements_class_common.adoc	6	3838
+ogcapi-cs-sections	api/part1/standard/sections/clause_8_requirements_class_system_features.adoc	12	11296
+ogcapi-cs-sections	api/part1/standard/sections/clause_9_requirements_class_subsystems.adoc	7	5893
+ogcapi-cs-sections	TOTAL	187
+homebrew-docs	docs/AGENTS.md	6	2267
+homebrew-docs	docs/Autobump.md	8	1696
+homebrew-docs	docs/BrewTestBot-For-Maintainers.md	7	2516
+homebrew-docs	docs/BrewTestBot.md	4	1350
+homebrew-docs	docs/Building-Against-Non-Homebrew-Dependencies.md	4	1789
+homebrew-docs	docs/C++-Standard-Libraries.md	4	1684
+homebrew-docs	docs/Checksum-Requirements.md	6	1186
+homebrew-docs	docs/Command-Not-Found.md	6	1266
+homebrew-docs	docs/Common-Issues-for-Maintainers.md	10	2371
+homebrew-docs	docs/Creating-a-Homebrew-Issue.md	3	739
+homebrew-docs	docs/Custom-GCC-and-cross-compilers.md	3	1563
+homebrew-docs	docs/Homebrew-Governance-Archives.md	2	282
+homebrew-docs	docs/Homebrew-Leadership-Responsibilities.md	5	1537
+homebrew-docs	docs/How-to-Build-Software-Outside-Homebrew-with-Homebrew-keg-only-Dependencies.md	16	2625
+homebrew-docs	docs/Interesting-Taps-and-Forks.md	5	2941
+homebrew-docs	docs/Linux-CI.md	5	2603
+homebrew-docs	docs/MCP-Server.md	5	1684
+homebrew-docs	docs/Maintainers-Avoiding-Burnout.md	6	2749
+homebrew-docs	docs/Migrating-A-Formula-To-A-Tap.md	3	995
+homebrew-docs	docs/README.md	4	567
+homebrew-docs	docs/Rename-A-Formula.md	8	1753
+homebrew-docs	docs/Taps.md	14	2646
+homebrew-docs	docs/Troubleshooting.md	9	2426
+homebrew-docs	docs/Updating-Software-in-Homebrew.md	3	1937
+homebrew-docs	docs/Xcode.md	6	1734
+homebrew-docs	TOTAL	152
+cobra-root	README.md	13	4949
+cobra-root	TOTAL	13

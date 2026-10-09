@@ -1,0 +1,33 @@
+2026-10-09T16:36:24Z iteration iter1: semsource 4093d3ce421371f4a99d7168e372552899bf6795
+nats-go-micro: 12 files, code=True docs=True unmatched=[]
+commons-csv: 13 files, code=True docs=True unmatched=[]
+flask-core: 26 files, code=True docs=True unmatched=[]
+express-lib: 7 files, code=True docs=True unmatched=[]
+osh-module: 12 files, code=True docs=True unmatched=[]
+ogcapi-cs-sections: 25 files, code=False docs=True unmatched=[]
+mavlink-minimal: 5 files, code=True docs=False unmatched=[]
+sveltekit-server-runtime: 40 files, code=True docs=False unmatched=[]
+homebrew-docs: 40 files, code=False docs=True unmatched=[]
+zlib-core: 26 files, code=True docs=False unmatched=[]
+requests-core: 20 files, code=True docs=False unmatched=[]
+cobra-root: 15 files, code=True docs=True unmatched=[]
+2026-10-09T16:36:30Z image sha256:08801743b4eeb774ee5818d23c238757cbb25bccc039766f85939a8a2d0b394f
+2026-10-09T16:36:35Z semsource healthy after 11s
+2026-10-09T16:36:35Z status {"phase":"ready","total_entities":4401,"index_ready":false,"embedding_ready":true}
+2026-10-09T16:36:45Z status {"phase":"ready","total_entities":4401,"index_ready":true,"embedding_ready":true}
+2026-10-09T16:36:45Z ready after 10s from healthy
+2026-10-09T16:37:03Z entity keys: 4401, recheck after 15s: 4401
+cobra-root	336
+commons-csv	414
+express-lib	235
+flask-core	495
+homebrew-docs	327
+mavlink-minimal	47
+nats-go-micro	217
+ogcapi-cs-sections	274
+osh-module	266
+requests-core	364
+sveltekit-server-runtime	789
+zlib-core	637
+2026-10-09T16:37:03Z iteration wall-clock 39s
+2026-10-09T16:37:03Z teardown complete (exit 0)

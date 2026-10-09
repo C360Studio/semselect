@@ -1,0 +1,152 @@
+{
+  "schema": "semselect.legacy-family-count.input/v1",
+  "note": "Owner-chosen families and roles for the community-refinement pilot (issue #5). Only `include`, `exclude` and `max_file_bytes` may change to bring a family into the 50-250 entity range. `include` entries are repo-relative globs (non-recursive); a matching directory is copied recursively. `exclude` globs match repo-relative paths. `commit` pins the shallow clone. `license` is an SPDX identifier read from the named license file; NOASSERTION means the checkout carries no license file.",
+  "entity_range": [50, 250],
+  "families": [
+    {
+      "id": "nats-go-micro",
+      "split": "development",
+      "role": "code and doc about the same responsibility",
+      "language": "Go + Markdown",
+      "repo": "https://github.com/nats-io/nats.go",
+      "commit": "31a3ee4cf0fef9e2dc2d85d5068087b46236cd12",
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "include": ["micro", "README.md"],
+      "exclude": []
+    },
+    {
+      "id": "commons-csv",
+      "split": "development",
+      "role": "one topic with builder boilerplate hubs",
+      "language": "Java + Markdown",
+      "repo": "https://github.com/apache/commons-csv",
+      "commit": "26f2e869625ba102f5b6386d9799817e523637f7",
+      "license": "Apache-2.0",
+      "license_file": "LICENSE.txt",
+      "include": ["src/main/java/org/apache/commons/csv", "README.md"],
+      "exclude": []
+    },
+    {
+      "id": "flask-core",
+      "split": "development",
+      "role": "multiple legitimate topics in one package",
+      "language": "Python",
+      "repo": "https://github.com/pallets/flask",
+      "commit": "d086db856be187255b8ec61ef409357393020f32",
+      "license": "BSD-3-Clause",
+      "license_file": "LICENSE.txt",
+      "include": ["src/flask"],
+      "exclude": []
+    },
+    {
+      "id": "express-lib",
+      "split": "development",
+      "role": "sparse explicit topology, small",
+      "language": "JavaScript + Markdown",
+      "repo": "https://github.com/expressjs/express",
+      "commit": "a419aa7350389a275ab45fde2e849ed1f02449ef",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "include": ["lib", "Readme.md"],
+      "exclude": []
+    },
+    {
+      "id": "osh-module",
+      "split": "held-out",
+      "role": "continuity with the recorded 6,685-entity baseline; cross-type",
+      "language": "Java + Markdown",
+      "repo": "https://github.com/opensensorhub/osh-core",
+      "commit": "9a43f9ec42315e5a22e5e5d90a4ba79eef9cea08",
+      "license": "MPL-2.0",
+      "license_file": "LICENSE",
+      "include": ["sensorhub-core/src/main/java/org/sensorhub/impl/module", "README.md"],
+      "exclude": []
+    },
+    {
+      "id": "ogcapi-cs-sections",
+      "split": "held-out",
+      "role": "docs-only, lexically similar sections",
+      "language": "AsciiDoc",
+      "repo": "https://github.com/opengeospatial/ogcapi-connected-systems",
+      "commit": "fb858be23aa03e2b824ec50b5a97ac2c2a1d3fec",
+      "license": "LicenseRef-OGC-Software-License",
+      "license_file": "LICENSE",
+      "include": ["api/part1/standard/sections"],
+      "exclude": []
+    },
+    {
+      "id": "mavlink-minimal",
+      "split": "held-out",
+      "role": "generated boilerplate hubs",
+      "language": "C headers",
+      "repo": "https://github.com/mavlink/c_library_v2",
+      "commit": "28eae47457249ab6c8c1cadd104fcbe25eacd7a3",
+      "license": "NOASSERTION",
+      "license_file": null,
+      "include": ["minimal"],
+      "exclude": []
+    },
+    {
+      "id": "sveltekit-server-runtime",
+      "split": "held-out",
+      "role": "many small helpers",
+      "language": "JavaScript/TypeScript",
+      "repo": "https://github.com/sveltejs/kit",
+      "commit": "a06817e90049f15465eca140a07c5218d439dc37",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "include": ["packages/kit/src/runtime/server"],
+      "exclude": []
+    },
+    {
+      "id": "homebrew-docs",
+      "split": "held-out",
+      "role": "docs with multiple topics and boilerplate pages; isolated entities",
+      "language": "Markdown",
+      "repo": "https://github.com/Homebrew/brew",
+      "commit": "7a8f775358a0ab6a2945bdc3d63834ec6f76673c",
+      "license": "BSD-2-Clause",
+      "license_file": "LICENSE.txt",
+      "include": ["docs/*.md"],
+      "exclude": [],
+      "max_file_bytes": 5000
+    },
+    {
+      "id": "zlib-core",
+      "split": "held-out",
+      "role": "C with macros; isolated entities",
+      "language": "C",
+      "repo": "https://github.com/madler/zlib",
+      "commit": "767c4c947852e143f582c85f14cf573411df1b35",
+      "license": "Zlib",
+      "license_file": "LICENSE",
+      "include": ["*.c", "*.h"],
+      "exclude": []
+    },
+    {
+      "id": "requests-core",
+      "split": "held-out",
+      "role": "client library sharing vocabulary with D3 but an independent subject",
+      "language": "Python",
+      "repo": "https://github.com/psf/requests",
+      "commit": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60",
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "include": ["src/requests"],
+      "exclude": []
+    },
+    {
+      "id": "cobra-root",
+      "split": "held-out",
+      "role": "CLI framework, independent of D1",
+      "language": "Go + Markdown",
+      "repo": "https://github.com/spf13/cobra",
+      "commit": "adbc8813901bba65827259daa8e22ff94ec1f30e",
+      "license": "Apache-2.0",
+      "license_file": "LICENSE.txt",
+      "include": ["*.go", "README.md"],
+      "exclude": ["*_test.go"]
+    }
+  ]
+}
