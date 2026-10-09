@@ -18,7 +18,7 @@ on one slot (`-np 1`), and Kev requests pass through a guard that admits one
 inference and returns 429 to a second. That is the right yardstick for an
 interactive router and the wrong one for background graph work, where the
 question is decisions per second. Throughput, batching and multi-slot serving
-are unmeasured for both models on every runtime. The
+were then unmeasured for both models on every runtime. The
 [README](../README.md#how-to-read-the-latency-numbers) and the
 [selection guide](when-to-use.md#why-per-request-latency-is-the-wrong-yardstick-for-background-work)
 now say so, and the README explains
@@ -30,22 +30,40 @@ What is measured, probed, designed and only reported by others:
   source-evidence workloads, as recorded in the closeout below. Qwen reused
   prompt prefixes in 47/48 ticket rows while Kev reprocessed them; Kev's query
   heads ran with zero cached starts in one slot. `-np 3 --kv-unified` is named
-  in the closeout as an untested optimization.
+  in the closeout as an untested optimization; the outcome below resolves it.
 - **Probed here, 2026-10-05:** SGLang's MLX backend served Qwen3.5-4B
   (mlx-community 4-bit) for JSON chat, `/v1/score` and `/v1/decisions` on this
   M3 Pro after `--disable-radix-cache`. One fixture, one running request, no
   throughput. The [compatibility record](sglang-investigation.md) keeps it
   apart from any performance claim. The venv and model are still on disk.
-- **Designed, not run:** the [throughput experiment](../eval/throughput/README.md).
+- **Designed; llama.cpp cells run 2026-10-09:** the
+  [throughput experiment](../eval/throughput/README.md).
   It compares three serving paths on this laptop, reusing the 24-case
   source-evidence pilot (independent decisions) and the 32-case query-routing
   task (three questions over one shared state), at 1, 4 and 8 slots, with Kev
   head grouping and unified KV cells. SGLang MLX cells cover Qwen JSON,
   `/v1/decisions` and `/v1/score`; Kev's own MLX server includes a cached-state
-  cell. It has no results.
+  cell. The llama.cpp cells ran on 2026-10-09 (outcome below); the SGLang MLX
+  and Kev MLX cells are running, with no results yet.
 - **Author-reported, not ours:** the figures in the README's
   [pitch table](../README.md#what-the-decision-model-pitch-claims-in-plain-language),
   and the SGLang and openjev-sglang statements below.
+
+**Outcome on llama.cpp Metal, 2026-10-09 (measured).** The [throughput
+record](validation-throughput.md) ran 19 cells across both models on this M3
+Pro, rerunning two Kev cells. Prompt processing stayed at about 440 to 570
+tokens per second at 1, 4 and 8 slots, so with fresh evidence in each request
+every path landed near one decision per second, and extra slots mostly added
+queueing. Kev gained nothing from slots: a decision model loads in embedding
+mode (every Kev log shows it), and on the pinned build that evaluates one slot's
+prompt per compute step (from the pinned source). Its one gain was head
+grouping: with four slots and one client the three query heads shared one
+prefix, 2.35× faster than one slot with identical labels, and still slower than
+Qwen JSON (1.01 against 1.30 to 1.39 questions per second). Qwen JSON gained
+from slots only with a warm prefix cache. Neither pre-declared reading came out
+yes: no arm batched usefully, and Kev showed no shared-state advantage. The
+lever on this hardware is fewer processed tokens per decision, not concurrency.
+This says nothing about CUDA hardware, Jev or decision quality.
 
 **SGLang does not document Kev support.** SGLang's
 [decision-model documentation](https://docs.sglang.io/docs/supported-models/decision_models),
@@ -154,8 +172,8 @@ that every untested alternative would fail.
 
 | Point raised | What the closeout accepts or corrects |
 | --- | --- |
-| Kev's three query heads repeat shared context | **Confirmed for our one-slot profile.** The saved run has 195 heads with zero cached starts. Native grouping uses available slots and can copy a shared prefix to child slots. `-np 3 --kv-unified` is an untested optimization, not a guaranteed removal of the measured 7.11 s versus 2.38 s gap. [Grouping source](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-decision.cpp#L810-L839), [prefix copy](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3676-L3691). |
-| Ticket latency measures inherent model speed | **It does not.** Qwen reused prefixes in 47/48 measured rows; Kev reprocessed them. The observed hybrid path lacks the completion-only rollback checkpoints. This confounds 449 versus 288 ms without establishing how much of the gap it explains. Decision tasks do enter prefix-reuse logic; “decision models cannot cache” is too broad. [Reuse](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3440-L3448), [checkpoint restriction](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3708-L3721). |
+| Kev's three query heads repeat shared context | **Confirmed for our one-slot profile.** The saved run has 195 heads with zero cached starts. Native grouping uses available slots and can copy a shared prefix to child slots. `-np 3 --kv-unified` is an untested optimization, not a guaranteed removal of the measured 7.11 s versus 2.38 s gap. [Grouping source](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-decision.cpp#L810-L839), [prefix copy](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3676-L3691). **Resolved 2026-10-09:** with `-np 4` and one client, grouping copied a shared prefix of about 1,070 tokens to two child heads and cut Kev's query median from 6,998 to 2,972 ms (0.43 to 1.01 questions/s), all 96 labels identical; `--kv-unified` added nothing measurable, and `-np 3` itself was not run. Kev stayed slower than Qwen JSON's 2,297 ms. [Throughput record](validation-throughput.md). |
+| Ticket latency measures inherent model speed | **It does not.** Qwen reused prefixes in 47/48 measured rows; Kev reprocessed them. The observed hybrid path lacks the completion-only rollback checkpoints. This confounds 449 versus 288 ms without establishing how much of the gap it explains. Decision tasks do enter prefix-reuse logic; “decision models cannot cache” is too broad. [Reuse](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3440-L3448), [checkpoint restriction](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3708-L3721). **Resolved 2026-10-09:** at one slot the two models processed prompt tokens at similar rates (Kev 512 to 519, Qwen 543 to 567 tokens per second); Kev reused no prompt tokens across requests in any throughput cell, while W1 Qwen JSON reused 40% of its prompt tokens. A rate difference under a tenth cannot explain 449 versus 288 ms, so cache reuse is the likelier main cause (inference; the ticket run itself was not repeated). [Throughput record](validation-throughput.md). |
 | Calibration was omitted or explicitly required a Q4 refit | **Shipped calibration was applied; workload calibration is unvalidated.** Conversion preserves the learned temperature and the runtime applies it (logged as 2.406050). The reviewed card recommends workload-specific validation/refitting, but does not substantiate the claimed BF16-fit/Q4-specific instruction. Positive scalar temperature cannot repair a single-variant Choice argmax error. [Conversion](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/conversion/lev.py#L196-L201), [runtime](https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-decision.cpp#L737-L758), [model guidance](https://huggingface.co/jaredpalmer/kev-4b#bias-risks-and-ethical-considerations). |
 | Qwen was Kev's identical backbone control | **Incorrect.** Kev uses Qwen3.5-4B-Base plus its trained adapter/head; our baseline is the post-trained Qwen3.5-4B release. Same family and size do not isolate training, weights or readout effects. [Kev details](https://huggingface.co/jaredpalmer/kev-4b#model-details), [Qwen card](https://huggingface.co/Qwen/Qwen3.5-4B). |
 | Argument selection makes the query task invalid | **Too strong.** The [frozen task](../eval/query-routing/protocol.json) uses finite operation/node/field choices and excludes open-vocabulary extraction. Kev's [intended uses](https://huggingface.co/jaredpalmer/kev-4b#intended-uses) include extraction choices. Independent heads can create inconsistent tuples; selecting a supplied node when `none` is correct remains an application error. This tests a compound caller task, not isolated architecture. |

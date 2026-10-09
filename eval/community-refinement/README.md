@@ -120,9 +120,11 @@ neighbour excerpts into one request, which pushes against the 8,192-byte state
 limit where a per-pair request carries a single pair. A packet that does not fit
 follows the existing out-of-profile rule below. Because the questions in a
 bundle share one state, this is the shape where state reuse can show up on a
-runtime that offers it; a per-pair request leaves nothing to reuse. Whether it
-does is a question for the [throughput experiment](../throughput/README.md),
-which has not run.
+runtime that offers it; a per-pair request leaves nothing to reuse. On
+llama.cpp Metal the [throughput record](../../docs/validation-throughput.md)
+measured it for Kev within one request: three questions over one shared state
+ran 2.35× faster with four slots than with one, labels unchanged. Nothing was
+reused across requests. The MLX runtimes have no results yet.
 
 ## Corpus, labels and evidence freeze
 
@@ -311,8 +313,15 @@ Proposed **pilot screening thresholds**, to freeze before execution:
   profile's measured decisions per second from the
   [throughput experiment](../throughput/README.md). If the requirement exceeds
   the measurement, the track is infeasible on this hardware, regardless of Kev
-  versus Qwen. For example (arithmetic only), 10,000 candidates refreshed hourly
-  need about 2.8 decisions per second; refreshed every five minutes, about 33.
+  versus Qwen. For example, 10,000 candidates refreshed hourly need about 2.8
+  decisions per second; refreshed every five minutes, about 33. The measured
+  rate on this M3 Pro is about **one decision per second** with fresh evidence
+  per request (0.94 to 1.06 at one slot for packets of 540 to 570 prompt
+  tokens; 1.01 to 1.39 questions per second for three-question bundles). At that
+  rate both examples are infeasible here: about 3,600 decisions per hour, or
+  300 per five-minute cycle, is the ceiling. A 32-review pilot cycle takes about
+  half a minute. Larger bundle packets should take proportionally longer per
+  request (inference from the flat prompt rate, not measured).
 
 Passing those gates establishes a reason for a larger confirmation, not production
 adoption. Kev earns preference over Qwen only if it also passes the graph-value
@@ -366,10 +375,15 @@ Execution is staged:
    result and do not start model shopping.
 3. **Primary Metal quality pilot:** Qwen and Kev runs on the same M3 Pro, one
    model server at a time, using the serving profile selected by the
-   [throughput experiment](../throughput/README.md). Until that result exists,
-   the existing one-slot service profile (see the
-   [README](../../README.md#configuration-and-operational-bounds)) is a
-   placeholder and the cost gate is provisional.
+   [throughput experiment](../throughput/README.md)
+   ([record](../../docs/validation-throughput.md)). **Kev:** `-np 4 -c 16384`
+   (4,096 tokens per slot) with one client, so one bundle's questions are
+   grouped over their shared state; the server's prompt cache stays at its
+   default. One client keeps the guard's one-inference admission unchanged; this
+   is a launch-profile change, not a guard change. **Qwen JSON:** one slot
+   (`-np 1`) unless the bundle's state is cached; without a cache, extra slots
+   added latency and no throughput. Other flags follow the existing service
+   profile (see the [README](../../README.md#configuration-and-operational-bounds)).
    Account for Qwen's direct chat path and Kev's guard. Verify actual cache/token
    behavior in logs. Cold start and warmup remain separate from request timing.
 4. **CPU/Docker feasibility:** at most six fixed development packets per model,

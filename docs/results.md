@@ -25,6 +25,55 @@ compare valid pairs. Other sections define their own datasets, metrics and order
 comparisons. These are small evaluations, not production benchmarks or calibration
 studies. Model probabilities are not established probabilities of correctness.
 
+## 2026-10-09: Metal throughput screen on llama.cpp
+
+**More slots and clients did not make prompt processing faster for either
+model.** Prompt processing stayed at about 440 to 570 tokens per second at 1, 4
+and 8 slots, so with fresh evidence in each request every path landed near one
+decision per second. Kev's one gain was head grouping: three questions over one
+shared state ran 2.35× faster with four slots and one client, all labels
+identical, and still slower than Qwen JSON. Qwen JSON gained from slots only
+with a warm prefix cache. Both pre-declared readings were no or not evaluable.
+Apple M3 Pro, native Metal, pinned llama.cpp `6c59c400`, Kev-4B and Qwen3.5-4B
+Q4_K_M, guard bypassed. Small screen on a shared laptop, not a benchmark. See
+the [record](validation-throughput.md), the
+[frozen protocol](../eval/throughput/README.md) and the evidence for the
+[Kev run](evidence/20261009T132345.224681Z-throughput-llamacpp-kev/README.md),
+[Qwen run](evidence/20261009T140002.987772Z-throughput-llamacpp-qwen/README.md)
+and [Kev rerun](evidence/20261009T141930.309707Z-throughput-llamacpp-kev/README.md).
+
+W1 is the 22-case source-evidence pilot in both orders over two measured passes
+(88 decisions); W2 is the 32-case query task with three questions per request
+(96 questions). Latency includes queueing at the server.
+
+| Cell | Questions/s | p50 / p95 ms | Matched / planned | Note |
+| --- | ---: | ---: | ---: | --- |
+| `w1-kev-1x1` | 0.94 | 939 / 1,458 | 88 / 88 | Kev's best W1 cell |
+| `w2-kev-1x1` | 0.43 | 6,998 / 7,005 | 96 / 96 | |
+| `w2-kev-4x1` | 1.01 | 2,972 / 2,974 | 96 / 96 | head grouping, one client |
+| `w2-kev-4x4-kvu` | 1.01 | 5,922 / 30,003 | 84 / 96 | report's best W2 Kev; 4 timeouts |
+| `w1-qwen_json-1x1` | 1.06 | 883 / 1,363 | 88 / 88 | |
+| `w1-qwen_json-8x8` | 2.88 | 2,164 / 6,527 | 88 / 88 | best cell in the readings; warm prefix cache |
+| `w1-qwen_json-8x8-b4096` | 4.43 | 917 / 4,581 | 88 / 88 | Amendment 2 diagnostic, not in the readings |
+| `w1-qwen_score-1x1` | 0.97 | 930 / 1,390 | 60 / 88 | best scoring cell; cross-format reference |
+| `w2-qwen_json-1x1` | 1.30 | 2,297 / 2,401 | 96 / 96 | |
+| `w2-qwen_json-4x4` | 1.39 | 8,593 / 12,611 | 96 / 96 | Qwen's best W2 cell |
+
+Pre-declared readings from `report.py`: batches usefully, W1 Qwen JSON **no**
+(2.71×, p95 4.79×), W2 Kev **no** (2.07×, p95 4.28×, 21 fewer matched), W2 Qwen
+JSON **no** (1.07×), W1 Kev and W1 one-token scoring **not evaluable** (8×8
+stopped). Kev shared-state advantage **no**: best W2 Kev 1.01 questions/s
+against Qwen JSON 1.39.
+
+Stops and refusals, kept as recorded: `w1-kev-8x8` stopped in warmup under
+protocol version 1 (which led to Amendment 1) and stopped again in its version 3
+rerun with 4 timeouts in the first measured wave (33/88 valid); `w2-kev-8x8`
+stopped in measurement under version 1 (39/96) and completed in the rerun with
+7 timeouts (75/96); `w1-qwen_score-8x8` stopped with 3 timeouts (32/88 valid);
+`w1-kev-8x8-b4096` was refused at startup because embedding mode set `n_batch`
+to 512, as Amendment 2 expected. Every error was a 30 s timeout. SGLang MLX and
+Kev MLX runs have no results yet.
+
 ## 2026-10-07 — Query-classification decision
 
 **Keep Qwen3.5-4B JSON and the improved-code baseline.** The additional models

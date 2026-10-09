@@ -1,0 +1,385 @@
+{
+  "cell": "w2-kev-4x4-kvu",
+  "workload": "w2",
+  "arm": "kev",
+  "model": "kev",
+  "profile": {
+    "slots": 4,
+    "concurrency": 4,
+    "kv_unified": true,
+    "n_ctx_total": 16384,
+    "n_ctx_per_slot": 16384,
+    "warmup_passes": 1,
+    "measured_passes": 1,
+    "timeout_s": 30,
+    "command": [
+      "/Users/coby/Code/c360/semselect/.native/build-6c59c40076c0/bin/llama-server",
+      "-m",
+      "/Users/coby/Code/c360/semselect/models/Kev-4B-Q4_K_M.gguf",
+      "--alias",
+      "semselect-kev-4b",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "18086",
+      "-ngl",
+      "99",
+      "-t",
+      "4",
+      "-tb",
+      "4",
+      "-c",
+      "16384",
+      "-b",
+      "512",
+      "-ub",
+      "512",
+      "-np",
+      "4",
+      "--no-context-shift",
+      "--metrics",
+      "-lv",
+      "4",
+      "-kvu"
+    ],
+    "n_ctx_per_slot_observed": 16384
+  },
+  "reference": {
+    "path": "docs/evidence/20261006-query-routing/metal.tar.gz!metal/result.json",
+    "sha256": "e46d230e04f9231b3a5787a1a7c2acf916cba549e16824ce86aab540f6051b8c",
+    "arm": "kev",
+    "view": "normal order"
+  },
+  "started_at": "2026-10-09T13:42:33.966846+00:00",
+  "status": "complete",
+  "runtime": {
+    "command": [
+      "/Users/coby/Code/c360/semselect/.native/build-6c59c40076c0/bin/llama-server",
+      "-m",
+      "/Users/coby/Code/c360/semselect/models/Kev-4B-Q4_K_M.gguf",
+      "--alias",
+      "semselect-kev-4b",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "18086",
+      "-ngl",
+      "99",
+      "-t",
+      "4",
+      "-tb",
+      "4",
+      "-c",
+      "16384",
+      "-b",
+      "512",
+      "-ub",
+      "512",
+      "-np",
+      "4",
+      "--no-context-shift",
+      "--metrics",
+      "-lv",
+      "4",
+      "-kvu"
+    ],
+    "endpoint_base": "http://127.0.0.1:18086",
+    "guard": "bypassed: clients call llama-server directly, as the Qwen baselines always did",
+    "gpu_offload": "offloaded 33/33 layers to GPU",
+    "startup": {
+      "n_seq_max": 4,
+      "n_ctx": 16384,
+      "n_ctx_seq": 16384,
+      "n_batch": 512,
+      "n_ubatch": 512,
+      "context_kv_unified": true,
+      "n_slots": 4,
+      "n_ctx_slot": 16384,
+      "slots_kv_unified": true,
+      "kv_cache": "size =  512.00 MiB ( 16384 cells,   8 layers,  4/1 seqs), K (f16):  256.00 MiB, V (f16):  256.00 MiB",
+      "recurrent_state": "size =  201.00 MiB (     4 cells,  32 layers,  4 seqs  0 rs_seq), R (f32):    9.00 MiB, S (f32):  192.00 MiB, P (f32):    0.00 MiB",
+      "kv_buffer_mib": 512.0,
+      "recurrent_buffer_mib": 201.0,
+      "compute_buffer_mib": 526.02
+    },
+    "startup_seconds": 0.7814468338619918,
+    "exit_code": 0,
+    "cleanup_errors": [],
+    "wall_seconds": 166.93317570886575,
+    "child_cpu_seconds": 7.2860569999999925,
+    "largest_child_peak_rss_bytes_so_far": 7615315968
+  },
+  "preparation_s": 1.5420373529195786e-06,
+  "largest_child_peak_rss_bytes_so_far": 7615315968,
+  "planned": 32,
+  "planned_questions": 96,
+  "valid": 28,
+  "valid_questions": 84,
+  "invalid": 0,
+  "not_run": 0,
+  "errors": {
+    "total": 4,
+    "by_kind": {
+      "timeout": 4
+    }
+  },
+  "elapsed_s": 82.93181749992073,
+  "decisions_per_s": 1.012880249490255,
+  "requests_per_s": 0.337626749830085,
+  "request_ms": {
+    "p50": 5922.23141703289,
+    "p95": 30002.571708057076,
+    "samples": 32
+  },
+  "label_agreement": {
+    "matched": 84,
+    "total": 96,
+    "reference_path": "docs/evidence/20261006-query-routing/metal.tar.gz!metal/result.json",
+    "reference_sha256": "e46d230e04f9231b3a5787a1a7c2acf916cba549e16824ce86aab540f6051b8c",
+    "reference_arm": "kev",
+    "reference_view": "normal order"
+  },
+  "tokens_per_request": {
+    "input_tokens": {
+      "requests": 28,
+      "sum": 101566,
+      "mean": 3627.3571428571427
+    }
+  },
+  "stop_reason": null,
+  "warmup": {
+    "planned": 32,
+    "attempted": 32,
+    "ok": 28,
+    "errors": 4
+  },
+  "metrics": {
+    "snapshots": {
+      "start": {
+        "prompt_tokens_total": 0.0,
+        "prompt_tokens_cached_total": 0.0,
+        "prompt_seconds_total": 0.0,
+        "tokens_predicted_total": 0.0,
+        "tokens_predicted_seconds_total": 0.0,
+        "n_decode_total": 0.0,
+        "n_tokens_max": 0.0,
+        "spec_decode_num_draft_tokens_total": 0.0,
+        "spec_decode_num_accepted_tokens_total": 0.0,
+        "spec_decode_num_drafts_total": 0.0,
+        "prompt_tokens_seconds": 0.0,
+        "predicted_tokens_seconds": 0.0,
+        "requests_processing": 0.0,
+        "requests_deferred": 0.0,
+        "n_busy_slots_per_decode": 0.0
+      },
+      "after_warmup": {
+        "prompt_tokens_total": 41764.0,
+        "prompt_tokens_cached_total": 59784.0,
+        "prompt_seconds_total": 82.9086,
+        "tokens_predicted_total": 0.0,
+        "tokens_predicted_seconds_total": 0.0,
+        "n_decode_total": 140.0,
+        "n_tokens_max": 1358.0,
+        "spec_decode_num_draft_tokens_total": 0.0,
+        "spec_decode_num_accepted_tokens_total": 0.0,
+        "spec_decode_num_drafts_total": 0.0,
+        "prompt_tokens_seconds": 503.736,
+        "predicted_tokens_seconds": 0.0,
+        "requests_processing": 0.0,
+        "requests_deferred": 0.0,
+        "n_busy_slots_per_decode": 2.8
+      },
+      "end": {
+        "prompt_tokens_total": 83534.0,
+        "prompt_tokens_cached_total": 119580.0,
+        "prompt_seconds_total": 165.795,
+        "tokens_predicted_total": 0.0,
+        "tokens_predicted_seconds_total": 0.0,
+        "n_decode_total": 280.0,
+        "n_tokens_max": 1358.0,
+        "spec_decode_num_draft_tokens_total": 0.0,
+        "spec_decode_num_accepted_tokens_total": 0.0,
+        "spec_decode_num_drafts_total": 0.0,
+        "prompt_tokens_seconds": 503.941,
+        "predicted_tokens_seconds": 0.0,
+        "requests_processing": 0.0,
+        "requests_deferred": 0.0,
+        "n_busy_slots_per_decode": 2.8
+      }
+    },
+    "measured_delta": {
+      "prompt_tokens_total": 41770.0,
+      "prompt_tokens_cached_total": 59796.0,
+      "prompt_seconds_total": 82.88639999999998,
+      "tokens_predicted_total": 0.0,
+      "tokens_predicted_seconds_total": 0.0,
+      "n_decode_total": 140.0,
+      "busy_slots_per_decode": 2.8
+    },
+    "warmup_delta": {
+      "prompt_tokens_total": 41764.0,
+      "prompt_tokens_cached_total": 59784.0,
+      "prompt_seconds_total": 82.9086,
+      "tokens_predicted_total": 0.0,
+      "tokens_predicted_seconds_total": 0.0,
+      "n_decode_total": 140.0,
+      "busy_slots_per_decode": 2.8
+    }
+  },
+  "finished_at": "2026-10-09T13:45:20.900680+00:00",
+  "provenance": {
+    "code_commit": "ded19f182dee0fd08e12b44742e962db58e6b26a",
+    "working_tree_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "git_status_porcelain": "",
+    "source_sha256": {
+      "eval/throughput/fixtures.py": "400b848ed742fcd9107d53d7919e727b4a461b8fac65c1ea49f90b8fdb8b0a9e",
+      "eval/throughput/runner.py": "483b3c02c295e1804e7dfa6be79baac2314bb188cc832a5b5e0abb4bb726526d",
+      "eval/throughput/llamacpp.py": "5d42c41b2aec2ff6510e68d5f0a3e22149a0ff24815fa2d6e62a0b2fffeed3cd",
+      "eval/throughput/report.py": "89c4017210c3736e29e897664b70460a87a5a4f32e497f3eeca96b7cf60fccfa",
+      "eval/throughput/run.py": "b4d94b3b6a7450ee8af68218314e6cbd9fdd47884458d06e93e2e21e63af2ae5",
+      "scripts/answerability.py": "d9d25ad39ca75d9d355c14c0b1cc9913d83883b0f733439993a218a75e76dc20",
+      "scripts/evaluate.py": "b448c23d910b57c383b53ea90f5684f8400e0f6bec1a75027a08a060ad9260b7",
+      "scripts/compare_scoring.py": "fe38643869f2e0f475ab1a81acf432f16fb21e22e38a4eada888ae1e779ef573",
+      "scripts/metal.py": "115291eb7e669d000343975cad3d5a3e92cf2a54a7b50c3c1433d7c6d872804f",
+      "scripts/model.py": "eda4d6bfef779e1622f33df722c9f4459e5857262121cb3732d4d2880adf5824",
+      "eval/query-routing/experiment.py": "7ce07108ed4738b308e4bb0003dabb5de86ee439ddd7d6997a46fc7ec9fc38a9",
+      "eval/query-routing/runner.py": "bb0aa5cc9e5ed632ab7fac67a2e9ebac81efea24d544661491e729c4bc431dfe"
+    },
+    "datasets": {
+      "w1": {
+        "path": "eval/answerability/heldout/cases.json",
+        "sha256": "74066d02a4fcff48b8363478dcbc22f9e08bc6cef5be668c859a7a50ee536594"
+      },
+      "w2": {
+        "path": "eval/query-routing/heldout.json",
+        "sha256": "01e484b73969cd35684a4153f33248af509b35c19a59bfe87ed8e51c33eac39a",
+        "freeze_sha256": "daaf3b6924df1644e019e59e4dcf5fb9bce40dad26ccecec1d942df7c0e15e13"
+      }
+    },
+    "model_lock": {
+      "repository": "ggml-org/Kev-4B-GGUF",
+      "revision": "d924f2e2c3872da8b8aaf3eb4453b4126deceb79",
+      "filename": "Kev-4B-Q4_K_M.gguf",
+      "size_bytes": 3033489824,
+      "sha256": "33ae6b18926502b2209a1bf7d3b61a350d65938441515c686bb87d226a19eff9",
+      "license": "Apache-2.0",
+      "alias": "semselect-kev-4b",
+      "conversion_source_revision": "6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+      "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125"
+    },
+    "model_lock_sha256": "a79136a2c946e1fdbbdfc79f9e21bb47aa466adf19ba25d7cefe11f37c6d8b16",
+    "build": {
+      "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+      "source_sha256": "efe5ae8270793300807cd2c0e20e748816f2c153971ce5610450f0e6a23d214e",
+      "cmake_version": "4.1.2",
+      "cmake_wheel_sha256": "415396a7320856c64bd27ca00950b2bbb161604bff60ae5ebf256e2ca08b81ab",
+      "configure_command": [
+        "/Users/coby/Code/c360/semselect/.native/cmake/cmake/data/bin/cmake",
+        "-S",
+        "/Users/coby/Code/c360/semselect/.native/ggml-org-llama.cpp-6c59c40",
+        "-B",
+        "/Users/coby/Code/c360/semselect/.native/build-6c59c40076c0",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DGGML_METAL=ON",
+        "-DGGML_METAL_EMBED_LIBRARY=ON",
+        "-DGGML_CUDA=OFF",
+        "-DGGML_NATIVE=ON",
+        "-DLLAMA_OPENSSL=OFF",
+        "-DLLAMA_BUILD_TESTS=OFF",
+        "-DLLAMA_BUILD_EXAMPLES=OFF",
+        "-DLLAMA_BUILD_UI=OFF"
+      ],
+      "runtime_files_sha256": {
+        "libggml-base.0.25.3.dylib": {
+          "sha256": "094f324ed00a4bc4db87b35d5413e8f298241ec77ad491ffc8117f0053fb321c"
+        },
+        "libggml-base.0.dylib": {
+          "symlink": "libggml-base.0.25.3.dylib"
+        },
+        "libggml-base.dylib": {
+          "symlink": "libggml-base.0.dylib"
+        },
+        "libggml-blas.0.25.3.dylib": {
+          "sha256": "ac7958f1559318df81e39cb732d37dfdcf30c9041110c67fbc896dc5d92a676c"
+        },
+        "libggml-blas.0.dylib": {
+          "symlink": "libggml-blas.0.25.3.dylib"
+        },
+        "libggml-blas.dylib": {
+          "symlink": "libggml-blas.0.dylib"
+        },
+        "libggml-cpu.0.25.3.dylib": {
+          "sha256": "f978a4c5f95634a027c75147e45526d3a85cd94d99e8d18233bac63d7cd86050"
+        },
+        "libggml-cpu.0.dylib": {
+          "symlink": "libggml-cpu.0.25.3.dylib"
+        },
+        "libggml-cpu.dylib": {
+          "symlink": "libggml-cpu.0.dylib"
+        },
+        "libggml-metal.0.25.3.dylib": {
+          "sha256": "b2d8017872f35b64e0b2dedd3af9dad15a59722697a4558ddb3d44d40c55bf56"
+        },
+        "libggml-metal.0.dylib": {
+          "symlink": "libggml-metal.0.25.3.dylib"
+        },
+        "libggml-metal.dylib": {
+          "symlink": "libggml-metal.0.dylib"
+        },
+        "libggml.0.25.3.dylib": {
+          "sha256": "a8b83aa7b90b846fb2db8f395aa5e351ceaaf14b23c0bf0383e950328cd4aa61"
+        },
+        "libggml.0.dylib": {
+          "symlink": "libggml.0.25.3.dylib"
+        },
+        "libggml.dylib": {
+          "symlink": "libggml.0.dylib"
+        },
+        "libllama-common.0.5.0.dylib": {
+          "sha256": "47fa4244d4230994a87e2f732d669d04ba5e23e1987416c320f3aef25c74dd83"
+        },
+        "libllama-common.0.dylib": {
+          "symlink": "libllama-common.0.5.0.dylib"
+        },
+        "libllama-common.dylib": {
+          "symlink": "libllama-common.0.dylib"
+        },
+        "libllama-server-impl.dylib": {
+          "sha256": "0155360ea4dc8996715c17892d61cf3b52cdffffcdbc8ab7da81b27ed460a94a"
+        },
+        "libllama.0.5.0.dylib": {
+          "sha256": "87d2c5665c462ea673930ec5258ec2dff411fff9bfed3d59362f0bf432ec0c2e"
+        },
+        "libllama.0.dylib": {
+          "symlink": "libllama.0.5.0.dylib"
+        },
+        "libllama.dylib": {
+          "symlink": "libllama.0.dylib"
+        },
+        "libmtmd.0.5.0.dylib": {
+          "sha256": "8394255e3ac688ff89b1eb48b919cb44bb1f217a6226bd952236533135216d5c"
+        },
+        "libmtmd.0.dylib": {
+          "symlink": "libmtmd.0.5.0.dylib"
+        },
+        "libmtmd.dylib": {
+          "symlink": "libmtmd.0.dylib"
+        },
+        "llama-server": {
+          "sha256": "8bda715ee0f798954d51fcc0539b716ca8a3446dbb4b297a3f09071490b2e53a"
+        }
+      },
+      "guard_sha256": "164edd3d25766775f9177ae2a6d4f48851aac61b6a76183e314111e85a856e0b",
+      "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+      "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+      "go": "go version go1.26.4 darwin/arm64"
+    },
+    "hardware": {
+      "cpu": "Apple M3 Pro",
+      "memory_bytes": 38654705664,
+      "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+      "machine": "arm64",
+      "tested_path": "native macOS Metal; not CPU Docker, AMD64 or CUDA"
+    }
+  }
+}

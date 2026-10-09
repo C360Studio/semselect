@@ -1,7 +1,10 @@
 # Does serving several decisions at once pay off on this laptop?
 
-**Design 2026-10-09; no inference results yet.** This directory holds a frozen
-protocol and an offline-tested harness. Nothing below is a measurement.
+**Design 2026-10-09; llama.cpp Metal results recorded 2026-10-09** in the
+[throughput record](../../docs/validation-throughput.md). The SGLang MLX and
+Kev MLX runners have no results yet. This directory holds the frozen protocol
+and an offline-tested harness; the protocol text below is unchanged, and the
+measurements live in the record and its evidence.
 
 Every model latency in this repository today is one request at a time: one
 llama.cpp slot (`-np 1`), one client, and for Kev a Go guard that admits one

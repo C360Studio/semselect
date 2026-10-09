@@ -1,0 +1,483 @@
+# Metal throughput screen on llama.cpp: 2026-10-09
+
+On this Apple M3 Pro, more llama.cpp slots and more concurrent clients did not
+make prompt processing faster for either model. Prompt processing ran at about
+440 to 570 tokens per second in every cell, so with fresh evidence in each
+request every path landed near **one decision per second**. Kev gained only
+from grouping three questions over one shared state: **2.35× faster with
+identical labels**, and still slower than Qwen JSON. Qwen JSON gained from
+extra slots only where a warm prefix cache had already removed most of each
+prompt. Neither pre-declared reading came out yes.
+
+This is a small screen on one shared laptop, not a benchmark. It says nothing
+about CUDA hardware, Jev or decision quality. The frozen protocol, both
+amendments and the source citations are in
+[`eval/throughput/README.md`](../eval/throughput/README.md). See the
+[results history](results.md) for earlier runs.
+
+Labels used below: **measured** means read from the saved run summaries and
+runtime logs linked at the end; **from the pinned source** means taken from the
+llama.cpp source the protocol cites, not measured; **inference** marks a
+reading the cells do not isolate; **author-reported** figures are not ours.
+
+## Method
+
+- **Hardware.** Apple M3 Pro, 36 GiB unified memory, macOS 26.5.2 arm64,
+  native Metal. A shared laptop with no thermal control or resource quotas. The
+  harness holds `.native/operation.lock`, so one Metal operation ran at a time,
+  and each cell started a fresh runtime.
+- **Runtime.** llama.cpp `6c59c40076c00eab49754dc955d7652d93f9e125`, the
+  pinned Metal build (`-DGGML_METAL=ON -DGGML_METAL_EMBED_LIBRARY=ON`, CMake
+  4.1.2); `build.json` and its hashes are in every run summary. Every cell's
+  log reports 33/33 layers offloaded to `MTL0 (Apple M3 Pro)`; every runtime
+  exited 0 with no cleanup errors.
+- **Models.** Kev-4B Q4_K_M (`ggml-org/Kev-4B-GGUF` revision `d924f2e2…`,
+  SHA-256 `33ae6b18…`) and Qwen3.5-4B Q4_K_M (`unsloth/Qwen3.5-4B-GGUF`
+  revision `e87f1764…`, SHA-256 `00fe7986…`), verified against
+  `models.lock.json` and `models.baseline.lock.json` before each run.
+- **Launch profile.** `scripts/metal.py`'s flags (`-ngl 99 -t 4 -tb 4 -b 512
+  -ub 512 --no-context-shift --metrics -lv 4`) with `-np N` and `-c 4096×N`,
+  so every slot holds 4,096 tokens. One cell adds `-kvu`; the two Amendment 2
+  cells use `-b 4096` with `-ub 512` unchanged.
+- **Workloads.** W1: the 22 source-evidence cases the code precheck leaves
+  unresolved, both candidate orders, 44 requests per pass, one warmup pass and
+  two measured passes (88 measured requests). W2: the 32-case query-routing
+  set, three questions per request (Kev: three Choice heads; Qwen: one compound
+  JSON object), one warmup and one measured pass (32 requests, 96 questions).
+  Kev and Qwen JSON request bodies are byte-identical to the serial runs
+  (`task throughput:validate`).
+- **Arms.** Kev through the native `/v1/systemone` API; Qwen JSON through
+  `/v1/chat/completions`; Qwen one-token scoring through `/completion` (W1
+  only).
+- **Load and stops.** C client threads keep up to C requests in flight. 30 s per
+  request including time queued at the server; no retries; three consecutive
+  runtime errors in the measured passes stop a cell (from protocol version 2;
+  version 1 also counted warmup); 45 minutes per runtime and model.
+- **Yardstick.** Valid questions per measured second. Request time p50 (median)
+  and p95 (nearest rank), including queueing. Label agreement with the serial
+  runs' labels, counting errors and unattempted requests as non-matches. Prompt
+  tokens processed and cached, decode calls and busy slots per decode from the
+  runtime's `/metrics` delta over the measured passes.
+
+| Run | Model | Protocol version | semselect commit | Cells | Time (UTC) | Run status |
+| --- | --- | ---: | --- | ---: | --- | --- |
+| `20261009T132345.224681Z` | Kev | 1 | `ded19f1` | 8 | 13:23:45 to 13:47:28 | stopped: two cells stopped |
+| `20261009T140002.987772Z` | Qwen | 3 | `454405f` | 10 | 14:00:03 to 14:18:52 | stopped: one cell stopped |
+| `20261009T141930.309707Z` | Kev | 3 | `454405f` | 3 | 14:19:30 to 14:23:42 | stopped: one stopped, one refused |
+
+A run is `stopped` when any of its cells did not complete. All three ran from a
+clean working tree (empty `working-tree.diff`), and none reached the 45-minute
+budget.
+
+**The guard is bypassed, deliberately.** semselect's Go guard admits one
+inference and answers a second with HTTP 429, so with the guard in place every
+overlapping request would be refused. Clients called llama-server directly, as
+every Qwen baseline already did, with the same Kev bodies the guard admitted in
+the serial runs. These numbers describe the runtime, not semselect's public
+service. Serving this throughput through semselect would need a reviewed guard
+change; this screen does not make or justify one.
+
+## Results
+
+Generated by `report.py` from the three runs together; numbers are copied
+unchanged. Values a cell did not produce are shown as n/a (the script prints a
+dash). Questions/s counts valid answers over measured passes; a W2 request
+counts three questions. A p95 of 30,003 ms is the 30 s timeout, not a service
+time.
+
+| Cell | Slots × clients | Unified KV | Valid / planned questions | Questions/s | Requests/s | p50 ms | p95 ms | Label agreement | Prompt tokens processed / cached | Busy slots per decode | Warmup ok / errors / attempted / planned | Status |
+| --- | ---: | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| `w1-kev-1x1` | 1 × 1 | no | 88 / 88 | 0.94 | 0.94 | 939 | 1,458 | 88 / 88 | 47,908 / 0 | 1.00 | 44 / 0 / 44 / 44 | complete |
+| `w1-kev-4x4` | 4 × 4 | no | 86 / 88 | 0.90 | 0.90 | 3,035 | 12,168 | 86 / 88 | 47,511 / 0 | 3.24 | 43 / 1 / 44 / 44 | complete |
+| `w1-kev-8x8` | 8 × 8 | no | 33 / 88 | 0.88 | 0.88 | 3,037 | 30,003 | 33 / 88 | 18,749 / 0 | 6.65 | 41 / 3 / 44 / 44 | stopped (three consecutive runtime errors) |
+| `w2-kev-1x1` | 1 × 1 | no | 96 / 96 | 0.43 | 0.14 | 6,998 | 7,005 | 96 / 96 | 116,057 / 0 | 1.00 | 32 / 0 / 32 / 32 | complete |
+| `w2-kev-4x1` | 4 × 1 | no | 96 / 96 | 1.01 | 0.34 | 2,972 | 2,974 | 96 / 96 | 47,731 / 68,326 | 2.80 | 32 / 0 / 32 / 32 | complete |
+| `w2-kev-4x4` | 4 × 4 | no | 84 / 96 | 1.01 | 0.34 | 5,935 | 30,003 | 84 / 96 | 41,768 / 59,792 | 2.80 | 28 / 4 / 32 / 32 | complete |
+| `w2-kev-4x4-kvu` | 4 × 4 | yes | 84 / 96 | 1.01 | 0.34 | 5,922 | 30,003 | 84 / 96 | 41,770 / 59,796 | 2.80 | 28 / 4 / 32 / 32 | complete |
+| `w2-kev-8x8` | 8 × 8 | no | 75 / 96 | 0.89 | 0.30 | 19,678 | 30,003 | 75 / 96 | 41,831 / 59,794 | 6.48 | 26 / 6 / 32 / 32 | complete |
+| `w1-qwen_json-1x1` | 1 × 1 | no | 88 / 88 | 1.06 | 1.06 | 883 | 1,363 | 88 / 88 | 30,265 / 20,195 | 1.00 | 44 / 0 / 44 / 44 | complete |
+| `w1-qwen_json-4x4` | 4 × 4 | no | 88 / 88 | 2.42 | 2.42 | 1,036 | 3,557 | 88 / 88 | 10,387 / 40,073 | 3.71 | 44 / 0 / 44 / 44 | complete |
+| `w1-qwen_json-8x8` | 8 × 8 | no | 88 / 88 | 2.88 | 2.88 | 2,164 | 6,527 | 88 / 88 | 10,680 / 39,780 | 7.48 | 44 / 0 / 44 / 44 | complete |
+| `w1-qwen_json-8x8-b4096` | 8 × 8 | no | 88 / 88 | 4.43 | 4.43 | 917 | 4,581 | 88 / 88 | 6,170 / 44,290 | 7.93 | 44 / 0 / 44 / 44 | complete |
+| `w1-qwen_score-1x1` | 1 × 1 | no | 88 / 88 | 0.97 | 0.97 | 930 | 1,390 | 60 / 88 | 50,460 / 0 | 1.00 | 44 / 0 / 44 / 44 | complete |
+| `w1-qwen_score-4x4` | 4 × 4 | no | 88 / 88 | 0.96 | 0.96 | 3,515 | 8,400 | 60 / 88 | 50,460 / 0 | 3.46 | 44 / 0 / 44 / 44 | complete |
+| `w1-qwen_score-8x8` | 8 × 8 | no | 32 / 88 | 0.92 | 0.92 | 3,849 | 30,003 | 22 / 88 | 18,884 / 0 | 7.08 | 40 / 4 / 44 / 44 | stopped (three consecutive runtime errors) |
+| `w2-qwen_json-1x1` | 1 × 1 | no | 96 / 96 | 1.30 | 0.43 | 2,297 | 2,401 | 96 / 96 | 34,899 / 0 | 1.00 | 32 / 0 / 32 / 32 | complete |
+| `w2-qwen_json-4x4` | 4 × 4 | no | 96 / 96 | 1.39 | 0.46 | 8,593 | 12,611 | 96 / 96 | 34,899 / 0 | 3.81 | 32 / 0 / 32 / 32 | complete |
+| `w2-qwen_json-8x8` | 8 × 8 | no | 96 / 96 | 1.38 | 0.46 | 17,079 | 27,443 | 96 / 96 | 34,899 / 0 | 7.13 | 32 / 0 / 32 / 32 | complete |
+| `w1-kev-8x8-b4096` | 8 × 8 | no | 0 / 88 | n/a | n/a | n/a | n/a | 0 / 88 | n/a / n/a | n/a | 0 / 0 / 0 / 44 | failed (RuntimeError: runtime slot/context/batch layout differs from the cell (observed, expected): {'n_batch': (512, 4096)}) |
+
+### Cell sources
+
+`report.py` takes each cell ID from the highest protocol version, then the
+latest start. Two Kev cells were rerun under protocol version 3. Their version 1
+results are kept below as recorded and are not used in the readings.
+
+| Cell | Run | Protocol version | Started | Superseded |
+| --- | --- | ---: | --- | --- |
+| `w1-kev-1x1` | 20261009T132345.224681Z | 1 | 2026-10-09T13:23:45.300848+00:00 | n/a |
+| `w1-kev-4x4` | 20261009T132345.224681Z | 1 | 2026-10-09T13:26:07.253586+00:00 | n/a |
+| `w1-kev-8x8` | 20261009T141930.309707Z | 3 | 2026-10-09T14:19:30.366435+00:00 | 20261009T132345.224681Z (protocol version 1, stopped) |
+| `w2-kev-1x1` | 20261009T132345.224681Z | 1 | 2026-10-09T13:29:06.506526+00:00 | n/a |
+| `w2-kev-4x1` | 20261009T132345.224681Z | 1 | 2026-10-09T13:36:35.359260+00:00 | n/a |
+| `w2-kev-4x4` | 20261009T132345.224681Z | 1 | 2026-10-09T13:39:46.700555+00:00 | n/a |
+| `w2-kev-4x4-kvu` | 20261009T132345.224681Z | 1 | 2026-10-09T13:42:33.966846+00:00 | n/a |
+| `w2-kev-8x8` | 20261009T141930.309707Z | 3 | 2026-10-09T14:20:55.885708+00:00 | 20261009T132345.224681Z (protocol version 1, stopped) |
+| `w1-qwen_json-1x1` | 20261009T140002.987772Z | 3 | 2026-10-09T14:00:03.044660+00:00 | n/a |
+| `w1-qwen_json-4x4` | 20261009T140002.987772Z | 3 | 2026-10-09T14:02:14.977762+00:00 | n/a |
+| `w1-qwen_json-8x8` | 20261009T140002.987772Z | 3 | 2026-10-09T14:03:32.541849+00:00 | n/a |
+| `w1-qwen_json-8x8-b4096` | 20261009T140002.987772Z | 3 | 2026-10-09T14:04:45.368422+00:00 | n/a |
+| `w1-qwen_score-1x1` | 20261009T140002.987772Z | 3 | 2026-10-09T14:05:44.812133+00:00 | n/a |
+| `w1-qwen_score-4x4` | 20261009T140002.987772Z | 3 | 2026-10-09T14:08:01.723493+00:00 | n/a |
+| `w1-qwen_score-8x8` | 20261009T140002.987772Z | 3 | 2026-10-09T14:10:21.196464+00:00 | n/a |
+| `w2-qwen_json-1x1` | 20261009T140002.987772Z | 3 | 2026-10-09T14:11:43.148745+00:00 | n/a |
+| `w2-qwen_json-4x4` | 20261009T140002.987772Z | 3 | 2026-10-09T14:14:12.539916+00:00 | n/a |
+| `w2-qwen_json-8x8` | 20261009T140002.987772Z | 3 | 2026-10-09T14:16:32.063641+00:00 | n/a |
+| `w1-kev-8x8-b4096` | 20261009T141930.309707Z | 3 | 2026-10-09T14:20:54.742119+00:00 | n/a |
+
+Superseded cells, as recorded:
+
+| Cell | Slots × clients | Unified KV | Valid / planned questions | Questions/s | Requests/s | p50 ms | p95 ms | Label agreement | Prompt tokens processed / cached | Busy slots per decode | Warmup ok / errors / attempted / planned | Status |
+| --- | ---: | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| `w1-kev-8x8` | 8 × 8 | no | 0 / 88 | n/a | n/a | n/a | n/a | 0 / 88 | 0 / 0 | n/a | 30 / 5 / 35 / 44 | stopped (three consecutive runtime errors) |
+| `w2-kev-8x8` | 8 × 8 | no | 39 / 96 | 0.90 | 0.30 | 14,634 | 30,003 | 39 / 96 | 21,436 / 29,884 | 6.30 | 25 / 7 / 32 / 32 | stopped (three consecutive runtime errors) |
+
+### Pre-declared readings
+
+Fixed before any inference; screening readings, not adoption gates. As printed
+by `report.py`:
+
+8×8 means the `-b 512` cells; the `-b4096` cells (amendment 2) are a diagnostic,
+shown in the table only.
+
+| Reading | Runs (1×1 / 8×8) | Speedup (8×8 / 1×1) | p95 ratio | Agreement drop | Result |
+| --- | --- | ---: | ---: | ---: | --- |
+| W1 kev batches usefully | 20261009T132345.224681Z / 20261009T141930.309707Z | n/a | n/a | n/a | not evaluable |
+| W1 qwen_json batches usefully | 20261009T140002.987772Z / 20261009T140002.987772Z | 2.71 | 4.79 | 0 | no |
+| W1 qwen_score batches usefully | 20261009T140002.987772Z / 20261009T140002.987772Z | n/a | n/a | n/a | not evaluable |
+| W2 kev batches usefully | 20261009T132345.224681Z / 20261009T141930.309707Z | 2.07 | 4.28 | 21 | no |
+| W2 qwen_json batches usefully | 20261009T140002.987772Z / 20261009T140002.987772Z | 1.07 | 11.43 | 0 | no |
+
+Kev shared-state advantage: **no** (Kev best `w2-kev-4x4-kvu` run
+20261009T132345.224681Z 1.01 questions/s vs Qwen JSON best `w2-qwen_json-4x4`
+run 20261009T140002.987772Z 1.39)
+
+- **W1 Kev and W1 one-token scoring: not evaluable.** Their 8×8 cells stopped,
+  and the protocol forbids inferring a reading from a stopped cell.
+- **W1 Qwen JSON: no.** 2.71× the 1×1 rate clears the 2× bar, but p95 grew
+  4.79×, past the 3× bound.
+- **W2 Kev: no.** 2.07× clears the throughput bar, but p95 grew 4.28× and 21
+  fewer questions matched (the 7 timeouts). The gain over 1×1 is head grouping,
+  which `w2-kev-4x1` reaches with one client (finding 4), not batching.
+- **W2 Qwen JSON: no.** 1.07× the 1×1 rate, with p95 11.43× longer.
+- **Kev shared-state advantage: no.** Kev's best W2 cell reached 1.01
+  questions/s; Qwen JSON's reached 1.39.
+
+## What each finding establishes
+
+### 1. The harness reproduces the serial runs (measured)
+
+| Cell | This screen, p50 / p95 | Serial record, p50 / p95 | Serial source |
+| --- | ---: | ---: | --- |
+| `w1-kev-1x1` | 939 / 1,458 ms | 965 / 1,484 ms | [source-evidence pilot](validation-answerability-source.md), all 88 model calls |
+| `w1-qwen_json-1x1` | 883 / 1,363 ms | 918 / 1,562 ms | same |
+| `w2-kev-1x1` | 6,998 / 7,005 ms | 7,111 / 7,121 ms | [query-routing Metal run](../eval/query-routing/README.md) |
+| `w2-qwen_json-1x1` | 2,297 / 2,401 ms | 2,381 / 2,487 ms | same |
+
+Every 1×1 cell of Kev and Qwen JSON matched all of its serial labels (88/88 or
+96/96). The serial Kev calls went through the guard and the serial W2 run used
+`-b 1024` with caching off, so small timing differences are expected. The
+one-slot cells are a fair baseline for the multi-slot cells.
+
+Across every cell, every valid Kev and Qwen JSON answer matched its serial
+label; each non-match in those arms is a timeout or an unattempted request.
+
+### 2. Prompt processing sets the rate, and nothing made it faster (measured)
+
+Prompt tokens processed per second of prompt processing, from each cell's
+`/metrics` delta (`prompt_tokens_total / prompt_seconds_total`, the same
+figure Amendment 2 used; `report.py` does not print it):
+
+| Arm | 1 slot | 4 slots | 8 slots |
+| --- | ---: | ---: | ---: |
+| Kev W1 | 512 | 500 | 500 (stopped) |
+| Kev W2 | 519 | 503 (4×1), 503 (4×4), 504 (unified KV) | 496 |
+| Qwen JSON W1 | 543 | 442 | 453; 524 at `-b 4096` |
+| Qwen one-token scoring W1 | 563 | 553 | 546 (stopped) |
+| Qwen JSON W2 | 567 | 533 | 515 |
+
+The cells with no cache reuse tell the same story in wall-clock terms: Kev,
+one-token scoring and W2 Qwen JSON at 4 and 8 slots processed 496 to 558 prompt
+tokens per measured second. Slots were in use, not idle: Kev W1 averaged 3.24
+busy slots per decode at 4 slots and 6.65 at 8. Extra slots added queueing,
+not prompt throughput.
+
+Prompt processing is most of the cost. It is all of Kev's busy time (Kev
+generates nothing) and nearly all of one-token scoring's. At one slot it took
+84% of W2 Qwen JSON's busy time and 68% of W1 Qwen JSON's, where a warm cache
+had already removed 40% of the prompt tokens (prompt seconds against
+generation seconds in `/metrics`).
+
+### 3. Kev gains nothing from more slots (measured; cause in the pinned source)
+
+- W1: 0.94 decisions/s at 1×1, 0.90 at 4×4 (2 timeouts) and starved at 8×8.
+  The version 1 cell stopped in warmup. The version 3 rerun stopped when four
+  requests of its first measured wave timed out; 33 requests completed validly
+  (0.88/s).
+- W2: 1.01 questions/s at 4×1, 4×4 (4 timeouts) and 4×4 with unified KV (4
+  timeouts); 0.89 at 8×8 with 7 timeouts and a 19.7 s median.
+
+**From the pinned source**, confirmed by the build's own log: a decision model
+loads in embedding mode, and with embeddings on, llama.cpp sets `n_batch` to
+`n_ubatch` ([`common/common.cpp:1246-1266`][kev-embd]). Embedding mode makes
+every token an output ([`src/llama-context.cpp:1736-1737`][output-all]), so the
+hybrid memory cuts every compute step by sequence
+([`src/llama-memory-hybrid.cpp:74-90`][hybrid-split]), and a sequence-split step
+holds one slot's tokens only ([`src/llama-batch.cpp:774-813`][split-seq]). On
+this build Kev evaluates one slot's prompt per compute step at any slot count.
+The refused `w1-kev-8x8-b4096` cell's log shows the clamp directly:
+
+```text
+I decision model reads the embeddings output, enabling embedding mode
+W embeddings enabled: setting n_batch = n_ubatch = 512
+```
+
+Every Kev cell log shows the embedding-mode line. The protocol's
+[Amendment 2](../eval/throughput/README.md#amendment-2-2026-10-09-batch-size-cells)
+gives the full chain of citations.
+
+### 4. Kev's one gain is head grouping (measured)
+
+`w2-kev-4x1` gives one client four slots. llama.cpp grouped each request's three
+heads into a parent and two children and evaluated the shared prefix once:
+
+| | `w2-kev-1x1` | `w2-kev-4x1` |
+| --- | ---: | ---: |
+| Questions/s | 0.43 | 1.01 (2.35×) |
+| Median / p95 request | 6,998 / 7,005 ms | 2,972 / 2,974 ms |
+| Labels matched | 96/96 | 96/96 |
+| Prompt tokens processed / cached | 116,057 / 0 | 47,731 / 68,326 |
+
+The runtime log records 64 grouped launches
+(`launching slots for parent task … with 2 child tasks`) and 128 lines
+`copying shared prompt (N tokens) to child`, with N from 1,065 to 1,073. The
+copied tokens total 136,652 over the identical warmup and measured passes; half
+of that is exactly the 68,326 cached tokens in the measured delta.
+
+This resolves the closeout's untested `-np 3 --kv-unified` item. Grouping
+needs three free slots for one request (from the pinned source); `-np 4` is
+what was measured, and `-np 3` itself was not run. Unified KV added nothing
+measurable: 1.011 against 1.013 questions/s, medians 5,935 against 5,922 ms.
+
+What grouping does not do: Kev reused no prompt tokens across requests in any
+cell (0 cached in every W1 cell and in `w2-kev-1x1`; the grouped cells' cached
+counts are the in-request prefix copies), and the logs show `forcing full prompt
+re-processing due to lack of cache data` on repeated prompts. Each request
+re-reads its state. Even grouped, Kev's 1.01 questions/s and 2,972 ms median
+are slower than Qwen JSON's one-slot 1.30 questions/s and 2,297 ms on the same
+task.
+
+### 5. Qwen JSON batches only with a warm prefix cache (measured)
+
+| `w1-qwen_json-` | `1x1` | `4x4` | `8x8` | `8x8-b4096` |
+| --- | ---: | ---: | ---: | ---: |
+| Decisions/s | 1.06 | 2.42 | 2.88 | 4.43 |
+| p50 / p95 ms | 883 / 1,363 | 1,036 / 3,557 | 2,164 / 6,527 | 917 / 4,581 |
+| Labels matched | 88/88 | 88/88 | 88/88 | 88/88 |
+| Prompt tokens processed | 30,265 | 10,387 | 10,680 | 6,170 |
+| Prompt tokens cached | 20,195 | 40,073 | 39,780 | 44,290 |
+| Decode calls (1,056 tokens generated) | 1,149 | 297 | 151 | 136 |
+
+Zero errors in every cell. The frozen W1 Qwen JSON request sets
+`cache_prompt=true`, and the measured passes repeat the warmup's prompts. As
+slots increased, more of each prompt came from the cache, leaving on average a
+70-token suffix plus 12 generated tokens per request in the b4096 cell. That
+small remaining work did share compute steps: the same 1,056 generated tokens
+took 1,149 decode calls at one slot and 136 at eight. Why more slots produced
+more cache hits is not established here (inference: more slots keep more
+recent prompts resident). Tail latency grew with slots.
+
+The b4096 diagnostic is mixed. Decisions/s rose 1.54× over `w1-qwen_json-8x8`
+and the median fell from 2,164 to 917 ms, which fits slots no longer waiting
+behind a 512-token batch. But its prompt rate stayed at 524 tokens per second,
+and it also processed 42% fewer prompt tokens because more came from the cache,
+so it does not separate the two causes. Its compute buffer matched the 8×8
+cell's (321.09 MiB), as Amendment 2 predicted.
+
+### 6. Without a cache, Qwen does not batch either (measured)
+
+- One-token scoring, W1 (`cache_prompt=false` in its frozen request): 0.97
+  decisions/s at 1×1, 0.96 at 4×4, starved at 8×8 (stopped in the first
+  measured wave, 32 valid at 0.92/s). Both completed cells processed 50,460
+  prompt tokens with 0 cached.
+- Qwen JSON, W2 (`cache_prompt=false`): 1.30, 1.39 and 1.38 questions/s at 1,
+  4 and 8 slots, with medians of 2.3, 8.6 and 17.1 s. Every cell processed
+  34,899 prompt tokens with 0 cached. Its 497 generated tokens took 593 decode
+  calls at one slot and 100 at eight, but generation was only 12 of 74 seconds
+  at one slot, so sharing it barely moved the rate.
+
+One-token scoring matched the Qwen JSON reference on 60 of 88 requests in both
+completed cells, with all 88 labels identical between `1x1` and `4x4`. This is
+a cross-format difference between scoring and JSON, not an effect of slots.
+
+### What these findings do not establish
+
+- Not a benchmark: 22 and 32 authored cases, repeated passes and reversed
+  orders are correlated, one run per cell, one shared laptop.
+- Not decision quality. Label agreement shows whether labels moved against the
+  serial runs, not whether they are correct.
+- Not semselect's service: the guard was bypassed.
+- Not novel traffic: measured passes repeat warmup prompts, which favours any
+  prompt cache.
+- Not other hardware or runtimes: Metal on ARM64 only. No CUDA, AMD64 or CPU
+  Docker inference; no SGLang or Kev MLX results yet; nothing about Jev.
+
+## The decision-model pitch, checked on this laptop
+
+The [README](../README.md#what-the-decision-model-pitch-claims-in-plain-language)
+lists the three claims behind the pitch's speed figures.
+
+1. **"No decode step."** True, but not where the time goes here. Prompt
+   processing at about 500 tokens per second is most of the cost (finding 2).
+   On the same Qwen, one-token scoring writes one token and JSON about 12, yet
+   scoring was slightly slower (0.97 against 1.06 decisions/s at one slot)
+   because its frozen request turns the prompt cache off and it processed 50,460
+   prompt tokens to JSON's 30,265. The earlier uncached comparison, where
+   scoring cut the median by 28% ([record](validation-scoring.md)), still
+   stands as an output-format effect.
+2. **"One state, many cheap questions."** Real, and now measured within one
+   request: grouping three heads over one state made Kev 2.35× faster with
+   identical labels (finding 4). It needs at least three free slots in
+   llama.cpp, so the one-slot service profile cannot use it, and the state is
+   still re-read on every request because Kev had zero cross-request cache hits
+   on this build. The author-reported cached-state figures, where the state is
+   kept between requests, remain untested here.
+3. **"Batching."** It did not speed up prompt processing on this GPU at all
+   (finding 2). The only cells that gained were Qwen JSON with a warm prefix
+   cache (finding 5). llama.cpp's decision-model path cannot batch prompts
+   across slots by construction (finding 3). Datacenter GPUs are untested.
+
+**Consequence.** With fresh evidence in every request, every path on this M3 Pro
+lands near one decision per second for a packet of 540 to 570 prompt tokens,
+whichever model and whatever the slot count: Kev 0.94, one-token scoring 0.97.
+Three-question bundles over a shared state of about 1.1K tokens reached 1.01
+(Kev, grouped) to 1.39 (Qwen JSON) questions per second. The lever is fewer
+processed tokens per decision, by bundling questions per shared state or reusing
+a cached prefix, not concurrency. On this build the specialized path is slower
+at throughput than ordinary Qwen. This says nothing about CUDA hardware, Jev or
+decision quality.
+
+## Stops, refusals and timeouts, as recorded
+
+- `w1-kev-8x8`, version 1: stopped in warmup. Five of the first eight cold
+  requests timed out together; 30 of 35 attempted warmup requests completed. No
+  measured request was sent (0/88 valid, 88 `not_run`). This stop led to
+  Amendment 1.
+- `w2-kev-8x8`, version 1: stopped in measurement after three consecutive
+  timeouts; 13 of 32 requests valid (39/96 questions), 16 `not_run`.
+- `w1-kev-8x8`, version 3 rerun: warmup 41 ok and 3 errors, no longer a stop.
+  Four requests of the first measured wave timed out at 30 s; the cell stopped
+  with 33 valid, 4 timeouts and 51 `not_run`.
+- `w2-kev-8x8`, version 3 rerun: complete, 25 of 32 requests valid, 7
+  timeouts.
+- `w1-qwen_score-8x8`: three requests of the first measured wave timed out; the
+  cell stopped with 32 valid, 3 timeouts and 53 `not_run`.
+- `w1-kev-8x8-b4096`: refused at startup, as Amendment 2 expected. The startup
+  check found `n_batch` 512 where the cell planned 4096 and recorded a `failed`
+  cell with all 88 measured requests `not_run`.
+- Timeouts inside complete cells: `w1-kev-4x4` 2, `w2-kev-4x4` 4,
+  `w2-kev-4x4-kvu` 4. Every error in all three runs, 27 measured and 34 in
+  warmup, was a 30 s timeout.
+
+## Amendments and why
+
+Both amendments were made on 2026-10-09 after the version 1 Kev run and before
+any Qwen cell ran; the pre-declared readings did not change.
+
+- [Amendment 1](../eval/throughput/README.md#amendment-1-2026-10-09-warmup-errors-no-longer-trigger-the-stop):
+  warmup errors no longer count toward the three-error stop. The version 1 rule
+  stopped `w1-kev-8x8` on a cold warmup burst, excluded from every metric,
+  before any measured request. The amendment only removes stops.
+- [Amendment 2](../eval/throughput/README.md#amendment-2-2026-10-09-batch-size-cells):
+  adds `w1-kev-8x8-b4096` and `w1-qwen_json-8x8-b4096` as diagnostics outside
+  the readings, to ask whether a 512-token logical batch starved high-numbered
+  slots. Kev's cell was kept although the startup check was expected to refuse
+  it, so that the clamp is documented from the build's own log.
+
+The two version 1 Kev cells that stopped were rerun under version 3 in their own
+run; `report.py` uses the reruns and lists the originals as superseded.
+
+## Memory, from startup logs (measured)
+
+| Slots | KV cache | Recurrent state | Kev compute buffer | Qwen compute buffer |
+| ---: | ---: | ---: | ---: | ---: |
+| 1 | 128 MiB | 50.25 MiB | 509.02 MiB | 89.21 MiB |
+| 4 | 512 MiB | 201 MiB | 509.02 MiB (526.02 unified KV) | 188.59 MiB |
+| 8 | 1,024 MiB | 402 MiB | 509.02 MiB | 321.09 MiB |
+
+The largest child lifetime peak RSS was 7.09 GiB in the version 1 Kev run, 14.21
+GiB in the Qwen run and 7.06 GiB in the Kev rerun. That figure is cumulative
+across cells and misses some Metal allocations; the buffer sizes are the better
+per-cell signal.
+
+## Confounds
+
+- **Prefix cache on W1 Qwen JSON only.** The frozen requests keep their cache
+  fields: W1 Qwen JSON `cache_prompt=true`; one-token scoring and W2 Qwen JSON
+  `cache_prompt=false`; Kev the server default, which reused nothing across
+  requests. Comparisons across W1 arms are therefore not like for like.
+- **Shared host.** No thermal control; background load unknown.
+- **Single passes.** W2 has one measured pass per cell, and every cell ran
+  once. No spread across repeated runs exists.
+- **Quantization.** GGUF Q4_K_M on both models. The SGLang MLX (4-bit) and Kev
+  MLX (bf16) runs use different weights and kernels; compare them by throughput
+  shape only.
+- **References.** The W2 reference ran `-b 1024` with caching off, and
+  one-token scoring is compared with a JSON reference across output formats.
+- **Mixed protocol versions.** Six Kev cells come from version 1 and three from
+  version 3. Amendment 1 only removes stops and Amendment 2 only adds cells, but
+  they are different runtime sessions.
+
+## Reproduction
+
+```sh
+task metal:build
+task model:fetch
+task metal:baseline:fetch
+task throughput:validate
+task throughput:metal -- --model kev
+task throughput:metal -- --model qwen
+task throughput:metal -- --model kev \
+  --cells w1-kev-8x8,w2-kev-8x8,w1-kev-8x8-b4096
+python3 eval/throughput/report.py \
+  docs/evidence/20261009T132345.224681Z-throughput-llamacpp-kev \
+  docs/evidence/20261009T140002.987772Z-throughput-llamacpp-qwen \
+  docs/evidence/20261009T141930.309707Z-throughput-llamacpp-kev
+```
+
+The last command reproduces every table and reading above from the published
+evidence. A new run writes its own directory under `results/throughput/`.
+
+## Evidence
+
+- [Kev, protocol version 1](evidence/20261009T132345.224681Z-throughput-llamacpp-kev/README.md)
+- [Qwen, protocol version 3](evidence/20261009T140002.987772Z-throughput-llamacpp-qwen/README.md)
+- [Kev rerun, protocol version 3](evidence/20261009T141930.309707Z-throughput-llamacpp-kev/README.md)
+
+Each holds the run summary, the executed sources, the working-tree diff and,
+per cell, the summary, the request journal and the runtime log. Journals and
+logs are gzip-compressed; `requests.json` is omitted because it duplicates the
+frozen fixtures that `task throughput:validate` rebuilds.
+
+## SGLang MLX
+
+Running, no results yet. Protocol: [`eval/throughput/sglang.md`](../eval/throughput/sglang.md).
+
+## Kev MLX server
+
+Running, no results yet. Protocol: [`eval/throughput/kevmlx.md`](../eval/throughput/kevmlx.md).
+
+[kev-embd]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/common/common.cpp#L1246-L1266
+[output-all]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L1736-L1737
+[hybrid-split]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-memory-hybrid.cpp#L74-L90
+[split-seq]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-batch.cpp#L774-L813
