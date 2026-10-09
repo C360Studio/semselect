@@ -207,7 +207,7 @@ never select prompts, graph parameters or thresholds.
 | Tuned semantic LPA | Strong algorithm baseline: development-only search over `k={4,8}`, cosine threshold `{0.75,0.80,0.85}`, semantic weight `{0.3,0.6,0.9}`; retain the same explicit/identity configuration. |
 | Small trained edge reviewer | Regularized logistic regression over frozen cosine, reciprocal ranks, shared-neighbor statistics, identity-tier flags and symmetric endpoint embedding features. Trained only on development families; suppress or preserve. |
 | Qwen JSON reviewer | Pinned Qwen3.5-4B, constrained `keep/suppress/defer`, no generated confidence. |
-| Native decision reviewer | Pinned Kev-4B through semselect's native Choice API, preserving the full distribution and confidence separately. |
+| Native decision reviewer | Pinned Kev-4B served by Kev's own MLX server (bf16 backbone, fp32 head), the only measured path with a cross-request state cache, using the per-entity bundle so each entity's state is sent once; full distribution and confidence preserved separately. semselect's llama.cpp path at `-np 4` is a diagnostic arm, not the reviewer. Decision recorded 2026-10-09 from the [throughput record](../../docs/validation-throughput.md). |
 
 The model and trained-reviewer arms overlay the **same stock graph and selected
 review set**. The tuned algorithm may change more of the stock graph; it is a
@@ -374,18 +374,17 @@ Execution is staged:
    check. If representative development graphs show no shortfall, publish that
    result and do not start model shopping.
 3. **Primary Metal quality pilot:** Qwen and Kev runs on the same M3 Pro, one
-   model server at a time, using the serving profile selected by the
-   [throughput experiment](../throughput/README.md)
-   ([record](../../docs/validation-throughput.md)). **Kev:** `-np 4 -c 16384`
-   (4,096 tokens per slot) with one client, so one bundle's questions are
-   grouped over their shared state; the server's prompt cache stays at its
-   default. One client keeps the guard's one-inference admission unchanged; this
-   is a launch-profile change, not a guard change. **Qwen JSON:** one slot
-   (`-np 1`) unless the bundle's state is cached; without a cache, extra slots
-   added latency and no throughput. Other flags follow the existing service
-   profile (see the [README](../../README.md#configuration-and-operational-bounds)).
-   Account for Qwen's direct chat path and Kev's guard. Verify actual cache/token
-   behavior in logs. Cold start and warmup remain separate from request timing.
+   model server at a time, with the serving profile fixed on 2026-10-09 from
+   the [throughput record](../../docs/validation-throughput.md). **Kev:** Kev's
+   own MLX server with per-entity bundles, so one entity's state is read once
+   and each neighbour question costs about a fifth of a new-state read
+   (measured 1,970 versus 365 ms). **Qwen JSON:** one slot on the pinned
+   llama.cpp Metal build with the prompt cache on; extra slots only help when
+   the prefix is already cached. **Diagnostic only:** semselect's llama.cpp Kev
+   path at `-np 4` (head grouping, 2.35×) and the one-slot service profile,
+   which is the worst case. Verify cache behaviour in the logs; cold start and
+   warmup stay separate from request timing. Expect about one fresh packet
+   per second on this laptop whichever arm runs.
 4. **CPU/Docker feasibility:** at most six fixed development packets per model,
    spanning short/long evidence, on Linux/ARM64 with four CPUs/threads and an
    8 GiB hard memory limit. This bounded check is not full CPU graph quality.

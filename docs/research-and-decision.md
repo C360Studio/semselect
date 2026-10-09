@@ -7,6 +7,28 @@ CPU-only Linux container. This document separates source review from the
 [local validation record](validation.md); numbers attributed to upstream are not
 local measurements.
 
+## Closeout 2026-10-09: serving question closed on this hardware
+
+**The serving and throughput question is closed for this laptop. The one open
+question is graph-refinement quality, which waits on the SemEngine port.**
+semselect stays a reference service with its evidence and plain-language
+guide; no production integration is proposed. The merged evidence snapshot is
+tagged `research-2026-10-09`.
+
+| Question | Status after five experiments | What could still change it |
+| --- | --- | --- |
+| Is the bounded decision interface useful? | Yes, measured and stable; both models deliver it. | Settled. |
+| Does the trained decision head decide better than Qwen JSON at 4B? | No measured advantage on four workloads: one small win, one loss, two ties. | A workload with ambiguous, varied evidence and no training data. Graph refinement is the only candidate left. |
+| Is it faster per request? | No; Qwen was equal or faster every time. | Nothing on this hardware. |
+| Does it win at throughput? | No; prompt processing is the cost and does not batch here, and llama.cpp's decision path is worse at it than ordinary Qwen. [Record](validation-throughput.md). | Datacenter GPUs, which do not change the quality question. |
+| Is "one state, many cheap questions" real? | Yes, measured: 2.35× from head grouping on llama.cpp; follow-up questions at about a fifth of a new-state read on Kev's own server. | It is a caching property that ordinary models share; Qwen's prefix cache gave the largest gain measured. |
+
+Next steps live in the quality-pilot prerequisites issue: the real
+candidates-per-cycle number, a SemEngine commit with clustering and semantic
+edges, frozen labeled fixtures, and the serving profile fixed in the
+[protocol](../eval/community-refinement/README.md). Do not build an
+evaluation-only graph engine here to get ahead of the port.
+
 ## Throughput and serving scope 2026-10-09
 
 **The README read as a speed verdict it had not earned.** The owner asked
