@@ -1,6 +1,40 @@
-# Research closeout and backend decision
+# Research scope and backend decision
 
-Initial decision checked 2026-10-05; research closed out 2026-10-06. Initial deployment target: CPU-only Linux container. This document separates source review from the [local validation record](validation.md); numbers attributed to upstream are not local measurements.
+Initial decision checked 2026-10-05; initial routing/evidence phase closed out
+2026-10-06; community/graph scope added 2026-10-08. Initial deployment target:
+CPU-only Linux container. This document separates source review from the
+[local validation record](validation.md); numbers attributed to upstream are not
+local measurements.
+
+## Community and graph scope 2026-10-08
+
+The owner requested an evaluation of community refinement against **SemEngine**,
+which will replace SemStreams when ready. The earlier routing, answerability and
+synthesis work did not evaluate graph construction, membership quality or graph
+maintenance. Its no-adoption conclusion applies to the measured workloads; it
+does not close those broader questions.
+
+The [community-refinement design](../eval/community-refinement/README.md) proposes
+reviewing existing semantic virtual edges, then measuring actual communities and
+evidence retrieval. Structural/identity grouping, stock and tuned mutual-kNN
+edges, a small trained reviewer, Qwen and Kev are separate comparison arms.
+Factual-edge review and community co-location remain distinct contracts. A useful
+result must improve graph/retrieval outcomes within a background-processing budget,
+not merely win another label-classification test.
+
+The [source audit](../eval/community-refinement/README.md#source-audit-and-execution-readiness)
+checked remote SemEngine main and the open ingest-kernel PR. Foundation and ingest
+work exists, but clustering and semantic edges have not landed at those revisions.
+The design uses SemEngine's pinned SemStreams algorithms as source context and
+requires re-auditing the real port before execution. It adds no sibling changes,
+new runtime, or production admission. New caller work is described in
+[SemEngine integration](semengine-integration.md); the
+[SemStreams integration audit](semstreams-integration.md) is historical.
+
+This is a designed, unexecuted research track. Previous measurements remain
+unchanged. Missing-edge discovery, membership moves, merge/split selection and
+summary validation are visible follow-ups, not silently counted as tested or
+made requirements of the first pilot.
 
 ## Query-classification follow-up 2026-10-07
 
@@ -29,9 +63,10 @@ useful without creating a new research backlog.
 ## Closeout review 2026-10-06
 
 **Keep semselect as a working evaluation/reference service. No measured production
-sem* use case currently justifies adopting it.** This closes the CPU/Metal research
-phase. The [selection guide](when-to-use.md) is the current recommendation; earlier
-experiment proposals below are history or conditional designs, not an active backlog.
+sem* use case currently justifies adopting it.** This historical closeout covers
+the initial CPU/Metal workloads. The [selection guide](when-to-use.md) is the
+current recommendation; earlier experiment proposals below are history or
+conditional designs. The separately requested community track is described above.
 
 The owner supplied Fable's outside critique. We checked its claims against the
 pinned source, preserved runs and cited primary material. Its useful contribution

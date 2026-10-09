@@ -4,8 +4,10 @@
 through a tested local service, reproducible comparisons, and plain-language guidance.**
 
 semselect packages llama.cpp's native decision API for the c360studio sem* ecosystem.
-It is also a completed CPU/Metal research baseline, with inspectable experiments
-and a guide to choosing code, ordinary model output, or a specialized decision model.
+It preserves a completed CPU/Metal baseline for routing and evidence judgments,
+with inspectable experiments and guidance for choosing code, ordinary model output,
+or a specialized decision model. Community and graph refinement are a separate,
+unmeasured research track targeting SemEngine.
 
 **Query-classification decision — 2026-10-07: keep Qwen3.5-4B JSON and the
 improved-code baseline.** Qwen remains our model quality reference; improve the
@@ -18,6 +20,13 @@ The bounded specialist and smaller-Qwen follow-ups are complete. Their negative
 results narrow the choice without establishing that 4B is the smallest possible
 solution or that task-specific training is required. Use the measured small-team
 requirements; no serious-scale requirement has been established.
+
+**Scope update — 2026-10-08:** the next designed workload is
+[community refinement in SemEngine](eval/community-refinement/README.md), starting
+with review of semantic virtual edges and measuring resulting communities and
+retrieved evidence. SemEngine is replacing SemStreams when ready. The source audit
+found that clustering and semantic edges were not ported at the inspected revisions;
+the design records that execution prerequisite. No graph-quality result is claimed.
 
 ## Answers we can give today
 
@@ -58,11 +67,11 @@ labels and training data, include a small trained classifier in the comparison�
 have not tested one here. The [when-to-use guide](docs/when-to-use.md#choose-by-the-job)
 makes these choices explicit.
 
-A possible Tier 2 community-evidence use remains worth remembering: prioritize
-which retrieved communities to inspect, or replace an existing expensive LLM
-review. First supply the missing source evidence and compare with existing ranking.
-We have not shown that an added classifier improves that path. A high event rate
-alone does not require a model call per event.
+Community refinement asks whether bounded semantic review improves the graph used
+by many later queries. Its [protocol](eval/community-refinement/README.md) compares
+existing graph algorithms, a trained reviewer, Qwen and Kev on community quality,
+evidence retrieval and background-cycle cost. Routing results do not settle this
+unmeasured workload.
 
 ## What is implemented and tested
 
@@ -97,8 +106,9 @@ records what we accepted and corrected from outside critique.
 A useful review identifies a real caller, an error budget and a rate/latency need
 that the current path cannot meet. Without that, more model shopping would not
 answer the adoption question. Parser fixes and a possible typed decision contract
-are [proposed SemStreams work](docs/semstreams-integration.md), not sibling changes
-or a committed integration roadmap.
+are preserved in the [historical SemStreams audit](docs/semstreams-integration.md).
+New integration work targets [SemEngine](docs/semengine-integration.md), with its
+actual port and admission requirements checked before implementation.
 
 ## Capabilities and target
 
@@ -290,8 +300,9 @@ quality and domain calibration need separate evaluation. Native Kev omits Python
 Score/Noul run but have only contract/smoke validation, not workload accuracy studies.
 See [upstream licenses and attribution](THIRD_PARTY_NOTICES.md).
 
-If a native decision backend earns adoption, SemStreams would need a small typed
-`/v1/systemone` client to preserve its distributions. No sibling repository was
+If a native decision backend earns adoption, SemEngine would need a small typed
+`/v1/systemone` client at its actual admitted caller to preserve distributions.
+See the [conditional integration proposal](docs/semengine-integration.md). No sibling repository was
 modified. A future seminstruct decision-model image
 variant could share or absorb this packaging; a second inference implementation
 is unnecessary.

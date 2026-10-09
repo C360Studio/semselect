@@ -1,9 +1,13 @@
 # Evaluation results history
 
-The initial CPU/Metal research phase closed out on 2026-10-06; the bounded
-specialist and smaller-Qwen follow-ups completed on 2026-10-07. The [README](../README.md)
-links the current decision summary; [reopening conditions](when-to-use.md#research-closeout-and-reopening-conditions)
-make further experiments conditional.
+The initial routing/evidence CPU/Metal phase closed out on 2026-10-06; the
+specialist and smaller-Qwen follow-ups completed on 2026-10-07. The
+[README](../README.md) links the decision summary; the
+[new SemEngine community-refinement track](../eval/community-refinement/README.md)
+has a design dated 2026-10-08 and **no results yet**. Graph refinement was not
+measured by the earlier phase. Its execution prerequisites and
+[workload criteria](when-to-use.md#research-closeout-and-reopening-conditions)
+remain explicit.
 This page preserves the complete published experiment history; linked
 JSON contains the per-request evidence and is the source for table values.
 Detailed validation reports explain conditions, failures and interpretation.
