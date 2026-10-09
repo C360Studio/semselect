@@ -102,6 +102,30 @@ within a cycle. Keep all non-reviewed pairs unchanged. Candidate generation is
 frozen before labels or model results; this first experiment cannot discover a
 missing pair outside that candidate set.
 
+### Per-entity bundle variant
+
+The per-pair request above stays the baseline contract. The variant makes one
+entity's source passage the shared state. Each candidate neighbour of that
+entity becomes its own Choice question in the same request. The question names
+the neighbour and carries its bounded excerpt, kept within the existing
+512-byte candidate-description limit, and it uses the same `keep`, `suppress`
+and `defer` labels as the per-pair contract.
+
+The service profile allows 1 to 4 questions per request, so a bundle of more
+than four neighbours is split into several requests, and the split is recorded
+with the results. The pilot does not change the guard.
+
+The trade-off is packet size: a bundle packs one entity's passage and several
+neighbour excerpts into one request, which pushes against the 8,192-byte state
+limit where a per-pair request carries a single pair. A packet that does not fit
+follows the existing out-of-profile rule below. Because the questions in a
+bundle share one state, this is the shape where state reuse can show up on a
+runtime that offers it; a per-pair request leaves nothing to reuse. On
+llama.cpp Metal the [throughput record](../../docs/validation-throughput.md)
+measured it for Kev within one request: three questions over one shared state
+ran 2.35× faster with four slots than with one, labels unchanged. Nothing was
+reused across requests. The MLX runtimes have no results yet.
+
 ## Corpus, labels and evidence freeze
 
 Start with 12 disjoint graph families: four development and eight held-out. Each
@@ -183,7 +207,7 @@ never select prompts, graph parameters or thresholds.
 | Tuned semantic LPA | Strong algorithm baseline: development-only search over `k={4,8}`, cosine threshold `{0.75,0.80,0.85}`, semantic weight `{0.3,0.6,0.9}`; retain the same explicit/identity configuration. |
 | Small trained edge reviewer | Regularized logistic regression over frozen cosine, reciprocal ranks, shared-neighbor statistics, identity-tier flags and symmetric endpoint embedding features. Trained only on development families; suppress or preserve. |
 | Qwen JSON reviewer | Pinned Qwen3.5-4B, constrained `keep/suppress/defer`, no generated confidence. |
-| Native decision reviewer | Pinned Kev-4B through semselect's native Choice API, preserving the full distribution and confidence separately. |
+| Native decision reviewer | Pinned Kev-4B served by Kev's own MLX server (bf16 backbone, fp32 head), the only measured path with a cross-request state cache, using the per-entity bundle so each entity's state is sent once; full distribution and confidence preserved separately. semselect's llama.cpp path at `-np 4` is a diagnostic arm, not the reviewer. Decision recorded 2026-10-09 from the [throughput record](../../docs/validation-throughput.md). |
 
 The model and trained-reviewer arms overlay the **same stock graph and selected
 review set**. The tuned algorithm may change more of the stock graph; it is a
@@ -210,6 +234,11 @@ the graph. Qwen has its explicit `defer`, without fabricated scores. These score
 are not calibrated correctness probabilities. No prompt/model search after the
 freeze; the model/runtime revisions, quantization, SHA-256 and licenses stay at
 the existing locks.
+
+Runtimes use different artifacts: GGUF Q4_K_M on llama.cpp, MLX affine 4-bit on
+SGLang and bf16 on Kev's own MLX server. Compare throughput within a runtime
+first. Cross-runtime label agreement is a diagnostic, not a quality ranking,
+because the quantization differs along with the runtime.
 
 Select configurations using development graph outcomes: relative to **stock
 semantic LPA**, first require retaining every previously successful retrieval
@@ -278,6 +307,21 @@ Proposed **pilot screening thresholds**, to freeze before execution:
   makes zero new review calls. Name the largest size actually tested; smaller
   snapshots do not establish 250-entity capacity. These are pilot budgets, not
   production SLOs or the query router's subsecond latency target.
+- Name the real scale before the pilot: candidates per cycle and refresh cadence
+  on a representative SemSource graph. Required decisions per second equals
+  candidates divided by the cadence in seconds. Compare it with the selected
+  profile's measured decisions per second from the
+  [throughput experiment](../throughput/README.md). If the requirement exceeds
+  the measurement, the track is infeasible on this hardware, regardless of Kev
+  versus Qwen. For example, 10,000 candidates refreshed hourly need about 2.8
+  decisions per second; refreshed every five minutes, about 33. The measured
+  rate on this M3 Pro is about **one decision per second** with fresh evidence
+  per request (0.94 to 1.06 at one slot for packets of 540 to 570 prompt
+  tokens; 1.01 to 1.39 questions per second for three-question bundles). At that
+  rate both examples are infeasible here: about 3,600 decisions per hour, or
+  300 per five-minute cycle, is the ceiling. A 32-review pilot cycle takes about
+  half a minute. Larger bundle packets should take proportionally longer per
+  request (inference from the flat prompt rate, not measured).
 
 Passing those gates establishes a reason for a larger confirmation, not production
 adoption. Kev earns preference over Qwen only if it also passes the graph-value
@@ -329,10 +373,18 @@ Execution is staged:
 2. **Code and trained baselines:** finish development selection and a readiness
    check. If representative development graphs show no shortfall, publish that
    result and do not start model shopping.
-3. **Primary Metal quality pilot:** serial Qwen and Kev runs on the same M3 Pro;
-   one slot, four threads, context 4,096, batch/microbatch 512, no prompt cache.
-   Account for Qwen's direct chat path and Kev's guard. Verify actual cache/token
-   behavior in logs. Cold start and warmup remain separate from request timing.
+3. **Primary Metal quality pilot:** Qwen and Kev runs on the same M3 Pro, one
+   model server at a time, with the serving profile fixed on 2026-10-09 from
+   the [throughput record](../../docs/validation-throughput.md). **Kev:** Kev's
+   own MLX server with per-entity bundles, so one entity's state is read once
+   and each neighbour question costs about a fifth of a new-state read
+   (measured 1,970 versus 365 ms). **Qwen JSON:** one slot on the pinned
+   llama.cpp Metal build with the prompt cache on; extra slots only help when
+   the prefix is already cached. **Diagnostic only:** semselect's llama.cpp Kev
+   path at `-np 4` (head grouping, 2.35×) and the one-slot service profile,
+   which is the worst case. Verify cache behaviour in the logs; cold start and
+   warmup stay separate from request timing. Expect about one fresh packet
+   per second on this laptop whichever arm runs.
 4. **CPU/Docker feasibility:** at most six fixed development packets per model,
    spanning short/long evidence, on Linux/ARM64 with four CPUs/threads and an
    8 GiB hard memory limit. This bounded check is not full CPU graph quality.

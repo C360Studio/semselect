@@ -25,6 +25,102 @@ compare valid pairs. Other sections define their own datasets, metrics and order
 comparisons. These are small evaluations, not production benchmarks or calibration
 studies. Model probabilities are not established probabilities of correctness.
 
+## 2026-10-09: Metal throughput screen on llama.cpp, SGLang MLX and Kev MLX
+
+**More slots and clients did not make prompt processing faster for either
+model.** Prompt processing stayed at about 440 to 570 tokens per second at 1, 4
+and 8 slots, so with fresh evidence in each request every path landed near one
+decision per second. Kev's one gain was head grouping: three questions over one
+shared state ran 2.35× faster with four slots and one client, all labels
+identical, and still slower than Qwen JSON. Qwen JSON gained from slots only
+with a warm prefix cache. Both llama.cpp pre-declared readings were no or not
+evaluable.
+Apple M3 Pro, native Metal, pinned llama.cpp `6c59c400`, Kev-4B and Qwen3.5-4B
+Q4_K_M, guard bypassed. Small screen on a shared laptop, not a benchmark. See
+the [record](validation-throughput.md), the
+[frozen protocol](../eval/throughput/README.md) and the evidence for the
+[Kev run](evidence/20261009T132345.224681Z-throughput-llamacpp-kev/README.md),
+[Qwen run](evidence/20261009T140002.987772Z-throughput-llamacpp-qwen/README.md)
+and [Kev rerun](evidence/20261009T141930.309707Z-throughput-llamacpp-kev/README.md).
+
+W1 is the 22-case source-evidence pilot in both orders over two measured passes
+(88 decisions); W2 is the 32-case query task with three questions per request
+(96 questions). Latency includes queueing at the server.
+
+| Cell | Questions/s | p50 / p95 ms | Matched / planned | Note |
+| --- | ---: | ---: | ---: | --- |
+| `w1-kev-1x1` | 0.94 | 939 / 1,458 | 88 / 88 | Kev's best W1 cell |
+| `w2-kev-1x1` | 0.43 | 6,998 / 7,005 | 96 / 96 | |
+| `w2-kev-4x1` | 1.01 | 2,972 / 2,974 | 96 / 96 | head grouping, one client |
+| `w2-kev-4x4-kvu` | 1.01 | 5,922 / 30,003 | 84 / 96 | report's best W2 Kev; 4 timeouts |
+| `w1-qwen_json-1x1` | 1.06 | 883 / 1,363 | 88 / 88 | |
+| `w1-qwen_json-8x8` | 2.88 | 2,164 / 6,527 | 88 / 88 | best cell in the readings; warm prefix cache |
+| `w1-qwen_json-8x8-b4096` | 4.43 | 917 / 4,581 | 88 / 88 | Amendment 2 diagnostic, not in the readings |
+| `w1-qwen_score-1x1` | 0.97 | 930 / 1,390 | 60 / 88 | best scoring cell; cross-format reference |
+| `w2-qwen_json-1x1` | 1.30 | 2,297 / 2,401 | 96 / 96 | |
+| `w2-qwen_json-4x4` | 1.39 | 8,593 / 12,611 | 96 / 96 | Qwen's best W2 cell |
+
+Pre-declared readings from `report.py`: batches usefully, W1 Qwen JSON **no**
+(2.71×, p95 4.79×), W2 Kev **no** (2.07×, p95 4.28×, 21 fewer matched), W2 Qwen
+JSON **no** (1.07×), W1 Kev and W1 one-token scoring **not evaluable** (8×8
+stopped). Kev shared-state advantage **no**: best W2 Kev 1.01 questions/s
+against Qwen JSON 1.39.
+
+Stops and refusals, kept as recorded: `w1-kev-8x8` stopped in warmup under
+protocol version 1 (which led to Amendment 1) and stopped again in its version 3
+rerun with 4 timeouts in the first measured wave (33/88 valid); `w2-kev-8x8`
+stopped in measurement under version 1 (39/96) and completed in the rerun with
+7 timeouts (75/96); `w1-qwen_score-8x8` stopped with 3 timeouts (32/88 valid);
+`w1-kev-8x8-b4096` was refused at startup because embedding mode set `n_batch`
+to 512, as Amendment 2 expected. Every error was a 30 s timeout.
+
+**SGLang MLX and Kev's own MLX server ran the same workloads the same day.**
+SGLang `efb62ce2` served `mlx-community/Qwen3.5-4B-4bit` (MLX affine 4-bit,
+group 64) with the degraded flags of the 2026-10-05 probe. Kev's server
+(`kev.serve`, Kev `5e42a7a0`) served the Kev-4B adapter over the bf16 base
+with an fp32 head. Both are different artifacts from the Q4_K_M files above.
+Matched counts here compare with the same runtime's one-request cell. Evidence:
+SGLang [re-probes](evidence/20261009T142410.714460Z-throughput-sglang-qwen/README.md),
+[W1 JSON](evidence/20261009T142639.150858Z-throughput-sglang-qwen/README.md),
+[W1 decisions and score](evidence/20261009T143126.613254Z-throughput-sglang-qwen/README.md)
+and [W2](evidence/20261009T143712.053883Z-throughput-sglang-qwen/README.md);
+[Kev MLX](evidence/20261009T144559.263704Z-throughput-kevmlx-kev/README.md).
+
+| Runtime | Cell | Questions/s | p50 / p95 ms | Matched / planned | Note |
+| --- | --- | ---: | ---: | ---: | --- |
+| SGLang MLX | `w1-qwen_json-1x1` | 0.78 | 1,182 / 1,655 | 88 / 88 | no prompt cache |
+| SGLang MLX | `w1-qwen_json-4x4` | 0.00 | n/a | 0 / 88 | stopped: scheduler crash |
+| SGLang MLX | `w1-qwen_decisions-1x1` | 0.99 | 926 / 1,401 | 88 / 88 | no decode |
+| SGLang MLX | `w1-qwen_score-1x1` | 0.98 | 923 / 1,387 | 88 / 88 | no decode |
+| SGLang MLX | `w2-qwen_json-1x1` | 1.21 | 2,563 / 2,669 | 96 / 96 | |
+| SGLang MLX | `w2-qwen_decisions-1x1` | 0.40 | 6,564 / 11,362 | 39 / 96 | stopped: Metal out of memory |
+| Kev MLX | `w1-kevmlx-1x1` | 1.18 | 773 / 1,158 | 88 / 88 | |
+| Kev MLX | `w1-kevmlx-1x8` | 1.19 | 6,486 / 8,902 | 88 / 88 | 1 × 4 also 1.19 |
+| Kev MLX | `w2-kevmlx-1x1` | 0.95 | 3,153 / 3,164 | 96 / 96 | |
+| Kev MLX | `w2-kevmlx-1x8` | 0.95 | 25,232 / 25,239 | 96 / 96 | 1 × 4 also 0.95 |
+| Kev MLX | `w2-kevmlx-cached-1x1` | 1.11 | 1,349 / 1,971 | 96 / 96 | A 1,970 ms new state; B 730 ms cached |
+
+Readings: every SGLang batching reading is **not evaluable**, because no
+8 × 8 cell ran. Kev MLX, from its own runner: batches usefully **no** on W1
+(1.00×, p95 7.69×) and W2 (1.00×, p95 7.98×); cached state materially cheaper
+**yes**, with B at 0.37 of A's median, 365 ms per cached question and no label
+change. Against the serial llama.cpp labels (diagnostic, different
+quantization) SGLang's complete cells matched 46/88 to 85/96 and Kev MLX 84/88
+and 95/96.
+
+SGLang crashes, as recorded: `probe-radix` crashed the server on its own
+startup warmup with the `mamba_checkpoint_grid` error of 2026-10-05, so the
+radix-gated cell was not added; `w1-qwen_json-4x4`, the only cell tried with
+four running requests, crashed on its first requests (`Expected all tensors to
+be on the same device ... mps:0 and cpu!`); `w2-qwen_decisions-1x1` ran out of
+Metal memory after answering 45 three-question requests, 13 of them measured.
+After each crash the runner recorded a cleanup error and launched no further
+cell. The later invocations ran 1 × 1 cells only, so ten multi-request cells
+were never attempted: at this pin SGLang MLX serves one running request only.
+The probe with overlap scheduling enabled passed twice on one fixture. Every
+Kev MLX cell completed with no errors, and its cache accounting matched the
+plan.
+
 ## 2026-10-07 — Query-classification decision
 
 **Keep Qwen3.5-4B JSON and the improved-code baseline.** The additional models

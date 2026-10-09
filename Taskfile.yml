@@ -134,3 +134,30 @@ tasks:
   specialist:prepare:
     desc: Freeze specialist pilot inputs without inference; pass -- --run NEW_RESULTS_DIRECTORY --driver DRIVER
     cmds: ['python3 eval/specialist-intent/runner.py prepare {{.CLI_ARGS}}']
+  throughput:validate:
+    desc: Verify frozen throughput inputs, rebuild requests and print planned cells; no inference
+    cmds: [python3 eval/throughput/run.py --validate]
+  throughput:test:
+    desc: Offline throughput harness tests with loopback stub servers; no inference
+    cmds: [python3 -m unittest discover -s eval/throughput -p 'test_*.py' -v]
+  throughput:metal:
+    desc: Run Metal llama.cpp throughput cells for one model; pass -- --model kev|qwen [--cells ...] [--output NEW_DIRECTORY]
+    cmds: ['python3 eval/throughput/run.py --runtime llamacpp {{.CLI_ARGS}}']
+  throughput:sglang:validate:
+    desc: Map frozen throughput requests onto SGLang MLX endpoints and print the planned cells; no inference
+    cmds: [python3 eval/throughput/run_sglang.py --validate]
+  throughput:sglang:
+    desc: Run SGLang MLX throughput cells for Qwen; pass -- --workload w1|w2 [--cells ...] [--output NEW_DIRECTORY]
+    cmds: ['python3 eval/throughput/run_sglang.py --model qwen {{.CLI_ARGS}}']
+  throughput:kevmlx:setup:
+    desc: Fetch and record the pinned Kev MLX environment under .kev/ (network, ~11.7 GB); refuses below 12 GiB free
+    cmds: [python3 eval/throughput/kevmlx_setup.py]
+  throughput:kevmlx:verify:
+    desc: Re-check every recorded .kev/ byte offline
+    cmds: [python3 eval/throughput/kevmlx_setup.py --verify]
+  throughput:kevmlx:validate:
+    desc: Verify frozen inputs, rebuild Kev MLX requests and print planned cells; no inference
+    cmds: [python3 eval/throughput/run_kevmlx.py --validate]
+  throughput:kevmlx:
+    desc: Run Kev MLX (kev.serve, bf16 backbone, fp32 head) throughput cells; pass -- [--cells ...] [--workload ...] [--output NEW_DIRECTORY]
+    cmds: ['python3 eval/throughput/run_kevmlx.py {{.CLI_ARGS}}']

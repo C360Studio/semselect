@@ -13,6 +13,23 @@ a conclusion about graph decisions, or a promising graph hypothesis into adoptio
 evidence. The required clustering/semantic-edge port is not present in the audited
 SemEngine main or ingest PR yet.
 
+**Scope update, 2026-10-09:** the latencies in this guide are one request at a
+time on one slot. A [bounded Metal throughput screen](validation-throughput.md)
+has since **measured** decisions per second on llama.cpp at 1, 4 and 8 slots.
+On this M3 Pro, prompt processing stayed at about 440 to 570 tokens per second
+whatever the slot count, so with fresh evidence in each request every path
+landed near one decision per second. Kev gained only from grouping questions
+over one shared state (2.35×, identical labels) and stayed slower than Qwen
+JSON; Qwen JSON gained from slots only with a warm prefix cache. Neither
+pre-declared llama.cpp reading favoured batching or Kev. Kev's own MLX server,
+the only runtime here that keeps a state between requests, answered each
+further question on a cached state in about 365 ms, against 1,970 ms for one
+question on a new state, with labels unchanged. SGLang MLX at its pinned
+revision served Qwen at one running request only; four running requests
+crashed its scheduler. Nothing here describes CUDA hardware. The graph pilot's
+serving profile now follows this result. See
+[why per-request latency is the wrong yardstick](#why-per-request-latency-is-the-wrong-yardstick-for-background-work).
+
 "Jev-like" describes the bounded decision interface. Our service runs Kev; our
 comparisons also use Qwen. Those results do not establish Jev's quality.
 Kev was selected for integration fit and reproducibility; we have not established
@@ -35,6 +52,7 @@ policy and its end-to-end quality/latency are still unmeasured.
 | Should we add a specialist backend? | No measured benefit here. The selected DeBERTa accepted only 13 correct cases and deferred 106; GLiClass was also weak. [Evidence](validation-specialist-intent.md). |
 | Must we do our own training? | That has not been established. A supervised small classifier remains unmeasured. Evaluation labels are necessary regardless of whether we train. |
 | Is 4B already fast enough? | Its 867/1,044 ms Metal median/p95 misses the accepted 250/750 ms classifier budget. Retaining it as a quality baseline does not waive the latency target. Small-model Metal and shared-prefix optimizations were not tested. |
+| Should we run more slots or clients for throughput? | Not on this M3 Pro with llama.cpp. Prompt processing stayed at about 500 tokens per second at 1, 4 and 8 slots, so extra slots added queueing: Kev 0.94 to 0.90 decisions/s at 4 slots and stopped at 8; uncached Qwen scoring 0.97 to 0.96. Only Qwen JSON with a warm prefix cache gained (2.7× at 8 slots, p95 4.8× longer). For Kev, give one client enough slots (four measured) for a request's questions to share their state: 2.35×. [Evidence](validation-throughput.md). |
 | Do we need serious-scale infrastructure? | No such requirement has been established beyond a small team. Concurrency/load checks did not run because prerequisite gates failed. Avoid a new service or provider framework on this evidence. |
 | What should app work focus on? | Bring measured rule/binding improvements into caller tests, retain Qwen4B for semantic comparison, and measure any proposed fallback policy on representative fresh queries. [Proposed integration work](semstreams-integration.md#query-classification-baseline-and-next-app-work). |
 
@@ -51,7 +69,7 @@ router meets the app's targets without its own evaluation.
 | --- | --- | --- |
 | Check an exact fact, permission or allowed transition | Caller code and authoritative data | Text interpretation may supply a hint; it never replaces the check. |
 | Retrieve relevant documents or communities | Existing lexical/statistical ranking, embeddings and applicable reranking | A remaining semantic judgment improves downstream answers, rather than merely producing another relevance score. |
-| Improve community boundaries or semantic graph hints | Existing weighted clustering, identity/explicit edges and tuned semantic-neighbor selection | Reviewing bounded proposals improves the resulting communities and retrieved evidence within a background-processing budget. This workload is **unmeasured here**. |
+| Improve community boundaries or semantic graph hints | Existing weighted clustering, identity/explicit edges and tuned semantic-neighbor selection | Reviewing bounded proposals improves the resulting communities and retrieved evidence within a background-processing budget. This workload is **unmeasured here**. Test bundling questions per entity before concluding on cost. |
 | Assign stable labels with representative training data | A small supervised classifier, such as embeddings plus a trained linear head | It beats that trained baseline after including labeling, training and serving costs. This baseline is **unmeasured here**. |
 | Interpret text with changing caller-defined choices and little labeled data | Schema-constrained Qwen as the first model baseline | A specialized model improves the actual caller's errors, abstention or total cost. |
 | Reduce the cost of an existing bounded LLM judgment | Measure output overhead, then compare ordinary-model one-token scoring and native decision heads | The cheaper implementation preserves acceptable decisions at the required input size and concurrency. |
@@ -83,6 +101,46 @@ System One is an API contract, not a quality guarantee. Compatible models can
 share transport code, but changing the backend still requires checking input
 limits, decision quality, ordering effects and score/threshold behavior. Ordinary
 Qwen's chat/scoring path is not automatically a native System One replacement.
+
+### Why per-request latency is the wrong yardstick for background work
+
+A router answers one person who is waiting, so the time for one request is the
+right number. A background job, such as reviewing the candidate pairs from a
+graph refresh, has nobody waiting on any single request. What matters is how
+long the whole batch takes, which is decisions per second.
+
+| Decisions per second | Time for 10,000 candidate pairs per refresh |
+| ---: | --- |
+| 1 (serial) | about 2.8 hours |
+| 10 | about 17 minutes |
+| 100 | under 2 minutes |
+
+This table is arithmetic, not a measurement. For scale, the Metal serial medians
+in this guide, 0.29 to 7.1 seconds per request, imply roughly 3.5 down to 0.14
+requests per second. That is not a throughput measurement, and one request in
+the query task carries three questions.
+
+Measured on this laptop (llama.cpp Metal, 2026-10-09): every path with fresh
+evidence in each request landed near **one decision per second** for a packet
+of 540 to 570 prompt tokens, at 1, 4 or 8 slots, so the first row is the
+realistic one here. Bundling three questions per shared state measured
+**2.35×** for Kev against asking them on one slot, with identical labels.
+[Record](validation-throughput.md).
+
+The number to measure is **decisions per second at acceptable quality, on the
+hardware you actually have**. A per-pair request with fresh evidence each time
+is the worst case for state reuse on every runtime. Bundling questions per
+entity is the shape that lets any runtime reuse state: one entity's passage is
+the shared state, and each neighbour is a question against it. The
+[per-entity bundle variant](../eval/community-refinement/README.md#per-entity-bundle-variant)
+describes that contract. On llama.cpp, Kev reused state within a bundle (head
+grouping) but not across requests. Kev's own MLX server reused it across
+requests too: with the state cached, each further question cost about 365 ms
+against 1,970 ms for one question on a new state
+([record](validation-throughput.md#kev-mlx-server)). SGLang MLX could not test
+concurrent bundles here, because at its pinned revision it served one running
+request at a time and crashed at four
+([record](validation-throughput.md#sglang-mlx)).
 
 ## Decisions the evidence supports today
 
@@ -191,8 +249,9 @@ Before executing a new workload comparison, name:
    including the strongest applicable code, retrieval, trained classifier or Qwen
    baseline. Fix observed defects on development cases; judge on separate data.
 3. **An acceptance rule:** allowed errors and deferrals, input/context limits,
-   target hardware, and total resource cost. Measure throughput and tail latency
-   under that workload before claiming high-rate capacity.
+   target hardware, and total resource cost. Measure throughput and tail latency,
+   on any runtime you propose, under that workload before claiming high-rate
+   capacity.
 
 Then test one candidate or serving change that addresses the shortfall. Neither
 CPU, Metal, CUDA nor a particular parameter count is automatically the right

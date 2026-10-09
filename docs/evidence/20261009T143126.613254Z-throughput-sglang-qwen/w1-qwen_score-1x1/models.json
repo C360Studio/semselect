@@ -1,0 +1,14 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "qwen35-4b-mlx",
+      "object": "model",
+      "created": 1791556462,
+      "owned_by": "sglang",
+      "root": "qwen35-4b-mlx",
+      "parent": null,
+      "max_model_len": 4096
+    }
+  ]
+}
