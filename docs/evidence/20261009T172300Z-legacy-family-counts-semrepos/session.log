@@ -1,0 +1,11 @@
+legacy family-count session, sem* repositories (UTC; each time is when the line was written, so early lines are approximate)
+2026-10-09T17:23:08Z  repositories exported with git archive to /tmp/semselect-families-src (semselect 5ee6c9b, semengine 00b4a81, semstreams 1b1accf4, semsource 4093d3c)
+2026-10-09T17:23:08Z  dry prepare + dupcheck: 290 files, 0 identical, max same-basename ratio 0.2081, nothing flagged
+2026-10-09T17:23:08Z  planning probe on owner subtrees (read-only import of semsource parsers, svelte added)
+2026-10-09T17:23:46Z  iter1 first attempt: stack reached ready (4,673 entities) but the counter failed on a relative evidence path (run.sh ran it from its own directory); no counts; torn down; logs kept in iter1-attempt-counter-path-failure/. run.sh now resolves the path.
+2026-10-09T17:26:56Z  iter1 complete: 4 of 12 families in 50-250 (semselect-service 56, semengine-message 111, semstreams-graph-clustering 175, semsource-cli 143); every family matched the planning probe exactly
+2026-10-09T17:26:56Z  trims chosen from per-file probe counts, file sizes and package comments only; probe predicts 12 of 12 in range
+2026-10-09T17:29:31Z  iter2 complete: 12 of 12 families in 50-250; matches probe predictions exactly; dupcheck 166 files, 0 identical, max ratio 0.2081, nothing flagged
+No image was built: every iteration reused semselect-family-count-semsource sha256:08801743b4ee (built 2026-10-09 from semsource 4093d3c for the earlier run; see docs/evidence/20261009T163623Z-legacy-family-counts/image-build.log).
+No third iteration was needed. Every stack start ended with docker compose down -v (trap), including the failed first attempt.
+families.json assembled from iter1 and iter2; nats-go-micro and commons-csv copied verbatim from families.json at f10aff6 as split generalization (owner ruling 4), not re-measured.

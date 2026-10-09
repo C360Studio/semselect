@@ -1,0 +1,96 @@
+name: semselect-family-count
+services:
+  nats:
+    command:
+      - -js
+      - -sd
+      - /data
+      - -m
+      - "8222"
+      - --name
+      - c360-nats
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost:8222/healthz
+      timeout: 3s
+      interval: 5s
+      retries: 10
+    image: nats:2.14-alpine
+    networks:
+      c360: null
+    ports:
+      - mode: ingress
+        target: 4222
+        published: "14222"
+        protocol: tcp
+      - mode: ingress
+        target: 8222
+        published: "18222"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: volume
+        source: nats-data
+        target: /data
+        volume: {}
+  semsource:
+    build:
+      context: /Users/coby/Code/c360/semsource
+      dockerfile: Dockerfile
+    command:
+      - run
+      - --config
+      - /etc/semsource/family-count.tier0.json
+      - --log-level
+      - info
+    depends_on:
+      nats:
+        condition: service_healthy
+        required: true
+    environment:
+      NATS_URL: nats://nats:4222
+      SEMSOURCE_LOG_LEVEL: info
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost:8080/source-manifest/status
+      timeout: 3s
+      interval: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      c360: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "18080"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /Users/coby/Code/c360/semselect/eval/community-refinement/fixtures/legacy-count
+        target: /etc/semsource
+        read_only: true
+        bind: {}
+      - type: bind
+        source: /private/tmp/semselect-families
+        target: /workspace
+        read_only: true
+        bind: {}
+networks:
+  c360:
+    name: semselect-family-count_c360
+    driver: bridge
+volumes:
+  nats-data:
+    name: semselect-family-count_nats-data
+    driver: local

@@ -1,0 +1,434 @@
+{
+  "nats_url": "nats://localhost:14222",
+  "collected_at": "2026-10-09T17:24:23Z",
+  "entity_keys": 4673,
+  "malformed_keys": [],
+  "systems": {
+    "semengine-message": {
+      "entities": 111,
+      "by_type": {
+        "const": 6,
+        "file": 16,
+        "folder": 2,
+        "function": 25,
+        "interface": 9,
+        "method": 33,
+        "repo": 1,
+        "struct": 12,
+        "type": 7
+      },
+      "by_domain": {
+        "code": 3,
+        "golang": 108
+      },
+      "edge_proxy": {
+        "source_keys": 111,
+        "edges": 343,
+        "induced_edges": 307,
+        "cross_system_edges": 0,
+        "dangling_edges": 36,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 54,
+          "code.relationship.embeds": 2,
+          "code.relationship.parameter": 10,
+          "code.relationship.receiver": 33,
+          "code.relationship.references": 6,
+          "code.relationship.returns": 18,
+          "code.structure.belongs": 110,
+          "code.structure.contains": 110
+        }
+      }
+    },
+    "semengine-natsclient": {
+      "entities": 653,
+      "by_type": {
+        "chunk": 20,
+        "const": 151,
+        "doc": 1,
+        "file": 26,
+        "folder": 1,
+        "function": 135,
+        "interface": 8,
+        "method": 216,
+        "repo": 1,
+        "struct": 55,
+        "type": 23,
+        "var": 16
+      },
+      "by_domain": {
+        "code": 2,
+        "golang": 630,
+        "web": 21
+      },
+      "edge_proxy": {
+        "source_keys": 653,
+        "edges": 2377,
+        "induced_edges": 2057,
+        "cross_system_edges": 0,
+        "dangling_edges": 320,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 561,
+          "code.relationship.parameter": 109,
+          "code.relationship.receiver": 216,
+          "code.relationship.references": 105,
+          "code.relationship.returns": 104,
+          "code.structure.belongs": 651,
+          "code.structure.contains": 631
+        }
+      }
+    },
+    "semselect-docs": {
+      "entities": 303,
+      "by_type": {
+        "chunk": 284,
+        "doc": 19
+      },
+      "by_domain": {
+        "web": 303
+      },
+      "edge_proxy": {
+        "source_keys": 303,
+        "edges": 284,
+        "induced_edges": 284,
+        "cross_system_edges": 0,
+        "dangling_edges": 0,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.structure.belongs": 284
+        }
+      }
+    },
+    "semselect-service": {
+      "entities": 56,
+      "by_type": {
+        "chunk": 31,
+        "const": 2,
+        "doc": 1,
+        "file": 3,
+        "folder": 4,
+        "function": 8,
+        "method": 2,
+        "repo": 1,
+        "struct": 4
+      },
+      "by_domain": {
+        "code": 5,
+        "golang": 19,
+        "web": 32
+      },
+      "edge_proxy": {
+        "source_keys": 56,
+        "edges": 103,
+        "induced_edges": 89,
+        "cross_system_edges": 0,
+        "dangling_edges": 14,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 21,
+          "code.relationship.parameter": 1,
+          "code.relationship.receiver": 2,
+          "code.relationship.references": 1,
+          "code.relationship.returns": 1,
+          "code.structure.belongs": 54,
+          "code.structure.contains": 23
+        }
+      }
+    },
+    "semsource-cli": {
+      "entities": 143,
+      "by_type": {
+        "const": 5,
+        "file": 17,
+        "folder": 1,
+        "function": 52,
+        "interface": 1,
+        "method": 54,
+        "repo": 1,
+        "struct": 11,
+        "var": 1
+      },
+      "by_domain": {
+        "code": 2,
+        "golang": 141
+      },
+      "edge_proxy": {
+        "source_keys": 143,
+        "edges": 435,
+        "induced_edges": 430,
+        "cross_system_edges": 0,
+        "dangling_edges": 5,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 68,
+          "code.relationship.parameter": 25,
+          "code.relationship.receiver": 54,
+          "code.relationship.references": 1,
+          "code.relationship.returns": 3,
+          "code.structure.belongs": 142,
+          "code.structure.contains": 142
+        }
+      }
+    },
+    "semsource-source-manifest": {
+      "entities": 255,
+      "by_type": {
+        "chunk": 23,
+        "const": 45,
+        "doc": 1,
+        "file": 15,
+        "folder": 2,
+        "function": 31,
+        "interface": 1,
+        "method": 87,
+        "repo": 1,
+        "struct": 36,
+        "type": 3,
+        "var": 10
+      },
+      "by_domain": {
+        "code": 3,
+        "golang": 228,
+        "web": 24
+      },
+      "edge_proxy": {
+        "source_keys": 255,
+        "edges": 801,
+        "induced_edges": 691,
+        "cross_system_edges": 0,
+        "dangling_edges": 110,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 145,
+          "code.relationship.parameter": 18,
+          "code.relationship.receiver": 87,
+          "code.relationship.references": 43,
+          "code.relationship.returns": 25,
+          "code.structure.belongs": 253,
+          "code.structure.contains": 230
+        }
+      }
+    },
+    "semsource-ui": {
+      "entities": 432,
+      "by_type": {
+        "class": 4,
+        "component": 7,
+        "const": 138,
+        "file": 28,
+        "folder": 9,
+        "function": 114,
+        "interface": 43,
+        "repo": 1,
+        "type": 18,
+        "var": 70
+      },
+      "by_domain": {
+        "code": 10,
+        "svelte": 130,
+        "typescript": 292
+      },
+      "edge_proxy": {
+        "source_keys": 432,
+        "edges": 1111,
+        "induced_edges": 1048,
+        "cross_system_edges": 0,
+        "dangling_edges": 63,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 124,
+          "code.relationship.parameter": 51,
+          "code.relationship.references": 5,
+          "code.relationship.returns": 46,
+          "code.structure.belongs": 431,
+          "code.structure.contains": 454
+        }
+      }
+    },
+    "semstreams-agentic-loop": {
+      "entities": 805,
+      "by_type": {
+        "const": 97,
+        "file": 37,
+        "folder": 7,
+        "function": 155,
+        "interface": 11,
+        "method": 396,
+        "repo": 1,
+        "struct": 65,
+        "type": 12,
+        "var": 24
+      },
+      "by_domain": {
+        "code": 8,
+        "golang": 797
+      },
+      "edge_proxy": {
+        "source_keys": 805,
+        "edges": 3322,
+        "induced_edges": 2514,
+        "cross_system_edges": 0,
+        "dangling_edges": 808,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 1010,
+          "code.relationship.parameter": 147,
+          "code.relationship.receiver": 396,
+          "code.relationship.references": 76,
+          "code.relationship.returns": 85,
+          "code.structure.belongs": 804,
+          "code.structure.contains": 804
+        }
+      }
+    },
+    "semstreams-component": {
+      "entities": 452,
+      "by_type": {
+        "const": 45,
+        "file": 31,
+        "folder": 2,
+        "function": 148,
+        "interface": 10,
+        "method": 148,
+        "repo": 1,
+        "struct": 55,
+        "type": 9,
+        "var": 3
+      },
+      "by_domain": {
+        "code": 3,
+        "golang": 449
+      },
+      "edge_proxy": {
+        "source_keys": 452,
+        "edges": 1647,
+        "induced_edges": 1567,
+        "cross_system_edges": 0,
+        "dangling_edges": 80,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 263,
+          "code.relationship.embeds": 2,
+          "code.relationship.parameter": 128,
+          "code.relationship.receiver": 148,
+          "code.relationship.references": 79,
+          "code.relationship.returns": 125,
+          "code.structure.belongs": 451,
+          "code.structure.contains": 451
+        }
+      }
+    },
+    "semstreams-graph-clustering": {
+      "entities": 175,
+      "by_type": {
+        "chunk": 13,
+        "const": 8,
+        "doc": 1,
+        "file": 7,
+        "folder": 2,
+        "function": 22,
+        "interface": 4,
+        "method": 83,
+        "repo": 1,
+        "struct": 26,
+        "var": 8
+      },
+      "by_domain": {
+        "code": 3,
+        "golang": 158,
+        "web": 14
+      },
+      "edge_proxy": {
+        "source_keys": 175,
+        "edges": 626,
+        "induced_edges": 483,
+        "cross_system_edges": 0,
+        "dangling_edges": 143,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 169,
+          "code.relationship.parameter": 10,
+          "code.relationship.receiver": 83,
+          "code.relationship.references": 18,
+          "code.relationship.returns": 11,
+          "code.structure.belongs": 173,
+          "code.structure.contains": 162
+        }
+      }
+    },
+    "semstreams-rule": {
+      "entities": 747,
+      "by_type": {
+        "const": 78,
+        "file": 53,
+        "folder": 3,
+        "function": 187,
+        "interface": 16,
+        "method": 305,
+        "repo": 1,
+        "struct": 66,
+        "type": 6,
+        "var": 32
+      },
+      "by_domain": {
+        "code": 4,
+        "golang": 743
+      },
+      "edge_proxy": {
+        "source_keys": 747,
+        "edges": 2874,
+        "induced_edges": 2362,
+        "cross_system_edges": 0,
+        "dangling_edges": 512,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 761,
+          "code.relationship.parameter": 179,
+          "code.relationship.receiver": 305,
+          "code.relationship.references": 69,
+          "code.relationship.returns": 67,
+          "code.structure.belongs": 746,
+          "code.structure.contains": 747
+        }
+      }
+    },
+    "semstreams-service": {
+      "entities": 541,
+      "by_type": {
+        "const": 21,
+        "file": 34,
+        "folder": 1,
+        "function": 96,
+        "interface": 12,
+        "method": 290,
+        "repo": 1,
+        "struct": 66,
+        "type": 7,
+        "var": 13
+      },
+      "by_domain": {
+        "code": 2,
+        "golang": 539
+      },
+      "edge_proxy": {
+        "source_keys": 541,
+        "edges": 2252,
+        "induced_edges": 1691,
+        "cross_system_edges": 0,
+        "dangling_edges": 561,
+        "undecodable_values": 0,
+        "predicates": {
+          "code.relationship.calls": 686,
+          "code.relationship.embeds": 9,
+          "code.relationship.parameter": 60,
+          "code.relationship.receiver": 290,
+          "code.relationship.references": 58,
+          "code.relationship.returns": 68,
+          "code.structure.belongs": 540,
+          "code.structure.contains": 541
+        }
+      }
+    }
+  }
+}

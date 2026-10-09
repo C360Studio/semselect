@@ -1,0 +1,9 @@
+legacy family-count session (UTC)
+2026-10-09T16:31:03Z  12 shallow clones complete under /tmp/semselect-families-src (dir mtime)
+2026-10-09T16:31-36Z  semsource image built: compose project semselect-family-count, image sha256:08801743b4ee...
+2026-10-09T16:36:23Z  iter1 start (owner subtrees; Homebrew rule: docs/*.md < 5,000 bytes)
+2026-10-09T16:37:03Z  iter1 teardown complete: 2 of 12 families in 50-250
+2026-10-09T16:38-40Z  planning probe (read-only import of semsource parsers) reproduced iter1 per-family counts exactly; trims chosen from per-file counts
+2026-10-09T16:40:47Z  iter2 start
+2026-10-09T16:41:16Z  iter2 teardown complete: 12 of 12 families in 50-250; matches probe predictions exactly
+No third iteration was needed. Every iteration ended with docker compose down -v (trap).

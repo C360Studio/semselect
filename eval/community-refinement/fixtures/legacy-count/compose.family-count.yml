@@ -1,0 +1,21 @@
+# semselect-owned override for the legacy SemSource stack (tier 0 family counts).
+# Used only as: docker compose -p semselect-family-count \
+#   -f <semsource>/docker-compose.yml -f <this file> ...
+# Paths come from run.sh as absolute host paths; semembed is disabled because
+# tier 0 uses the in-process BM25 embedder and this task runs no embeddings.
+services:
+  semsource:
+    volumes: !override
+      - ${FAMILY_COUNT_CONFIG_DIR:?set by run.sh}:/etc/semsource:ro
+      - ${FAMILY_WORKSPACE_ROOT:?set by run.sh}:/workspace:ro
+    command: !override
+      - run
+      - --config
+      - /etc/semsource/family-count.tier0.json
+      - --log-level
+      - ${LOG_LEVEL:-info}
+    depends_on: !override
+      nats:
+        condition: service_healthy
+  semembed:
+    profiles: ["disabled"]

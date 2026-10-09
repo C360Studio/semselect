@@ -1,0 +1,17 @@
+time=2026-10-09T11:43:22.940-05:00 level=INFO msg="listed buckets" entities=6689 embedded=6689
+time=2026-10-09T11:43:25.164-05:00 level=INFO msg="similar queries" done=500 of=6689
+time=2026-10-09T11:43:27.359-05:00 level=INFO msg="similar queries" done=1000 of=6689
+time=2026-10-09T11:43:29.286-05:00 level=INFO msg="similar queries" done=1500 of=6689
+time=2026-10-09T11:43:31.134-05:00 level=INFO msg="similar queries" done=2000 of=6689
+time=2026-10-09T11:43:33.389-05:00 level=INFO msg="similar queries" done=2500 of=6689
+time=2026-10-09T11:43:35.602-05:00 level=INFO msg="similar queries" done=3000 of=6689
+time=2026-10-09T11:43:37.709-05:00 level=INFO msg="similar queries" done=3500 of=6689
+time=2026-10-09T11:43:39.578-05:00 level=INFO msg="similar queries" done=4000 of=6689
+time=2026-10-09T11:43:41.563-05:00 level=INFO msg="similar queries" done=4500 of=6689
+time=2026-10-09T11:43:43.489-05:00 level=INFO msg="similar queries" done=5000 of=6689
+time=2026-10-09T11:43:45.426-05:00 level=INFO msg="similar queries" done=5500 of=6689
+time=2026-10-09T11:43:47.428-05:00 level=INFO msg="similar queries" done=6000 of=6689
+time=2026-10-09T11:43:49.350-05:00 level=INFO msg="similar queries" done=6500 of=6689
+time=2026-10-09T11:43:50.076-05:00 level=INFO msg="similar queries" done=6689 of=6689
+time=2026-10-09T11:43:50.374-05:00 level=INFO msg="explicit-edge reads" endpoints=6443 errors=0
+time=2026-10-09T11:43:50.438-05:00 level=INFO msg="capture written" output=/Users/coby/Code/c360/semselect/docs/evidence/20261009T163957Z-legacy-capture-osh-mutualknn mutual_pairs=15578 failed=0 aborted=false

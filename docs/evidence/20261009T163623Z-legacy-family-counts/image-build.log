@@ -1,0 +1,149 @@
+ Image semselect-family-count-semsource Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 556B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.19kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26.3-alpine
+#3 ...
+
+#4 [internal] load metadata for docker.io/library/alpine:3.21
+#4 DONE 0.5s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26.3-alpine
+#3 DONE 0.5s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 821B done
+#5 DONE 0.0s
+
+#6 [builder 1/7] FROM docker.io/library/golang:1.26.3-alpine@sha256:91eda9776261207ea25fd06b5b7fed8d397dd2c0a283e77f2ab6e91bfa71079d
+#6 resolve docker.io/library/golang:1.26.3-alpine@sha256:91eda9776261207ea25fd06b5b7fed8d397dd2c0a283e77f2ab6e91bfa71079d done
+#6 sha256:12e696fa36d88793f0869c86c611ba1d605ad3a2a7f60d00018579c8c2c9f935 125B / 125B 0.0s done
+#6 sha256:ef948c355a7dc83c698cdbb853ce74cbea62b03bcdffec75a5ddd8453edb8fcc 292.86kB / 292.86kB 0.1s done
+#6 sha256:99fa76ba696f7dc4b9e2330d4ae7c03a0f4b2c055caa94b353f7f600a6dab0c6 2.10MB / 64.17MB 0.2s
+#6 ...
+
+#7 [stage-1 1/4] FROM docker.io/library/alpine:3.21@sha256:ce64758a109eb420d874a118f87920e625e12d3634e03b4a5573fd9f6e5d3507
+#7 resolve docker.io/library/alpine:3.21@sha256:ce64758a109eb420d874a118f87920e625e12d3634e03b4a5573fd9f6e5d3507 done
+#7 sha256:248d4d6535e8932d2b51acdf49a4ca8d87629cd408a02bd59788b4c31e3d0c28 3.97MB / 3.97MB 0.1s done
+#7 extracting sha256:248d4d6535e8932d2b51acdf49a4ca8d87629cd408a02bd59788b4c31e3d0c28 0.2s done
+#7 DONE 0.3s
+
+#6 [builder 1/7] FROM docker.io/library/golang:1.26.3-alpine@sha256:91eda9776261207ea25fd06b5b7fed8d397dd2c0a283e77f2ab6e91bfa71079d
+#6 sha256:d17f077ada118cc762df373ff803592abf2dfa3ddafaa7381e364dd27a88fca7 1.05MB / 4.20MB 0.2s
+#6 sha256:99fa76ba696f7dc4b9e2330d4ae7c03a0f4b2c055caa94b353f7f600a6dab0c6 12.58MB / 64.17MB 0.3s
+#6 sha256:d17f077ada118cc762df373ff803592abf2dfa3ddafaa7381e364dd27a88fca7 4.20MB / 4.20MB 0.2s done
+#6 extracting sha256:d17f077ada118cc762df373ff803592abf2dfa3ddafaa7381e364dd27a88fca7
+#6 sha256:99fa76ba696f7dc4b9e2330d4ae7c03a0f4b2c055caa94b353f7f600a6dab0c6 24.12MB / 64.17MB 0.5s
+#6 extracting sha256:d17f077ada118cc762df373ff803592abf2dfa3ddafaa7381e364dd27a88fca7 0.2s done
+#6 extracting sha256:ef948c355a7dc83c698cdbb853ce74cbea62b03bcdffec75a5ddd8453edb8fcc 0.1s done
+#6 sha256:99fa76ba696f7dc4b9e2330d4ae7c03a0f4b2c055caa94b353f7f600a6dab0c6 35.65MB / 64.17MB 0.6s
+#6 sha256:99fa76ba696f7dc4b9e2330d4ae7c03a0f4b2c055caa94b353f7f600a6dab0c6 44.04MB / 64.17MB 0.8s
+#6 sha256:99fa76ba696f7dc4b9e2330d4ae7c03a0f4b2c055caa94b353f7f600a6dab0c6 64.17MB / 64.17MB 1.0s done
+#6 extracting sha256:99fa76ba696f7dc4b9e2330d4ae7c03a0f4b2c055caa94b353f7f600a6dab0c6
+#6 ...
+
+#8 [internal] load build context
+#8 transferring context: 117.15MB 1.7s done
+#8 DONE 1.7s
+
+#9 [stage-1 2/4] RUN apk add --no-cache ca-certificates git tzdata
+#9 0.185 fetch https://dl-cdn.alpinelinux.org/alpine/v3.21/main/aarch64/APKINDEX.tar.gz
+#9 0.326 fetch https://dl-cdn.alpinelinux.org/alpine/v3.21/community/aarch64/APKINDEX.tar.gz
+#9 1.170 (1/14) Installing ca-certificates (20260909-r0)
+#9 1.190 (2/14) Installing brotli-libs (1.1.0-r2)
+#9 1.207 (3/14) Installing c-ares (1.34.8-r0)
+#9 1.216 (4/14) Installing libunistring (1.2-r0)
+#9 1.260 (5/14) Installing libidn2 (2.3.7-r0)
+#9 1.282 (6/14) Installing nghttp2-libs (1.69.0-r0)
+#9 1.295 (7/14) Installing libpsl (0.21.5-r3)
+#9 1.321 (8/14) Installing zstd-libs (1.5.6-r2)
+#9 1.334 (9/14) Installing libcurl (8.14.1-r2)
+#9 1.349 (10/14) Installing libexpat (2.8.4-r0)
+#9 1.368 (11/14) Installing pcre2 (10.43-r0)
+#9 1.380 (12/14) Installing git (2.47.3-r0)
+#9 1.437 (13/14) Installing git-init-template (2.47.3-r0)
+#9 1.444 (14/14) Installing tzdata (2026e-r0)
+#9 1.477 Executing busybox-1.37.0-r14.trigger
+#9 1.479 Executing ca-certificates-20260909-r0.trigger
+#9 1.491 OK: 20 MiB in 29 packages
+#9 DONE 2.0s
+
+#6 [builder 1/7] FROM docker.io/library/golang:1.26.3-alpine@sha256:91eda9776261207ea25fd06b5b7fed8d397dd2c0a283e77f2ab6e91bfa71079d
+#6 extracting sha256:99fa76ba696f7dc4b9e2330d4ae7c03a0f4b2c055caa94b353f7f600a6dab0c6 1.4s done
+#6 DONE 2.5s
+
+#6 [builder 1/7] FROM docker.io/library/golang:1.26.3-alpine@sha256:91eda9776261207ea25fd06b5b7fed8d397dd2c0a283e77f2ab6e91bfa71079d
+#6 extracting sha256:12e696fa36d88793f0869c86c611ba1d605ad3a2a7f60d00018579c8c2c9f935 done
+#6 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done
+#6 DONE 2.5s
+
+#10 [builder 2/7] RUN apk add --no-cache git gcc musl-dev
+#10 0.259 ( 1/24) Installing libgcc (15.2.0-r2)
+#10 0.268 ( 2/24) Installing jansson (2.14.1-r0)
+#10 0.276 ( 3/24) Installing libstdc++ (15.2.0-r2)
+#10 0.302 ( 4/24) Installing zstd-libs (1.5.7-r2)
+#10 0.315 ( 5/24) Installing binutils (2.45.1-r0)
+#10 0.376 ( 6/24) Installing libgomp (15.2.0-r2)
+#10 0.385 ( 7/24) Installing libatomic (15.2.0-r2)
+#10 0.391 ( 8/24) Installing gmp (6.3.0-r4)
+#10 0.400 ( 9/24) Installing isl26 (0.26-r1)
+#10 0.417 (10/24) Installing mpfr4 (4.2.2-r0)
+#10 0.436 (11/24) Installing mpc1 (1.3.1-r1)
+#10 0.444 (12/24) Installing gcc (15.2.0-r2)
+#10 1.121 (13/24) Installing brotli-libs (1.2.0-r0)
+#10 1.133 (14/24) Installing c-ares (1.34.8-r0)
+#10 1.142 (15/24) Installing libunistring (1.4.1-r0)
+#10 1.160 (16/24) Installing libidn2 (2.3.8-r0)
+#10 1.168 (17/24) Installing nghttp2-libs (1.69.0-r0)
+#10 1.178 (18/24) Installing libpsl (0.21.5-r3)
+#10 1.186 (19/24) Installing libcurl (8.22.0-r0)
+#10 1.197 (20/24) Installing libexpat (2.8.5-r0)
+#10 1.205 (21/24) Installing pcre2 (10.49-r0)
+#10 1.217 (22/24) Installing git (2.52.0-r0)
+#10 1.282 (23/24) Installing git-init-template (2.52.0-r0)
+#10 1.288 (24/24) Installing musl-dev (1.2.5-r23)
+#10 1.335 Executing busybox-1.37.0-r30.trigger
+#10 1.337 OK: 186.6 MiB in 41 packages
+#10 DONE 1.6s
+
+#11 [builder 3/7] WORKDIR /src
+#11 DONE 0.0s
+
+#12 [builder 4/7] COPY go.mod go.sum ./
+#12 DONE 0.0s
+
+#13 [builder 5/7] RUN go mod download
+#13 DONE 5.2s
+
+#14 [builder 6/7] COPY . .
+#14 DONE 0.5s
+
+#15 [builder 7/7] RUN if [ "dev" = "dev" ] && [ -d .git ]; then     VERSION=$(git describe --tags --always --dirty 2>/dev/null || echo dev);     fi &&     CGO_ENABLED=1 go build     -ldflags="-s -w -linkmode external -extldflags '-static' -X main.version=dev"     -o /bin/semsource ./cmd/semsource
+#15 DONE 12.6s
+
+#16 [stage-1 3/4] COPY --from=builder /bin/semsource /usr/local/bin/semsource
+#16 DONE 0.4s
+
+#17 [stage-1 4/4] WORKDIR /etc/semsource
+#17 DONE 0.0s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 0.7s done
+#18 exporting manifest sha256:f463e5e4ec151fdffa3c9fdc85e69c7b8bfffa5663b8f2703dec646b5024fbfa done
+#18 exporting config sha256:8a6fcde1d194d01628dd4b18bc3b16d461f1b5f42ded7b08344e72cbe0d55ecc done
+#18 exporting attestation manifest sha256:a226a260be79774a01e38a2fd53d958a8bc349c20dca12de84a89901f66a2333 done
+#18 exporting manifest list sha256:08801743b4eeb774ee5818d23c238757cbb25bccc039766f85939a8a2d0b394f done
+#18 naming to docker.io/library/semselect-family-count-semsource:latest done
+#18 unpacking to docker.io/library/semselect-family-count-semsource:latest
+#18 unpacking to docker.io/library/semselect-family-count-semsource:latest 0.2s done
+#18 DONE 1.0s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image semselect-family-count-semsource Built 

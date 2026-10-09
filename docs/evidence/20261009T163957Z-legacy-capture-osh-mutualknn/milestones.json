@@ -1,0 +1,99 @@
+{
+  "outcome": "ok",
+  "failure": null,
+  "milestones": [
+    {
+      "name": "build_start",
+      "utc": "2026-10-09T16:39:59Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "build_done",
+      "utc": "2026-10-09T16:40:00Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "compose_up_start",
+      "utc": "2026-10-09T16:40:00Z",
+      "elapsed_s_since_compose_up": 0,
+      "detail": null
+    },
+    {
+      "name": "containers_healthy",
+      "utc": "2026-10-09T16:40:12Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": null
+    },
+    {
+      "name": "phase_ready",
+      "utc": "2026-10-09T16:40:12Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 6689,
+        "index": {
+          "ready": false,
+          "state": "building",
+          "lag": 5562
+        },
+        "embedding": {
+          "ready": false,
+          "state": "building",
+          "lag": 7149
+        }
+      }
+    },
+    {
+      "name": "index_ready",
+      "utc": "2026-10-09T16:40:22Z",
+      "elapsed_s_since_compose_up": 22,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 6689,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": false,
+          "state": "building",
+          "lag": 6612
+        }
+      }
+    },
+    {
+      "name": "embedding_ready",
+      "utc": "2026-10-09T16:43:21Z",
+      "elapsed_s_since_compose_up": 201,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 6689,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        }
+      }
+    },
+    {
+      "name": "capture_start",
+      "utc": "2026-10-09T16:43:22Z",
+      "elapsed_s_since_compose_up": 202,
+      "detail": null
+    },
+    {
+      "name": "capture_done",
+      "utc": "2026-10-09T16:43:50Z",
+      "elapsed_s_since_compose_up": 230,
+      "detail": null
+    }
+  ]
+}

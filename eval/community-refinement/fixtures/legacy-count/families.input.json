@@ -1,0 +1,303 @@
+{
+  "schema": "semselect.legacy-family-count.input/v2",
+  "note": "Owner-chosen families and roles for the community-refinement pilot (issue #5), drawn only from the C360 sem* product repositories (owner ruling, 2026-10-09). Each repository is assigned whole to one split. Only `include`, `exclude` and `max_file_bytes` may change to bring a family into the 50-250 entity range. `include` entries are repo-relative globs (non-recursive); a matching directory is copied recursively. `exclude` globs match repo-relative paths. Each repository is exported with `git archive` at its pinned `commit` from the sibling checkout named by `local`, so uncommitted files are never captured; `export_exclude` entries are git glob pathspecs. `license` is the SPDX identifier read from `license_file`. Where the owner named a README for a family it is included; elsewhere 'non-test' is read as the package's non-test Go files.",
+  "entity_range": [
+    50,
+    250
+  ],
+  "repositories": {
+    "semselect": {
+      "url": "https://github.com/C360Studio/semselect",
+      "local": "semselect",
+      "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+      "split": "development",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "export_exclude": [
+        ".venv/**",
+        ".kev/**",
+        ".synthesis/**",
+        ".sglang/**",
+        "**/node_modules/**",
+        "docs/evidence/**",
+        "models/**",
+        "results/**"
+      ]
+    },
+    "semengine": {
+      "url": "https://github.com/C360Studio/semengine",
+      "local": "semengine",
+      "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+      "split": "development",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "export_exclude": [
+        ".worktrees/**",
+        "**/node_modules/**"
+      ]
+    },
+    "semstreams": {
+      "url": "https://github.com/C360Studio/semstreams",
+      "local": "semstreams",
+      "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "split": "held-out",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "export_exclude": []
+    },
+    "semsource": {
+      "url": "https://github.com/C360Studio/semsource",
+      "local": "semsource",
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "split": "held-out",
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "export_exclude": [
+        "**/node_modules/**",
+        "ui/build/**",
+        "ui/dist/**",
+        "**/coverage.out"
+      ]
+    }
+  },
+  "families": [
+    {
+      "id": "semselect-service",
+      "split": "development",
+      "repository": "semselect",
+      "role": "code and doc about the same responsibility",
+      "language": "Go + Markdown",
+      "include": [
+        "internal",
+        "cmd",
+        "README.md"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*"
+      ],
+      "notes": "Owner subtree: internal/ and cmd/ non-test Go plus the root README.md."
+    },
+    {
+      "id": "semselect-docs",
+      "split": "development",
+      "repository": "semselect",
+      "role": "docs with multiple topics; isolated entities",
+      "language": "Markdown",
+      "include": [
+        "docs/*.md"
+      ],
+      "exclude": [],
+      "notes": "Owner subtree docs/*.md (top level; docs/evidence excluded) trimmed by the owner's size rule: files of 50,000 bytes or more are dropped, which removes only validation-throughput.md (57,502 bytes, 61 entities). The remaining 18 documents keep every topic the docs cover.",
+      "max_file_bytes": 50000
+    },
+    {
+      "id": "semengine-natsclient",
+      "split": "development",
+      "repository": "semengine",
+      "role": "one subject with boilerplate hubs",
+      "language": "Go + Markdown",
+      "include": [
+        "natsclient/README.md",
+        "natsclient/client.go",
+        "natsclient/doc.go",
+        "natsclient/errors.go",
+        "natsclient/heartbeat.go",
+        "natsclient/kv.go",
+        "natsclient/options.go",
+        "natsclient/trace.go"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*"
+      ],
+      "notes": "natsclient/ is one directory, so it is trimmed by file to the subject its README documents: the Client connection hub (client.go), its options, errors, heartbeat, the KVStore abstraction (kv.go), tracing and the package doc. Stream, consumer, delivery-settlement, request, KV key-contract/spec/retention, JetStream metrics and the storage_* observability files are excluded; references to them are dangling edges."
+    },
+    {
+      "id": "semengine-message",
+      "split": "development",
+      "repository": "semengine",
+      "role": "multiple legitimate topics",
+      "language": "Go",
+      "include": [
+        "message",
+        "payloadregistry"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md"
+      ],
+      "notes": "Owner subtree: message/ and payloadregistry/ non-test Go; message/README.md is not Go and is excluded."
+    },
+    {
+      "id": "semstreams-graph-clustering",
+      "split": "held-out",
+      "repository": "semstreams",
+      "role": "cross-type, code and doc",
+      "language": "Go + Markdown",
+      "include": [
+        "processor/graph-clustering"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*"
+      ],
+      "notes": "Owner subtree: processor/graph-clustering/ non-test Go plus its README.md."
+    },
+    {
+      "id": "semstreams-rule",
+      "split": "held-out",
+      "repository": "semstreams",
+      "role": "multiple topics in one package",
+      "language": "Go",
+      "include": [
+        "processor/rule/doc.go",
+        "processor/rule/cron_metrics.go",
+        "processor/rule/cron_rule.go",
+        "processor/rule/cron_scheduler.go",
+        "processor/rule/cron_substitution.go",
+        "processor/rule/schedule_tracker.go",
+        "processor/rule/caller_substitution.go",
+        "processor/rule/entity_substitution.go",
+        "processor/rule/lifecycle_substitution.go",
+        "processor/rule/message_substitution.go",
+        "processor/rule/typed_substitution.go",
+        "processor/rule/state_tracker.go",
+        "processor/rule/stateful_evaluator.go",
+        "processor/rule/payload_projection.go",
+        "processor/rule/projection_derivation.go",
+        "processor/rule/projection_targets.go"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md"
+      ],
+      "notes": "processor/rule/ is trimmed by file to four topics named by the files' own package comments: cron scheduling (cron_*, schedule_tracker), substitution contexts (*_substitution), stateful evaluation (state_tracker, stateful_evaluator) and payload projection (payload_projection, projection_*), plus the package doc. The processor hub, actions, entity watcher, configuration, factories and the expression/ subpackage are excluded; references to them are dangling edges."
+    },
+    {
+      "id": "semstreams-service",
+      "split": "held-out",
+      "repository": "semstreams",
+      "role": "lexically similar helpers",
+      "language": "Go",
+      "include": [
+        "service"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md"
+      ],
+      "notes": "service/ is one directory of helpers, so it is trimmed by a size rule: files of 12,000 bytes or more are dropped. This removes the hubs (service_manager, component_manager, message_logger, base, storage_observability and its metrics, metrics_forwarder, message_logger_http, component_manager_http) and keeps the 25 smaller helper files, including the lexically similar *_http, *_config, metrics, forwarder and registry helpers.",
+      "max_file_bytes": 12000
+    },
+    {
+      "id": "semstreams-component",
+      "split": "held-out",
+      "repository": "semstreams",
+      "role": "lifecycle boilerplate hubs",
+      "language": "Go",
+      "include": [
+        "component"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md",
+        "component/flowgraph/*",
+        "component/lifecycle_test_suite.go",
+        "component/test_helpers.go",
+        "component/port_codec.go",
+        "component/port_facts.go",
+        "component/schema.go",
+        "component/schema_tags.go",
+        "component/validation.go",
+        "component/config_validator.go"
+      ],
+      "notes": "component/ is trimmed to component lifecycle, ports and the registry hub. Excluded: the flowgraph/ subpackage; lifecycle_test_suite.go and test_helpers.go, which are test support although not *_test.go; the port codec and port facts files; and the schema and validation files. References to them are dangling edges."
+    },
+    {
+      "id": "semstreams-agentic-loop",
+      "split": "held-out",
+      "repository": "semstreams",
+      "role": "one long responsibility",
+      "language": "Go",
+      "include": [
+        "processor/agentic-loop/doc.go",
+        "processor/agentic-loop/handlers.go",
+        "processor/agentic-loop/state.go"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md"
+      ],
+      "notes": "processor/agentic-loop/ is trimmed to the loop's lifecycle in two long files: state.go (LoopManager, loop entity lifecycle and state) and handlers.go (the handlers that drive the loop), plus the package doc. component.go, the trajectory, governance, approval, context and metrics files and the internal/, lessonmatch/ and prompt/ subpackages are excluded; references to them are dangling edges."
+    },
+    {
+      "id": "semsource-source-manifest",
+      "split": "held-out",
+      "repository": "semsource",
+      "role": "cross-type",
+      "language": "Go + Markdown",
+      "include": [
+        "processor/source-manifest",
+        "configs/tiers/README.md"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "processor/source-manifest/workbench_capabilities.go"
+      ],
+      "notes": "Owner subtree processor/source-manifest/ non-test Go plus configs/tiers/README.md, less workbench_capabilities.go (32 entities), the UI capability advertisement, which the tiers README does not discuss."
+    },
+    {
+      "id": "semsource-cli",
+      "split": "held-out",
+      "repository": "semsource",
+      "role": "many small commands",
+      "language": "Go",
+      "include": [
+        "cli"
+      ],
+      "exclude": [
+        "*_test.go",
+        "*/testdata/*",
+        "*.md"
+      ],
+      "notes": "Owner subtree: cli/ non-test Go."
+    },
+    {
+      "id": "semsource-ui",
+      "split": "held-out",
+      "repository": "semsource",
+      "role": "sparse explicit topology",
+      "language": "Svelte + TypeScript",
+      "include": [
+        "ui/src"
+      ],
+      "exclude": [
+        "*.test.ts",
+        "*.spec.ts",
+        "ui/src/tests/*",
+        "*.css",
+        "*.html",
+        "ui/src/lib/contracts/*",
+        "ui/src/lib/graph/*"
+      ],
+      "notes": "ui/src/ Svelte and TypeScript without tests (*.test.ts and ui/src/tests/); app.css and app.html are not parsed. Trimmed to the UI shell: routes, components, API clients and state. The typed contracts (lib/contracts/) and the graph layout and rendering engine (lib/graph/) are excluded; references to them are dangling edges. No file carries a generated-code marker; app.d.ts is the hand-kept SvelteKit ambient stub."
+    }
+  ],
+  "generalization": {
+    "ids": [
+      "nats-go-micro",
+      "commons-csv"
+    ],
+    "manifest": "eval/community-refinement/fixtures/families.json",
+    "manifest_commit": "f10aff606fd0a28ee0e320ab5f446a3f35986887",
+    "evidence": "docs/evidence/20261009T163623Z-legacy-family-counts",
+    "note": "Owner ruling 4 (issue #5): kept from the earlier public-repo list under split 'generalization' as a check that a sem* result carries over to external code with an unambiguous licence. Copied verbatim from the earlier measurement and not re-measured; outside the four development and eight held-out families and not counted toward the promotion rule."
+  }
+}

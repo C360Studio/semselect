@@ -1,0 +1,191 @@
+{
+  "namespace": "semselect",
+  "sources": [
+    {
+      "type": "ast",
+      "path": "/workspace/semselect-service",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/semselect-service"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/semselect-docs"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/semengine-natsclient",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/semengine-natsclient"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/semengine-message",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/semstreams-graph-clustering",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/semstreams-graph-clustering"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/semstreams-rule",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/semstreams-service",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/semstreams-component",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/semstreams-agentic-loop",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/semsource-source-manifest",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    },
+    {
+      "type": "docs",
+      "paths": [
+        "/workspace/semsource-source-manifest"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/semsource-cli",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    },
+    {
+      "type": "ast",
+      "path": "/workspace/semsource-ui",
+      "languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "svelte",
+        "python"
+      ],
+      "watch": false
+    }
+  ],
+  "source_roots": [
+    "/workspace/semselect-service",
+    "/workspace/semselect-docs",
+    "/workspace/semengine-natsclient",
+    "/workspace/semengine-message",
+    "/workspace/semstreams-graph-clustering",
+    "/workspace/semstreams-rule",
+    "/workspace/semstreams-service",
+    "/workspace/semstreams-component",
+    "/workspace/semstreams-agentic-loop",
+    "/workspace/semsource-source-manifest",
+    "/workspace/semsource-cli",
+    "/workspace/semsource-ui"
+  ],
+  "graph": {
+    "embedder_type": "bm25",
+    "index_workers": 4,
+    "coalesce_ms": 200
+  }
+}

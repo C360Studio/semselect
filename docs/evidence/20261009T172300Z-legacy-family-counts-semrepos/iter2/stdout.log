@@ -1,0 +1,33 @@
+2026-10-09T17:26:56Z iteration iter2: semsource 4093d3ce421371f4a99d7168e372552899bf6795
+semselect-service: 4 files, code=True docs=True unmatched=[]
+semselect-docs: 18 files, code=False docs=True unmatched=[]
+semengine-natsclient: 8 files, code=True docs=True unmatched=[]
+semengine-message: 16 files, code=True docs=False unmatched=[]
+semstreams-graph-clustering: 8 files, code=True docs=True unmatched=[]
+semstreams-rule: 16 files, code=True docs=False unmatched=[]
+semstreams-service: 25 files, code=True docs=False unmatched=[]
+semstreams-component: 20 files, code=True docs=False unmatched=[]
+semstreams-agentic-loop: 3 files, code=True docs=False unmatched=[]
+semsource-source-manifest: 15 files, code=True docs=True unmatched=[]
+semsource-cli: 17 files, code=True docs=False unmatched=[]
+semsource-ui: 16 files, code=True docs=False unmatched=[]
+dupcheck: 166 files hashed (46 development, 120 held-out); 0 identical, 18 same-basename pairs, max ratio 0.2081; flagged []
+2026-10-09T17:27:03Z image sha256:08801743b4eeb774ee5818d23c238757cbb25bccc039766f85939a8a2d0b394f
+2026-10-09T17:27:08Z semsource healthy after 12s
+2026-10-09T17:27:08Z status {"phase":"ready","total_entities":2179,"index_ready":true,"embedding_ready":true}
+2026-10-09T17:27:08Z ready after 0s from healthy
+2026-10-09T17:27:24Z entity keys: 2179, recheck after 15s: 2179
+semengine-message	111
+semengine-natsclient	226
+semselect-docs	242
+semselect-service	56
+semsource-cli	143
+semsource-source-manifest	223
+semsource-ui	206
+semstreams-agentic-loop	207
+semstreams-component	226
+semstreams-graph-clustering	175
+semstreams-rule	162
+semstreams-service	202
+2026-10-09T17:27:24Z iteration wall-clock 28s
+2026-10-09T17:27:24Z teardown complete (exit 0)

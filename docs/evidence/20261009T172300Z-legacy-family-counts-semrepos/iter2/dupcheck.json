@@ -1,0 +1,172 @@
+{
+  "rule": "identical SHA-256, or same basename with more than 80% of the longer file's lines unchanged by diff",
+  "files_hashed": 166,
+  "development_files": 46,
+  "held_out_files": 120,
+  "identical": [],
+  "same_basename_pairs": [
+    {
+      "basename": "doc.go",
+      "development": "semengine-message/message/doc.go",
+      "held_out": "semstreams-agentic-loop/processor/agentic-loop/doc.go",
+      "development_lines": 484,
+      "held_out_lines": 543,
+      "unchanged_lines": 113,
+      "ratio": 0.2081
+    },
+    {
+      "basename": "doc.go",
+      "development": "semengine-natsclient/natsclient/doc.go",
+      "held_out": "semstreams-agentic-loop/processor/agentic-loop/doc.go",
+      "development_lines": 524,
+      "held_out_lines": 543,
+      "unchanged_lines": 112,
+      "ratio": 0.2063
+    },
+    {
+      "basename": "README.md",
+      "development": "semengine-natsclient/natsclient/README.md",
+      "held_out": "semsource-source-manifest/configs/tiers/README.md",
+      "development_lines": 376,
+      "held_out_lines": 296,
+      "unchanged_lines": 61,
+      "ratio": 0.1622
+    },
+    {
+      "basename": "doc.go",
+      "development": "semengine-natsclient/natsclient/doc.go",
+      "held_out": "semstreams-service/service/doc.go",
+      "development_lines": 524,
+      "held_out_lines": 307,
+      "unchanged_lines": 84,
+      "ratio": 0.1603
+    },
+    {
+      "basename": "doc.go",
+      "development": "semengine-message/message/doc.go",
+      "held_out": "semstreams-service/service/doc.go",
+      "development_lines": 484,
+      "held_out_lines": 307,
+      "unchanged_lines": 75,
+      "ratio": 0.155
+    },
+    {
+      "basename": "README.md",
+      "development": "semengine-natsclient/natsclient/README.md",
+      "held_out": "semstreams-graph-clustering/processor/graph-clustering/README.md",
+      "development_lines": 376,
+      "held_out_lines": 250,
+      "unchanged_lines": 58,
+      "ratio": 0.1543
+    },
+    {
+      "basename": "README.md",
+      "development": "semselect-service/README.md",
+      "held_out": "semsource-source-manifest/configs/tiers/README.md",
+      "development_lines": 510,
+      "held_out_lines": 296,
+      "unchanged_lines": 60,
+      "ratio": 0.1176
+    },
+    {
+      "basename": "registry.go",
+      "development": "semengine-message/payloadregistry/registry.go",
+      "held_out": "semstreams-component/component/registry.go",
+      "development_lines": 446,
+      "held_out_lines": 1046,
+      "unchanged_lines": 117,
+      "ratio": 0.1119
+    },
+    {
+      "basename": "README.md",
+      "development": "semselect-service/README.md",
+      "held_out": "semstreams-graph-clustering/processor/graph-clustering/README.md",
+      "development_lines": 510,
+      "held_out_lines": 250,
+      "unchanged_lines": 53,
+      "ratio": 0.1039
+    },
+    {
+      "basename": "doc.go",
+      "development": "semengine-message/message/doc.go",
+      "held_out": "semstreams-rule/processor/rule/doc.go",
+      "development_lines": 484,
+      "held_out_lines": 142,
+      "unchanged_lines": 39,
+      "ratio": 0.0806
+    },
+    {
+      "basename": "doc.go",
+      "development": "semengine-natsclient/natsclient/doc.go",
+      "held_out": "semstreams-rule/processor/rule/doc.go",
+      "development_lines": 524,
+      "held_out_lines": 142,
+      "unchanged_lines": 41,
+      "ratio": 0.0782
+    },
+    {
+      "basename": "registry.go",
+      "development": "semengine-message/payloadregistry/registry.go",
+      "held_out": "semstreams-service/service/registry.go",
+      "development_lines": 446,
+      "held_out_lines": 72,
+      "unchanged_lines": 31,
+      "ratio": 0.0695
+    },
+    {
+      "basename": "doc.go",
+      "development": "semengine-message/message/doc.go",
+      "held_out": "semstreams-graph-clustering/processor/graph-clustering/doc.go",
+      "development_lines": 484,
+      "held_out_lines": 118,
+      "unchanged_lines": 29,
+      "ratio": 0.0599
+    },
+    {
+      "basename": "doc.go",
+      "development": "semengine-natsclient/natsclient/doc.go",
+      "held_out": "semstreams-graph-clustering/processor/graph-clustering/doc.go",
+      "development_lines": 524,
+      "held_out_lines": 118,
+      "unchanged_lines": 30,
+      "ratio": 0.0573
+    },
+    {
+      "basename": "heartbeat.go",
+      "development": "semengine-natsclient/natsclient/heartbeat.go",
+      "held_out": "semstreams-service/service/heartbeat.go",
+      "development_lines": 28,
+      "held_out_lines": 280,
+      "unchanged_lines": 8,
+      "ratio": 0.0286
+    },
+    {
+      "basename": "registry.go",
+      "development": "semengine-message/payloadregistry/registry.go",
+      "held_out": "semsource-cli/cli/registry.go",
+      "development_lines": 446,
+      "held_out_lines": 35,
+      "unchanged_lines": 12,
+      "ratio": 0.0269
+    },
+    {
+      "basename": "doc.go",
+      "development": "semengine-message/message/doc.go",
+      "held_out": "semstreams-component/component/doc.go",
+      "development_lines": 484,
+      "held_out_lines": 25,
+      "unchanged_lines": 4,
+      "ratio": 0.0083
+    },
+    {
+      "basename": "doc.go",
+      "development": "semengine-natsclient/natsclient/doc.go",
+      "held_out": "semstreams-component/component/doc.go",
+      "development_lines": 524,
+      "held_out_lines": 25,
+      "unchanged_lines": 4,
+      "ratio": 0.0076
+    }
+  ],
+  "flagged_development_files": []
+}
