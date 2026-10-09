@@ -16,6 +16,31 @@ refinement ask different questions and need their own measures of success.
 where adding this specialized service earns production adoption.** That is the
 current evidence, not a conclusion that bounded decisions have no graph use.
 
+## How to read the latency numbers
+
+Every latency **we measured** has the same shape: one request at a time, on
+one slot (`-np 1`, llama.cpp's working memory for one conversation). Kev
+requests pass through semselect's guard, which admits one inference and answers
+a second with HTTP 429. The Qwen runs called llama.cpp directly, but an
+evaluator sent them one at a time too. That is the shape of an interactive
+router for a small team: one person asks and one answer comes back.
+
+Background graph work asks a different question: how many decisions per second
+can the hardware finish, at acceptable quality? We have **not measured that**
+for either model on any runtime. Batching, several slots and concurrent clients
+were never run; two harnesses carry a two-client load check that was skipped
+when quality gates failed. The high-throughput case is the main pitch for
+decision models, and it is **unmeasured here**. A model that is slow one
+request at a time could still be the cheaper choice at volume, or the reverse.
+Nothing below settles it.
+The [pitch itself](#what-the-decision-model-pitch-claims-in-plain-language)
+is explained further down.
+
+A [bounded Metal throughput experiment](eval/throughput/README.md) is
+**designed, not run** (tracking issue
+[#3](https://github.com/C360Studio/semselect/issues/3)). It has no results yet.
+This page gets throughput numbers only after that experiment produces them.
+
 ## Qwen versus Kev: quality and latency
 
 **Kev was slower in our routing comparisons.** Recommending Qwen as a comparison
@@ -90,6 +115,70 @@ reason to choose a specialized backend. Native distributions and typed outputs
 are implemented capabilities; their presence alone does not establish better
 accuracy, calibrated confidence, or lower application cost.
 
+## What the decision-model pitch claims, in plain language
+
+A chat model answers by writing text one token at a time. A decision model
+writes no text. It reads the input once and reads out a probability for each
+option the caller supplied, such as `billing`, `technical` or `unknown`. The
+answer is a list of numbers over your options, which caller code can threshold
+or send to a fallback. "Jev-like" in this repository means that interface:
+bounded options, typed answers and an explicit way to abstain.
+
+Jev itself is a hosted model, so we cannot test it locally. The open
+[OpenJev 27B GGUF](https://huggingface.co/ggml-org/OpenJev-GGUF) is licensed
+CC BY-NC 4.0, which puts it outside this project's default candidate set.
+Kev is the open decision model we run. Our results say nothing about Jev's
+quality.
+
+The pitch's speed claims rest on three things:
+
+1. **No decode step.** Nothing is generated, so the cost is one pass over the
+   input.
+2. **One state, many cheap questions.** Read a document once, keep that state,
+   and each new question pays only for itself.
+3. **Batching on a datacenter GPU.** Many requests share each pass over the
+   weights.
+
+**Author-reported** speed figures for Kev-4B follow. None is measured here, and
+the Apple rows are an M5, not our M3 Pro.
+
+| Hardware | Setup | New state | Cached state |
+| --- | --- | --- | --- |
+| Apple M5, MLX bf16 | 5 questions, ~270-token state | 721 ms | 136 ms |
+| Apple M5, MLX bf16 | 3 questions, 8,192-token state | 6.6 s | 354 ms |
+| Apple M5, MLX bf16 | 3 questions, 65,000-token state | 84.5 s | 716 ms |
+| RTX PRO 6000 | one decision | 12 ms | not stated |
+| H100, bf16 | 64 concurrent clients | about 101 requests/s | not stated |
+
+Sources: the [Kev repository](https://github.com/jaredpalmer/kev) and
+[model card](https://huggingface.co/jaredpalmer/kev-4b) for the M5 and H100
+rows; the [llama.cpp announcement](https://huggingface.co/blog/ggml-org/decision-models-in-llamacpp)
+for the RTX PRO 6000 row.
+
+**Cached** means the state was already sent, so only the new questions are paid
+for. Those figures apply only when you ask more questions about a document you
+already sent. Each request in our measurements carried its own evidence; we
+never sent a document once and then asked follow-up questions against it, so
+the cached column describes a case we have not tested. The new-state column is
+the closer comparison with our numbers, and it is still a different machine,
+runtime and precision from our M3 Pro with Q4_K_M GGUF files.
+
+What we have tested of each claim:
+
+- **No decode step:** partly. On the same Qwen, one-token scoring cut median
+  inference latency by 28% against JSON (measured, [record](docs/validation-scoring.md)).
+  That is an output-format effect on an ordinary model, not Kev's native head.
+- **One state, many questions:** a serving gap, not a result. Qwen reused prompt
+  prefixes in 47/48 ticket rows while Kev reprocessed them, and Kev's three query
+  heads ran with zero cached starts in one slot. The
+  [runtime audit](docs/research-and-decision.md#closeout-review-2026-10-06)
+  names `-np 3 --kv-unified` as an untested optimization.
+- **Batching:** unmeasured here, on every runtime.
+
+Whether a decision model is worth using for your job is the question for the
+[selection guide](docs/when-to-use.md). This section only says what the pitch
+claims and which parts we have not tested.
+
 ## Community and graph refinement
 
 The next [designed evaluation](eval/community-refinement/README.md) asks whether
@@ -97,6 +186,11 @@ reviewing semantic virtual edges improves the resulting communities and retrieve
 evidence. It compares existing structural/tuned semantic clustering, a trained
 edge reviewer, Qwen and Kev. Background refinement gets its own cost budget;
 the query router's 250 ms target is not a universal semselect requirement.
+The pilot's serving profile and cost budget now depend on the
+[throughput experiment](eval/throughput/README.md), which has not run. Its
+review contract also gains a
+[per-entity bundle variant](eval/community-refinement/README.md#per-entity-bundle-variant),
+which asks several questions about one entity in a single request.
 
 SemEngine is the integration target, replacing SemStreams when ready. The
 **2026-10-08 source audit** found that its clustering and semantic-edge path was
@@ -115,14 +209,39 @@ arms, not additional supported service backends.
 CPU inference results are **Linux/ARM64 Docker on an M3 Pro**; Metal results are
 native on that laptop. Neither establishes AMD64 or CUDA performance. Native
 Choice, Score and Noul work, but Score/Noul have contract and smoke validation
-rather than workload-quality evidence. SGLang/MLX has a separate
-[compatibility record](docs/sglang-investigation.md), not a performance result.
+rather than workload-quality evidence. The serving-path table at the end of this
+section shows what has and has not been run on Apple Silicon.
 
 The [selection guide](docs/when-to-use.md) explains when to use code, a general
 model or a decision model. The linked validation reports preserve conditions and
 raw evidence; [results history](docs/results.md) and the
 [model-selection review](docs/research-and-decision.md#is-kev-our-best-open-source-choice)
 provide the earlier experiment and backend rationale.
+
+### Serving paths on Apple Silicon
+
+| Path | Model artifact | Status here |
+| --- | --- | --- |
+| llama.cpp native | Kev, Qwen GGUF Q4_K_M | **Measured**, serial only |
+| SGLang MLX | Qwen MLX 4-bit | **Probed**, one fixture; Kev not documented |
+| Kev's own MLX server | Kev bf16 | **Author-reported** only; not run here |
+
+- **llama.cpp native** produced every latency above. Each was one request at a
+  time; no throughput, batching or multi-slot run exists for either model.
+- **SGLang MLX** served Qwen3.5-4B (mlx-community 4-bit) for JSON chat,
+  `/v1/score` and `/v1/decisions` on this M3 Pro on 2026-10-05, after adding
+  `--disable-radix-cache`. That was one fixture and one running request, with
+  no throughput. See the [compatibility record](docs/sglang-investigation.md).
+  SGLang's [documentation](https://docs.sglang.io/docs/supported-models/decision_models)
+  names trained decision checkpoints (PPLX-Decider, Clef) that answer through
+  `/v1/systemone`, and mentions a `decision_config.json` for them. It does not
+  name Kev, and Kev ships no such file, so on the documentation SGLang does not
+  serve Kev. We have not tried loading it. SGLang can run Qwen direct scoring
+  through `/v1/decisions`.
+- **Kev's own MLX server** (`python -m kev.serve`) exposes `/v1/systemone` and
+  picks MLX in bf16 on Apple Silicon automatically, per the
+  [Kev model card](https://huggingface.co/jaredpalmer/kev-4b). Its numbers
+  appear only in the author-reported table above. We have not run it.
 
 ## Capabilities and target
 

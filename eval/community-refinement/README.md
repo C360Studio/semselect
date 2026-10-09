@@ -102,6 +102,28 @@ within a cycle. Keep all non-reviewed pairs unchanged. Candidate generation is
 frozen before labels or model results; this first experiment cannot discover a
 missing pair outside that candidate set.
 
+### Per-entity bundle variant
+
+The per-pair request above stays the baseline contract. The variant makes one
+entity's source passage the shared state. Each candidate neighbour of that
+entity becomes its own Choice question in the same request. The question names
+the neighbour and carries its bounded excerpt, kept within the existing
+512-byte candidate-description limit, and it uses the same `keep`, `suppress`
+and `defer` labels as the per-pair contract.
+
+The service profile allows 1 to 4 questions per request, so a bundle of more
+than four neighbours is split into several requests, and the split is recorded
+with the results. The pilot does not change the guard.
+
+The trade-off is packet size: a bundle packs one entity's passage and several
+neighbour excerpts into one request, which pushes against the 8,192-byte state
+limit where a per-pair request carries a single pair. A packet that does not fit
+follows the existing out-of-profile rule below. Because the questions in a
+bundle share one state, this is the shape where state reuse can show up on a
+runtime that offers it; a per-pair request leaves nothing to reuse. Whether it
+does is a question for the [throughput experiment](../throughput/README.md),
+which has not run.
+
 ## Corpus, labels and evidence freeze
 
 Start with 12 disjoint graph families: four development and eight held-out. Each
@@ -211,6 +233,11 @@ are not calibrated correctness probabilities. No prompt/model search after the
 freeze; the model/runtime revisions, quantization, SHA-256 and licenses stay at
 the existing locks.
 
+Runtimes use different artifacts: GGUF Q4_K_M on llama.cpp, MLX affine 4-bit on
+SGLang and bf16 on Kev's own MLX server. Compare throughput within a runtime
+first. Cross-runtime label agreement is a diagnostic, not a quality ranking,
+because the quantization differs along with the runtime.
+
 Select configurations using development graph outcomes: relative to **stock
 semantic LPA**, first require retaining every previously successful retrieval
 question and no decrease in macro positive co-membership;
@@ -278,6 +305,14 @@ Proposed **pilot screening thresholds**, to freeze before execution:
   makes zero new review calls. Name the largest size actually tested; smaller
   snapshots do not establish 250-entity capacity. These are pilot budgets, not
   production SLOs or the query router's subsecond latency target.
+- Name the real scale before the pilot: candidates per cycle and refresh cadence
+  on a representative SemSource graph. Required decisions per second equals
+  candidates divided by the cadence in seconds. Compare it with the selected
+  profile's measured decisions per second from the
+  [throughput experiment](../throughput/README.md). If the requirement exceeds
+  the measurement, the track is infeasible on this hardware, regardless of Kev
+  versus Qwen. For example (arithmetic only), 10,000 candidates refreshed hourly
+  need about 2.8 decisions per second; refreshed every five minutes, about 33.
 
 Passing those gates establishes a reason for a larger confirmation, not production
 adoption. Kev earns preference over Qwen only if it also passes the graph-value
@@ -329,8 +364,12 @@ Execution is staged:
 2. **Code and trained baselines:** finish development selection and a readiness
    check. If representative development graphs show no shortfall, publish that
    result and do not start model shopping.
-3. **Primary Metal quality pilot:** serial Qwen and Kev runs on the same M3 Pro;
-   one slot, four threads, context 4,096, batch/microbatch 512, no prompt cache.
+3. **Primary Metal quality pilot:** Qwen and Kev runs on the same M3 Pro, one
+   model server at a time, using the serving profile selected by the
+   [throughput experiment](../throughput/README.md). Until that result exists,
+   the existing one-slot service profile (see the
+   [README](../../README.md#configuration-and-operational-bounds)) is a
+   placeholder and the cost gate is provisional.
    Account for Qwen's direct chat path and Kev's guard. Verify actual cache/token
    behavior in logs. Cold start and warmup remain separate from request timing.
 4. **CPU/Docker feasibility:** at most six fixed development packets per model,

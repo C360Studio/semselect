@@ -1,10 +1,86 @@
 # Research scope and backend decision
 
 Initial decision checked 2026-10-05; initial routing/evidence phase closed out
-2026-10-06; community/graph scope added 2026-10-08. Initial deployment target:
+2026-10-06; community/graph scope added 2026-10-08; throughput scope added
+2026-10-09. Initial deployment target:
 CPU-only Linux container. This document separates source review from the
 [local validation record](validation.md); numbers attributed to upstream are not
 local measurements.
+
+## Throughput and serving scope 2026-10-09
+
+**The README read as a speed verdict it had not earned.** The owner asked
+(tracking issue [#3](https://github.com/C360Studio/semselect/issues/3)) for the
+hype around Jev-like decision models to be demystified for the team and the
+wider community, with a plain-language account of why we did what we did. The
+gap was in our own framing. Every latency we measured is one request at a time,
+on one slot (`-np 1`), and Kev requests pass through a guard that admits one
+inference and returns 429 to a second. That is the right yardstick for an
+interactive router and the wrong one for background graph work, where the
+question is decisions per second. Throughput, batching and multi-slot serving
+are unmeasured for both models on every runtime. The
+[README](../README.md#how-to-read-the-latency-numbers) and the
+[selection guide](when-to-use.md#why-per-request-latency-is-the-wrong-yardstick-for-background-work)
+now say so, and the README explains
+[what the decision-model pitch claims](../README.md#what-the-decision-model-pitch-claims-in-plain-language).
+
+What is measured, probed, designed and only reported by others:
+
+- **Measured here:** serial latency and quality on the ticket, query and
+  source-evidence workloads, as recorded in the closeout below. Qwen reused
+  prompt prefixes in 47/48 ticket rows while Kev reprocessed them; Kev's query
+  heads ran with zero cached starts in one slot. `-np 3 --kv-unified` is named
+  in the closeout as an untested optimization.
+- **Probed here, 2026-10-05:** SGLang's MLX backend served Qwen3.5-4B
+  (mlx-community 4-bit) for JSON chat, `/v1/score` and `/v1/decisions` on this
+  M3 Pro after `--disable-radix-cache`. One fixture, one running request, no
+  throughput. The [compatibility record](sglang-investigation.md) keeps it
+  apart from any performance claim. The venv and model are still on disk.
+- **Designed, not run:** the [throughput experiment](../eval/throughput/README.md).
+  It compares three serving paths on this laptop, reusing the 24-case
+  source-evidence pilot (independent decisions) and the 32-case query-routing
+  task (three questions over one shared state), at 1, 4 and 8 slots, with Kev
+  head grouping and unified KV cells. SGLang MLX cells cover Qwen JSON,
+  `/v1/decisions` and `/v1/score`; Kev's own MLX server includes a cached-state
+  cell. It has no results.
+- **Author-reported, not ours:** the figures in the README's
+  [pitch table](../README.md#what-the-decision-model-pitch-claims-in-plain-language),
+  and the SGLang and openjev-sglang statements below.
+
+**SGLang does not document Kev support.** SGLang's
+[decision-model documentation](https://docs.sglang.io/docs/supported-models/decision_models),
+reviewed 2026-10-09, describes two routes. `/v1/decisions` scores ordinary chat
+models by answer-token probabilities, with one prefill per question and the
+questions scored together in one batch. `/v1/systemone` accepts the System One
+request shape for those models and for trained decision checkpoints, which
+answer only through it; the page names PPLX-Decider-v1-27B, PPLX-Decider-v1.1-27B
+and Clef, and mentions a `decision_config.json` for the decision checkpoints.
+Kev is not named, and its [model card](https://huggingface.co/jaredpalmer/kev-4b)
+file list (adapter, `head.pt`, tokenizer and training records) has no such file.
+On the documentation, SGLang can serve Qwen direct scoring but not Kev. This is
+a reading of the documentation; we have not tried to load Kev in SGLang. The
+[openjev-sglang](https://github.com/ekzhang/openjev-sglang) experiment scored
+options on an ordinary model (prefill plus a first-token readout, Qwen3.6-35B-A3B
+on a B200 through Modal). It is archived, and its notice recommends SGLang's
+native decision endpoint; it does not mention Apple Silicon. SGLang's
+[Apple Metal page](https://docs.sglang.io/docs/hardware-platforms/apple_metal)
+documents overlap scheduling through MLX async evaluation, and does not
+describe batching limits or prefix caching on MLX.
+
+**Kev's own server is the MLX path for Kev.** The
+[Kev repository](https://github.com/jaredpalmer/kev) ships `python -m kev.serve`,
+which exposes `/v1/systemone` and selects MLX automatically on Apple Silicon
+(bf16). The artifact is a LoRA adapter plus a pointer head with fitted
+temperature 2.41, under Apache-2.0. Its authors report Apple M5 and H100 numbers
+(see the README table); we have not run it, and an M5 with bf16 weights is a
+different machine and precision from our M3 Pro with Q4_K_M files.
+
+**A "neither runtime batches usefully on Metal" result is a valid outcome.** The
+experiment is isolated evaluation work. It changes neither the default runtime
+profile nor the guard, adds no provider framework and no second scoring engine,
+and compares throughput within a runtime first, because the artifacts differ
+(GGUF Q4_K_M, MLX 4-bit, bf16). Such a result would be written up as a finding
+about this hardware, in the same way as a favorable one.
 
 ## Community and graph scope 2026-10-08
 

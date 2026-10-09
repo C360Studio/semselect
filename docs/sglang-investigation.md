@@ -14,6 +14,14 @@ remain separate. Shutdown was bounded but not graceful. This is endpoint
 compatibility, not a SGLang quality, calibration or performance result. The matched
 SGLang workload comparison below was not executed.
 
+**Update, 2026-10-09:** a bounded Metal throughput rerun is **designed, not
+run**; see the [throughput protocol](../eval/throughput/README.md) and issue
+[#3](https://github.com/C360Studio/semselect/issues/3). It reuses the pinned venv
+and the Qwen3.5-4B MLX 4-bit model from the probe above, both still on disk, and
+asks how many decisions per second SGLang's JSON, `/v1/decisions` and `/v1/score`
+paths complete. It is the one performance check taken up since the closeout; the
+rest of the deferral stands.
+
 The [real-source answerability pilot](../eval/answerability/heldout/README.md) showed
 a limited aggregate quality advantage for Kev. The subsequent
 [answer-synthesis replay](../eval/synthesis/README.md) found identical gate decisions
@@ -22,6 +30,32 @@ and no Kev advantage on captured summaries, all lacking a complete answer. The
 Kev accuracy advantage over Qwen, with costly CPU requests. The research phase
 closes without a production adoption case. Return to this serving comparison only
 when a workload result makes runtime cost or scoring mechanics a concrete blocker.
+
+## What changed upstream by 2026-10-09
+
+Reviewed 2026-10-09. These are the projects' own statements, not our
+measurements.
+
+- **openjev-sglang is archived.** It was an early experiment reproducing Jev by
+  scoring options on an ordinary model (prefill plus a first-token readout,
+  Qwen3.6-35B-A3B on a B200 through Modal). Its
+  [notice](https://github.com/ekzhang/openjev-sglang) recommends SGLang's
+  native decision endpoint instead. It does not mention Apple Silicon.
+- **SGLang's native support covers two kinds of model.** `/v1/decisions` scores
+  ordinary chat models. `/v1/systemone` accepts the System One request shape for
+  those models and for trained decision checkpoints, which the
+  [documentation](https://docs.sglang.io/docs/supported-models/decision_models)
+  names (PPLX-Decider-v1-27B, PPLX-Decider-v1.1-27B, Clef) and ties to a
+  `decision_config.json`.
+- **Kev is not among them.** It is not named and ships no `decision_config.json`,
+  so on the documentation SGLang does not serve Kev. It can serve Qwen direct
+  scoring, as the one-fixture probe above shows. We have not tried loading Kev.
+- **Kev's own server is the MLX path for Kev.** `python -m kev.serve` exposes
+  `/v1/systemone` and selects MLX in bf16 on Apple Silicon automatically, per the
+  [Kev repository](https://github.com/jaredpalmer/kev). We have not run it.
+- **SGLang's [Apple Metal page](https://docs.sglang.io/docs/hardware-platforms/apple_metal)**
+  describes overlap scheduling through MLX async evaluation. It does not
+  describe batching limits or prefix caching on MLX.
 
 ## Question and architecture boundary
 
@@ -80,6 +114,9 @@ The old Metal Q4_K_M results remain a deployment reference. Comparing them with
 NVIDIA/BF16 would not isolate the benefit of SGLang or direct scoring. Do not swap
 to a much larger Qwen model and attribute any gain solely to the serving engine.
 Kev can be a later third-model comparison once the same-Qwen question is answered.
+SGLang's documentation does not cover Kev (see
+[what changed upstream](#what-changed-upstream-by-2026-10-09)), so that
+comparison would need Kev's own server.
 
 ## Small, staged workload
 

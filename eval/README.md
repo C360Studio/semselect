@@ -6,7 +6,16 @@ semantic edges with bounded review, measuring resulting communities, retrieved
 evidence and background-processing cost. The required SemEngine port and fixture
 freeze precede any run; there is no runnable driver or quality result yet.
 
+The [throughput track](throughput/README.md) is also **designed, not yet run**
+(issue [#3](https://github.com/C360Studio/semselect/issues/3)). It asks how many
+decisions per second this M3 Pro completes, which a one-request-at-a-time
+latency cannot answer. It covers three serving paths: llama.cpp (Kev and Qwen),
+SGLang's MLX backend (Qwen) and Kev's own MLX server. It reuses the 24-case
+source-evidence pilot (independent decisions) and the 32-case query-routing task
+(three questions over one shared state), at 1, 4 and 8 slots.
+
 The routing and evidence evaluations below remain separate measured workloads.
+Their latencies are one request at a time; none measured throughput.
 
 For the current **query-classification** decision, start with the
 [120-case comparison](../docs/results.md#2026-10-07--query-classification-decision).
