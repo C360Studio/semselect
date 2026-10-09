@@ -109,7 +109,8 @@ class CellTests(unittest.TestCase):
     # Protocol amendment 1 (2026-10-09): warmup errors are recorded but never stop a cell.
     def test_warmup_errors_do_not_stop_the_cell(self):
         result, lines = run_scripted('eeeoeeo', 7)  # five warmup errors, three of them consecutive
-        self.assertEqual((result['status'], result['stop_reason'], result['protocol_version']), ('complete', None, 2))
+        self.assertEqual((result['status'], result['stop_reason'], result['protocol_version']), ('complete', None, 3))
+        self.assertEqual((result['profile']['n_batch'], result['profile']['n_ubatch']), (512, 512))
         self.assertEqual(result['warmup'], {'planned': 7, 'attempted': 7, 'ok': 2, 'errors': 5})
         self.assertEqual([r['status'] for r in lines if r['phase'] == 'warmup'].count('error'), 5)
         self.assertEqual((result['planned'], result['valid'], result['not_run'], result['errors']['total']), (14, 14, 0, 0))
@@ -136,8 +137,8 @@ class CellTests(unittest.TestCase):
 
 class SelectionTests(unittest.TestCase):
     def test_cells_are_filtered_by_model_workload_and_id(self):
-        self.assertEqual(len(run.select_cells('kev', ['w1', 'w2'], [])), 8)
-        self.assertEqual(len(run.select_cells('qwen', ['w1', 'w2'], [])), 9)
+        self.assertEqual(len(run.select_cells('kev', ['w1', 'w2'], [])), 9)
+        self.assertEqual(len(run.select_cells('qwen', ['w1', 'w2'], [])), 10)
         self.assertEqual([c.id for c in run.select_cells('kev', ['w2'], ['w2-kev-4x4-kvu'])], ['w2-kev-4x4-kvu'])
         with self.assertRaisesRegex(ValueError, 'unknown cells'):
             run.select_cells('qwen', ['w2'], ['w2-kev-1x1'])
@@ -190,7 +191,8 @@ class ValidateTests(unittest.TestCase):
         stdout = io.StringIO()
         with contextlib.redirect_stdout(stdout):
             self.assertEqual(run.main(['--validate', '--model', 'kev']), 0)
-        self.assertIn('kev: 8 cells, 716 requests (292 warmup, 424 measured)', stdout.getvalue())
+        self.assertIn('kev: 9 cells, 848 requests (336 warmup, 512 measured)', stdout.getvalue())
+        self.assertIn('w1-kev-8x8-b4096             8       8   no  32768     4096   4096    512', stdout.getvalue())
 
 
 if __name__ == '__main__':

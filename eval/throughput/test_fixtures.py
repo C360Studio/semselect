@@ -114,9 +114,18 @@ class PlanTests(unittest.TestCase):
         self.assertEqual([(c.id, c.n_ctx_total, c.n_ctx_per_slot) for c in fixtures.CELLS if c.workload == 'w2' and c.arm == 'kev'],
                          [('w2-kev-1x1', 4096, 4096), ('w2-kev-4x1', 16384, 4096), ('w2-kev-4x4', 16384, 4096),
                           ('w2-kev-4x4-kvu', 16384, 16384), ('w2-kev-8x8', 32768, 4096)])
-        self.assertEqual(len(fixtures.CELLS), 17)
+        self.assertEqual(len(fixtures.CELLS), 19)
         self.assertEqual({c.id for c in fixtures.CELLS if c.workload == 'w1'},
-                         {f'w1-{arm}-{n}x{n}' for arm in ('kev', 'qwen_json', 'qwen_score') for n in (1, 4, 8)})
+                         {f'w1-{arm}-{n}x{n}' for arm in ('kev', 'qwen_json', 'qwen_score') for n in (1, 4, 8)}
+                         | {'w1-kev-8x8-b4096', 'w1-qwen_json-8x8-b4096'})
+
+    def test_batch_cells_change_only_the_logical_batch(self):
+        # Amendment 2: -b 4096 with -ub 512, -c 32768 and separate per-slot KV, as in the 8x8 cells.
+        batch = [c for c in fixtures.CELLS if c.n_batch != fixtures.BATCH]
+        self.assertEqual([(c.id, c.slots, c.concurrency, c.kv_unified, c.n_ctx_total, c.n_batch, c.n_ubatch) for c in batch],
+                         [('w1-kev-8x8-b4096', 8, 8, False, 32768, 4096, 512),
+                          ('w1-qwen_json-8x8-b4096', 8, 8, False, 32768, 4096, 512)])
+        self.assertTrue(all((c.n_batch, c.n_ubatch) == (512, 512) for c in fixtures.CELLS if c not in batch))
 
 
 def native(choice, candidates):

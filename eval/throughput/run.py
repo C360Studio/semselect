@@ -36,17 +36,25 @@ SOURCES = ('eval/throughput/fixtures.py', 'eval/throughput/runner.py', 'eval/thr
            'eval/query-routing/experiment.py', 'eval/query-routing/runner.py')
 PROTOCOL = {
     # Version 1 (no 'version' key in the summary) is the protocol as frozen; bump on every amendment.
-    'version': 2,
+    'version': 3,
     'amendments': ['1, 2026-10-09: warmup errors are recorded but no longer count toward the consecutive-error '
-                   'stop; the count starts at zero when the measured passes begin. See eval/throughput/README.md.'],
+                   'stop; the count starts at zero when the measured passes begin. See eval/throughput/README.md.',
+                   '2, 2026-10-09: adds cells w1-kev-8x8-b4096 and w1-qwen_json-8x8-b4096 (-b 4096 -ub 512, -c 32768, '
+                   'no unified KV) to separate slot starvation under a 512-token logical batch from saturated '
+                   'compute; profiles record n_batch and n_ubatch, verified from the startup log. Added before any '
+                   'Qwen cell ran. The pre-declared readings are unchanged and use the -b 512 cells; the b4096 cells '
+                   'are a diagnostic. On the pinned build a decision model runs in embedding mode, which sets '
+                   'n_batch = n_ubatch (common/common.cpp:1261-1266), so the startup check is expected to refuse the '
+                   'Kev b4096 cell rather than measure it at n_batch 512. See eval/throughput/README.md.'],
     'question': 'Does any Metal serving path deliver materially more decisions per second than the one-slot '
                 'serial profile at unchanged labels, and does Kev gain more than Qwen from slots or shared state?',
     'yardstick': 'decisions_per_s = valid questions answered / measured elapsed seconds (warmup excluded); '
                  'W2 Kev counts three heads per request and W2 Qwen JSON three fields.',
     'guard': 'Bypassed. Clients call llama-server directly, as the Qwen baselines always did. The Go guard admits '
              'one inference and returns 429 otherwise; it forwards Kev bodies unchanged, so bytes are identical.',
-    'runtime': 'scripts/metal.py launch flags except -np N, -c 4096*N and -kvu in the unified-KV cell; port is '
-               'compare_scoring.PORT so prepare_score tokenizes against the cell runtime. Fresh runtime per cell.',
+    'runtime': 'scripts/metal.py launch flags except -np N, -c 4096*N, -kvu in the unified-KV cell and -b 4096 in '
+               'the two batch cells; port is compare_scoring.PORT so prepare_score tokenizes against the cell '
+               'runtime. Fresh runtime per cell.',
     'cache': 'Frozen requests keep their cache fields: W1 Qwen JSON cache_prompt=true, W1 one-token scoring '
              'cache_prompt=false, W2 Qwen JSON cache_prompt=false, Kev uses the server default. Measured passes '
              'repeat warmup prompts, so the RAM prompt cache can serve repeats; processed/cached counts are recorded.',
@@ -96,6 +104,8 @@ def run_cell(cell, cell_dir, jobs, reference, make_runtime, deadline, finalize=N
                           'timeout_s': runner.TIMEOUT_SECONDS},
               'reference': reference, 'protocol_version': PROTOCOL['version'], 'started_at': now(),
               'status': 'running'}
+    if hasattr(cell, 'n_batch'):  # llama.cpp cells; the sibling runners' cells have no logical batch flag
+        result['profile'].update(n_batch=cell.n_batch, n_ubatch=cell.n_ubatch)
     state = {'consecutive_errors': 0, 'stop_reason': None}
     phases = {'warmup': {}, 'measured': {}}
     metrics = {}
@@ -279,7 +289,8 @@ def validate(model, workloads, ids):
                   f'qwen_json {len(built["qwen_json"])}/{fixtures.W2_CASES}']
     lines.append('Locks: ' + ', '.join(f'{fixtures.LOCKS[m].name} sha256 {inputs["lock_sha256"][m]}' for m in ('kev', 'qwen'))
                  + f'; runtime revision {metal.REVISION} matches scripts/metal.py')
-    header = f'{"cell":<22}{"slots":>6}{"clients":>8}{"kvu":>5}{"n_ctx":>7}{"per-slot":>9}{"warmup":>8}{"measured":>9}{"questions":>10}'
+    header = (f'{"cell":<24}{"slots":>6}{"clients":>8}{"kvu":>5}{"n_ctx":>7}{"per-slot":>9}{"batch":>7}{"ubatch":>7}'
+              f'{"warmup":>8}{"measured":>9}{"questions":>10}')
     lines += ['', header]
     totals = {}
     for cell in cells:
@@ -289,8 +300,9 @@ def validate(model, workloads, ids):
         total = totals.setdefault(cell.model, {'cells': 0, 'warmup': 0, 'measured': 0, 'questions': 0})
         for key, value in (('cells', 1), ('warmup', len(jobs)), ('measured', measured), ('questions', questions)):
             total[key] += value
-        lines.append(f'{cell.id:<22}{cell.slots:>6}{cell.concurrency:>8}{"yes" if cell.kv_unified else "no":>5}'
-                     f'{cell.n_ctx_total:>7}{cell.n_ctx_per_slot:>9}{len(jobs):>8}{measured:>9}{questions:>10}')
+        lines.append(f'{cell.id:<24}{cell.slots:>6}{cell.concurrency:>8}{"yes" if cell.kv_unified else "no":>5}'
+                     f'{cell.n_ctx_total:>7}{cell.n_ctx_per_slot:>9}{cell.n_batch:>7}{cell.n_ubatch:>7}'
+                     f'{len(jobs):>8}{measured:>9}{questions:>10}')
     lines.append('')
     for model, t in totals.items():
         lines.append(f'{model}: {t["cells"]} cells, {t["warmup"] + t["measured"]} requests ({t["warmup"]} warmup, '
@@ -303,7 +315,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--validate', action='store_true', help='Verify inputs and print the plan offline; no inference')
     parser.add_argument('--runtime', choices=['llamacpp'], default='llamacpp',
-                        help='Serving runtime; SGLang MLX and Kev MLX runners are not implemented')
+                        help='Serving runtime; SGLang MLX and Kev MLX have their own CLIs, run_sglang.py and run_kevmlx.py')
     parser.add_argument('--model', choices=['kev', 'qwen'])
     parser.add_argument('--workload', nargs='+', choices=['w1', 'w2'], default=['w1', 'w2'],
                         help='Run both in one invocation so the per-model budget covers them')

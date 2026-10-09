@@ -29,15 +29,17 @@ class CommandTests(unittest.TestCase):
         self.assertEqual(ours[0], str(metal.SERVER))
         self.assertEqual(ours[ours.index('--port') + 1], str(llamacpp.PORT))
 
-    def test_only_slots_context_and_unified_kv_change(self):
+    def test_only_slots_context_unified_kv_and_logical_batch_change(self):
         one = llamacpp.command(LOCK, 1, False)
-        for slots, unified in ((4, False), (4, True), (8, False)):
-            other = llamacpp.command(LOCK, slots, unified)
-            self.assertEqual(other[:len(one)][one.index('-c') + 1], str(4096 * slots))
-            self.assertEqual(other[:len(one)][one.index('-np') + 1], str(slots))
-            changed = [i for i, (a, b) in enumerate(zip(one, other)) if a != b]
-            self.assertEqual(changed, [one.index('-c') + 1, one.index('-np') + 1])
-            self.assertEqual(other[len(one):], ['-kvu'] if unified else [])
+        for cell in fixtures.CELLS:
+            other = llamacpp.command(LOCK, cell.slots, cell.kv_unified, n_batch=cell.n_batch)
+            planned = {one.index('-c') + 1: str(4096 * cell.slots), one.index('-b') + 1: str(cell.n_batch),
+                       one.index('-np') + 1: str(cell.slots)}
+            changed = {i: b for i, (a, b) in enumerate(zip(one, other)) if a != b}
+            self.assertEqual(changed, {i: value for i, value in planned.items() if one[i] != value}, cell.id)
+            self.assertEqual(other[len(one):], ['-kvu'] if cell.kv_unified else [], cell.id)
+        self.assertEqual(llamacpp.command(LOCK, 8, False, n_batch=4096)[one.index('-ub') - 1:one.index('-ub') + 2],
+                         ['4096', '-ub', '512'])
 
 
 class StartupTests(unittest.TestCase):
@@ -54,12 +56,27 @@ class StartupTests(unittest.TestCase):
     def test_unified_kv_slot_addresses_the_whole_pool(self):
         log = '\n'.join([
             '0.01 I llama_context: n_seq_max             = 4', '0.01 I llama_context: n_ctx                 = 16384',
-            '0.01 I llama_context: n_ctx_seq             = 16384', '0.01 I llama_context: kv_unified            = true',
+            '0.01 I llama_context: n_ctx_seq             = 16384', '0.01 I llama_context: n_batch               = 512',
+            '0.01 I llama_context: n_ubatch              = 512', '0.01 I llama_context: kv_unified            = true',
             "0.01 I srv    load_model: initializing, n_slots = 4, n_ctx_slot = 16384, kv_unified = 'true'"])
         found = llamacpp.parse_startup(log)
         llamacpp.check_startup(found, fixtures.Cell('w2', 'kev', 4, 4, True))
         with self.assertRaisesRegex(RuntimeError, 'n_ctx_slot'):
             llamacpp.check_startup(found, fixtures.Cell('w2', 'kev', 4, 4))
+
+    def test_lowered_logical_batch_is_refused(self):
+        # A decision model runs in embedding mode, which sets n_batch = n_ubatch (common/common.cpp:1261-1266):
+        # -b 4096 -ub 512 then starts with n_batch 512, which must not be measured as the b4096 cell.
+        def log(n_batch):
+            return '\n'.join([
+                '0.01 I llama_context: n_seq_max             = 8', '0.01 I llama_context: n_ctx                 = 32768',
+                f'0.01 I llama_context: n_batch               = {n_batch}', '0.01 I llama_context: n_ubatch              = 512',
+                '0.01 I llama_context: kv_unified            = false',
+                "0.01 I srv    load_model: initializing, n_slots = 8, n_ctx_slot = 4096, kv_unified = 'false'"])
+        cell = next(c for c in fixtures.CELLS if c.id == 'w1-kev-8x8-b4096')
+        llamacpp.check_startup(llamacpp.parse_startup(log(4096)), cell)
+        with self.assertRaisesRegex(RuntimeError, r"'n_batch': \(512, 4096\)"):
+            llamacpp.check_startup(llamacpp.parse_startup(log(512)), cell)
 
 
 class MetricsTests(unittest.TestCase):

@@ -87,6 +87,7 @@ this protocol's own 1×1 cell, never against 100% agreement.
 | `w2-kev-4x4-kvu` | 4 × 4, `-kvu` | The same with a unified KV cache: copying the shared prefix becomes bookkeeping instead of a buffer copy. |
 | `w2-kev-8x8` | 8 × 8 | Two Kev requests fit (six of eight slots); the rest wait. |
 | `w2-qwen_json-1x1`, `-4x4`, `-8x8` | as named | Qwen's compound answer has no head grouping; slots can only add batching across requests. |
+| `w1-kev-8x8-b4096`, `w1-qwen_json-8x8-b4096` | 8 × 8, `-b 4096 -ub 512` | **Diagnostic, added by [Amendment 2](#amendment-2-2026-10-09-batch-size-cells).** The 8×8 cell with a logical batch large enough for every slot's prompt and unchanged per-step compute: slot starvation under a 512-token batch, or compute already saturated? Not used in the readings. The Kev cell is expected to be refused at startup on the pinned build. |
 
 Clients are a `ThreadPoolExecutor` with C workers that keep up to C requests in
 flight. Warmup is drained before the measured clock starts; measured passes run
@@ -95,7 +96,8 @@ as one queue. Each cell gets a fresh runtime, so no cell inherits another's cach
 ## Runtime profile and slot/context semantics
 
 The launch command is `scripts/metal.py`'s, flag for flag, except `-np N`,
-`-c 4096×N`, and `-kvu` in the unified-KV cell only. A test parses `metal.py` and
+`-c 4096×N`, `-kvu` in the unified-KV cell only, and `-b 4096` (with `-ub 512`
+unchanged) in the two Amendment 2 batch cells only. A test parses `metal.py` and
 fails if the shared flags drift. The runtime listens on `compare_scoring.PORT`
 (18086) rather than 8085 so that `prepare_score` tokenizes against the cell's
 runtime; the port does not affect inference. Before launch the harness verifies
@@ -131,13 +133,16 @@ every cited file was checked byte-for-byte against the checksummed archive
   With the RAM prompt cache on, unified KV also clears idle slots when a new task
   starts ([`server-context.cpp:1800-1806`][idle-clear], [`2651-2654`][idle-save]).
 - The runtime prints its actual layout:
-  `llama_context: n_seq_max / n_ctx / n_ctx_seq / kv_unified`
+  `llama_context: n_seq_max / n_ctx / n_ctx_seq / n_batch / n_ubatch / kv_unified`
   ([`src/llama-context.cpp:310-317`][ctx-log]) and
   `srv load_model: initializing, n_slots = N, n_ctx_slot = M, kv_unified = '…'`
   ([`server-context.cpp:1383-1384`][slot-log]). The harness parses these at
   startup, refuses to measure a cell whose layout differs from its plan, and
   records them (`profile.n_ctx_per_slot_observed`, `runtime.startup`, plus the
-  KV, recurrent-state and compute buffer sizes). The committed serial Kev log
+  KV, recurrent-state and compute buffer sizes). From protocol version 3 the
+  check includes `n_batch` and `n_ubatch`, and the profile records the planned
+  `n_batch` and `n_ubatch`; llama.cpp can lower `n_batch` without failing
+  (see Amendment 2). The committed serial Kev log
   shows `n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'`.
 
 ### Head grouping and prefix copy: what to look for in `runtime.log`
@@ -209,8 +214,10 @@ reviewed guard change; this screen does not make or justify one.
   `not_run` with `stop_reason: budget`.
 - Every planned measured request appears exactly once in `journal.jsonl` as
   `ok`, `invalid`, `error` or `not_run`. Denominators never shrink.
-- Planned load from `--validate`: Kev 8 cells, 716 requests (424 measured);
-  Qwen 9 cells, 984 requests (624 measured).
+- Planned load from `--validate` (protocol version 3): Kev 9 cells, 848
+  requests (512 measured); Qwen 10 cells, 1,116 requests (712 measured). Before
+  Amendment 2: Kev 8 cells, 716 requests (424 measured); Qwen 9 cells, 984
+  requests (624 measured).
 
 ### Amendment 1, 2026-10-09: warmup errors no longer trigger the stop
 
@@ -259,6 +266,97 @@ protocol version for each run. Summaries written before the amendment have no
 version field and are reported as version 1. Their copied `source/` files and
 the `source_sha256` entries for `runner.py`, `run.py` and `report.py` also differ.
 
+### Amendment 2, 2026-10-09: batch-size cells
+
+**Observed.** In run `20261009T132345.224681Z-llamacpp-kev` (protocol version 1)
+every cell used `-b 512 -ub 512`. At 8 slots llama.cpp filled each 512-token
+batch from the lowest-numbered slots first: slots 4–7 processed no prompt
+tokens in 33 s while slots 0–2 served every completed request, so the first
+wave timed out (slot starvation). At 4 slots the aggregate prompt rate did not
+move: 512 prompt tokens/s in `w1-kev-1x1` and 500 in `w1-kev-4x4` (`/metrics`
+over measured passes, 0 cached tokens in both), with 3.24 busy slots per decode
+at 4 slots. Concurrency added queueing, not throughput. A W1 Kev prompt averages
+about 544 tokens (47,908 over 88 measured requests in `w1-kev-1x1`), more than one
+512-token batch.
+
+**What the pinned source does** (revision `6c59c400`; every file cited here was
+checked byte-for-byte against the checksummed archive):
+
+- `-b` is the logical batch: the most tokens one server update gathers across
+  slots. `-ub` is the physical batch, the most tokens one compute step
+  evaluates. `n_batch` is capped at `n_ctx` for causal models, and `n_ubatch` is
+  lowered to `n_batch` when larger ([`src/llama-context.cpp:247-250`][batch-clamp]).
+  So `n_batch ≥ n_ubatch` always holds, by clamping, not by an error. Both cells
+  here have 4,096 ≥ 512 and 4,096 ≤ `n_ctx` 32,768.
+- Each update first adds one sampled token per generating slot
+  ([`server-context.cpp:3309-3312`][gen-first]), then walks the slots in index
+  order ([`2935-2945`][slot-order]) and skips every remaining slot once the batch
+  holds `n_batch` tokens ([`3321-3328`][batch-fill]). Within a slot, prompt tokens
+  are added while the batch has room ([`3781`][token-fill]), and a decision's
+  question-and-options tail is never split across batches: if it does not fit,
+  the slot stops and waits ([`3793-3796`][token-fill]). With 512 and prompts of
+  about 544 tokens, the lowest-numbered busy slots take nearly all of every
+  batch and higher slots wait. The gathered batch is then decoded in `n_batch` chunks
+  ([`3071-3080`][decode-chunks]) and split into ubatches of at most `n_ubatch`
+  tokens ([`src/llama-context.cpp:1816`][init-batch]).
+- How a ubatch is cut depends on the model. Both pinned models are `qwen35`
+  hybrids (no SWA), served by `llama_memory_hybrid`. When every token is an
+  output it cuts by sequence (`split_seq`), otherwise into equal shares from a
+  run of consecutive slot ids (`split_equal`)
+  ([`src/llama-memory-hybrid.cpp:74-90`][hybrid-split]). A `split_seq` ubatch
+  holds one slot's tokens only ([`src/llama-batch.cpp:774-813`][split-seq]); a
+  `split_equal` ubatch takes the same number of tokens from each participating
+  slot, up to `n_ubatch` in total ([`603-697`][split-equal]).
+- Compute buffers are reserved for a worst-case graph of
+  `min(n_ctx, n_ubatch)` tokens ([`src/llama-context.cpp:631`][reserve],
+  [`672-676`][reserve-pp]), so the `MTL0 compute buffer size` line
+  ([`742`][reserve-log]) scales with `n_ubatch`, not `n_batch`. What grows with
+  `n_batch` is host-side and small: the server's token batch
+  ([`server-context.cpp:1476-1482`][batch-alloc]), the output-id map
+  ([`src/llama-context.cpp:2166-2169`][output-ids]) and an output buffer sized
+  per decode for the rows requested ([`1858-1862`][output-decode],
+  [`2118-2135`][output-reserve]). KV and recurrent-state buffers depend on
+  `n_ctx` and slots only. The startup log of the b4096 cells should therefore
+  show the same compute buffer size as the 8×8 cells; the harness records it.
+
+**Kev is different on the pinned build.** A decision model runs in embedding
+mode, and with embeddings on, `n_batch` is set to `n_ubatch` whenever it is
+larger ([`common/common.cpp:1246-1266`][kev-embd]; the server loads through this
+path at [`server-context.cpp:1208`][server-init]). The committed serial Kev logs
+and all eight cell logs of the original run show `decision model reads the
+embeddings output, enabling embedding mode`. So
+`-b 4096 -ub 512` starts Kev with `n_batch = 512`, and the startup check refuses
+`w1-kev-8x8-b4096` rather than measure the 8×8 profile under the b4096 name. The
+refusal is recorded as a failed cell with every measured request `not_run`.
+Embedding mode also makes every token an output
+([`src/llama-context.cpp:1736-1737`][output-all]), so Kev's ubatches are cut by
+sequence: one slot's prompt tokens per compute step at any `n_batch`. On this
+build a larger logical batch could change which Kev slots are served but not
+evaluate their prompts together, which is consistent with the unchanged prompt
+rate from 1 to 4 slots. Decision, 2026-10-09, before any Qwen cell ran: keep
+`w1-kev-8x8-b4096` as specified. The startup check is expected to refuse it
+and record a `failed` cell, which documents the clamp from the build's own
+log rather than from a reading of the source. It is not redefined with
+`-ub 4096`, because the per-sequence split applies at any batch size, so a
+larger micro-batch would change per-step compute without batching slots.
+
+**What the cells isolate.** `w1-qwen_json-8x8-b4096` repeats `w1-qwen_json-8x8`
+(`-c 32768`, 4,096 tokens per slot, no unified KV, 8 clients) with `-b 4096`, so
+one update can gather every slot's prompt, while `-ub 512` keeps each compute
+step at most 512 tokens. If its rate rises well above the `-b 512` cell's, the
+512-token batch was starving slots. If it does not, compute was already
+saturated at 512 tokens per step, whichever slots supplied them.
+
+**Timing and results.** Added after the original Kev run and before any Qwen
+cell ran. The pre-declared readings are unchanged: the 8×8 cell in reading 1 is
+the original `-b 512` cell, and the two b4096 cells are reported alongside in
+the cell table as a diagnostic, in neither reading. The shared-state reading
+uses W2 cells only and is unaffected.
+
+**Versioning.** Runs under this amendment record `"version": 3` and both
+amendment texts in `protocol`, and `"protocol_version": 3` with `n_batch` and
+`n_ubatch` in each cell `profile`. Cells without `n_batch` are read as 512.
+
 ## Pre-declared readings
 
 Fixed before any inference so the results cannot be reframed afterwards. They
@@ -304,16 +402,19 @@ not absolute speed or label quality.
 
 ## SGLang MLX runner
 
-**Not implemented yet.** Placeholder for a sibling runner using the same cells,
-fixtures, budgets and readings. It must stay within the isolated scope and
-evidence rules of [`docs/sglang-investigation.md`](../../docs/sglang-investigation.md),
-record compatibility failures separately, and does not change the default runtime.
+Implemented as `run_sglang.py` with its own protocol text in
+[`sglang.md`](sglang.md). It reuses the same fixtures, runner, budgets and
+readings, serves Qwen3.5-4B MLX 4-bit on the pinned SGLang source, and stays
+within the isolated scope and evidence rules of
+[`docs/sglang-investigation.md`](../../docs/sglang-investigation.md). SGLang
+cannot serve Kev here, so its cells are Qwen only.
 
 ## Kev MLX runner
 
-**Not implemented yet.** Placeholder for a sibling runner serving Kev under MLX
-with the same cells, fixtures, budgets and readings. No result from it may be
-read as evidence about the llama.cpp path, or the reverse.
+Implemented as `run_kevmlx.py` with its own protocol text in
+[`kevmlx.md`](kevmlx.md): Kev's own server under MLX, bf16 backbone and
+fp32 pointer head, with new-state and cached-state cells. No result from it
+may be read as evidence about the llama.cpp path, or the reverse.
 
 ## Running
 
@@ -328,6 +429,14 @@ python3 eval/throughput/report.py results/throughput/<kev-run> results/throughpu
 A run needs `task metal:build`, `task model:fetch`, `task metal:baseline:fetch`
 and a free loopback port 18086. `--cells` selects cell IDs and `--output` names
 a new directory. Only one Metal operation may run at a time.
+
+A rerun goes to its own directory; pass it to `report.py` together with the
+original. When a cell ID appears in more than one run, the report takes it from
+the highest protocol version, then the latest `started_at`, and uses that cell in
+the readings. A "Cell sources" table names the run of every cell, and superseded
+cells are shown as recorded. Cells from protocol versions 1 to 3 can be paired:
+Amendment 1 only removes stops and Amendment 2 only adds cells. They still come
+from different runtime sessions.
 
 ## Limits
 
@@ -368,3 +477,23 @@ a new directory. Only one Metal operation may run at a time.
 [usage]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L5652-L5658
 [metrics]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-task.cpp#L1537-L1543
 [busy]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-task.cpp#L1597-L1599
+[batch-clamp]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L247-L250
+[gen-first]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3309-L3312
+[slot-order]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L2935-L2945
+[batch-fill]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3321-L3328
+[token-fill]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3780-L3796
+[decode-chunks]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L3071-L3080
+[init-batch]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L1816
+[hybrid-split]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-memory-hybrid.cpp#L74-L90
+[split-seq]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-batch.cpp#L774-L813
+[split-equal]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-batch.cpp#L603-L697
+[reserve]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L631
+[reserve-pp]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L672-L676
+[reserve-log]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L742
+[batch-alloc]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L1476-L1482
+[output-ids]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L2166-L2169
+[output-decode]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L1858-L1862
+[output-reserve]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L2118-L2135
+[kev-embd]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/common/common.cpp#L1246-L1266
+[server-init]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/tools/server/server-context.cpp#L1208
+[output-all]: https://github.com/ggml-org/llama.cpp/blob/6c59c40076c00eab49754dc955d7652d93f9e125/src/llama-context.cpp#L1736-L1737

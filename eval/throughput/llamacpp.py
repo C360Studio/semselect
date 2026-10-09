@@ -1,7 +1,8 @@
 """Owned llama-server lifecycle for one throughput cell (native Metal, pinned build).
 
-The launch is scripts/metal.py's command with three changes: -np N, -c 4096*N so
-each slot keeps 4096 tokens, and -kvu only in the unified-KV cell. The port is
+The launch is scripts/metal.py's command with these changes: -np N, -c 4096*N so
+each slot keeps 4096 tokens, -kvu only in the unified-KV cell, and -b 4096 only in
+the Amendment 2 batch cells (-ub stays 512). The port is
 compare_scoring's, so its prepare_score helper tokenizes against this runtime.
 Clients talk to llama-server directly; the Go guard admits one inference at a
 time and returns 429 otherwise, so it would hide the effect being measured.
@@ -45,10 +46,11 @@ STARTUP = {
 }
 
 
-def command(lock, slots, kv_unified, port=PORT):
+def command(lock, slots, kv_unified, port=PORT, n_batch=fixtures.BATCH):
     launch = [str(metal.SERVER), '-m', str(fixtures.ROOT / 'models' / lock['filename']), '--alias', lock['alias'],
               '--host', '127.0.0.1', '--port', str(port), '-ngl', '99', '-t', '4', '-tb', '4',
-              '-c', str(fixtures.CONTEXT_PER_SLOT * slots), '-b', '512', '-ub', '512', '-np', str(slots),
+              '-c', str(fixtures.CONTEXT_PER_SLOT * slots), '-b', str(n_batch), '-ub', str(fixtures.UBATCH),
+              '-np', str(slots),
               '--no-context-shift', '--metrics', '-lv', '4']
     return launch + ['-kvu'] if kv_unified else launch
 
@@ -77,13 +79,16 @@ def parse_startup(log):
 
 
 def check_startup(found, cell):
-    """The runtime must report the slot/context layout the cell claims to measure."""
+    """The runtime must report the slot/context/batch layout the cell claims to measure.
+
+    llama.cpp may lower n_batch silently (to n_ctx, or to n_ubatch for a decision model's
+    embedding mode), so the logged values are checked, not the flags."""
     expected = {'n_seq_max': cell.slots, 'n_ctx': cell.n_ctx_total, 'n_slots': cell.slots,
                 'n_ctx_slot': cell.n_ctx_per_slot, 'context_kv_unified': cell.kv_unified,
-                'slots_kv_unified': cell.kv_unified}
+                'slots_kv_unified': cell.kv_unified, 'n_batch': cell.n_batch, 'n_ubatch': cell.n_ubatch}
     wrong = {key: (found.get(key), value) for key, value in expected.items() if found.get(key) != value}
     if wrong:
-        raise RuntimeError(f'runtime slot/context layout differs from the cell (observed, expected): {wrong}')
+        raise RuntimeError(f'runtime slot/context/batch layout differs from the cell (observed, expected): {wrong}')
 
 
 def parse_metrics(text):
@@ -119,7 +124,7 @@ class Runtime:
         self.cell, self.lock, self.cell_dir = cell, lock, Path(cell_dir)
         self.base = BASE
         self.child = None
-        self.command = command(lock, cell.slots, cell.kv_unified)
+        self.command = command(lock, cell.slots, cell.kv_unified, n_batch=cell.n_batch)
         self.info = {'command': self.command, 'endpoint_base': BASE,
                      'guard': 'bypassed: clients call llama-server directly, as the Qwen baselines always did'}
         self.started = time.monotonic()

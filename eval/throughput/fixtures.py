@@ -64,6 +64,10 @@ ARM_MODEL = {'kev': 'kev', 'qwen_json': 'qwen', 'qwen_score': 'qwen'}
 REFERENCE_ARM = {'kev': 'kev', 'qwen_json': 'qwen_json', 'qwen_score': 'qwen_json'}
 PATHS = {'kev': '/v1/systemone', 'qwen_json': '/v1/chat/completions', 'qwen_score': '/completion'}
 CONTEXT_PER_SLOT = 4096
+# scripts/metal.py's -b and -ub. Only the Amendment 2 cells raise the logical batch (-b);
+# the physical batch (-ub) stays 512 so per-step compute is unchanged.
+BATCH = 512
+UBATCH = 512
 WARMUP_PASSES = 1
 MEASURED_PASSES = {'w1': 2, 'w2': 1}
 
@@ -75,10 +79,16 @@ class Cell:
     slots: int
     concurrency: int
     kv_unified: bool = False
+    n_batch: int = BATCH
 
     @property
     def id(self):
-        return f'{self.workload}-{self.arm}-{self.slots}x{self.concurrency}' + ('-kvu' if self.kv_unified else '')
+        return (f'{self.workload}-{self.arm}-{self.slots}x{self.concurrency}' + ('-kvu' if self.kv_unified else '')
+                + (f'-b{self.n_batch}' if self.n_batch != BATCH else ''))
+
+    @property
+    def n_ubatch(self):
+        return UBATCH
 
     @property
     def model(self):
@@ -100,7 +110,9 @@ class Cell:
 
 CELLS = (
     Cell('w1', 'kev', 1, 1), Cell('w1', 'kev', 4, 4), Cell('w1', 'kev', 8, 8),
+    Cell('w1', 'kev', 8, 8, n_batch=4096),  # Amendment 2
     Cell('w1', 'qwen_json', 1, 1), Cell('w1', 'qwen_json', 4, 4), Cell('w1', 'qwen_json', 8, 8),
+    Cell('w1', 'qwen_json', 8, 8, n_batch=4096),  # Amendment 2
     Cell('w1', 'qwen_score', 1, 1), Cell('w1', 'qwen_score', 4, 4), Cell('w1', 'qwen_score', 8, 8),
     Cell('w2', 'kev', 1, 1), Cell('w2', 'kev', 4, 1), Cell('w2', 'kev', 4, 4),
     Cell('w2', 'kev', 4, 4, True), Cell('w2', 'kev', 8, 8),
