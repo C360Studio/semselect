@@ -1,0 +1,343 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semsource-ui",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "packet-only"
+  },
+  "packets_sha256": "343ca3a43d9fa52708d7a7eac897877bbcd075edc11b453b0b0e071c4a7f9a28",
+  "labels": [
+    {
+      "pair_hash": "971ef51a4a922edc1862d9f6d54aa4b567fa0277c3c5b2fdd7c5c6438aa1c85b",
+      "rank": 1,
+      "label": "suppress",
+      "evidence": [
+        "if (node.name) return node.name;",
+        "return node.resolved ? node.handle : unresolvedMarker(node.handle).label;",
+        ".replaceAll(\"_\", \" \")"
+      ],
+      "rationale": "nodeLabel derives a display name for a graph node, while label() is a generic string prettifier (underscores to spaces, capitalise) used for workbench state labels; \"label\" is an overloaded term, not a shared subject."
+    },
+    {
+      "pair_hash": "45ba79b49bdd37e1822ff05ed96f5de8e88731507790e1d15fc6ee8ff9cefa91",
+      "rank": 2,
+      "label": "suppress",
+      "evidence": [
+        "source.paths?.join(\", \") ??",
+        "throw new AdvertisedRouteError(\"Capability was not advertised\", \"missing\");"
+      ],
+      "rationale": "sourceLocation formats a manifest source's path or url for display; resolveAdvertisedRoute validates a capability href and throws on failure. The shared path/url vocabulary is incidental."
+    },
+    {
+      "pair_hash": "fa9a7a29f612b47f81c2a32f96a34f24cb47199e1448cd880ba1265887e94cd8",
+      "rank": 3,
+      "label": "defer",
+      "evidence": [
+        "export class FusionSearchError extends Error {",
+        ") => Promise<FusionResponse>;",
+        "links in (2): function:ui-src-lib-api-search-ts-statusError returns; file:ui-src-lib-api-search-ts contains"
+      ],
+      "rationale": "Both carry the Fusion vocabulary, but nothing visible shows whether a GraphQuery implementation raises FusionSearchError. Missing: any graph.ts implementation or link that connects the query type to this error class."
+    },
+    {
+      "pair_hash": "bd2302ce9742af1c27f73e1beea1bb8185f800c5072ab288b0e83b9d78dde4a7",
+      "rank": 4,
+      "label": "suppress",
+      "evidence": [
+        "const created = await rendererFactory(container, pendingGraph, choose);",
+        "const capabilities = await dependencies.loadCapabilities("
+      ],
+      "rationale": "ensureRenderer lazily creates the graph renderer; createBootstrapController orchestrates capability/inventory loading with abort generations. They share only the async guard plus try/catch/finally lifecycle pattern."
+    },
+    {
+      "pair_hash": "86a068343b525ca05ffc52dd4479538b6f461d7337de19ed694176d56ef06991",
+      "rank": 5,
+      "label": "suppress",
+      "evidence": [
+        "evidence.source === undefined ? null : `Source ${evidence.source}`,",
+        "(cause instanceof DOMException && cause.name === \"AbortError\") ||"
+      ],
+      "rationale": "evidenceParts formats graph evidence strings; isAbort recognises abort errors in the search panel. Two unrelated small helpers."
+    },
+    {
+      "pair_hash": "683a56305549162a7c5020797ea105218d950220ad2f13ccaf42a0dd08b3b624",
+      "rank": 6,
+      "label": "suppress",
+      "evidence": [
+        "function isAbort(cause: unknown): boolean {",
+        "function record(value: unknown): Record<string, unknown> | null {"
+      ],
+      "rationale": "Both are tiny type-narrowing guards over unknown, one for abort errors and one for plain objects; a shared pattern, not a shared subject."
+    },
+    {
+      "pair_hash": "1dc56d45c5b91ccf7cbd6988661329b8d3c3b72055a2a6771304ba43d4040963",
+      "rank": 7,
+      "label": "keep",
+      "evidence": [
+        "const defaultQuery: GraphQuery = (href, query, errorContract, signal) =>",
+        "export type GraphQuery = ("
+      ],
+      "rationale": "defaultQuery is declared with the GraphQuery type; a value and the type that defines its contract belong together."
+    },
+    {
+      "pair_hash": "bfbe8cd8b6720bbb3a203054ea64eebc7cf5574fe32ff1cf7989d50340ddd361",
+      "rank": 8,
+      "label": "suppress",
+      "evidence": [
+        "renderer.setGraph(pendingGraph);",
+        "timer = setInterval(refresh, intervalMs);"
+      ],
+      "rationale": "Graph renderer initialisation versus a readiness polling timer; only the guarded start/stop lifecycle pattern is shared."
+    },
+    {
+      "pair_hash": "0e97b3cae31a0e54dcd111704b72c1548cc65286f4803656c78dc8f4fe05fa7f",
+      "rank": 9,
+      "label": "keep",
+      "evidence": [
+        "doc: Whether the workbench, as a whole, needs no further self-healing poll.",
+        "doc: Drives a self-healing refresh while the workbench is not ready"
+      ],
+      "rationale": "isFullyReady decides whether the self-healing poll is still needed and ReadinessPoller is the thing that drives that poll; one readiness-polling responsibility."
+    },
+    {
+      "pair_hash": "99fe7ba1dd6db37da7331927a9cac97e2492333eb331eaa9ed5d2983176266b8",
+      "rank": 10,
+      "label": "keep",
+      "evidence": [
+        "readonly reason: \"missing\" | \"not_ready\" | \"unsupported\" | \"invalid\",",
+        "message: \"This resource was not advertised by SemSource\",",
+        "if (capability.availability === \"not_ready\")"
+      ],
+      "rationale": "Both encode the same advertised-capability availability outcomes (missing/not advertised, not_ready, unsupported), one as an error reason and one as a resource state; judged on fully visible code, this is one responsibility, interpreting an advertised capability."
+    },
+    {
+      "pair_hash": "fc40924b2e01076d23aeeea7f8d763a6b9994dee0d72267b7584075e384e6512",
+      "rank": 11,
+      "label": "keep",
+      "evidence": [
+        "readonly kind: WorkbenchErrorKind,",
+        "| { status: \"error\"; message: string; retryable: boolean; kind: string };",
+        "function:ui-src-lib-api-workbench-ts-resourceError returns"
+      ],
+      "rationale": "ResourceState's error arm carries exactly the message/retryable/kind triple that WorkbenchClientError defines and is returned by resourceError; the client error and the state it becomes are one error-to-state responsibility."
+    },
+    {
+      "pair_hash": "4247918e771c5eb440a3e60bed24cf4c494ba86d0fbb1f29b1433ddca62e4552",
+      "rank": 12,
+      "label": "keep",
+      "evidence": [
+        "cause instanceof FusionSearchError",
+        "label: \"Code search\" | \"Graph query\",",
+        "if (!response.index.ready) {"
+      ],
+      "rationale": "runQuery issues a graph query and handles FusionSearchError; postFusionRequest is the fusion POST path labelled \"Graph query\" that throws those errors. One request/response/error flow."
+    },
+    {
+      "pair_hash": "ac1be75dbe4a11a06796c1b1e2a0a988fa2ccb197c18131580db8eb7c7130b83",
+      "rank": 13,
+      "label": "suppress",
+      "evidence": [
+        "deriveReadinessCoverage(capabilities.readiness).ready",
+        "\"disconnected\" | \"http\" | \"invalid_payload\" | \"incompatible_version\";"
+      ],
+      "rationale": "A readiness predicate and an HTTP error-kind union share only the \"Workbench\" term."
+    },
+    {
+      "pair_hash": "0bda8622c6efc3db943c9536e2d518afcaee464b5031d43001f729d1d961ad2c",
+      "rank": 14,
+      "label": "keep",
+      "evidence": [
+        "searchCode(globalThis.fetch, href, query, errorContract, signal);",
+        "cause instanceof FusionSearchError",
+        "function statusError(status: number, label: string): FusionSearchError {"
+      ],
+      "rationale": "SearchPanel runs code search through $lib/api/search and renders the FusionSearchError message/code/retryable; statusError is that module's constructor of the same error for HTTP failures. Producer and consumer of one code-search error path."
+    },
+    {
+      "pair_hash": "75a30a591d257ca4c82b928d367154d986705aa70408bd8f3a52814922d560ae",
+      "rank": 15,
+      "label": "suppress",
+      "evidence": [
+        "class: \"invalid\" | \"transient\" | \"fatal\";",
+        "\"disconnected\" | \"http\" | \"invalid_payload\" | \"incompatible_version\";"
+      ],
+      "rationale": "Two distinct error taxonomies, the fusion error-body contract and the workbench client error kinds, that share only the error-classification pattern."
+    },
+    {
+      "pair_hash": "6a83e256e1488b120339fe508c9315961ffceed0cf4e502ffba7d048de1a6d52",
+      "rank": 16,
+      "label": "suppress",
+      "evidence": [
+        "].filter((part): part is string => part !== null);",
+        "return typeof value === \"object\" && value !== null && !Array.isArray(value)"
+      ],
+      "rationale": "Evidence string formatting in the graph view versus a plain-object guard in the search API; unrelated."
+    },
+    {
+      "pair_hash": "37244f1536dace58917dfc8333536c0118685c24adc989fd7f36c9fd560b55bb",
+      "rank": 17,
+      "label": "suppress",
+      "evidence": [
+        "\"Code search\",",
+        "export type GraphQuery = ("
+      ],
+      "rationale": "searchCode is the code-search entry point; GraphQuery types the graph query. They share the fusion request signature shape, not a subject."
+    },
+    {
+      "pair_hash": "302117cd8efaf44a621cf470a11960c684867a1659b6fb58d4373eb6390ff013",
+      "rank": 18,
+      "label": "keep",
+      "evidence": [
+        "loadInventory: (value, signal) => loadInventory(fetch, value, signal),",
+        "export async function loadInventory("
+      ],
+      "rationale": "The bootstrap wiring calls loadInventory directly as its inventory loader; caller and callee implement one bootstrap-load behaviour."
+    },
+    {
+      "pair_hash": "e694930a4ad2c52fc1e403a0da491540e780af2cd1f2c6a07748eb1a374d5906",
+      "rank": 19,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "export type WorkbenchErrorKind ="
+      ],
+      "rationale": "workbench.ts has no body in the packet and its header lists only its members, so whether it uses WorkbenchErrorKind is not visible. Missing: the file body or any link to http.ts."
+    },
+    {
+      "pair_hash": "54ac24c2870b87cd3f8d5055c39f2b983d6ea497c651466d46e90c666d38d46f",
+      "rank": 20,
+      "label": "defer",
+      "evidence": [
+        "export type WorkbenchErrorKind =",
+        "| { status: \"error\"; message: string; retryable: boolean; kind: string };"
+      ],
+      "rationale": "ResourceState's error arm types kind as a plain string, so whether its values come from WorkbenchErrorKind is not shown. Missing: resourceError's body or a typed reference between the two."
+    },
+    {
+      "pair_hash": "e13c95fc26011dbcb96d85718cb92c40cfdd9b93add32c5f6d64c275c1d39c98",
+      "rank": 21,
+      "label": "defer",
+      "evidence": [
+        "query = defaultQuery,",
+        "selectedHandle = $bindable<string | null>(null),"
+      ],
+      "rationale": "Both sides are named rendererFactory but each shown line is a different props-destructuring entry that never mentions rendererFactory. Missing: the actual rendererFactory declarations."
+    },
+    {
+      "pair_hash": "7f45958bf9ad2f548b7e8369c5aad39dcfcc236a62f411ba64d09a4b415aadad",
+      "rank": 22,
+      "label": "keep",
+      "evidence": [
+        "loadInventory(capabilities: C, signal: AbortSignal): Promise<I>;",
+        "export async function loadInventory("
+      ],
+      "rationale": "BootstrapDependencies declares the loadInventory(capabilities, signal) slot and A is the loader with that name and shape; the contract and its implementation."
+    },
+    {
+      "pair_hash": "2e35924391b3463b7676f4dec67061cbee076fa2159d46042f4cc68607e10eeb",
+      "rank": 23,
+      "label": "keep",
+      "evidence": [
+        "const response = await query(",
+        "export type GraphQuery = (",
+        "if (!response.index.ready) {"
+      ],
+      "rationale": "runQuery calls query(href, graphQuery, errorContract, signal), the GraphQuery parameter list, and consumes the FusionResponse it promises; a handler and the contract it invokes."
+    },
+    {
+      "pair_hash": "579556360bf801c20c5a982925a3d2f30772213b5e874a814316a40d955e7190",
+      "rank": 24,
+      "label": "keep",
+      "evidence": [
+        "export class AdvertisedRouteError extends Error {",
+        "throw new AdvertisedRouteError(\"Capability was not advertised\", \"missing\");"
+      ],
+      "rationale": "resolveAdvertisedRoute constructs AdvertisedRouteError for every failure reason; a type and the function that constructs it."
+    },
+    {
+      "pair_hash": "8231c9aa9e4efb76010f0f3e27ab3c21df5991cb2cc39baba5e993abe0d964f5",
+      "rank": 25,
+      "label": "suppress",
+      "evidence": [
+        "`${label} failed with HTTP ${status}`,",
+        "if (cause instanceof WorkbenchClientError)"
+      ],
+      "rationale": "statusError builds a FusionSearchError for search HTTP failures; resourceError maps workbench load failures into ResourceState. Both construct error values, but for different subsystems; a pattern match."
+    },
+    {
+      "pair_hash": "31b6ec158751e78ec62aee7532651e0d5d901f009d749b47c855e8cc3853888a",
+      "rank": 26,
+      "label": "defer",
+      "evidence": [
+        "onError: (cause) => {",
+        "export class AdvertisedRouteError extends Error {"
+      ],
+      "rationale": "The shown line for clientError is only the onError handler opening, so what clientError is narrowed to is not visible. Missing: the clientError assignment."
+    },
+    {
+      "pair_hash": "1ed6b5633330ab898f705b517d6f516d44f54f725bedad2db49e91721516d915",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "search?: CodeSearch;",
+        "const search: CodeSearch = (href, query, errorContract, signal) =>"
+      ],
+      "rationale": "SearchPanel takes an optional search prop typed CodeSearch; the page defines a search constant of exactly that name and type, the dependency it supplies to the panel."
+    },
+    {
+      "pair_hash": "9acc3f062b1f02b0414289bd777c0b446b3979450b279aa4fba0dd5584c0f29f",
+      "rank": 28,
+      "label": "suppress",
+      "evidence": [
+        "const defaultQuery: GraphQuery = (href, query, errorContract, signal) =>",
+        "const search: CodeSearch = (href, query, errorContract, signal) =>"
+      ],
+      "rationale": "Identical parameter lists but different contracts, GraphQuery versus CodeSearch; a signature-shape match across the graph and code-search subjects."
+    },
+    {
+      "pair_hash": "c8036353144a5e0b459a20c8cca06c7fe35df87baf6ecb3ba5aee2af38f0b20e",
+      "rank": 29,
+      "label": "suppress",
+      "evidence": [
+        "async function submit(): Promise<void> {",
+        "if (erroredQuery !== null) await runQuery(erroredQuery);"
+      ],
+      "rationale": "A is a const inside SearchPanel's code-search submit; B retries GraphPanel's graph query. Submission flows in different panels share a pattern, not a subject."
+    },
+    {
+      "pair_hash": "d75f8c8a3dd6bf988dc527937c89e6c85ac61f7897af36138b569d367aecd38f",
+      "rank": 30,
+      "label": "suppress",
+      "evidence": [
+        "await runQuery(input.trim());",
+        "const nextQuery = query.trim();"
+      ],
+      "rationale": "Two functions named submit in different panels (graph query versus code search); the same name and trim-then-run pattern, different subjects."
+    },
+    {
+      "pair_hash": "f4775244fb6deaaf67f97e57aed27bf9b2bdea52da09ae8a17b827526b9bcf1a",
+      "rank": 31,
+      "label": "suppress",
+      "evidence": [
+        "const result = await search(",
+        "{ query, want: [\"graph\"] },"
+      ],
+      "rationale": "SearchPanel.submit runs code search; queryGraph is the graph query API. They share FusionSearchError and the fusion request shape, not a responsibility."
+    },
+    {
+      "pair_hash": "afcf812c873e97b537bfb20e6a626b1caf3e517ea8ab7a102099574cb1b1efeb",
+      "rank": 32,
+      "label": "keep",
+      "evidence": [
+        "loadCapabilities: (signal) => loadCapabilities(fetch, signal),",
+        "const clientError = cause instanceof WorkbenchClientError ? cause : null;",
+        "throw new WorkbenchClientError("
+      ],
+      "rationale": "The bootstrap wiring calls loadCapabilities and handles the WorkbenchClientError it throws; caller and callee of one capability-loading behaviour."
+    }
+  ]
+}

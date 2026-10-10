@@ -140,9 +140,24 @@ product repositories only, assigned whole to a split, with two Apache-2.0
 public families (nats.go `micro`, commons-csv) kept as a generalization set
 outside the promotion rule; the second annotator may
 be a Codex session with the owner resolving disagreements, disclosed in the
-evidence record; the "distance from `0.8`" priority key below is reconsidered
+evidence record (superseded by ruling 7, 2026-10-10: no person labels;
+annotator A is an LLM, annotator B a Codex session reviewing blind by the
+same packet-only instructions, and a pair they do not agree on stays
+`defer`, every label disclosed as model-written); the "distance from `0.8`" priority key below is reconsidered
 after the first real tier-1 family capture, because on the measured embedder
 nearly every mutual pair scores above 0.85 (see [scale.md](scale.md)).
+
+Owner rulings, 2026-10-10 (issue #5), after the four development families
+were captured under both identity profiles
+([fixtures/tier1-capture](fixtures/tier1-capture/README.md)): the
+structural-only floor is explicit topology alone, with the legacy sibling and
+system-peer synthesis off, because that synthesis is a lexically-sorted,
+capped star that collapses every family to one or two communities; the
+containment structure read directly is the named structural comparator; and
+the step-2 priority order stays as written, since against the explicit-only
+floor every family has more cross-partition candidates than the ceiling and
+the development medians (0.814 to 0.829) show the `0.8` anchor is not
+degenerate.
 
 Assign repositories or genuinely independent subject families to splits before
 annotation. Related modules, duplicate passages, graph versions, paraphrases and
@@ -158,10 +173,11 @@ select held-out graphs because a particular baseline or model fails on them.
 
 For each primary snapshot:
 
-1. Freeze the stock directed neighbor results, mutual pairs, explicit/identity
-   memberships, effective weights and structural-only partition: the same
-   explicit/identity provider chain with the semantic profile's structural
-   weights retained and semantic influence disabled. Use the actual
+1. Freeze the stock directed neighbor results, mutual pairs, explicit
+   memberships, effective weights and structural-only partition: the explicit
+   provider chain alone, identity synthesis off and semantic influence
+   disabled (ruling of 2026-10-10; the identity-synthesis captures of the
+   development families stay on record as the artifact). Use the actual
    qualified embedding service and preserve its model/artifact/preprocessing
    identity. Replayed neighbor results isolate review cost; a live refresh later
    measures total embedding and clustering cost.
@@ -174,7 +190,9 @@ For each primary snapshot:
    label it `keep`, `suppress` or `defer`, citing evidence visible in that packet.
    Missing decisive evidence means `defer`, even when the full source would
    answer the question. Two annotators resolve disagreements before inference;
-   unresolved cases remain `defer`. Show disagreement counts. Structural or
+   unresolved cases remain `defer`. Show disagreement counts. Under ruling 7
+   both annotators are models and nobody adjudicates, so every disagreement
+   is unresolved and the final label is `defer`. Structural or
    embedding scores alone are not label evidence.
 4. Separately annotate 20 co-membership constraints, ten positive and ten
    negative, including pairs outside the review set. Positives mean useful to
@@ -210,10 +228,11 @@ never select prompts, graph parameters or thresholds.
 
 | Arm | Purpose |
 | --- | --- |
-| Explicit-only LPA | Diagnostic lower tier: how much do virtual hints add? |
-| Structural/identity LPA | Existing coded grouping without semantic edges. Preserve the configured identity weights. |
+| Explicit-only LPA | The structural-only floor (ruling 5, 2026-10-10): explicit topology alone, identity synthesis off. On the development families it gives one community per file or doc, small files absorbed into their folder. |
+| Containment | Named structural comparator (ruling 5): the file and doc tree read directly, no vote. Report where the explicit-only LPA departs from it. |
+| Structural/identity LPA | Artifact record, not a comparator: the legacy sibling and system-peer synthesis is a lexically-sorted, capped star that collapses every development family to one or two communities ([fixtures/tier1-capture](fixtures/tier1-capture/README.md)). Kept as evidence of why the floor changed. |
 | Stock semantic LPA | Actual ported semantic provider, no review; records whether any improvement is needed. |
-| Tuned semantic LPA | Strong algorithm baseline: development-only search over `k={4,8}`, cosine threshold `{0.75,0.80,0.85}`, semantic weight `{0.3,0.6,0.9}`; retain the same explicit/identity configuration. |
+| Tuned semantic LPA | Strong algorithm baseline: development-only search over `k={4,8}`, cosine threshold `{0.75,0.80,0.85}`, semantic weight `{0.3,0.6,0.9}`; retain the explicit-only configuration. |
 | Small trained edge reviewer | Regularized logistic regression over frozen cosine, reciprocal ranks, shared-neighbor statistics, identity-tier flags and symmetric endpoint embedding features. Trained only on development families; suppress or preserve. |
 | Qwen JSON reviewer | Pinned Qwen3.5-4B, constrained `keep/suppress/defer`, no generated confidence. |
 | Native decision reviewer | Pinned Kev-4B served by Kev's own MLX server (bf16 backbone, fp32 head), the only measured path with a cross-request state cache, using the per-entity bundle so each entity's state is sent once; full distribution and confidence preserved separately. semselect's llama.cpp path at `-np 4` is a diagnostic arm, not the reviewer. Decision recorded 2026-10-09 from the [throughput record](../../docs/validation-throughput.md). |
@@ -261,7 +280,9 @@ This compares the actual existing algorithm family and a trained alternative.
 It does not establish that LPA is the best possible clustering algorithm. If
 development shows the failure comes from LPA or identity weights, record that
 shortfall and test an applicable algorithm/configuration change before presenting
-model review as the necessary repair.
+model review as the necessary repair. The identity-weight shortfall was found
+and recorded on 2026-10-10 before any review ran; the configuration change is
+ruling 5.
 
 ## Outcomes and pilot promotion rule
 

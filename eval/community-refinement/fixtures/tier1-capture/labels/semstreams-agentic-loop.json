@@ -1,0 +1,351 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semstreams-agentic-loop",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "packet-only"
+  },
+  "packets_sha256": "af2bac724421bc73f8cf95aa0fbb578235508204d89f0f5e6241d7cd7d4000c6",
+  "labels": [
+    {
+      "pair_hash": "a1b9cc0df4c490abcfccf03e5f78194a8deb85c4b6d9814176fd3b7baee1bf01",
+      "rank": 1,
+      "label": "keep",
+      "evidence": [
+        "gives every still-queued tool call a correlated synthetic result saying the terminal tool ended the iteration, and empties the queue doing it",
+        "restoreToolBatch re-seats the tool batch the retained response dispatched, so a rebuilt loop can decide AllToolsComplete",
+        "m.queuedToolCalls[loopID] = queued"
+      ],
+      "rationale": "Both maintain the loop's queued tool-call batch: B re-seats the queue when a loop is rebuilt and A drains that queue with synthetic results so the carried request's batch stays complete. B's omitted tail comes after the queue seating shown."
+    },
+    {
+      "pair_hash": "a1e3903fb156335ed030bcc54e279c00102ce74180717f2f2cd3be1015b157f1",
+      "rank": 2,
+      "label": "keep",
+      "evidence": [
+        "the loop is unchanged except for its context and its pending marker, and nothing is published",
+        "HasPendingContinuation reports whether a continuation turn is waiting for a request to carry it — pending AND uncarried"
+      ],
+      "rationale": "Both concern the deferred-continuation marker: A is the handler result that records a continuation deferred behind an outstanding request, B reads whether such a deferred turn is still uncarried."
+    },
+    {
+      "pair_hash": "8849ee9fd13770ac43fdaefc365a066016b6ddcc5ac8e346a8a4ec26d677ff38",
+      "rank": 3,
+      "label": "keep",
+      "evidence": [
+        "queued := h.loopManager.QueuedToolCount(loopID)",
+        "Bounded by the QUEUE's own length at entry, never by a heuristic.",
+        "it is the only honest bound on a drain loop"
+      ],
+      "rationale": "A's drain loop is bounded by B's count, and B's doc names exactly that drain-loop use as its purpose; caller and the accessor built for it."
+    },
+    {
+      "pair_hash": "aeb5c851471216b51836c48c535d3fa41e57f14dcb656b37a722279944f45c6d",
+      "rank": 4,
+      "label": "keep",
+      "evidence": [
+        "retryCount := h.loopManager.publishedRetryOrdinal(loopID) + 1",
+        "Format: loopID:req:iteration:retry",
+        "the truncation retry, and only that"
+      ],
+      "rationale": "B mints the request name whose retry ordinal A reads as its one-shot compaction-retry budget, and B's own comment says the retry suffix exists only for the truncation retry A handles. The budget read is in A's shown part."
+    },
+    {
+      "pair_hash": "2d9363895d294550c31839fe6bc74c507a6626bff2a8637b85a276c9ceb5788c",
+      "rank": 5,
+      "label": "suppress",
+      "evidence": [
+        "failTimedOutLoop is the one timeout arm: a loop past its deadline fails in memory",
+        "It has one caller and one purpose: the approval lane's cold branch, when the evidence a rebuild needs is confirmed gone"
+      ],
+      "rationale": "The sides share only the failure vocabulary: A is the timeout arm, B seats a cold record for the approval lane's rebuild branch, and neither packet shows them on one path. Judgement call on fully visible sources."
+    },
+    {
+      "pair_hash": "eb516f62373cb6e857269b18287ac05ed656f5d01a604a125d7bf0acf1566fad",
+      "rank": 6,
+      "label": "keep",
+      "evidence": [
+        "it reports whether the error accompanies a populated terminal the loop owner must commit",
+        "settleTerminal is the terminal owner's in-memory half of the entity write"
+      ],
+      "rationale": "Both implement the terminal owner's commit: A decides whether a handler's result is a terminal the owner must commit, B is the owner's in-memory settlement of that terminal."
+    },
+    {
+      "pair_hash": "c1e363b555eb2657bded0ba001653acc35ead3c368416ef2113df6196afdf50e",
+      "rank": 7,
+      "label": "keep",
+      "evidence": [
+        "returns the full 6-part ChainExecutionEntityID for a run when runID is non-empty",
+        "SetRunID sets the run anchor (bare run loop-id) on the loop entity (ADR-053 D7). The run_id identifies which agent run this loop belongs to."
+      ],
+      "rationale": "Both concern the loop's run anchor in the same sense: B stores the run ID on the entity and A derives the run's entity ID from it for events."
+    },
+    {
+      "pair_hash": "7729d20ef84ccb1d052ef78d0517108b42181f0819ac66a62ae0e75f625b3eb1",
+      "rank": 8,
+      "label": "keep",
+      "evidence": [
+        "func NewMessageHandler(config Config, loopManagerOpts ...LoopManagerOption) *MessageHandler",
+        "loopManager := NewLoopManagerWithConfig(config.Context, loopManagerOpts...)",
+        "func WithLoopManagerModelRegistry(reg model.RegistryReader) LoopManagerOption"
+      ],
+      "rationale": "B is a LoopManagerOption value that A accepts and forwards to the loop manager it constructs; a constructor and one of its options are one construction behaviour, not boilerplate."
+    },
+    {
+      "pair_hash": "dccd8d44c2175130a28b709333f9bf8a6f70e976a8bf1238b5548d2d9aa64390",
+      "rank": 9,
+      "label": "suppress",
+      "evidence": [
+        "carryDeferredContinuation advances a loop that was ABOUT to complete into one more iteration, because a continuation turn was admitted while this response was outstanding",
+        "ResolveApprovalIfPending atomically transitions the loop out of LoopStateAwaitingApproval if and only if the supplied call_id matches the currently pinned PendingApproval"
+      ],
+      "rationale": "Different mechanisms: A carries a deferred continuation turn, B resolves the approval gate. They share only loop-state vocabulary (pending, deferred, idempotent drop)."
+    },
+    {
+      "pair_hash": "69ebc5d66bf0d59dc41acd34743e259600bdfea97f99f8c2e0cc45f3b61fe13d",
+      "rank": 10,
+      "label": "keep",
+      "evidence": [
+        "The loop's PublishedRequestID is NOT set here.",
+        "carrier knows when that became true (stampPublishedRequest, #1330 Q1).",
+        "SetPublishedRequest records the request this loop has minted as the one its record will name (LoopEntity.PublishedRequestID, invariant I1 of #1330)"
+      ],
+      "rationale": "Both sides are the same #1330 contract for naming the minted request on the record: A publishes the request and explains why it leaves the stamp to the carrier, B is the stamp the birth and the carrier apply."
+    },
+    {
+      "pair_hash": "a43db6ff086f1c561416fed765cf5c5b603cf6bd2f032b61d740fbe53aaf7c3c",
+      "rank": 11,
+      "label": "suppress",
+      "evidence": [
+        "terminalGuardResult is the effect-free answer both handlers give a delivery that finds its loop already terminal in memory.",
+        "reseatTerminalKind moves a terminal entity to the adopted terminal's kind when it is in another one; the caller holds the manager's lock."
+      ],
+      "rationale": "The sides share only the word terminal: A is a handler's no-effect result for a delivery on an already-terminal loop, B rewrites an entity's terminal kind inside the settle path, and neither packet shows them cooperating. Judgement call on fully visible sources."
+    },
+    {
+      "pair_hash": "bd39676d6e737613f006976210591004ba9d1c11ba627f5d0b5d4147adf78076",
+      "rank": 12,
+      "label": "keep",
+      "evidence": [
+        "the name tracked for this execution ID first, then the name carried on the result envelope itself",
+        "resultKey := result.ExecutionID",
+        "StoreToolResult stores a tool result in the loop entity for later retrieval"
+      ],
+      "rationale": "Both are per-loop bookkeeping of the same incoming tool result keyed by its execution ID: A resolves its name, B retains it for the next turn."
+    },
+    {
+      "pair_hash": "be7bb5ac9fc33b26fa9150a52e16bcde97c205092fb82d3f15cd31bb43a11446",
+      "rank": 13,
+      "label": "keep",
+      "evidence": [
+        "if err := h.loopManager.StoreToolResult(loopID, errResult); err != nil {",
+        "h.loopManager.TrackToolOrdinal(toolCall.ExecutionID, uint32(index+1))",
+        "GetAndClearToolResults retrieves all accumulated tool results and clears them. Also evicts the ExecutionID→loop routing entry for each drained result"
+      ],
+      "rationale": "A seeds the batch's execution-ID bookkeeping and stores immediate error results into the accumulated set that B drains and un-routes; both maintain one tool batch's result and routing state. A's omitted tail is the dispatch loop after the stores shown."
+    },
+    {
+      "pair_hash": "67ac4086ce7806ae940680be08a57987b752c07986fe96f0e6caf3fcdb1bb231",
+      "rank": 14,
+      "label": "suppress",
+      "evidence": [
+        "Mirrors the request-construction tail of handleToolsComplete but without the tool-result drain or iteration increment.",
+        "GetAndClearToolResults retrieves all accumulated tool results and clears them."
+      ],
+      "rationale": "A is the truncation-retry request builder and its only mention of the tool-result drain is to say it does not perform it; B is that drain. The match is request-construction vocabulary, not a shared responsibility."
+    },
+    {
+      "pair_hash": "7d5073e0e89525b3ed25ee9537471b13011047d87d9eccc30c497095a69bdc4e",
+      "rank": 15,
+      "label": "keep",
+      "evidence": [
+        "retryCount := h.loopManager.publishedRetryOrdinal(loopID) + 1",
+        "It is the budget the compaction self-heal spends: ordinal 0 means no retry of this iteration has been published, so one is still available."
+      ],
+      "rationale": "A calls B to read the retry budget that decides its compaction retry, and B's doc names that self-heal as its purpose."
+    },
+    {
+      "pair_hash": "79eb8297752c6149144ac45f04917c62dc9ec1dcf4f5d914391c3837ede320fd",
+      "rank": 16,
+      "label": "keep",
+      "evidence": [
+        "because a continuation turn was admitted while this response was outstanding and nothing has carried it yet",
+        "PendingContinuation with an empty carrier",
+        "deferredContinuationPrompt returns the deferred turn's text while the marker is set, CARRIED or not"
+      ],
+      "rationale": "Both concern the deferred continuation turn and its PendingContinuation marker: A carries the turn into another iteration or leaves the marker on the record when it cannot, B exposes the turn's text while the marker is set."
+    },
+    {
+      "pair_hash": "97cd105a4626d1ffabec75b1b575b27d8ef0f08a8b468bcad5b555b4a8b4114d",
+      "rank": 17,
+      "label": "suppress",
+      "evidence": [
+        "HandleTask processes an incoming task message and creates a new loop",
+        "beginApprovalGate gates the loop on one tool call, atomically: the live entity is moved to awaiting_approval with its pending call"
+      ],
+      "rationale": "A is task intake (dedup, create or attach a continuation, metadata, trajectory) and B is the tool-call approval gate in the result lane; A's complete doc and the shown 3.9 KB scope it away from approval, so the omitted tail does not change the answer."
+    },
+    {
+      "pair_hash": "144c388550d338aa42fd60d7a3496f20b6217329c3d46d4cb62b843be79f8aa5",
+      "rank": 18,
+      "label": "suppress",
+      "evidence": [
+        "BuildFailureEvent creates a failure event (public wrapper for component.go).",
+        "return fmt.Sprintf(\"approval gate refused: loop %s is %s\", e.loopID, e.state)"
+      ],
+      "rationale": "A one-line public wrapper for failure-event construction and an Error() string for the approval gate's refusal share only error and failure vocabulary; generic error handling, not one subject."
+    },
+    {
+      "pair_hash": "b06a12b0bd402589353dbf26010263f52eedf20c29868313df4a610a13825903",
+      "rank": 19,
+      "label": "keep",
+      "evidence": [
+        "if err := h.loopManager.SetWorkflowContext(loopID, task.WorkflowSlug, task.WorkflowStep); err != nil {",
+        "SetWorkflowContext sets the workflow slug and step for loops created by workflow commands"
+      ],
+      "rationale": "A calls B to apply the task's workflow context while configuring a new loop's metadata; caller and the setter that exists for it."
+    },
+    {
+      "pair_hash": "7d82555214b657d37512430dbfc229d2a840318163fc247eda43d9cb8e650957",
+      "rank": 20,
+      "label": "keep",
+      "evidence": [
+        "prompt := h.loopManager.GetTaskPrompt(loopID)",
+        "it re-injects the original task prompt as a synthetic user message so the agent can continue",
+        "If GC/repair leaves the context empty, this prompt is re-injected as a synthetic user message so the model always has contents to work with"
+      ],
+      "rationale": "B caches the task prompt and its doc describes exactly A's re-injection of that prompt on an emptied context; producer and consumer of one behaviour."
+    },
+    {
+      "pair_hash": "ae7236df64840d7d88c5662d5f0ac90531a93eea07a571e7a05de7a5d1058656",
+      "rank": 21,
+      "label": "suppress",
+      "evidence": [
+        "UpdateLoop updates a loop entity",
+        "return h.loopManager.UpdateLoop(entity)",
+        "GetLoop retrieves a loop entity by ID"
+      ],
+      "rationale": "A one-line pass-through updater and the general entity getter are generic accessors to the loop map used from every path; grouping them joins a hub node to whatever either touches rather than evidencing one responsibility."
+    },
+    {
+      "pair_hash": "300d5381ad0c1acd6a31b40b994e447d3e88ca4c2815479219fe569aff38807d",
+      "rank": 22,
+      "label": "keep",
+      "evidence": [
+        "if err := h.loopManager.SetMetadata(loopID, task.Metadata); err != nil {",
+        "SetMetadata sets domain context metadata on the loop entity."
+      ],
+      "rationale": "A calls B to apply the task's domain metadata while configuring a new loop; caller and the setter that exists for it."
+    },
+    {
+      "pair_hash": "652dad99026810c466b5b84510f2368db46fb5071eefc42febe687e50d425a8f",
+      "rank": 23,
+      "label": "suppress",
+      "evidence": [
+        "handleToolsComplete handles the case when all pending tools have completed",
+        "atomically transitions the loop out of LoopStateAwaitingApproval if and only if the supplied call_id matches the currently pinned PendingApproval"
+      ],
+      "rationale": "A advances the iteration after a complete tool batch (absorb results, publish the next request, or fail on the iteration budget) and B resolves the approval gate; neither packet mentions the other's mechanism."
+    },
+    {
+      "pair_hash": "fc7ac3f75e33f551ee6141b11428d19037aa01be9c4b05d1fee447ef4801fd59",
+      "rank": 24,
+      "label": "keep",
+      "evidence": [
+        "gateForApproval transitions the loop into LoopStateAwaitingApproval, persists the pending call on the entity, clears any queued tool calls",
+        "ResolveApprovalIfPending atomically transitions the loop out of LoopStateAwaitingApproval if and only if the supplied call_id matches the currently pinned PendingApproval"
+      ],
+      "rationale": "The two halves of the approval gate: A enters awaiting_approval and pins the call, B leaves it when the matching answer arrives."
+    },
+    {
+      "pair_hash": "2f1e1b3306e5a110f314971765ff2394becffc687912dcd776077e2ac3d64f17",
+      "rank": 25,
+      "label": "keep",
+      "evidence": [
+        "failTimedOutLoop is the one timeout arm: a loop past its deadline fails in memory and returns its populated failure",
+        "IsTimedOut checks if a loop has exceeded its timeout",
+        "return time.Now().After(entity.TimeoutAt)"
+      ],
+      "rationale": "B is the deadline check and A is the single arm that fails a loop that check reports past its deadline; one timeout behaviour."
+    },
+    {
+      "pair_hash": "f91628972bb828d96cd3e85011280d49ebbefb12333c7439b7df0f6a8d5fc01c",
+      "rank": 26,
+      "label": "suppress",
+      "evidence": [
+        "lookupLoopUserID resolves the owning user for a loop, returning \"\" when the loop is unknown or has no UserID",
+        "GenerateLoopID returns an identity with the exact UUID semantics used by CreateLoop, without registering or persisting a loop."
+      ],
+      "rationale": "A user-provenance lookup and a UUID minter share only loop-ID vocabulary; user attribution and identity minting are different subjects."
+    },
+    {
+      "pair_hash": "749e29b7465c96c80eed0b8ad88af4785863768bb0b05d9587406dcbc81ac2c4",
+      "rank": 27,
+      "label": "suppress",
+      "evidence": [
+        "HandlerResult contains the results of a handler operation",
+        "LoopManager manages loop entity lifecycle and state",
+        "terminalOwnedElsewhere marks a result the handler returned without acting,"
+      ],
+      "rationale": "Two package-wide hub types: A's fields span publication, trajectory, completion, failure and terminal ownership and B's maps span loops, queues, caches and request routing; they do not reference each other and share no single responsibility, so the hint would merge every subject in the package. A's omitted tail is more fields, not a link to B."
+    },
+    {
+      "pair_hash": "c9b88cf98348bb8144070432f80b1a0aea50132913b88d7f2cbe85b00f8e57ec",
+      "rank": 28,
+      "label": "keep",
+      "evidence": [
+        "for _, tm := range h.buildToolMessages(h.loopManager.GetAndClearToolResults(loopID)) {",
+        "GetAndClearToolResults retrieves all accumulated tool results and clears them."
+      ],
+      "rationale": "A calls B to drain the accumulated results it turns into the next request's tool messages; one drain behaviour."
+    },
+    {
+      "pair_hash": "b817e2b2cbe9e4e6416d07a5fc14f12ca01a00b5fdbece8f9b54e4db5d7d2948",
+      "rank": 29,
+      "label": "keep",
+      "evidence": [
+        "err = h.loopManager.StoreToolResult(loopID, toolResult)",
+        "// Store this tool result for accumulation",
+        "StoreToolResult stores a tool result in the loop entity for later retrieval"
+      ],
+      "rationale": "A is the tool-result handler and calls B to retain the result it is processing; the call is in A's shown part, before the omitted tail."
+    },
+    {
+      "pair_hash": "5b60d031ffc05cd69e4f8eeeaedc153103fe58588d22877dfc9f92b18e9d3bfd",
+      "rank": 30,
+      "label": "keep",
+      "evidence": [
+        "checkApprovalGate implements the awaiting-approval branch logic extracted from HandleToolResult.",
+        "approvalAnswersGate(entity.PendingApproval, toolResult.CallID, toolResult.ExecutionID)",
+        "if !approvalAnswersGate(entity.PendingApproval, callID, executionID) {"
+      ],
+      "rationale": "Both are the approval gate: A gates the loop, absorbs siblings and re-echoes the gate in the result lane, B resolves the gate on the matching answer, and both match the gate by the same identity rule."
+    },
+    {
+      "pair_hash": "0741a5d398cf9884471cb094c91559c77f6e1706b2f7a1851503e46a67fcb943",
+      "rank": 31,
+      "label": "keep",
+      "evidence": [
+        "if tracked := h.loopManager.GetToolName(toolResult.ExecutionID); tracked != \"\" {",
+        "TrackToolName associates a framework execution ID with its function name. This is used to populate the name field on tool result messages (required by Gemini).",
+        "m.executionIDToName[executionID] = name"
+      ],
+      "rationale": "B writes the execution-ID-to-name map that A reads first in its fallback chain; producer and consumer of one fact."
+    },
+    {
+      "pair_hash": "612f9678bd1abdc137c491f763f1b85698b46515250b0b54a851be90312ff3a9",
+      "rank": 32,
+      "label": "keep",
+      "evidence": [
+        "loopID, err = h.loopManager.CreateLoopWithID(task.LoopID, task.TaskID, task.Role, task.Model, effectiveMaxIterations)",
+        "case errors.Is(err, ErrLoopAlreadyExists):",
+        "CreateLoopWithID creates a new loop entity with a specific ID."
+      ],
+      "rationale": "A calls B to create the loop under the task's supplied token and branches on B's ErrLoopAlreadyExists refusal to attach a continuation instead; the call is in A's shown part."
+    }
+  ]
+}

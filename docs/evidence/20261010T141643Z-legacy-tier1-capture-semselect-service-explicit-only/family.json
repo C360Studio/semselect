@@ -1,0 +1,169 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semselect-service",
+    "split": "development",
+    "role": "code and doc about the same responsibility",
+    "language": "Go + Markdown",
+    "repo": "https://github.com/C360Studio/semselect",
+    "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semselect-service",
+    "include": [
+      "internal",
+      "cmd",
+      "README.md"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "README.md",
+      "cmd/semselect/main.go",
+      "internal/guard/guard.go",
+      "internal/guard/json.go"
+    ],
+    "workspace_sha256": "f00b031de9f674f48b867bba4a0465db482a3b8ea82be4c8b9c235b22e66ed8f",
+    "entities_total": 56,
+    "entities_by_type": {
+      "chunk": 31,
+      "const": 2,
+      "doc": 1,
+      "file": 3,
+      "folder": 4,
+      "function": 8,
+      "method": 2,
+      "repo": 1,
+      "struct": 4
+    },
+    "entities_by_domain": {
+      "code": 5,
+      "golang": 19,
+      "web": 32
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 56,
+      "edges": 103,
+      "induced_edges": 89,
+      "cross_system_edges": 0,
+      "dangling_edges": 14,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 21,
+        "code.relationship.parameter": 1,
+        "code.relationship.receiver": 2,
+        "code.relationship.references": 1,
+        "code.relationship.returns": 1,
+        "code.structure.belongs": 54,
+        "code.structure.contains": 23
+      },
+      "non_containment_edges": 26
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "internal",
+          "cmd",
+          "README.md"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*"
+        ],
+        "max_file_bytes": null,
+        "files": 4,
+        "entities": 56
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "internal",
+          "cmd",
+          "README.md"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*"
+        ],
+        "max_file_bytes": null,
+        "files": 4,
+        "entities": 56
+      }
+    ],
+    "notes": "Owner subtree: internal/ and cmd/ non-test Go plus the root README.md.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semselect-service",
+    "split": "development",
+    "repository": "semselect",
+    "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+    "include": [
+      "internal",
+      "cmd",
+      "README.md"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": true,
+    "has_docs": true,
+    "files": [
+      {
+        "path": "README.md",
+        "bytes": 30244,
+        "sha256": "fd38db99448f396d5c8636d513754879b8c0264729871ab840b2cf06b97979d3"
+      },
+      {
+        "path": "cmd/semselect/main.go",
+        "bytes": 2791,
+        "sha256": "72e9b42666003b20d2511fd2ae02686886cdd986867e73d3b9b729d543fceb88"
+      },
+      {
+        "path": "internal/guard/guard.go",
+        "bytes": 8242,
+        "sha256": "0619d575440bbc478081bcd9d800f3756adaa5d5907e1a11839cec1c0330bda2"
+      },
+      {
+        "path": "internal/guard/json.go",
+        "bytes": 1879,
+        "sha256": "fb197df6ec0a08cc08456aac3eb3573f3e87f0d3869c2154b597b84636db461d"
+      }
+    ],
+    "workspace_sha256": "f00b031de9f674f48b867bba4a0465db482a3b8ea82be4c8b9c235b22e66ed8f"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.WedNZA/config/semselect-service.tier1.json",
+    "sha256": "0ec727c7e43e7dc0fe9e31a1a6139189720c6ed75071ef9eb571457fc5ed9766",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}

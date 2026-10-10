@@ -1,0 +1,121 @@
+name: semselect-tier1-capture
+services:
+  nats:
+    command:
+      - -js
+      - -sd
+      - /data
+      - -m
+      - "8222"
+      - --name
+      - c360-nats
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost:8222/healthz
+      timeout: 3s
+      interval: 5s
+      retries: 10
+    image: nats:2.14-alpine
+    networks:
+      c360: null
+    ports:
+      - mode: ingress
+        target: 4222
+        published: "14222"
+        protocol: tcp
+      - mode: ingress
+        target: 8222
+        published: "18222"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: volume
+        source: nats-data
+        target: /data
+        volume: {}
+  semembed:
+    deploy:
+      resources:
+        limits:
+          cpus: 2
+    environment:
+      SEMEMBED_MODEL: Snowflake/snowflake-arctic-embed-s
+      SEMEMBED_PORT: "8081"
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -sf
+        - http://localhost:8081/health
+      timeout: 3s
+      interval: 10s
+      retries: 5
+      start_period: 30s
+    image: ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2
+    networks:
+      c360: null
+    restart: unless-stopped
+  semsource:
+    build:
+      context: /Users/coby/Code/c360/semsource
+      dockerfile: Dockerfile
+    command:
+      - run
+      - --config
+      - /etc/semsource/semengine-message.tier1.json
+      - --log-level
+      - info
+    depends_on:
+      nats:
+        condition: service_healthy
+        required: true
+      semembed:
+        condition: service_healthy
+        required: true
+    environment:
+      NATS_URL: nats://nats:4222
+      SEMSOURCE_LOG_LEVEL: info
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --tries=1
+        - --spider
+        - http://localhost:8080/source-manifest/status
+      timeout: 3s
+      interval: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      c360: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "18080"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.dGkd3w/config
+        target: /etc/semsource
+        read_only: true
+        bind: {}
+      - type: bind
+        source: /private/tmp/semselect-families/semengine-message
+        target: /workspace/semengine-message
+        read_only: true
+        bind: {}
+networks:
+  c360:
+    name: semselect-tier1-capture_c360
+    driver: bridge
+volumes:
+  nats-data:
+    name: semselect-tier1-capture_nats-data
+    driver: local

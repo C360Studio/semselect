@@ -1,0 +1,335 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semstreams-service",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "packet-only"
+  },
+  "packets_sha256": "2f0f381eddb0efdd449f3e74d6d41f25b5d351be5fd50e943a96bc494b5f8616",
+  "labels": [
+    {
+      "pair_hash": "bf7d1b75b24b00be5d469a1d8cab8ba7d36a3cb5bb6bf4a50cdcbfab77a84d81",
+      "rank": 1,
+      "label": "suppress",
+      "evidence": [
+        "metrics on the same concrete Server lifecycle",
+        "subscriber's durable consumers"
+      ],
+      "rationale": "Metrics HTTP startup and milestone consumer startup are different services sharing lifecycle scaffolding."
+    },
+    {
+      "pair_hash": "c8c7e09b106783e03b2f99342752b503fa1bdcb35dbb0e3c6f508d6e177a5dcd",
+      "rank": 2,
+      "label": "suppress",
+      "evidence": [
+        "sends an error event via SSE",
+        "logger.Warn(message"
+      ],
+      "rationale": "Watch-stream error delivery and generic logging are distinct error-reporting mechanisms."
+    },
+    {
+      "pair_hash": "bcde921a073d086d364833cfa61ccb3bdd0c69ae0b78b19b5be9d0e12e40fc76",
+      "rank": 3,
+      "label": "suppress",
+      "evidence": [
+        "cloneRulePackContracts",
+        "pendingServiceChanges"
+      ],
+      "rationale": "Copying projection contracts and detecting desired service configuration changes are unrelated configuration operations."
+    },
+    {
+      "pair_hash": "59392e04dbf5c879eb28d4189f8b9b439ad25f8908c78d16ae448767188cc68e",
+      "rank": 4,
+      "label": "suppress",
+      "evidence": [
+        "PreflightProjectionMutations",
+        "serviceChangeReconfigure"
+      ],
+      "rationale": "Rule-pack mutation admission and service activation diffs concern different configuration responsibilities."
+    },
+    {
+      "pair_hash": "0a11219ac0ecbb63e4eb6bdac7b6673d9716625669366239a43c2076febe2950",
+      "rank": 5,
+      "label": "suppress",
+      "evidence": [
+        "Start begins the heartbeat service.",
+        "subscriber's durable consumers"
+      ],
+      "rationale": "Heartbeat and milestone startup implement different services; common lifecycle checks are incidental."
+    },
+    {
+      "pair_hash": "41bb9de4b11de3e251e1e6cb0507393c6ee7f898c2721c63cd0ab6118fd0ed50",
+      "rank": 6,
+      "label": "suppress",
+      "evidence": [
+        "OpenAPI specification for a specific service",
+        "constructor for the given service name"
+      ],
+      "rationale": "Documentation lookup and executable factory lookup only share registry access patterns."
+    },
+    {
+      "pair_hash": "cb6d9658ebe1f5de2591c34557d0a7fe9ae4936a40b6f864c62a94247c3c201e",
+      "rank": 7,
+      "label": "suppress",
+      "evidence": [
+        "new log forwarder service",
+        "builds the MilestoneService"
+      ],
+      "rationale": "Constructors for unrelated service subjects share generic dependency setup."
+    },
+    {
+      "pair_hash": "968f5c4519787fcd209651e926ed80135729dcf37df32a622b1c0c51afe8691f",
+      "rank": 8,
+      "label": "keep",
+      "evidence": [
+        "reusable OpenAPI component definitions",
+        "parameter or response schema"
+      ],
+      "rationale": "Both describe the OpenAPI schema-definition responsibility."
+    },
+    {
+      "pair_hash": "c80faebf7171c998176efae110656c2ed7de0cb7e02b05f236652a19e10b097b",
+      "rank": 9,
+      "label": "suppress",
+      "evidence": [
+        "reader.Keys(ctx)",
+        "gets a KV bucket for watching"
+      ],
+      "rationale": "Graph triple enumeration and message-logger watch setup are different KV consumers."
+    },
+    {
+      "pair_hash": "801421c12ef4c23c8afc193e9bc80fc4bdb3cddb875c4d45cf3ad5abdb2e3a27",
+      "rank": 10,
+      "label": "defer",
+      "evidence": [
+        "file | log_forwarder.go",
+        "file | message_logger_kv_watch.go"
+      ],
+      "rationale": "Both bodies are absent; the headers do not establish how log forwarding and KV watches share a responsibility."
+    },
+    {
+      "pair_hash": "aa434ca31685ed5f96dbf310a96c0c7625be07666df053b8236da0632b29053a",
+      "rank": 11,
+      "label": "keep",
+      "evidence": [
+        "OpenAPI specification types for HTTP endpoint documentation",
+        "reusable OpenAPI component definitions"
+      ],
+      "rationale": "The file header describes the schema-documentation responsibility represented by ComponentsSpec."
+    },
+    {
+      "pair_hash": "0883271c14d37d1a5caa2f3f22c960a97eea2b71c893ffd74631831b881d25c4",
+      "rank": 12,
+      "label": "suppress",
+      "evidence": [
+        "m.managerHealthy = healthy",
+        "w.writeComponents(w.componentSnapshot())"
+      ],
+      "rationale": "Metrics server health state and boot component metric publication are separate telemetry subjects."
+    },
+    {
+      "pair_hash": "9702bf15cf700ad08b578b98ae8c57598c978538b7b386f1561d5f83e64f48ab",
+      "rank": 13,
+      "label": "suppress",
+      "evidence": [
+        "EnabledComponents: nil",
+        "materializeServiceConfig(resolved, \"component-manager\""
+      ],
+      "rationale": "Component enablement defaults and outer service-map activation are different configuration levels."
+    },
+    {
+      "pair_hash": "33799364d1e83783d200a6e10268e072cc0f9f837fe2a3923ae93d6ddafc54a6",
+      "rank": 14,
+      "label": "suppress",
+      "evidence": [
+        "canonicalServiceJSON",
+        "MarshalJSON implements json.Marshaler for OpenAPISpec"
+      ],
+      "rationale": "Canonical service configuration and OpenAPI serialization only share generic JSON handling."
+    },
+    {
+      "pair_hash": "95a28af7c0dba36b4b99ff66733d16bebc29a16958c17e47bd7de8905f0d0eba",
+      "rank": 15,
+      "label": "keep",
+      "evidence": [
+        "returns the OpenAPI specification",
+        "adds a path specification to the OpenAPI spec"
+      ],
+      "rationale": "Lookup and path construction belong to the same service OpenAPI specification lifecycle."
+    },
+    {
+      "pair_hash": "073a862467048e83d4b3bcdf8ac8fdd3ef36d545a142bec5c399c7fff93ba379",
+      "rank": 16,
+      "label": "suppress",
+      "evidence": [
+        "HeartbeatService",
+        "MilestoneService"
+      ],
+      "rationale": "Heartbeat startup and milestone shutdown concern different services despite lifecycle patterns."
+    },
+    {
+      "pair_hash": "5d74b71d763d4e6657986059aa392133c7516c9fe4ca1f80b7e2f63f7eb63e28",
+      "rank": 17,
+      "label": "suppress",
+      "evidence": [
+        "c.Interval",
+        "c.HTTPReadTimeout"
+      ],
+      "rationale": "Heartbeat cadence and HTTP read deadlines are different temporal settings."
+    },
+    {
+      "pair_hash": "e79bbe785523f796e86aaece98c2a64db7364bdd68cd02215b917e703fdbb523",
+      "rank": 18,
+      "label": "suppress",
+      "evidence": [
+        "newHeartbeatServiceForTest",
+        "NewMilestoneService"
+      ],
+      "rationale": "A heartbeat test constructor and milestone wrapper share constructor scaffolding for different services."
+    },
+    {
+      "pair_hash": "69d7bb2700529984d2df011d015c0e0da62c824806c8469e9e55aed754eb9dc6",
+      "rank": 19,
+      "label": "suppress",
+      "evidence": [
+        "Error stopping metrics server",
+        "stop milestone subscriber"
+      ],
+      "rationale": "Metrics HTTP teardown and subscriber cancellation have different owned resources and responsibilities."
+    },
+    {
+      "pair_hash": "8231a1cd507ace43345dc78be0e57431ca3755f62a5dc8d689f62b2634388b35",
+      "rank": 20,
+      "label": "suppress",
+      "evidence": [
+        "LogForwarder configuration",
+        "port the metrics server is listening on"
+      ],
+      "rationale": "Log policy and metrics listener configuration are different accessor subjects."
+    },
+    {
+      "pair_hash": "cf91cce7febc0371b5d9a3f86d1b7c39f8f1e7568789dca921ccceb761158cb9",
+      "rank": 21,
+      "label": "suppress",
+      "evidence": [
+        "configuration for the metrics service",
+        "configuration for the Manager HTTP server"
+      ],
+      "rationale": "The structs configure different server responsibilities despite similar port fields."
+    },
+    {
+      "pair_hash": "c6bfcf6b8c6717a5283a90a906fcab4b008af6670929133e6459d0c0a99019c0",
+      "rank": 22,
+      "label": "suppress",
+      "evidence": [
+        "validateKVWatchRequest",
+        "func (c ManagerConfig) Validate"
+      ],
+      "rationale": "KV-watch request checks and manager-server configuration checks validate different inputs."
+    },
+    {
+      "pair_hash": "06e9fc6f00c1089c6e76b46ac7e08ef4834f3f2b18ef49495a0f2d55d8eb649c",
+      "rank": 23,
+      "label": "suppress",
+      "evidence": [
+        "LogForwarder stopping",
+        "Error stopping metrics server"
+      ],
+      "rationale": "Log-forwarder and metrics teardown share only generic service lifecycle calls."
+    },
+    {
+      "pair_hash": "1ee14e6cb9707985a89942eab61615ff9697abd50330d8a5bdefe0eb05264ecf",
+      "rank": 24,
+      "label": "suppress",
+      "evidence": [
+        "logforwarderpolicy.ValidateFields",
+        "isValidWatchPattern(pattern)"
+      ],
+      "rationale": "Log policy validation and KV-watch path/pattern validation are different responsibilities."
+    },
+    {
+      "pair_hash": "8adcf9171aa78f47df4cf57e3f9a81087b60b284a5645ea196b00d981f359b3b",
+      "rank": 25,
+      "label": "suppress",
+      "evidence": [
+        "reader.Keys(ctx)",
+        "PreflightProjectionMutations"
+      ],
+      "rationale": "Graph catalog enumeration and rule-pack mutation admission are different graph-related operations."
+    },
+    {
+      "pair_hash": "a9946289db38caa40dd264cefa3b0f43dbfc909a5d456b3018e13466994db7ab",
+      "rank": 26,
+      "label": "suppress",
+      "evidence": [
+        "Starting pprof server",
+        "logger.Warn(message"
+      ],
+      "rationale": "Profiling-server startup and a generic storage warning helper share only incidental error reporting."
+    },
+    {
+      "pair_hash": "2bcc12d2086125c77b79dd16566a64a394b051323739f6b448520ac023c57ddc",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "reusable OpenAPI component definitions",
+        "#/components/schemas/ReviewRequest"
+      ],
+      "rationale": "Request-body schema references target the reusable component definitions represented by ComponentsSpec."
+    },
+    {
+      "pair_hash": "982ebe70153a60b6c9056106764c6b129e2b6a440655faa36fa0d0a969081a47",
+      "rank": 28,
+      "label": "keep",
+      "evidence": [
+        "all registered OpenAPI specifications",
+        "adds a path specification to the OpenAPI spec"
+      ],
+      "rationale": "Registry collection and path construction operate on the same service API documentation fragments."
+    },
+    {
+      "pair_hash": "67c19f37939844f48d30ae9f925d8ccc8fa6f6c0d897842255f9611382e64bcb",
+      "rank": 29,
+      "label": "suppress",
+      "evidence": [
+        "EnabledComponents: nil",
+        "activation defaults only"
+      ],
+      "rationale": "Component selection defaults and outer service-map resolution govern different configuration levels."
+    },
+    {
+      "pair_hash": "aec5013e802af3d62f4c356cb93246dbe76254793531e34f325c9324c9f8dbdd",
+      "rank": 30,
+      "label": "keep",
+      "evidence": [
+        "OpenAPI specification types for HTTP endpoint documentation",
+        "new OpenAPI specification fragment for a service"
+      ],
+      "rationale": "The file header describes the exact OpenAPI fragment-construction responsibility."
+    },
+    {
+      "pair_hash": "e4e11eb95f9b1bf66b4793123ff82a4456ce04f5e4076cf48b614abe928f8491",
+      "rank": 31,
+      "label": "keep",
+      "evidence": [
+        "nil means all components enabled",
+        "constructed boot components that implement T"
+      ],
+      "rationale": "Both govern the boot component inventory, selecting its enabled set and exposing constructed members for composition."
+    },
+    {
+      "pair_hash": "9039c624419b632dbe7825c36c0568865e08660b91a37166cb75f23328013f0d",
+      "rank": 32,
+      "label": "suppress",
+      "evidence": [
+        "m.managerHealthy = healthy",
+        "w.writeServices(w.serviceSnapshot())"
+      ],
+      "rationale": "Metrics-server health state and startup inventory metrics have different telemetry responsibilities."
+    }
+  ]
+}

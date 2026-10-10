@@ -1,0 +1,2728 @@
+{
+  "communities": [
+    {
+      "key": "0.semselect.semsource.code.semsource-cli.folder.cli",
+      "level": 0,
+      "id": "semselect.semsource.code.semsource-cli.folder.cli",
+      "members": [
+        "semselect.semsource.code.semsource-cli.folder.cli",
+        "semselect.semsource.code.semsource-cli.repo.semsource-cli",
+        "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-remove-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-validate-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL",
+        "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard",
+        "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards",
+        "semselect.semsource.golang.semsource-cli.function.cli-validate-go-Validate",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_audio-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_git-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_repo-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_url-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-init",
+        "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_git-go-gitWizard",
+        "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry"
+      ],
+      "value": {
+        "id": "semselect.semsource.code.semsource-cli.folder.cli",
+        "level": 0,
+        "members": [
+          "semselect.semsource.code.semsource-cli.folder.cli",
+          "semselect.semsource.code.semsource-cli.repo.semsource-cli",
+          "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-remove-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-validate-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards",
+          "semselect.semsource.golang.semsource-cli.function.cli-validate-go-Validate",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_audio-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_git-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_repo-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_url-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-init",
+          "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_git-go-gitWizard",
+          "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry"
+        ],
+        "statistical_summary": "Community of 27 entities including 13 functions, 5 methods, 4 files. Key themes: init, git, registry, function, validate.",
+        "keywords": [
+          "init",
+          "git",
+          "registry",
+          "function",
+          "validate",
+          "code.dependency.imports",
+          "gitwizard",
+          "wizards",
+          "file",
+          "sourcewizard"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+          "semselect.semsource.code.semsource-cli.folder.cli",
+          "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 27
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseConfigFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseDocsFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseGitFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseRepoFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseURLFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseVideoFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseConfigFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseDocsFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseGitFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseRepoFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseURLFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseVideoFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma"
+        ],
+        "statistical_summary": "Community of 13 entities including 12 functions, 1 file. Key themes: code.relationship.calls, add, error, sourceentry, external.",
+        "keywords": [
+          "code.relationship.calls",
+          "add",
+          "error",
+          "sourceentry",
+          "external",
+          "args",
+          "22z",
+          "flag",
+          "config",
+          "newflagset"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 13
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-DetectProject",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-DetectProject",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName"
+        ],
+        "statistical_summary": "Community of 6 entities including 5 functions, 1 file. Key themes: strings, detect, acme, code.relationship.calls, detectgitremote.",
+        "keywords": [
+          "strings",
+          "detect",
+          "acme",
+          "code.relationship.calls",
+          "detectgitremote",
+          "sanitizename",
+          "derivenamespace",
+          "orgfromremote",
+          "detectproject",
+          "git"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 6
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate"
+        ],
+        "statistical_summary": "Community of 6 entities including 5 functions, 1 file. Key themes: sources, code.relationship.calls, remove, int, external.",
+        "keywords": [
+          "sources",
+          "code.relationship.calls",
+          "remove",
+          "int",
+          "external",
+          "term",
+          "fmt",
+          "config",
+          "function",
+          "sourcelocation"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 6
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiBold",
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiDim",
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiGreen",
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiReset",
+        "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-term-go-NewTerm",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Confirm",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Header",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Info",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-MultiLine",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Println",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Prompt",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Success",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-readLine",
+        "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiBold",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiDim",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiGreen",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiReset",
+          "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-term-go-NewTerm",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Confirm",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Header",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Info",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-MultiLine",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Println",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Prompt",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Success",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-readLine",
+          "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term"
+        ],
+        "statistical_summary": "Community of 16 entities including 9 methods, 4 consts, 1 file. Key themes: term, const, line, readline, label.",
+        "keywords": [
+          "term",
+          "const",
+          "line",
+          "readline",
+          "label",
+          "code.doc.comment",
+          "prints",
+          "terminal",
+          "method",
+          "fprintf"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiBold",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiDim",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiGreen"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 16
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.const.cli-wizard-go-defaultConfigPath",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-Init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-InitQuick",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize",
+        "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.const.cli-wizard-go-defaultConfigPath",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-Init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-InitQuick",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize",
+          "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo"
+        ],
+        "statistical_summary": "Community of 12 entities including 9 functions, 1 struct, 1 const. Key themes: code.relationship.calls, code.relationship.references, term, external, projectinfo.",
+        "keywords": [
+          "code.relationship.calls",
+          "code.relationship.references",
+          "term",
+          "external",
+          "projectinfo",
+          "auto",
+          "config",
+          "fmt",
+          "info",
+          "function"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 12
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard"
+        ],
+        "statistical_summary": "Community of 8 entities including 5 methods, 1 struct, 1 file. Key themes: ast, astwizard, detectlanguage, term, method.",
+        "keywords": [
+          "ast",
+          "astwizard",
+          "detectlanguage",
+          "term",
+          "method",
+          "string",
+          "code.relationship.calls",
+          "struct",
+          "description",
+          "manifest"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 8
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard"
+        ],
+        "statistical_summary": "Community of 7 entities including 5 methods, 1 file, 1 struct. Key themes: audio, audiowizard, term, method, code.relationship.calls.",
+        "keywords": [
+          "audio",
+          "audiowizard",
+          "term",
+          "method",
+          "code.relationship.calls",
+          "description",
+          "struct",
+          "d1ade04f58fdc9bb7010d36b6e1a2c0ada43d6bcc8fe1521fb40e8cad04098cc",
+          "303439606265df5f",
+          "dbc6e2f456698f6844ef1517272b652128715d70ba41d5e887e3554a64dec284"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Name"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 7
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard"
+        ],
+        "statistical_summary": "Community of 8 entities including 5 methods, 1 function, 1 struct. Key themes: cfg, cfgwizard, detectconfigfiles, method, term.",
+        "keywords": [
+          "cfg",
+          "cfgwizard",
+          "detectconfigfiles",
+          "method",
+          "term",
+          "code.relationship.calls",
+          "string",
+          "struct",
+          "description",
+          "7e3687327e41cd7ed20c32577089b5a6182aee3e8c80f9bfbf6a9bd2e3d51ea4"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 8
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-detectDocPaths",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-detectDocPaths",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard"
+        ],
+        "statistical_summary": "Community of 9 entities including 5 methods, 2 functions, 1 file. Key themes: doc, docwizard, detectdocpaths, joinpaths, method.",
+        "keywords": [
+          "doc",
+          "docwizard",
+          "detectdocpaths",
+          "joinpaths",
+          "method",
+          "term",
+          "string",
+          "code.relationship.calls",
+          "struct",
+          "description"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-detectDocPaths",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 9
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard"
+        ],
+        "statistical_summary": "Community of 9 entities including 5 methods, 2 functions, 1 struct. Key themes: image, imagewizard, boolptr, detectimagepaths, bool.",
+        "keywords": [
+          "image",
+          "imagewizard",
+          "boolptr",
+          "detectimagepaths",
+          "bool",
+          "term",
+          "method",
+          "code.relationship.calls",
+          "string",
+          "description"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 9
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard"
+        ],
+        "statistical_summary": "Community of 7 entities including 5 methods, 1 struct, 1 file. Key themes: repo, repowizard, method, term, description.",
+        "keywords": [
+          "repo",
+          "repowizard",
+          "method",
+          "term",
+          "description",
+          "struct",
+          "5fbcb01dbb0b6d6c395ef0a89eb7409631a8791f203cca48660486cfa6a78222",
+          "497dafb9baa4c6b6311757cb3bafe942eaf0819dca511ad4f6a1f4882be313a8",
+          "e8e0c29f33631902888435376e4cf64239a37c2853297cbfbece2839cadffe72",
+          "4e3acba16bbaafb86f3131e15de2db341bce8e407d9d9902095e8606836e32c8"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 7
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard"
+        ],
+        "statistical_summary": "Community of 7 entities including 5 methods, 1 file, 1 struct. Key themes: url, urlwizard, method, term, description.",
+        "keywords": [
+          "url",
+          "urlwizard",
+          "method",
+          "term",
+          "description",
+          "struct",
+          "54708906a3ac1813e5d8114afd48d443f8e0ef32ff301d13ba3ad2ab531ec884",
+          "b6932c7aa250a06bd6aec42609a46638188ec5804f8322d0c14ce5a8b1575987",
+          "6be3fd5805ffe4adf115c5c6deaded87c9df92b25657cd4b78a0a9a6be761825",
+          "343a3d7d86ab82b1"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 7
+        }
+      }
+    },
+    {
+      "key": "0.semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "level": 0,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+        "level": 0,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard"
+        ],
+        "statistical_summary": "Community of 8 entities including 5 methods, 1 function, 1 struct. Key themes: video, videowizard, ffmpegavailable, term, method.",
+        "keywords": [
+          "video",
+          "videowizard",
+          "ffmpegavailable",
+          "term",
+          "method",
+          "bool",
+          "exec",
+          "code.relationship.calls",
+          "description",
+          "struct"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 8
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.code.semsource-cli.folder.cli",
+      "level": 1,
+      "id": "semselect.semsource.code.semsource-cli.folder.cli",
+      "members": [
+        "semselect.semsource.code.semsource-cli.folder.cli",
+        "semselect.semsource.code.semsource-cli.repo.semsource-cli",
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiBold",
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiDim",
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiGreen",
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiReset",
+        "semselect.semsource.golang.semsource-cli.file.cli-remove-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-validate-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate",
+        "semselect.semsource.golang.semsource-cli.function.cli-term-go-NewTerm",
+        "semselect.semsource.golang.semsource-cli.function.cli-validate-go-Validate",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_audio-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-detectDocPaths",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-init",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Confirm",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Header",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Info",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-MultiLine",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Println",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Prompt",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Success",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-readLine",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.code.semsource-cli.folder.cli",
+        "level": 1,
+        "members": [
+          "semselect.semsource.code.semsource-cli.folder.cli",
+          "semselect.semsource.code.semsource-cli.repo.semsource-cli",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiBold",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiDim",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiGreen",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiReset",
+          "semselect.semsource.golang.semsource-cli.file.cli-remove-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-validate-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate",
+          "semselect.semsource.golang.semsource-cli.function.cli-term-go-NewTerm",
+          "semselect.semsource.golang.semsource-cli.function.cli-validate-go-Validate",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_audio-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-detectDocPaths",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-init",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Confirm",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Header",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Info",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-MultiLine",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Println",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Prompt",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Success",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-readLine",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard"
+        ],
+        "statistical_summary": "Community of 57 entities including 25 methods, 15 functions, 7 files. Key themes: term, code.relationship.calls, method, string, code.dependency.imports.",
+        "keywords": [
+          "term",
+          "code.relationship.calls",
+          "method",
+          "string",
+          "code.dependency.imports",
+          "external",
+          "image",
+          "sources",
+          "bool",
+          "fmt"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 57
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "level": 1,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseConfigFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseDocsFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseGitFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseRepoFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseURLFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseVideoFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+        "level": 1,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseConfigFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseDocsFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseGitFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseRepoFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseURLFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseVideoFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma"
+        ],
+        "statistical_summary": "Community of 13 entities including 12 functions, 1 file. Key themes: code.relationship.calls, add, error, sourceentry, external.",
+        "keywords": [
+          "code.relationship.calls",
+          "add",
+          "error",
+          "sourceentry",
+          "external",
+          "args",
+          "22z",
+          "flag",
+          "config",
+          "parse"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 13
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "level": 1,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-DetectProject",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+        "level": 1,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-DetectProject",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo"
+        ],
+        "statistical_summary": "Community of 10 entities including 7 functions, 1 method, 1 struct. Key themes: code.relationship.references, code.relationship.calls, detect, git, strings.",
+        "keywords": [
+          "code.relationship.references",
+          "code.relationship.calls",
+          "detect",
+          "git",
+          "strings",
+          "remote",
+          "acme",
+          "external",
+          "path",
+          "filepath"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName",
+          "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 10
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "level": 1,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard",
+        "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_git-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_repo-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_url-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-init",
+        "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard",
+        "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+        "level": 1,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_git-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_repo-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_url-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-init",
+          "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard",
+          "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry"
+        ],
+        "statistical_summary": "Community of 11 entities including 8 functions, 1 file, 1 interface. Key themes: init, registry, wizards, function, sourcewizard.",
+        "keywords": [
+          "init",
+          "registry",
+          "wizards",
+          "function",
+          "sourcewizard",
+          "registersourcewizard",
+          "var",
+          "interface",
+          "source",
+          "private"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+          "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards",
+          "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 11
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "level": 1,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.const.cli-wizard-go-defaultConfigPath",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-Init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-InitQuick",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+        "level": 1,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.const.cli-wizard-go-defaultConfigPath",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-Init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-InitQuick",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize"
+        ],
+        "statistical_summary": "Community of 10 entities including 8 functions, 1 const, 1 file. Key themes: code.relationship.calls, term, external, fmt, config.",
+        "keywords": [
+          "code.relationship.calls",
+          "term",
+          "external",
+          "fmt",
+          "config",
+          "projectinfo",
+          "auto",
+          "function",
+          "sprintf",
+          "detection"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 10
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "level": 1,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+        "level": 1,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard"
+        ],
+        "statistical_summary": "Community of 8 entities including 5 methods, 1 struct, 1 file. Key themes: ast, astwizard, detectlanguage, term, method.",
+        "keywords": [
+          "ast",
+          "astwizard",
+          "detectlanguage",
+          "term",
+          "method",
+          "string",
+          "code.relationship.calls",
+          "struct",
+          "description",
+          "manifest"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 8
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "level": 1,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+        "level": 1,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard"
+        ],
+        "statistical_summary": "Community of 6 entities including 4 methods, 1 struct, 1 file. Key themes: doc, docwizard, method, struct, description.",
+        "keywords": [
+          "doc",
+          "docwizard",
+          "method",
+          "struct",
+          "description",
+          "8c9b65f3bde7093ecce137c9d6fe1490a8afdf336dafe3b25d7218d34607a230",
+          "6b8b53685f02ac0ad2873a98c7b2ca95acd1cac49b0c9f2680590c861c2b1d34",
+          "0541c374c331fa70bf86ad0fcfc81c4c17267e0bddc955325f0dfa635cb90436",
+          "f2ede0d2475c959e",
+          "8312e99c56dfeb2555c74475087f91da4c7ef944ecc05ce4f204b0a3ca61daec"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Name"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 6
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+      "level": 1,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_git-go-gitWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+        "level": 1,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_git-go-gitWizard"
+        ],
+        "statistical_summary": "Community of 6 entities including 4 methods, 1 file, 1 struct. Key themes: git, gitwizard, code.dependency.imports, method, description.",
+        "keywords": [
+          "git",
+          "gitwizard",
+          "code.dependency.imports",
+          "method",
+          "description",
+          "struct",
+          "b71928d35040f54029084fc113665d4be097b3ee8169c55b491ab54fbb870f1d",
+          "3e4f24c96c1b2653622ee3392f3b0e22e55833de9be1eea4d7f728047935639d",
+          "fc678414ed952c0e29ed5118b5cd63278283f613ed5babf0fd82bc597fd5f66d",
+          "94f748c53be53235"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_git-go-gitWizard",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Name"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 6
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "level": 1,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+        "level": 1,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard"
+        ],
+        "statistical_summary": "Community of 7 entities including 5 methods, 1 file, 1 struct. Key themes: repo, repowizard, method, term, description.",
+        "keywords": [
+          "repo",
+          "repowizard",
+          "method",
+          "term",
+          "description",
+          "struct",
+          "5fbcb01dbb0b6d6c395ef0a89eb7409631a8791f203cca48660486cfa6a78222",
+          "497dafb9baa4c6b6311757cb3bafe942eaf0819dca511ad4f6a1f4882be313a8",
+          "4e3acba16bbaafb86f3131e15de2db341bce8e407d9d9902095e8606836e32c8",
+          "3e71afe424a460105c147e6ff8f8ba57e46b0491dafc844c67c00fdd8c350876"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 7
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "level": 1,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+        "level": 1,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard"
+        ],
+        "statistical_summary": "Community of 7 entities including 5 methods, 1 file, 1 struct. Key themes: url, urlwizard, method, term, description.",
+        "keywords": [
+          "url",
+          "urlwizard",
+          "method",
+          "term",
+          "description",
+          "struct",
+          "8a801d5636a40694c7cc91a26a1de3e2779fd9ae194074fe7ec8387791da2233",
+          "552eb3c8365644dfc831c8293e8b4ddcbfc52611595d6ce04179cb0a6ed2f00f",
+          "343a3d7d86ab82b1",
+          "b6932c7aa250a06bd6aec42609a46638188ec5804f8322d0c14ce5a8b1575987"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 7
+        }
+      }
+    },
+    {
+      "key": "1.semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "level": 1,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+        "level": 1,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard"
+        ],
+        "statistical_summary": "Community of 8 entities including 5 methods, 1 struct, 1 file. Key themes: video, videowizard, ffmpegavailable, term, method.",
+        "keywords": [
+          "video",
+          "videowizard",
+          "ffmpegavailable",
+          "term",
+          "method",
+          "bool",
+          "exec",
+          "code.relationship.calls",
+          "description",
+          "struct"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 8
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.code.semsource-cli.folder.cli",
+      "level": 2,
+      "id": "semselect.semsource.code.semsource-cli.folder.cli",
+      "members": [
+        "semselect.semsource.code.semsource-cli.folder.cli",
+        "semselect.semsource.code.semsource-cli.repo.semsource-cli",
+        "semselect.semsource.golang.semsource-cli.file.cli-remove-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-validate-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-validate-go-Validate",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_audio-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-detectDocPaths",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_git-go-init",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_git-go-gitWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.code.semsource-cli.folder.cli",
+        "level": 2,
+        "members": [
+          "semselect.semsource.code.semsource-cli.folder.cli",
+          "semselect.semsource.code.semsource-cli.repo.semsource-cli",
+          "semselect.semsource.golang.semsource-cli.file.cli-remove-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-validate-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-validate-go-Validate",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_audio-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-detectDocPaths",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_git-go-init",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_git-go-gitWizard"
+        ],
+        "statistical_summary": "Community of 31 entities including 15 methods, 6 functions, 5 files. Key themes: term, code.dependency.imports, doc, method, audio.",
+        "keywords": [
+          "term",
+          "code.dependency.imports",
+          "doc",
+          "method",
+          "audio",
+          "code.relationship.calls",
+          "validate",
+          "git",
+          "file",
+          "audiowizard"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+          "semselect.semsource.code.semsource-cli.folder.cli",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 31
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseConfigFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseDocsFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseGitFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseRepoFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseURLFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseVideoFlags",
+        "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseConfigFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseDocsFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseGitFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseRepoFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseURLFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseVideoFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma"
+        ],
+        "statistical_summary": "Community of 13 entities including 12 functions, 1 file. Key themes: code.relationship.calls, add, error, sourceentry, external.",
+        "keywords": [
+          "code.relationship.calls",
+          "add",
+          "error",
+          "sourceentry",
+          "external",
+          "args",
+          "22z",
+          "flag",
+          "config",
+          "parse"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags",
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 13
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-DetectProject",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL",
+        "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect",
+        "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-DetectProject",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect",
+          "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo"
+        ],
+        "statistical_summary": "Community of 11 entities including 9 functions, 1 file, 1 struct. Key themes: code.relationship.references, code.relationship.calls, detect, strings, external.",
+        "keywords": [
+          "code.relationship.references",
+          "code.relationship.calls",
+          "detect",
+          "strings",
+          "external",
+          "remote",
+          "acme",
+          "git",
+          "projectinfo",
+          "function"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 11
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard",
+        "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_repo-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_url-go-init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-init",
+        "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard",
+        "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_repo-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_url-go-init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-init",
+          "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard",
+          "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry"
+        ],
+        "statistical_summary": "Community of 11 entities including 8 functions, 1 file, 1 interface. Key themes: init, registry, wizards, function, sourcewizard.",
+        "keywords": [
+          "init",
+          "registry",
+          "wizards",
+          "function",
+          "sourcewizard",
+          "registersourcewizard",
+          "var",
+          "interface",
+          "source",
+          "private"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+          "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards",
+          "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 11
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation",
+        "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate"
+        ],
+        "statistical_summary": "Community of 6 entities including 5 functions, 1 file. Key themes: sources, code.relationship.calls, remove, int, external.",
+        "keywords": [
+          "sources",
+          "code.relationship.calls",
+          "remove",
+          "int",
+          "external",
+          "term",
+          "fmt",
+          "config",
+          "function",
+          "sourcelocation"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 6
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiBold",
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiDim",
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiGreen",
+        "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiReset",
+        "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-term-go-NewTerm",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Confirm",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Header",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Info",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-MultiLine",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Println",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Prompt",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Success",
+        "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-readLine",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiBold",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiDim",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiGreen",
+          "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiReset",
+          "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-term-go-NewTerm",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Confirm",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Header",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Info",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-MultiLine",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Println",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Prompt",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Success",
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-readLine",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard"
+        ],
+        "statistical_summary": "Community of 24 entities including 14 methods, 4 consts, 2 files. Key themes: term, method, const, video, code.relationship.calls.",
+        "keywords": [
+          "term",
+          "method",
+          "const",
+          "video",
+          "code.relationship.calls",
+          "readline",
+          "line",
+          "label",
+          "code.doc.comment",
+          "string"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 24
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.const.cli-wizard-go-defaultConfigPath",
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-Init",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-InitQuick",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.const.cli-wizard-go-defaultConfigPath",
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-Init",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-InitQuick",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize"
+        ],
+        "statistical_summary": "Community of 8 entities including 6 functions, 1 const, 1 file. Key themes: code.relationship.calls, term, external, config, auto.",
+        "keywords": [
+          "code.relationship.calls",
+          "term",
+          "external",
+          "config",
+          "auto",
+          "printdetectionsummary",
+          "initquick",
+          "fmt",
+          "projectinfo",
+          "sprintf"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 8
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard"
+        ],
+        "statistical_summary": "Community of 8 entities including 5 methods, 1 file, 1 function. Key themes: ast, astwizard, detectlanguage, term, method.",
+        "keywords": [
+          "ast",
+          "astwizard",
+          "detectlanguage",
+          "term",
+          "method",
+          "string",
+          "code.relationship.calls",
+          "struct",
+          "description",
+          "81532f2b005cbe93cc51b41af613d5a977d1045cbea6dafd4775269e01bf1e3e"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 8
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard"
+        ],
+        "statistical_summary": "Community of 8 entities including 5 methods, 1 file, 1 function. Key themes: cfg, cfgwizard, detectconfigfiles, method, term.",
+        "keywords": [
+          "cfg",
+          "cfgwizard",
+          "detectconfigfiles",
+          "method",
+          "term",
+          "code.relationship.calls",
+          "string",
+          "description",
+          "struct",
+          "ec001a50ff4a4ac409fc2836e86612881024e2b63fb081a575f096abe3cda35e"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 8
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr",
+        "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard"
+        ],
+        "statistical_summary": "Community of 9 entities including 5 methods, 2 functions, 1 file. Key themes: image, imagewizard, detectimagepaths, boolptr, bool.",
+        "keywords": [
+          "image",
+          "imagewizard",
+          "detectimagepaths",
+          "boolptr",
+          "bool",
+          "term",
+          "method",
+          "code.relationship.calls",
+          "string",
+          "struct"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 9
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard"
+        ],
+        "statistical_summary": "Community of 7 entities including 5 methods, 1 struct, 1 file. Key themes: repo, repowizard, method, term, description.",
+        "keywords": [
+          "repo",
+          "repowizard",
+          "method",
+          "term",
+          "description",
+          "struct",
+          "e8e0c29f33631902888435376e4cf64239a37c2853297cbfbece2839cadffe72",
+          "905d513bb0f8b913",
+          "4e3acba16bbaafb86f3131e15de2db341bce8e407d9d9902095e8606836e32c8",
+          "497dafb9baa4c6b6311757cb3bafe942eaf0819dca511ad4f6a1f4882be313a8"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 7
+        }
+      }
+    },
+    {
+      "key": "2.semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "level": 2,
+      "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "members": [
+        "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Prompts",
+        "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-TypeKey",
+        "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard"
+      ],
+      "value": {
+        "id": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+        "level": 2,
+        "members": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Prompts",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-TypeKey",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard"
+        ],
+        "statistical_summary": "Community of 7 entities including 5 methods, 1 struct, 1 file. Key themes: url, urlwizard, method, term, description.",
+        "keywords": [
+          "url",
+          "urlwizard",
+          "method",
+          "term",
+          "description",
+          "struct",
+          "8a801d5636a40694c7cc91a26a1de3e2779fd9ae194074fe7ec8387791da2233",
+          "6be3fd5805ffe4adf115c5c6deaded87c9df92b25657cd4b78a0a9a6be761825",
+          "b6932c7aa250a06bd6aec42609a46638188ec5804f8322d0c14ce5a8b1575987",
+          "552eb3c8365644dfc831c8293e8b4ddcbfc52611595d6ce04179cb0a6ed2f00f"
+        ],
+        "rep_entities": [
+          "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+          "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name"
+        ],
+        "summary_status": "statistical",
+        "metadata": {
+          "size": 7
+        }
+      }
+    }
+  ],
+  "entity_to_community": {
+    "0": {
+      "semselect.semsource.code.semsource-cli.folder.cli": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.code.semsource-cli.repo.semsource-cli": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiBold": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiDim": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiGreen": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiReset": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.const.cli-wizard-go-defaultConfigPath": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-add-go": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-detect-go": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-registry-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-remove-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-sources-go": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-term-go": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-validate-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseConfigFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseDocsFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseGitFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseRepoFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseURLFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseVideoFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-DetectProject": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-term-go-NewTerm": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-validate-go-Validate": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-Init": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-InitQuick": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_audio-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-detectDocPaths": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_git-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_repo-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_url-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Confirm": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Header": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Info": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-MultiLine": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Println": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Prompt": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Success": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-readLine": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Available": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Description": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Name": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-TypeKey": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_git-go-gitWizard": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry": "semselect.semsource.code.semsource-cli.folder.cli"
+    },
+    "1": {
+      "semselect.semsource.code.semsource-cli.folder.cli": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.code.semsource-cli.repo.semsource-cli": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiBold": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiDim": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiGreen": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiReset": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.const.cli-wizard-go-defaultConfigPath": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-add-go": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-detect-go": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-registry-go": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-remove-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-sources-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-term-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-validate-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseConfigFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseDocsFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseGitFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseRepoFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseURLFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseVideoFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-DetectProject": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-term-go-NewTerm": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-validate-go-Validate": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-Init": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-InitQuick": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_audio-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-detectDocPaths": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_git-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_repo-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_url-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Confirm": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Header": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Info": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-MultiLine": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Println": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Prompt": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Success": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-readLine": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Description": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Name": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Prompts": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-TypeKey": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Name": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Prompts": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-TypeKey": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Prompts": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Description": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Name": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-TypeKey": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_git-go-gitWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go",
+      "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry": "semselect.semsource.golang.semsource-cli.file.cli-registry-go"
+    },
+    "2": {
+      "semselect.semsource.code.semsource-cli.folder.cli": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.code.semsource-cli.repo.semsource-cli": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiBold": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiDim": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiGreen": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.const.cli-term-go-ansiReset": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.const.cli-wizard-go-defaultConfigPath": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-add-go": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-detect-go": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-registry-go": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-remove-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-sources-go": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-term-go": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-validate-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_audio-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_doc-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_git-go": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.file.cli-wizard_video-go": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseASTFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseAudioFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseConfigFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseDocsFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseGitFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseRepoFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseURLFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseVideoFlags": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma": "semselect.semsource.golang.semsource-cli.file.cli-add-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-DetectProject": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-detect-go-sanitizeName": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-Sources": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceExtra": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-sources-go-truncate": "semselect.semsource.golang.semsource-cli.file.cli-sources-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-term-go-NewTerm": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-validate-go-Validate": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-Init": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-InitQuick": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printDetectionSummary": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize": "semselect.semsource.golang.semsource-cli.file.cli-wizard-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_audio-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-detectDocPaths": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_git-go-init": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-boolPtr": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-detectImagePaths": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_image-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_repo-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_url-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-init": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard": "semselect.semsource.golang.semsource-cli.file.cli-registry-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Confirm": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Header": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Info": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-MultiLine": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Println": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Prompt": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Success": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-readLine": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_ast-go-astWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Description": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Name": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Prompts": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-TypeKey": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Available": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Description": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Name": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-Prompts": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_doc-go-docWizard-TypeKey": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Available": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Description": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Name": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-TypeKey": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_url-go-urlWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Description": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Prompts": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-TypeKey": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo": "semselect.semsource.golang.semsource-cli.file.cli-detect-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-term-go-Term": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_ast-go-astWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_ast-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_audio-go-audioWizard": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_cfg-go-cfgWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_cfg-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_doc-go-docWizard": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_git-go-gitWizard": "semselect.semsource.code.semsource-cli.folder.cli",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_image-go-imageWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_image-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_repo-go-repoWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_repo-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_url-go-urlWizard": "semselect.semsource.golang.semsource-cli.file.cli-wizard_url-go",
+      "semselect.semsource.golang.semsource-cli.struct.cli-wizard_video-go-videoWizard": "semselect.semsource.golang.semsource-cli.file.cli-term-go",
+      "semselect.semsource.golang.semsource-cli.var.cli-registry-go-registry": "semselect.semsource.golang.semsource-cli.file.cli-registry-go"
+    }
+  },
+  "levels": [
+    {
+      "level": 0,
+      "communities": 14,
+      "members": 143,
+      "entity_mapped": 143,
+      "singletons": 0,
+      "largest": 27,
+      "size_histogram": {
+        "12": 1,
+        "13": 1,
+        "16": 1,
+        "27": 1,
+        "6": 2,
+        "7": 3,
+        "8": 3,
+        "9": 2
+      }
+    },
+    {
+      "level": 1,
+      "communities": 11,
+      "members": 143,
+      "entity_mapped": 143,
+      "singletons": 0,
+      "largest": 57,
+      "size_histogram": {
+        "10": 2,
+        "11": 1,
+        "13": 1,
+        "57": 1,
+        "6": 2,
+        "7": 2,
+        "8": 2
+      }
+    },
+    {
+      "level": 2,
+      "communities": 12,
+      "members": 143,
+      "entity_mapped": 143,
+      "singletons": 0,
+      "largest": 31,
+      "size_histogram": {
+        "11": 2,
+        "13": 1,
+        "24": 1,
+        "31": 1,
+        "6": 1,
+        "7": 2,
+        "8": 3,
+        "9": 1
+      }
+    }
+  ],
+  "malformed_keys": [],
+  "level0_covers_entity_states": true,
+  "level0_members_disjoint": true,
+  "level0_entity_map_consistent": true,
+  "hash": "0ac1e5ae52bfd5a9b6ea1911556b19ea7458ee6784d9b841df8a5f8cd07b40c5"
+}

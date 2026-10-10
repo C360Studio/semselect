@@ -1,0 +1,435 @@
+{
+  "policy": "exact-runtime-tokenization-v1",
+  "context": 4096,
+  "reserve": {
+    "qwen_json": 128,
+    "kev": 1
+  },
+  "inference_calls": 0,
+  "runtime": {
+    "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+    "locks": {
+      "qwen_json": {
+        "repository": "unsloth/Qwen3.5-4B-GGUF",
+        "revision": "e87f176479d0855a907a41277aca2f8ee7a09523",
+        "filename": "Qwen3.5-4B-Q4_K_M.gguf",
+        "size_bytes": 2740937888,
+        "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "license": "Apache-2.0",
+        "alias": "qwen3.5-4b",
+        "source_repository": "Qwen/Qwen3.5-4B",
+        "source_revision_note": "The GGUF publisher identifies Qwen/Qwen3.5-4B but does not pin its conversion source revision in the model card. The distributed GGUF bytes are pinned above.",
+        "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125",
+        "metadata_source": "https://huggingface.co/api/models/unsloth/Qwen3.5-4B-GGUF/revision/e87f176479d0855a907a41277aca2f8ee7a09523?blobs=true"
+      },
+      "kev": {
+        "repository": "ggml-org/Kev-4B-GGUF",
+        "revision": "d924f2e2c3872da8b8aaf3eb4453b4126deceb79",
+        "filename": "Kev-4B-Q4_K_M.gguf",
+        "size_bytes": 3033489824,
+        "sha256": "33ae6b18926502b2209a1bf7d3b61a350d65938441515c686bb87d226a19eff9",
+        "license": "Apache-2.0",
+        "alias": "semselect-kev-4b",
+        "conversion_source_revision": "6cfce5c2fa4b4bd64026336ab649c5ca78857d52",
+        "runtime_revision": "6c59c40076c00eab49754dc955d7652d93f9e125"
+      }
+    },
+    "kev_template": "<|fim_prefix|>{{ state }}<|fim_middle|>{{ instructions }}{% for o in options %}<|box_start|>{% if type == 'score' %}{% if o.description %}{{ o.description }}{% endif %}{% else %}{% if type != 'noul' %}{{ o.key }}{% elif o.key == 'true' %}yes{% else %}no{% endif %}{% if o.description %}: {{ o.description }}{% endif %}{% endif %}<|box_end|>{% endfor %}<|fim_suffix|>",
+    "qwen_json": {
+      "command": [
+        "/Users/coby/Code/c360/semselect/.native/build-6c59c40076c0/bin/llama-server",
+        "-m",
+        "/Users/coby/Code/c360/semselect/models/Qwen3.5-4B-Q4_K_M.gguf",
+        "--alias",
+        "qwen3.5-4b",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18389",
+        "-ngl",
+        "99",
+        "-t",
+        "4",
+        "-tb",
+        "4",
+        "-c",
+        "4096",
+        "-b",
+        "512",
+        "-ub",
+        "512",
+        "-np",
+        "1",
+        "--no-context-shift",
+        "--metrics",
+        "-lv",
+        "4",
+        "--chat-template-kwargs",
+        "{\"enable_thinking\":false}"
+      ],
+      "offload": "offloaded 33/33 layers to GPU",
+      "n_ctx": 4096
+    },
+    "kev": {
+      "command": [
+        "/Users/coby/Code/c360/semselect/.native/build-6c59c40076c0/bin/llama-server",
+        "-m",
+        "/Users/coby/Code/c360/semselect/models/Kev-4B-Q4_K_M.gguf",
+        "--alias",
+        "semselect-kev-4b",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18387",
+        "-ngl",
+        "99",
+        "-t",
+        "4",
+        "-tb",
+        "4",
+        "-c",
+        "4096",
+        "-b",
+        "512",
+        "-ub",
+        "512",
+        "-np",
+        "1",
+        "--no-context-shift",
+        "--metrics",
+        "-lv",
+        "4"
+      ],
+      "offload": "offloaded 33/33 layers to GPU",
+      "n_ctx": 4096
+    }
+  },
+  "families": [
+    {
+      "family": "semengine-message",
+      "split": "development",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 569,
+          "median": 813,
+          "max": 1561,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 538,
+          "median": 782,
+          "max": 1530,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 338,
+        "median": 508,
+        "max": 1165,
+        "requests": 41,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 3.253
+    },
+    {
+      "family": "semengine-natsclient",
+      "split": "development",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 502,
+          "median": 674,
+          "max": 2027,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 471,
+          "median": 643,
+          "max": 1996,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 320,
+        "median": 479,
+        "max": 1873,
+        "requests": 47,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 2.948
+    },
+    {
+      "family": "semselect-docs",
+      "split": "development",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 483,
+          "median": 982,
+          "max": 1833,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 452,
+          "median": 951,
+          "max": 1802,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 277,
+        "median": 678,
+        "max": 1255,
+        "requests": 53,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 3.326
+    },
+    {
+      "family": "semselect-service",
+      "split": "development",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 413,
+          "median": 785,
+          "max": 1958,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 382,
+          "median": 754,
+          "max": 1927,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 293,
+        "median": 492,
+        "max": 1308,
+        "requests": 28,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 2.826
+    },
+    {
+      "family": "semsource-cli",
+      "split": "held-out",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 430,
+          "median": 765,
+          "max": 1627,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 399,
+          "median": 734,
+          "max": 1596,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 281,
+        "median": 568,
+        "max": 1189,
+        "requests": 35,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 2.8
+    },
+    {
+      "family": "semsource-source-manifest",
+      "split": "held-out",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 513,
+          "median": 839,
+          "max": 1403,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 482,
+          "median": 808,
+          "max": 1372,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 315,
+        "median": 546,
+        "max": 1170,
+        "requests": 54,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 3.211
+    },
+    {
+      "family": "semsource-ui",
+      "split": "held-out",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 477,
+          "median": 728,
+          "max": 2292,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 446,
+          "median": 697,
+          "max": 2261,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 311,
+        "median": 481,
+        "max": 2316,
+        "requests": 41,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 3.116
+    },
+    {
+      "family": "semstreams-agentic-loop",
+      "split": "held-out",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 681,
+          "median": 1487,
+          "max": 2303,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 650,
+          "median": 1456,
+          "max": 2272,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 450,
+        "median": 758,
+        "max": 2423,
+        "requests": 52,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 3.455
+    },
+    {
+      "family": "semstreams-component",
+      "split": "held-out",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 430,
+          "median": 651,
+          "max": 1588,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 399,
+          "median": 620,
+          "max": 1557,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 271,
+        "median": 455,
+        "max": 1361,
+        "requests": 37,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 3.143
+    },
+    {
+      "family": "semstreams-graph-clustering",
+      "split": "held-out",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 511,
+          "median": 911,
+          "max": 2205,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 480,
+          "median": 880,
+          "max": 2174,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 339,
+        "median": 594,
+        "max": 2135,
+        "requests": 50,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 3.338
+    },
+    {
+      "family": "semstreams-rule",
+      "split": "held-out",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 527,
+          "median": 982,
+          "max": 1745,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 496,
+          "median": 951,
+          "max": 1714,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 360,
+        "median": 627,
+        "max": 1446,
+        "requests": 47,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 3.456
+    },
+    {
+      "family": "semstreams-service",
+      "split": "held-out",
+      "all_fit": true,
+      "pairs": {
+        "qwen_json": {
+          "min": 539,
+          "median": 793,
+          "max": 1501,
+          "out_of_profile": 0
+        },
+        "kev": {
+          "min": 508,
+          "median": 762,
+          "max": 1470,
+          "out_of_profile": 0
+        }
+      },
+      "bundles_kev": {
+        "min": 363,
+        "median": 530,
+        "max": 995,
+        "requests": 47,
+        "out_of_profile": 0
+      },
+      "bytes_per_qwen_token": 3.099
+    }
+  ],
+  "all_fit": true,
+  "wall_seconds": 3.8
+}

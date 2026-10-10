@@ -1,0 +1,209 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semengine-natsclient",
+    "split": "development",
+    "role": "one subject with boilerplate hubs",
+    "language": "Go + Markdown",
+    "repo": "https://github.com/C360Studio/semengine",
+    "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semengine-natsclient",
+    "include": [
+      "natsclient/README.md",
+      "natsclient/client.go",
+      "natsclient/doc.go",
+      "natsclient/errors.go",
+      "natsclient/heartbeat.go",
+      "natsclient/kv.go",
+      "natsclient/options.go",
+      "natsclient/trace.go"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "natsclient/README.md",
+      "natsclient/client.go",
+      "natsclient/doc.go",
+      "natsclient/errors.go",
+      "natsclient/heartbeat.go",
+      "natsclient/kv.go",
+      "natsclient/options.go",
+      "natsclient/trace.go"
+    ],
+    "workspace_sha256": "160273dacc04ca4fca0f23f9e47fd6680c2eaa70397d474626b32d176d65d725",
+    "entities_total": 226,
+    "entities_by_type": {
+      "chunk": 20,
+      "const": 24,
+      "doc": 1,
+      "file": 7,
+      "folder": 1,
+      "function": 45,
+      "interface": 1,
+      "method": 101,
+      "repo": 1,
+      "struct": 11,
+      "type": 3,
+      "var": 11
+    },
+    "entities_by_domain": {
+      "code": 2,
+      "golang": 203,
+      "web": 21
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 226,
+      "edges": 805,
+      "induced_edges": 614,
+      "cross_system_edges": 0,
+      "dangling_edges": 191,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 235,
+        "code.relationship.parameter": 8,
+        "code.relationship.receiver": 101,
+        "code.relationship.references": 5,
+        "code.relationship.returns": 28,
+        "code.structure.belongs": 224,
+        "code.structure.contains": 204
+      },
+      "non_containment_edges": 377
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "natsclient"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*"
+        ],
+        "max_file_bytes": null,
+        "files": 27,
+        "entities": 653
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "natsclient/README.md",
+          "natsclient/client.go",
+          "natsclient/doc.go",
+          "natsclient/errors.go",
+          "natsclient/heartbeat.go",
+          "natsclient/kv.go",
+          "natsclient/options.go",
+          "natsclient/trace.go"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*"
+        ],
+        "max_file_bytes": null,
+        "files": 8,
+        "entities": 226
+      }
+    ],
+    "notes": "natsclient/ is one directory, so it is trimmed by file to the subject its README documents: the Client connection hub (client.go), its options, errors, heartbeat, the KVStore abstraction (kv.go), tracing and the package doc. Stream, consumer, delivery-settlement, request, KV key-contract/spec/retention, JetStream metrics and the storage_* observability files are excluded; references to them are dangling edges.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semengine-natsclient",
+    "split": "development",
+    "repository": "semengine",
+    "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+    "include": [
+      "natsclient/README.md",
+      "natsclient/client.go",
+      "natsclient/doc.go",
+      "natsclient/errors.go",
+      "natsclient/heartbeat.go",
+      "natsclient/kv.go",
+      "natsclient/options.go",
+      "natsclient/trace.go"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": true,
+    "has_docs": true,
+    "files": [
+      {
+        "path": "natsclient/README.md",
+        "bytes": 11094,
+        "sha256": "1546ce134669fdc2a727b49087c0580c9da7ac4a609ce8c39adb2e161ee1154a"
+      },
+      {
+        "path": "natsclient/client.go",
+        "bytes": 73652,
+        "sha256": "c38f988f064bfc7cf2ebf5bcfb69e98132e62964adeb6d3f622a5a38bb5cec36"
+      },
+      {
+        "path": "natsclient/doc.go",
+        "bytes": 20310,
+        "sha256": "a5aee6f4d1f6b8a422804a7279d19221f6ecd61447d7eed15c2f0bb66d059e56"
+      },
+      {
+        "path": "natsclient/errors.go",
+        "bytes": 15408,
+        "sha256": "4d94c9d4c818782150169341a3ad29269de945fa889c3b9dc3454b4ffcccbb2a"
+      },
+      {
+        "path": "natsclient/heartbeat.go",
+        "bytes": 975,
+        "sha256": "8cba341c4f3db214b5de0b86a234a3ea564dea79f11fd71ffbacac5e85950671"
+      },
+      {
+        "path": "natsclient/kv.go",
+        "bytes": 26662,
+        "sha256": "303fe4d889cc865859117a826da2d30694a777978dbc4886add0c81e2c17edb1"
+      },
+      {
+        "path": "natsclient/options.go",
+        "bytes": 3137,
+        "sha256": "ade95167a21e07c534974a38d4e9e4f1de3925d06a77ae0bdd4aa92af13d37fa"
+      },
+      {
+        "path": "natsclient/trace.go",
+        "bytes": 5349,
+        "sha256": "632862f5cc6f28259f850cc085d0d3f5e3aafda72530b8da9532ce0e9c3444a1"
+      }
+    ],
+    "workspace_sha256": "160273dacc04ca4fca0f23f9e47fd6680c2eaa70397d474626b32d176d65d725"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.fI4YKZ/config/semengine-natsclient.tier1.json",
+    "sha256": "3263e0bb7d43055f362c71b7ba28283072aa647e5563448cb854c22f31ccf144",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}

@@ -1,0 +1,2 @@
+hydrate: 226 entity states (1287657 bytes), 204 with a body handle, 204 distinct bodies
+hydrate: 204 bodies fetched (70167 bytes), 0 missing, 0 oversize; checks map[all_handles_resolved:true all_states_parse:true handles_name_object_store:true]

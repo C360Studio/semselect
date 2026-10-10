@@ -1,0 +1,244 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semselect-service",
+  "split": "development",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "e020f914fb7439d83fffff160c03a0dfa8115a6f5479b1b1111794dcb9fcbfd5",
+  "constraints": [
+    {
+      "id": "pos-01",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-validate",
+      "b": "semselect.semsource.golang.semselect-service.function.internal-guard-json-go-checkJSON",
+      "evidence": [
+        "internal/guard/guard.go:84-87",
+        "internal/guard/json.go:12-15"
+      ],
+      "rationale": "validate's first step is checkJSON, and json.go's header comment explains the key inspection (case-sensitive names, duplicate keys, original byte order) that the struct decode inside validate cannot do. Changing what the guard accepts means changing both."
+    },
+    {
+      "id": "pos-02",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semselect-service.struct.internal-guard-guard-go-Request",
+      "b": "semselect.semsource.golang.semselect-service.function.internal-guard-json-go-checkJSON",
+      "evidence": [
+        "internal/guard/guard.go:44-48",
+        "internal/guard/json.go:49-50"
+      ],
+      "rationale": "checkJSON hard-codes the top-level key set state/model/questions as string literals that must mirror Request's JSON tags. Adding or renaming a Request field without updating checkJSON makes the guard reject valid bodies, so the two carry one contract."
+    },
+    {
+      "id": "pos-03",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-decode",
+      "b": "semselect.semsource.golang.semselect-service.function.internal-guard-json-go-checkJSON",
+      "evidence": [
+        "internal/guard/guard.go:72-82",
+        "internal/guard/json.go:12-14",
+        "internal/guard/json.go:74-76"
+      ],
+      "rationale": "These are the two halves of strict request parsing: decode rejects unknown fields and trailing values through the struct decoder, and checkJSON exists precisely because that decoder tolerates case variants and duplicate keys. Both repeat the exactly-one-JSON-value rule, so a reader of either needs the other to see why."
+    },
+    {
+      "id": "pos-04",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semselect-service.function.cmd-semselect-main-go-main",
+      "b": "semselect.semsource.golang.semselect-service.struct.internal-guard-guard-go-Config",
+      "evidence": [
+        "cmd/semselect/main.go:70",
+        "internal/guard/guard.go:22-28"
+      ],
+      "rationale": "main is the only producer of guard.Config, mapping SEMSELECT_UPSTREAM, SEMSELECT_MODEL, SEMSELECT_TIMEOUT and the JSON logger onto its fields. A new Config field needs a new environment mapping in main; the type and its consumer are one configuration responsibility."
+    },
+    {
+      "id": "pos-05",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semselect-service.chunk.README-md-0025",
+      "b": "semselect.semsource.golang.semselect-service.function.cmd-semselect-main-go-main",
+      "evidence": [
+        "README.md:413-417",
+        "cmd/semselect/main.go:47",
+        "cmd/semselect/main.go:65-70"
+      ],
+      "rationale": "The configuration table documents SEMSELECT_TIMEOUT as an upstream deadline that is positive and at most 5m, which is exactly the bound main enforces before exiting, and the section goes on to name the standalone guard's listener, upstream and model variables that main reads with those defaults. The passage documents main's startup contract."
+    },
+    {
+      "id": "pos-06",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semselect-service.chunk.README-md-0001",
+      "b": "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-ServeHTTP",
+      "evidence": [
+        "README.md:21-24",
+        "internal/guard/guard.go:216-224"
+      ],
+      "rationale": "The passage explains the shape of every measured latency by the guard admitting one inference and answering a second with HTTP 429. ServeHTTP's non-blocking send on the busy channel, with the 429 and Retry-After reply, is that admission rule."
+    },
+    {
+      "id": "pos-07",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semselect-service.chunk.README-md-0026",
+      "b": "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-ServeHTTP",
+      "evidence": [
+        "README.md:455-462",
+        "internal/guard/guard.go:155-174",
+        "internal/guard/guard.go:194"
+      ],
+      "rationale": "The bullets document GET /health, /ready, /v1/models, /metrics, /metrics/runtime and the status/duration JSON logs that carry no input text; ServeHTTP's GET switch and its deferred decision_request log line implement each one. Someone changing an endpoint needs the documented meaning, and vice versa."
+    },
+    {
+      "id": "pos-08",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semselect-service.chunk.README-md-0015",
+      "b": "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-validate",
+      "evidence": [
+        "README.md:317-321",
+        "internal/guard/guard.go:108-143"
+      ],
+      "rationale": "The primitive table defines Choice as named candidates with descriptions, Score as ordered level descriptions and Noul as a yes/no proposition with optional descriptions; validate's switch on question type enforces exactly those criteria shapes and rejects any other type. The table is the documented contract that validate's branches encode."
+    },
+    {
+      "id": "pos-09",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-New",
+      "b": "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-forward",
+      "evidence": [
+        "internal/guard/guard.go:61-64",
+        "internal/guard/guard.go:258-261"
+      ],
+      "rationale": "One policy split across two functions: New replaces the client's CheckRedirect so no upstream redirect is followed, and forward then turns any 3xx that reaches it into a 502 'unexpected runtime redirect'. The 3xx branch in forward only exists because of the client New builds."
+    },
+    {
+      "id": "pos-10",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semselect-service.function.cmd-semselect-main-go-main",
+      "b": "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-forward",
+      "evidence": [
+        "cmd/semselect/main.go:65-75",
+        "internal/guard/guard.go:229-230",
+        "internal/guard/guard.go:242-246"
+      ],
+      "rationale": "The deadline main parses from SEMSELECT_TIMEOUT is the context timeout forward applies to the upstream call and the basis of the server WriteTimeout (timeout plus 20s) that leaves room to write forward's 504. Changing the deadline semantics in forward requires revisiting main's server timeouts."
+    },
+    {
+      "id": "neg-01",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semselect-service.function.cmd-semselect-main-go-listenConfig",
+      "b": "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-New",
+      "evidence": [
+        "cmd/semselect/main.go:25-33",
+        "internal/guard/guard.go:50-54"
+      ],
+      "rationale": "Both parse a network address string at startup and reject it with a 'must be ...' error, so they read as the same address-validation boilerplate. listenConfig derives the guard's own loopback readiness URL for the healthcheck subcommand, while New validates the upstream runtime origin the guard proxies to; they govern opposite ends of the connection."
+    },
+    {
+      "id": "neg-02",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-validate",
+      "b": "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-New",
+      "evidence": [
+        "internal/guard/guard.go:50-57",
+        "internal/guard/guard.go:84-100",
+        "internal/guard/guard.go:211-214"
+      ],
+      "rationale": "They share the file, the validator role and the errors.New('... must be ...') style, so a shallow reader files both under 'validation'. New checks operator configuration once and a failure exits the process; validate checks every caller body against the API profile and a failure is a 400 to that caller. Different trust boundary, different failure mode."
+    },
+    {
+      "id": "neg-03",
+      "polarity": "negative",
+      "a": "semselect.semsource.web.semselect-service.chunk.README-md-0003",
+      "b": "semselect.semsource.golang.semselect-service.struct.internal-guard-guard-go-Config",
+      "evidence": [
+        "README.md:76-82",
+        "internal/guard/guard.go:22-28",
+        "internal/guard/guard.go:92-94"
+      ],
+      "rationale": "The shared word is 'model'. The passage compares two candidate models' measured quality and latency as evaluation findings, whereas Config.Model is the deployment's expected model alias that validate requires requests to repeat. A community joining Qwen-versus-Kev results to the guard's operator settings would mix evidence with configuration."
+    },
+    {
+      "id": "neg-04",
+      "polarity": "negative",
+      "a": "semselect.semsource.web.semselect-service.chunk.README-md-0005",
+      "b": "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-forward",
+      "evidence": [
+        "README.md:119-122",
+        "internal/guard/guard.go:229-230",
+        "internal/guard/guard.go:242-246"
+      ],
+      "rationale": "Both put a time limit on a request: the passage's 250 ms median / 750 ms p95 'latency budget' and forward's deadline that becomes a 504. The README budget is a qualification criterion for an evaluation contract on a router task; forward's timeout is the operational upstream deadline of the service, unrelated to whether any model qualified."
+    },
+    {
+      "id": "neg-05",
+      "polarity": "negative",
+      "a": "semselect.semsource.web.semselect-service.chunk.README-md-0014",
+      "b": "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-ServeHTTP",
+      "evidence": [
+        "README.md:302-308",
+        "internal/guard/guard.go:1",
+        "internal/guard/guard.go:176-184"
+      ],
+      "rationale": "The shared term is the endpoint path /v1/systemone (with /v1/decisions and /v1/score nearby). The passage inventories which third-party serving runtimes on Apple Silicon expose that path for guard-bypassed measurements, while ServeHTTP is the guard's own routing in front of the pinned llama.cpp runtime. Serving-path evidence and the service's HTTP surface are different subjects."
+    },
+    {
+      "id": "neg-06",
+      "polarity": "negative",
+      "a": "semselect.semsource.web.semselect-service.chunk.README-md-0030",
+      "b": "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-forward",
+      "evidence": [
+        "README.md:505-507",
+        "internal/guard/guard.go:228-231"
+      ],
+      "rationale": "Both describe a '/v1/systemone client': the passage proposes a small typed client inside SemEngine that would call semselect, and forward is literally an HTTP client call to /v1/systemone. The proposal is a conditional downstream integration in a sibling repository; forward is the guard's proxy to its upstream runtime. Same phrase, opposite direction and different owner."
+    },
+    {
+      "id": "neg-07",
+      "polarity": "negative",
+      "a": "semselect.semsource.web.semselect-service.chunk.README-md-0029",
+      "b": "semselect.semsource.golang.semselect-service.struct.internal-guard-guard-go-Guard",
+      "evidence": [
+        "README.md:483-486",
+        "internal/guard/guard.go:30-36",
+        "internal/guard/guard.go:172"
+      ],
+      "rationale": "Both talk in error counts and latency figures: the passage's accuracy, conditional error and p50/p95 latency reports, and Guard's requests, errors and durationNS counters rendered at /metrics. The report figures measure model quality in an evaluation harness; the struct's counters are the running service's HTTP bookkeeping. Grouping them would present operational counters as evaluation evidence."
+    },
+    {
+      "id": "neg-08",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-decode",
+      "b": "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-replyError",
+      "evidence": [
+        "internal/guard/guard.go:72-82",
+        "internal/guard/guard.go:148-152"
+      ],
+      "rationale": "Both are short helpers in the same file built on encoding/json, a Decoder and an Encoder in mirror image. decode is the strict parse of a caller's body that feeds validation; replyError is the local error envelope written on every failure path, including ones that never parsed anything. Shared library, unrelated responsibilities."
+    },
+    {
+      "id": "neg-09",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semselect-service.struct.internal-guard-guard-go-Question",
+      "b": "semselect.semsource.golang.semselect-service.struct.internal-guard-guard-go-Config",
+      "evidence": [
+        "internal/guard/guard.go:22-28",
+        "internal/guard/guard.go:38-42"
+      ],
+      "rationale": "Two small structs of mostly string fields declared a few lines apart in one file look like siblings. Question is the caller's per-question wire shape, owned with Request, validate and checkJSON; Config is the operator's startup settings, owned with main and New. A structural grouping of 'the structs in guard.go' would merge the request contract with deployment configuration."
+    },
+    {
+      "id": "neg-10",
+      "polarity": "negative",
+      "a": "semselect.semsource.web.semselect-service.chunk.README-md-0006",
+      "b": "semselect.semsource.golang.semselect-service.file.internal-guard-guard-go",
+      "evidence": [
+        "README.md:145",
+        "internal/guard/guard.go:1-2"
+      ],
+      "rationale": "The likeness is the protective-layer metaphor: an 'evidence gate' in the passage and the 'guard' package. The gate is a model-made semantic judgment in a synthesis experiment about unsupported assertions; the package comment says guard bounds the HTTP API and does not score models. A tool keyed on gate/guard vocabulary would join an evaluation finding to transport code."
+    }
+  ]
+}

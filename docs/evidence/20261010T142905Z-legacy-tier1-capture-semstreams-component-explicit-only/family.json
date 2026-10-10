@@ -1,0 +1,288 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semstreams-component",
+    "split": "held-out",
+    "role": "lifecycle boilerplate hubs",
+    "language": "Go",
+    "repo": "https://github.com/C360Studio/semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semstreams-component",
+    "include": [
+      "component"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "*.md",
+      "component/flowgraph/*",
+      "component/lifecycle_test_suite.go",
+      "component/test_helpers.go",
+      "component/port_codec.go",
+      "component/port_facts.go",
+      "component/schema.go",
+      "component/schema_tags.go",
+      "component/validation.go",
+      "component/config_validator.go"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "component/dependencies.go",
+      "component/discovery.go",
+      "component/doc.go",
+      "component/lifecycle.go",
+      "component/logging.go",
+      "component/metrics.go",
+      "component/port.go",
+      "component/port_file.go",
+      "component/port_httpclient.go",
+      "component/port_jetstream.go",
+      "component/port_kv.go",
+      "component/port_nats.go",
+      "component/port_network.go",
+      "component/port_provide.go",
+      "component/port_resolver.go",
+      "component/port_store.go",
+      "component/port_timer.go",
+      "component/ports.go",
+      "component/registerable.go",
+      "component/registry.go"
+    ],
+    "workspace_sha256": "b7fee656072eb3d805a36dce3dafb9906e6dc1fb0c6a7e935ffc95516d57c31a",
+    "entities_total": 226,
+    "entities_by_type": {
+      "const": 38,
+      "file": 20,
+      "folder": 1,
+      "function": 42,
+      "interface": 7,
+      "method": 76,
+      "repo": 1,
+      "struct": 33,
+      "type": 8
+    },
+    "entities_by_domain": {
+      "code": 2,
+      "golang": 224
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 226,
+      "edges": 820,
+      "induced_edges": 726,
+      "cross_system_edges": 0,
+      "dangling_edges": 94,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 122,
+        "code.relationship.embeds": 1,
+        "code.relationship.parameter": 58,
+        "code.relationship.receiver": 76,
+        "code.relationship.references": 60,
+        "code.relationship.returns": 53,
+        "code.structure.belongs": 225,
+        "code.structure.contains": 225
+      },
+      "non_containment_edges": 370
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "component"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "*.md"
+        ],
+        "max_file_bytes": null,
+        "files": 31,
+        "entities": 452
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "component"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "*.md",
+          "component/flowgraph/*",
+          "component/lifecycle_test_suite.go",
+          "component/test_helpers.go",
+          "component/port_codec.go",
+          "component/port_facts.go",
+          "component/schema.go",
+          "component/schema_tags.go",
+          "component/validation.go",
+          "component/config_validator.go"
+        ],
+        "max_file_bytes": null,
+        "files": 20,
+        "entities": 226
+      }
+    ],
+    "notes": "component/ is trimmed to component lifecycle, ports and the registry hub. Excluded: the flowgraph/ subpackage; lifecycle_test_suite.go and test_helpers.go, which are test support although not *_test.go; the port codec and port facts files; and the schema and validation files. References to them are dangling edges.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semstreams-component",
+    "split": "held-out",
+    "repository": "semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "include": [
+      "component"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "*.md",
+      "component/flowgraph/*",
+      "component/lifecycle_test_suite.go",
+      "component/test_helpers.go",
+      "component/port_codec.go",
+      "component/port_facts.go",
+      "component/schema.go",
+      "component/schema_tags.go",
+      "component/validation.go",
+      "component/config_validator.go"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": true,
+    "has_docs": false,
+    "files": [
+      {
+        "path": "component/dependencies.go",
+        "bytes": 6488,
+        "sha256": "ec535fc6e7e868f196ef6fdb0645ed76fb3bba75502c9fdcb294f99832751842"
+      },
+      {
+        "path": "component/discovery.go",
+        "bytes": 4421,
+        "sha256": "f2c7af51458dc7841509c8155a11d617882cf7dfa2de4432876eb6c28c9f24ff"
+      },
+      {
+        "path": "component/doc.go",
+        "bytes": 1389,
+        "sha256": "c688b9f712d273aabe943f56e251ad466bc274f0c095dc596eab3cb33839f8cc"
+      },
+      {
+        "path": "component/lifecycle.go",
+        "bytes": 3666,
+        "sha256": "42bba6807fd871ea5a964a5de405bd66ded52a02078d49ee148a297178935f5f"
+      },
+      {
+        "path": "component/logging.go",
+        "bytes": 842,
+        "sha256": "353b49993d79a7e66819161fefd706ce312dc5d4bff366c448e4ae36cd12d08a"
+      },
+      {
+        "path": "component/metrics.go",
+        "bytes": 3605,
+        "sha256": "30238ad9a4d3faffa4851e98e5b1a4c86e331b565326f4dd674bbe25f9ff4ed4"
+      },
+      {
+        "path": "component/port.go",
+        "bytes": 4168,
+        "sha256": "b9d9242916619f52d7c535cafef32f8469c215face3260769c5a9166b7942b1d"
+      },
+      {
+        "path": "component/port_file.go",
+        "bytes": 525,
+        "sha256": "6a31f4225f078379d12541c984133254b352434a3f60d1c68d463d88805427bf"
+      },
+      {
+        "path": "component/port_httpclient.go",
+        "bytes": 2405,
+        "sha256": "d68efdc31e1fdcbdd4095b5da2d6952fe5ed68b0a3671097dda9da7b005501a2"
+      },
+      {
+        "path": "component/port_jetstream.go",
+        "bytes": 7557,
+        "sha256": "631da281fc38a2724ea179754fc8e704e68fad6b0b18cd39f1e71b699ba8a517"
+      },
+      {
+        "path": "component/port_kv.go",
+        "bytes": 2113,
+        "sha256": "2df4e913791126c87f142b7e29f4441d4684048ba18ffe108690ce8f80a3a4c2"
+      },
+      {
+        "path": "component/port_nats.go",
+        "bytes": 1391,
+        "sha256": "9b252cf0d65e0013509acf145bf27520d8d81ad143bc896376d67e6ddc10d60d"
+      },
+      {
+        "path": "component/port_network.go",
+        "bytes": 653,
+        "sha256": "1890a3966e8449bff130ef712fccbdebed5c6740ea265f7ec6612cab835a8b1b"
+      },
+      {
+        "path": "component/port_provide.go",
+        "bytes": 1128,
+        "sha256": "9671e5a51d4d690359fe898b496fef00a24f1a93bfcecae3466e0b4e1beb83a7"
+      },
+      {
+        "path": "component/port_resolver.go",
+        "bytes": 6034,
+        "sha256": "1841d1d427d268d2a6c819e827e5e9323f445d83d8d1d24fb82a58d2bafff8dc"
+      },
+      {
+        "path": "component/port_store.go",
+        "bytes": 915,
+        "sha256": "fa50b750ccf28aaa6f6f5d5c1e959049f7a3372822169fe5a9a1311b7057fa6f"
+      },
+      {
+        "path": "component/port_timer.go",
+        "bytes": 630,
+        "sha256": "a56869a76bd3f69db756f509f7c5a67e30c318c978029a56624288c3c85a010a"
+      },
+      {
+        "path": "component/ports.go",
+        "bytes": 9222,
+        "sha256": "e48028c6900adaba3ba9d3798566ad207fbd334f1792349c574d031173598987"
+      },
+      {
+        "path": "component/registerable.go",
+        "bytes": 157,
+        "sha256": "a14504a7c52beb74e67cf15b06663ce5ba31c1f6448310e52d04393dade670be"
+      },
+      {
+        "path": "component/registry.go",
+        "bytes": 38517,
+        "sha256": "736a12a959900a91312f73c09733aeb803b710eb09b916df4af5439e8bc26daf"
+      }
+    ],
+    "workspace_sha256": "b7fee656072eb3d805a36dce3dafb9906e6dc1fb0c6a7e935ffc95516d57c31a"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.gXLL1J/config/semstreams-component.tier1.json",
+    "sha256": "b299bf7c54545068a65c92973bda27b33e96d51125efb1c8776a1c19f00b4a0f",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}

@@ -1,0 +1,4 @@
+time=2026-10-10T08:51:39.487-05:00 level=INFO msg="listed buckets" entities=206 embedded=206 swept=206 embedded_not_in_entity_states=0
+time=2026-10-10T08:51:39.565-05:00 level=INFO msg="similar queries" done=206 of=206
+time=2026-10-10T08:51:39.573-05:00 level=INFO msg="explicit-edge reads" endpoints=192 errors=0
+time=2026-10-10T08:51:39.576-05:00 level=INFO msg="capture written" output=/Users/coby/Code/c360/semselect/docs/evidence/20261010T135023Z-legacy-tier1-capture-semsource-ui-explicit-only/mutualknn mutual_pairs=472 failed=0 aborted=false

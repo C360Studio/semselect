@@ -1,0 +1,335 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semstreams-rule",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "packet-only"
+  },
+  "packets_sha256": "bdd24eb4aba871d01f9cf61ba65adab5a6be1158963db08abf1c674b6bb2f88a",
+  "labels": [
+    {
+      "pair_hash": "1babd5e06dfbb144d31b829a2c76c25f932a217a938279ecd070d3f25a95b347",
+      "rank": 1,
+      "label": "keep",
+      "evidence": [
+        "ruleFields projects an inbound message's payload",
+        "message.RuleReadable fields (see `ruleFields`)"
+      ],
+      "rationale": "The evaluation input explicitly receives the payload projection produced by this helper."
+    },
+    {
+      "pair_hash": "f62c37a20ad26ebf47614097768a76c3ed21efd1f916e3bb7337000bf4641f83",
+      "rank": 2,
+      "label": "suppress",
+      "evidence": [
+        "rule's description string",
+        "return s.phase"
+      ],
+      "rationale": "Cron rule description and participant lifecycle phase only share getter syntax."
+    },
+    {
+      "pair_hash": "b2aec783d09c6f32d2a79c2de37ecff3e5b16efe251580ffd7145400eed9d178",
+      "rank": 3,
+      "label": "suppress",
+      "evidence": [
+        "six canonical positions",
+        "suffix path under `$entity.lifecycle.`"
+      ],
+      "rationale": "Entity ID parts and participant lifecycle fields resolve different semantic namespaces."
+    },
+    {
+      "pair_hash": "df1531496aa74261f3685fa01fdf57c617c881d18c4fe44ef9d648b65f285930",
+      "rank": 4,
+      "label": "suppress",
+      "evidence": [
+        "$schedule.*",
+        "six canonical positions"
+      ],
+      "rationale": "Schedule context and canonical entity identity are distinct substitution sources; replacement syntax is incidental."
+    },
+    {
+      "pair_hash": "7ca44799a88abf4fdb3499eebfd54fbf3e5354c565461bed6baf4d5d0708ce2b",
+      "rank": 5,
+      "label": "suppress",
+      "evidence": [
+        "maps each token name",
+        "state-tracker key"
+      ],
+      "rationale": "Entity-part template values and whole-entity/pair persistence keys use identity for different responsibilities."
+    },
+    {
+      "pair_hash": "c8d4226f0a986a016084aa1896113dc4e32efe05224bd0853bcf915ddc577e0c",
+      "rank": 6,
+      "label": "suppress",
+      "evidence": [
+        "CronRule fires have no entity in scope",
+        "Entity-part substitution context"
+      ],
+      "rationale": "Cron schedule context explicitly lacks the entity context required by entity-part substitution."
+    },
+    {
+      "pair_hash": "d1131fb4d275194e19760b184ee6d867ec8d47f8cd2795073de93c21a4ed558c",
+      "rank": 7,
+      "label": "suppress",
+      "evidence": [
+        "last-fired timestamps for cron rules",
+        "rule match state persistence"
+      ],
+      "rationale": "Schedule timestamps and entity match transitions are different tracked facts despite identical KV holder shapes."
+    },
+    {
+      "pair_hash": "07d10f888dc17396d6535d0d2ef9d77f4e25590b95bf57bfa37a69d9cbcd25f6",
+      "rank": 8,
+      "label": "keep",
+      "evidence": [
+        "ValidateEntityIDPattern(declared)",
+        "contracts []projection.Contract"
+      ],
+      "rationale": "Both manage projection contracts, preserving their data and validating entity coverage."
+    },
+    {
+      "pair_hash": "8494b380aacbf5cf36e7f69be8fd53249ef3f162c22363fb6e47861ec85c114a",
+      "rank": 9,
+      "label": "keep",
+      "evidence": [
+        "Prometheus metrics for the cron scheduler",
+        "Metrics *cronMetrics"
+      ],
+      "rationale": "The scheduler configuration directly holds the metrics described by the file header."
+    },
+    {
+      "pair_hash": "e1f0ac2cc3a0a05a334148628810846fd206df6b98bda0a2ff1284a86f37939a",
+      "rank": 10,
+      "label": "suppress",
+      "evidence": [
+        "Entity-part substitution context",
+        "$entity.lifecycle.* substitution"
+      ],
+      "rationale": "ID-segment substitution and participant lifecycle lookup are different template namespaces rather than one implementation."
+    },
+    {
+      "pair_hash": "a2823340045b1e25d4d01c2a9fe6a8b3514b95c61c62b80de3e46b2ac7ab2fc4",
+      "rank": 11,
+      "label": "suppress",
+      "evidence": [
+        "parsed.Org",
+        "projection_contract is required"
+      ],
+      "rationale": "Entity ID decomposition and projection contract target resolution have different responsibilities."
+    },
+    {
+      "pair_hash": "270913d6bd4da8617198db68a815c97083ec40d255fb8f11faf4db78842370c0",
+      "rank": 12,
+      "label": "defer",
+      "evidence": [
+        "file | projection_derivation.go",
+        "file | state_tracker.go"
+      ],
+      "rationale": "Both bodies are missing, and their headers do not show a relationship between projection derivation and match-state persistence."
+    },
+    {
+      "pair_hash": "3308a4eb3acb35d6463af7464ecc2418d5b6a647c763f72985791dc05d4f2911",
+      "rank": 13,
+      "label": "keep",
+      "evidence": [
+        "type minimalProjectionContract struct",
+        "type projectionTargetGroup struct"
+      ],
+      "rationale": "Both represent named predicate groups in the projection contract derivation/target pipeline."
+    },
+    {
+      "pair_hash": "fcc236015db02d7fac93de3d5afbad97f486a95c2593e300927bee2001d71422",
+      "rank": 14,
+      "label": "suppress",
+      "evidence": [
+        "entityPartValues(parsed)",
+        "typedEntityTripleRe"
+      ],
+      "rationale": "String entity-ID parts and typed triple/message/state values are separate substitution capabilities."
+    },
+    {
+      "pair_hash": "3003e2b6bf638bdf0df881a16f6f8943cec333582f7e2196affc800a9bc7991e",
+      "rank": 15,
+      "label": "keep",
+      "evidence": [
+        "Inbound-message substitution context",
+        "expression.MessageFields(ec.MessageData)"
+      ],
+      "rationale": "Both resolve inbound $message fields in rule templates, with the typed path preserving values."
+    },
+    {
+      "pair_hash": "4cbca0344db5cc22a4b0de0139ffcbbc5e6f69f6d8f4f7cca1beaaf2f2538f4b",
+      "rank": 16,
+      "label": "keep",
+      "evidence": [
+        "payload.(message.RuleReadable)",
+        "messageFields expression.MessageFields"
+      ],
+      "rationale": "Payload projection provides the declared message fields used by action guard conditions."
+    },
+    {
+      "pair_hash": "8e3b5cf83b3fa176ff604286341eff2d9c365fd24e42cb549c50af9bb5431224",
+      "rank": 17,
+      "label": "keep",
+      "evidence": [
+        "NewCronScheduler builds a scheduler",
+        "Enabled reports whether the rule should be registered with the scheduler."
+      ],
+      "rationale": "Scheduler construction and cron-rule registration eligibility belong to the same scheduling responsibility."
+    },
+    {
+      "pair_hash": "b3a9dc6f7b906c8df1b0639b88d8dd01ee8996ad717eb4b26d1c7525b422607c",
+      "rank": 18,
+      "label": "defer",
+      "evidence": [
+        "file | projection_targets.go",
+        "file | state_tracker.go"
+      ],
+      "rationale": "The missing bodies leave projection target resolution's relationship to match-state tracking unestablished."
+    },
+    {
+      "pair_hash": "c1e4e913ee82a58499decbb9e8906fdc90ed715c380f56e9b49afe8a02cd78f0",
+      "rank": 19,
+      "label": "suppress",
+      "evidence": [
+        "return r.name",
+        "return s.workflow"
+      ],
+      "rationale": "A cron rule's display name and a participant workflow are different metadata subjects sharing getter syntax."
+    },
+    {
+      "pair_hash": "f71a140382f62a3c26039e01d53d4caa5627e74db51f455b8dbcdb1061593ab9",
+      "rank": 20,
+      "label": "keep",
+      "evidence": [
+        "returns the original cron expression",
+        "dispatches CronRule actions on a cron schedule"
+      ],
+      "rationale": "The accessor and scheduler concern the same rule schedule representation."
+    },
+    {
+      "pair_hash": "24ce25f349df8f94b7a01628975c4782478e8c433e1f6bc333aa425d2a09e269",
+      "rank": 21,
+      "label": "suppress",
+      "evidence": [
+        "scans entity.Triples",
+        "Manager.LookupByEntityID"
+      ],
+      "rationale": "Triple object retrieval and participant lifecycle lookup use different data sources and responsibilities."
+    },
+    {
+      "pair_hash": "8111416f62271bf0e14bd631448c2f7707fb12edd5ef3b3e213e13730665e74a",
+      "rank": 22,
+      "label": "keep",
+      "evidence": [
+        "validateDeclaredProjectionSuperset",
+        "cloneProjectionContracts"
+      ],
+      "rationale": "Both manage the same declared projection-contract data, validating coverage and preserving independent copies."
+    },
+    {
+      "pair_hash": "2d2084ed56eb53b98b17eda91d3431530e5be53e0c7539b452363ef6d0bfe047",
+      "rank": 23,
+      "label": "keep",
+      "evidence": [
+        "writes the resulting $entity.lifecycle.* keys into fields",
+        "pre-resolves the trigger entity's lifecycle state"
+      ],
+      "rationale": "The lifecycle population helper supplies the exact fields consumed by stateful evaluation."
+    },
+    {
+      "pair_hash": "bf7c3c5c5ad58422eebea42a1174e86ed7ebd1b537d2e2b125e56ef294425ac3",
+      "rank": 24,
+      "label": "keep",
+      "evidence": [
+        "ready for the scheduler to register and fire",
+        "collaborators NewCronScheduler needs"
+      ],
+      "rationale": "Both define the cron scheduling inputs and dependencies."
+    },
+    {
+      "pair_hash": "9bee9dd8cf14bf8fd30ceeb73d8e174d9d67361be24356d579544dfab7c8f18d",
+      "rank": 25,
+      "label": "keep",
+      "evidence": [
+        "payload.(message.RuleReadable)",
+        "When clauses can match against `$message.<field>`"
+      ],
+      "rationale": "Declared payload fields feed message-sensitive action evaluation and substitution."
+    },
+    {
+      "pair_hash": "d1cfeb95100c39eefc2d32bd464c646a6595118800f0a0644157daf16e7a31da",
+      "rank": 26,
+      "label": "suppress",
+      "evidence": [
+        "cron actions read schedule-shaped context",
+        "caller-only token in a rule that never has a CallerContext"
+      ],
+      "rationale": "Cron schedule substitution and caller identity substitution have distinct context availability."
+    },
+    {
+      "pair_hash": "90c86cefc2fa3a0a662eb39aabdb37875c8b79922b71c620cb193e6a084092f6",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "previous and current match state",
+        "previous field values from the state tracker"
+      ],
+      "rationale": "Both implement stateful rule transition detection from prior and current matches."
+    },
+    {
+      "pair_hash": "1d011fa4385ba3eb6f32c1733cd366bdba4784144d1518c07a0bacd03005843e",
+      "rank": 28,
+      "label": "suppress",
+      "evidence": [
+        "inbound message's payload",
+        "condition is currently matching for a specific entity or entity pair"
+      ],
+      "rationale": "Payload projection and durable entity match state are different evaluation inputs and responsibilities."
+    },
+    {
+      "pair_hash": "27b47ad4d19b30e616ab3ea3a2386f26b57cac238b928c0504f46a949fe68e6a",
+      "rank": 29,
+      "label": "suppress",
+      "evidence": [
+        "six canonical positions",
+        "first triple matching predicate"
+      ],
+      "rationale": "Canonical identity-part substitution and typed fact retrieval resolve different entity data."
+    },
+    {
+      "pair_hash": "4eaa95a8c3e6aa2860b921a81263b628eacfad690f3dc36a3d14e594abe6eef4",
+      "rank": 30,
+      "label": "suppress",
+      "evidence": [
+        "$message.<field_path>",
+        "entity.Triples"
+      ],
+      "rationale": "Message field extraction and entity triple retrieval concern distinct substitution sources."
+    },
+    {
+      "pair_hash": "120e8a07cf65f4d75a2b4a0781ce480c04840ccd2310b8f205942a250eb91a4f",
+      "rank": 31,
+      "label": "suppress",
+      "evidence": [
+        "$caller.*",
+        "cron-rule context"
+      ],
+      "rationale": "Caller identity and cron schedule context are separate substitution responsibilities."
+    },
+    {
+      "pair_hash": "e167c3b2744949a1e53daa6c6edde9d1b952736f9146f6819a2c9c63b68de7dc",
+      "rank": 32,
+      "label": "defer",
+      "evidence": [
+        "file | projection_derivation.go",
+        "file | stateful_evaluator.go"
+      ],
+      "rationale": "The files lack source, and the headers do not establish how projection derivation participates in stateful evaluation."
+    }
+  ]
+}
