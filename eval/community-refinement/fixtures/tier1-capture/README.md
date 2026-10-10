@@ -16,12 +16,15 @@ provider chain.
 | 1. Neighbours and partition | directed neighbour results (`k=8`, threshold 0.75 recorded), mutual pairs, explicit and identity memberships, effective weights, the structural-only partition, embedding identity (semembed image digest and model), source and config hashes | one legacy tier-1 stack **per family** ([`run-family.sh`](run-family.sh)), so the similarity index holds that family alone; [`cmd/structural`](../../legacy-capture/README.md#structural-freeze-cmdstructural) freezes the structural side, [`cmd/mutualknn`](../../legacy-capture/README.md) the candidates | runner built; four development families captured (below) |
 | 2. Candidate selection | at most 32 effective candidates, with the fraction of all candidates they cover | [`select_candidates.py`](select_candidates.py), deterministic and offline; order fixed by ruling 6 | frozen for the twelve families in [`selections/`](selections/) (below) |
 | 3. Reviewer packets | one packet per candidate, 8,192-byte state bound, per-entity bundle variant, both tokenizers verified | [`make_packets.py`](make_packets.py) over the hydration captures, [`verify_packets.py`](verify_packets.py) on both pinned runtimes | frozen for the twelve families in [`packets/`](packets/) (below) |
-| 4. Co-membership constraints | 20 per family, ten positive and ten negative | people, from full source evidence | not started |
-| 5. Retrieval queries | 6 per family with gold evidence sets | people | not started |
+| 4. Co-membership constraints | 20 per family, ten positive and ten negative | from full source evidence; annotators as in ruling 7 | not started |
+| 5. Retrieval queries | 6 per family with gold evidence sets | annotators as in ruling 7 | not started |
 
-Labels (`keep`, `suppress`, `defer`) follow step 3: annotator A is the owner;
-annotator B may be a Codex session; the owner resolves disagreements before
-inference, and the record discloses which labels are model-written (ruling 3).
+Labels (`keep`, `suppress`, `defer`) follow step 3. Ruling 7 (owner,
+2026-10-10) replaces the annotator arrangement of ruling 3: no person labels.
+Annotator A is an LLM (Claude Code subagents of this session, packet-only,
+one per family), annotator B is a Codex session reviewing blind by the same
+instructions, and a pair the two do not agree on stays `defer`. The record
+discloses that every label is model-written.
 
 ## Step 1 runner
 
@@ -344,6 +347,72 @@ containers, which is what a packet quoting one of them says.
 Totals: 384 pair packets, 12 truncated sources, 67 sources without a body (container entities), 532 bundle requests carrying 768 questions, 6 entities split across more than one request. Largest prompt: 2,303 tokens on the Qwen JSON arm and 2,272 on Kev for a pair, 2,423 on Kev for a bundle question, against a 4,096-token slot; every packet fits on both runtimes (`packets/tokens-rollup.json`, all_fit true).
 <!-- /step3-table -->
 
+## Step 3 labels: annotator A (2026-10-10)
+
+[`labels/PROMPT.md`](labels/PROMPT.md) is the labelling contract for both
+annotators: the packet state is the only admissible evidence, the three
+labels carry the protocol's definitions with worked distinctions (a passage
+and the code it documents is `keep`; shared vocabulary alone is `suppress`;
+a missing or cut source that hides the decisive part is `defer`), scores,
+ranks and partition flags are context and never evidence, and every label
+cites one to three verbatim quotes from the packet plus a rationale.
+[`label_sheet.py`](label_sheet.py) validates a sheet (every packet labelled
+once in rank order, labels in the set, the packets' sha256, every quote found
+verbatim in its packet with whitespace collapsed) and builds
+[`labels/index.json`](labels/index.json): per-family counts for A, and once
+annotator B's `labels/<family>.review.json` exists, agreement, the A/B
+confusion and the final labels (A's where they agree, `defer` otherwise) in
+`labels/<family>.final.json`. [`labels/REVIEW.md`](labels/REVIEW.md) tells
+the Codex session what to do; it labels blind before reading A's sheets.
+
+Annotator A ran as twelve Claude Code subagents, one per family, each given
+only `PROMPT.md`, the family's `index.json` and `pairs.jsonl`, and told to
+read nothing else and to use no prior knowledge of the repositories. The
+model is the session's default for subagents (Claude Fable 5.1 session, owner
+ruling of 2026-10-09 that this track may run on Fable). Each sheet passed the
+validator before it was kept.
+
+<!-- labels-table -->
+| Family | Split | keep | suppress | defer | Review |
+| --- | --- | --- | --- | --- | --- |
+| `semselect-service` | development | 7 | 12 | 13 | awaiting annotator B |
+| `semselect-docs` | development | 16 | 14 | 2 | awaiting annotator B |
+| `semengine-natsclient` | development | 16 | 12 | 4 | awaiting annotator B |
+| `semengine-message` | development | 23 | 6 | 3 | awaiting annotator B |
+| `semstreams-graph-clustering` | held-out | 11 | 16 | 5 | awaiting annotator B |
+| `semstreams-rule` | held-out | 23 | 9 | 0 | awaiting annotator B |
+| `semstreams-service` | held-out | 6 | 25 | 1 | awaiting annotator B |
+| `semstreams-component` | held-out | 18 | 13 | 1 | awaiting annotator B |
+| `semstreams-agentic-loop` | held-out | 22 | 10 | 0 | awaiting annotator B |
+| `semsource-source-manifest` | held-out | 18 | 11 | 3 | awaiting annotator B |
+| `semsource-cli` | held-out | 10 | 21 | 1 | awaiting annotator B |
+| `semsource-ui` | held-out | 12 | 15 | 5 | awaiting annotator B |
+
+Annotator A totals over 384 pairs: 182 keep, 164 suppress, 38 defer. Final labels wait for annotator B.
+<!-- /labels-table -->
+
+What the annotators reported, across families: the single-package families
+(`semstreams-rule`, `semstreams-agentic-loop`, `semsource-source-manifest`,
+`semstreams-graph-clustering`) make "one responsibility" rather than "one
+package" the operative grain, and most keep/suppress calls there turn on
+where a responsibility ends; sibling-shape pairs (port-kind structs,
+request/response structs against wire structs, lifecycle and getter
+boilerplate across services) were labelled `suppress` as shared pattern; a
+container side without a body went `defer` unless its header (doc comment,
+contained-symbol list) settled the subject, which drives the thirteen defers
+on `semselect-service`; cut sources were rarely decisive (one `defer` on
+`semstreams-graph-clustering` where the shown part of `Start` stops before
+the relevant code). Two packet defects surfaced that the serializer did not
+cause: the legacy TypeScript producer stores a one-line body for arrow
+function constants and some props destructures, so a "complete" source can
+fail to show the named entity (three defers on `semsource-ui`), and a
+multi-line Go comment cannot be quoted as one span because the `//` markers
+break the whitespace rule, so evidence came from doc fields or single lines.
+Each annotator flagged its judgement calls in the rationales. A check of the
+twelve annotators' tool calls shows reads of `PROMPT.md`, the family's
+`index.json` and `pairs.jsonl`, and the files they wrote, and no command
+naming a source file, an evidence directory or another family.
+
 ## Order
 
 Development families first (all four done), then the eight held-out
@@ -356,9 +425,12 @@ label exists.
 Steps 1 to 3 are done for the twelve sem* families: captures under the ruled
 explicit-only floor (the development families also under the artifact profile
 for the record), frozen 32-pair selections, hydration re-captures and frozen
-reviewer packets verified on both pinned runtimes. No label exists. Next: the
-label sheets for the 384 pair packets (annotator A the owner, annotator B a
-Codex session, owner adjudicating, held-out labels never tuning anything),
-then the co-membership constraints (step 4) and the retrieval queries (step
-5). The generalization families still need an export step before the runner
-accepts them.
+reviewer packets verified on both pinned runtimes, and annotator A's labels
+for all 384 pairs (ruling 7: model-written, packet-only, validated). No final
+label exists until annotator B, a Codex session following
+[`labels/REVIEW.md`](labels/REVIEW.md), has labelled blind and
+`label_sheet.py index` has merged the two sheets (agreement kept,
+disagreement `defer`). Then the co-membership constraints (step 4) and the
+retrieval queries (step 5) under the same annotator arrangement. The
+generalization families still need an export step before the runner accepts
+them.

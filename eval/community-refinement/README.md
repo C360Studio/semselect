@@ -140,7 +140,10 @@ product repositories only, assigned whole to a split, with two Apache-2.0
 public families (nats.go `micro`, commons-csv) kept as a generalization set
 outside the promotion rule; the second annotator may
 be a Codex session with the owner resolving disagreements, disclosed in the
-evidence record; the "distance from `0.8`" priority key below is reconsidered
+evidence record (superseded by ruling 7, 2026-10-10: no person labels;
+annotator A is an LLM, annotator B a Codex session reviewing blind by the
+same packet-only instructions, and a pair they do not agree on stays
+`defer`, every label disclosed as model-written); the "distance from `0.8`" priority key below is reconsidered
 after the first real tier-1 family capture, because on the measured embedder
 nearly every mutual pair scores above 0.85 (see [scale.md](scale.md)).
 
@@ -187,7 +190,9 @@ For each primary snapshot:
    label it `keep`, `suppress` or `defer`, citing evidence visible in that packet.
    Missing decisive evidence means `defer`, even when the full source would
    answer the question. Two annotators resolve disagreements before inference;
-   unresolved cases remain `defer`. Show disagreement counts. Structural or
+   unresolved cases remain `defer`. Show disagreement counts. Under ruling 7
+   both annotators are models and nobody adjudicates, so every disagreement
+   is unresolved and the final label is `defer`. Structural or
    embedding scores alone are not label evidence.
 4. Separately annotate 20 co-membership constraints, ten positive and ten
    negative, including pairs outside the review set. Positives mean useful to
