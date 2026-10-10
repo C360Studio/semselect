@@ -1,0 +1,227 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels",
+  "rule": "A where A and B agree, defer otherwise; held-out labels never tune anything",
+  "families": [
+    {
+      "family": "semengine-message",
+      "split": "development",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "keep": 23,
+        "suppress": 6,
+        "defer": 3
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semengine-natsclient",
+      "split": "development",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "suppress": 12,
+        "defer": 4,
+        "keep": 16
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semselect-docs",
+      "split": "development",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "keep": 16,
+        "suppress": 14,
+        "defer": 2
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semselect-service",
+      "split": "development",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "defer": 13,
+        "suppress": 12,
+        "keep": 7
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semsource-cli",
+      "split": "held-out",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "suppress": 21,
+        "keep": 10,
+        "defer": 1
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semsource-source-manifest",
+      "split": "held-out",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "keep": 18,
+        "defer": 3,
+        "suppress": 11
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semsource-ui",
+      "split": "held-out",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "suppress": 15,
+        "defer": 5,
+        "keep": 12
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-agentic-loop",
+      "split": "held-out",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "keep": 22,
+        "suppress": 10
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-component",
+      "split": "held-out",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "keep": 18,
+        "suppress": 13,
+        "defer": 1
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-graph-clustering",
+      "split": "held-out",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "keep": 11,
+        "suppress": 16,
+        "defer": 5
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-rule",
+      "split": "held-out",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "keep": 23,
+        "suppress": 9
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-service",
+      "split": "held-out",
+      "packets": 32,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "packet-only"
+      },
+      "a_counts": {
+        "suppress": 25,
+        "keep": 6,
+        "defer": 1
+      },
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    }
+  ],
+  "reviewed_families": 0,
+  "totals": {
+    "keep": 182,
+    "suppress": 164,
+    "defer": 38
+  }
+}
