@@ -1,0 +1,335 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semstreams-agentic-loop",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "packet-only"
+  },
+  "packets_sha256": "af2bac724421bc73f8cf95aa0fbb578235508204d89f0f5e6241d7cd7d4000c6",
+  "labels": [
+    {
+      "pair_hash": "a1b9cc0df4c490abcfccf03e5f78194a8deb85c4b6d9814176fd3b7baee1bf01",
+      "rank": 1,
+      "label": "keep",
+      "evidence": [
+        "a tool_call with no tool result",
+        "turn missing two tool messages"
+      ],
+      "rationale": "Both preserve complete tool-call/result batches when continuing or rebuilding a loop."
+    },
+    {
+      "pair_hash": "a1e3903fb156335ed030bcc54e279c00102ce74180717f2f2cd3be1015b157f1",
+      "rank": 2,
+      "label": "keep",
+      "evidence": [
+        "deferred continuation",
+        "PendingContinuation && entity.PendingContinuationRequestID == \"\""
+      ],
+      "rationale": "Both represent a continuation waiting for a model request to carry it."
+    },
+    {
+      "pair_hash": "8849ee9fd13770ac43fdaefc365a066016b6ddcc5ac8e346a8a4ec26d677ff38",
+      "rank": 3,
+      "label": "keep",
+      "evidence": [
+        "h.loopManager.QueuedToolCount(loopID)",
+        "return len(m.queuedToolCalls[loopID])"
+      ],
+      "rationale": "The queue dispatcher directly uses the count to bound its drain."
+    },
+    {
+      "pair_hash": "aeb5c851471216b51836c48c535d3fa41e57f14dcb656b37a722279944f45c6d",
+      "rank": 4,
+      "label": "keep",
+      "evidence": [
+        "PublishedRequestID names this iteration's",
+        "the truncation retry, and only that"
+      ],
+      "rationale": "Both implement durable identity and budgeting for the same truncation retry."
+    },
+    {
+      "pair_hash": "2d9363895d294550c31839fe6bc74c507a6626bff2a8637b85a276c9ceb5788c",
+      "rank": 5,
+      "label": "keep",
+      "evidence": [
+        "lane owns the commit",
+        "so the terminal owner"
+      ],
+      "rationale": "Both prepare a populated loop failure for commitment by its terminal owner."
+    },
+    {
+      "pair_hash": "eb516f62373cb6e857269b18287ac05ed656f5d01a604a125d7bf0acf1566fad",
+      "rank": 6,
+      "label": "keep",
+      "evidence": [
+        "terminal the loop owner must commit",
+        "terminal owner's in-memory half"
+      ],
+      "rationale": "Failure recognition and terminal settlement implement the same ownership boundary."
+    },
+    {
+      "pair_hash": "c1e363b555eb2657bded0ba001653acc35ead3c368416ef2113df6196afdf50e",
+      "rank": 7,
+      "label": "keep",
+      "evidence": [
+        "ChainExecutionEntityID",
+        "run_id identifies which agent run this loop belongs to"
+      ],
+      "rationale": "Both establish the loop's parent agent-run identity."
+    },
+    {
+      "pair_hash": "7729d20ef84ccb1d052ef78d0517108b42181f0819ac66a62ae0e75f625b3eb1",
+      "rank": 8,
+      "label": "keep",
+      "evidence": [
+        "loopManagerOpts...",
+        "sets the model registry for context managers"
+      ],
+      "rationale": "The handler constructor forwards the model-registry option to its loop manager."
+    },
+    {
+      "pair_hash": "dccd8d44c2175130a28b709333f9bf8a6f70e976a8bf1238b5548d2d9aa64390",
+      "rank": 9,
+      "label": "suppress",
+      "evidence": [
+        "carryDeferredContinuation",
+        "ResolveApprovalIfPending"
+      ],
+      "rationale": "Carrying an admitted user turn and resolving a tool approval are different loop transitions."
+    },
+    {
+      "pair_hash": "69ebc5d66bf0d59dc41acd34743e259600bdfea97f99f8c2e0cc45f3b61fe13d",
+      "rank": 10,
+      "label": "keep",
+      "evidence": [
+        "carrier knows when that became true",
+        "Every later transition is stamped by the CARRIER"
+      ],
+      "rationale": "Both govern the durable published-request identity and its commit ordering."
+    },
+    {
+      "pair_hash": "a43db6ff086f1c561416fed765cf5c5b603cf6bd2f032b61d740fbe53aaf7c3c",
+      "rank": 11,
+      "label": "keep",
+      "evidence": [
+        "already terminal in memory",
+        "moves a terminal entity to the adopted terminal's kind"
+      ],
+      "rationale": "Both preserve ownership of terminal loop state when concurrent deliveries observe or adopt settlement."
+    },
+    {
+      "pair_hash": "bd39676d6e737613f006976210591004ba9d1c11ba627f5d0b5d4147adf78076",
+      "rank": 12,
+      "label": "keep",
+      "evidence": [
+        "function name of a tool result",
+        "stores a tool result in the loop entity"
+      ],
+      "rationale": "Both preserve correlated tool results and their executable identity within the loop."
+    },
+    {
+      "pair_hash": "be7bb5ac9fc33b26fa9150a52e16bcde97c205092fb82d3f15cd31bb43a11446",
+      "rank": 13,
+      "label": "keep",
+      "evidence": [
+        "h.loopManager.StoreToolResult(loopID, errResult)",
+        "retrieves all accumulated tool results and clears them"
+      ],
+      "rationale": "Tool-call rejection stores results that the same batch-result lifecycle later drains."
+    },
+    {
+      "pair_hash": "67ac4086ce7806ae940680be08a57987b752c07986fe96f0e6caf3fcdb1bb231",
+      "rank": 14,
+      "label": "suppress",
+      "evidence": [
+        "without the tool-result drain or iteration increment",
+        "retrieves all accumulated tool results and clears them"
+      ],
+      "rationale": "The retry deliberately bypasses result draining, so these are different request/result operations."
+    },
+    {
+      "pair_hash": "7d5073e0e89525b3ed25ee9537471b13011047d87d9eccc30c497095a69bdc4e",
+      "rank": 15,
+      "label": "keep",
+      "evidence": [
+        "h.loopManager.publishedRetryOrdinal(loopID)",
+        "return published.Retry"
+      ],
+      "rationale": "Truncation handling directly reads the persisted retry budget through this helper."
+    },
+    {
+      "pair_hash": "79eb8297752c6149144ac45f04917c62dc9ec1dcf4f5d914391c3837ede320fd",
+      "rank": 16,
+      "label": "keep",
+      "evidence": [
+        "continuation turn was admitted",
+        "returns the deferred turn's text"
+      ],
+      "rationale": "Both preserve and eventually carry the same deferred continuation turn."
+    },
+    {
+      "pair_hash": "97cd105a4626d1ffabec75b1b575b27d8ef0f08a8b468bcad5b555b4a8b4114d",
+      "rank": 17,
+      "label": "suppress",
+      "evidence": [
+        "HandleTask processes an incoming task message",
+        "beginApprovalGate gates the loop on one tool call"
+      ],
+      "rationale": "Task admission and tool approval gating are separate responsibilities; generic loop state is insufficient linkage."
+    },
+    {
+      "pair_hash": "144c388550d338aa42fd60d7a3496f20b6217329c3d46d4cb62b843be79f8aa5",
+      "rank": 18,
+      "label": "suppress",
+      "evidence": [
+        "BuildFailureEvent creates a failure event",
+        "approval gate refused"
+      ],
+      "rationale": "Failure-event construction and approval-gate refusal error formatting address different outcomes."
+    },
+    {
+      "pair_hash": "b06a12b0bd402589353dbf26010263f52eedf20c29868313df4a610a13825903",
+      "rank": 19,
+      "label": "keep",
+      "evidence": [
+        "h.loopManager.SetWorkflowContext(loopID, task.WorkflowSlug, task.WorkflowStep)",
+        "entity.WorkflowSlug = workflowSlug"
+      ],
+      "rationale": "Metadata configuration directly installs the shown workflow context."
+    },
+    {
+      "pair_hash": "7d82555214b657d37512430dbfc229d2a840318163fc247eda43d9cb8e650957",
+      "rank": 20,
+      "label": "keep",
+      "evidence": [
+        "h.loopManager.GetTaskPrompt(loopID)",
+        "If GC/repair leaves the context empty, this prompt is re-injected"
+      ],
+      "rationale": "Prompt persistence and empty-context recovery implement the same conversation repair."
+    },
+    {
+      "pair_hash": "ae7236df64840d7d88c5662d5f0ac90531a93eea07a571e7a05de7a5d1058656",
+      "rank": 21,
+      "label": "keep",
+      "evidence": [
+        "UpdateLoop updates a loop entity",
+        "GetLoop retrieves a loop entity by ID"
+      ],
+      "rationale": "Both form the loop entity state access/update responsibility."
+    },
+    {
+      "pair_hash": "300d5381ad0c1acd6a31b40b994e447d3e88ca4c2815479219fe569aff38807d",
+      "rank": 22,
+      "label": "keep",
+      "evidence": [
+        "h.loopManager.SetMetadata(loopID, task.Metadata)",
+        "entity.Metadata = cp"
+      ],
+      "rationale": "Task metadata configuration directly invokes this defensive metadata setter."
+    },
+    {
+      "pair_hash": "652dad99026810c466b5b84510f2368db46fb5071eefc42febe687e50d425a8f",
+      "rank": 23,
+      "label": "suppress",
+      "evidence": [
+        "all pending tools have completed",
+        "transitions the loop out of LoopStateAwaitingApproval"
+      ],
+      "rationale": "Completing a tool batch and resolving an approval gate are separate state transitions."
+    },
+    {
+      "pair_hash": "fc7ac3f75e33f551ee6141b11428d19037aa01be9c4b05d1fee447ef4801fd59",
+      "rank": 24,
+      "label": "keep",
+      "evidence": [
+        "LoopStateAwaitingApproval",
+        "ResolveApprovalIfPending atomically transitions the loop out"
+      ],
+      "rationale": "Approval gating and resolution are complementary halves of the same tool approval state."
+    },
+    {
+      "pair_hash": "2f1e1b3306e5a110f314971765ff2394becffc687912dcd776077e2ac3d64f17",
+      "rank": 25,
+      "label": "keep",
+      "evidence": [
+        "loop past its deadline fails",
+        "IsTimedOut checks if a loop has exceeded its timeout"
+      ],
+      "rationale": "Timeout detection and failure settlement implement one loop deadline behavior."
+    },
+    {
+      "pair_hash": "f91628972bb828d96cd3e85011280d49ebbefb12333c7439b7df0f6a8d5fc01c",
+      "rank": 26,
+      "label": "suppress",
+      "evidence": [
+        "owning user for a loop",
+        "GenerateLoopID returns an identity"
+      ],
+      "rationale": "User attribution and loop token generation are distinct identity responsibilities."
+    },
+    {
+      "pair_hash": "749e29b7465c96c80eed0b8ad88af4785863768bb0b05d9587406dcbc81ac2c4",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "HandlerResult contains the results of a handler operation",
+        "LoopManager manages loop entity lifecycle and state"
+      ],
+      "rationale": "Both represent the agentic loop's lifecycle state and correlated tool processing at this package's responsibility granularity."
+    },
+    {
+      "pair_hash": "c9b88cf98348bb8144070432f80b1a0aea50132913b88d7f2cbe85b00f8e57ec",
+      "rank": 28,
+      "label": "keep",
+      "evidence": [
+        "h.loopManager.GetAndClearToolResults(loopID)",
+        "func (m *LoopManager) GetAndClearToolResults"
+      ],
+      "rationale": "Context absorption directly drains results through the shown manager method."
+    },
+    {
+      "pair_hash": "b817e2b2cbe9e4e6416d07a5fc14f12ca01a00b5fdbece8f9b54e4db5d7d2948",
+      "rank": 29,
+      "label": "keep",
+      "evidence": [
+        "h.loopManager.StoreToolResult(loopID, toolResult)",
+        "func (m *LoopManager) StoreToolResult"
+      ],
+      "rationale": "The tool-result handler directly uses this result accumulator."
+    },
+    {
+      "pair_hash": "5b60d031ffc05cd69e4f8eeeaedc153103fe58588d22877dfc9f92b18e9d3bfd",
+      "rank": 30,
+      "label": "keep",
+      "evidence": [
+        "approvalAnswersGate(entity.PendingApproval",
+        "approvalAnswersGate(entity.PendingApproval"
+      ],
+      "rationale": "Both enforce the same correlated pending-approval identity for gating and resolution."
+    },
+    {
+      "pair_hash": "0741a5d398cf9884471cb094c91559c77f6e1706b2f7a1851503e46a67fcb943",
+      "rank": 31,
+      "label": "keep",
+      "evidence": [
+        "name tracked for this execution ID first",
+        "m.executionIDToName[executionID] = name"
+      ],
+      "rationale": "Name tracking supplies the fallback identity resolved for tool results."
+    },
+    {
+      "pair_hash": "612f9678bd1abdc137c491f763f1b85698b46515250b0b54a851be90312ff3a9",
+      "rank": 32,
+      "label": "keep",
+      "evidence": [
+        "h.loopManager.CreateLoopWithID(task.LoopID",
+        "func (m *LoopManager) CreateLoopWithID"
+      ],
+      "rationale": "Task admission directly invokes the shown canonical-token loop constructor."
+    }
+  ]
+}

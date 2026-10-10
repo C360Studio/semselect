@@ -1,0 +1,335 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semstreams-graph-clustering",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "packet-only"
+  },
+  "packets_sha256": "4d3e0f009929358dfc048a26dabac2da55c9bb46f89d5c467514f8efe632927e",
+  "labels": [
+    {
+      "pair_hash": "2aa2f7b8859d369ca21488bc1c5b78f3583a7a4fed99fbe09f3782488cd5f68e",
+      "rank": 1,
+      "label": "keep",
+      "evidence": [
+        "runs community detection on a timer",
+        "records a completed detection run's wall time"
+      ],
+      "rationale": "Both operate and observe the same repeated community-detection runs."
+    },
+    {
+      "pair_hash": "a1738ae10c17de83ab875088bc3e8cc3e6b33e10d5649462ff3bc46060bb39d3",
+      "rank": 2,
+      "label": "suppress",
+      "evidence": [
+        "entity community query",
+        "matches graphembedding.SimilarRequest"
+      ],
+      "rationale": "Community membership lookup and embedding-neighbor lookup are different query responsibilities."
+    },
+    {
+      "pair_hash": "66ba3cfa4c0c2b181a6bc4b9473cf64e8f0ec019cf6c93a32777ad221888fd85",
+      "rank": 3,
+      "label": "suppress",
+      "evidence": [
+        "request format for community query",
+        "matches graphembedding.SimilarRequest"
+      ],
+      "rationale": "Community retrieval and embedding similarity use different request subjects despite struct boilerplate."
+    },
+    {
+      "pair_hash": "d54fb506013f6a10f3cdd23cf672cfd4c2da0375a65800dc2b9b961266985b73",
+      "rank": 4,
+      "label": "keep",
+      "evidence": [
+        "staleness a run proceeded at operator-visible",
+        "duration climbing as communities consolidate"
+      ],
+      "rationale": "Both observe the detection-run freshness/cost behavior for operators."
+    },
+    {
+      "pair_hash": "f25fad641d38f5bfce0a1fad2648de3cffe1c519af4d02b6510e108433dd09ba",
+      "rank": 5,
+      "label": "suppress",
+      "evidence": [
+        "registers the graph-clustering factory",
+        "registers enabled detectors with the orchestrator"
+      ],
+      "rationale": "Component factory registration and anomaly detector registration use registration at different levels."
+    },
+    {
+      "pair_hash": "24ff4ff75ac8ea3f2822102d6de2307ebf01bc2d817f5e84d5b8286d15e703c0",
+      "rank": 6,
+      "label": "keep",
+      "evidence": [
+        "semantic co-location virtual-edge synthesis",
+        "clustering package's narrow SemanticNeighborFinder"
+      ],
+      "rationale": "Both configure or connect the semantic virtual-edge tier's candidate source."
+    },
+    {
+      "pair_hash": "fa46344591fd36659b57ee3332de7298a315fdee2a1c7a270dff6a27a215a449",
+      "rank": 7,
+      "label": "suppress",
+      "evidence": [
+        "request format for members query",
+        "matches graphembedding.SimilarRequest"
+      ],
+      "rationale": "Community member lookup and embedding similarity are different query subjects."
+    },
+    {
+      "pair_hash": "a471fa25c17e88a6d126da11bd75305d9cae0af04da982c96814195ac39a9ea3",
+      "rank": 8,
+      "label": "suppress",
+      "evidence": [
+        "new query-based similarity finder",
+        "a.m.addSemanticEdgeQueries(n)"
+      ],
+      "rationale": "A shared finder constructor and one consumer's query metric show no direct implemented linkage in this packet."
+    },
+    {
+      "pair_hash": "a2820d5dffedc1cb455ce7aadaebeb7d45d784be8bd80884d6408b9030ef78f7",
+      "rank": 9,
+      "label": "suppress",
+      "evidence": [
+        "_ component.Discoverable",
+        "var _ inference.SimilarityFinder"
+      ],
+      "rationale": "These are interface-assertion scaffolding for different types and contracts."
+    },
+    {
+      "pair_hash": "163da8ae0da0724fe4e533d1e6df71b6d7b3ef4786e336374b779625715efa0f",
+      "rank": 10,
+      "label": "suppress",
+      "evidence": [
+        "response format for members query",
+        "matches graphembedding.SimilarResponse"
+      ],
+      "rationale": "Community membership and embedding neighbors are different response subjects."
+    },
+    {
+      "pair_hash": "7d967440fd880bbe68ef663357659d0a46f8bcd2a3c3d4f4269b53383c5f7f3b",
+      "rank": 11,
+      "label": "suppress",
+      "evidence": [
+        "response format for community query",
+        "matches graphembedding.SimilarResponse"
+      ],
+      "rationale": "Community retrieval and similarity retrieval only share response-struct patterns."
+    },
+    {
+      "pair_hash": "d257797405708539c5fdb0d750faec7f85f04bcfe22c0467a6a02c5a9c051981",
+      "rank": 12,
+      "label": "keep",
+      "evidence": [
+        "c.semanticEdges = c.SemanticEdges.resolve()",
+        "semantic-edge tier active (1) or structural-only (0)"
+      ],
+      "rationale": "Both govern the configured semantic tier's effective state and its operational reporting."
+    },
+    {
+      "pair_hash": "aec901ef7fc8ef419b471bb8485b0187980261b32ce54e2460bc33963831486a",
+      "rank": 13,
+      "label": "suppress",
+      "evidence": [
+        "response format for level query",
+        "matches graphembedding.SimilarResponse"
+      ],
+      "rationale": "Hierarchy-level communities and embedding neighbors are different query results."
+    },
+    {
+      "pair_hash": "42c3622a2d1c397f7204ea0703e438721bf38b58b271b9fa8c85fcf2b50e464c",
+      "rank": 14,
+      "label": "suppress",
+      "evidence": [
+        "return results, resp.Duration, nil",
+        "return c.detectionInterval"
+      ],
+      "rationale": "Similarity RPC elapsed time and a detection scheduling interval use duration in different senses."
+    },
+    {
+      "pair_hash": "bf16dce01f80f3827f76350004e8ab78c6fc837d33b80ca7f0d8c2942721a1ab",
+      "rank": 15,
+      "label": "suppress",
+      "evidence": [
+        "touches ONLY the explicit-edge cache",
+        "one mutual-kNN cache refresh's duration"
+      ],
+      "rationale": "Explicit-neighbor cache reset and semantic-cache refresh telemetry concern distinct caches."
+    },
+    {
+      "pair_hash": "0807cb3b50c85ad8b2c2a7c4e0fabe4467739387fc99237d6e38ea977ff5f098",
+      "rank": 16,
+      "label": "keep",
+      "evidence": [
+        "isEmbeddingIndexNotReady(err)",
+        "graph-embedding's status key"
+      ],
+      "rationale": "Both detect producer-wide embedding unavailability to preserve structural-only clustering."
+    },
+    {
+      "pair_hash": "2d356fb198ed594f2112e200465fcfe19948977bab14b1e18b02c58038d449d7",
+      "rank": 17,
+      "label": "keep",
+      "evidence": [
+        "strict-decodes the semantic_edges block",
+        "ONLY for a deployment that ENABLES the semantic-edge tier"
+      ],
+      "rationale": "Both preserve explicit semantic-tier opt-in and prevent misleading silent defaults or metrics."
+    },
+    {
+      "pair_hash": "ee8f763a6cb9e84251418c881b8a7c1bec696d447b74328c73e943c05113ab0a",
+      "rank": 18,
+      "label": "keep",
+      "evidence": [
+        "a.m.addSemanticEdgeQueries(n)",
+        "both consumers share this construction"
+      ],
+      "rationale": "Both support the semantic-edge consumer's shared similarity-query path and its query-cost reporting."
+    },
+    {
+      "pair_hash": "c41c96c84dc1bf7713f05ca97fd4cc71c655198f568fc10af04b31f0510afa3d",
+      "rank": 19,
+      "label": "keep",
+      "evidence": [
+        "a.provider.GetNeighbors(ctx, entityID, \"outgoing\")",
+        "outgoing ∪ incoming explicit neighbors"
+      ],
+      "rationale": "Both derive explicit graph relationships from the provider's topology."
+    },
+    {
+      "pair_hash": "3a64f5cc09ffb4383613bd167e656c9e4b6db64d49647254dadf636223031536",
+      "rank": 20,
+      "label": "keep",
+      "evidence": [
+        "stalenessAtDetection prometheus.Gauge",
+        "staleness_at_detection_ms gauge"
+      ],
+      "rationale": "The removed-config guidance points to the precise freshness metric represented by the type."
+    },
+    {
+      "pair_hash": "fc0be60af6137055cd32bddc982d7183f603d4628589aa7ebad27d021e6dabd6",
+      "rank": 21,
+      "label": "suppress",
+      "evidence": [
+        "response format for entity community query",
+        "matches graphembedding.SimilarResponse"
+      ],
+      "rationale": "Entity community membership and embedding similarity are separate results despite common entity IDs."
+    },
+    {
+      "pair_hash": "733fa2675a78cbf6befc3d0f9a9528b18b73694f3cad1e482907049cc30a7e79",
+      "rank": 22,
+      "label": "keep",
+      "evidence": [
+        "a.provider.GetNeighbors(ctx, entityID, \"incoming\")",
+        "incoming, err := p.getIncomingNeighbors"
+      ],
+      "rationale": "Both derive incoming explicit graph topology for consumers."
+    },
+    {
+      "pair_hash": "76d7678df6681aa58cd7571bea25f93e216f5d1e8c49e368cd6cf24cc721e77a",
+      "rank": 23,
+      "label": "keep",
+      "evidence": [
+        "ABORT the mutual-kNN build",
+        "fail-open classification is §5.1, inside semanticFinderAdapter"
+      ],
+      "rationale": "Both define producer-failure handling for the semantic provider wrapper's mutual-kNN build."
+    },
+    {
+      "pair_hash": "d112415487cd794c8aceb7ce22040c1bfcd233163466588a6f313e71d8f8baa4",
+      "rank": 24,
+      "label": "defer",
+      "evidence": [
+        "file | metrics.go",
+        "file | query.go"
+      ],
+      "rationale": "Both bodies are absent; method lists do not establish any query-specific metrics behavior."
+    },
+    {
+      "pair_hash": "af28e3479315a13e53af2e1b6e580c643726f966af1d3d55d6910fe44cc416a6",
+      "rank": 25,
+      "label": "keep",
+      "evidence": [
+        "Called during Start() when EnableAnomalyDetection is true",
+        "Start begins processing"
+      ],
+      "rationale": "The initializer explicitly documents its place in the component startup lifecycle."
+    },
+    {
+      "pair_hash": "e5a4a5019e2385de88de22f4ef5c7f77941ee472bf5861537550e6dccd3a9946",
+      "rank": 26,
+      "label": "suppress",
+      "evidence": [
+        "reads from ENTITY_STATES",
+        "new query-based similarity finder"
+      ],
+      "rationale": "Entity-state and similarity-query constructors only share dependency-injection patterns."
+    },
+    {
+      "pair_hash": "d83a63e21bce1277fa2b00a3994f2db0e0a39073f1ead2f438edd09ca0a3155d",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "must ABORT the mutual-kNN build",
+        "structural-floor guarantee"
+      ],
+      "rationale": "Both ensure embedding failures deactivate semantic synthesis while preserving structural clustering."
+    },
+    {
+      "pair_hash": "e8fc47084122443437cd7528ffb6ed32f7ded2ba5b5b217eefb38ad418503efa",
+      "rank": 28,
+      "label": "keep",
+      "evidence": [
+        "semantic tier applies only when graph-embedding's held envelope",
+        "still-bootstrapping embedding-index transient"
+      ],
+      "rationale": "Both recognize embedding readiness as the condition for semantic-tier availability."
+    },
+    {
+      "pair_hash": "84545539812a9e3edbf9ff0047c13c226cd63209fe09ba1fef8879273f649ff8",
+      "rank": 29,
+      "label": "keep",
+      "evidence": [
+        "semantic_edges_applied",
+        "m.semanticEdgesApplied.Set(1)"
+      ],
+      "rationale": "Transition logging and the gauge report the same actual semantic execution mode."
+    },
+    {
+      "pair_hash": "bead33a29f3f75bf226ef480e818c0912e6ed301f42cc532513e0ce48b02c017",
+      "rank": 30,
+      "label": "keep",
+      "evidence": [
+        "classified, still-bootstrapping embedding-index transient",
+        "unknown or not-ready embedding feed"
+      ],
+      "rationale": "Both treat incomplete embedding readiness as semantic unavailability."
+    },
+    {
+      "pair_hash": "d91b54f03b50866d4647a7447b14486ba0d63fd8a053b3a2b6cf76cf6dae4565",
+      "rank": 31,
+      "label": "keep",
+      "evidence": [
+        "initializes anomaly detection resources",
+        "c.runStructuralAndAnomalyDetection(ctx)"
+      ],
+      "rationale": "Anomaly resource initialization and the detection cycle belong to the same anomaly-execution responsibility."
+    },
+    {
+      "pair_hash": "d55cdbe84ba486c22aaa74ec04e259274b2e1bf34d256767b6ca4405e5f63a48",
+      "rank": 32,
+      "label": "keep",
+      "evidence": [
+        "defer_total remains the rate signal",
+        "m.deferTotal.WithLabelValues(string(reason)).Inc()"
+      ],
+      "rationale": "Gate-transition tracking and typed counting report the same detection-deferral outcomes."
+    }
+  ]
+}

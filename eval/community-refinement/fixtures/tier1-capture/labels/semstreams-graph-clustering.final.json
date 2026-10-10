@@ -1,0 +1,265 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "family": "semstreams-graph-clustering",
+  "split": "held-out",
+  "rule": "A where A and B agree, defer otherwise (ruling 7, 2026-10-10)",
+  "packets_sha256": "4d3e0f009929358dfc048a26dabac2da55c9bb46f89d5c467514f8efe632927e",
+  "labels": [
+    {
+      "pair_hash": "2aa2f7b8859d369ca21488bc1c5b78f3583a7a4fed99fbe09f3782488cd5f68e",
+      "rank": 1,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    },
+    {
+      "pair_hash": "a1738ae10c17de83ab875088bc3e8cc3e6b33e10d5649462ff3bc46060bb39d3",
+      "rank": 2,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "66ba3cfa4c0c2b181a6bc4b9473cf64e8f0ec019cf6c93a32777ad221888fd85",
+      "rank": 3,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "d54fb506013f6a10f3cdd23cf672cfd4c2da0375a65800dc2b9b961266985b73",
+      "rank": 4,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    },
+    {
+      "pair_hash": "f25fad641d38f5bfce0a1fad2648de3cffe1c519af4d02b6510e108433dd09ba",
+      "rank": 5,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "24ff4ff75ac8ea3f2822102d6de2307ebf01bc2d817f5e84d5b8286d15e703c0",
+      "rank": 6,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    },
+    {
+      "pair_hash": "fa46344591fd36659b57ee3332de7298a315fdee2a1c7a270dff6a27a215a449",
+      "rank": 7,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "a471fa25c17e88a6d126da11bd75305d9cae0af04da982c96814195ac39a9ea3",
+      "rank": 8,
+      "a": "defer",
+      "b": "suppress",
+      "final": "defer",
+      "agreed": false
+    },
+    {
+      "pair_hash": "a2820d5dffedc1cb455ce7aadaebeb7d45d784be8bd80884d6408b9030ef78f7",
+      "rank": 9,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "163da8ae0da0724fe4e533d1e6df71b6d7b3ef4786e336374b779625715efa0f",
+      "rank": 10,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "7d967440fd880bbe68ef663357659d0a46f8bcd2a3c3d4f4269b53383c5f7f3b",
+      "rank": 11,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "d257797405708539c5fdb0d750faec7f85f04bcfe22c0467a6a02c5a9c051981",
+      "rank": 12,
+      "a": "suppress",
+      "b": "keep",
+      "final": "defer",
+      "agreed": false
+    },
+    {
+      "pair_hash": "aec901ef7fc8ef419b471bb8485b0187980261b32ce54e2460bc33963831486a",
+      "rank": 13,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "42c3622a2d1c397f7204ea0703e438721bf38b58b271b9fa8c85fcf2b50e464c",
+      "rank": 14,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "bf16dce01f80f3827f76350004e8ab78c6fc837d33b80ca7f0d8c2942721a1ab",
+      "rank": 15,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "0807cb3b50c85ad8b2c2a7c4e0fabe4467739387fc99237d6e38ea977ff5f098",
+      "rank": 16,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    },
+    {
+      "pair_hash": "2d356fb198ed594f2112e200465fcfe19948977bab14b1e18b02c58038d449d7",
+      "rank": 17,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    },
+    {
+      "pair_hash": "ee8f763a6cb9e84251418c881b8a7c1bec696d447b74328c73e943c05113ab0a",
+      "rank": 18,
+      "a": "defer",
+      "b": "keep",
+      "final": "defer",
+      "agreed": false
+    },
+    {
+      "pair_hash": "c41c96c84dc1bf7713f05ca97fd4cc71c655198f568fc10af04b31f0510afa3d",
+      "rank": 19,
+      "a": "defer",
+      "b": "keep",
+      "final": "defer",
+      "agreed": false
+    },
+    {
+      "pair_hash": "3a64f5cc09ffb4383613bd167e656c9e4b6db64d49647254dadf636223031536",
+      "rank": 20,
+      "a": "suppress",
+      "b": "keep",
+      "final": "defer",
+      "agreed": false
+    },
+    {
+      "pair_hash": "fc0be60af6137055cd32bddc982d7183f603d4628589aa7ebad27d021e6dabd6",
+      "rank": 21,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "733fa2675a78cbf6befc3d0f9a9528b18b73694f3cad1e482907049cc30a7e79",
+      "rank": 22,
+      "a": "defer",
+      "b": "keep",
+      "final": "defer",
+      "agreed": false
+    },
+    {
+      "pair_hash": "76d7678df6681aa58cd7571bea25f93e216f5d1e8c49e368cd6cf24cc721e77a",
+      "rank": 23,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    },
+    {
+      "pair_hash": "d112415487cd794c8aceb7ce22040c1bfcd233163466588a6f313e71d8f8baa4",
+      "rank": 24,
+      "a": "suppress",
+      "b": "defer",
+      "final": "defer",
+      "agreed": false
+    },
+    {
+      "pair_hash": "af28e3479315a13e53af2e1b6e580c643726f966af1d3d55d6910fe44cc416a6",
+      "rank": 25,
+      "a": "defer",
+      "b": "keep",
+      "final": "defer",
+      "agreed": false
+    },
+    {
+      "pair_hash": "e5a4a5019e2385de88de22f4ef5c7f77941ee472bf5861537550e6dccd3a9946",
+      "rank": 26,
+      "a": "suppress",
+      "b": "suppress",
+      "final": "suppress",
+      "agreed": true
+    },
+    {
+      "pair_hash": "d83a63e21bce1277fa2b00a3994f2db0e0a39073f1ead2f438edd09ca0a3155d",
+      "rank": 27,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    },
+    {
+      "pair_hash": "e8fc47084122443437cd7528ffb6ed32f7ded2ba5b5b217eefb38ad418503efa",
+      "rank": 28,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    },
+    {
+      "pair_hash": "84545539812a9e3edbf9ff0047c13c226cd63209fe09ba1fef8879273f649ff8",
+      "rank": 29,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    },
+    {
+      "pair_hash": "bead33a29f3f75bf226ef480e818c0912e6ed301f42cc532513e0ce48b02c017",
+      "rank": 30,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    },
+    {
+      "pair_hash": "d91b54f03b50866d4647a7447b14486ba0d63fd8a053b3a2b6cf76cf6dae4565",
+      "rank": 31,
+      "a": "suppress",
+      "b": "keep",
+      "final": "defer",
+      "agreed": false
+    },
+    {
+      "pair_hash": "d55cdbe84ba486c22aaa74ec04e259274b2e1bf34d256767b6ca4405e5f63a48",
+      "rank": 32,
+      "a": "keep",
+      "b": "keep",
+      "final": "keep",
+      "agreed": true
+    }
+  ]
+}

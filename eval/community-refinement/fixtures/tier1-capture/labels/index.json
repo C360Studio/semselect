@@ -18,8 +18,31 @@
         "suppress": 6,
         "defer": 3
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "keep": 22,
+        "defer": 4,
+        "suppress": 6
+      },
+      "agreed": 31,
+      "disagreed": 1,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "defer/defer": 3,
+        "keep/defer": 1,
+        "keep/keep": 22,
+        "suppress/suppress": 6
+      },
+      "final_counts": {
+        "keep": 22,
+        "defer": 4,
+        "suppress": 6
+      }
     },
     {
       "family": "semengine-natsclient",
@@ -36,8 +59,30 @@
         "defer": 4,
         "keep": 16
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "suppress": 12,
+        "defer": 4,
+        "keep": 16
+      },
+      "agreed": 32,
+      "disagreed": 0,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "defer/defer": 4,
+        "keep/keep": 16,
+        "suppress/suppress": 12
+      },
+      "final_counts": {
+        "suppress": 12,
+        "defer": 4,
+        "keep": 16
+      }
     },
     {
       "family": "semselect-docs",
@@ -54,8 +99,32 @@
         "suppress": 14,
         "defer": 2
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "keep": 18,
+        "suppress": 13,
+        "defer": 1
+      },
+      "agreed": 30,
+      "disagreed": 2,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "defer/defer": 1,
+        "defer/keep": 1,
+        "keep/keep": 16,
+        "suppress/keep": 1,
+        "suppress/suppress": 13
+      },
+      "final_counts": {
+        "keep": 16,
+        "suppress": 13,
+        "defer": 3
+      }
     },
     {
       "family": "semselect-service",
@@ -72,8 +141,32 @@
         "suppress": 12,
         "keep": 7
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "defer": 14,
+        "suppress": 10,
+        "keep": 8
+      },
+      "agreed": 30,
+      "disagreed": 2,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "defer/defer": 13,
+        "keep/keep": 7,
+        "suppress/defer": 1,
+        "suppress/keep": 1,
+        "suppress/suppress": 10
+      },
+      "final_counts": {
+        "defer": 15,
+        "suppress": 10,
+        "keep": 7
+      }
     },
     {
       "family": "semsource-cli",
@@ -90,8 +183,32 @@
         "keep": 10,
         "defer": 1
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "suppress": 15,
+        "keep": 15,
+        "defer": 2
+      },
+      "agreed": 26,
+      "disagreed": 6,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "defer/defer": 1,
+        "keep/keep": 10,
+        "suppress/defer": 1,
+        "suppress/keep": 5,
+        "suppress/suppress": 15
+      },
+      "final_counts": {
+        "suppress": 15,
+        "defer": 7,
+        "keep": 10
+      }
     },
     {
       "family": "semsource-source-manifest",
@@ -108,8 +225,34 @@
         "defer": 3,
         "suppress": 11
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "keep": 20,
+        "suppress": 9,
+        "defer": 3
+      },
+      "agreed": 24,
+      "disagreed": 8,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "defer/keep": 3,
+        "keep/defer": 1,
+        "keep/keep": 16,
+        "keep/suppress": 1,
+        "suppress/defer": 2,
+        "suppress/keep": 1,
+        "suppress/suppress": 8
+      },
+      "final_counts": {
+        "keep": 16,
+        "defer": 8,
+        "suppress": 8
+      }
     },
     {
       "family": "semsource-ui",
@@ -126,8 +269,33 @@
         "defer": 5,
         "keep": 12
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "suppress": 15,
+        "keep": 13,
+        "defer": 4
+      },
+      "agreed": 29,
+      "disagreed": 3,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "defer/defer": 3,
+        "defer/keep": 1,
+        "defer/suppress": 1,
+        "keep/keep": 12,
+        "suppress/defer": 1,
+        "suppress/suppress": 14
+      },
+      "final_counts": {
+        "suppress": 14,
+        "defer": 6,
+        "keep": 12
+      }
     },
     {
       "family": "semstreams-agentic-loop",
@@ -143,8 +311,29 @@
         "keep": 22,
         "suppress": 10
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "keep": 26,
+        "suppress": 6
+      },
+      "agreed": 28,
+      "disagreed": 4,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "keep/keep": 22,
+        "suppress/keep": 4,
+        "suppress/suppress": 6
+      },
+      "final_counts": {
+        "keep": 22,
+        "defer": 4,
+        "suppress": 6
+      }
     },
     {
       "family": "semstreams-component",
@@ -161,8 +350,33 @@
         "suppress": 13,
         "defer": 1
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "suppress": 17,
+        "keep": 11,
+        "defer": 4
+      },
+      "agreed": 18,
+      "disagreed": 14,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "defer/defer": 1,
+        "keep/keep": 9,
+        "keep/suppress": 9,
+        "suppress/defer": 3,
+        "suppress/keep": 2,
+        "suppress/suppress": 8
+      },
+      "final_counts": {
+        "defer": 15,
+        "keep": 9,
+        "suppress": 8
+      }
     },
     {
       "family": "semstreams-graph-clustering",
@@ -179,8 +393,33 @@
         "suppress": 16,
         "defer": 5
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "keep": 18,
+        "suppress": 13,
+        "defer": 1
+      },
+      "agreed": 23,
+      "disagreed": 9,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "defer/keep": 4,
+        "defer/suppress": 1,
+        "keep/keep": 11,
+        "suppress/defer": 1,
+        "suppress/keep": 3,
+        "suppress/suppress": 12
+      },
+      "final_counts": {
+        "keep": 11,
+        "suppress": 12,
+        "defer": 9
+      }
     },
     {
       "family": "semstreams-rule",
@@ -196,8 +435,31 @@
         "keep": 23,
         "suppress": 9
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "keep": 13,
+        "suppress": 16,
+        "defer": 3
+      },
+      "agreed": 19,
+      "disagreed": 13,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "keep/keep": 13,
+        "keep/suppress": 10,
+        "suppress/defer": 3,
+        "suppress/suppress": 6
+      },
+      "final_counts": {
+        "keep": 13,
+        "suppress": 6,
+        "defer": 13
+      }
     },
     {
       "family": "semstreams-service",
@@ -214,14 +476,37 @@
         "keep": 6,
         "defer": 1
       },
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "packet-only"
+      },
+      "b_counts": {
+        "suppress": 24,
+        "keep": 7,
+        "defer": 1
+      },
+      "agreed": 31,
+      "disagreed": 1,
+      "b_changed_after_reading_a": 0,
+      "confusion": {
+        "defer/defer": 1,
+        "keep/keep": 6,
+        "suppress/keep": 1,
+        "suppress/suppress": 24
+      },
+      "final_counts": {
+        "suppress": 24,
+        "keep": 6,
+        "defer": 2
+      }
     }
   ],
-  "reviewed_families": 0,
+  "reviewed_families": 12,
   "totals": {
-    "keep": 182,
-    "suppress": 164,
-    "defer": 38
+    "keep": 160,
+    "defer": 90,
+    "suppress": 134
   }
 }
