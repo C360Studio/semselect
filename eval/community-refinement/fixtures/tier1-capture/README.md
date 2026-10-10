@@ -66,6 +66,11 @@ One family, one stack, always torn down with `down -v`:
    family entry and file hashes, `run.json` (images, model, machine, status),
    `milestones.json`, SemSource and Compose logs (gzip) and `SHA256SUMS`.
 
+`IDENTITY_PROFILE=explicit-only` turns both identity tiers off (the switches
+the legacy component already exposes) so detection runs on explicit topology
+alone; the evidence directory is then suffixed `-explicit-only`. The default
+`semantic-baseline` is what the protocol text names.
+
 Generalization families (`nats-go-micro`, `commons-csv`) are not in
 `families.input.json`, so `prepare` does not export them and `family_config.py`
 refuses them; they need their own export step before capture.
@@ -94,39 +99,72 @@ communities.
 
 Findings for the protocol:
 
+- **The identity-edge synthesis is a star, and it decides the partition.** The
+  legacy provider sorts each entity's sibling and system-peer candidates
+  lexically and keeps the first few, so every entity in a system votes for the
+  same lexically-first entities. On all four families the top eight system-peer
+  targets receive 92 to 95 percent of the system-peer edges, and on the docs
+  family the top eight sibling targets receive 96 percent of the sibling
+  edges. Identity edges carry 54 to 83 percent of the vote mass. The one-or-two
+  community partitions above are that star, not the families' structure.
+  SemStreams documents that system-peer synthesis "collapses a single-system
+  graph" and exposes a switch (gh#461); the sibling tier does the same on a
+  homogeneous family. See the explicit-only check below.
 - **The 0.8 anchor is not degenerate on the code families (ruling 2 input).**
   On the osh corpus nearly every mutual pair scored above 0.85
   ([scale.md](../../scale.md)); on `semselect-service` only 24 of 125
   candidates do, and the three code-bearing families have medians 0.814 to
   0.829. The all-docs family is closer to osh (median 0.852, 300 of 547 at or
   above 0.85).
-- **The first key of the priority order is empty or saturated.** Ordering by
-  partition crossing first, then distance from 0.8: on `semselect-docs` there
-  is nothing to cross, so the 32 selected are the same-community pairs nearest
-  0.8 (0.785 to 0.817); on `semengine-natsclient` and `semengine-message` the
-  cross-partition candidates (43 and 40) already exceed the ceiling, so the
-  second key only orders within them (selected similarities 0.774 to 0.849
-  and 0.762 to 0.834); only `semselect-service` mixes the two (12 cross plus
-  20 same-community pairs at 0.791 to 0.809). The 32-candidate ceiling covers
-  6 to 26 percent of each family's candidates. The owner's ruling on the key
-  is still open; this is the distribution it asked to see.
-- **An all-docs family has no structural partition to cross.** `semselect-docs`
-  carries only `belongs` containment edges, so with the semantic profile's
-  structural weights every chunk ends up in one community seeded by the
-  lexically first doc. Review candidates there can only be ordered by
-  similarity; co-membership constraints (step 4) will have to carry the
-  structural signal for that family.
+- **Against the semantic-baseline floor the priority order's first key is
+  empty or saturated.** On `semselect-docs` there is nothing to cross; on
+  `semengine-natsclient` and `semengine-message` the cross-partition
+  candidates (43 and 40) already exceed the 32 ceiling; only
+  `semselect-service` mixes the two. Against the explicit-only floor (below)
+  the first key is never empty and exceeds the ceiling on three families.
+- **Most candidates pair entities inside one file or doc.** 56 to 79 percent
+  of review candidates share their immediate container, and most are
+  same-type pairs; those duplicate containment and need no model. The pairs
+  that can change a partition are the cross-file and cross-doc ones.
 - **The stored community values are not byte-stable between cycles.** On an
   unchanged graph the legacy statistical summarizer rewrites each community's
-  `keywords` in a different order between 30 s cycles on three of the four
-  families (`semengine-message` happened to be byte-stable), so a raw-bytes
-  comparison never settles. `cmd/structural` therefore settles on memberships
-  and back-pointers and reports `community_values_byte_stable`; the frozen
-  `partition.json` keeps the raw values as read. Memberships were identical
-  across the two covered reads 35 s apart on every family; a probe during the
-  aborted first `semselect-service` attempt (whose stack ran for 7 minutes with
-  the raw-bytes check) also found level-0 memberships identical across cycles
-  while only `keywords` moved.
+  `keywords` in a different order between 30 s cycles (seven of the eight
+  captures; `semengine-message` happened to be byte-stable once), so a
+  raw-bytes comparison never settles. `cmd/structural` therefore settles on
+  memberships and back-pointers and reports `community_values_byte_stable`;
+  the frozen `partition.json` keeps the raw values as read.
+- **The mutual-kNN replay is reproducible.** The explicit-only re-captures
+  rebuilt every stack from scratch and produced byte-identical
+  `mutual_pairs.jsonl` on all four families (same pairs, same similarities).
+
+### Identity-synthesis check: explicit-only re-capture (2026-10-10)
+
+The same four families, same runner, `IDENTITY_PROFILE=explicit-only`
+(`include_siblings` and `include_system_peers` false, everything else equal).
+Every check passed; 73 to 75 s each. Evidence directories carry the
+`-explicit-only` suffix.
+
+| Family | Level-0 communities, semantic baseline → explicit-only | Explicit-only community sizes | Cross-partition candidates, semantic baseline → explicit-only | Cross-partition similarity (explicit-only) |
+| --- | --- | --- | --- | --- |
+| `semselect-service` | 2 → 4 | 32 (README), 13 (`guard.go`), 7 (`cmd/` folder, repo), 4 (`cmd/semselect`) | 12 → 29 | median 0.788; 3 at or above 0.85 |
+| `semselect-docs` | 1 → 18 | one community per doc, 9 to 36 chunks | 0 → 242 | median 0.853; 140 at or above 0.85 |
+| `semengine-natsclient` | 2 → 8 | one per file plus the README: 116 (`client.go`), 37, 21, 16, 15, 12, 6, 3 | 43 → 140 | median 0.821; 28 at or above 0.85 |
+| `semengine-message` | 2 → 7 | 34 (`message/` folder with its small files), 21, 18, 15, 9, 7, 7 | 40 → 83 | median 0.814; 7 at or above 0.85 |
+
+With identity synthesis off, the legacy detector over explicit topology gives
+a containment-shaped floor: one community per doc or per file, with small
+files absorbed into their folder. That floor is sane and interpretable, and it
+is also largely what the file tree already says; a comparison arm that reads
+containment directly should be the stated structural comparator, not LPA.
+Against it the semantic candidates have something to decide: 29 to 242
+cross-container pairs per family, mostly same-type pairs across files or docs
+(`function`/`method` across Go files, `chunk`/`chunk` across docs), which is
+the co-location question the pilot was written to ask. The identity tiers
+should not be part of any floor the pilot refines, and a SemEngine port should
+not reproduce sorted-then-capped identity synthesis (see
+[`docs/semengine-integration.md`](../../../../docs/semengine-integration.md)).
+Which floor the fixtures freeze is an owner ruling on issue #5; both captures
+are kept so the artifact stays on record.
 
 Clustering ran with `min_community_size` 3 and `max_iterations` 100 (the
 graph-clustering defaults SemSource does not override); LPA uses a fixed seed
@@ -140,10 +178,12 @@ before any held-out label is read.
 
 ## Stop-point
 
-Step 1 is runnable and has produced the four development families. Next:
-the eight held-out families with the same runner (frozen before any held-out
-label is read), then the step-2 candidate selector against `structural/` and
-`mutualknn/` (reading `voting_edges.jsonl` for partition crossing and
-`mutual_pairs.jsonl` for similarity and explicit dominance) once the owner
-rules on the priority key. The generalization families still need an export
-step before the runner accepts them.
+Step 1 is runnable and has produced the four development families under
+both identity profiles. Two owner rulings are open on issue #5 before the
+held-out captures: which floor the fixtures freeze (the explicit-only floor is
+proposed) and the step-2 priority key. Then the eight held-out families with
+the same runner (frozen before any held-out label is read), then the step-2
+candidate selector against `structural/` and `mutualknn/` (reading
+`voting_edges.jsonl` for partition crossing and `mutual_pairs.jsonl` for
+similarity and explicit dominance). The generalization families still need an
+export step before the runner accepts them.
