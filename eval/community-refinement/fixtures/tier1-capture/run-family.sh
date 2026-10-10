@@ -7,8 +7,9 @@
 # embedder and graph clustering on (semantic-profile structural weights,
 # semantic edges off), waits for embedding.ready, freezes the structural side
 # (legacy-capture cmd/structural: entities, explicit topology, identity edges
-# and weights, settled structural-only partition) and the mutual-kNN candidates
-# (cmd/mutualknn), then always tears the stack down with `down -v`.
+# and weights, settled structural-only partition), the mutual-kNN candidates
+# (cmd/mutualknn) and the hydration (cmd/hydrate: every entity state verbatim
+# plus the bodies it references), then always tears the stack down with `down -v`.
 #
 # Usage: run-family.sh <family-id>
 # Env:   SEMSOURCE_DIR (default ../semsource next to this repo)
@@ -141,7 +142,7 @@ cleanup() {
 		'{provenance: "legacy SemStreams capture; not a SemEngine result", family: $family, outcome: $outcome,
 		  failure: (if $failure == "" then null else $failure end), milestones: .}' \
 		"$MILESTONES" >"$EVIDENCE/milestones.json"
-	for f in run.json family.json prepare-manifest.json structural.log mutualknn.log last-status.json; do
+	for f in run.json family.json prepare-manifest.json structural.log mutualknn.log hydrate.log last-status.json; do
 		[[ -f $WORK/$f ]] && cp "$WORK/$f" "$EVIDENCE/$f"
 	done
 	[[ -f $CONFIG_DIR/$FAMILY.tier1.json ]] && cp "$CONFIG_DIR/$FAMILY.tier1.json" "$EVIDENCE/$FAMILY.tier1.json"
@@ -193,6 +194,7 @@ CORPUS_COMMIT=$(jq -r .family.commit "$WORK/family.json")
 # Build the tools before the stack so a compile error costs nothing.
 go build -C "$TOOL_DIR" -o "$WORK/bin/mutualknn" ./cmd/mutualknn
 go build -C "$TOOL_DIR" -o "$WORK/bin/structural" ./cmd/structural
+go build -C "$TOOL_DIR" -o "$WORK/bin/hydrate" ./cmd/hydrate
 
 # --- Stack.
 milestone build_start
@@ -314,6 +316,14 @@ milestone mutualknn_start
 	2>&1 | tee "$WORK/mutualknn.log" || fail "mutualknn failed: $(tail -n 5 "$WORK/mutualknn.log")"
 milestone mutualknn_done
 
+# --- Hydration: every entity state verbatim plus the bodies they reference in
+# the CONTENT object store, so the reviewer packets quote the bytes the system
+# embedded rather than a re-parse of the workspace.
+milestone hydrate_start
+"$WORK/bin/hydrate" -nats "$NATS_URL" -output "$EVIDENCE/hydration" -run-metadata "$WORK/run.json" \
+	2>&1 | tee "$WORK/hydrate.log" || fail "hydration failed: $(tail -n 5 "$WORK/hydrate.log")"
+milestone hydrate_done "$(jq -c '{entities, with_body_handle, distinct_body_keys, bodies_fetched, body_bytes, checks}' "$EVIDENCE/hydration/hydration.json")"
+
 # The graph must not have moved underneath the captures: status after the
 # sweeps must equal the status that gated them, and both tools must have seen
 # the same ENTITY_STATES count.
@@ -345,7 +355,8 @@ fi
 
 # Per-family roll-up for the fixture freeze.
 jq -n --slurpfile fam "$WORK/family.json" --slurpfile s "$EVIDENCE/structural/structural.json" \
-	--slurpfile m "$EVIDENCE/mutualknn/summary.json" --arg evidence "${EVIDENCE#"$REPO_ROOT"/}" '
+	--slurpfile m "$EVIDENCE/mutualknn/summary.json" --slurpfile h "$EVIDENCE/hydration/hydration.json" \
+	--arg evidence "${EVIDENCE#"$REPO_ROOT"/}" '
 	{
 		provenance: "legacy SemStreams capture; not a SemEngine result",
 		family: $fam[0].family.id, split: $fam[0].family.split, commit: $fam[0].family.commit,
@@ -363,7 +374,11 @@ jq -n --slurpfile fam "$WORK/family.json" --slurpfile s "$EVIDENCE/structural/st
 			queried: $m[0].queried, failed: $m[0].failed, directed_pairs_at_threshold: $m[0].directed_pairs_at_threshold,
 			mutual_pairs: $m[0].mutual_pairs, explicit_dominated: $m[0].mutual_pairs_explicit_dominated,
 			review_candidates: $m[0].mutual_pairs_review_candidates, cross_type: $m[0].mutual_pairs_cross_type,
-			lower_bound: $m[0].mutual_pairs_is_lower_bound}
+			lower_bound: $m[0].mutual_pairs_is_lower_bound},
+		hydration: {entities: $h[0].entities, with_body_handle: $h[0].with_body_handle,
+			distinct_body_keys: $h[0].distinct_body_keys, bodies_fetched: $h[0].bodies_fetched,
+			body_bytes: $h[0].body_bytes, bodies_missing: ($h[0].bodies_missing | length),
+			invalid_utf8: $h[0].invalid_utf8, checks: $h[0].checks}
 	}' >"$EVIDENCE/summary.json"
 
 OUTCOME=ok

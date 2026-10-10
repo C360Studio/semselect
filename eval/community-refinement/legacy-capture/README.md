@@ -196,3 +196,29 @@ are reported but do not fail the run, because the capture records what the
 stack served. Offline tests run the tool against an embedded `nats-server`
 with seeded buckets, including a partition that appears late and one that
 never settles.
+
+## Hydration (`cmd/hydrate`)
+
+`cmd/hydrate` dumps every `ENTITY_STATES` value verbatim and the bodies those
+states reference: SemSource's producers offload each code symbol's and each
+document passage's verbatim body to the `CONTENT` object store and stamp a
+`code.body.store`/`code.body.key` or `source.doc.body-store`/`source.doc.body-key`
+handle on the entity (ADR-062 at the pinned commit). Containers (repo, folder,
+file, document) carry no body. The quality pilot's reviewer packets
+(`fixtures/tier1-capture/make_packets.py`) are serialized from this dump, so a
+reviewer sees the bytes the system embedded, not a re-parse of the workspace.
+
+```
+hydrate -nats nats://127.0.0.1:14222 -output <dir>/hydration [-run-metadata run.json]
+```
+
+Outputs: `entity_states.jsonl` (entity ID, byte count, sha256, triple count, the
+lifted handle and the state JSON verbatim; a non-JSON value is kept as `raw`),
+`bodies.jsonl` (one row per distinct body key with the entities that name it,
+bytes, sha256 and the text, or base64 when the bytes are not UTF-8) and
+`hydration.json` (counts, handles by predicate and store, missing or oversize
+bodies, checks). It exits 1 after writing when a state does not parse, a
+handle does not resolve, or a handle names a store other than `objectstore`.
+`run-family.sh` runs it after the mutual-kNN replay and rolls its counts into
+`summary.json`. Offline tests run against an embedded nats-server with a
+`CONTENT` object store.
