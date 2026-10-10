@@ -1,0 +1,253 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semengine-message",
+  "split": "development",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "36a218d4979116bf6bb988cd8837ee27a192cb348f5a7eedade738d254138875",
+  "constraints": [
+    {
+      "id": "pos-01",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-message.method.message-decoder-go-Decoder-Decode",
+      "b": "semselect.semsource.golang.semengine-message.method.message-base_message-go-BaseMessage-UnmarshalJSON",
+      "evidence": [
+        "message/decoder.go:45-47",
+        "message/base_message.go:42-48",
+        "message/base_message.go:306-312"
+      ],
+      "rationale": "Both carry the registry-aware wire decoding path: Decode is the only code that sets the unexported registry field on a fresh BaseMessage before json.Unmarshal, and UnmarshalJSON fails fast when that field is nil and tells the caller to use NewDecoder. Changing either side's contract (what Decode seeds, what UnmarshalJSON demands) breaks the other."
+    },
+    {
+      "id": "pos-02",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-message.method.message-base_message-go-BaseMessage-UnmarshalJSON",
+      "b": "semselect.semsource.golang.semengine-message.method.payloadregistry-registry-go-Registry-Create",
+      "evidence": [
+        "message/base_message.go:314-321",
+        "payloadregistry/registry.go:301-304",
+        "payloadregistry/registry.go:80-82"
+      ],
+      "rationale": "UnmarshalJSON resolves the wire type discriminator by calling registry.Create and treats a nil return as an unregistered type; Create's own doc names BaseMessage.UnmarshalJSON as the consumer of that nil. The two halves of payload type resolution on decode live in these two methods."
+    },
+    {
+      "id": "pos-03",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-message.interface.message-payload-go-Payload",
+      "b": "semselect.semsource.golang.semengine-message.interface.payloadregistry-registry-go-schemaProvider",
+      "evidence": [
+        "payloadregistry/registry.go:401-405",
+        "message/payload.go:50-53",
+        "payloadregistry/registry.go:34-36"
+      ],
+      "rationale": "schemaProvider is Payload's Schema() method restated locally because payloadregistry cannot import message; validateSchemaConsistency uses it to check a factory's payload against its registration. Anyone changing Payload.Schema's signature must change schemaProvider in step or registration validation silently stops applying."
+    },
+    {
+      "id": "pos-04",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-message.method.message-base_message-go-BaseMessage-MarshalJSON",
+      "b": "semselect.semsource.golang.semengine-message.function.message-base_message-go-wireMillis",
+      "evidence": [
+        "message/base_message.go:223-228",
+        "message/base_message.go:241-243",
+        "message/base_message.go:288-289"
+      ],
+      "rationale": "MarshalJSON writes created_at and received_at as integer Unix milliseconds and wireMillis is the strict inverse that reads them back, documenting that 0 is how MarshalJSON writes the zero time. The meta timestamp wire encoding is defined by the pair; a change to one side's unit or zero handling must be mirrored in the other."
+    },
+    {
+      "id": "pos-05",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-message.function.message-base_message-go-WithTime",
+      "b": "semselect.semsource.golang.semengine-message.function.message-meta_default-go-NewDefaultMeta",
+      "evidence": [
+        "message/base_message.go:57-64",
+        "message/meta_default.go:18-27"
+      ],
+      "rationale": "WithTime only works by type-asserting the message meta to *DefaultMeta and rebuilding it with NewDefaultMeta(createdAt, source), which also re-stamps receivedAt with the current time. Someone changing what NewDefaultMeta initialises changes what WithTime produces, and vice versa."
+    },
+    {
+      "id": "pos-06",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-message.interface.message-storable-go-Storable",
+      "b": "semselect.semsource.golang.semengine-message.struct.message-triple-go-Triple",
+      "evidence": [
+        "message/storable.go:38-39",
+        "message/storable.go:68-69",
+        "message/triple.go:17-24"
+      ],
+      "rationale": "Storable.Triples() returns []Triple, the facts an entity payload declares, and Triple's doc defines what those facts must look like (subject in EntityID.Key() form, predicate dotted, object literal or entity reference). Implementing or consuming Storable requires Triple's field contract alongside it."
+    },
+    {
+      "id": "pos-07",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-message.struct.message-triple-go-Triple",
+      "b": "semselect.semsource.golang.semengine-message.function.message-triple_identity-go-AppendIdentityKey",
+      "evidence": [
+        "message/triple_identity.go:20-35",
+        "message/triple_identity.go:61-72",
+        "message/triple.go:95-99"
+      ],
+      "rationale": "AppendIdentityKey is built from exactly six named Triple fields and its header explains why Timestamp, Confidence and ExpiresAt are excluded, including a forward hazard tied to Triple.ExpiresAt. Adding, renaming or re-purposing a Triple field requires revisiting this key, so the struct and the key must be read together."
+    },
+    {
+      "id": "pos-08",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-message.function.message-triple_identity-go-canonicalObjectKey",
+      "b": "semselect.semsource.golang.semengine-message.function.message-triple_identity-go-roundTripIsIdentity",
+      "evidence": [
+        "message/triple_identity.go:162-180",
+        "message/triple_identity.go:145-150",
+        "message/triple_identity.go:182-199"
+      ],
+      "rationale": "canonicalObjectKey normalises a Triple.Object through a JSON round-trip except where roundTripIsIdentity proves the round-trip is a no-op; the fast-path predicate exists only for this caller and its exclusion of numbers is the bug the key was written to fix. Widening one without the other reintroduces the replay re-append."
+    },
+    {
+      "id": "pos-09",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-message.interface.message-rule_readable-go-RuleReadable",
+      "b": "semselect.semsource.golang.semengine-message.method.message-generic_json-go-GenericJSONPayload-RuleFields",
+      "evidence": [
+        "message/generic_json.go:251-261",
+        "message/rule_readable.go:57-63",
+        "message/doc.go:50-51"
+      ],
+      "rationale": "RuleFields is the family's one in-tree implementation of RuleReadable, and its doc argues from the interface's rules (the payload declares its projection, no reflective default) why exposing the whole Data map is the honest answer for core.json.v1. The interface's contract and this implementation are each other's evidence."
+    },
+    {
+      "id": "pos-10",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-message.interface.message-behaviors-go-IndexingProfiler",
+      "b": "semselect.semsource.golang.semengine-message.method.payloadregistry-registry-go-Registry-IndexingProfileFor",
+      "evidence": [
+        "message/behaviors.go:16-21",
+        "payloadregistry/registry.go:62-66",
+        "payloadregistry/registry.go:261-264"
+      ],
+      "rationale": "Both are channels of one indexing-profile resolution order: IndexingProfiler is the producer's per-payload hint, and when it is absent the consumer falls through to the per-type floor that IndexingProfileFor returns from the registration. Changing the vocabulary or the fallback semantics on one side changes what the other must return."
+    },
+    {
+      "id": "neg-01",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-message.method.message-base_message-go-BaseMessage-Validate",
+      "b": "semselect.semsource.golang.semengine-message.method.message-generic_json-go-GenericJSONPayload-Validate",
+      "evidence": [
+        "message/base_message.go:150-172",
+        "message/generic_json.go:99-104",
+        "message/doc.go:271-284"
+      ],
+      "rationale": "Same method name and the same errs.WrapInvalid(errs.ErrInvalidData, ...) scaffold make these look like one validation routine. The first is the container's structural validation (type grammar, payload and meta present) that applies to every message; the second is one payload's domain check that Data is non-nil, which doc.go lists as a separate level."
+    },
+    {
+      "id": "neg-02",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-message.interface.message-meta-go-Meta",
+      "b": "semselect.semsource.golang.semengine-message.struct.message-triple-go-Triple",
+      "evidence": [
+        "message/meta.go:14-27",
+        "message/triple.go:55-63",
+        "message/triple.go:17-24"
+      ],
+      "rationale": "Both carry a Source string plus timestamps and both call this provenance, so a reader keying on those words would merge them. Meta describes a message's lifecycle and originating service; Triple's Source and Timestamp describe one fact assertion inside an entity's knowledge graph, and a message may carry many triples with sources unrelated to the message's own."
+    },
+    {
+      "id": "neg-03",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-message.type.message-types-go-Keyable",
+      "b": "semselect.semsource.golang.semengine-message.function.message-triple_identity-go-AppendIdentityKey",
+      "evidence": [
+        "message/types.go:9-11",
+        "message/triple_identity.go:55-60",
+        "message/doc.go:155-159"
+      ],
+      "rationale": "Both are about producing a key string and share the word key. Keyable.Key() is dotted notation for NATS subjects and storage addressing, while AppendIdentityKey is a length-prefixed dedupe identity that explicitly rejects dot-joining as a collision class; one is routing addressing, the other add-lane duplicate suppression."
+    },
+    {
+      "id": "neg-04",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-message.method.message-generic_json-go-shapeCheck-check",
+      "b": "semselect.semsource.golang.semengine-message.function.message-triple_identity-go-roundTripIsIdentity",
+      "evidence": [
+        "message/generic_json.go:137-156",
+        "message/triple_identity.go:192-199",
+        "message/triple_identity.go:145-150"
+      ],
+      "rationale": "Both are a type switch over nil, bool, string and the numeric kinds deciding how to treat a JSON-shaped Go value, so they read as the same utility. check gates what GenericJSONPayload may encode and accepts numbers; roundTripIsIdentity picks the fast path for the triple identity key and deliberately excludes numbers because that is the case the key exists to normalise."
+    },
+    {
+      "id": "neg-05",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-message.type.message-types-go-Type",
+      "b": "semselect.semsource.golang.semengine-message.type.message-types-go-EntityType",
+      "evidence": [
+        "message/types.go:13-20",
+        "message/doc.go:146-153",
+        "message/doc.go:161-172"
+      ],
+      "rationale": "Two adjacent aliases named Type and EntityType, both Keyable with dotted notation, look like one type family. doc.go states that Type (domain.category.version) identifies message schemas and is independent of entity identity, while EntityType (domain.type) classifies graph entities and is derived from EntityID; the package tells readers to choose one or the other."
+    },
+    {
+      "id": "neg-06",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-message.interface.message-behaviors-go-IndexingProfiler",
+      "b": "semselect.semsource.golang.semengine-message.interface.message-content_storable-go-ContentStorable",
+      "evidence": [
+        "message/behaviors.go:11-15",
+        "message/content_storable.go:3-14",
+        "message/behaviors.go:3-8"
+      ],
+      "rationale": "Both are optional payload interfaces that mention embedding and the word content (IndexingProfiler can return \"content\"), inviting a merge. ContentStorable maps where an entity's stored text lives so workers can extract it; IndexingProfiler is a policy hint about which substrates index the entity at all, and behaviors.go separates the pure structural behaviours from the semantic Storable family."
+    },
+    {
+      "id": "neg-07",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-message.interface.message-rule_readable-go-RuleReadable",
+      "b": "semselect.semsource.golang.semengine-message.method.payloadregistry-registry-go-Registry-Contracts",
+      "evidence": [
+        "message/rule_readable.go:16-19",
+        "payloadregistry/registry.go:276-279",
+        "payloadregistry/registry.go:223-233"
+      ],
+      "rationale": "Both use the word projection: RuleReadable is the payload's declared projection of fields a rule may read, and Contracts returns the projection contracts bound to a registered type. The senses differ entirely: one is the rule engine's field projection, the other pkg/projection contracts of birth predicates and predicate groups that the composition root hands to the mutation client."
+    },
+    {
+      "id": "neg-08",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-message.method.payloadregistry-registry-go-Registry-Build",
+      "b": "semselect.semsource.golang.semengine-message.method.message-decoder-go-Decoder-Decode",
+      "evidence": [
+        "payloadregistry/registry.go:39-43",
+        "payloadregistry/registry.go:340-351",
+        "message/decoder.go:10-13"
+      ],
+      "rationale": "Both turn untyped input into a typed payload through the registry's Factory and end in json.Unmarshal, so they look like two decoders. Decode is the only public path for wire-format messages (envelope plus registry-bound BaseMessage); Build serves workflow variable interpolation from a step-output field map and never sees an envelope or a message."
+    },
+    {
+      "id": "neg-09",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-message.function.message-triple_identity-go-writeIdentityField",
+      "b": "semselect.semsource.golang.semengine-message.function.message-generic_json-go-member",
+      "evidence": [
+        "message/triple_identity.go:111-116",
+        "message/generic_json.go:212-225"
+      ],
+      "rationale": "Two tiny string-composition helpers of the same shape, each worrying about awkward characters in a key. writeIdentityField length-prefixes a field so the add-lane identity key is injective; member renders a human-readable error path like data.k or data[\"a b\"] for a shape refusal, and conflating them would mix identity encoding with diagnostics."
+    },
+    {
+      "id": "neg-10",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-message.method.message-triple-go-Triple-IsExpired",
+      "b": "semselect.semsource.golang.semengine-message.function.message-meta_default-go-NewDefaultMeta",
+      "evidence": [
+        "message/triple.go:129-138",
+        "message/meta_default.go:18-27",
+        "message/triple_identity.go:31-35"
+      ],
+      "rationale": "Both are small functions that consult the current clock (time.Now, timestamp.Now) and deal in timestamps. IsExpired is triple TTL, a graph-fact lifetime the identity file notes is currently unenforced; NewDefaultMeta stamps a message's received time for lifecycle metadata, a different responsibility that shares only the clock call."
+    }
+  ]
+}

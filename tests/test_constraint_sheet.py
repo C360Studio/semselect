@@ -137,6 +137,17 @@ class ConstraintSheetTests(unittest.TestCase):
         fn = next(r for r in rows if r['entity_id'] == ID['fnA'])
         self.assertEqual((fn['type'], fn['start_line'], fn['signature'], fn['has_body']), ('function', 5, 'func New()', True))
 
+    def test_passages_carry_verbatim_bodies(self):
+        cap = next(self.dirs['evidence_root'].glob('*'))
+        (cap / 'hydration' / 'bodies.jsonl').write_text(json.dumps({'key': 'k5', 'sha256': 'x5', 'text': 'New builds it.'}) + '\n'
+                                                        + json.dumps({'key': 'k6', 'sha256': 'x6', 'text': 'Validate checks it.'}) + '\n')
+        out, n = cs.write_passages(FAM, self.dirs['evidence_root'], self.dirs['constraints_dir'])
+        rows = [json.loads(l) for l in out.read_text().splitlines()]
+        self.assertEqual(n, 2)
+        self.assertEqual([(r['entity_id'], r['chunk_index'], r['text']) for r in rows],
+                         [(ID['c1'], 0, 'New builds it.'), (ID['c2'], 1, 'Validate checks it.')])
+        self.assertNotIn('community', json.dumps(rows))
+
     def test_workspace_hash_is_recomputed(self):
         fam = cs.Family(FAM, **self.dirs)
         ok, detail = fam.workspace_check()

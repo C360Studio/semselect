@@ -5,6 +5,10 @@ catalogue <family>|all  write constraints/<family>.catalogue.jsonl from the
                         family's hydration capture: one line per entity with
                         ID, type, path, lines, title, section, signature; no
                         community, no neighbour, no label
+passages <family>|all   write constraints/<family>.passages.jsonl: each
+                        document passage entity with its verbatim body, so a
+                        reviewer can read a passage without inferring which
+                        README lines a chunk index covers
 validate <family>       check annotator A's constraints/<family>.json (and B's
                         <family>.review.json when present) against PROMPT.md
 index                   per-family counts, the agreed (final) constraints, and
@@ -158,6 +162,33 @@ def write_catalogue(family, evidence_root=EVIDENCE, constraints_dir=CONSTRAINTS)
     rows = catalogue_rows(hydration_dir(family, evidence_root))
     out = Path(constraints_dir) / f'{family}.catalogue.jsonl'
     out.parent.mkdir(parents=True, exist_ok=True)
+    with open(out, 'w', encoding='utf-8') as f:
+        for r in rows:
+            f.write(json.dumps(r, ensure_ascii=False, sort_keys=True) + '\n')
+    return out, len(rows)
+
+
+def write_passages(family, evidence_root=EVIDENCE, constraints_dir=CONSTRAINTS):
+    hydration = hydration_dir(family, evidence_root)
+    bodies = {r['key']: r for r in read_jsonl(hydration / 'hydration' / 'bodies.jsonl')}
+    rows = []
+    for state in read_jsonl(hydration / 'hydration' / 'entity_states.jsonl'):
+        parts = state['entity_id'].split('.')
+        if len(parts) < 6 or parts[4] != 'chunk' or not state.get('body_key'):
+            continue
+        body = bodies.get(state['body_key'])
+        values = {}
+        for t in (state.get('state') or {}).get('triples') or []:
+            values.setdefault(t['predicate'], []).append(t['object'])
+        rows.append({'entity_id': state['entity_id'], 'path': first(values, PREDICATES['path']),
+                     'chunk_index': first(values, PREDICATES['chunk_index']), 'section': first(values, PREDICATES['section']),
+                     'body_sha256': body['sha256'] if body else None, 'text': body.get('text') if body else None})
+    rows.sort(key=lambda r: (r['path'] or '~', r['chunk_index'] or 0, r['entity_id']))
+    out = Path(constraints_dir) / f'{family}.passages.jsonl'
+    if not rows:
+        if out.exists():
+            out.unlink()
+        return out, 0
     with open(out, 'w', encoding='utf-8') as f:
         for r in rows:
             f.write(json.dumps(r, ensure_ascii=False, sort_keys=True) + '\n')
@@ -345,17 +376,19 @@ def main(argv=None):
     ap.add_argument('--workspaces', default=str(WORKSPACES))
     sub = ap.add_subparsers(dest='command', required=True)
     sub.add_parser('catalogue').add_argument('family')
+    sub.add_parser('passages').add_argument('family')
     sub.add_parser('validate').add_argument('family')
     sub.add_parser('index')
     args = ap.parse_args(argv)
     dirs = {'evidence_root': Path(args.evidence_root), 'selections_dir': Path(args.selections_dir),
             'constraints_dir': Path(args.constraints_dir), 'workspaces': Path(args.workspaces)}
-    if args.command == 'catalogue':
+    if args.command in ('catalogue', 'passages'):
         families = ([p.stem for p in sorted(dirs['selections_dir'].glob('*.json')) if p.stem != 'index']
                     if args.family == 'all' else [args.family])
+        writer = write_catalogue if args.command == 'catalogue' else write_passages
         for family in families:
-            out, n = write_catalogue(family, dirs['evidence_root'], dirs['constraints_dir'])
-            print(f'{family}: {n} entities -> {out.name} sha256 {sha256_file(out)[:12]}')
+            out, n = writer(family, dirs['evidence_root'], dirs['constraints_dir'])
+            print(f'{family}: {n} rows -> {out.name} sha256 {sha256_file(out)[:12]}' if n else f'{family}: no passages, no file')
         return 0
     if args.command == 'validate':
         fam = Family(args.family, **dirs)

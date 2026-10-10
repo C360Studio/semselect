@@ -8,8 +8,11 @@ the actual counts are recorded.
 1. Read `PROMPT.md` in this directory: the two polarities, the containment
    rule, the evidence form. The same evidence rules bind you.
 2. For each family under `../packets/` there is a sheet
-   `constraints/<family>.json` by annotator A and a catalogue
-   `constraints/<family>.catalogue.jsonl`. The family's full source is the
+   `constraints/<family>.json` by annotator A, a catalogue
+   `constraints/<family>.catalogue.jsonl`, and `constraints/<family>.passages.jsonl`
+   giving every document passage entity its verbatim text (annotator A did
+   not have this file and inferred passage boundaries from section sizes;
+   use it to check that a cited passage says what the rationale claims). The family's full source is the
    exported workspace at `/tmp/semselect-families/<family>/`; if it is
    missing, run from the repository root
    `python3 -I eval/community-refinement/fixtures/legacy-count/families.py prepare --input eval/community-refinement/fixtures/legacy-count/families.input.json --ws-root /tmp/semselect-families --config-out /tmp/semselect-tier0.unused.json --manifest-out /tmp/semselect-prepare-manifest.json`

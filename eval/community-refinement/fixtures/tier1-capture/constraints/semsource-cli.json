@@ -1,0 +1,243 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semsource-cli",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "afc5386219ecb6bd15e5de7ca93c3a50a764b6217f7403e170c4bb879c01e773",
+  "constraints": [
+    {
+      "id": "pos-01",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-cli.interface.cli-registry-go-SourceWizard",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu",
+      "evidence": [
+        "cli/registry.go:5-22",
+        "cli/wizard.go:171-181",
+        "cli/wizard.go:225-236"
+      ],
+      "rationale": "SourceWizard is the contract every per-type wizard implements, and runSourceMenu is the init wizard's consumer of all five of its methods (Available, TypeKey, Name, Description, Prompts) to build the toggle menu and collect entries. Changing what a wizard must report changes what the menu can show, so the two are read together."
+    },
+    {
+      "id": "pos-02",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-registry-go-RegisterSourceWizard",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-wizard_url-go-init",
+      "evidence": [
+        "cli/registry.go:26-30",
+        "cli/wizard_url.go:5-7"
+      ],
+      "rationale": "RegisterSourceWizard's comment says to call it from init() in wizard_*.go files, and wizard_url.go's init is exactly that registration call; one side defines the global registry's write path and the other is how a wizard becomes visible to Init and Add at all."
+    },
+    {
+      "id": "pos-03",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL",
+      "b": "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts",
+      "evidence": [
+        "cli/detect.go:113-126",
+        "cli/wizard_git.go:25-31",
+        "cli/wizard_git.go:40-46"
+      ],
+      "rationale": "The git wizard's default URL is resolvableGitURL(detectGitRemote(\".\")), and both sides carry the same audit comment: a bare \".\" slugs to an empty system segment and silently ingests zero git history. The wizard's absolute-path normalisation only makes sense alongside the helper's never-\".\" rule."
+    },
+    {
+      "id": "pos-04",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-cli.struct.cli-detect-go-ProjectInfo",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources",
+      "evidence": [
+        "cli/detect.go:10-32",
+        "cli/wizard.go:119-167"
+      ],
+      "rationale": "buildDetectedSources turns almost every ProjectInfo field (HasGit, GitRemote, Language, HasDocs/DocPaths, ConfigFiles, HasImages/ImagePaths) into a SourceEntry for the quick setup. Adding or renaming a detected fact in the struct changes which sources the zero-prompt path writes, so the struct's field semantics are needed to read the builder."
+    },
+    {
+      "id": "pos-05",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-detect-go-deriveNamespace",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-Init",
+      "evidence": [
+        "cli/detect.go:138-147",
+        "cli/detect.go:107-108",
+        "cli/wizard.go:43-57"
+      ],
+      "rationale": "deriveNamespace produces info.Namespace, which Init offers as the default for the 'Organization name (namespace)' prompt and then validates with config.ValidateNamespace because it becomes the org segment of every entity ID. The derivation (org from remote, else sanitised dir name) and the inline validation rule are two halves of the same namespace-selection step."
+    },
+    {
+      "id": "pos-06",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseVideoFlags",
+      "b": "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Prompts",
+      "evidence": [
+        "cli/add.go:232-253",
+        "cli/wizard_video.go:35-70"
+      ],
+      "rationale": "These are the flag-driven and interactive front-ends for the same video SourceEntry: both populate Paths, KeyframeMode, KeyframeInterval, MaxFileSize and Watch with matching defaults (interval, 30s, 2GB). A new video option or a changed default has to land in both, and the wizard's scene-threshold handling is the one place the flag parser already diverges."
+    },
+    {
+      "id": "pos-07",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-detect-go-DetectProject",
+      "evidence": [
+        "cli/wizard_ast.go:61-76",
+        "cli/detect.go:46-63"
+      ],
+      "rationale": "Both implement manifest-file-to-language detection with the same go.mod/package.json/Cargo.toml/pom.xml/build.gradle table; detectLanguage feeds the AST wizard's default and DetectProject feeds ProjectInfo.Language for the init wizard and quick setup. They have already drifted (DetectProject knows the python manifests, detectLanguage does not), which is exactly why one is read alongside the other."
+    },
+    {
+      "id": "pos-08",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation",
+      "evidence": [
+        "cli/remove.go:31-39",
+        "cli/sources.go:46-63"
+      ],
+      "rationale": "Remove's interactive menu labels each source with sourceLocation (plus a Paths fallback and truncate) so the user can tell entries apart before deleting one. How a source type's location is rendered, including the empty-string cases, determines what the removal menu shows, so the two are inspected together when a type is added or its fields change."
+    },
+    {
+      "id": "pos-09",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable",
+      "b": "semselect.semsource.golang.semsource-cli.method.cli-wizard_audio-go-audioWizard-Available",
+      "evidence": [
+        "cli/wizard_video.go:78-82",
+        "cli/wizard_audio.go:17-22"
+      ],
+      "rationale": "The audio wizard's availability is entirely defined by ffmpegAvailable, a helper that lives in the video wizard's file; the 'ffmpeg not found in PATH' reason shown in the source menu for audio comes from this probe. Anyone changing how ffmpeg is located needs to see that audio, not just video, is gated by it."
+    },
+    {
+      "id": "pos-10",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-registry-go-Wizards",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add",
+      "evidence": [
+        "cli/registry.go:32-35",
+        "cli/add.go:36-62"
+      ],
+      "rationale": "Add's interactive branch is the second consumer of the registry: it calls Wizards(), labels each entry with Name/Description/Available, lets the user Select one, and runs its Prompts. The order and contents of the registry slice are what the 'Choose source type to add' menu displays, so the accessor and the add command share the wizard-lookup responsibility."
+    },
+    {
+      "id": "neg-01",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-cli.method.cli-wizard_cfg-go-cfgWizard-Prompts",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildConfig",
+      "evidence": [
+        "cli/wizard_cfg.go:20-22",
+        "cli/wizard_cfg.go:41-45",
+        "cli/wizard.go:293-298"
+      ],
+      "rationale": "Both say 'config' and both construct a value from the config package, but the word means two different things: cfgWizard.Prompts collects the project's own manifest files (go.mod, package.json, Dockerfile) as a 'config'-type ingestion source, while buildConfig assembles semsource's own config.Config (namespace plus sources) that becomes semsource.json. Grouping them would merge a source-type wizard with the init wizard's config assembly."
+    },
+    {
+      "id": "neg-02",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-printSummary",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-validate-go-Validate",
+      "evidence": [
+        "cli/wizard.go:315-322",
+        "cli/validate.go:15-25"
+      ],
+      "rationale": "The two print near-identical 'Namespace : %s' / 'Sources   : %d' / '    - type' lines, which is the trap. printSummary is the closing step of the init wizard (followed by NATS and next-steps guidance for a config it just wrote), whereas Validate is the standalone validate subcommand that loads an existing semsource.json and reports whether it parses. Same output scaffold, different commands."
+    },
+    {
+      "id": "neg-03",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-runSourceMenu",
+      "evidence": [
+        "cli/term.go:80-104",
+        "cli/wizard.go:184-223",
+        "cli/add.go:51"
+      ],
+      "rationale": "Both print a numbered list, Sscanf a '%d', range-check it and re-prompt with an 'enter a number 1-N' message, so they look like the same menu code. Term.Select is the generic single-choice primitive used by Add and Remove, while runSourceMenu is the init wizard's own multi-toggle loop over wizards that deliberately bypasses Select and reads lines directly. One is terminal I/O, the other is init-specific source selection."
+    },
+    {
+      "id": "neg-04",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-writeAndSummarize",
+      "evidence": [
+        "cli/remove.go:49-62",
+        "cli/wizard.go:300-313"
+      ],
+      "rationale": "Both end with the same MarshalIndent / WriteFile / 'marshal config: %w' / 'write %s: %w' / term.Success block, so a shallow reader sees one config-writing routine. Remove is the remove subcommand (load, pick an index, delete an entry) and writeAndSummarize is the init wizard's final write plus summary; only the persistence boilerplate is shared, not the subject."
+    },
+    {
+      "id": "neg-05",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-add-go-addNonInteractive",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-shouldPreselect",
+      "evidence": [
+        "cli/add.go:81-104",
+        "cli/wizard.go:241-264"
+      ],
+      "rationale": "Both are a switch over the same nine type-key strings in the same order (ast, git, repo, docs, config, url, image, video, audio), which makes them look like one dispatch table. addNonInteractive routes 'semsource add <type>' to a flag parser, while shouldPreselect decides which init-menu entries start checked from ProjectInfo; one belongs to the add command, the other to detection-driven init defaults."
+    },
+    {
+      "id": "neg-06",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-detect-go-detectGitRemote",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable",
+      "evidence": [
+        "cli/detect.go:128-136",
+        "cli/wizard_video.go:78-82"
+      ],
+      "rationale": "Both are small helpers that shell out through os/exec and swallow the error, so they read as the family's 'external tool' utilities. detectGitRemote reads the origin URL that feeds namespace derivation and the git source default, whereas ffmpegAvailable only gates whether the video and audio wizards are offered. Shared mechanism, unrelated subjects."
+    },
+    {
+      "id": "neg-07",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-wizard_doc-go-joinPaths",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-add-go-splitComma",
+      "evidence": [
+        "cli/wizard_doc.go:59-68",
+        "cli/add.go:274-283",
+        "cli/add.go:162-177"
+      ],
+      "rationale": "They are mirror-image comma-list helpers over path slices, which invites grouping them as one 'paths' utility. joinPaths only formats the '(detected: ...)' hint shown by the docs, config and image wizards, while splitComma parses the --paths/--urls flags of the non-interactive add command; they serve different commands and neither depends on the other."
+    },
+    {
+      "id": "neg-08",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-detect-go-orgFromRemote",
+      "b": "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts",
+      "evidence": [
+        "cli/detect.go:149-163",
+        "cli/wizard_git.go:40-46",
+        "cli/wizard.go:43-46"
+      ],
+      "rationale": "Both sniff a git remote string for '@' and ':'/'://' to tell SSH from HTTPS/local forms, so they look like the same URL-format logic. orgFromRemote extracts the owner segment for the namespace (the org part of every entity ID), while gitWizard.Prompts only decides whether to absolutise the user's git source path. One is namespace derivation, the other is git source configuration."
+    },
+    {
+      "id": "neg-09",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage",
+      "b": "semselect.semsource.golang.semsource-cli.function.cli-wizard_cfg-go-detectConfigFiles",
+      "evidence": [
+        "cli/wizard_ast.go:61-76",
+        "cli/wizard_cfg.go:48-61"
+      ],
+      "rationale": "Both os.Stat the same manifest names (go.mod, package.json, Cargo.toml, pom.xml, build.gradle) in the working directory, so they read as duplicate detection code. detectLanguage maps a manifest to a language for the AST wizard's default, while detectConfigFiles returns the files themselves as the config-source wizard's default paths; the same filenames serve a language question and a what-to-ingest question."
+    },
+    {
+      "id": "neg-10",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-cli.method.cli-wizard_repo-go-repoWizard-Prompts",
+      "b": "semselect.semsource.golang.semsource-cli.method.cli-wizard_git-go-gitWizard-Prompts",
+      "evidence": [
+        "cli/wizard_repo.go:13-42",
+        "cli/wizard_git.go:17-56",
+        "cli/wizard.go:251-252"
+      ],
+      "rationale": "Both prompt for a repository URL, a branch and watch, and both fill URL/Branch/Watch on a SourceEntry, so 'repo' and 'git' look like one source. The git wizard configures commit-history ingestion of a local or remote repo (defaulting to the current checkout and absolutising paths), whereas the repo wizard configures an all-in-one remote clone that analyses code, docs and config; shouldPreselect's comment that repos are never auto-detected and git/ast/docs/config are used individually marks the split."
+    }
+  ]
+}

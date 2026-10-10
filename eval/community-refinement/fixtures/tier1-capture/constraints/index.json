@@ -1,0 +1,264 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "rule": "constraints both annotators agree on; disputed ones dropped; flags are after-the-fact and were never shown to annotator A",
+  "families": [
+    {
+      "family": "semengine-message",
+      "split": "development",
+      "catalogue_entities": 111,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 18,
+      "outside_mutual_candidates": 11,
+      "with_explicit_edge": 3,
+      "same_file": 3,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semengine-natsclient",
+      "split": "development",
+      "catalogue_entities": 226,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 19,
+      "outside_mutual_candidates": 12,
+      "with_explicit_edge": 1,
+      "same_file": 4,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semselect-docs",
+      "split": "development",
+      "catalogue_entities": 242,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 18,
+      "outside_mutual_candidates": 14,
+      "with_explicit_edge": 0,
+      "same_file": 0,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semselect-service",
+      "split": "development",
+      "catalogue_entities": 56,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 15,
+      "outside_mutual_candidates": 12,
+      "with_explicit_edge": 1,
+      "same_file": 4,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semsource-cli",
+      "split": "held-out",
+      "catalogue_entities": 143,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 18,
+      "outside_mutual_candidates": 15,
+      "with_explicit_edge": 6,
+      "same_file": 0,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semsource-source-manifest",
+      "split": "held-out",
+      "catalogue_entities": 223,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 18,
+      "outside_mutual_candidates": 12,
+      "with_explicit_edge": 2,
+      "same_file": 0,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semsource-ui",
+      "split": "held-out",
+      "catalogue_entities": 206,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 20,
+      "outside_mutual_candidates": 10,
+      "with_explicit_edge": 2,
+      "same_file": 1,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-agentic-loop",
+      "split": "held-out",
+      "catalogue_entities": 207,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 19,
+      "outside_mutual_candidates": 15,
+      "with_explicit_edge": 1,
+      "same_file": 9,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-component",
+      "split": "held-out",
+      "catalogue_entities": 226,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 20,
+      "outside_mutual_candidates": 15,
+      "with_explicit_edge": 3,
+      "same_file": 0,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-graph-clustering",
+      "split": "held-out",
+      "catalogue_entities": 175,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 19,
+      "outside_mutual_candidates": 14,
+      "with_explicit_edge": 0,
+      "same_file": 4,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-rule",
+      "split": "held-out",
+      "catalogue_entities": 162,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 19,
+      "outside_mutual_candidates": 11,
+      "with_explicit_edge": 3,
+      "same_file": 0,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-service",
+      "split": "held-out",
+      "catalogue_entities": 202,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "outside_review_set": 19,
+      "outside_mutual_candidates": 14,
+      "with_explicit_edge": 2,
+      "same_file": 2,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    }
+  ],
+  "reviewed_families": 0,
+  "totals": {
+    "positive": 120,
+    "negative": 120
+  }
+}
