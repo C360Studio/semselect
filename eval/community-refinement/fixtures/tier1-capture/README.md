@@ -172,18 +172,49 @@ Clustering ran with `min_community_size` 3 and `max_iterations` 100 (the
 graph-clustering defaults SemSource does not override); LPA uses a fixed seed
 and sorted inputs, so the partition is reproducible for a fixed graph.
 
+## Captured: the eight held-out families (explicit-only floor, 2026-10-10)
+
+Captured under the ruled floor, one after another, 74 to 75 s each, every
+check passing, both explicit indexes agreeing, no similar query failing, and
+entity counts equal to the tier-0 counts. Frozen before any held-out label
+exists; nothing here is a label. Evidence directories carry the
+`-explicit-only` suffix.
+
+| Family | Entities | Explicit edges | Level-0 communities (largest) | Mutual pairs (explicit-dominated) | Candidates | Cross-partition | Candidate similarity median; at or above 0.85 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `semstreams-graph-clustering` | 175 | 624 | 6 (104) | 436 (46) | 390 | 111 | 0.834; 134 |
+| `semstreams-rule` | 162 | 598 | 12 (34) | 401 (83) | 318 | 142 | 0.821; 87 |
+| `semstreams-service` | 202 | 675 | 14 (58) | 506 (85) | 421 | 170 | 0.829; 126 |
+| `semstreams-component` | 226 | 807 | 13 (65) | 541 (58) | 483 | 226 | 0.893; 337 |
+| `semstreams-agentic-loop` | 207 | 1,072 | 3 (105, 98, 4) | 432 (22) | 410 | 71 | 0.836; 136 |
+| `semsource-source-manifest` | 223 | 694 | 11 (45) | 564 (40) | 524 | 252 | 0.849; 261 |
+| `semsource-cli` | 143 | 435 | 14 (27) | 373 (14) | 359 | 242 | 0.922; 308 |
+| `semsource-ui` | 206 | 479 | 16 (30) | 472 (33) | 439 | 315 | 0.867; 305 |
+
+Every held-out family has more cross-partition candidates than the 32
+ceiling, so the step-2 order's second key (distance from 0.8) does the
+ordering on all of them, and eight families times 32 reaches the protocol's
+256 held-out review pairs. The similarity medians run higher than on the
+development families on three of the eight (`semsource-cli` 0.922,
+`semstreams-component` 0.893, `semsource-ui` 0.867), closer to the osh
+picture; the development-tuned anchor is applied to them unchanged, as the
+protocol requires. `semstreams-agentic-loop` is the densest explicit graph
+(1,072 edges) and the coarsest partition (two large communities); its 71
+cross-partition candidates still exceed the ceiling.
+
 ## Order
 
 Development families first (all four done), then the eight held-out
-families, then the two generalization families. Held-out captures are frozen
-before any held-out label is read.
+families (all eight done under the explicit-only floor), then the two
+generalization families. Held-out captures were frozen before any held-out
+label exists.
 
 ## Stop-point
 
-Step 1 is runnable; the four development families are captured under the
-ruled explicit-only floor (and under the artifact profile for the record), and
-the eight held-out families are being captured under the explicit-only floor,
-frozen before any held-out label is read. Next: the step-2 candidate selector
+Step 1 is done for the twelve sem* families: the four development families
+under the ruled explicit-only floor (and under the artifact profile for the
+record) and the eight held-out families under the explicit-only floor, frozen
+before any held-out label exists. Next: the step-2 candidate selector
 against `structural/` and `mutualknn/` (reading `voting_edges.jsonl` for
 partition crossing and `mutual_pairs.jsonl` for similarity and explicit
 dominance) with the priority order as written. The generalization families
