@@ -14,7 +14,7 @@ provider chain.
 | Step | Output | How | Status |
 | --- | --- | --- | --- |
 | 1. Neighbours and partition | directed neighbour results (`k=8`, threshold 0.75 recorded), mutual pairs, explicit and identity memberships, effective weights, the structural-only partition, embedding identity (semembed image digest and model), source and config hashes | one legacy tier-1 stack **per family** ([`run-family.sh`](run-family.sh)), so the similarity index holds that family alone; [`cmd/structural`](../../legacy-capture/README.md#structural-freeze-cmdstructural) freezes the structural side, [`cmd/mutualknn`](../../legacy-capture/README.md) the candidates | runner built; four development families captured (below) |
-| 2. Candidate selection | at most 32 effective candidates, with the fraction of all candidates they cover | deterministic selection, offline; the "distance from 0.8" key is reconsidered after the first family's distribution is seen (ruling 2) | not started; first-family distribution is below |
+| 2. Candidate selection | at most 32 effective candidates, with the fraction of all candidates they cover | [`select_candidates.py`](select_candidates.py), deterministic and offline; order fixed by ruling 6 | frozen for the twelve families in [`selections/`](selections/) (below) |
 | 3. Reviewer packets | one packet per candidate, 8,192-byte state bound, per-entity bundle variant, both tokenizers verified | serializer, offline | not started |
 | 4. Co-membership constraints | 20 per family, ten positive and ten negative | people, from full source evidence | not started |
 | 5. Retrieval queries | 6 per family with gold evidence sets | people | not started |
@@ -202,6 +202,44 @@ protocol requires. `semstreams-agentic-loop` is the densest explicit graph
 (1,072 edges) and the coarsest partition (two large communities); its 71
 cross-partition candidates still exceed the ceiling.
 
+## Step 2: frozen candidate selections (2026-10-10)
+
+`select_candidates.py --evidence <step-1 dir> --family <id> --out selections/<id>.json`
+reads one family's `summary.json`, `structural/entities.jsonl` and
+`mutualknn/mutual_pairs.jsonl`, drops explicit-dominated pairs and any pair
+with an endpoint outside the frozen partition (the protocol's
+semantic-no-effect class, empty under the explicit-only floor because every
+remaining candidate adds a 0.9 edge where the vote had none), orders the rest
+by crossing the structural-only partition, then distance of similarity from
+0.8 (the weaker of the two directed similarities; they were equal on every
+pair), then the sha256 of the sorted entity IDs, and freezes the first 32 with
+the input hashes. It refuses evidence captured under another identity
+profile. Offline tests: `tests/test_select_candidates.py`.
+[`selections/index.json`](selections/index.json) rolls the twelve up: 384
+pairs selected (128 development, 256 held-out) of 4,756 candidates.
+
+| Family | Split | Candidates | Selected | Coverage | Cross-partition selected / available | Selected similarity (min, median, max) | Same-type among selected |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `semselect-service` | development | 125 | 32 | 25.6% | 29 / 29 | 0.751, 0.793, 1.000 | 12 |
+| `semselect-docs` | development | 547 | 32 | 5.9% | 32 / 242 | 0.776, 0.819, 0.828 | 30 |
+| `semengine-natsclient` | development | 527 | 32 | 6.1% | 32 / 140 | 0.792, 0.802, 0.810 | 12 |
+| `semengine-message` | development | 213 | 32 | 15.0% | 32 / 83 | 0.784, 0.808, 0.818 | 17 |
+| `semstreams-graph-clustering` | held-out | 390 | 32 | 8.2% | 32 / 111 | 0.782, 0.806, 0.817 | 23 |
+| `semstreams-rule` | held-out | 318 | 32 | 10.1% | 32 / 142 | 0.791, 0.803, 0.808 | 15 |
+| `semstreams-service` | held-out | 421 | 32 | 7.6% | 32 / 170 | 0.790, 0.802, 0.810 | 24 |
+| `semstreams-component` | held-out | 483 | 32 | 6.6% | 32 / 226 | 0.783, 0.799, 0.817 | 17 |
+| `semstreams-agentic-loop` | held-out | 410 | 32 | 7.8% | 32 / 71 | 0.771, 0.816, 0.831 | 31 |
+| `semsource-source-manifest` | held-out | 524 | 32 | 6.1% | 32 / 252 | 0.794, 0.799, 0.806 | 17 |
+| `semsource-cli` | held-out | 359 | 32 | 8.9% | 32 / 242 | 0.760, 0.812, 0.869 | 27 |
+| `semsource-ui` | held-out | 439 | 32 | 7.3% | 32 / 315 | 0.792, 0.813, 0.822 | 14 |
+
+Only `semselect-service` has fewer cross-partition candidates than the
+ceiling, so its 32 span the whole similarity range and include three
+same-community pairs; everywhere else the 32 are cross-partition pairs within
+about 0.03 of the anchor. The selections are frozen: they are not refilled
+from labels or outcomes, and the 32-pair ceiling covers 6 to 26 percent of
+each family's candidates, as the protocol anticipated.
+
 ## Order
 
 Development families first (all four done), then the eight held-out
@@ -211,11 +249,10 @@ label exists.
 
 ## Stop-point
 
-Step 1 is done for the twelve sem* families: the four development families
-under the ruled explicit-only floor (and under the artifact profile for the
-record) and the eight held-out families under the explicit-only floor, frozen
-before any held-out label exists. Next: the step-2 candidate selector
-against `structural/` and `mutualknn/` (reading `voting_edges.jsonl` for
-partition crossing and `mutual_pairs.jsonl` for similarity and explicit
-dominance) with the priority order as written. The generalization families
-still need an export step before the runner accepts them.
+Steps 1 and 2 are done for the twelve sem* families: captures under the
+ruled explicit-only floor (the development families also under the artifact
+profile for the record) and frozen 32-pair selections. Next: the step-3
+reviewer packet serializer (one packet per selected pair, 8,192-byte state
+bound, per-entity bundle variant, both tokenizers verified), then the label,
+constraint and query sheets. The generalization families still need an export
+step before the runner accepts them.
