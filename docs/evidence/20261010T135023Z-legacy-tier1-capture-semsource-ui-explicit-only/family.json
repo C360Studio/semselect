@@ -1,0 +1,251 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semsource-ui",
+    "split": "held-out",
+    "role": "sparse explicit topology",
+    "language": "Svelte + TypeScript",
+    "repo": "https://github.com/C360Studio/semsource",
+    "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semsource-ui",
+    "include": [
+      "ui/src"
+    ],
+    "exclude": [
+      "*.test.ts",
+      "*.spec.ts",
+      "ui/src/tests/*",
+      "*.css",
+      "*.html",
+      "ui/src/lib/contracts/*",
+      "ui/src/lib/graph/*"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "ui/src/app.d.ts",
+      "ui/src/lib/api/advertisedRoute.ts",
+      "ui/src/lib/api/graph.ts",
+      "ui/src/lib/api/http.ts",
+      "ui/src/lib/api/search.ts",
+      "ui/src/lib/api/workbench.ts",
+      "ui/src/lib/components/CapabilityCard.svelte",
+      "ui/src/lib/components/GraphPanel.svelte",
+      "ui/src/lib/components/GraphView.svelte",
+      "ui/src/lib/components/SearchPanel.svelte",
+      "ui/src/lib/components/WorkbenchShell.svelte",
+      "ui/src/lib/state/bootstrap.ts",
+      "ui/src/lib/state/readiness.ts",
+      "ui/src/lib/state/readinessPoller.ts",
+      "ui/src/routes/+layout.svelte",
+      "ui/src/routes/+page.svelte"
+    ],
+    "workspace_sha256": "0b4539115bfa5979e2b7ec14740936ef24006bbe5c63966e44ec7eee386de495",
+    "entities_total": 206,
+    "entities_by_type": {
+      "class": 3,
+      "component": 7,
+      "const": 51,
+      "file": 16,
+      "folder": 7,
+      "function": 47,
+      "interface": 4,
+      "repo": 1,
+      "type": 7,
+      "var": 63
+    },
+    "entities_by_domain": {
+      "code": 8,
+      "svelte": 130,
+      "typescript": 68
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 206,
+      "edges": 484,
+      "induced_edges": 453,
+      "cross_system_edges": 0,
+      "dangling_edges": 31,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 31,
+        "code.relationship.parameter": 25,
+        "code.relationship.references": 5,
+        "code.relationship.returns": 8,
+        "code.structure.belongs": 205,
+        "code.structure.contains": 210
+      },
+      "non_containment_edges": 69
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "ui/src"
+        ],
+        "exclude": [
+          "*.test.ts",
+          "*.spec.ts",
+          "ui/src/tests/*",
+          "*.css",
+          "*.html"
+        ],
+        "max_file_bytes": null,
+        "files": 28,
+        "entities": 432
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "ui/src"
+        ],
+        "exclude": [
+          "*.test.ts",
+          "*.spec.ts",
+          "ui/src/tests/*",
+          "*.css",
+          "*.html",
+          "ui/src/lib/contracts/*",
+          "ui/src/lib/graph/*"
+        ],
+        "max_file_bytes": null,
+        "files": 16,
+        "entities": 206
+      }
+    ],
+    "notes": "ui/src/ Svelte and TypeScript without tests (*.test.ts and ui/src/tests/); app.css and app.html are not parsed. Trimmed to the UI shell: routes, components, API clients and state. The typed contracts (lib/contracts/) and the graph layout and rendering engine (lib/graph/) are excluded; references to them are dangling edges. No file carries a generated-code marker; app.d.ts is the hand-kept SvelteKit ambient stub.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semsource-ui",
+    "split": "held-out",
+    "repository": "semsource",
+    "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+    "include": [
+      "ui/src"
+    ],
+    "exclude": [
+      "*.test.ts",
+      "*.spec.ts",
+      "ui/src/tests/*",
+      "*.css",
+      "*.html",
+      "ui/src/lib/contracts/*",
+      "ui/src/lib/graph/*"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": true,
+    "has_docs": false,
+    "files": [
+      {
+        "path": "ui/src/app.d.ts",
+        "bytes": 50,
+        "sha256": "05836746e38b5028adbcf960715fb37504746fb8644949aa2267552774eaa696"
+      },
+      {
+        "path": "ui/src/lib/api/advertisedRoute.ts",
+        "bytes": 1583,
+        "sha256": "b01458abb0cfaad22a7421cc32a365134faa2fe39bcbdb14f3e97af1344a7a33"
+      },
+      {
+        "path": "ui/src/lib/api/graph.ts",
+        "bytes": 901,
+        "sha256": "2a7fb2afa9cfe9a30ab9b948bd4c364ffa85e456f51175e60936120887479630"
+      },
+      {
+        "path": "ui/src/lib/api/http.ts",
+        "bytes": 1297,
+        "sha256": "6b1f7bcf87c10628ca63fcaa783d8ba3eac486f59e81790acca1a4a50dd912a4"
+      },
+      {
+        "path": "ui/src/lib/api/search.ts",
+        "bytes": 4462,
+        "sha256": "ebd4c73336f7bd828085fa47a5b075dbf910609b3d419d2ecb7a5921503927bc"
+      },
+      {
+        "path": "ui/src/lib/api/workbench.ts",
+        "bytes": 4571,
+        "sha256": "bccecbbd042230f3a36c7459507f48e3f152982f450eedf933d9cb6ea676c60e"
+      },
+      {
+        "path": "ui/src/lib/components/CapabilityCard.svelte",
+        "bytes": 1684,
+        "sha256": "2415bd8232af25af21369b7f5f7e49edf7405650c21604c3765da88b5a4b562c"
+      },
+      {
+        "path": "ui/src/lib/components/GraphPanel.svelte",
+        "bytes": 9800,
+        "sha256": "522a0c9aff353c19de6a318b6e96006e80161e9db156e45ef8a3696730af039f"
+      },
+      {
+        "path": "ui/src/lib/components/GraphView.svelte",
+        "bytes": 10068,
+        "sha256": "62e9985056f76854ea3c9633409f178e896607bcbc671f61ff42ab4f03483180"
+      },
+      {
+        "path": "ui/src/lib/components/SearchPanel.svelte",
+        "bytes": 13550,
+        "sha256": "48b78327cd64e828fedb75c5de6e63a7fdd5a6ce8a0fc20a46887b9a5febc6cf"
+      },
+      {
+        "path": "ui/src/lib/components/WorkbenchShell.svelte",
+        "bytes": 15532,
+        "sha256": "3052d019e263aca35ba649d20eeaa98eb4d66740f2fb6f38c35dda21ea95f45d"
+      },
+      {
+        "path": "ui/src/lib/state/bootstrap.ts",
+        "bytes": 1707,
+        "sha256": "7ed264303926cd5c19db7493c56e2df42ebe2f07e03a22412430b18530256197"
+      },
+      {
+        "path": "ui/src/lib/state/readiness.ts",
+        "bytes": 1966,
+        "sha256": "736fed36aefb35bfb0e198169279730d32996171d98d04d4f6861b3000adf07f"
+      },
+      {
+        "path": "ui/src/lib/state/readinessPoller.ts",
+        "bytes": 1092,
+        "sha256": "200d06b83ff79dc2d9635f2fb54a58740ef242c922ee124df884aa0489605ea2"
+      },
+      {
+        "path": "ui/src/routes/+layout.svelte",
+        "bytes": 170,
+        "sha256": "d262f6e8fde52c2b35c014de355f3dc40ee09a802360da2be72be78b117952c7"
+      },
+      {
+        "path": "ui/src/routes/+page.svelte",
+        "bytes": 2767,
+        "sha256": "ed14f0b84de0d9169b4b4c57d8b3166293531c155397cd815b6e64e36cfebb35"
+      }
+    ],
+    "workspace_sha256": "0b4539115bfa5979e2b7ec14740936ef24006bbe5c63966e44ec7eee386de495"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.k99N9t/config/semsource-ui.tier1.json",
+    "sha256": "ac22ff7181170aec18974a24b823d11a0201a924836cc65dd62e85ae0dffb9b1",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}

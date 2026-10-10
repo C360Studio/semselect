@@ -1,0 +1,72 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "family": "semstreams-service",
+  "split": "held-out",
+  "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+  "workspace_sha256": "9003c0fa3b7e20c5dc454f13f3e732f25f117954f63d0a3aff8469165d7da153",
+  "evidence": "docs/evidence/20261010T134345Z-legacy-tier1-capture-semstreams-service-explicit-only",
+  "identity_profile": "explicit-only",
+  "tier0_entities_total": 202,
+  "entities": 202,
+  "embedded": 202,
+  "explicit_edges": 675,
+  "explicit_undirected_pairs": 473,
+  "explicit_indexes_consistent": true,
+  "voting_edges": 801,
+  "voting_by_tier": {
+    "explicit": 801,
+    "sibling": 0,
+    "system_peer": 0
+  },
+  "partition_level0": {
+    "level": 0,
+    "communities": 14,
+    "members": 202,
+    "entity_mapped": 202,
+    "singletons": 0,
+    "largest": 58,
+    "size_histogram": {
+      "10": 1,
+      "12": 1,
+      "16": 1,
+      "18": 2,
+      "21": 1,
+      "4": 1,
+      "58": 1,
+      "6": 1,
+      "7": 2,
+      "8": 2,
+      "9": 1
+    }
+  },
+  "partition_hash": "f002c39301af036aee368fcf5a4179346d60451772364df61f66e086a114f338",
+  "structural_checks": {
+    "explicit_indexes_consistent": true,
+    "no_malformed_entity_ids": true,
+    "partition_covers_entity_states": true,
+    "partition_entity_map_consistent": true,
+    "partition_members_disjoint": true,
+    "partition_settled": true,
+    "stable_after_topology_read": true
+  },
+  "structural_baseline": {
+    "include_siblings": false,
+    "include_system_peers": false,
+    "sibling_weight": 0.7,
+    "max_siblings": 5,
+    "system_peer_weight": 0.2,
+    "max_system_peers": 8
+  },
+  "mutualknn": {
+    "k": 8,
+    "threshold": 0.75,
+    "queried": 202,
+    "failed": 0,
+    "directed_pairs_at_threshold": 1448,
+    "mutual_pairs": 506,
+    "explicit_dominated": 85,
+    "review_candidates": 421,
+    "cross_type": 172,
+    "lower_bound": false
+  }
+}

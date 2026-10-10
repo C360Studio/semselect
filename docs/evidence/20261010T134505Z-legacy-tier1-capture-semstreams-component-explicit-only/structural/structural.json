@@ -1,0 +1,426 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "nats_url": "nats://127.0.0.1:14222",
+  "started_utc": "2026-10-10T13:45:25Z",
+  "finished_utc": "2026-10-10T13:46:20Z",
+  "parameters": {
+    "identity": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "settle_seconds": 35,
+    "poll_seconds": 5,
+    "max_keys": 500000
+  },
+  "entities": {
+    "total": 226,
+    "valid_six_part_ids": 226,
+    "malformed_ids": [],
+    "embedded": 226,
+    "by_system": {
+      "semstreams-component": 226
+    },
+    "by_type": {
+      "const": 38,
+      "file": 20,
+      "folder": 1,
+      "function": 42,
+      "interface": 7,
+      "method": 76,
+      "repo": 1,
+      "struct": 33,
+      "type": 8
+    },
+    "by_domain": {
+      "code": 2,
+      "golang": 224
+    }
+  },
+  "explicit": {
+    "outgoing_rows": 226,
+    "outgoing_rows_rejected": 0,
+    "outgoing_keys_not_in_entity_states": 0,
+    "edges": 807,
+    "edges_to_outside_entity_states": 90,
+    "predicates": {
+      "code.relationship.calls": 122,
+      "code.relationship.embeds": 1,
+      "code.relationship.parameter": 48,
+      "code.relationship.receiver": 76,
+      "code.relationship.references": 57,
+      "code.relationship.returns": 53,
+      "code.structure.belongs": 225,
+      "code.structure.contains": 225
+    },
+    "incoming_keys": 807,
+    "incoming_keys_malformed": 0,
+    "outgoing_only": 0,
+    "incoming_only": 0,
+    "outgoing_only_examples": [],
+    "incoming_only_examples": [],
+    "indexes_consistent": true,
+    "undirected_pairs": 573,
+    "undirected_pairs_cross_level0": 63
+  },
+  "voting": {
+    "edges": 1056,
+    "by_tier": {
+      "explicit": 1056,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "by_listed_as": {
+      "explicit": 1056,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "weight_mass_by_tier": {
+      "explicit": 1056,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "edges_to_outside_entity_states": 88,
+    "cross_level0_by_tier": {
+      "explicit": 126,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "entities_sibling_capped": 0,
+    "entities_system_peer_capped": 0,
+    "entities_without_neighbors": 0
+  },
+  "partition": {
+    "levels": [
+      {
+        "level": 0,
+        "communities": 13,
+        "members": 226,
+        "entity_mapped": 226,
+        "singletons": 0,
+        "largest": 65,
+        "size_histogram": {
+          "12": 1,
+          "13": 1,
+          "27": 1,
+          "5": 3,
+          "55": 1,
+          "65": 1,
+          "7": 3,
+          "9": 2
+        }
+      },
+      {
+        "level": 1,
+        "communities": 13,
+        "members": 226,
+        "entity_mapped": 226,
+        "singletons": 0,
+        "largest": 66,
+        "size_histogram": {
+          "10": 1,
+          "14": 2,
+          "5": 4,
+          "66": 2,
+          "9": 4
+        }
+      },
+      {
+        "level": 2,
+        "communities": 12,
+        "members": 226,
+        "entity_mapped": 226,
+        "singletons": 0,
+        "largest": 63,
+        "size_histogram": {
+          "13": 1,
+          "49": 1,
+          "5": 5,
+          "55": 1,
+          "63": 1,
+          "7": 3
+        }
+      }
+    ],
+    "level0_covers_entity_states": true,
+    "level0_members_disjoint": true,
+    "level0_entity_map_consistent": true,
+    "malformed_keys": 0,
+    "hash": "aec122988ec5863ccebeb1e0f380224598e2d57007285cd98e6415f13d58d35a"
+  },
+  "settle": {
+    "reads": [
+      {
+        "utc": "2026-10-10T13:45:25Z",
+        "entities": 226,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "e99d12206b5e501620443863aa49ad9c2b5f6366c4752612dd0a817ee582c62a",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 226 entities (226 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-10T13:45:30Z",
+        "entities": 226,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "e99d12206b5e501620443863aa49ad9c2b5f6366c4752612dd0a817ee582c62a",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 226 entities (226 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-10T13:45:35Z",
+        "entities": 226,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "e99d12206b5e501620443863aa49ad9c2b5f6366c4752612dd0a817ee582c62a",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 226 entities (226 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-10T13:45:40Z",
+        "entities": 226,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "e99d12206b5e501620443863aa49ad9c2b5f6366c4752612dd0a817ee582c62a",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 226 entities (226 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-10T13:45:45Z",
+        "entities": 226,
+        "communities_level0": 13,
+        "covered": true,
+        "hash": "aec122988ec5863ccebeb1e0f380224598e2d57007285cd98e6415f13d58d35a",
+        "raw_value_hash": "df313489add683cf39b8fc2d309e805d42a6343a2899742c8d3e92f20bc36499"
+      },
+      {
+        "utc": "2026-10-10T13:46:20Z",
+        "entities": 226,
+        "communities_level0": 13,
+        "covered": true,
+        "hash": "aec122988ec5863ccebeb1e0f380224598e2d57007285cd98e6415f13d58d35a",
+        "raw_value_hash": "3b787e287dae294383c3ef4d1e57b333bb1b62185e3ec8101576d1fc156d4a69",
+        "note": "memberships unchanged since the read 35.1s earlier; stored community values differ byte-wise (summary decoration), memberships do not"
+      }
+    ],
+    "settled": true,
+    "settled_over_seconds": 35.137019833,
+    "waited_seconds": 55.325423,
+    "stable_after_topology_read": true,
+    "community_values_byte_stable": false
+  },
+  "checks": {
+    "explicit_indexes_consistent": true,
+    "no_malformed_entity_ids": true,
+    "partition_covers_entity_states": true,
+    "partition_entity_map_consistent": true,
+    "partition_members_disjoint": true,
+    "partition_settled": true,
+    "stable_after_topology_read": true
+  },
+  "run": {
+    "provenance": "legacy SemStreams capture; not a SemEngine result",
+    "compose_project": "semselect-tier1-capture",
+    "family": {
+      "id": "semstreams-component",
+      "split": "held-out",
+      "role": "lifecycle boilerplate hubs",
+      "repo": "https://github.com/C360Studio/semstreams",
+      "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "license": "MIT",
+      "workspace_sha256": "b7fee656072eb3d805a36dce3dafb9906e6dc1fb0c6a7e935ffc95516d57c31a",
+      "files": 20,
+      "tier0_entities_total": 226
+    },
+    "config": {
+      "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.yFhWGo/config/semstreams-component.tier1.json",
+      "sha256": "b299bf7c54545068a65c92973bda27b33e96d51125efb1c8776a1c19f00b4a0f",
+      "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+      "identity_profile": "explicit-only",
+      "structural_baseline": {
+        "include_siblings": false,
+        "include_system_peers": false,
+        "sibling_weight": 0.7,
+        "max_siblings": 5,
+        "system_peer_weight": 0.2,
+        "max_system_peers": 8
+      },
+      "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+    },
+    "semsource": {
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "dirty_paths": 0,
+      "image_id": "sha256:3f6ed3c2e119c0d17f504530f23eab88cd844664ef5b5a242b34f0b5c0c13631",
+      "semstreams_version": "v1.0.0-beta.160",
+      "log_level": "info"
+    },
+    "semembed": {
+      "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "image_id": "sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "model": "Snowflake/snowflake-arctic-embed-s",
+      "cpus": "2"
+    },
+    "semselect": {
+      "commit": "a4e622dce87ecec20eb03ae23f26e15283890379",
+      "dirty_paths": 3
+    },
+    "docker": {
+      "os": "Docker Desktop",
+      "server_version": "29.8.2",
+      "architecture": "aarch64",
+      "ncpu": 12,
+      "mem_total_bytes": 24895582208
+    },
+    "host_cpu": "Apple M3 Pro",
+    "status_at_capture": {
+      "embedding": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 226,
+        "target_revision": 226,
+        "revision": "226",
+        "last_synced": "2026-10-10T13:45:23Z"
+      },
+      "index": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 226,
+        "target_revision": 226,
+        "revision": "226",
+        "last_synced": "2026-10-10T13:45:18Z"
+      },
+      "namespace": "semselect",
+      "note": "readiness is honest (semstreams ADR-066): index.ready means the structural index (NAME_INDEX) has caught up to the latest committed write — byName / code_context / code_impact are reliable. embedding.ready means the semantic pipeline has caught up — code_search is reliable (surfaced, not gated). A miss is a genuine absence only when status.phase is \"ready\" (every configured source has finished its initial seed) AND the relevant index signal is ready; while status.phase is \"seeding\" a miss may simply be not-yet-ingested. For exact read-your-write freshness, compare the numeric indexed_revision field against your write's revision.",
+      "phase": "ready",
+      "sources": [
+        {
+          "entity_count": 226,
+          "error_count": 0,
+          "instance_name": "ast-source-semstreams-component",
+          "phase": "watching",
+          "publish_total": 226,
+          "source_type": "ast",
+          "type_counts": {
+            "code.folder": 1,
+            "code.repo": 1,
+            "golang.const": 38,
+            "golang.file": 20,
+            "golang.function": 42,
+            "golang.interface": 7,
+            "golang.method": 76,
+            "golang.struct": 33,
+            "golang.type": 8
+          }
+        }
+      ],
+      "timestamp": "2026-10-10T13:45:13.868465171Z",
+      "total_entities": 226
+    },
+    "milestones": [
+      {
+        "name": "prepare_start",
+        "utc": "2026-10-10T13:45:05Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "prepare_done",
+        "utc": "2026-10-10T13:45:05Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": {
+          "split": "held-out",
+          "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+          "files": 20,
+          "workspace_sha256": "b7fee656072eb3d805a36dce3dafb9906e6dc1fb0c6a7e935ffc95516d57c31a"
+        }
+      },
+      {
+        "name": "build_start",
+        "utc": "2026-10-10T13:45:06Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "build_done",
+        "utc": "2026-10-10T13:45:07Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "compose_up_start",
+        "utc": "2026-10-10T13:45:07Z",
+        "elapsed_s_since_compose_up": 0,
+        "detail": null
+      },
+      {
+        "name": "containers_healthy",
+        "utc": "2026-10-10T13:45:19Z",
+        "elapsed_s_since_compose_up": 12,
+        "detail": null
+      },
+      {
+        "name": "phase_ready",
+        "utc": "2026-10-10T13:45:19Z",
+        "elapsed_s_since_compose_up": 12,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 226,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": false,
+            "state": "building",
+            "lag": 225
+          }
+        }
+      },
+      {
+        "name": "index_ready",
+        "utc": "2026-10-10T13:45:19Z",
+        "elapsed_s_since_compose_up": 12,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 226,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": false,
+            "state": "building",
+            "lag": 225
+          }
+        }
+      },
+      {
+        "name": "embedding_ready",
+        "utc": "2026-10-10T13:45:24Z",
+        "elapsed_s_since_compose_up": 17,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 226,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          }
+        }
+      }
+    ]
+  }
+}

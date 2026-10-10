@@ -1,0 +1,187 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semstreams-graph-clustering",
+    "split": "held-out",
+    "role": "cross-type, code and doc",
+    "language": "Go + Markdown",
+    "repo": "https://github.com/C360Studio/semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semstreams-graph-clustering",
+    "include": [
+      "processor/graph-clustering"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "processor/graph-clustering/README.md",
+      "processor/graph-clustering/anomaly.go",
+      "processor/graph-clustering/component.go",
+      "processor/graph-clustering/doc.go",
+      "processor/graph-clustering/metrics.go",
+      "processor/graph-clustering/query.go",
+      "processor/graph-clustering/similarity.go",
+      "processor/graph-clustering/structural.go"
+    ],
+    "workspace_sha256": "812aeaccca05f630a3ebb9f7fce2c7f26fed122271ed3fb88bdbe8bb8a77832f",
+    "entities_total": 175,
+    "entities_by_type": {
+      "chunk": 13,
+      "const": 8,
+      "doc": 1,
+      "file": 7,
+      "folder": 2,
+      "function": 22,
+      "interface": 4,
+      "method": 83,
+      "repo": 1,
+      "struct": 26,
+      "var": 8
+    },
+    "entities_by_domain": {
+      "code": 3,
+      "golang": 158,
+      "web": 14
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 175,
+      "edges": 626,
+      "induced_edges": 483,
+      "cross_system_edges": 0,
+      "dangling_edges": 143,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 169,
+        "code.relationship.parameter": 10,
+        "code.relationship.receiver": 83,
+        "code.relationship.references": 18,
+        "code.relationship.returns": 11,
+        "code.structure.belongs": 173,
+        "code.structure.contains": 162
+      },
+      "non_containment_edges": 291
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "processor/graph-clustering"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*"
+        ],
+        "max_file_bytes": null,
+        "files": 8,
+        "entities": 175
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "processor/graph-clustering"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*"
+        ],
+        "max_file_bytes": null,
+        "files": 8,
+        "entities": 175
+      }
+    ],
+    "notes": "Owner subtree: processor/graph-clustering/ non-test Go plus its README.md.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semstreams-graph-clustering",
+    "split": "held-out",
+    "repository": "semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "include": [
+      "processor/graph-clustering"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": true,
+    "has_docs": true,
+    "files": [
+      {
+        "path": "processor/graph-clustering/README.md",
+        "bytes": 8924,
+        "sha256": "274b6cca4769ea8b0467d71d6902d284a7c673253c6846fff73d4161c08b6d54"
+      },
+      {
+        "path": "processor/graph-clustering/anomaly.go",
+        "bytes": 12423,
+        "sha256": "6a47d84e585e64e4ab4b8dd835fa09c5bb85e419a9d032cf02d8718bb707fcae"
+      },
+      {
+        "path": "processor/graph-clustering/component.go",
+        "bytes": 107467,
+        "sha256": "30d1efcc0caf08939f06de9f5a69d97cde8ea335e03956aecac95e36f7a765fd"
+      },
+      {
+        "path": "processor/graph-clustering/doc.go",
+        "bytes": 4650,
+        "sha256": "f37d2f514581c5aef1f2583c06f038d13e0ec0fdba21167489bb5b82144b9ca2"
+      },
+      {
+        "path": "processor/graph-clustering/metrics.go",
+        "bytes": 16063,
+        "sha256": "0df082421fb366b8a2346032d496a6e3450b8b7e4a89fbe2142c3f48aa1d35c8"
+      },
+      {
+        "path": "processor/graph-clustering/query.go",
+        "bytes": 11311,
+        "sha256": "02e5296cff7f4f7dd39719a1bb1065f3a189a645f46d477b0203a1ac76be75b8"
+      },
+      {
+        "path": "processor/graph-clustering/similarity.go",
+        "bytes": 17060,
+        "sha256": "f34c3cd8fbdc4aa28cd439e1db674844eae05d63637d0ce1d70fa242077f2814"
+      },
+      {
+        "path": "processor/graph-clustering/structural.go",
+        "bytes": 1890,
+        "sha256": "c6655bb4a9946039ef7ed3a64fae2fed52b6b0a0eaa3a439a0edc1d822382bda"
+      }
+    ],
+    "workspace_sha256": "812aeaccca05f630a3ebb9f7fce2c7f26fed122271ed3fb88bdbe8bb8a77832f"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.olUK2V/config/semstreams-graph-clustering.tier1.json",
+    "sha256": "941955bfbc6a1d51db670994b678e80de37fae0b84ed34b6f22a43e8f215805b",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}

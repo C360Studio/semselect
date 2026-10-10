@@ -1,0 +1,165 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semstreams-agentic-loop",
+    "split": "held-out",
+    "role": "one long responsibility",
+    "language": "Go",
+    "repo": "https://github.com/C360Studio/semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semstreams-agentic-loop",
+    "include": [
+      "processor/agentic-loop/doc.go",
+      "processor/agentic-loop/handlers.go",
+      "processor/agentic-loop/state.go"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "*.md"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "processor/agentic-loop/doc.go",
+      "processor/agentic-loop/handlers.go",
+      "processor/agentic-loop/state.go"
+    ],
+    "workspace_sha256": "0d97e0498498866ff973c46b8819f7c1a386ff0b58dc42aed11bbffdd737c793",
+    "entities_total": 207,
+    "entities_by_type": {
+      "const": 3,
+      "file": 3,
+      "folder": 2,
+      "function": 20,
+      "interface": 1,
+      "method": 155,
+      "repo": 1,
+      "struct": 8,
+      "type": 2,
+      "var": 12
+    },
+    "entities_by_domain": {
+      "code": 3,
+      "golang": 204
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 207,
+      "edges": 1072,
+      "induced_edges": 635,
+      "cross_system_edges": 0,
+      "dangling_edges": 437,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 429,
+        "code.relationship.parameter": 43,
+        "code.relationship.receiver": 155,
+        "code.relationship.references": 13,
+        "code.relationship.returns": 20,
+        "code.structure.belongs": 206,
+        "code.structure.contains": 206
+      },
+      "non_containment_edges": 660
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "processor/agentic-loop"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "*.md"
+        ],
+        "max_file_bytes": null,
+        "files": 37,
+        "entities": 805
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "processor/agentic-loop/doc.go",
+          "processor/agentic-loop/handlers.go",
+          "processor/agentic-loop/state.go"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "*.md"
+        ],
+        "max_file_bytes": null,
+        "files": 3,
+        "entities": 207
+      }
+    ],
+    "notes": "processor/agentic-loop/ is trimmed to the loop's lifecycle in two long files: state.go (LoopManager, loop entity lifecycle and state) and handlers.go (the handlers that drive the loop), plus the package doc. component.go, the trajectory, governance, approval, context and metrics files and the internal/, lessonmatch/ and prompt/ subpackages are excluded; references to them are dangling edges.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semstreams-agentic-loop",
+    "split": "held-out",
+    "repository": "semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "include": [
+      "processor/agentic-loop/doc.go",
+      "processor/agentic-loop/handlers.go",
+      "processor/agentic-loop/state.go"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "*.md"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": true,
+    "has_docs": false,
+    "files": [
+      {
+        "path": "processor/agentic-loop/doc.go",
+        "bytes": 26060,
+        "sha256": "3ad7ad0552feaa6f45a821b19778eaf5e32f6f0dc3e4a2b9dff923b743a12ec7"
+      },
+      {
+        "path": "processor/agentic-loop/handlers.go",
+        "bytes": 156045,
+        "sha256": "9c5752b1276eacf84203eddcb72356b90491f30d0ba7c8bc732f2f7eb9598ca3"
+      },
+      {
+        "path": "processor/agentic-loop/state.go",
+        "bytes": 89145,
+        "sha256": "52e3d16b14e8939c61b6ab7251a636bc277e53604f8289bb380734095b15f833"
+      }
+    ],
+    "workspace_sha256": "0d97e0498498866ff973c46b8819f7c1a386ff0b58dc42aed11bbffdd737c793"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.ng4X9V/config/semstreams-agentic-loop.tier1.json",
+    "sha256": "5a286c7b80bc9d44fab526ef835072463a64eee4d29c8383337fa9fdd8cd74ee",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}
