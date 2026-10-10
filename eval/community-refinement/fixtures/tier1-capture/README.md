@@ -15,7 +15,7 @@ provider chain.
 | --- | --- | --- | --- |
 | 1. Neighbours and partition | directed neighbour results (`k=8`, threshold 0.75 recorded), mutual pairs, explicit and identity memberships, effective weights, the structural-only partition, embedding identity (semembed image digest and model), source and config hashes | one legacy tier-1 stack **per family** ([`run-family.sh`](run-family.sh)), so the similarity index holds that family alone; [`cmd/structural`](../../legacy-capture/README.md#structural-freeze-cmdstructural) freezes the structural side, [`cmd/mutualknn`](../../legacy-capture/README.md) the candidates | runner built; four development families captured (below) |
 | 2. Candidate selection | at most 32 effective candidates, with the fraction of all candidates they cover | [`select_candidates.py`](select_candidates.py), deterministic and offline; order fixed by ruling 6 | frozen for the twelve families in [`selections/`](selections/) (below) |
-| 3. Reviewer packets | one packet per candidate, 8,192-byte state bound, per-entity bundle variant, both tokenizers verified | serializer, offline | not started |
+| 3. Reviewer packets | one packet per candidate, 8,192-byte state bound, per-entity bundle variant, both tokenizers verified | [`make_packets.py`](make_packets.py) over the hydration captures, [`verify_packets.py`](verify_packets.py) on both pinned runtimes | frozen for the twelve families in [`packets/`](packets/) (below) |
 | 4. Co-membership constraints | 20 per family, ten positive and ten negative | people, from full source evidence | not started |
 | 5. Retrieval queries | 6 per family with gold evidence sets | people | not started |
 
@@ -240,6 +240,110 @@ about 0.03 of the anchor. The selections are frozen: they are not refilled
 from labels or outcomes, and the 32-pair ceiling covers 6 to 26 percent of
 each family's candidates, as the protocol anticipated.
 
+## Step 3: frozen reviewer packets (2026-10-10)
+
+The step-1 captures held entity IDs, topology and vectors but not the
+passages a reviewer must read, so the runner gained a hydration step
+(`legacy-capture/cmd/hydrate`): every entity state verbatim plus the bodies the
+SemSource producers offloaded to the `CONTENT` object store (code symbols and
+document passages; repo, folder, file and document entities carry no body).
+The twelve families were re-captured with it under the same explicit-only
+floor. Every re-capture reproduced its frozen step-1 inputs byte for byte:
+`entities.jsonl`, `mutual_pairs.jsonl` and the partition hash all equal the
+values recorded in `selections/<family>.json`, which is also what
+`make_packets.py` refuses to proceed without. The partition is therefore
+deterministic across stack rebuilds, as the mutual pairs were already known
+to be.
+
+`make_packets.py --selection selections/<id>.json --evidence <re-capture dir>
+--out packets/<id>` writes, per family:
+
+- `pairs.jsonl`, one request per selected pair, the per-pair baseline
+  contract: a state of at most 8,192 UTF-8 bytes holding the community
+  objective, the candidate's similarity, both neighbour ranks, any explicit
+  link and whether the pair crosses the explicit-structure partition, then one
+  card per entity (type, title, path and lines, package or section, content
+  or file hash, signature, doc comment, up to six explicit links per direction
+  with the omitted count, contained children for a container) and its verbatim
+  source. When both bodies do not fit, the remaining budget is split between
+  them, longest-first for leftovers, and each is cut on a line end; the state
+  says how many bytes were omitted after which line, and the packet record
+  carries the full reference (entity ID, path, lines, hash, body key, body
+  sha256, body bytes, included and omitted bytes). The single Choice question
+  is the protocol's, with the three labels as its criteria.
+- `bundles.jsonl`, the per-entity variant: one entity's card and source as the
+  state, each selected neighbour as its own question carrying that neighbour's
+  head line and an excerpt of at most 512 bytes within the 1,024-byte
+  instruction limit, split into requests of at most four questions with the
+  split recorded. The questions in a bundle share one state, which is the
+  shape where a runtime's state reuse can show.
+- `index.json`: input hashes, the prompt text, state byte statistics,
+  truncation counts and the sha256 of both files.
+
+Packets quote the frozen evidence only; no label, community ID beyond the
+partition-crossing flag, or query answer enters them. The Qwen JSON message
+shape (system: instructions plus categories plus the JSON-only clause; user:
+the state; constrained `choice` schema) mirrors `scripts/evaluate.py`'s JSON
+baseline and is the pilot's prompt version 1; development labels may still
+tune it, held-out labels never.
+
+`verify_packets.py --packets packets/* --out <roll-up> --logs <dir>` launches
+the two pinned llama.cpp runtimes on Metal (4,096-token slot, thinking off for
+Qwen), renders each packet the way its arm would send it, counts tokens with
+the runtime's own `/tokenize` and writes `packets/<id>/tokens.json`. No
+completion is requested. The Kev render uses the GGUF's SystemOne choice
+template, checked against the pinned renderer first; a bundle is rendered once
+per question over the shared state. Reserve is 128 output tokens for the JSON
+reviewer and 1 for the decision head. A packet that does not fit would be
+recorded as out of profile, not truncated.
+
+Two findings from the re-captures. First, every family's entity set and
+partition reproduced exactly, but on two families the embedding replay did
+not: `semstreams-graph-clustering` (mutual pairs 436 in the frozen capture,
+438 in the re-capture; one `var` entity's similarity to its neighbours moved by
+up to 0.045) and `semsource-ui` (472 against 467; one `const` entity moved by
+up to 0.101, dragging twelve entities' lists). In each case a single entity's
+vector changed while its state, body and neighbours' vectors did not. That is
+consistent with the legacy embedder racing the concurrent body offload
+(`processor/ast-source/bodystore.go` puts bodies with bounded concurrency;
+`graph-embedding` fetches an offloaded body through its `StorageRef` at embed
+time and counts a failed fetch as content excluded), which would embed the
+identity text alone for the entity whose body was not yet stored. The
+embedder's content metrics that would confirm it were not captured, so the
+mechanism is a hypothesis; the measurement is not. The selections stay frozen
+on the first capture: packets take similarity and ranks from that capture of
+record, the serializer refuses a hydration capture whose entities or partition
+differ, and it records the drift in `index.json` (`mutual_pairs_drift`). The
+affected pair is rank 9 of `semstreams-graph-clustering`, which keeps its
+frozen similarity. For the port this is a second reproducibility requirement
+alongside the identity synthesis: an embedding must not depend on the timing
+of the body offload.
+
+Second, the hydration itself: 2,179 entities across the twelve families, of
+which 2,009 carry a body handle (code symbols and passages) resolved to 1,999
+distinct bodies, every handle resolved (`semsource-ui` has ten entities whose
+bodies are byte-identical to another's). The 170 entities without a body are
+containers, which is what a packet quoting one of them says.
+
+<!-- step3-table -->
+| Family | Split | Pair packets | State bytes (min, median, max) | Sources truncated | Sources without body | Qwen JSON prompt tokens (min, median, max) | Kev prompt tokens (min, median, max) | Bundle requests / entities / split entities | Bundle Kev prompt tokens (min, median, max) | All fit |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `semselect-service` | development | 32 | 989, 2,238, 5,849 | 0 | 16 | 413, 785, 1958 | 382, 754, 1927 | 28 / 25 / 3 | 293, 492, 1308 | yes |
+| `semselect-docs` | development | 32 | 1,222, 3,457, 4,768 | 0 | 2 | 483, 982, 1833 | 452, 951, 1802 | 53 / 52 / 1 | 277, 678, 1255 | yes |
+| `semengine-natsclient` | development | 32 | 1,170, 2,170, 7,674 | 0 | 6 | 502, 674, 2027 | 471, 643, 1996 | 47 / 47 / 0 | 320, 479, 1873 | yes |
+| `semengine-message` | development | 32 | 1,528, 2,656, 5,412 | 0 | 8 | 569, 813, 1561 | 538, 782, 1530 | 41 / 41 / 0 | 338, 508, 1165 | yes |
+| `semstreams-graph-clustering` | held-out | 32 | 1,362, 2,960, 8,021 | 2 | 2 | 511, 911, 2205 | 480, 880, 2174 | 50 / 50 / 0 | 339, 594, 2135 | yes |
+| `semstreams-rule` | held-out | 32 | 1,414, 3,472, 5,982 | 0 | 13 | 527, 982, 1745 | 496, 951, 1714 | 47 / 47 / 0 | 360, 627, 1446 | yes |
+| `semstreams-service` | held-out | 32 | 1,427, 2,431, 5,096 | 0 | 4 | 539, 793, 1501 | 508, 762, 1470 | 47 / 47 / 0 | 363, 530, 995 | yes |
+| `semstreams-component` | held-out | 32 | 1,056, 1,931, 5,814 | 0 | 8 | 430, 651, 1588 | 399, 620, 1557 | 37 / 37 / 0 | 271, 455, 1361 | yes |
+| `semstreams-agentic-loop` | held-out | 32 | 1,897, 4,790, 8,028 | 8 | 0 | 681, 1487, 2303 | 650, 1456, 2272 | 52 / 52 / 0 | 450, 758, 2423 | yes |
+| `semsource-source-manifest` | held-out | 32 | 1,367, 2,649, 5,220 | 0 | 4 | 513, 839, 1403 | 482, 808, 1372 | 54 / 54 / 0 | 315, 546, 1170 | yes |
+| `semsource-cli` | held-out | 32 | 980, 2,144, 4,874 | 0 | 3 | 430, 765, 1627 | 399, 734, 1596 | 35 / 33 / 2 | 281, 568, 1189 | yes |
+| `semsource-ui` | held-out | 32 | 1,225, 2,214, 8,028 | 2 | 1 | 477, 728, 2292 | 446, 697, 2261 | 41 / 41 / 0 | 311, 481, 2316 | yes |
+
+Totals: 384 pair packets, 12 truncated sources, 67 sources without a body (container entities), 532 bundle requests carrying 768 questions, 6 entities split across more than one request. Largest prompt: 2,303 tokens on the Qwen JSON arm and 2,272 on Kev for a pair, 2,423 on Kev for a bundle question, against a 4,096-token slot; every packet fits on both runtimes (`packets/tokens-rollup.json`, all_fit true).
+<!-- /step3-table -->
+
 ## Order
 
 Development families first (all four done), then the eight held-out
@@ -249,10 +353,12 @@ label exists.
 
 ## Stop-point
 
-Steps 1 and 2 are done for the twelve sem* families: captures under the
-ruled explicit-only floor (the development families also under the artifact
-profile for the record) and frozen 32-pair selections. Next: the step-3
-reviewer packet serializer (one packet per selected pair, 8,192-byte state
-bound, per-entity bundle variant, both tokenizers verified), then the label,
-constraint and query sheets. The generalization families still need an export
-step before the runner accepts them.
+Steps 1 to 3 are done for the twelve sem* families: captures under the ruled
+explicit-only floor (the development families also under the artifact profile
+for the record), frozen 32-pair selections, hydration re-captures and frozen
+reviewer packets verified on both pinned runtimes. No label exists. Next: the
+label sheets for the 384 pair packets (annotator A the owner, annotator B a
+Codex session, owner adjudicating, held-out labels never tuning anything),
+then the co-membership constraints (step 4) and the retrieval queries (step
+5). The generalization families still need an export step before the runner
+accepts them.
