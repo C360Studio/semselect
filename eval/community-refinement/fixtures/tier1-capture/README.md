@@ -40,11 +40,9 @@ One family, one stack, always torn down with `down -v`:
    `semselect`, the AST and docs sources at `/workspace/<family-id>` (same
    languages as the tier-0 count, so entity IDs match), the HTTP embedder and
    model registry of SemSource's shipped `configs/mvp.json`,
-   `graph.enable_clustering` on, and `graph.entity_id_edges` set to the
-   semantic profile's structural baseline (sibling 0.7 capped at 5, system
-   peer 0.2 capped at 8). SemSource passes no `semantic_edges` block, so the
-   live partition is structural-only by construction: the semantic profile's
-   structural weights retained, semantic influence off, as freeze step 1 asks.
+   `graph.enable_clustering` on, and `graph.entity_id_edges` set from the
+   identity profile (below). SemSource passes no `semantic_edges` block, so
+   the live partition is structural-only by construction.
 2. SemSource's own `docker-compose.yml` plus [`compose.tier1.yml`](compose.tier1.yml)
    (mounts only that family at `/workspace/<family-id>`, keeps semembed) runs
    as Compose project `semselect-tier1-capture` on host ports 18080, 14222 and
@@ -66,10 +64,12 @@ One family, one stack, always torn down with `down -v`:
    family entry and file hashes, `run.json` (images, model, machine, status),
    `milestones.json`, SemSource and Compose logs (gzip) and `SHA256SUMS`.
 
-`IDENTITY_PROFILE=explicit-only` turns both identity tiers off (the switches
-the legacy component already exposes) so detection runs on explicit topology
-alone; the evidence directory is then suffixed `-explicit-only`. The default
-`semantic-baseline` is what the protocol text names.
+`IDENTITY_PROFILE` selects the identity profile. The default, `explicit-only`,
+turns both identity tiers off (the switches the legacy component already
+exposes) so detection runs on explicit topology alone; it is the floor the
+owner ruled on 2026-10-10 and its evidence directories carry the
+`-explicit-only` suffix. `semantic-baseline` is the profile the protocol first
+named; it collapses every family and is kept for the artifact record.
 
 Generalization families (`nats-go-micro`, `commons-csv`) are not in
 `families.input.json`, so `prepare` does not export them and `family_config.py`
@@ -163,8 +163,10 @@ the co-location question the pilot was written to ask. The identity tiers
 should not be part of any floor the pilot refines, and a SemEngine port should
 not reproduce sorted-then-capped identity synthesis (see
 [`docs/semengine-integration.md`](../../../../docs/semengine-integration.md)).
-Which floor the fixtures freeze is an owner ruling on issue #5; both captures
-are kept so the artifact stays on record.
+The owner ruled on 2026-10-10 (issue #5) that the fixtures freeze the
+explicit-only floor, with containment named as the structural comparator, and
+that the step-2 priority order stays as written; the semantic-baseline
+captures are kept so the artifact stays on record.
 
 Clustering ran with `min_community_size` 3 and `max_iterations` 100 (the
 graph-clustering defaults SemSource does not override); LPA uses a fixed seed
@@ -178,12 +180,11 @@ before any held-out label is read.
 
 ## Stop-point
 
-Step 1 is runnable and has produced the four development families under
-both identity profiles. Two owner rulings are open on issue #5 before the
-held-out captures: which floor the fixtures freeze (the explicit-only floor is
-proposed) and the step-2 priority key. Then the eight held-out families with
-the same runner (frozen before any held-out label is read), then the step-2
-candidate selector against `structural/` and `mutualknn/` (reading
-`voting_edges.jsonl` for partition crossing and `mutual_pairs.jsonl` for
-similarity and explicit dominance). The generalization families still need an
-export step before the runner accepts them.
+Step 1 is runnable; the four development families are captured under the
+ruled explicit-only floor (and under the artifact profile for the record), and
+the eight held-out families are being captured under the explicit-only floor,
+frozen before any held-out label is read. Next: the step-2 candidate selector
+against `structural/` and `mutualknn/` (reading `voting_edges.jsonl` for
+partition crossing and `mutual_pairs.jsonl` for similarity and explicit
+dominance) with the priority order as written. The generalization families
+still need an export step before the runner accepts them.

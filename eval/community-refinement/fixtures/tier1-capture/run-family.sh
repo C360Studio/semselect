@@ -16,8 +16,8 @@
 #        EMBEDDING_CAP_SECONDS (1800, from containers healthy)
 #        PARTITION_SETTLE_SECONDS (35), PARTITION_SETTLE_TIMEOUT_SECONDS (600)
 #        LOG_LEVEL (info), SEMEMBED_CPUS (2)
-#        IDENTITY_PROFILE (semantic-baseline; "explicit-only" turns identity synthesis off
-#          and suffixes the evidence directory with the profile name)
+#        IDENTITY_PROFILE (explicit-only, the ruled floor, suffixes the evidence directory
+#          with the profile name; "semantic-baseline" is the identity-synthesis artifact)
 #        ALLOW_SEMSOURCE_DRIFT=1 to run a SemSource checkout other than the pinned commit
 set -euo pipefail
 
@@ -44,7 +44,7 @@ NATS_URL=nats://127.0.0.1:${NATS_PORT}
 DIRECTED_RAW_LIMIT_BYTES=$((20 * 1024 * 1024))
 WS_ROOT=/tmp/semselect-families # families.py prepare refuses any other basename
 
-IDENTITY_PROFILE=${IDENTITY_PROFILE:-semantic-baseline}
+IDENTITY_PROFILE=${IDENTITY_PROFILE:-explicit-only}
 TS=$(date -u +%Y%m%dT%H%M%SZ)
 EVIDENCE=$REPO_ROOT/docs/evidence/${TS}-legacy-tier1-capture-${FAMILY}
 [[ $IDENTITY_PROFILE == semantic-baseline ]] || EVIDENCE=${EVIDENCE}-${IDENTITY_PROFILE}

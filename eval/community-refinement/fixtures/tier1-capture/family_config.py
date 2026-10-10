@@ -6,9 +6,11 @@ legacy-count/families.py prepare wrote for the same export, refuses to continue
 unless the family's commit, file list and workspace hash agree, and writes a
 config that ingests only that family: the HTTP embedder and model registry of
 SemSource's shipped mvp.json, graph clustering on, and the identity-edge
-weights and caps of the semantic profile's structural baseline (semantic edges
-stay off, which SemSource cannot enable). No inference, embeddings or labels
-are produced here. Legacy SemStreams capture; not a SemEngine result.
+profile: "explicit-only" (the ruled floor, both identity tiers off) or
+"semantic-baseline" (the semantic profile's structural weights and caps, kept
+for the artifact record). Semantic edges stay off, which SemSource cannot
+enable. No inference, embeddings or labels are produced here. Legacy
+SemStreams capture; not a SemEngine result.
 """
 
 import argparse
@@ -30,10 +32,11 @@ STRUCTURAL_BASELINE = {
     "max_system_peers": 8,
 }
 
-# Identity profiles the runner can freeze. "semantic-baseline" is what the
-# protocol names. "explicit-only" turns both identity tiers off (the gh#461
-# switches) so detection runs on explicit topology alone; the numeric fields
-# are kept so the structural tool's flags stay positive and are ignored.
+# Identity profiles the runner can freeze. "explicit-only" turns both identity
+# tiers off (the gh#461 switches) so detection runs on explicit topology alone;
+# it is the floor the owner ruled on 2026-10-10. "semantic-baseline" is the
+# profile the protocol first named and collapses every family (the artifact).
+# The numeric fields are kept so the structural tool's flags stay positive.
 IDENTITY_PROFILES = {
     "semantic-baseline": STRUCTURAL_BASELINE,
     "explicit-only": {**STRUCTURAL_BASELINE, "include_siblings": False, "include_system_peers": False},
@@ -56,7 +59,7 @@ def main():
     p.add_argument("--mvp", required=True, help="SemSource configs/mvp.json (model registry source)")
     p.add_argument("--config-out", required=True)
     p.add_argument("--family-out", required=True, help="family entry, prepared file list and checks")
-    p.add_argument("--identity-profile", default="semantic-baseline", choices=sorted(IDENTITY_PROFILES))
+    p.add_argument("--identity-profile", default="explicit-only", choices=sorted(IDENTITY_PROFILES))
     args = p.parse_args()
     identity = IDENTITY_PROFILES[args.identity_profile]
 
