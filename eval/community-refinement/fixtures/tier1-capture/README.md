@@ -16,7 +16,7 @@ provider chain.
 | 1. Neighbours and partition | directed neighbour results (`k=8`, threshold 0.75 recorded), mutual pairs, explicit and identity memberships, effective weights, the structural-only partition, embedding identity (semembed image digest and model), source and config hashes | one legacy tier-1 stack **per family** ([`run-family.sh`](run-family.sh)), so the similarity index holds that family alone; [`cmd/structural`](../../legacy-capture/README.md#structural-freeze-cmdstructural) freezes the structural side, [`cmd/mutualknn`](../../legacy-capture/README.md) the candidates | runner built; four development families captured (below) |
 | 2. Candidate selection | at most 32 effective candidates, with the fraction of all candidates they cover | [`select_candidates.py`](select_candidates.py), deterministic and offline; order fixed by ruling 6 | frozen for the twelve families in [`selections/`](selections/) (below) |
 | 3. Reviewer packets | one packet per candidate, 8,192-byte state bound, per-entity bundle variant, both tokenizers verified | [`make_packets.py`](make_packets.py) over the hydration captures, [`verify_packets.py`](verify_packets.py) on both pinned runtimes | frozen for the twelve families in [`packets/`](packets/) (below) |
-| 4. Co-membership constraints | 20 per family, ten positive and ten negative | from full source evidence; annotators as in ruling 7 | not started |
+| 4. Co-membership constraints | 20 per family, ten positive and ten negative | [`constraint_sheet.py`](constraint_sheet.py) catalogue, validator and index; annotators as in ruling 7, from full source | annotator A done for the twelve families in [`constraints/`](constraints/) (below); Codex review pending |
 | 5. Retrieval queries | 6 per family with gold evidence sets | annotators as in ruling 7 | not started |
 
 Labels (`keep`, `suppress`, `defer`) follow step 3. Ruling 7 (owner,
@@ -419,6 +419,79 @@ twelve annotators' tool calls shows reads of `PROMPT.md`, the family's
 `index.json` and `pairs.jsonl`, and the files they wrote, and no command
 naming a source file, an evidence directory or another family.
 
+## Step 4: co-membership constraints (2026-10-10)
+
+Constraints are independent graph labels: pairs of entities that are useful
+to inspect together (positive) or harmful to conflate under the objective
+(negative), twenty per family, drawn from the full source and never from the
+partition, the neighbour lists or the edge labels. Each arm's communities are
+later scored by how often positives share a community and negatives do not.
+[`constraints/PROMPT.md`](constraints/PROMPT.md) is the contract for both
+annotators: definitions with worked shapes, the containment rule (no file
+with its own symbol, folder with its file, document with its passage, or
+the repo entity, since those hold in every arm), at least six positives
+across different files, every negative naming the superficial likeness that
+makes it a trap, and evidence as `path:lines` into the workspace.
+[`constraint_sheet.py`](constraint_sheet.py) writes each family's entity
+catalogue from the hydration capture (ID, type, path, lines, title, section,
+signature; no community, neighbour or label field), recomputes the exported
+workspace's `workspace_sha256` before a sheet is validated, checks a sheet
+(exact IDs and counts, catalogue membership, no duplicate pair, the
+containment rule against the frozen explicit edges, evidence paths in the
+family's file list with line ranges inside the file), and builds
+[`constraints/index.json`](constraints/index.json) with after-the-fact flags
+computed from the frozen captures and never shown to annotator A: whether a
+pair is in the step-3 review set, a mutual-kNN candidate, joined by an
+explicit edge, or in one file. [`constraints/REVIEW.md`](constraints/REVIEW.md)
+tells the Codex session what to do: a constraint survives only when B agrees
+on the source; disputed ones are dropped and the actual counts recorded.
+
+Annotator A ran as twelve Claude Code subagents, one per family, each given
+`PROMPT.md`, the family's catalogue and its exported workspace at
+`/tmp/semselect-families/<family>/` (hash verified against the capture), and
+told to read nothing else.
+
+<!-- constraints-table -->
+| Family | Split | Proposed pos/neg | Outside review set | Outside mutual-kNN | With explicit edge | Same file | Review |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `semselect-service` | development | 10/10 | 15 | 12 | 1 | 4 | awaiting annotator B |
+| `semselect-docs` | development | 10/10 | 18 | 14 | 0 | 0 | awaiting annotator B |
+| `semengine-natsclient` | development | 10/10 | 19 | 12 | 1 | 4 | awaiting annotator B |
+| `semengine-message` | development | 10/10 | 18 | 11 | 3 | 3 | awaiting annotator B |
+| `semstreams-graph-clustering` | held-out | 10/10 | 19 | 14 | 0 | 4 | awaiting annotator B |
+| `semstreams-rule` | held-out | 10/10 | 19 | 11 | 3 | 0 | awaiting annotator B |
+| `semstreams-service` | held-out | 10/10 | 19 | 14 | 2 | 2 | awaiting annotator B |
+| `semstreams-component` | held-out | 10/10 | 20 | 15 | 3 | 0 | awaiting annotator B |
+| `semstreams-agentic-loop` | held-out | 10/10 | 19 | 15 | 1 | 9 | awaiting annotator B |
+| `semsource-source-manifest` | held-out | 10/10 | 18 | 12 | 2 | 0 | awaiting annotator B |
+| `semsource-cli` | held-out | 10/10 | 18 | 15 | 6 | 0 | awaiting annotator B |
+| `semsource-ui` | held-out | 10/10 | 20 | 10 | 2 | 1 | awaiting annotator B |
+| **Total** | | **120/120** | **222** | **155** | **24** | **27** | |
+
+Of the 240 proposed pairs, 222 lie outside the step-3 review set and 155 outside the mutual-kNN candidate set, 24 are joined by some explicit edge (never a containment edge, which the validator forbids) and 27 sit in one file. Final constraints wait for annotator B.
+<!-- /constraints-table -->
+
+What the annotators reported: positives were almost all cross-file by
+construction (the rule asks for six; most families gave nine or ten) and
+spread over each family's responsibilities (ingest, status, lifecycle,
+validation, wiring, and the document passages that describe them); negatives
+lean on overloaded terms (`port`, `index`, `level`, `schema`, `register`,
+`timeout`, `config`), copied scaffolds (`Validate`, `Stop`, GET handlers,
+ticker loops, print-and-marshal commands) and sibling types that the source
+itself contrasts. The closest calls, flagged in the rationales, are pairs
+joined only outside the family (a generator or a fact table that is not in
+the workspace) and sibling helpers with identical shape. Two limitations of
+the inputs: the split is not derivable from the allowed files, so several
+annotators guessed it and the validator corrected them; and the catalogue
+gives a document passage its index and section but no line range, so
+annotators mapped passages to README lines by section size. For annotator
+B, `constraint_sheet.py passages` now writes each passage's verbatim text
+beside the catalogue (`<family>.passages.jsonl`, five families have
+passages). A check of the twelve annotators' tool calls shows reads of
+`PROMPT.md`, the catalogue, the exported workspace and the sheet they
+wrote, and no command naming the packets, labels, selections or evidence
+directories.
+
 ## Order
 
 Development families first (all four done), then the eight held-out
@@ -434,7 +507,10 @@ for the record), frozen 32-pair selections, hydration re-captures and frozen
 reviewer packets verified on both pinned runtimes, and annotator A's labels
 for all 384 pairs, annotator B's blind review, and the merged final labels
 (ruling 7: model-written, packet-only, validated, disagreement `defer`): 160
-keep, 134 suppress, 90 defer, 321 of 384 agreed. Next: the co-membership
-constraints (step 4, from full source evidence) and the retrieval queries
-(step 5) under the same annotator arrangement. The generalization families
-still need an export step before the runner accepts them.
+keep, 134 suppress, 90 defer, 321 of 384 agreed. Step 4 has annotator A's
+240 constraints (ten positive and ten negative per family, validated, from
+the full source) and awaits the Codex review by
+[`constraints/REVIEW.md`](constraints/REVIEW.md); a constraint survives only
+when both agree. Then the retrieval queries (step 5) under the same
+arrangement. The generalization families still need an export step before
+the runner accepts them.
