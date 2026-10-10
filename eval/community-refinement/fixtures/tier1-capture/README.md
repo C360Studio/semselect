@@ -347,7 +347,7 @@ containers, which is what a packet quoting one of them says.
 Totals: 384 pair packets, 12 truncated sources, 67 sources without a body (container entities), 532 bundle requests carrying 768 questions, 6 entities split across more than one request. Largest prompt: 2,303 tokens on the Qwen JSON arm and 2,272 on Kev for a pair, 2,423 on Kev for a bundle question, against a 4,096-token slot; every packet fits on both runtimes (`packets/tokens-rollup.json`, all_fit true).
 <!-- /step3-table -->
 
-## Step 3 labels: annotator A (2026-10-10)
+## Step 3 labels: annotators A and B (2026-10-10)
 
 [`labels/PROMPT.md`](labels/PROMPT.md) is the labelling contract for both
 annotators: the packet state is the only admissible evidence, the three
@@ -370,25 +370,31 @@ only `PROMPT.md`, the family's `index.json` and `pairs.jsonl`, and told to
 read nothing else and to use no prior knowledge of the repositories. The
 model is the session's default for subagents (Claude Fable 5.1 session, owner
 ruling of 2026-10-09 that this track may run on Fable). Each sheet passed the
-validator before it was kept.
+validator before it was kept. Annotator B was a Codex session run by the
+owner following `labels/REVIEW.md`: it labelled every family blind from the
+packets by the same contract, wrote `labels/<family>.review.json`, validated
+and built the index; its sheets cite two quotes per label on average and
+carry no `review_note`, so no label of B's changed after reading A. Where the
+two disagree the final label is `defer` (ruling 7).
 
 <!-- labels-table -->
-| Family | Split | keep | suppress | defer | Review |
-| --- | --- | --- | --- | --- | --- |
-| `semselect-service` | development | 7 | 12 | 13 | awaiting annotator B |
-| `semselect-docs` | development | 16 | 14 | 2 | awaiting annotator B |
-| `semengine-natsclient` | development | 16 | 12 | 4 | awaiting annotator B |
-| `semengine-message` | development | 23 | 6 | 3 | awaiting annotator B |
-| `semstreams-graph-clustering` | held-out | 11 | 16 | 5 | awaiting annotator B |
-| `semstreams-rule` | held-out | 23 | 9 | 0 | awaiting annotator B |
-| `semstreams-service` | held-out | 6 | 25 | 1 | awaiting annotator B |
-| `semstreams-component` | held-out | 18 | 13 | 1 | awaiting annotator B |
-| `semstreams-agentic-loop` | held-out | 22 | 10 | 0 | awaiting annotator B |
-| `semsource-source-manifest` | held-out | 18 | 11 | 3 | awaiting annotator B |
-| `semsource-cli` | held-out | 10 | 21 | 1 | awaiting annotator B |
-| `semsource-ui` | held-out | 12 | 15 | 5 | awaiting annotator B |
+| Family | Split | A keep/suppress/defer | B keep/suppress/defer | Agreed | Disagreed | Final keep/suppress/defer |
+| --- | --- | --- | --- | --- | --- | --- |
+| `semselect-service` | development | 7/12/13 | 8/10/14 | 30 | 2 | 7/10/15 |
+| `semselect-docs` | development | 16/14/2 | 18/13/1 | 30 | 2 | 16/13/3 |
+| `semengine-natsclient` | development | 16/12/4 | 16/12/4 | 32 | 0 | 16/12/4 |
+| `semengine-message` | development | 23/6/3 | 22/6/4 | 31 | 1 | 22/6/4 |
+| `semstreams-graph-clustering` | held-out | 11/16/5 | 18/13/1 | 23 | 9 | 11/12/9 |
+| `semstreams-rule` | held-out | 23/9/0 | 13/16/3 | 19 | 13 | 13/6/13 |
+| `semstreams-service` | held-out | 6/25/1 | 7/24/1 | 31 | 1 | 6/24/2 |
+| `semstreams-component` | held-out | 18/13/1 | 11/17/4 | 18 | 14 | 9/8/15 |
+| `semstreams-agentic-loop` | held-out | 22/10/0 | 26/6/0 | 28 | 4 | 22/6/4 |
+| `semsource-source-manifest` | held-out | 18/11/3 | 20/9/3 | 24 | 8 | 16/8/8 |
+| `semsource-cli` | held-out | 10/21/1 | 15/15/2 | 26 | 6 | 10/15/7 |
+| `semsource-ui` | held-out | 12/15/5 | 13/15/4 | 29 | 3 | 12/14/6 |
+| **Total** | | **182/164/38** | **187/156/41** | **321** | **63** | **160/134/90** |
 
-Annotator A totals over 384 pairs: 182 keep, 164 suppress, 38 defer. Final labels wait for annotator B.
+Annotator B (Codex, model string `GPT-6`, blind, no label changed after reading A's sheets) agreed with A on 321 of 384 pairs (123 of 128 development, 198 of 256 held-out). The 63 disagreements by A/B label: keep/suppress 20, suppress/keep 18, suppress/defer 12, defer/keep 9, keep/defer 2, defer/suppress 2. Final labels over 384 pairs: 160 keep, 134 suppress, 90 defer (64 of the defers held-out). Per-pair final labels are in `labels/<family>.final.json`; `labels/index.json` carries the counts and the per-family confusion.
 <!-- /labels-table -->
 
 What the annotators reported, across families: the single-package families
@@ -426,11 +432,9 @@ Steps 1 to 3 are done for the twelve sem* families: captures under the ruled
 explicit-only floor (the development families also under the artifact profile
 for the record), frozen 32-pair selections, hydration re-captures and frozen
 reviewer packets verified on both pinned runtimes, and annotator A's labels
-for all 384 pairs (ruling 7: model-written, packet-only, validated). No final
-label exists until annotator B, a Codex session following
-[`labels/REVIEW.md`](labels/REVIEW.md), has labelled blind and
-`label_sheet.py index` has merged the two sheets (agreement kept,
-disagreement `defer`). Then the co-membership constraints (step 4) and the
-retrieval queries (step 5) under the same annotator arrangement. The
-generalization families still need an export step before the runner accepts
-them.
+for all 384 pairs, annotator B's blind review, and the merged final labels
+(ruling 7: model-written, packet-only, validated, disagreement `defer`): 160
+keep, 134 suppress, 90 defer, 321 of 384 agreed. Next: the co-membership
+constraints (step 4, from full source evidence) and the retrieval queries
+(step 5) under the same annotator arrangement. The generalization families
+still need an export step before the runner accepts them.
