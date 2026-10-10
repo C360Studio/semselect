@@ -30,6 +30,15 @@ STRUCTURAL_BASELINE = {
     "max_system_peers": 8,
 }
 
+# Identity profiles the runner can freeze. "semantic-baseline" is what the
+# protocol names. "explicit-only" turns both identity tiers off (the gh#461
+# switches) so detection runs on explicit topology alone; the numeric fields
+# are kept so the structural tool's flags stay positive and are ignored.
+IDENTITY_PROFILES = {
+    "semantic-baseline": STRUCTURAL_BASELINE,
+    "explicit-only": {**STRUCTURAL_BASELINE, "include_siblings": False, "include_system_peers": False},
+}
+
 
 def sha256_file(path):
     h = hashlib.sha256()
@@ -47,7 +56,9 @@ def main():
     p.add_argument("--mvp", required=True, help="SemSource configs/mvp.json (model registry source)")
     p.add_argument("--config-out", required=True)
     p.add_argument("--family-out", required=True, help="family entry, prepared file list and checks")
+    p.add_argument("--identity-profile", default="semantic-baseline", choices=sorted(IDENTITY_PROFILES))
     args = p.parse_args()
+    identity = IDENTITY_PROFILES[args.identity_profile]
 
     families = json.load(open(args.families))
     fam = next((f for f in families["families"] if f["id"] == args.family), None)
@@ -89,7 +100,7 @@ def main():
             "index_workers": 4,
             "coalesce_ms": 200,
             "enable_clustering": True,
-            "entity_id_edges": STRUCTURAL_BASELINE,
+            "entity_id_edges": identity,
         },
         "model_registry": mvp["model_registry"],
     }
@@ -105,7 +116,8 @@ def main():
             "path": args.config_out,
             "sha256": sha256_file(args.config_out),
             "mvp_json_sha256": sha256_file(args.mvp),
-            "structural_baseline": STRUCTURAL_BASELINE,
+            "identity_profile": args.identity_profile,
+            "structural_baseline": identity,
             "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)",
         },
         "checks": {"commit": True, "workspace_sha256": True, "split": True, "files": True},
@@ -115,7 +127,8 @@ def main():
         json.dump(out, fh, indent=2)
         fh.write("\n")
     print(f"{fam['id']}: {fam['split']} {fam['commit'][:12]} files={len(fam['files'])} "
-          f"code={prepared['has_code']} docs={prepared['has_docs']} workspace={fam['workspace_sha256'][:12]}")
+          f"code={prepared['has_code']} docs={prepared['has_docs']} workspace={fam['workspace_sha256'][:12]} "
+          f"identity={args.identity_profile}")
 
 
 if __name__ == "__main__":

@@ -16,6 +16,8 @@
 #        EMBEDDING_CAP_SECONDS (1800, from containers healthy)
 #        PARTITION_SETTLE_SECONDS (35), PARTITION_SETTLE_TIMEOUT_SECONDS (600)
 #        LOG_LEVEL (info), SEMEMBED_CPUS (2)
+#        IDENTITY_PROFILE (semantic-baseline; "explicit-only" turns identity synthesis off
+#          and suffixes the evidence directory with the profile name)
 #        ALLOW_SEMSOURCE_DRIFT=1 to run a SemSource checkout other than the pinned commit
 set -euo pipefail
 
@@ -42,8 +44,10 @@ NATS_URL=nats://127.0.0.1:${NATS_PORT}
 DIRECTED_RAW_LIMIT_BYTES=$((20 * 1024 * 1024))
 WS_ROOT=/tmp/semselect-families # families.py prepare refuses any other basename
 
+IDENTITY_PROFILE=${IDENTITY_PROFILE:-semantic-baseline}
 TS=$(date -u +%Y%m%dT%H%M%SZ)
 EVIDENCE=$REPO_ROOT/docs/evidence/${TS}-legacy-tier1-capture-${FAMILY}
+[[ $IDENTITY_PROFILE == semantic-baseline ]] || EVIDENCE=${EVIDENCE}-${IDENTITY_PROFILE}
 
 die() {
 	echo "run-family: $*" >&2
@@ -167,6 +171,7 @@ python3 -I "$LEGACY_COUNT/families.py" prepare --input "$LEGACY_COUNT/families.i
 	grep -F "$FAMILY:" || fail "families.py prepare did not export $FAMILY"
 python3 -I "$HERE/family_config.py" --families "$FAMILIES" --prepare-manifest "$WORK/prepare-manifest.json" \
 	--family "$FAMILY" --mvp "$SEMSOURCE_DIR/configs/$SEMSOURCE_CONFIG_NAME" \
+	--identity-profile "$IDENTITY_PROFILE" \
 	--config-out "$CONFIG_DIR/$FAMILY.tier1.json" --family-out "$WORK/family.json" ||
 	fail "family_config.py refused $FAMILY"
 FAMILY_DIR=$(cd "$WS_ROOT/$FAMILY" && pwd -P)
@@ -345,6 +350,7 @@ jq -n --slurpfile fam "$WORK/family.json" --slurpfile s "$EVIDENCE/structural/st
 		provenance: "legacy SemStreams capture; not a SemEngine result",
 		family: $fam[0].family.id, split: $fam[0].family.split, commit: $fam[0].family.commit,
 		workspace_sha256: $fam[0].family.workspace_sha256, evidence: $evidence,
+		identity_profile: $fam[0].config.identity_profile,
 		tier0_entities_total: $fam[0].family.entities_total,
 		entities: $s[0].entities.total, embedded: $s[0].entities.embedded,
 		explicit_edges: $s[0].explicit.edges, explicit_undirected_pairs: $s[0].explicit.undirected_pairs,
