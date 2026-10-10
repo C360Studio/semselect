@@ -253,6 +253,34 @@ class PacketTests(unittest.TestCase):
         with self.assertRaises(SystemExit):
             run_main(['--selection', str(sel), '--evidence', str(ev), '--out', str(out)])
 
+    def test_frozen_capture_supplies_ranks_and_drift_is_recorded(self):
+        ev, sel = self.small()
+        import shutil
+        hyd = self.root / 'hydration-capture'
+        shutil.copytree(ev, hyd)
+        # The hydration capture's embedding replay moved: one similarity changed, one pair appeared.
+        directed = read_jsonl(hyd / 'mutualknn' / 'directed.jsonl')
+        directed[0]['similar'] = [{'entity_id': IDS['c2'], 'similarity': 0.84}, {'entity_id': IDS['c1'], 'similarity': 0.80}]
+        write_jsonl(hyd / 'mutualknn' / 'directed.jsonl', directed)
+        write_jsonl(hyd / 'mutualknn' / 'mutual_pairs.jsonl', [{'a': IDS['fn'], 'b': IDS['c1']}, {'a': IDS['fn'], 'b': IDS['c2']}])
+        out = self.root / 'out'
+        self.assertEqual(run_main(['--selection', str(sel), '--evidence', str(hyd), '--frozen', str(ev), '--out', str(out)]), 0)
+        pairs = read_jsonl(out / 'pairs.jsonl')
+        self.assertEqual(pairs[0]['context']['rank_a_to_b'], 1, 'ranks come from the frozen capture')
+        self.assertIn('A lists B at neighbour rank 1 of 2', pairs[0]['request']['state'])
+        drift = json.loads((out / 'index.json').read_text())['evidence']['mutual_pairs_drift']
+        self.assertFalse(drift['equal'])
+        self.assertEqual((drift['mutual_pairs_frozen'], drift['mutual_pairs_hydration'], drift['pairs_only_hydration']), (1, 2, 1))
+        self.assertAlmostEqual(drift['max_similarity_delta'], 0.05, places=6)
+        self.assertEqual(drift['entities_with_moved_similarity'], 3)
+        self.assertEqual(drift['most_moved_entities'][0], IDS['fn'])
+        # An entity-set or partition difference between the two captures is refused.
+        bad = self.root / 'bad-capture'
+        shutil.copytree(ev, bad)
+        rows = read_jsonl(bad / 'structural' / 'entities.jsonl')
+        write_jsonl(bad / 'structural' / 'entities.jsonl', rows[:-1])
+        self.assertEqual(run_main(['--selection', str(sel), '--evidence', str(bad), '--frozen', str(ev), '--out', str(self.root / 'out2')]), 2)
+
     def test_bound_respects_lines_and_utf8(self):
         text = 'first line\nsecond line\nthird line\n'
         kept, omitted, lines = mp.bound(text, 25)

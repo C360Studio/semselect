@@ -21,6 +21,7 @@ from pathlib import Path
 import sys
 
 PROVENANCE = 'legacy SemStreams capture; not a SemEngine result'
+ROOT = Path(__file__).resolve().parents[4]
 STEP = 'step 3: bounded reviewer packets (eval/community-refinement/README.md)'
 STATE_BUDGET = 8192          # guard: state must be 1..8192 UTF-8 bytes
 INSTRUCTION_LIMIT = 1024     # guard: instructions 1..1024 bytes
@@ -84,11 +85,26 @@ def load_json(path):
         return json.load(f)
 
 
-class Capture:
-    """One hydration capture directory, read once."""
+def read_directed(evidence):
+    directed = Path(evidence) / 'mutualknn' / 'directed.jsonl'
+    if not directed.exists():
+        directed = directed.with_suffix('.jsonl.gz')
+    return {r['entity_id']: [(s['entity_id'], s['similarity']) for s in r.get('similar') or []]
+            for r in read_jsonl(directed)}
 
-    def __init__(self, evidence):
+
+class Capture:
+    """The hydration capture (states, bodies, topology) plus the frozen step-1
+    capture the selection was made from (neighbour ranks, mutual pairs).
+
+    Entity set and partition must be identical in both and in the selection;
+    the hydration capture's mutual pairs are compared with the frozen ones and
+    any drift is recorded, never used: similarity and ranks in a packet come
+    from the frozen capture of record."""
+
+    def __init__(self, evidence, frozen=None):
         self.dir = Path(evidence)
+        self.frozen_dir = Path(frozen) if frozen else self.dir
         self.summary = load_json(self.dir / 'summary.json')
         self.family_json = load_json(self.dir / 'family.json')
         self.hydration = load_json(self.dir / 'hydration' / 'hydration.json')
@@ -96,16 +112,17 @@ class Capture:
         self.states = {r['entity_id']: r for r in read_jsonl(self.dir / 'hydration' / 'entity_states.jsonl')}
         self.bodies = {r['key']: r for r in read_jsonl(self.dir / 'hydration' / 'bodies.jsonl')}
         self.explicit = read_jsonl(self.dir / 'structural' / 'explicit_edges.jsonl')
-        directed = self.dir / 'mutualknn' / 'directed.jsonl'
-        if not directed.exists():
-            directed = directed.with_suffix('.jsonl.gz')
-        self.neighbours = {r['entity_id']: [s['entity_id'] for s in r.get('similar') or []]
-                           for r in read_jsonl(directed)}
+        self.neighbours = read_directed(self.frozen_dir)
         self.hashes = {
             'entities_jsonl_sha256': sha256_file(self.dir / 'structural' / 'entities.jsonl'),
-            'mutual_pairs_jsonl_sha256': sha256_file(self.dir / 'mutualknn' / 'mutual_pairs.jsonl'),
             'partition_hash': self.summary['partition_hash'],
+            'mutual_pairs_jsonl_sha256': sha256_file(self.frozen_dir / 'mutualknn' / 'mutual_pairs.jsonl'),
         }
+        self.frozen_hashes = {
+            'entities_jsonl_sha256': sha256_file(self.frozen_dir / 'structural' / 'entities.jsonl'),
+            'partition_hash': load_json(self.frozen_dir / 'summary.json')['partition_hash'],
+        }
+        self.drift = mutual_pairs_drift(self.frozen_dir, self.dir)
         self.out_by = {}
         self.in_by = {}
         for e in self.explicit:
@@ -113,7 +130,8 @@ class Capture:
             self.in_by.setdefault(e['to'], []).append(e)
 
     def check_against(self, selection):
-        """The hydration capture must reproduce the frozen step-1 inputs exactly."""
+        """Entities and partition must match everywhere; the frozen capture's
+        mutual pairs must be the selection's; the hydration must be complete."""
         errors = []
         if selection['family'] != self.summary['family']:
             errors.append(f"family {self.summary['family']} is not the selection's {selection['family']}")
@@ -125,6 +143,9 @@ class Capture:
         for key, value in self.hashes.items():
             if selection['inputs'].get(key) != value:
                 errors.append(f'{key} differs from the frozen selection')
+        for key, value in self.frozen_hashes.items():
+            if self.hashes[key] != value:
+                errors.append(f'{key} differs between the frozen capture and the hydration capture')
         for name, ok in self.hydration['checks'].items():
             if not ok:
                 errors.append(f'hydration check {name} failed')
@@ -132,6 +153,35 @@ class Capture:
         if missing:
             errors.append(f'{len(missing)} selected endpoints have no entity state')
         return errors
+
+
+def mutual_pairs_drift(frozen_dir, hydration_dir):
+    """How far the hydration capture's embedding replay moved from the frozen
+    one: recorded as a finding, never used for selection or packets."""
+    frozen = sha256_file(Path(frozen_dir) / 'mutualknn' / 'mutual_pairs.jsonl')
+    hydration = sha256_file(Path(hydration_dir) / 'mutualknn' / 'mutual_pairs.jsonl')
+    record = {'frozen_sha256': frozen, 'hydration_sha256': hydration, 'equal': frozen == hydration}
+    if frozen == hydration:
+        return record
+    fp = {(r['a'], r['b']): r for r in read_jsonl(Path(frozen_dir) / 'mutualknn' / 'mutual_pairs.jsonl')}
+    hp = {(r['a'], r['b']): r for r in read_jsonl(Path(hydration_dir) / 'mutualknn' / 'mutual_pairs.jsonl')}
+    fd, hd = read_directed(frozen_dir), read_directed(hydration_dir)
+    moved = {}
+    for e, lst in fd.items():
+        for nb, sim in lst:
+            other = dict(hd.get(e, []))
+            if nb in other and abs(other[nb] - sim) > 1e-9:
+                moved[e] = moved.get(e, 0) + 1
+                moved[nb] = moved.get(nb, 0) + 1
+    deltas = [abs(dict(hd.get(e, [])).get(nb, sim) - sim) for e, lst in fd.items() for nb, sim in lst]
+    record.update({
+        'mutual_pairs_frozen': len(fp), 'mutual_pairs_hydration': len(hp),
+        'pairs_only_frozen': len(set(fp) - set(hp)), 'pairs_only_hydration': len(set(hp) - set(fp)),
+        'max_similarity_delta': max(deltas) if deltas else 0.0,
+        'entities_with_moved_similarity': len(moved),
+        'most_moved_entities': [e for e, _ in sorted(moved.items(), key=lambda kv: (-kv[1], kv[0]))[:3]],
+    })
+    return record
 
 
 def triples(state_row):
@@ -272,11 +322,12 @@ def source_block(c, allowance):
         return [f'  source: none ({reason})'], 0, 0, False
     kept, omitted, kept_lines = bound(c['text'], allowance)
     total = c['body_bytes'] if c['body_bytes'] is not None else len(c['text'].encode())
-    span = ''
+    span, after = '', kept_lines
     if c['start_line'] and c['end_line']:
         last = c['start_line'] + max(kept_lines, 1) - 1
         span = f" lines {c['start_line']}-{last if omitted else c['end_line']}"
-    note = f'{total - omitted} of {total} bytes shown, {omitted} omitted after line {kept_lines}' if omitted else f'{total} bytes, complete'
+        after = last
+    note = f'{total - omitted} of {total} bytes shown, {omitted} omitted after line {after}' if omitted else f'{total} bytes, complete'
     return [f'  source{span} ({note}):', kept.rstrip('\n')], total - omitted, omitted, omitted > 0
 
 
@@ -329,7 +380,7 @@ def allocate(wants, remaining):
 
 
 def rank_of(capture, a, b):
-    lst = capture.neighbours.get(a) or []
+    lst = [nb for nb, _ in capture.neighbours.get(a) or []]
     return (lst.index(b) + 1, len(lst)) if b in lst else (None, len(lst))
 
 
@@ -439,6 +490,15 @@ def bundle_packets(capture, rows, budget=STATE_BUDGET):
     return packets
 
 
+def rel(path):
+    """Repo-relative when inside the repo, so the record does not name a machine."""
+    p = Path(path).resolve()
+    try:
+        return str(p.relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
+
 def write_jsonl(path, rows):
     with open(path, 'w', encoding='utf-8') as f:
         for r in rows:
@@ -454,6 +514,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--selection', required=True, help='frozen step-2 selection JSON')
     ap.add_argument('--evidence', required=True, help='hydration capture directory (run-family.sh output)')
+    ap.add_argument('--frozen', help='the frozen step-1 capture the selection was made from '
+                                     '(default: the selection\'s evidence entry under docs/evidence)')
     ap.add_argument('--out', required=True, help='output directory (created; must not exist)')
     ap.add_argument('--state-budget', type=int, default=STATE_BUDGET)
     args = ap.parse_args(argv)
@@ -463,7 +525,10 @@ def main(argv=None):
     if out.exists():
         ap.error(f'{out} already exists; refusing to overwrite frozen packets')
     selection = load_json(args.selection)
-    capture = Capture(args.evidence)
+    frozen = args.frozen
+    if frozen is None and selection.get('evidence'):
+        frozen = str(ROOT / 'docs' / 'evidence' / selection['evidence'])
+    capture = Capture(args.evidence, frozen)
     errors = capture.check_against(selection)
     if errors:
         for e in errors:
@@ -478,9 +543,10 @@ def main(argv=None):
     truncated = sum(1 for p in pairs for s in p['sources'] if s['truncated'])
     index = {
         'provenance': PROVENANCE, 'step': STEP, 'family': selection['family'], 'split': selection['split'],
-        'selection': {'path': str(args.selection), 'sha256': sha256_file(args.selection), 'selected': len(rows)},
-        'evidence': {'path': str(capture.dir), 'summary_evidence': capture.summary.get('evidence'), **capture.hashes,
-                     'hydration': {k: capture.hydration[k] for k in ('entities', 'with_body_handle', 'bodies_fetched', 'checks')}},
+        'selection': {'path': rel(args.selection), 'sha256': sha256_file(args.selection), 'selected': len(rows)},
+        'evidence': {'hydration_capture': rel(capture.dir), 'frozen_capture': rel(capture.frozen_dir), **capture.hashes,
+                     'hydration': {k: capture.hydration[k] for k in ('entities', 'with_body_handle', 'bodies_fetched', 'checks')},
+                     'mutual_pairs_drift': capture.drift},
         'parameters': {'state_budget': args.state_budget, 'instruction_limit': INSTRUCTION_LIMIT,
                        'description_limit': DESCRIPTION_LIMIT, 'questions_per_request': QUESTIONS_PER_REQUEST,
                        'neighbour_cap': NEIGHBOUR_CAP, 'children_cap': CHILDREN_CAP},
@@ -498,8 +564,11 @@ def main(argv=None):
     with open(out / 'index.json', 'w', encoding='utf-8') as f:
         json.dump(index, f, indent=2, ensure_ascii=False)
         f.write('\n')
+    drift = '' if capture.drift['equal'] else (f"; mutual pairs drifted in the hydration capture "
+                                               f"({capture.drift['entities_with_moved_similarity']} entities moved, "
+                                               f"max delta {capture.drift['max_similarity_delta']:.3f}), frozen ranks used")
     print(f"{selection['family']}: {len(pairs)} pair packets, state bytes {index['pairs']['state_bytes']}, "
-          f"{truncated} truncated sources; {len(bundles)} bundle requests over {index['bundles']['entities']} entities")
+          f"{truncated} truncated sources; {len(bundles)} bundle requests over {index['bundles']['entities']} entities{drift}")
     return 0
 
 
