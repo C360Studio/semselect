@@ -1,0 +1,79 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "family": "semselect-service",
+  "split": "development",
+  "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+  "workspace_sha256": "f00b031de9f674f48b867bba4a0465db482a3b8ea82be4c8b9c235b22e66ed8f",
+  "evidence": "docs/evidence/20261010T141643Z-legacy-tier1-capture-semselect-service-explicit-only",
+  "identity_profile": "explicit-only",
+  "tier0_entities_total": 56,
+  "entities": 56,
+  "embedded": 56,
+  "explicit_edges": 103,
+  "explicit_undirected_pairs": 80,
+  "explicit_indexes_consistent": true,
+  "voting_edges": 146,
+  "voting_by_tier": {
+    "explicit": 146,
+    "sibling": 0,
+    "system_peer": 0
+  },
+  "partition_level0": {
+    "level": 0,
+    "communities": 4,
+    "members": 56,
+    "entity_mapped": 56,
+    "singletons": 0,
+    "largest": 32,
+    "size_histogram": {
+      "13": 1,
+      "32": 1,
+      "4": 1,
+      "7": 1
+    }
+  },
+  "partition_hash": "4fc199e2ca585c711cfbca851fcbf8c7bbc2e3239265696eea9c06dabe8cfc4a",
+  "structural_checks": {
+    "explicit_indexes_consistent": true,
+    "no_malformed_entity_ids": true,
+    "partition_covers_entity_states": true,
+    "partition_entity_map_consistent": true,
+    "partition_members_disjoint": true,
+    "partition_settled": true,
+    "stable_after_topology_read": true
+  },
+  "structural_baseline": {
+    "include_siblings": false,
+    "include_system_peers": false,
+    "sibling_weight": 0.7,
+    "max_siblings": 5,
+    "system_peer_weight": 0.2,
+    "max_system_peers": 8
+  },
+  "mutualknn": {
+    "k": 8,
+    "threshold": 0.75,
+    "queried": 56,
+    "failed": 0,
+    "directed_pairs_at_threshold": 351,
+    "mutual_pairs": 136,
+    "explicit_dominated": 11,
+    "review_candidates": 125,
+    "cross_type": 32,
+    "lower_bound": false
+  },
+  "hydration": {
+    "entities": 56,
+    "with_body_handle": 47,
+    "distinct_body_keys": 47,
+    "bodies_fetched": 47,
+    "body_bytes": 42398,
+    "bodies_missing": 0,
+    "invalid_utf8": 0,
+    "checks": {
+      "all_handles_resolved": true,
+      "all_states_parse": true,
+      "handles_name_object_store": true
+    }
+  }
+}

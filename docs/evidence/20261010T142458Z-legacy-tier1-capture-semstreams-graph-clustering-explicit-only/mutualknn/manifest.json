@@ -1,0 +1,252 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a"
+  },
+  "semsource_commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+  "semstreams_version": "v1.0.0-beta.160",
+  "semembed": {
+    "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+    "model": "Snowflake/snowflake-arctic-embed-s"
+  },
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.TAvrbb/config/semstreams-graph-clustering.tier1.json",
+    "sha256": "941955bfbc6a1d51db670994b678e80de37fae0b84ed34b6f22a43e8f215805b"
+  },
+  "compose_file": {
+    "path": "/Users/coby/Code/c360/semsource/docker-compose.yml",
+    "sha256": "1ac8fccdc3a8bb63b673900ba11258279c5178594e44cf723ffecf7c27170601"
+  },
+  "compose_override": {
+    "path": "/Users/coby/Code/c360/semselect/eval/community-refinement/fixtures/tier1-capture/compose.tier1.yml",
+    "sha256": "8a3260b8c6e086b824dffdae031844e30b373d07a9427d726fe7246dc1409d68"
+  },
+  "machine": {
+    "tool_os": "darwin",
+    "tool_arch": "arm64",
+    "docker_arch": "aarch64"
+  },
+  "tool": {
+    "module": "github.com/c360studio/semselect/eval/community-refinement/legacy-capture",
+    "go_version": "go1.26.4",
+    "vcs_revision": "d58750d492d8f50d9a334de644828a28caf8b6ed",
+    "vcs_modified": "true"
+  },
+  "nats_url": "nats://127.0.0.1:14222",
+  "started_utc": "2026-10-10T14:26:17Z",
+  "finished_utc": "2026-10-10T14:26:17Z",
+  "run": {
+    "provenance": "legacy SemStreams capture; not a SemEngine result",
+    "compose_project": "semselect-tier1-capture",
+    "family": {
+      "id": "semstreams-graph-clustering",
+      "split": "held-out",
+      "role": "cross-type, code and doc",
+      "repo": "https://github.com/C360Studio/semstreams",
+      "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+      "license": "MIT",
+      "workspace_sha256": "812aeaccca05f630a3ebb9f7fce2c7f26fed122271ed3fb88bdbe8bb8a77832f",
+      "files": 8,
+      "tier0_entities_total": 175
+    },
+    "config": {
+      "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.TAvrbb/config/semstreams-graph-clustering.tier1.json",
+      "sha256": "941955bfbc6a1d51db670994b678e80de37fae0b84ed34b6f22a43e8f215805b",
+      "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+      "identity_profile": "explicit-only",
+      "structural_baseline": {
+        "include_siblings": false,
+        "include_system_peers": false,
+        "sibling_weight": 0.7,
+        "max_siblings": 5,
+        "system_peer_weight": 0.2,
+        "max_system_peers": 8
+      },
+      "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+    },
+    "semsource": {
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "dirty_paths": 0,
+      "image_id": "sha256:ef334066560bba7fe0fec04d29119969f5ebda81e5e00f82d3909b04303b3939",
+      "semstreams_version": "v1.0.0-beta.160",
+      "log_level": "info"
+    },
+    "semembed": {
+      "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "image_id": "sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "model": "Snowflake/snowflake-arctic-embed-s",
+      "cpus": "2"
+    },
+    "semselect": {
+      "commit": "d58750d492d8f50d9a334de644828a28caf8b6ed",
+      "dirty_paths": 9
+    },
+    "docker": {
+      "os": "Docker Desktop",
+      "server_version": "29.8.2",
+      "architecture": "aarch64",
+      "ncpu": 12,
+      "mem_total_bytes": 24895582208
+    },
+    "host_cpu": "Apple M3 Pro",
+    "status_at_capture": {
+      "embedding": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 177,
+        "target_revision": 177,
+        "revision": "177",
+        "last_synced": "2026-10-10T14:25:24Z"
+      },
+      "index": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 177,
+        "target_revision": 177,
+        "revision": "177",
+        "last_synced": "2026-10-10T14:25:14Z"
+      },
+      "namespace": "semselect",
+      "note": "readiness is honest (semstreams ADR-066): index.ready means the structural index (NAME_INDEX) has caught up to the latest committed write — byName / code_context / code_impact are reliable. embedding.ready means the semantic pipeline has caught up — code_search is reliable (surfaced, not gated). A miss is a genuine absence only when status.phase is \"ready\" (every configured source has finished its initial seed) AND the relevant index signal is ready; while status.phase is \"seeding\" a miss may simply be not-yet-ingested. For exact read-your-write freshness, compare the numeric indexed_revision field against your write's revision.",
+      "phase": "ready",
+      "sources": [
+        {
+          "entity_count": 161,
+          "error_count": 0,
+          "instance_name": "ast-source-semstreams-graph-clustering",
+          "phase": "watching",
+          "publish_total": 163,
+          "source_type": "ast",
+          "type_counts": {
+            "code.folder": 2,
+            "code.repo": 1,
+            "golang.const": 8,
+            "golang.file": 7,
+            "golang.function": 22,
+            "golang.interface": 4,
+            "golang.method": 83,
+            "golang.struct": 26,
+            "golang.var": 8
+          }
+        },
+        {
+          "entity_count": 14,
+          "error_count": 0,
+          "instance_name": "doc-source-semstreams-graph-clustering",
+          "phase": "watching",
+          "publish_total": 14,
+          "source_type": "docs",
+          "type_counts": {
+            "web.chunk": 13,
+            "web.doc": 1
+          }
+        }
+      ],
+      "timestamp": "2026-10-10T14:25:09.629676138Z",
+      "total_entities": 175
+    },
+    "milestones": [
+      {
+        "name": "prepare_start",
+        "utc": "2026-10-10T14:24:59Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "prepare_done",
+        "utc": "2026-10-10T14:24:59Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": {
+          "split": "held-out",
+          "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+          "files": 8,
+          "workspace_sha256": "812aeaccca05f630a3ebb9f7fce2c7f26fed122271ed3fb88bdbe8bb8a77832f"
+        }
+      },
+      {
+        "name": "build_start",
+        "utc": "2026-10-10T14:25:01Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "build_done",
+        "utc": "2026-10-10T14:25:02Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "compose_up_start",
+        "utc": "2026-10-10T14:25:02Z",
+        "elapsed_s_since_compose_up": 0,
+        "detail": null
+      },
+      {
+        "name": "containers_healthy",
+        "utc": "2026-10-10T14:25:14Z",
+        "elapsed_s_since_compose_up": 12,
+        "detail": null
+      },
+      {
+        "name": "phase_ready",
+        "utc": "2026-10-10T14:25:15Z",
+        "elapsed_s_since_compose_up": 13,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 175,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": false,
+            "state": "building",
+            "lag": 177
+          }
+        }
+      },
+      {
+        "name": "index_ready",
+        "utc": "2026-10-10T14:25:15Z",
+        "elapsed_s_since_compose_up": 13,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 175,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": false,
+            "state": "building",
+            "lag": 177
+          }
+        }
+      },
+      {
+        "name": "embedding_ready",
+        "utc": "2026-10-10T14:25:25Z",
+        "elapsed_s_since_compose_up": 23,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 175,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          }
+        }
+      }
+    ]
+  }
+}
