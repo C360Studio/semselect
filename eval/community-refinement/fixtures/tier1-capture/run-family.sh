@@ -2,7 +2,8 @@
 # Legacy SemStreams capture; not a SemEngine result.
 #
 # One pilot family, one legacy tier-1 stack (protocol freeze step 1). Exports
-# the family workspace at its pinned commit (legacy-count/families.py prepare),
+# the family workspace at its pinned commit (legacy-count/families.py prepare;
+# a generalization family is fetched from its public repository, --generalization),
 # runs SemSource's shipped Compose stack over that family alone with the HTTP
 # embedder and graph clustering on (semantic-profile structural weights,
 # semantic edges off), waits for embedding.ready, freezes the structural side
@@ -63,6 +64,9 @@ done
 [[ ! -e $EVIDENCE ]] || die "evidence directory already exists: $EVIDENCE"
 jq -e --arg id "$FAMILY" '.families[] | select(.id == $id)' "$FAMILIES" >/dev/null ||
 	die "family $FAMILY is not in $FAMILIES"
+FAMILY_SPLIT=$(jq -r --arg id "$FAMILY" '.families[] | select(.id == $id) | .split' "$FAMILIES")
+PREPARE_FLAGS=()
+[[ $FAMILY_SPLIT != generalization ]] || PREPARE_FLAGS+=(--generalization)
 
 PINNED_SEMSOURCE=$(jq -r .capture_profile.semsource_commit "$FAMILIES")
 SEMSOURCE_COMMIT=$(git -C "$SEMSOURCE_DIR" rev-parse HEAD)
@@ -164,11 +168,13 @@ fail() {
 	exit 1
 }
 
-# --- Workspace: every family is exported from the sibling checkouts at its
-# pinned commit (git archive, committed files only); only this family is mounted.
+# --- Workspace: every sem* family is exported from the sibling checkouts at its
+# pinned commit (git archive, committed files only); a generalization family is
+# shallow-fetched from its public repository; only this family is mounted.
 milestone prepare_start
 python3 -I "$LEGACY_COUNT/families.py" prepare --input "$LEGACY_COUNT/families.input.json" \
-	--ws-root "$WS_ROOT" --config-out "$WORK/tier0.unused.json" --manifest-out "$WORK/prepare-manifest.json" |
+	--ws-root "$WS_ROOT" --config-out "$WORK/tier0.unused.json" --manifest-out "$WORK/prepare-manifest.json" \
+	${PREPARE_FLAGS[@]+"${PREPARE_FLAGS[@]}"} |
 	grep -F "$FAMILY:" || fail "families.py prepare did not export $FAMILY"
 python3 -I "$HERE/family_config.py" --families "$FAMILIES" --prepare-manifest "$WORK/prepare-manifest.json" \
 	--family "$FAMILY" --mvp "$SEMSOURCE_DIR/configs/$SEMSOURCE_CONFIG_NAME" \

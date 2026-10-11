@@ -18,7 +18,9 @@ import hashlib
 import json
 import sys
 
-# Same AST languages as the tier-0 family count, so the entity set matches.
+# Same AST languages as the tier-0 family count, so the entity set matches. A
+# generalization entry carries its own list (ast_languages, with java and c)
+# from the count it was copied from; the sem* configs stay as frozen.
 LANGUAGES = ["go", "typescript", "javascript", "svelte", "python"]
 
 # processor/graph-clustering semanticEnabledEntityIDBaseline at SemStreams
@@ -71,7 +73,7 @@ def main():
     prepared = next((f for f in manifest["families"] if f["id"] == args.family), None)
     if prepared is None:
         sys.exit(f"family {args.family} was not exported by families.py prepare "
-                 f"(generalization families need their own export; not supported yet)")
+                 f"(a generalization family needs prepare --generalization)")
 
     problems = []
     if prepared["commit"] != fam["commit"]:
@@ -87,9 +89,10 @@ def main():
 
     mvp = json.load(open(args.mvp))
     path = f"/workspace/{fam['id']}"
+    languages = fam.get("ast_languages", LANGUAGES)
     sources = []
     if prepared["has_code"]:
-        sources.append({"type": "ast", "path": path, "languages": LANGUAGES, "watch": False})
+        sources.append({"type": "ast", "path": path, "languages": languages, "watch": False})
     if prepared["has_docs"]:
         sources.append({"type": "docs", "paths": [path], "watch": False})
     if not sources:

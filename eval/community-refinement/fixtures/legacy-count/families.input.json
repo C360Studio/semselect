@@ -298,6 +298,61 @@
     "manifest": "eval/community-refinement/fixtures/families.json",
     "manifest_commit": "f10aff606fd0a28ee0e320ab5f446a3f35986887",
     "evidence": "docs/evidence/20261009T163623Z-legacy-family-counts",
-    "note": "Owner ruling 4 (issue #5): kept from the earlier public-repo list under split 'generalization' as a check that a sem* result carries over to external code with an unambiguous licence. Copied verbatim from the earlier measurement and not re-measured; outside the four development and eight held-out families and not counted toward the promotion rule."
+    "note": "Owner ruling 4 (issue #5): kept from the earlier public-repo list under split 'generalization' as a check that a sem* result carries over to external code with an unambiguous licence. Copied verbatim from the earlier measurement and not re-measured; outside the four development and eight held-out families and not counted toward the promotion rule.",
+    "repositories": {
+      "nats.go": {
+        "url": "https://github.com/nats-io/nats.go",
+        "commit": "31a3ee4cf0fef9e2dc2d85d5068087b46236cd12",
+        "license": "Apache-2.0",
+        "license_file": "LICENSE",
+        "export_exclude": []
+      },
+      "commons-csv": {
+        "url": "https://github.com/apache/commons-csv",
+        "commit": "26f2e869625ba102f5b6386d9799817e523637f7",
+        "license": "Apache-2.0",
+        "license_file": "LICENSE.txt",
+        "export_exclude": []
+      }
+    },
+    "families": [
+      {
+        "id": "nats-go-micro",
+        "repository": "nats.go",
+        "include": [
+          "micro",
+          "README.md"
+        ],
+        "exclude": [],
+        "max_file_bytes": null
+      },
+      {
+        "id": "commons-csv",
+        "repository": "commons-csv",
+        "include": [
+          "src/main/java/org/apache/commons/csv",
+          "README.md"
+        ],
+        "exclude": [
+          "src/main/java/org/apache/commons/csv/CSVParser.java",
+          "src/main/java/org/apache/commons/csv/CSVRecord.java",
+          "src/main/java/org/apache/commons/csv/Constants.java",
+          "src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java",
+          "src/main/java/org/apache/commons/csv/Lexer.java",
+          "src/main/java/org/apache/commons/csv/Token.java"
+        ],
+        "max_file_bytes": null
+      }
+    ],
+    "ast_languages": [
+      "go",
+      "typescript",
+      "javascript",
+      "java",
+      "python",
+      "svelte",
+      "c"
+    ],
+    "export_note": "Exported only by `families.py prepare --generalization`: the public repositories have no sibling checkout, so the pinned commit (full hash, verified by family_config.py against the copied workspace_sha256) is shallow-fetched from the URL into a bare clone under --src-root and archived from there. include/exclude are copied from the manifest entries; ast_languages is the list of the count they were copied from, which the sem* families no longer need (no Java or C)."
   }
 }

@@ -1537,6 +1537,16 @@
       ],
       "notes": "Owner subtree unchanged; micro/ includes its tests and micro/README.md.",
       "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+      "ast_languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "export": "families.py prepare --generalization: shallow fetch of the pinned commit from the public URL, then git archive (no sibling checkout)",
       "copied_from": "f10aff606fd0a28ee0e320ab5f446a3f35986887:eval/community-refinement/fixtures/families.json",
       "evidence": "docs/evidence/20261009T163623Z-legacy-family-counts",
       "generalization_note": "Owner ruling 4 (issue #5): kept from the earlier public-repo list under split 'generalization' as a check that a sem* result carries over to external code with an unambiguous licence. Copied verbatim from the earlier measurement and not re-measured; outside the four development and eight held-out families and not counted toward the promotion rule."
@@ -1646,6 +1656,16 @@
       ],
       "notes": "The package is one directory, so it is trimmed by file: the CSVFormat builder hub is kept with CSVPrinter, QuoteMode, DuplicateHeaderMode, CSVException and package-info. The parser/lexer/record side is excluded; references to it are dangling edges.",
       "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+      "ast_languages": [
+        "go",
+        "typescript",
+        "javascript",
+        "java",
+        "python",
+        "svelte",
+        "c"
+      ],
+      "export": "families.py prepare --generalization: shallow fetch of the pinned commit from the public URL, then git archive (no sibling checkout)",
       "copied_from": "f10aff606fd0a28ee0e320ab5f446a3f35986887:eval/community-refinement/fixtures/families.json",
       "evidence": "docs/evidence/20261009T163623Z-legacy-family-counts",
       "generalization_note": "Owner ruling 4 (issue #5): kept from the earlier public-repo list under split 'generalization' as a check that a sem* result carries over to external code with an unambiguous licence. Copied verbatim from the earlier measurement and not re-measured; outside the four development and eight held-out families and not counted toward the promotion rule."
