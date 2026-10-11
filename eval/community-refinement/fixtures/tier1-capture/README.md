@@ -17,7 +17,7 @@ provider chain.
 | 2. Candidate selection | at most 32 effective candidates, with the fraction of all candidates they cover | [`select_candidates.py`](select_candidates.py), deterministic and offline; order fixed by ruling 6 | frozen for the twelve families in [`selections/`](selections/) (below) |
 | 3. Reviewer packets | one packet per candidate, 8,192-byte state bound, per-entity bundle variant, both tokenizers verified | [`make_packets.py`](make_packets.py) over the hydration captures, [`verify_packets.py`](verify_packets.py) on both pinned runtimes | frozen for the twelve families in [`packets/`](packets/) (below) |
 | 4. Co-membership constraints | 20 per family, ten positive and ten negative | [`constraint_sheet.py`](constraint_sheet.py) catalogue, validator and index; annotators as in ruling 7, from full source | done for the twelve families in [`constraints/`](constraints/) (below): 237 of 240 agreed, 119 positive and 118 negative stand |
-| 5. Retrieval queries | 6 per family with gold evidence sets, four complementary and two precise | [`query_sheet.py`](query_sheet.py) validator and index; annotators as in ruling 7, from full source and passage text | annotator A done for the twelve families in [`queries/`](queries/) (below): 72 queries, 48 held-out; Codex review pending |
+| 5. Retrieval queries | 6 per family with gold evidence sets, four complementary and two precise | [`query_sheet.py`](query_sheet.py) validator and index; annotators as in ruling 7, from full source and passage text | done for the twelve families in [`queries/`](queries/) (below): 43 of 72 agreed, 28 complementary and 15 precise stand, 28 of them held-out |
 
 Labels (`keep`, `suppress`, `defer`) follow step 3. Ruling 7 (owner,
 2026-10-10) replaces the annotator arrangement of ruling 3: no person labels.
@@ -560,23 +560,23 @@ told to read nothing else; the split was given in the instruction since it
 is not derivable from those inputs.
 
 <!-- queries-table -->
-| Family | Split | Proposed compl./precise | Alternative sets | Primary set spans communities | Some set inside one community | Primary set has explicit edge | Primary set has mutual pair | Primary set has constraint pair | Review |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `semselect-service` | development | 4/2 | 1 | 4 | 0 | 0 | 2 | 2 | awaiting annotator B |
-| `semselect-docs` | development | 4/2 | 2 | 4 | 0 | 0 | 1 | 0 | awaiting annotator B |
-| `semengine-natsclient` | development | 4/2 | 1 | 4 | 1 | 1 | 0 | 0 | awaiting annotator B |
-| `semengine-message` | development | 4/2 | 0 | 4 | 0 | 1 | 4 | 3 | awaiting annotator B |
-| `semstreams-graph-clustering` | held-out | 4/2 | 0 | 3 | 1 | 0 | 2 | 1 | awaiting annotator B |
-| `semstreams-rule` | held-out | 4/2 | 0 | 3 | 1 | 0 | 1 | 2 | awaiting annotator B |
-| `semstreams-service` | held-out | 4/2 | 0 | 4 | 0 | 2 | 2 | 1 | awaiting annotator B |
-| `semstreams-component` | held-out | 4/2 | 1 | 3 | 1 | 3 | 1 | 1 | awaiting annotator B |
-| `semstreams-agentic-loop` | held-out | 4/2 | 0 | 4 | 0 | 0 | 2 | 1 | awaiting annotator B |
-| `semsource-source-manifest` | held-out | 4/2 | 2 | 4 | 0 | 1 | 0 | 0 | awaiting annotator B |
-| `semsource-cli` | held-out | 4/2 | 0 | 3 | 1 | 2 | 0 | 1 | awaiting annotator B |
-| `semsource-ui` | held-out | 4/2 | 5 | 4 | 0 | 2 | 2 | 1 | awaiting annotator B |
-| **Total** | | **48/24** | **12** | **44** | **5** | **12** | **17** | **13** | |
+| Family | Split | Proposed compl./precise | Alternative sets | Primary set spans communities | Some set inside one community | Primary set has explicit edge | Primary set has mutual pair | Primary set has constraint pair | Agreed compl./precise | Dropped | B added sets |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `semselect-service` | development | 4/2 | 1 | 4 | 0 | 0 | 2 | 2 | 2/2 | 2 | 0 |
+| `semselect-docs` | development | 4/2 | 2 | 4 | 0 | 0 | 1 | 0 | 2/1 | 3 | 0 |
+| `semengine-natsclient` | development | 4/2 | 1 | 4 | 1 | 1 | 0 | 0 | 3/0 | 3 | 0 |
+| `semengine-message` | development | 4/2 | 0 | 4 | 0 | 1 | 4 | 3 | 3/2 | 1 | 0 |
+| `semstreams-graph-clustering` | held-out | 4/2 | 0 | 3 | 1 | 0 | 2 | 1 | 2/0 | 4 | 0 |
+| `semstreams-rule` | held-out | 4/2 | 0 | 3 | 1 | 0 | 1 | 2 | 2/1 | 3 | 0 |
+| `semstreams-service` | held-out | 4/2 | 0 | 4 | 0 | 2 | 2 | 1 | 2/2 | 2 | 0 |
+| `semstreams-component` | held-out | 4/2 | 1 | 3 | 1 | 3 | 1 | 1 | 2/2 | 2 | 0 |
+| `semstreams-agentic-loop` | held-out | 4/2 | 0 | 4 | 0 | 0 | 2 | 1 | 3/2 | 1 | 0 |
+| `semsource-source-manifest` | held-out | 4/2 | 2 | 4 | 0 | 1 | 0 | 0 | 2/1 | 3 | 0 |
+| `semsource-cli` | held-out | 4/2 | 0 | 3 | 1 | 2 | 0 | 1 | 2/1 | 3 | 0 |
+| `semsource-ui` | held-out | 4/2 | 5 | 4 | 0 | 2 | 2 | 1 | 3/1 | 2 | 0 |
+| **Total** | | **48/24** | **12** | **44** | **5** | **12** | **17** | **13** | **28/15** | **29** | **0** |
 
-Of the 72 proposed queries (48 complementary, 24 precise) with 12 alternative supporting sets, the primary gold set of 44 of the 48 complementary queries spans more than one level-0 community of the frozen structural partition, 5 have some gold set inside one community, 12 have an explicit edge among the primary members, 17 a mutual-kNN pair and 13 a step-4 constraint pair. Final queries wait for annotator B.
+Of the 72 proposed queries (48 complementary, 24 precise) with 12 alternative supporting sets, the primary gold set of 44 of the 48 complementary queries spans more than one level-0 community of the frozen structural partition, 5 have some gold set inside one community, 12 have an explicit edge among the primary members, 17 a mutual-kNN pair and 13 a step-4 constraint pair. After annotator B, 28 complementary and 15 precise queries stand, 29 were dropped and B recorded 0 additional supporting sets on agreed queries (kept beside the gold sets, not gold; sets B added on dropped queries stay in the review sheets); per-query gold sets with their flags are in `queries/<family>.final.json`.
 <!-- /queries-table -->
 
 What the annotators reported, and two rule changes made while they ran.
@@ -601,19 +601,57 @@ the file's lines; eleven of `semselect-docs`'s passages split mid-table or
 mid-list; the Go `doc.go` files yield a file entity without text and no
 passages, so package documentation is unreachable as evidence.
 
+Annotator B ran as one Codex session (model string `GPT-6`) following
+[`queries/REVIEW.md`](queries/REVIEW.md) with the same inputs as A plus A's
+sheets. Every review sheet validated with its `sheet_sha256` matching A's
+committed file; A's sheets, the catalogues and the passages are
+byte-identical before and after the review; re-running
+`query_sheet.py index` reproduces B's `<family>.final.json` and
+`index.json` byte for byte. B agreed with 43 of the 72 queries and
+disagreed with 29 (20 complementary, 9 precise; 9 development, 20
+held-out), each dropped without adjudication (ruling 7). The agreement
+rate is far below steps 3 and 4, and the reason is visible in the
+rationales: B applied the contract's "every gold set establishes the
+answer in full" against the catalogue bodies as captured, while A's
+answers (mean 453 characters against a 600 cap) routinely carried claims
+beyond what those bodies literally say. In my reading of the 29: about
+seven rest on a fact stated in a Go doc comment above the declaration,
+which the legacy producer leaves outside the entity's body; about
+fourteen on a claim that needs one more entity (a helper, a constant, the
+caller that supplies a literal) the set omits; four fault an alternative
+set that establishes less than the primary; three or four call part of
+the answer wrong (a 503 that is a 502 on one timing; a running guard the
+answer skipped; an overstated fallback); one cites a passage that ends
+before the definition it is asked for, with the passage text available,
+so that one is A's error. B recorded seven additional sets, all on
+disagreed queries and all supersets of A's primary set; they stay in the
+review sheets and nowhere else, since a dropped query has no final entry.
+Three of B's claims were checked against the source and the passage text
+and hold. Whether the Codex session read anything it was told not to is
+not verifiable from this repository. The lesson for the contract, not
+applied retroactively: ask A for the answer the gold text literally
+establishes, nothing more, and tell both annotators that bodies exclude
+doc comments. The held-out count that stands, 28, is below the protocol's
+48-question target; the protocol records actual counts and treats the
+targets as ceilings, so this is recorded, not padded. A second round for
+the 29 dropped slots would need the owner's ruling and fresh questions,
+written and reviewed blind as before, never revisions of the dropped ones.
+
 ## Stop-point
 
-Steps 1 to 4 are done for the twelve sem* families: captures under the ruled
+Steps 1 to 5 are done for the twelve sem* families: captures under the ruled
 explicit-only floor (the development families also under the artifact profile
 for the record), frozen 32-pair selections, hydration re-captures and frozen
 reviewer packets verified on both pinned runtimes, final edge-review labels
 (ruling 7: model-written, packet-only, validated, disagreement `defer`): 160
-keep, 134 suppress, 90 defer, 321 of 384 agreed; and final co-membership
+keep, 134 suppress, 90 defer, 321 of 384 agreed; final co-membership
 constraints (full-source, validated, disputed ones dropped): 119 positive and
 118 negative, 237 of 240 agreed, in
-[`constraints/<family>.final.json`](constraints/). Step 5 has annotator A's
-72 retrieval queries (four complementary and two precise per family, 48 of
-them held-out, validated, from the full source and passage text) and awaits
-the Codex review by [`queries/REVIEW.md`](queries/REVIEW.md); a query
-survives only when both agree. The generalization families still need an export step before
+[`constraints/<family>.final.json`](constraints/); and final retrieval
+queries (full-source and passage text, validated, disputed ones dropped): 28
+complementary and 15 precise, 43 of 72 agreed, 28 held-out against the
+48-question target, in [`queries/<family>.final.json`](queries/). Open for
+the owner: accept the 43 as the frozen query set, or rule a second blind
+round of fresh questions for the 29 dropped slots under a tightened answer
+contract. The generalization families still need an export step before
 the runner accepts them.
