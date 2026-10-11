@@ -66,8 +66,12 @@ def short(entity_id):
     return str(entity_id).rsplit('.', 1)[-1][:60]
 
 
-def check_set(members, kind, fam, tag, problems):
-    """Check one gold set; -> frozenset of members, or None when unusable."""
+def check_set(members, kind, fam, tag, problems, primary=True):
+    """Check one gold set; -> frozenset of members, or None when unusable.
+    Only the primary set of a complementary query must span two files: an
+    alternative set may sit in one file, since any set that establishes the
+    answer must count as gold or an arm is penalised for retrieving true
+    evidence."""
     if not isinstance(members, list) or not members:
         problems.append(f'{tag}: a gold set must be a non-empty list of entity IDs')
         return None
@@ -86,8 +90,8 @@ def check_set(members, kind, fam, tag, problems):
     if kind == 'complementary':
         if not 2 <= len(members) <= MAX_SET_MEMBERS:
             problems.append(f'{tag}: a complementary gold set has two to {MAX_SET_MEMBERS} members')
-        if len(paths) < 2:
-            problems.append(f'{tag}: a complementary gold set must span two different files or documents')
+        if primary and len(paths) < 2:
+            problems.append(f'{tag}: the primary gold set of a complementary query must span two different files or documents')
     return frozenset(members)
 
 
@@ -141,8 +145,8 @@ def validate_sheet(sheet, fam):
             problems.append(f'{tag}: gold_sets must hold one to {MAX_SETS} sets')
             sets = []
         checked = []
-        for s in sets:
-            fs = check_set(s, kind, fam, tag, problems)
+        for n, s in enumerate(sets):
+            fs = check_set(s, kind, fam, tag, problems, primary=(n == 0))
             if fs is None:
                 continue
             for other in checked:
@@ -182,8 +186,11 @@ def validate_sheet(sheet, fam):
             problems.append(f'{tag}: rationale missing')
         elif len(rationale) > MAX_RATIONALE:
             problems.append(f'{tag}: rationale over {MAX_RATIONALE} characters')
-    if len(rows) == len(KINDS) and len(primary_paths) < MIN_DISTINCT_PATHS:
-        problems.append(f'the primary gold sets draw on {len(primary_paths)} files or documents; at least {MIN_DISTINCT_PATHS} needed')
+    text_paths = {r.get('path') for r in fam.catalogue.values() if r.get('has_body') and r.get('type') not in CONTAINERS}
+    needed = min(MIN_DISTINCT_PATHS, len(text_paths))
+    if len(rows) == len(KINDS) and len(primary_paths) < needed:
+        problems.append(f'the primary gold sets draw on {len(primary_paths)} files or documents; at least {needed} needed '
+                        f'(the family has {len(text_paths)} that carry text)')
     if not ws_ok:
         problems.append('note: workspace missing or changed, evidence line ranges were not checked')
     return problems
@@ -218,7 +225,7 @@ def validate_review(review, sheet_path, fam):
             problems.append(f'{tag}: additional_sets must be a list of sets')
             continue
         for s in extra:
-            fs = check_set(s, KINDS.get(tag), fam, f'{tag} additional set', problems)
+            fs = check_set(s, KINDS.get(tag), fam, f'{tag} additional set', problems, primary=False)
             if fs is not None and fs in a_sets.get(tag, []):
                 problems.append(f"{tag}: an additional set repeats one of A's gold sets")
     return problems

@@ -27,9 +27,10 @@ recorded. Nobody adjudicates.
    is not minimal, or when you are not confident. Say why in one or two
    sentences.
    If you know another supporting set that A did not list, put it under
-   `additional_sets` (same rules as A's sets: entity IDs with bodies, two to
-   six members from at least two files for a complementary query, exactly
-   one for a precise query). It is recorded, not adjudicated, and does not
+   `additional_sets` (same rules as A's alternative sets: entity IDs with
+   bodies, two to six members for a complementary query with no single
+   member establishing the answer, one file allowed; exactly one member for
+   a precise query). It is recorded, not adjudicated, and does not
    become gold.
 4. Write `queries/<family>.review.json`:
 

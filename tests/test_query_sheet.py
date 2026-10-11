@@ -78,7 +78,7 @@ class QuerySheetTests(unittest.TestCase):
         sheet = good_sheet(self.cat_sha)
         sheet['queries'][4]['gold_sets'] = [[ID['fileA']]]                       # container, no body
         sheet['queries'][5]['gold_sets'] = [[ID['c1'], ID['c2']]]                # precise with two members
-        sheet['queries'][0]['gold_sets'] = [[ID['fnA'], ID['cfgA']]]             # complementary inside one file
+        sheet['queries'][0]['gold_sets'] = [[ID['fnA'], ID['cfgA']]]             # primary set inside one file
         sheet['queries'][1]['question'] = f'What does {ID["fnA"]} do?'           # entity ID in the question
         sheet['queries'][2]['question'] = 'What does a.go do?'                   # file path in the question
         sheet['queries'][3]['gold_sets'] = [[ID['cfgB'], ID['c1']], [ID['cfgB'], ID['c1'], ID['fnB']]]  # not minimal
@@ -86,10 +86,16 @@ class QuerySheetTests(unittest.TestCase):
         sheet['queries'][2]['evidence'] = ['a.go:5']                             # b.go of the primary set not cited
         self.write(f'{FAM}.json', sheet)
         text = '\n'.join(self.problems())
-        for needle in ('container or carries no text', 'exactly one member', 'span two different files',
+        for needle in ('container or carries no text', 'exactly one member', 'primary gold set of a complementary query must span',
                        'names an entity ID', 'names the file a.go', 'contains another', "kind 'precise' must be 'complementary'",
                        'cite every file of the primary gold set'):
             self.assertIn(needle, text)
+
+    def test_alternative_set_may_sit_in_one_file(self):
+        sheet = good_sheet(self.cat_sha)
+        sheet['queries'][1]['gold_sets'] = [[ID['fnA'], ID['c2']], [ID['fnA'], ID['cfgA']]]   # alternative inside a.go
+        self.write(f'{FAM}.json', sheet)
+        self.assertEqual(self.problems(), [])
 
     def test_primary_sets_differ_and_spread(self):
         sheet = good_sheet(self.cat_sha)
@@ -100,7 +106,7 @@ class QuerySheetTests(unittest.TestCase):
         for q in sheet['queries']:                                               # everything from a.go and b.go only
             q['gold_sets'] = [[ID['fnA'], ID['fnB']]] if q['kind'] == 'complementary' else [[ID['fnA']]]
         self.write(f'{FAM}.json', sheet)
-        self.assertTrue(any('at least 3 needed' in p for p in self.problems()))
+        self.assertTrue(any('at least 3 needed (the family has 3 that carry text)' in p for p in self.problems()))
 
     def test_passages_hash_is_required_when_the_family_has_passages(self):
         cap = self.dirs['evidence_root'] / f'20261010T000000Z-legacy-tier1-capture-{FAM}-explicit-only'

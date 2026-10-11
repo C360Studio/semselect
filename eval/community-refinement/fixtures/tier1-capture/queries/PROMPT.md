@@ -56,13 +56,17 @@ alone, never from the current partition or from earlier labels.
   true. Containers (repo, folder, file, document) carry no text and cannot
   be members.
 - Record every supporting set you know of, the primary set first:
-  alternatives such as a passage that restates what a function shows. A
-  complementary set has two to six members from at least two different
-  files or documents. A precise set has exactly one member. Sets are
-  minimal: remove any member and the set no longer establishes the answer,
-  so no set may contain another.
+  alternatives such as a passage that restates what a function shows, or
+  two neighbouring declarations in one file that together say the same
+  thing. A complementary set has two to six members and no single member
+  establishes the answer; the primary set draws its members from at least
+  two different files or documents, an alternative set may sit in one file.
+  A precise set has exactly one member. Sets are minimal: remove any member
+  and the set no longer establishes the answer, so no set may contain
+  another.
 - The six primary sets differ from one another and together draw on at
-  least three different files or documents.
+  least three different files or documents, or on every file that carries
+  text when the family has fewer than three.
 - Prefer questions whose answer a careful reader of the source would be
   confident about. If you are not confident that a gold set establishes the
   answer in full, choose another question; there is no `defer` here.
