@@ -203,11 +203,15 @@ For each primary snapshot:
    sets: four require complementary evidence and two require a precise source.
    Record all known alternative supporting sets. Grade retrieved evidence,
    without introducing an answer generator as another changing variable.
+   Under ruling 7 the queries are model-written and Codex-reviewed like the
+   constraints, a disputed query is dropped, and ruling 8 (owner,
+   2026-10-11) accepted the 43 that survived (28 held-out) as the frozen set
+   rather than running a second round.
 
 The target is 128 development and 256 held-out edge reviews, 160 held-out
 co-membership constraints and 48 held-out retrieval questions. These are ceilings
 for review counts, not permission to fabricate extra candidates. Record actual
-counts. Fewer than eight qualifying held-out families or fewer than 128 eligible
+counts (the frozen tier-1 fixture holds 28 held-out questions, ruling 8). Fewer than eight qualifying held-out families or fewer than 128 eligible
 held-out review pairs makes the result exploratory and unable to pass the pilot
 promotion rule below. Smaller valid fixtures still produce useful diagnostics.
 

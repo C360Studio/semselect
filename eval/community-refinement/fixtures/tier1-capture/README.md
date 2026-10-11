@@ -633,9 +633,8 @@ applied retroactively: ask A for the answer the gold text literally
 establishes, nothing more, and tell both annotators that bodies exclude
 doc comments. The held-out count that stands, 28, is below the protocol's
 48-question target; the protocol records actual counts and treats the
-targets as ceilings, so this is recorded, not padded. A second round for
-the 29 dropped slots would need the owner's ruling and fresh questions,
-written and reviewed blind as before, never revisions of the dropped ones.
+targets as ceilings, so this is recorded, not padded. Ruling 8 (owner,
+2026-10-11): the 43 are the frozen step-5 query set; no second round.
 
 ## Stop-point
 
@@ -650,8 +649,7 @@ constraints (full-source, validated, disputed ones dropped): 119 positive and
 [`constraints/<family>.final.json`](constraints/); and final retrieval
 queries (full-source and passage text, validated, disputed ones dropped): 28
 complementary and 15 precise, 43 of 72 agreed, 28 held-out against the
-48-question target, in [`queries/<family>.final.json`](queries/). Open for
-the owner: accept the 43 as the frozen query set, or rule a second blind
-round of fresh questions for the 29 dropped slots under a tightened answer
-contract. The generalization families still need an export step before
-the runner accepts them.
+48-question target, in [`queries/<family>.final.json`](queries/), accepted
+as the frozen query set by ruling 8 (owner, 2026-10-11). The
+generalization families still need an export step before the runner
+accepts them; then the fixture is frozen.
