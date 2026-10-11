@@ -1,0 +1,242 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semengine-natsclient",
+  "split": "development",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "b166333148269855509cf5c8899abc2dac959824bcfea5bdd5a69bce7e774a33",
+  "constraints": [
+    {
+      "id": "pos-01",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-natsclient.function.natsclient-options-go-WithConnectionLossTimeout",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-armConnectionLossTimer",
+      "evidence": [
+        "natsclient/options.go:57-74",
+        "natsclient/client.go:2047-2076"
+      ],
+      "rationale": "The option sets connectionLossTimeout and its comment specifies the watchdog semantics (arm on first disconnect, fire once with the original error, cancel on reconnect); armConnectionLossTimer is the code that implements them, returning early when the grace is non-positive and arming time.AfterFunc with that duration. Changing either side without the other breaks the documented contract."
+    },
+    {
+      "id": "pos-02",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-Publish",
+      "b": "semselect.semsource.golang.semengine-natsclient.function.natsclient-trace-go-InjectTrace",
+      "evidence": [
+        "natsclient/client.go:1378-1386",
+        "natsclient/trace.go:69-86"
+      ],
+      "rationale": "Publish builds the outbound nats.Msg and calls InjectTrace on it after auto-generating a trace context; InjectTrace is where the traceparent and X-Trace/Span headers are actually written. The core publish path's tracing guarantee is split between these two functions."
+    },
+    {
+      "id": "pos-03",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-natsclient.function.natsclient-errors-go-RespondError",
+      "b": "semselect.semsource.golang.semengine-natsclient.function.natsclient-errors-go-ClassifyReply",
+      "evidence": [
+        "natsclient/errors.go:162-180",
+        "natsclient/errors.go:193-209"
+      ],
+      "rationale": "RespondError is the producer half of the ADR-060 header-classified error reply (X-Status, X-Error-Class, X-Error-Code plus the JSON body) and ClassifyReply is the consumer half that reconstructs the typed error from exactly those headers and body. One cannot be changed without the other or the wire contract silently diverges."
+    },
+    {
+      "id": "pos-04",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semengine-natsclient.chunk.natsclient-README-md-0005",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-publishToStream",
+      "evidence": [
+        "natsclient/README.md:56-62",
+        "natsclient/client.go:1514-1531"
+      ],
+      "rationale": "The README passage states that publish methods auto-generate a trace context when none exists and inject the W3C and X- headers; publishToStream is that behaviour for JetStream publishes, generating a NewTraceContext when the ctx carries none and calling InjectTrace before js.PublishMsg. The passage documents what this code does."
+    },
+    {
+      "id": "pos-05",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semengine-natsclient.chunk.natsclient-README-md-0014",
+      "b": "semselect.semsource.golang.semengine-natsclient.function.natsclient-kv-go-IsKVNotFoundError",
+      "evidence": [
+        "natsclient/README.md:262-270",
+        "natsclient/kv.go:738-752"
+      ],
+      "rationale": "The Error Handling passage shows callers detecting KV key absence with natsclient.IsKVNotFoundError and lists the kv: sentinels; IsKVNotFoundError is the helper it documents, recognising ErrKVKeyNotFound, the jetstream sentinels and the raw error text. Someone revising the documented detection story needs the helper's actual matching rules."
+    },
+    {
+      "id": "pos-06",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semengine-natsclient.chunk.natsclient-README-md-0018",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-UpdateJSON",
+      "evidence": [
+        "natsclient/README.md:363-371",
+        "natsclient/kv.go:454-481",
+        "natsclient/kv.go:346-351"
+      ],
+      "rationale": "The Configuration Management example calls kvStore.UpdateJSON with a mutator and warns that the function may run multiple times on conflict; UpdateJSON is that method, decoding the current JSON and delegating to the CAS retry loop that re-invokes the mutator on each conflict. The example's warning is a direct consequence of this implementation."
+    },
+    {
+      "id": "pos-07",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-natsclient.function.natsclient-options-go-WithMetrics",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-startMetricsPoller",
+      "evidence": [
+        "natsclient/options.go:101-117",
+        "natsclient/client.go:812-815",
+        "natsclient/client.go:868-882"
+      ],
+      "rationale": "WithMetrics installs c.jsMetrics from a registry; connectWith starts the metrics poller only when jsMetrics is set, and startMetricsPoller runs jsMetrics.runPoller as client-owned background work that Close cancels and joins. The option and the poller are the two ends of the JetStream metrics feature."
+    },
+    {
+      "id": "pos-08",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-startBackground",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-join",
+      "evidence": [
+        "natsclient/client.go:219-237",
+        "natsclient/client.go:242-263",
+        "natsclient/client.go:1006-1032"
+      ],
+      "rationale": "startBackground admits every piece of client-owned work under mu via admitLocked, which increments owned and wakes idleWait when it returns to zero; join is the Close-side loop that waits on idleWait until owned is zero before closing joined. The design-D3 shutdown guarantee is exactly the pairing of this admission with this join."
+    },
+    {
+      "id": "pos-09",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-natsclient.function.natsclient-kv-go-BucketRetention",
+      "b": "semselect.semsource.golang.semengine-natsclient.function.natsclient-kv-go-CheckNoLifecycleRetention",
+      "evidence": [
+        "natsclient/kv.go:133-157",
+        "natsclient/kv.go:171-187",
+        "natsclient/kv.go:195-204"
+      ],
+      "rationale": "BucketRetention reads a bucket's MaxAge and MaxBytes from the backing stream, and CheckNoLifecycleRetention is the pure rule that judges those two values; its comment says the boot path pairs it with BucketRetention, and AssertNoLifecycleRetention composes the two. Together they form the one retention guardrail."
+    },
+    {
+      "id": "pos-10",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-publishToStreamAsync",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-asyncPublishErrHandler",
+      "evidence": [
+        "natsclient/client.go:1543-1552",
+        "natsclient/client.go:1575-1582",
+        "natsclient/client.go:1625-1634"
+      ],
+      "rationale": "publishToStreamAsync resets the circuit on a successful enqueue and explicitly leaves failed acks to the connection-level async error handler; asyncPublishErrHandler is that handler, applying the failure accounting and never resetting. The async path's circuit-breaker semantics are split across these two methods and only make sense read together."
+    },
+    {
+      "id": "neg-01",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-natsclient.var.natsclient-heartbeat-go-ErrHeartbeatFailed",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-startHealthMonitoring",
+      "evidence": [
+        "natsclient/heartbeat.go:5-7",
+        "natsclient/client.go:2212-2227"
+      ],
+      "rationale": "Both read as liveness signalling (a heartbeat, a health monitor with an RTT ping), so a shallow grouping puts them together. ErrHeartbeatFailed names loss of the JetStream InProgress settlement path for a delivered message, while startHealthMonitoring polls the connection's RTT on a ticker and moves ConnectionStatus; one is message-settlement, the other connection state."
+    },
+    {
+      "id": "neg-02",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-natsclient.function.natsclient-heartbeat-go-TerminateDelivery",
+      "b": "semselect.semsource.golang.semengine-natsclient.function.natsclient-errors-go-classForHeader",
+      "evidence": [
+        "natsclient/heartbeat.go:20-28",
+        "natsclient/errors.go:309-322"
+      ],
+      "rationale": "Each takes an error and sorts it into a severity bucket, and both comments stress that transient errors must keep their existing path, so they look like one classification utility. TerminateDelivery marks a consumed JetStream message for Term instead of NAK on the consumer settlement path; classForHeader picks the X-Error-Class string stamped on a request/reply failure for the remote caller. Different wires, different decisions."
+    },
+    {
+      "id": "neg-03",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-Delete",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-DeleteKeyValueBucket",
+      "evidence": [
+        "natsclient/kv.go:483-504",
+        "natsclient/client.go:1917-1945"
+      ],
+      "rationale": "Same verb, both KV, both opening with the nil-context check, so they share a surface. KVStore.Delete removes one key inside a bucket and maps absence to ErrKVKeyNotFound; DeleteKeyValueBucket destroys the whole bucket through the client's circuit-breaker-gated JetStream path, recording failures and resetting the circuit. Key-level CAS store versus bucket provisioning."
+    },
+    {
+      "id": "neg-04",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-natsclient.struct.natsclient-client-go-Status",
+      "b": "semselect.semsource.golang.semengine-natsclient.const.natsclient-errors-go-HeaderStatus",
+      "evidence": [
+        "natsclient/client.go:57-64",
+        "natsclient/errors.go:76-79"
+      ],
+      "rationale": "Both are named Status. The struct is the connection's runtime snapshot (ConnectionStatus, failure count, RTT) returned by GetStatus; HeaderStatus is the X-Status wire header that marks a reply message as a handler-side error. Connection monitoring and the RPC error contract share only the word."
+    },
+    {
+      "id": "neg-05",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-recordFailureLocked",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-getRetryConfig",
+      "evidence": [
+        "natsclient/client.go:481-486",
+        "natsclient/kv.go:272-289"
+      ],
+      "rationale": "Both implement exponential backoff with a cap: the breaker doubles backoff up to maxBackoff, and getRetryConfig sets Multiplier 2.0 bounded by MaxDelay with jitter. The breaker backoff decides when an open circuit is re-tested at the connection level; the retry config paces CAS conflict retries inside one KV update. Same arithmetic, unrelated responsibilities."
+    },
+    {
+      "id": "neg-06",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-Watch",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-WaitForBucket",
+      "evidence": [
+        "natsclient/kv.go:713-724",
+        "natsclient/client.go:1895-1908"
+      ],
+      "rationale": "Both are KV 'watcher' code: Watch returns a jetstream.KeyWatcher and WaitForBucket builds a resource.NewWatcher. Watch is a long-lived subscription to key changes in a bucket the caller already holds; WaitForBucket polls GetKeyValueBucket at startup until a bucket exists. The shared term hides a change-feed versus a readiness wait."
+    },
+    {
+      "id": "neg-07",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-natsclient.const.natsclient-kv-go-filteredWatcherDrainTimeout",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-drainAndCloseConnection",
+      "evidence": [
+        "natsclient/kv.go:571-573",
+        "natsclient/kv.go:641-655",
+        "natsclient/client.go:1100-1105"
+      ],
+      "rationale": "Both are 'drain timeout' logic with a bounded select, and the KV comment even distinguishes its drain from the configured deadline. filteredWatcherDrainTimeout bounds the cleanup of one filtered KV watcher's Updates channel after Stop inside KeysByFilter; drainAndCloseConnection is Close's drain of the entire NATS connection. A per-listing cleanup bound is not connection shutdown."
+    },
+    {
+      "id": "neg-08",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-natsclient.function.natsclient-client-go-isAlreadyExistsError",
+      "b": "semselect.semsource.golang.semengine-natsclient.function.natsclient-kv-go-IsKVConflictError",
+      "evidence": [
+        "natsclient/client.go:2253-2262",
+        "natsclient/kv.go:754-769"
+      ],
+      "rationale": "Both are strings.Contains sniffers over NATS error text for an 'exists' condition, so they look like one error-matching utility. isAlreadyExistsError recognises the bucket-creation race in CreateKeyValueBucket so it can fall back to getting the bucket; IsKVConflictError recognises key-level CAS conflicts (wrong last sequence, key exists) that drive the UpdateWithRetryRev retry loop. Bucket provisioning versus key CAS."
+    },
+    {
+      "id": "neg-09",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-natsclient.function.natsclient-options-go-WithTimeout",
+      "b": "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-applyTimeout",
+      "evidence": [
+        "natsclient/options.go:93-99",
+        "natsclient/client.go:639",
+        "natsclient/kv.go:68-74"
+      ],
+      "rationale": "Both are the package's 'Timeout' knobs. WithTimeout sets the dial timeout handed to nats.Timeout in buildConnectionOptions; applyTimeout derives a per-operation deadline from KVOptions.Timeout for each KVStore call. A connection-establishment bound and a KV operation bound are unrelated settings that only share a name."
+    },
+    {
+      "id": "neg-10",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semengine-natsclient.const.natsclient-trace-go-TraceIDHeader",
+      "b": "semselect.semsource.golang.semengine-natsclient.const.natsclient-errors-go-HeaderErrorClass",
+      "evidence": [
+        "natsclient/trace.go:20-25",
+        "natsclient/errors.go:81-84"
+      ],
+      "rationale": "Both are X-prefixed NATS header-name string constants in near-identical const blocks. TraceIDHeader is injected on every outbound publish for distributed tracing; HeaderErrorClass is stamped only on failure replies by RespondError and read back by ClassifyReply. Trace propagation and the RPC error contract are separate responsibilities that happen to both ride message headers."
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semsource-ui",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "4941bf418583fdb11f9092bda41daf392034952865bd638f6917311cbc7fa37b",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "isSameOriginRelativeHref delegates its route decision to resolveAdvertisedRoute using a synthetic POST capability. The cited calls and checks establish one route-validation responsibility across the wrapper and implementation."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "queryGraph invokes postFusionRequest with want: graph and the graph label, using its shared response parsing. The wrapper and request implementation divide one graph-query transport and response-contract workflow."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "The page supplies the loaders and callbacks required by BootstrapDependencies when constructing its bootstrap controller. The cited interface and concrete wiring jointly define how bootstrap results become page state."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "The page derives the poller input from !isFullyReady(capabilities), and the cited comments specify starting and stopping self-healing refresh from that verdict. The readiness decision and timer reconciliation are two halves of the same polling policy."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "The shell computes coverage by calling deriveReadinessCoverage and renders its ready verdict and covered labels. The cited sources directly connect the all-advertised-signals policy to the Overall readiness banner."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "loadCapabilities forwards incompatible_version through WorkbenchClientError, the page preserves the kind, and the shell derives incompatible from that value. The cited chain establishes one capability-contract incompatibility reporting workflow."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "resourceError tests WorkbenchClientError and copies its kind, retryable flag and message into ResourceState. The class contract and its adapter jointly govern resource error presentation and the cited retry affordance."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "GraphPanel passes the saved resultQuery as GraphView.queriedName, which drives its grouped entities. The cited comments and binding establish the queried-symbol selection behavior across the panel and view."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "The route passes refresh as WorkbenchShell.onRetry, and the shell invokes that callback from its connection retry button. The cited binding connects the retry affordance directly to bootstrap refresh behavior."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "SearchPanel.submit distinguishes FusionSearchError and copies its code, retryable flag and message into the displayed error. The cited rendering makes those class fields part of the same search-failure and retry contract."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "The two usable gates share POST and href checks but govern separately advertised code_search and graph_projection capabilities, with the graph contract adding an extra gate. The cited shell wiring demonstrates different query subjects despite the near-identical derived expressions."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "queryNotice describes one graph response whose index is unready and retains existing graph state, while indexStateLabel renders advertised structural and semantic readiness states. The cited uses distinguish transient query feedback from the workbench authoritative-state display."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "The cancellation bodies share generation/abort scaffolding, but bootstrap.cancel terminates page resource loading on teardown while GraphPanel.cancel manages its graph request and loading state. The source contexts establish separate request lifecycles rather than one cancellation responsibility."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "selectedNode resolves a graph entity by stable handle, while selectedIndex indexes the new code-search response and drives its result detail. The cited code distinguishes graph navigation selection from search-result selection despite the same master-detail shape."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "The cited classes have matching error scaffolding, but resourceError consumes WorkbenchClientError for workbench resources. Full source separately uses FusionSearchError for fusion query error envelopes and response parsing, so merging them would erase distinct client contracts."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "The readiness timer invokes refresh while not-ready, whereas elapsedTimer increments the per-search elapsed counter. The cited callback bodies establish different polling and progress-display responsibilities despite identical interval-handle scaffolding."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "CapabilityCard derives only an advertisement badge and message for project views or export, while GraphPanel receives the graph_projection query capability. The cited shell bindings and card code distinguish passive availability display from an executable graph query surface."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "stateLabel handles ResourceState presentation, while badge maps a capability availability verdict to card text. The matching not_ready label appears in different resource-loading and advertisement vocabularies, so literal text similarity is not a shared responsibility."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "nodeLocation formats a FusionNode path and line range for search results, while sourceLocation selects configured source paths or URLs for the inventory list. Their small location-formatting shape masks different entities and presentation subjects."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "The loaders request different advertised capabilities and use different parsers and empty rules, with independent source-inventory and project-summary render sections. Their shared GET/loading/error scaffold does not make those resource responsibilities interchangeable."
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semsource-source-manifest",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "8b907cbc8988acf147b36dd6d54a5c94b34c460f7e13145acba5d8b38995b7ac",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "The cited HTTP handler calls addSource after its transport guards, then translates the resulting reply into an HTTP status. These methods implement the same add-source operation across transport and shared processing files."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "RegisterIngestHandlers writes the copied configuration that ingestConfig reads under the component lock. The comments explicitly connect that handoff to the HTTP facade startup readiness, so both belong to its dependency-wiring responsibility."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "removeSource captures the systems through systemsForRemovedInstance before deleting the configuration, then uses them for removal lifecycle marking. The helper documents exactly that removal scope and ordering dependency."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "The constant is assigned directly to AddReply.ReadyWhen, whose documented purpose is the caller readiness condition. The cited declaration and reply construction establish one externally visible readiness contract."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "dropSourceStatus delegates record removal to the aggregator method while recording removed instances to reject late reports. The cited code and comments place both methods in the same deregistration-status cleanup workflow."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "handleStatusReport calls allSeeded to decide seed completion, and the predicate requires every reported source to be watching or idle after all expected reports exist. Both are necessary to inspect the readiness transition rather than mere first-report arrival."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "The converter constructs ManifestSource and assigns the corresponding source fields individually. The data shape and its projection share the configured-source representation responsibility across files."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "The cited aggregation allocates DomainSummary and fills its entity counts, per-type counts and contributing sources. Inspecting that output contract requires both the summary type and its producer."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "The builder explicitly constructs PredicateDescriptor values with name, description, data type and role. Its construction logic and the descriptor shape jointly define the advertised predicate vocabulary."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "The exact passage contains the cited embedding.ready and index.ready guidance, including retirement of stable counts as a readiness proxy. ReadinessNote defines those same structural and semantic readiness signals, making this a documentation-to-contract positive."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "The similar typed-code/message envelopes describe synchronous ingest replies versus asynchronous source-runtime failures. The cited comments establish distinct error channels and code vocabularies, so their similar representation should not merge those responsibilities."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "The JSON-tagged Config describes the manifest component configuration, while IngestHandlerConfig wires a store, spawning options and HTTP guards for live ingest handlers. Their shared Config suffix does not make those distinct configuration and runtime-wiring contracts one responsibility."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "manifestSchema is reflected from the component Config and returned by ConfigSchema, whereas buildPredicateSchema builds vocabulary descriptors. The cited sources distinguish configuration validation metadata from published predicate semantics despite the shared schema term."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "Register supplies component factory metadata to a registry, while RegisterIngestHandlers opens namespace-specific request subscriptions after startup. Their common registration wording masks component discovery versus live ingest transport setup."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "The cited equality helper compares manifest path/URL slices for source identity, whereas matchesPrefixes filters vocabulary names in schema generation. Similar boolean loop scaffolding does not connect those separate identity and predicate-selection responsibilities."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "The two cited MarshalJSON methods use the same alias-and-marshal scaffold for differently named payload receivers. Full source identifies ManifestPayload as the configured-source broadcast and AddReply as an add-request response; the serialization boilerplate is not shared domain evidence."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "The prefix map selects advertised predicate namespaces, while the factory switch recovers entity-system slugs from stored source configuration for removal marking. Their source-kind likeness masks different outputs and consumers, as the cited comments and branches show."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "watchMode returns a static registration mode from a boolean, whereas SourcePhaseWatching is one live phase alongside ingesting, idle and errored. The shared watch terminology would conflate configuration with runtime progress."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "The exact enablement passage contains provenance: embedding for code_search retrieval results. The cited Provenance declaration instead describes actor and trace attribution on add/remove requests, establishing two different meanings of provenance."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "The exact passage discusses the substrate graph.query.summary discovery resolver, whereas the constant names graph.query.sourceSummary. Its comment explicitly describes the former reply-shape collision, showing why these similarly named summary responsibilities must remain distinct."
+    }
+  ]
+}

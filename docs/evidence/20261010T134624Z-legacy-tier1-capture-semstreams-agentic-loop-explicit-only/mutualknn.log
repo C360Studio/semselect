@@ -1,0 +1,4 @@
+time=2026-10-10T08:47:40.971-05:00 level=INFO msg="listed buckets" entities=207 embedded=207 swept=207 embedded_not_in_entity_states=0
+time=2026-10-10T08:47:41.060-05:00 level=INFO msg="similar queries" done=207 of=207
+time=2026-10-10T08:47:41.070-05:00 level=INFO msg="explicit-edge reads" endpoints=195 errors=0
+time=2026-10-10T08:47:41.073-05:00 level=INFO msg="capture written" output=/Users/coby/Code/c360/semselect/docs/evidence/20261010T134624Z-legacy-tier1-capture-semstreams-agentic-loop-explicit-only/mutualknn mutual_pairs=432 failed=0 aborted=false

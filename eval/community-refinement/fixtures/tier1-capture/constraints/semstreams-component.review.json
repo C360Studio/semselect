@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semstreams-component",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "e7ba93a88f8e734023dc22da2b8de39e51933a8855d0178aa74b847e067b49b6",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "The StoreProvidePort comment explicitly says it complements StoreProvider, and the interface comment requires the same StorageInstance value for registry keys and port tokens. The cited definitions jointly describe store-ownership declaration and runtime handle publication."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "PortDeclarer requires constructor/declaration parity, and PortConfigFrom is documented as the inverse helper that exposes already resolved ports through that declarer. Their cited contracts implement one consistent factory-port declaration responsibility."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "resolveDefinitions directly invokes resolveAndProjectPort for each definition and stores both outputs. The cited call and resolver body show one declaration-resolution workflow divided between the registry loop and semantic interpreter."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "GetConsumerConfig calls Port.Facts, propagates its errors and extracts consumer configuration from its result. The cited Facts body revalidates the port, making the two symbols part of the same validated JetStream consumer projection."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "The JetStream Import field documents peer-origin input semantics, and feedsFromAPeerDeployment reads that import fact to derive External. Both cited comments expressly describe the same import-lane fact and its composition consequence."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "HTTPClientPort explicitly names a sibling TimerPort through TriggerPort when polling is timer-driven. The cited comments place polling cadence in the timer declaration, so understanding that client dependency requires both shapes."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "captureComponentDeclaration obtains both port directions through the Discoverable methods and captures their projected facts. The cited interface and implementation jointly define construction-to-admission port reporting."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "clonePropertySchema receives PropertySchema and copies its slices, pointer values and nested item/property schemas. The cited code establishes a direct type-to-copy responsibility; this agreement does not imply every map or Default value is deeply cloned."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "The package documentation describes sealing composition after boot admission, and SealComposition sets the flag that the cited admission check rejects. The file and method are in different files and document/implement the same admission boundary."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "The Factory contract directs I/O to Start instead of construction, while LifecycleComponent documents the context-owned Start/Stop boundary. The cited package guidance connects those definitions into one component construction and lifecycle contract."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "HealthStatus is the current health report, whereas ManagedComponent stores lifecycle state, effective configuration, start order and lifecycle-operation errors. Their similar error/status fields should not collapse health reporting into manager lifecycle bookkeeping."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "ValidatePortNumber bounds an integer network port between 1 and 65535, while Port is a typed component I/O declaration. The cited signatures and fields establish different meanings of port rather than one validation/declaration concept."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "ValidateConfigKey rejects unsafe raw key strings, whereas validateFieldConstraints interprets a port binding to enforce numeric minima and allowed directions. The cited bodies demonstrate different validation subjects despite their common validation naming and errors."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "GetInt reads an untyped map using a key and fallback, while GetConsumerConfig requires a valid resolved JetStream port and projects consumer facts. Similar Get/configuration-helper names conceal different input contracts and validation responsibilities."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "LogEntry is documented as a NATS/SSE wire record, while GetLoggerWithComponent returns an injected slog logger with a component attribute. The cited declarations distinguish log publication format from process logger dependency configuration."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "FlowMetrics is a rate/activity snapshot returned through component discovery, whereas ProcessorMetrics contains Prometheus counters and a latency histogram. Their common Metrics naming and error/event vocabulary do not make those telemetry contracts one representation."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "The HTTPClientPort comments explicitly contrast shareable outbound connections with NetworkPort listeners, whose cited implementation is exclusive. The shared endpoint and port-method scaffolding therefore masks different ownership and resource-conflict responsibilities."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "PlatformMeta is documented as supplied platform identity, while Metadata describes a component by name, type, description and version. The cited source distinguishes injected platform context from discovered component description despite the Meta likeness."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "NewProcessorMetrics registers Prometheus collectors under a subsystem, while RegisterFactory validates and records a named component Registration. The cited bodies show two separate registry responsibilities sharing generic registration terminology."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "DebugStatusProvider returns JSON-serializable diagnostic information, while StoreProvider exposes named store handles for startup registry population. The cited comments establish observability versus storage-ownership wiring despite their optional one-method Provider shape."
+    }
+  ]
+}

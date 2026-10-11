@@ -1,0 +1,178 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "parameters": {
+    "k": 8,
+    "threshold": 0.75,
+    "concurrency": 8,
+    "timeout_ms": 30000,
+    "max_retries": 2
+  },
+  "total_entities": 175,
+  "embedded_entities": 175,
+  "embedded_not_in_entity_states": 0,
+  "embedded_in_entity_states": 175,
+  "malformed_entity_ids": 0,
+  "entities_by_type": {
+    "chunk": 13,
+    "const": 8,
+    "doc": 1,
+    "file": 7,
+    "folder": 2,
+    "function": 22,
+    "interface": 4,
+    "method": 83,
+    "repo": 1,
+    "struct": 26,
+    "var": 8
+  },
+  "entities_by_system": {
+    "semstreams-graph-clustering": 175
+  },
+  "embedded_by_type": {
+    "chunk": 13,
+    "const": 8,
+    "doc": 1,
+    "file": 7,
+    "folder": 2,
+    "function": 22,
+    "interface": 4,
+    "method": 83,
+    "repo": 1,
+    "struct": 26,
+    "var": 8
+  },
+  "queried": 175,
+  "answered": 175,
+  "embedding_unavailable": 0,
+  "failed": 0,
+  "failed_by_kind": {},
+  "not_queried": 0,
+  "retries": 0,
+  "aborted": false,
+  "similar_returned": 1400,
+  "directed_pairs_at_threshold": 1346,
+  "neighbor_ids_not_in_entity_states": 0,
+  "directed_edges_to_unanswered": 0,
+  "mutual_pairs": 438,
+  "mutual_pairs_is_lower_bound": false,
+  "mutual_pairs_explicit_dominated": 46,
+  "mutual_pairs_review_candidates": 392,
+  "mutual_pairs_cross_type": 144,
+  "mutual_pairs_cross_system": 0,
+  "mutual_pairs_by_type_pair": {
+    "chunk|chunk": 23,
+    "chunk|doc": 2,
+    "chunk|file": 3,
+    "chunk|folder": 2,
+    "chunk|repo": 2,
+    "chunk|struct": 6,
+    "const|const": 8,
+    "const|function": 5,
+    "const|method": 7,
+    "const|struct": 8,
+    "doc|file": 3,
+    "doc|folder": 1,
+    "doc|repo": 1,
+    "doc|var": 1,
+    "file|file": 14,
+    "file|folder": 3,
+    "file|repo": 1,
+    "file|struct": 3,
+    "file|var": 2,
+    "folder|repo": 1,
+    "folder|var": 1,
+    "function|function": 21,
+    "function|interface": 1,
+    "function|method": 39,
+    "function|struct": 10,
+    "function|var": 2,
+    "interface|interface": 3,
+    "interface|method": 3,
+    "interface|struct": 2,
+    "method|method": 171,
+    "method|struct": 23,
+    "method|var": 8,
+    "repo|var": 1,
+    "struct|struct": 51,
+    "struct|var": 3,
+    "var|var": 3
+  },
+  "mutual_pairs_asymmetric_similarity": 0,
+  "entities_with_mutual_edges": 172,
+  "mutual_degree_histogram": [
+    3,
+    9,
+    17,
+    16,
+    23,
+    33,
+    20,
+    24,
+    30
+  ],
+  "directed_degree_histogram": [
+    1,
+    1,
+    1,
+    2,
+    4,
+    0,
+    2,
+    3,
+    161
+  ],
+  "similarity_histogram": [
+    {
+      "range": "[0.75,0.80)",
+      "count": 78
+    },
+    {
+      "range": "[0.80,0.85)",
+      "count": 211
+    },
+    {
+      "range": "[0.85,0.90)",
+      "count": 93
+    },
+    {
+      "range": "[0.90,0.95)",
+      "count": 42
+    },
+    {
+      "range": "[0.95,1.00]",
+      "count": 14
+    }
+  ],
+  "similarity_histogram_directed": [
+    {
+      "range": "[0.75,0.80)",
+      "count": 506
+    },
+    {
+      "range": "[0.80,0.85)",
+      "count": 542
+    },
+    {
+      "range": "[0.85,0.90)",
+      "count": 186
+    },
+    {
+      "range": "[0.90,0.95)",
+      "count": 84
+    },
+    {
+      "range": "[0.95,1.00]",
+      "count": 28
+    }
+  ],
+  "degree_histogram_denominator_entities": 175,
+  "similarity_histogram_definition": "mutual pairs binned by min(similarity_a_to_b, similarity_b_to_a); directed histogram bins every directed neighbour at or above the threshold",
+  "latency": {
+    "count": 175,
+    "p50_ms": 2.101,
+    "p95_ms": 2.819,
+    "max_ms": 5.089
+  },
+  "query_phase_seconds": 0.0493065,
+  "wallclock_seconds": 0.073336
+}

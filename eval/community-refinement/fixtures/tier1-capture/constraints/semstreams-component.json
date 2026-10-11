@@ -1,0 +1,241 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semstreams-component",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "06102e48a64a7cc6c4b5deaa9f98f78b1b2376706aa3c4d63b39ee1767a6e4d7",
+  "constraints": [
+    {
+      "id": "pos-01",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-component.interface.component-dependencies-go-StoreProvider",
+      "b": "semselect.semsource.golang.semstreams-component.struct.component-port_provide-go-StoreProvidePort",
+      "evidence": [
+        "component/port_provide.go:5-8",
+        "component/dependencies.go:23-32"
+      ],
+      "rationale": "Both carry the ADR-063 store-ownership contract: StoreProvidePort is the declaration marker that a component owns a StorageInstance, and StoreProvider is the interface ComponentManager reads after Start to populate StoreRegistry under that same instance name. The port doc says it complements the StoreProvider interface; changing the key or token on one side needs the other."
+    },
+    {
+      "id": "pos-02",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-component.type.component-registry-go-PortDeclarer",
+      "b": "semselect.semsource.golang.semstreams-component.function.component-ports-go-PortConfigFrom",
+      "evidence": [
+        "component/registry.go:33-40",
+        "component/ports.go:164-167"
+      ],
+      "rationale": "PortDeclarer requires that a constructor derive its ports from the same pure function so the static declaration and the constructed ports cannot drift; PortConfigFrom is the helper that lets a constructor that already resolved its ports expose them as its PortDeclarer without a second derivation. One states the parity rule, the other is how a factory satisfies it."
+    },
+    {
+      "id": "pos-03",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-component.function.component-port_resolver-go-resolveAndProjectPort",
+      "b": "semselect.semsource.golang.semstreams-component.function.component-registry-go-resolveDefinitions",
+      "evidence": [
+        "component/registry.go:350-351",
+        "component/registry.go:377-389",
+        "component/port_resolver.go:16-63"
+      ],
+      "rationale": "The registry's declare path resolves every PortDefinition through resolveAndProjectPort, named in the source as the single interpreter of a port declaration; resolveDefinitions is the loop that calls it per definition and collects the resolved ports and facts into a Declaration. Any change to what resolution validates or returns changes what the registry admits."
+    },
+    {
+      "id": "pos-04",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-component.function.component-port_jetstream-go-GetConsumerConfig",
+      "b": "semselect.semsource.golang.semstreams-component.method.component-port_resolver-go-Port-Facts",
+      "evidence": [
+        "component/port_jetstream.go:106-120",
+        "component/port_resolver.go:167-171"
+      ],
+      "rationale": "GetConsumerConfig obtains its JetStream consumer settings only through port.Facts(), the revalidating semantic projection, so a non-JetStream or invalid port errors instead of silently receiving defaults. The extractor's correctness rests on what Facts revalidates and projects."
+    },
+    {
+      "id": "pos-05",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-component.struct.component-port_jetstream-go-JetStreamPort",
+      "b": "semselect.semsource.golang.semstreams-component.function.component-port_resolver-go-feedsFromAPeerDeployment",
+      "evidence": [
+        "component/port_jetstream.go:53-64",
+        "component/port_resolver.go:65-90"
+      ],
+      "rationale": "JetStreamPort.Import declares an ADR-102 import lane fed by a peer deployment, and feedsFromAPeerDeployment is the resolver rule that reads that declaration off the facts projection and derives Port.External from it. The field doc and the function doc describe the same fact from its two ends."
+    },
+    {
+      "id": "pos-06",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-component.struct.component-port_httpclient-go-HTTPClientPort",
+      "b": "semselect.semsource.golang.semstreams-component.struct.component-port_timer-go-TimerPort",
+      "evidence": [
+        "component/port_httpclient.go:10-15",
+        "component/port_httpclient.go:23",
+        "component/port_timer.go:5-9"
+      ],
+      "rationale": "HTTPClientPort does not own polling cadence: when polling is timer-driven the component also declares a TimerPort and HTTPClientPort.TriggerPort names that sibling by port name, making the timer the single source of truth for the interval. Reading a timer-driven HTTP client declaration requires both port shapes."
+    },
+    {
+      "id": "pos-07",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-component.interface.component-discovery-go-Discoverable",
+      "b": "semselect.semsource.golang.semstreams-component.function.component-registry-go-captureComponentDeclaration",
+      "evidence": [
+        "component/discovery.go:21-25",
+        "component/registry.go:740-761"
+      ],
+      "rationale": "captureComponentDeclaration builds the admitted Declaration by calling the constructed component's Discoverable.InputPorts and OutputPorts and re-resolving them. The interface defines what a component reports; the capture is where the registry turns that report into the immutable record it retains."
+    },
+    {
+      "id": "pos-08",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-component.struct.component-discovery-go-PropertySchema",
+      "b": "semselect.semsource.golang.semstreams-component.function.component-registry-go-clonePropertySchema",
+      "evidence": [
+        "component/discovery.go:52-71",
+        "component/registry.go:553-588"
+      ],
+      "rationale": "clonePropertySchema deep-copies PropertySchema field by field (every pointer field, the Enum and Required slices, Items and nested Properties) so registry schema reads return defensive values. Adding or changing a pointer or slice field on PropertySchema requires a matching line in the clone, or the read surface leaks shared state."
+    },
+    {
+      "id": "pos-09",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-component.file.component-doc-go",
+      "b": "semselect.semsource.golang.semstreams-component.method.component-registry-go-Registry-SealComposition",
+      "evidence": [
+        "component/doc.go:15-18",
+        "component/registry.go:472-479",
+        "component/registry.go:452-457"
+      ],
+      "rationale": "The package doc states that once boot admission completes the Registry is sealed and later admission attempts fail until a fresh Registry is created; SealComposition is the method that sets that seal, and admitPrepared is where the sealed check rejects admission. The passage documents the behaviour the method implements."
+    },
+    {
+      "id": "pos-10",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-component.interface.component-lifecycle-go-LifecycleComponent",
+      "b": "semselect.semsource.golang.semstreams-component.type.component-registry-go-Factory",
+      "evidence": [
+        "component/registry.go:26-31",
+        "component/lifecycle.go:43-46",
+        "component/doc.go:5-7"
+      ],
+      "rationale": "Factory and LifecycleComponent split one contract for a component's life: the factory constructs without I/O and all I/O is to happen in the component's Start method, while LifecycleComponent is where Start accepts the context that owns continuing work and Stop joins it. Deciding what belongs in construction versus Start needs both definitions."
+    },
+    {
+      "id": "neg-01",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-component.struct.component-discovery-go-HealthStatus",
+      "b": "semselect.semsource.golang.semstreams-component.struct.component-lifecycle-go-ManagedComponent",
+      "evidence": [
+        "component/discovery.go:73-81",
+        "component/lifecycle.go:70-91"
+      ],
+      "rationale": "Both are structs with a LastError field and a status-like member (HealthStatus.Status and Healthy, ManagedComponent.State), so they read as the same component-state record. HealthStatus is the component's self-reported health returned through Discoverable.Health for the management layer, while ManagedComponent is ComponentManager's private bookkeeping of lifecycle phase, start order and effective config."
+    },
+    {
+      "id": "neg-02",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-component.function.component-registry-go-ValidatePortNumber",
+      "b": "semselect.semsource.golang.semstreams-component.struct.component-port-go-Port",
+      "evidence": [
+        "component/registry.go:713-721",
+        "component/registry.go:658-659",
+        "component/port.go:50-58"
+      ],
+      "rationale": "The word port is overloaded: ValidatePortNumber checks a numeric TCP/UDP port against MinPort and MaxPort as part of the config security limits, while Port is a resolved component I/O declaration with a name, direction and typed config. Nothing in the port-declaration grammar calls ValidatePortNumber; grouping them conflates network port numbers with semantic ports."
+    },
+    {
+      "id": "neg-03",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-component.function.component-registry-go-ValidateConfigKey",
+      "b": "semselect.semsource.golang.semstreams-component.function.component-port_resolver-go-validateFieldConstraints",
+      "evidence": [
+        "component/registry.go:664-682",
+        "component/port_resolver.go:92-121"
+      ],
+      "rationale": "Both are named validate*, take a field-shaped input and return a field-named error, so they look like one validation layer. ValidateConfigKey is the security guard on raw config map keys (length, control characters) that the Get* helpers call, whereas validateFieldConstraints enforces a port binding's per-kind minimums and direction allowances during port resolution."
+    },
+    {
+      "id": "neg-04",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-component.function.component-registry-go-GetInt",
+      "b": "semselect.semsource.golang.semstreams-component.function.component-port_jetstream-go-GetConsumerConfig",
+      "evidence": [
+        "component/registry.go:945-949",
+        "component/port_jetstream.go:106-120"
+      ],
+      "rationale": "Both are Get* functions that extract configuration and apply defaults, so a reader may file them as one config-helper family. GetInt is a bounds-checked reader of an untyped config map for component authors, while GetConsumerConfig projects an already resolved JetStream Port into consumer settings through the facts projection and errors rather than defaulting on a wrong kind."
+    },
+    {
+      "id": "neg-05",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-component.struct.component-logging-go-LogEntry",
+      "b": "semselect.semsource.golang.semstreams-component.method.component-dependencies-go-Dependencies-GetLoggerWithComponent",
+      "evidence": [
+        "component/logging.go:17-26",
+        "component/dependencies.go:123-126"
+      ],
+      "rationale": "Both say log and component and both attach a component name to log output. LogEntry is a JSON wire record published to NATS for the Flow Builder SSE endpoint with its own LogLevel vocabulary; GetLoggerWithComponent hands a factory the injected process slog.Logger with a component attribute. Neither reads or writes the other."
+    },
+    {
+      "id": "neg-06",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-component.struct.component-discovery-go-FlowMetrics",
+      "b": "semselect.semsource.golang.semstreams-component.struct.component-metrics-go-ProcessorMetrics",
+      "evidence": [
+        "component/discovery.go:91-97",
+        "component/metrics.go:9-26"
+      ],
+      "rationale": "Both are named *Metrics and both count events and errors, so they look like one telemetry type. FlowMetrics is the JSON snapshot a component returns from Discoverable.DataFlow for the management layer, while ProcessorMetrics is a bundle of live Prometheus counters and a histogram registered with the MetricsRegistry; the source draws no line from one to the other."
+    },
+    {
+      "id": "neg-07",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-component.struct.component-port_network-go-NetworkPort",
+      "b": "semselect.semsource.golang.semstreams-component.struct.component-port_httpclient-go-HTTPClientPort",
+      "evidence": [
+        "component/port_httpclient.go:5-8",
+        "component/port_httpclient.go:35-37",
+        "component/port_network.go:5-20"
+      ],
+      "rationale": "Both are port config structs with the same ResourceID/IsExclusive/Kind scaffold and both describe network endpoints. The HTTPClientPort doc defines itself against NetworkPort: an outbound, shareable client dependency rather than binding a listener, while NetworkPort is the one exclusive kind whose resource identity feeds the registry's conflict check."
+    },
+    {
+      "id": "neg-08",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-component.type.component-dependencies-go-PlatformMeta",
+      "b": "semselect.semsource.golang.semstreams-component.struct.component-discovery-go-Metadata",
+      "evidence": [
+        "component/dependencies.go:19-21",
+        "component/discovery.go:37-43"
+      ],
+      "rationale": "The shared Meta name suggests two views of the same metadata. PlatformMeta is the platform identity (organization and platform) injected into components through Dependencies, while Metadata is a component's self-description (name, type, description, version) returned by Discoverable.Meta; one is an input to the component and the other an output from it."
+    },
+    {
+      "id": "neg-09",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-component.function.component-metrics-go-NewProcessorMetrics",
+      "b": "semselect.semsource.golang.semstreams-component.method.component-registry-go-Registry-RegisterFactory",
+      "evidence": [
+        "component/metrics.go:72-79",
+        "component/registry.go:156-187"
+      ],
+      "rationale": "Both register something with a registry by name and the word Registry appears in each, but they are different registries. NewProcessorMetrics registers Prometheus collectors with the metric.MetricsRegistry keyed by subsystem; RegisterFactory admits a component factory Registration into the component Registry and validates its port declarer."
+    },
+    {
+      "id": "neg-10",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-component.interface.component-discovery-go-DebugStatusProvider",
+      "b": "semselect.semsource.golang.semstreams-component.interface.component-dependencies-go-StoreProvider",
+      "evidence": [
+        "component/discovery.go:83-89",
+        "component/dependencies.go:23-35"
+      ],
+      "rationale": "Both are optional single-method *Provider interfaces that a component may implement and the framework type-asserts for, so they share shape and suffix. DebugStatusProvider exposes extended debug information beyond HealthStatus for inspection; StoreProvider exposes owned stores that ComponentManager reads after Start to populate the StoreRegistry. Observability versus storage-ownership wiring."
+    }
+  ]
+}

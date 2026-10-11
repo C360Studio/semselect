@@ -1,0 +1,292 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semstreams-service",
+    "split": "held-out",
+    "role": "lexically similar helpers",
+    "language": "Go",
+    "repo": "https://github.com/C360Studio/semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semstreams-service",
+    "include": [
+      "service"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "*.md"
+    ],
+    "max_file_bytes": 12000,
+    "unmatched_includes": [],
+    "files": [
+      "service/component_manager_config.go",
+      "service/configurable.go",
+      "service/dependencies.go",
+      "service/doc.go",
+      "service/graph_runtime.go",
+      "service/graph_triples_http.go",
+      "service/heartbeat.go",
+      "service/log_forwarder.go",
+      "service/message_logger_kv_watch.go",
+      "service/metrics.go",
+      "service/middleware.go",
+      "service/milestone_service.go",
+      "service/openapi.go",
+      "service/openapi_registry.go",
+      "service/openapi_types.go",
+      "service/pprof.go",
+      "service/register.go",
+      "service/registry.go",
+      "service/rule_pack_bind.go",
+      "service/schema.go",
+      "service/service_configs.go",
+      "service/service_manager_config.go",
+      "service/startup_metrics.go",
+      "service/storage_observability_http.go",
+      "service/stream_override_expiry.go"
+    ],
+    "workspace_sha256": "9003c0fa3b7e20c5dc454f13f3e732f25f117954f63d0a3aff8469165d7da153",
+    "entities_total": 202,
+    "entities_by_type": {
+      "const": 11,
+      "file": 25,
+      "folder": 1,
+      "function": 46,
+      "interface": 8,
+      "method": 67,
+      "repo": 1,
+      "struct": 38,
+      "type": 2,
+      "var": 3
+    },
+    "entities_by_domain": {
+      "code": 2,
+      "golang": 200
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 202,
+      "edges": 679,
+      "induced_edges": 536,
+      "cross_system_edges": 0,
+      "dangling_edges": 143,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 139,
+        "code.relationship.embeds": 4,
+        "code.relationship.parameter": 19,
+        "code.relationship.receiver": 67,
+        "code.relationship.references": 25,
+        "code.relationship.returns": 23,
+        "code.structure.belongs": 201,
+        "code.structure.contains": 201
+      },
+      "non_containment_edges": 277
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "service"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "*.md"
+        ],
+        "max_file_bytes": null,
+        "files": 34,
+        "entities": 541
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "service"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "*.md"
+        ],
+        "max_file_bytes": 12000,
+        "files": 25,
+        "entities": 202
+      }
+    ],
+    "notes": "service/ is one directory of helpers, so it is trimmed by a size rule: files of 12,000 bytes or more are dropped. This removes the hubs (service_manager, component_manager, message_logger, base, storage_observability and its metrics, metrics_forwarder, message_logger_http, component_manager_http) and keeps the 25 smaller helper files, including the lexically similar *_http, *_config, metrics, forwarder and registry helpers.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semstreams-service",
+    "split": "held-out",
+    "repository": "semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "include": [
+      "service"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "*.md"
+    ],
+    "max_file_bytes": 12000,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": true,
+    "has_docs": false,
+    "files": [
+      {
+        "path": "service/component_manager_config.go",
+        "bytes": 1052,
+        "sha256": "407a82a5b05d03a2eb1c740218a070c9005b5e106774b176d893683f87dbb78d"
+      },
+      {
+        "path": "service/configurable.go",
+        "bytes": 1803,
+        "sha256": "f987aefe9ff75706cba8e78763e6466b82bf4217cf00612b3b7ed01d5685977b"
+      },
+      {
+        "path": "service/dependencies.go",
+        "bytes": 2153,
+        "sha256": "27f512b9ba2c2c5ed2fac19f5252886cbf1145de86f38028ac964c206abc78b3"
+      },
+      {
+        "path": "service/doc.go",
+        "bytes": 10659,
+        "sha256": "c313d1a6de73bcc95d13ddc063b6019854812c7c2caaf5467962de05fdb3ff86"
+      },
+      {
+        "path": "service/graph_runtime.go",
+        "bytes": 1017,
+        "sha256": "612d3d2a9b867e3819124963ff88827f404edb8f3eb944a6119c156cebd2ad1c"
+      },
+      {
+        "path": "service/graph_triples_http.go",
+        "bytes": 7973,
+        "sha256": "341b58235a4077d862beae1bf00bc440a3648f767305b6ee34313cb640cf659d"
+      },
+      {
+        "path": "service/heartbeat.go",
+        "bytes": 7226,
+        "sha256": "41b3e66ab79b98c33e1820518ace2eabbd56efc5d0ab49f95ba462c032217918"
+      },
+      {
+        "path": "service/log_forwarder.go",
+        "bytes": 4315,
+        "sha256": "a0208f2ecedd1adbb1acb0e6adf7141a9eadbe5c8f5b1df5e058c62ee556fd0c"
+      },
+      {
+        "path": "service/message_logger_kv_watch.go",
+        "bytes": 11307,
+        "sha256": "c395e64d16dd5b9bbfb08cafbcf3113319524b36633424772e281e849c572217"
+      },
+      {
+        "path": "service/metrics.go",
+        "bytes": 10149,
+        "sha256": "912e1411cb8d641fab55303f856cce5ddf4b11ca62cca995bea6a816970ad6e2"
+      },
+      {
+        "path": "service/middleware.go",
+        "bytes": 1723,
+        "sha256": "01d004de2aec342a6ded52ec7b4be9f199972d61611f193d7acb0a9942ab64c0"
+      },
+      {
+        "path": "service/milestone_service.go",
+        "bytes": 8282,
+        "sha256": "9efcf444f0c99bc4882ec720398a0d59dbc9a2cf327119d50e09bad2ca4ff427"
+      },
+      {
+        "path": "service/openapi.go",
+        "bytes": 935,
+        "sha256": "99d6a4b13a70b273529b42e536c419b8b44d2719d4c5f97f97a5ad1eff1c9145"
+      },
+      {
+        "path": "service/openapi_registry.go",
+        "bytes": 1255,
+        "sha256": "5d8b523e34b1699a670cda238b7b726e46347d3902071c082e2352034493ebc0"
+      },
+      {
+        "path": "service/openapi_types.go",
+        "bytes": 4079,
+        "sha256": "48c4f1207da6712c9c1e234ad50c70770976234f5becd171bb62e16df1a1e7b9"
+      },
+      {
+        "path": "service/pprof.go",
+        "bytes": 2143,
+        "sha256": "d6daf472145ff1e51f011fb834bec342b4b33fa3004914ed920d63f422c86eb9"
+      },
+      {
+        "path": "service/register.go",
+        "bytes": 963,
+        "sha256": "48b619f167a2a3bf02e10aa42c11bf2c2ad7acd690374311af297aee4e199d34"
+      },
+      {
+        "path": "service/registry.go",
+        "bytes": 1636,
+        "sha256": "94c1bbcb87b3eb06c1963292979220f9174ae0e22d687d5325e8e0cb35dd29bd"
+      },
+      {
+        "path": "service/rule_pack_bind.go",
+        "bytes": 4420,
+        "sha256": "3a6d815cbebd5d9e768ad7c02c732b559fa247a2054ba55b6e98ca50fab59d86"
+      },
+      {
+        "path": "service/schema.go",
+        "bytes": 3714,
+        "sha256": "325d4031bceb8e46387de088f448e02b6dff74819d97bec6114652832287529f"
+      },
+      {
+        "path": "service/service_configs.go",
+        "bytes": 5748,
+        "sha256": "4b0af48975e72f5e73c474232779a17301f53eb63120fb1bb01aceec0d06d803"
+      },
+      {
+        "path": "service/service_manager_config.go",
+        "bytes": 2794,
+        "sha256": "97bfdeeffac1243aded96e9713bdc89b2b5cd14b3c816db01ceafd4a47273ef1"
+      },
+      {
+        "path": "service/startup_metrics.go",
+        "bytes": 3259,
+        "sha256": "6ee30ea32553b082dc4aefe5721e9f0d2834780c9173c86158128cc3987107aa"
+      },
+      {
+        "path": "service/storage_observability_http.go",
+        "bytes": 11040,
+        "sha256": "c29519e17af8fc0672376d5616f0d23b97e6e89b1acca4d205b429c0d39a6487"
+      },
+      {
+        "path": "service/stream_override_expiry.go",
+        "bytes": 5374,
+        "sha256": "a304b1068a7bfea683bba59f451ff6d00d59519c84d03c3f0e8abb686a73c1b4"
+      }
+    ],
+    "workspace_sha256": "9003c0fa3b7e20c5dc454f13f3e732f25f117954f63d0a3aff8469165d7da153"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.rUO9Ye/config/semstreams-service.tier1.json",
+    "sha256": "3d7bbd4509ba00c4905350ea8a7d220a81a656fea55cdce736404923e0283162",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}

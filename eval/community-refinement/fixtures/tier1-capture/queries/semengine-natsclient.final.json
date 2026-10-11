@@ -1,0 +1,116 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semengine-natsclient",
+  "split": "development",
+  "rule": "queries both annotators agree on (ruling 7, 2026-10-10); disputed ones dropped; gold sets are annotator A's, sets B added are recorded under b_additional_sets and are not gold",
+  "success": "the budgeted evidence contains every member of at least one gold set",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semengine",
+    "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+    "workspace_sha256": "160273dacc04ca4fca0f23f9e47fd6680c2eaa70397d474626b32d176d65d725"
+  },
+  "frozen_capture": "docs/evidence/20261010T132441Z-legacy-tier1-capture-semengine-natsclient-explicit-only",
+  "partition_hash": "9479ddb8fbefd189f6fd8e1e9269ddc95361d1f3636059376ffce9463f3ba7dc",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "Which client option sets how often the health monitor runs, and on each tick what does the monitor check on the connection and which status transitions can it make?",
+      "answer": "WithHealthInterval(d) sets healthInterval. Each tick reads the installed conn (a nil conn is skipped), treats it as healthy only if conn.IsConnected() and conn.RTT() succeeds, then under mu and only while the client still owns the status for that conn (Close not begun, conn still installed) it sets Connected when healthy and the status is not Connected, or Reconnecting when unhealthy and the status is Connected.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-natsclient.function.natsclient-options-go-WithHealthInterval",
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-startHealthMonitoring"
+        ]
+      ],
+      "evidence": [
+        "natsclient/options.go:30-35",
+        "natsclient/client.go:2203-2228"
+      ],
+      "rationale": "WithHealthInterval is the only text naming the option that writes healthInterval; startHealthMonitoring is the only text showing what a tick checks (IsConnected, RTT) and the ownership-guarded Connected/Reconnecting writes. The option says nothing about the tick and the monitor never names the option, so neither alone establishes the answer.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "I called CreateKeyValueBucket with a KeyValueConfig carrying no MaxAge or MaxBytes, yet CheckNoLifecycleRetention fails for that bucket: does CreateKeyValueBucket apply my config to a bucket that already exists, and exactly which values does the check reject?",
+      "answer": "No. CreateKeyValueBucket first calls js.KeyValue(ctx, cfg.Bucket) and, if the bucket exists, returns it unchanged (logging \"Using existing KV bucket\"); it only calls CreateKeyValue when that lookup fails, and on an already-exists race it again fetches the existing bucket, so another process's retention config stands. CheckNoLifecycleRetention rejects maxAge > 0 (\"bucket %q has TTL/MaxAge %s\") and maxBytes > 0 (\"bucket %q has MaxBytes %d\"), each wrapping ErrGraphBucketRetention; zero or negative values pass.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-CreateKeyValueBucket",
+          "semselect.semsource.golang.semengine-natsclient.function.natsclient-kv-go-CheckNoLifecycleRetention"
+        ]
+      ],
+      "evidence": [
+        "natsclient/client.go:1793-1830",
+        "natsclient/kv.go:179-187"
+      ],
+      "rationale": "CreateKeyValueBucket establishes the lookup-first order (an existing bucket is returned as-is, the config is not applied); CheckNoLifecycleRetention establishes the exact rejected values and error texts. AssertNoLifecycleRetention only says the config must not be 'binding' and delegates, so it cannot replace the check, and nothing in kv.go describes CreateKeyValueBucket's lookup-first behaviour.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "With the default KVOptions, how many CAS attempts does UpdateWithRetryRev make, how are the delays between them computed, and what error is returned when the last attempt still conflicts?",
+      "answer": "Defaults are MaxRetries 10, RetryDelay 10ms, MaxRetryDelay 1s, UseExponentialBackoff true. getRetryConfig turns that into retry.Config{MaxAttempts: MaxRetries+1 = 11, InitialDelay 10ms, MaxDelay 1s, AddJitter: true, Multiplier 2.0 (1.0 when exponential backoff is off)}. UpdateWithRetryRev runs the loop with retry.Do; if the final error is still a conflict (IsKVConflictError) it returns (0, ErrKVMaxRetriesExceeded); any other final error is returned as-is with revision 0.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semengine-natsclient.chunk.natsclient-README-md-0009",
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-getRetryConfig",
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-UpdateWithRetryRev"
+        ],
+        [
+          "semselect.semsource.golang.semengine-natsclient.function.natsclient-kv-go-DefaultKVOptions",
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-getRetryConfig",
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-UpdateWithRetryRev"
+        ]
+      ],
+      "evidence": [
+        "natsclient/README.md:170-175",
+        "natsclient/kv.go:273-289",
+        "natsclient/kv.go:443-449"
+      ],
+      "rationale": "The README API-reference passage states the default values; getRetryConfig shows MaxRetries+1 attempts, the always-on jitter and the 2.0/1.0 multiplier; UpdateWithRetryRev shows the conflict-after-retries mapping to ErrKVMaxRetriesExceeded. Each member carries one third: the defaults are not in the retry code, and the attempt arithmetic and the sentinel mapping sit in different functions.",
+      "flags": [
+        {
+          "members": 3,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        },
+        {
+          "members": 3,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 1,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    }
+  ]
+}

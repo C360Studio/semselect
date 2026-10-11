@@ -1,0 +1,128 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-service",
+  "split": "held-out",
+  "rule": "queries both annotators agree on (ruling 7, 2026-10-10); disputed ones dropped; gold sets are annotator A's, sets B added are recorded under b_additional_sets and are not gold",
+  "success": "the budgeted evidence contains every member of at least one gold set",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "workspace_sha256": "9003c0fa3b7e20c5dc454f13f3e732f25f117954f63d0a3aff8469165d7da153"
+  },
+  "frozen_capture": "docs/evidence/20261010T134345Z-legacy-tier1-capture-semstreams-service-explicit-only",
+  "partition_hash": "f002c39301af036aee368fcf5a4179346d60451772364df61f66e086a114f338",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "Does NewMetrics accept a metrics service config JSON that carries a field the service does not know, and what error does it return if not?",
+      "answer": "No. NewMetrics decodes rawConfig through decodeStrictServiceJSON, which builds a json.Decoder with DisallowUnknownFields, so an unknown field fails decoding and NewMetrics returns it wrapped as \"parse metrics config: <decode error>\". Empty or whitespace-only rawConfig is accepted (decodeStrictServiceJSON returns nil without decoding), after which NewMetrics applies the defaults port 9090 and path /metrics.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-service.function.service-metrics-go-NewMetrics",
+          "semselect.semsource.golang.semstreams-service.function.service-service_configs-go-decodeStrictServiceJSON"
+        ]
+      ],
+      "evidence": [
+        "service/metrics.go:71-84",
+        "service/service_configs.go:130-140"
+      ],
+      "rationale": "NewMetrics shows the config goes through decodeStrictServiceJSON, the \"parse metrics config\" wrapping and the defaults, but not what strict decoding rejects; decodeStrictServiceJSON shows DisallowUnknownFields and the empty-input pass-through but not which service calls it or how the error surfaces. Neither alone answers.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 1,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "Which service entry does ComponentsImplementing look up on the Manager, what does it return when that entry is missing, and does ResolveServiceConfigs add that service when the desired services map omits it?",
+      "answer": "ComponentsImplementing reads m.services[\"component-manager\"] and asserts *ComponentManager; it returns nil when the Manager is nil, the entry is absent, or the entry is not a *ComponentManager. ResolveServiceConfigs calls resolveServiceConfigs with applyDefaults true, which materializes a missing \"component-manager\" as Enabled:true with config {} (and likewise \"service-manager\" with {} and \"metrics\" with {\"path\":\"/metrics\",\"port\":9090}), so the resolved map always names component-manager.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-service.function.service-rule_pack_bind-go-ComponentsImplementing",
+          "semselect.semsource.golang.semstreams-service.function.service-service_configs-go-ResolveServiceConfigs",
+          "semselect.semsource.golang.semstreams-service.function.service-service_configs-go-resolveServiceConfigs",
+          "semselect.semsource.golang.semstreams-service.function.service-service_configs-go-materializeServiceConfig"
+        ]
+      ],
+      "evidence": [
+        "service/rule_pack_bind.go:28-39",
+        "service/service_configs.go:59-64",
+        "service/service_configs.go:79-96"
+      ],
+      "rationale": "ComponentsImplementing shows the \"component-manager\" lookup and its nil returns but says nothing about defaults; ResolveServiceConfigs shows the exported path applies defaults; resolveServiceConfigs names which services are materialized and with which config; materializeServiceConfig shows the entry is added only when absent and with Enabled true. No single entity links the lookup to the guarantee.",
+      "flags": [
+        {
+          "members": 4,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 2,
+          "mutual_pairs_among_members": 3,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "Which interval strings does the heartbeat service's HeartbeatConfig.Validate reject, and what exact error message does each case return?",
+      "answer": "An empty Interval passes (nil; the comment says a default will be used). Otherwise the string is parsed with time.ParseDuration: an unparsable value returns \"invalid interval: <parse error>\"; a duration <= 0 returns \"invalid interval: must be positive\"; a duration under one second returns \"invalid interval: must be at least 1s\". Any parsable duration of at least 1s passes.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-service.method.service-heartbeat-go-HeartbeatConfig-Validate"
+        ]
+      ],
+      "evidence": [
+        "service/heartbeat.go:25-42"
+      ],
+      "rationale": "Only HeartbeatConfig.Validate holds the three interval rules and their messages. Lookalikes: ManagerConfig.Validate also parses duration strings but for http_read_timeout/http_write_timeout with different messages; NewHeartbeatService and newHeartbeatServiceForTest emit their own \"invalid interval: %w\" without the positive/1s rules; MetricsConfig, LogForwarderConfig and ComponentManagerConfig have Validate methods too.",
+      "flags": [
+        {
+          "members": 1,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "What exact error text does Registry.Register return when a constructor is registered under a name the registry already holds, and which two inputs does it reject before taking the lock?",
+      "answer": "A duplicate name returns the plain fmt.Errorf error \"service <name> already registered\" (no typed error). Before locking r.mu it rejects an empty name with \"service name cannot be empty\" and a nil constructor with \"constructor cannot be nil\". On success it stores the constructor in r.constructors under the name and returns nil.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-service.method.service-registry-go-Registry-Register"
+        ]
+      ],
+      "evidence": [
+        "service/registry.go:23-41"
+      ],
+      "rationale": "Registry.Register is the only entity with these checks and texts. The lookalike is DuplicateServiceError in service_configs.go, whose Error() reads \"service <name> is already registered\" (nearly the same words) but is a typed error for composition-level duplicates, not the constructor registry; RegisterAll only wraps Register's error as \"register <name>: ...\".",
+      "flags": [
+        {
+          "members": 1,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    }
+  ]
+}

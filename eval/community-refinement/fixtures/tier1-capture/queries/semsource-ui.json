@@ -1,0 +1,140 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semsource-ui",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "4754bc7ad1c8e47c3b916b8e3d060a7526f1582d6569b8894101f36d2518ad84",
+  "passages_sha256": null,
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "How often does the workbench page re-run the bootstrap refresh while it is not fully ready, and what starts and stops that polling?",
+      "answer": "Every 10 s: createReadinessPoller defaults intervalMs to 10_000 and the page constructs it with `() => void bootstrap.refresh()` and no interval. The page derives notReady = !isFullyReady(capabilities) and an $effect calls poller.sync(notReady); sync starts setInterval(refresh, intervalMs) when notReady is true and no timer exists, and clearInterval when notReady becomes false, so it restarts if readiness regresses. The onMount cleanup calls poller.stop() (then bootstrap.cancel()).",
+      "gold_sets": [
+        [
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-state-readinessPoller-ts-createReadinessPoller",
+          "semselect.semsource.svelte.semsource-ui.component.ui-src-routes--page-svelte-6dec60d2-page-e39dca96"
+        ]
+      ],
+      "evidence": [
+        "ui/src/lib/state/readinessPoller.ts:15-36",
+        "ui/src/routes/+page.svelte:58-73"
+      ],
+      "rationale": "createReadinessPoller supplies the 10_000 ms default and the sync/stop timer semantics; the page shows it is built without an interval, which refresh it wraps, that notReady = !isFullyReady(capabilities) drives sync from an $effect, and that unmount calls stop. Neither alone gives both the interval and what toggles the timer."
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "During a workbench refresh, what does the page set before capabilities are requested, and are the inventory and project summary loaded sequentially or concurrently once capabilities arrive?",
+      "answer": "refresh() aborts any in-flight controller and calls onStart, where the page sets inventory and projectSummary to {status: \"loading\"}. It then awaits loadCapabilities alone; after onCapabilities (page stores capabilities, loading = false, error = null) it runs loadInventory and loadProjectSummary concurrently via Promise.all, delivering each through onInventory/onProjectSummary only while valid() (not aborted, generation unchanged). A thrown error reaches onError: the page records the WorkbenchClientError message/kind, else \"Could not reach SemSource\"/\"disconnected\", and sets loading = false.",
+      "gold_sets": [
+        [
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-state-bootstrap-ts-refresh",
+          "semselect.semsource.svelte.semsource-ui.const.ui-src-routes--page-svelte-6dec60d2-bootstrap"
+        ],
+        [
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-state-bootstrap-ts-createBootstrapController",
+          "semselect.semsource.svelte.semsource-ui.const.ui-src-routes--page-svelte-6dec60d2-bootstrap"
+        ],
+        [
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-state-bootstrap-ts-refresh",
+          "semselect.semsource.svelte.semsource-ui.component.ui-src-routes--page-svelte-6dec60d2-page-e39dca96"
+        ],
+        [
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-state-bootstrap-ts-createBootstrapController",
+          "semselect.semsource.svelte.semsource-ui.component.ui-src-routes--page-svelte-6dec60d2-page-e39dca96"
+        ]
+      ],
+      "evidence": [
+        "ui/src/lib/state/bootstrap.ts:17-47",
+        "ui/src/routes/+page.svelte:26-50"
+      ],
+      "rationale": "refresh in bootstrap.ts fixes the order: onStart, loadCapabilities, onCapabilities, then Promise.all over inventory and summary gated by valid(); the page's bootstrap const supplies what each callback sets. The controller is generic over its callbacks, so neither side alone says both what is set and in what order."
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "Which advertised capabilities field decides whether a failed code search or graph query reports the server's error envelope, and what message and retryability does the user get when the envelope is not applied?",
+      "answer": "capabilities.contracts.fusion_http_error, which WorkbenchShell passes as errorContract to both SearchPanel and GraphPanel. postFusionRequest parses a non-OK body as a fusion error envelope only when errorContract === \"1\" (and parseFusionError accepts it); otherwise it throws statusError's FusionSearchError \"<Code search|Graph query> failed with HTTP <status>\" with code \"http_error\", retryable only when the status is 503 or 504, status attached.",
+      "gold_sets": [
+        [
+          "semselect.semsource.svelte.semsource-ui.component.ui-src-lib-components-WorkbenchShell-svelte-WorkbenchShell",
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-api-search-ts-postFusionRequest",
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-api-search-ts-statusError"
+        ]
+      ],
+      "evidence": [
+        "ui/src/lib/components/WorkbenchShell.svelte:323-337",
+        "ui/src/lib/api/search.ts:122-142",
+        "ui/src/lib/api/search.ts:71-78"
+      ],
+      "rationale": "WorkbenchShell is the only place naming capabilities.contracts.fusion_http_error and wiring it to the panels' errorContract; postFusionRequest holds the errorContract === \"1\" gate (D5); statusError holds the fallback message, code and 503/504 retryability. The gate and the fallback are separate functions, and the field name appears nowhere in search.ts."
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "What must an advertised code-search capability satisfy for the search panel to treat its route as valid, and what exactly does the href check verify?",
+      "answer": "advertisedRouteValid requires capability.method === \"POST\" and isSameOriginRelativeHref(capability.href), which wraps the href in a synthetic ready POST capability and returns false if resolveAdvertisedRoute throws. That throws \"invalid\" unless the href is non-empty, starts with \"/\" but not \"//\", contains no backslash or \"#\", parses as a URL against https://semsource.invalid with that origin unchanged, carries no username or password, and its parsed pathname starts with \"/\" but not \"//\".",
+      "gold_sets": [
+        [
+          "semselect.semsource.svelte.semsource-ui.const.ui-src-lib-components-SearchPanel-svelte-advertisedRouteValid",
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-api-search-ts-isSameOriginRelativeHref",
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-api-advertisedRoute-ts-resolveAdvertisedRoute"
+        ],
+        [
+          "semselect.semsource.svelte.semsource-ui.const.ui-src-lib-components-SearchPanel-svelte-usable",
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-api-search-ts-isSameOriginRelativeHref",
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-api-advertisedRoute-ts-resolveAdvertisedRoute"
+        ],
+        [
+          "semselect.semsource.svelte.semsource-ui.component.ui-src-lib-components-SearchPanel-svelte-SearchPanel",
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-api-search-ts-isSameOriginRelativeHref",
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-api-advertisedRoute-ts-resolveAdvertisedRoute"
+        ]
+      ],
+      "evidence": [
+        "ui/src/lib/components/SearchPanel.svelte:44-46",
+        "ui/src/lib/api/search.ts:57-69",
+        "ui/src/lib/api/advertisedRoute.ts:24-59"
+      ],
+      "rationale": "advertisedRouteValid states the panel's rule (POST plus isSameOriginRelativeHref); isSameOriginRelativeHref shows that is just resolveAdvertisedRoute on a synthetic ready POST capability with throw mapped to false; resolveAdvertisedRoute lists the actual href checks. Each file adds a layer the others do not contain."
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "For the workbench's plain GET JSON fetches (capabilities, source manifest, project summary), which HTTP failure statuses are retryable, and what are the error messages for an unreachable server, an HTTP failure and a non-JSON body?",
+      "answer": "fetchJSON (GET with Accept: application/json) throws WorkbenchClientError: a non-abort fetch failure gives \"Could not reach SemSource\", kind \"disconnected\", retryable true (an AbortError is rethrown); a non-OK response gives \"SemSource request failed with HTTP <status>\", kind \"http\", retryable only when status >= 500, with the status attached; an unparsable body gives \"SemSource returned an invalid JSON response\", kind \"invalid_payload\", retryable false.",
+      "gold_sets": [
+        [
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-api-http-ts-fetchJSON"
+        ]
+      ],
+      "evidence": [
+        "ui/src/lib/api/http.ts:16-55"
+      ],
+      "rationale": "fetchJSON alone fixes the three messages, kinds and the status >= 500 retryable rule for GET fetches. The lookalike is statusError/postFusionRequest in search.ts, which classify fusion POST failures with different messages (\"<label> failed with HTTP <status>\", \"Could not reach SemSource <label>\") and treat only 503 and 504 as retryable."
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "Which readiness signals feed the workbench's overall readiness verdict, and how is a signal the backend does not advertise (available false) treated?",
+      "answer": "All three signals: source (\"Sources\"), structural_index (\"Structural index\") and semantic_index (\"Semantic index\"). Only signals with available true are tracked and listed in covered; of those, any with ready false is listed in building, and ready is true only when building is empty. An unadvertised signal (available false) is dropped entirely and never blocks readiness, unlike the backend's own overall field, which gates only on source and structural index (D4).",
+      "gold_sets": [
+        [
+          "semselect.semsource.typescript.semsource-ui.function.ui-src-lib-state-readiness-ts-deriveReadinessCoverage"
+        ]
+      ],
+      "evidence": [
+        "ui/src/lib/state/readiness.ts:23-48"
+      ],
+      "rationale": "deriveReadinessCoverage lists the three signals, filters by available, and defines ready/covered/building, with the D4 comment explaining the divergence from the backend's overall. The lookalike isFullyReady in the same file only wraps it with a null check, and WorkbenchShell's coverage/overall consume the result without naming the signals or the available rule."
+    }
+  ]
+}

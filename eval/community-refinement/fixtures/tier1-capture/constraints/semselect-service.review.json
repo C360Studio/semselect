@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semselect-service",
+  "split": "development",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "c866f38fa38a79b9690e33052900820bc31e63761203d998a13652659e923d7e",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "validate calls checkJSON before decoding, and the latter's source explains why key casing and duplicates require this extra check. Together they implement the guard's strict request acceptance contract."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "The Request JSON tags and checkJSON's permitted top-level key set exactly correspond. A wire-contract change needs both the declaration and its key validator alongside it."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "decode and checkJSON enforce complementary parts of strict request parsing, including single-value JSON. The source explicitly identifies decoder behavior that the key inspection compensates for."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "main constructs guard.Config from startup settings and passes it to the constructor. The configuration type and the code supplying its values share the deployment configuration responsibility."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "The actual README passage documents the timeout bound and standalone environment variables enforced by main. It is the documented startup contract alongside its implementation."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "The passage's one-inference admission rule and second-request 429 are implemented by ServeHTTP's nonblocking busy-channel branch. The source and passage describe the same concurrency policy."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "The exact passage lists the health, readiness, model and metrics endpoints implemented in ServeHTTP's GET routing. Its status/duration logging description also corresponds to the cited log call."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "The primitive table's named Choice options, ordered Score levels and optional Noul descriptions correspond to validate's type-specific criteria branches. They carry one supported request-profile contract."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "New disables redirect following on the upstream client, and forward rejects the resulting 3xx responses with 502. These functions jointly enforce the no-runtime-redirect policy."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "main supplies the configured deadline and reserves additional server write time; ServeHTTP passes that configuration timeout into forward's upstream context. These pieces implement one bounded request lifetime and deadline response policy."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "The address-validation shape is shared, but listenConfig governs the guard listener/readiness URL while New governs the runtime's upstream origin. The checks protect different endpoints."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "Both return validation errors, but New checks operator configuration during construction and validate checks individual caller request bodies. The cited call path turns the latter failure into a request-specific 400."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "The model-comparison passage reports experimental quality and cost; Config.Model supplies the required deployment alias. Shared model vocabulary does not connect those separate responsibilities."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "The passage's median/p95 budget is a model-qualification criterion for an operation-selection experiment. forward's context timeout bounds a particular runtime HTTP call, so their time-limit vocabulary has different meanings."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "The passage inventories third-party Apple Silicon serving paths and their tested capabilities. ServeHTTP implements this guard's own routing in front of its upstream; matching endpoint names do not establish a shared serving implementation."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "The passage proposes a conditional downstream SemEngine client, while forward makes this guard's upstream HTTP request. The similar client terminology refers to different owners and connection directions."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "The passage's errors and latency percentiles are model-evaluation measurements. Guard's atomic request/error/duration fields are live HTTP bookkeeping, not semantic quality evidence."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "Both use encoding/json, but decode enforces caller-input parsing while replyError serializes local failure envelopes. The shared library and short-helper shape do not establish one semantic responsibility."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "The nearby small structs encode different contracts: Question is caller-visible request data and Config is operator startup wiring. Their structural resemblance should not merge the API profile with deployment settings."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "The passage's evidence gate is a semantic model decision before answer generation. The guard file explicitly bounds the native HTTP API without scoring models, so gate/guard terminology is a misleading connection."
+    }
+  ]
+}

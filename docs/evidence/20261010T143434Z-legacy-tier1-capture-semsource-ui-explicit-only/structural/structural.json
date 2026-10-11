@@ -1,0 +1,458 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "nats_url": "nats://127.0.0.1:14222",
+  "started_utc": "2026-10-10T14:34:50Z",
+  "finished_utc": "2026-10-10T14:35:50Z",
+  "parameters": {
+    "identity": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "settle_seconds": 35,
+    "poll_seconds": 5,
+    "max_keys": 500000
+  },
+  "entities": {
+    "total": 206,
+    "valid_six_part_ids": 206,
+    "malformed_ids": [],
+    "embedded": 206,
+    "by_system": {
+      "semsource-ui": 206
+    },
+    "by_type": {
+      "class": 3,
+      "component": 7,
+      "const": 51,
+      "file": 16,
+      "folder": 7,
+      "function": 47,
+      "interface": 4,
+      "repo": 1,
+      "type": 7,
+      "var": 63
+    },
+    "by_domain": {
+      "code": 8,
+      "svelte": 130,
+      "typescript": 68
+    }
+  },
+  "explicit": {
+    "outgoing_rows": 206,
+    "outgoing_rows_rejected": 0,
+    "outgoing_keys_not_in_entity_states": 0,
+    "edges": 479,
+    "edges_to_outside_entity_states": 31,
+    "predicates": {
+      "code.relationship.calls": 31,
+      "code.relationship.parameter": 25,
+      "code.relationship.references": 5,
+      "code.relationship.returns": 8,
+      "code.structure.belongs": 205,
+      "code.structure.contains": 205
+    },
+    "incoming_keys": 479,
+    "incoming_keys_malformed": 0,
+    "outgoing_only": 0,
+    "incoming_only": 0,
+    "outgoing_only_examples": [],
+    "incoming_only_examples": [],
+    "indexes_consistent": true,
+    "undirected_pairs": 274,
+    "undirected_pairs_cross_level0": 20
+  },
+  "voting": {
+    "edges": 517,
+    "by_tier": {
+      "explicit": 517,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "by_listed_as": {
+      "explicit": 517,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "weight_mass_by_tier": {
+      "explicit": 517,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "edges_to_outside_entity_states": 31,
+    "cross_level0_by_tier": {
+      "explicit": 40,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "entities_sibling_capped": 0,
+    "entities_system_peer_capped": 0,
+    "entities_without_neighbors": 0
+  },
+  "partition": {
+    "levels": [
+      {
+        "level": 0,
+        "communities": 16,
+        "members": 206,
+        "entity_mapped": 206,
+        "singletons": 0,
+        "largest": 30,
+        "size_histogram": {
+          "11": 2,
+          "12": 1,
+          "13": 1,
+          "17": 1,
+          "20": 1,
+          "22": 1,
+          "30": 2,
+          "4": 2,
+          "5": 2,
+          "6": 1,
+          "7": 1,
+          "9": 1
+        }
+      },
+      {
+        "level": 1,
+        "communities": 17,
+        "members": 206,
+        "entity_mapped": 206,
+        "singletons": 0,
+        "largest": 30,
+        "size_histogram": {
+          "10": 1,
+          "11": 1,
+          "12": 1,
+          "15": 2,
+          "2": 1,
+          "20": 1,
+          "22": 1,
+          "30": 2,
+          "4": 3,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "9": 1
+        }
+      },
+      {
+        "level": 2,
+        "communities": 16,
+        "members": 206,
+        "entity_mapped": 206,
+        "singletons": 0,
+        "largest": 30,
+        "size_histogram": {
+          "11": 1,
+          "12": 1,
+          "13": 2,
+          "14": 1,
+          "2": 1,
+          "20": 1,
+          "22": 1,
+          "30": 2,
+          "4": 2,
+          "6": 1,
+          "7": 1,
+          "9": 2
+        }
+      }
+    ],
+    "level0_covers_entity_states": true,
+    "level0_members_disjoint": true,
+    "level0_entity_map_consistent": true,
+    "malformed_keys": 0,
+    "hash": "d2318857074f5736a4d72fe8c42b213758a6726f6093473594eb04e70a589d61"
+  },
+  "settle": {
+    "reads": [
+      {
+        "utc": "2026-10-10T14:34:50Z",
+        "entities": 206,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "0250e0cf05433faed8547564f6bd093fbcffc02ea7b715595180eb6c446525a3",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 206 entities (206 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-10T14:34:55Z",
+        "entities": 206,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "0250e0cf05433faed8547564f6bd093fbcffc02ea7b715595180eb6c446525a3",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 206 entities (206 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-10T14:35:00Z",
+        "entities": 206,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "0250e0cf05433faed8547564f6bd093fbcffc02ea7b715595180eb6c446525a3",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 206 entities (206 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-10T14:35:05Z",
+        "entities": 206,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "0250e0cf05433faed8547564f6bd093fbcffc02ea7b715595180eb6c446525a3",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 206 entities (206 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-10T14:35:10Z",
+        "entities": 206,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "0250e0cf05433faed8547564f6bd093fbcffc02ea7b715595180eb6c446525a3",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 206 entities (206 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-10T14:35:15Z",
+        "entities": 206,
+        "communities_level0": 16,
+        "covered": true,
+        "hash": "d2318857074f5736a4d72fe8c42b213758a6726f6093473594eb04e70a589d61",
+        "raw_value_hash": "5609cbec1a7b346ccef0aa66a02d05c153290c18a661d35a17de04807430be1f"
+      },
+      {
+        "utc": "2026-10-10T14:35:50Z",
+        "entities": 206,
+        "communities_level0": 16,
+        "covered": true,
+        "hash": "d2318857074f5736a4d72fe8c42b213758a6726f6093473594eb04e70a589d61",
+        "raw_value_hash": "5d8642ea770fcac78cd4aa18942cef2e85e9b65eb921deed2ddda81a1b5fc270",
+        "note": "memberships unchanged since the read 35.1s earlier; stored community values differ byte-wise (summary decoration), memberships do not"
+      }
+    ],
+    "settled": true,
+    "settled_over_seconds": 35.120846417,
+    "waited_seconds": 60.279533,
+    "stable_after_topology_read": true,
+    "community_values_byte_stable": false
+  },
+  "checks": {
+    "explicit_indexes_consistent": true,
+    "no_malformed_entity_ids": true,
+    "partition_covers_entity_states": true,
+    "partition_entity_map_consistent": true,
+    "partition_members_disjoint": true,
+    "partition_settled": true,
+    "stable_after_topology_read": true
+  },
+  "run": {
+    "provenance": "legacy SemStreams capture; not a SemEngine result",
+    "compose_project": "semselect-tier1-capture",
+    "family": {
+      "id": "semsource-ui",
+      "split": "held-out",
+      "role": "sparse explicit topology",
+      "repo": "https://github.com/C360Studio/semsource",
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "license": "MIT",
+      "workspace_sha256": "0b4539115bfa5979e2b7ec14740936ef24006bbe5c63966e44ec7eee386de495",
+      "files": 16,
+      "tier0_entities_total": 206
+    },
+    "config": {
+      "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.5tsuwF/config/semsource-ui.tier1.json",
+      "sha256": "ac22ff7181170aec18974a24b823d11a0201a924836cc65dd62e85ae0dffb9b1",
+      "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+      "identity_profile": "explicit-only",
+      "structural_baseline": {
+        "include_siblings": false,
+        "include_system_peers": false,
+        "sibling_weight": 0.7,
+        "max_siblings": 5,
+        "system_peer_weight": 0.2,
+        "max_system_peers": 8
+      },
+      "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+    },
+    "semsource": {
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "dirty_paths": 0,
+      "image_id": "sha256:4c0fde6ff31b2a6cab42ba0f7f90e099ba4a87e281566c2ed9e2ff671ce57050",
+      "semstreams_version": "v1.0.0-beta.160",
+      "log_level": "info"
+    },
+    "semembed": {
+      "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "image_id": "sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "model": "Snowflake/snowflake-arctic-embed-s",
+      "cpus": "2"
+    },
+    "semselect": {
+      "commit": "618271bd239896bef81715e5be9c00e1a38afdbc",
+      "dirty_paths": 12
+    },
+    "docker": {
+      "os": "Docker Desktop",
+      "server_version": "29.8.2",
+      "architecture": "aarch64",
+      "ncpu": 12,
+      "mem_total_bytes": 24895582208
+    },
+    "host_cpu": "Apple M3 Pro",
+    "status_at_capture": {
+      "embedding": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 211,
+        "target_revision": 211,
+        "revision": "211",
+        "last_synced": "2026-10-10T14:34:48Z"
+      },
+      "index": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 211,
+        "target_revision": 211,
+        "revision": "211",
+        "last_synced": "2026-10-10T14:34:48Z"
+      },
+      "namespace": "semselect",
+      "note": "readiness is honest (semstreams ADR-066): index.ready means the structural index (NAME_INDEX) has caught up to the latest committed write — byName / code_context / code_impact are reliable. embedding.ready means the semantic pipeline has caught up — code_search is reliable (surfaced, not gated). A miss is a genuine absence only when status.phase is \"ready\" (every configured source has finished its initial seed) AND the relevant index signal is ready; while status.phase is \"seeding\" a miss may simply be not-yet-ingested. For exact read-your-write freshness, compare the numeric indexed_revision field against your write's revision.",
+      "phase": "ready",
+      "sources": [
+        {
+          "entity_count": 206,
+          "error_count": 0,
+          "instance_name": "ast-source-semsource-ui",
+          "phase": "watching",
+          "publish_total": 211,
+          "source_type": "ast",
+          "type_counts": {
+            "code.folder": 7,
+            "code.repo": 1,
+            "svelte.component": 7,
+            "svelte.const": 33,
+            "svelte.file": 7,
+            "svelte.function": 26,
+            "svelte.var": 57,
+            "typescript.class": 3,
+            "typescript.const": 18,
+            "typescript.file": 9,
+            "typescript.function": 21,
+            "typescript.interface": 4,
+            "typescript.type": 7,
+            "typescript.var": 6
+          }
+        }
+      ],
+      "timestamp": "2026-10-10T14:34:43.660695792Z",
+      "total_entities": 206
+    },
+    "milestones": [
+      {
+        "name": "prepare_start",
+        "utc": "2026-10-10T14:34:34Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "prepare_done",
+        "utc": "2026-10-10T14:34:34Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": {
+          "split": "held-out",
+          "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+          "files": 16,
+          "workspace_sha256": "0b4539115bfa5979e2b7ec14740936ef24006bbe5c63966e44ec7eee386de495"
+        }
+      },
+      {
+        "name": "build_start",
+        "utc": "2026-10-10T14:34:35Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "build_done",
+        "utc": "2026-10-10T14:34:36Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "compose_up_start",
+        "utc": "2026-10-10T14:34:36Z",
+        "elapsed_s_since_compose_up": 0,
+        "detail": null
+      },
+      {
+        "name": "containers_healthy",
+        "utc": "2026-10-10T14:34:48Z",
+        "elapsed_s_since_compose_up": 12,
+        "detail": null
+      },
+      {
+        "name": "phase_ready",
+        "utc": "2026-10-10T14:34:49Z",
+        "elapsed_s_since_compose_up": 13,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 206,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          }
+        }
+      },
+      {
+        "name": "index_ready",
+        "utc": "2026-10-10T14:34:49Z",
+        "elapsed_s_since_compose_up": 13,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 206,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          }
+        }
+      },
+      {
+        "name": "embedding_ready",
+        "utc": "2026-10-10T14:34:49Z",
+        "elapsed_s_since_compose_up": 13,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 206,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          }
+        }
+      }
+    ]
+  }
+}

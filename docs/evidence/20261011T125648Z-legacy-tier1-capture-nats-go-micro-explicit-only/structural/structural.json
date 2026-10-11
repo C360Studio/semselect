@@ -1,0 +1,439 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "nats_url": "nats://127.0.0.1:14222",
+  "started_utc": "2026-10-11T12:57:18Z",
+  "finished_utc": "2026-10-11T12:58:08Z",
+  "parameters": {
+    "identity": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "settle_seconds": 35,
+    "poll_seconds": 5,
+    "max_keys": 500000
+  },
+  "entities": {
+    "total": 217,
+    "valid_six_part_ids": 217,
+    "malformed_ids": [],
+    "embedded": 217,
+    "by_system": {
+      "nats-go-micro": 217
+    },
+    "by_type": {
+      "chunk": 55,
+      "const": 10,
+      "doc": 2,
+      "file": 10,
+      "folder": 2,
+      "function": 57,
+      "interface": 4,
+      "method": 37,
+      "repo": 1,
+      "struct": 19,
+      "type": 9,
+      "var": 11
+    },
+    "by_domain": {
+      "code": 3,
+      "golang": 157,
+      "web": 57
+    }
+  },
+  "explicit": {
+    "outgoing_rows": 217,
+    "outgoing_rows_rejected": 0,
+    "outgoing_keys_not_in_entity_states": 0,
+    "edges": 547,
+    "edges_to_outside_entity_states": 70,
+    "predicates": {
+      "code.relationship.calls": 85,
+      "code.relationship.embeds": 5,
+      "code.relationship.parameter": 15,
+      "code.relationship.receiver": 37,
+      "code.relationship.references": 14,
+      "code.relationship.returns": 18,
+      "code.structure.belongs": 214,
+      "code.structure.contains": 159
+    },
+    "incoming_keys": 547,
+    "incoming_keys_malformed": 0,
+    "outgoing_only": 0,
+    "incoming_only": 0,
+    "outgoing_only_examples": [],
+    "incoming_only_examples": [],
+    "indexes_consistent": true,
+    "undirected_pairs": 387,
+    "undirected_pairs_cross_level0": 12
+  },
+  "voting": {
+    "edges": 704,
+    "by_tier": {
+      "explicit": 704,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "by_listed_as": {
+      "explicit": 704,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "weight_mass_by_tier": {
+      "explicit": 704,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "edges_to_outside_entity_states": 70,
+    "cross_level0_by_tier": {
+      "explicit": 24,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "entities_sibling_capped": 0,
+    "entities_system_peer_capped": 0,
+    "entities_without_neighbors": 0
+  },
+  "partition": {
+    "levels": [
+      {
+        "level": 0,
+        "communities": 9,
+        "members": 217,
+        "entity_mapped": 217,
+        "singletons": 0,
+        "largest": 81,
+        "size_histogram": {
+          "13": 1,
+          "15": 1,
+          "17": 1,
+          "23": 2,
+          "34": 1,
+          "4": 1,
+          "7": 1,
+          "81": 1
+        }
+      },
+      {
+        "level": 1,
+        "communities": 10,
+        "members": 217,
+        "entity_mapped": 217,
+        "singletons": 0,
+        "largest": 81,
+        "size_histogram": {
+          "15": 1,
+          "17": 1,
+          "23": 2,
+          "34": 1,
+          "4": 2,
+          "7": 1,
+          "81": 1,
+          "9": 1
+        }
+      },
+      {
+        "level": 2,
+        "communities": 10,
+        "members": 217,
+        "entity_mapped": 217,
+        "singletons": 0,
+        "largest": 81,
+        "size_histogram": {
+          "15": 1,
+          "17": 1,
+          "23": 2,
+          "34": 1,
+          "4": 2,
+          "7": 1,
+          "81": 1,
+          "9": 1
+        }
+      }
+    ],
+    "level0_covers_entity_states": true,
+    "level0_members_disjoint": true,
+    "level0_entity_map_consistent": true,
+    "malformed_keys": 0,
+    "hash": "82a22c5239d162fa8812d5ba46737f43ef1fc77da46860b10fdb89ff3bf971a4"
+  },
+  "settle": {
+    "reads": [
+      {
+        "utc": "2026-10-11T12:57:18Z",
+        "entities": 217,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "63626fb8b2a776f1a5dad15592688c97acbf6226226815cf56434f9e3881f596",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 217 entities (217 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-11T12:57:23Z",
+        "entities": 217,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "63626fb8b2a776f1a5dad15592688c97acbf6226226815cf56434f9e3881f596",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 217 entities (217 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-11T12:57:28Z",
+        "entities": 217,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "63626fb8b2a776f1a5dad15592688c97acbf6226226815cf56434f9e3881f596",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 217 entities (217 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-11T12:57:33Z",
+        "entities": 217,
+        "communities_level0": 9,
+        "covered": true,
+        "hash": "82a22c5239d162fa8812d5ba46737f43ef1fc77da46860b10fdb89ff3bf971a4",
+        "raw_value_hash": "5e5eef82ef717dd7316dcca3b052561d64647190081a7f3150242ad31451c7bb"
+      },
+      {
+        "utc": "2026-10-11T12:58:08Z",
+        "entities": 217,
+        "communities_level0": 9,
+        "covered": true,
+        "hash": "82a22c5239d162fa8812d5ba46737f43ef1fc77da46860b10fdb89ff3bf971a4",
+        "raw_value_hash": "5749bfff8eb716600f23eede061a61206d77e4ef19f895752c9a45165bd565a5",
+        "note": "memberships unchanged since the read 35.1s earlier; stored community values differ byte-wise (summary decoration), memberships do not"
+      }
+    ],
+    "settled": true,
+    "settled_over_seconds": 35.1418585,
+    "waited_seconds": 50.499541,
+    "stable_after_topology_read": true,
+    "community_values_byte_stable": false
+  },
+  "checks": {
+    "explicit_indexes_consistent": true,
+    "no_malformed_entity_ids": true,
+    "partition_covers_entity_states": true,
+    "partition_entity_map_consistent": true,
+    "partition_members_disjoint": true,
+    "partition_settled": true,
+    "stable_after_topology_read": true
+  },
+  "run": {
+    "provenance": "legacy SemStreams capture; not a SemEngine result",
+    "compose_project": "semselect-tier1-capture",
+    "family": {
+      "id": "nats-go-micro",
+      "split": "generalization",
+      "role": "code and doc about the same responsibility",
+      "repo": "https://github.com/nats-io/nats.go",
+      "commit": "31a3ee4cf0fef9e2dc2d85d5068087b46236cd12",
+      "license": "Apache-2.0",
+      "workspace_sha256": "748217ef6f458befadcba49f16e98ca7490896fc0828ce274c2bf6c74f8236d3",
+      "files": 12,
+      "tier0_entities_total": 217
+    },
+    "config": {
+      "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.mYUq6F/config/nats-go-micro.tier1.json",
+      "sha256": "815c4ffc8c466415a9300b636a32324e3596d314b41ed2a4907e3518a3a3f428",
+      "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+      "identity_profile": "explicit-only",
+      "structural_baseline": {
+        "include_siblings": false,
+        "include_system_peers": false,
+        "sibling_weight": 0.7,
+        "max_siblings": 5,
+        "system_peer_weight": 0.2,
+        "max_system_peers": 8
+      },
+      "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+    },
+    "semsource": {
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "dirty_paths": 0,
+      "image_id": "sha256:7de891aef997dab9ac94d04ceeda178a1a22977a719b5d90f6bb655b5c845081",
+      "semstreams_version": "v1.0.0-beta.160",
+      "log_level": "info"
+    },
+    "semembed": {
+      "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "image_id": "sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "model": "Snowflake/snowflake-arctic-embed-s",
+      "cpus": "2"
+    },
+    "semselect": {
+      "commit": "a3e59bb38026be9edf83187e8546ca1c7cc62e3a",
+      "dirty_paths": 0
+    },
+    "docker": {
+      "os": "Docker Desktop",
+      "server_version": "29.8.2",
+      "architecture": "aarch64",
+      "ncpu": 12,
+      "mem_total_bytes": 24895582208
+    },
+    "host_cpu": "Apple M3 Pro",
+    "status_at_capture": {
+      "embedding": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 217,
+        "target_revision": 217,
+        "revision": "217",
+        "last_synced": "2026-10-11T12:57:15Z"
+      },
+      "index": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 217,
+        "target_revision": 217,
+        "revision": "217",
+        "last_synced": "2026-10-11T12:57:05Z"
+      },
+      "namespace": "semselect",
+      "note": "readiness is honest (semstreams ADR-066): index.ready means the structural index (NAME_INDEX) has caught up to the latest committed write — byName / code_context / code_impact are reliable. embedding.ready means the semantic pipeline has caught up — code_search is reliable (surfaced, not gated). A miss is a genuine absence only when status.phase is \"ready\" (every configured source has finished its initial seed) AND the relevant index signal is ready; while status.phase is \"seeding\" a miss may simply be not-yet-ingested. For exact read-your-write freshness, compare the numeric indexed_revision field against your write's revision.",
+      "phase": "ready",
+      "sources": [
+        {
+          "entity_count": 57,
+          "error_count": 0,
+          "instance_name": "doc-source-nats-go-micro",
+          "phase": "watching",
+          "publish_total": 57,
+          "source_type": "docs",
+          "type_counts": {
+            "web.chunk": 55,
+            "web.doc": 2
+          }
+        },
+        {
+          "entity_count": 160,
+          "error_count": 0,
+          "instance_name": "ast-source-nats-go-micro",
+          "phase": "watching",
+          "publish_total": 160,
+          "source_type": "ast",
+          "type_counts": {
+            "code.folder": 2,
+            "code.repo": 1,
+            "golang.const": 10,
+            "golang.file": 10,
+            "golang.function": 57,
+            "golang.interface": 4,
+            "golang.method": 37,
+            "golang.struct": 19,
+            "golang.type": 9,
+            "golang.var": 11
+          }
+        }
+      ],
+      "timestamp": "2026-10-11T12:57:00.676534547Z",
+      "total_entities": 217
+    },
+    "milestones": [
+      {
+        "name": "prepare_start",
+        "utc": "2026-10-11T12:56:49Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "prepare_done",
+        "utc": "2026-10-11T12:56:49Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": {
+          "split": "generalization",
+          "commit": "31a3ee4cf0fef9e2dc2d85d5068087b46236cd12",
+          "files": 12,
+          "workspace_sha256": "748217ef6f458befadcba49f16e98ca7490896fc0828ce274c2bf6c74f8236d3"
+        }
+      },
+      {
+        "name": "build_start",
+        "utc": "2026-10-11T12:56:51Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "build_done",
+        "utc": "2026-10-11T12:56:53Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "compose_up_start",
+        "utc": "2026-10-11T12:56:53Z",
+        "elapsed_s_since_compose_up": 0,
+        "detail": null
+      },
+      {
+        "name": "containers_healthy",
+        "utc": "2026-10-11T12:57:05Z",
+        "elapsed_s_since_compose_up": 12,
+        "detail": null
+      },
+      {
+        "name": "phase_ready",
+        "utc": "2026-10-11T12:57:06Z",
+        "elapsed_s_since_compose_up": 13,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 217,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": false,
+            "state": "building",
+            "lag": 216
+          }
+        }
+      },
+      {
+        "name": "index_ready",
+        "utc": "2026-10-11T12:57:06Z",
+        "elapsed_s_since_compose_up": 13,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 217,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": false,
+            "state": "building",
+            "lag": 216
+          }
+        }
+      },
+      {
+        "name": "embedding_ready",
+        "utc": "2026-10-11T12:57:16Z",
+        "elapsed_s_since_compose_up": 23,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 217,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          }
+        }
+      }
+    ]
+  }
+}

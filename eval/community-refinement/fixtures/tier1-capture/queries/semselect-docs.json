@@ -1,0 +1,124 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semselect-docs",
+  "split": "development",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "96feecb6240c7893611bb2fd6d8ebe8891c5f454c7f5238a8706f5d8425ba3ec",
+  "passages_sha256": "01bf7ea0e64e82a4d65a82014454d73c067fca7850cb9234e17c9232657015f4",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "What does the native Metal launcher verify and wait for before it treats a service as ready, and why did its initial full-offload check stop two runs before any inference?",
+      "answer": "It checks both native ports before startup, verifies the GGUF and built runtime files, waits at most 180 seconds per service for readiness, and requires log evidence that all model layers were offloaded. The first offload check stopped two runs because the default runtime log level hid allocation details and this llama.cpp revision names its Metal device `MTL0`; the final check uses trace-level allocation logs, requires a positive full-offload count on an Apple MTL device, and has a regression for that device-name format. Those startup failures were not scored as model calls.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-laptop-and-gpu-md-0003",
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-metal-md-0006"
+        ]
+      ],
+      "evidence": [
+        "docs/laptop-and-gpu.md:31-35",
+        "docs/validation-metal.md:102-106"
+      ],
+      "rationale": "The laptop guide passage states the launcher's port/file checks, the 180-second readiness wait and the offload-evidence requirement but says nothing about stopped runs; the Metal validation passage explains the MTL0/log-level failure and the corrected trace-level check but never states the readiness timeout or file checks. Neither passage alone covers both halves."
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "For the answer-synthesis replay, which generation settings did the imported production synthesizer keep, and on primary trial 1 how did each generator's unsupported-assertion count change when a gate was added?",
+      "answer": "The driver imports the actual `NewLLMAnswerSynthesizer` with its known/missing instruction, temperature 0.3, a 500-token limit, a 15-second HTTP/synthesis deadline and up to three retries within it (a timeout may return a degraded template; an empty summary list bypasses the model). On primary trial 1 the CPU 0.6B generator went from 10/12 unsupported assertions to 1/12 with either gate, and the Metal 4B generator from 3/12 to 0/12 with either gate, preserving one useful partial answer; both gates allowed only S09.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-synthesis-md-0002",
+          "semselect.semsource.web.semselect-docs.chunk.docs-results-md-0011"
+        ],
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-answering-path-md-0003",
+          "semselect.semsource.web.semselect-docs.chunk.docs-results-md-0011"
+        ]
+      ],
+      "evidence": [
+        "docs/validation-synthesis.md:34-40",
+        "docs/results.md:292-298",
+        "docs/answering-path.md:59-65"
+      ],
+      "rationale": "The synthesis record's frozen-inputs passage (or the answer-path audit's generator passage) gives the preserved temperature, token limit, deadline and retries; only the results-history replay passage reports both strata's primary unsupported counts (10/12 to 1/12 and 3/12 to 0/12). No passage carries both the settings and the counts; the synthesis record's outcome passages give only 4B figures."
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "How big is the pinned Kev-4B Q4_K_M GGUF download, and which repository revision and SHA-256 does the bootstrap validation record for that artifact?",
+      "answer": "The official ggml-org Kev-4B GGUF card publishes a 3.03 GB Q4_K_M artifact (download size, not peak RAM; Apache-2.0 weights). The CPU bootstrap record pins `Kev-4B-Q4_K_M.gguf` at repository revision `d924f2e2c3872da8b8aaf3eb4453b4126deceb79` with SHA-256 `33ae6b18926502b2209a1bf7d3b61a350d65938441515c686bb87d226a19eff9`.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-research-and-decision-md-0024",
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-md-0002"
+        ],
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-research-and-decision-md-0027",
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-md-0002"
+        ]
+      ],
+      "evidence": [
+        "docs/research-and-decision.md:361",
+        "docs/validation.md:26-28",
+        "docs/research-and-decision.md:379"
+      ],
+      "rationale": "The decision passage (or the shortlist table row) is the only place the 3.03 GB download size appears; the bootstrap hardware/method passage is the only place the revision and SHA-256 appear. Neither passage mentions the other's fact, so the answer needs one of each."
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "To reproduce the SGLang/MLX probe on Apple Silicon, which SGLang revision and Python/PyTorch/MLX versions were pinned, and which environment variable and launch flag does SGLang's Apple serving path use?",
+      "answer": "The probe pinned SGLang `efb62ce269b499123e2d1c89005ee4cea8c31098` with Python 3.12.13, PyTorch 2.13.0 and MLX 0.32.3 in an isolated source-pinned install with a dependency freeze. SGLang's Apple path serves through MLX/Metal with `SGLANG_USE_MLX=1` and `--disable-cuda-graph`; its source-install guide requires macOS 14+, stable PyTorch 2.13.x and MLX 0.32+, with full Xcode needed only for the optional native Metal kernels.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-scoring-md-0008",
+          "semselect.semsource.web.semselect-docs.chunk.docs-sglang-investigation-md-0008"
+        ]
+      ],
+      "evidence": [
+        "docs/validation-scoring.md:186-191",
+        "docs/sglang-investigation.md:191-196"
+      ],
+      "rationale": "The scoring record's SGLang compatibility passage holds the exact pinned revision and installed versions but no Apple-path flags; the investigation's hardware passage gives `SGLANG_USE_MLX=1`, `--disable-cuda-graph` and the documented version floors but no pinned revision. The results-history mention of `efb62ce2` is a short form with neither versions nor flags."
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "In the query-classification experiment's report, what exactly does the stored `operation_correct` secondary metric count, and how does that differ from the primary measure?",
+      "answer": "`operation_correct` requires a valid tuple first, so it counts operation-correct valid tuples, not correct raw operation heads regardless of argument errors. Exact complete hints (operation with correct arguments) remain the primary measure; the original selections are kept for inspecting argument failures.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-query-routing-md-0005"
+        ]
+      ],
+      "evidence": [
+        "docs/validation-query-routing.md:133-136"
+      ],
+      "rationale": "Only the Metal-totals passage of the query-routing record defines the stored secondary metric. The lookalike is the specialist pilot's 'raw correct operations / 120' (its held-out table and the results history), an operation-only count that deliberately ignores argument binding; the routing record's contract passage ('a correct operation with the wrong argument is wrong') states the primary rule, not this metric."
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "In the original CPU bootstrap evaluation, what probabilities did Kev assign to its wrong `billing` selections on the two instruction-only injection observations, and did the declared 0.7 threshold stop them?",
+      "answer": "Both instruction-only injection orders selected `billing` with probabilities 0.783 and 0.851 although the expected category was `unknown`, so the example 0.7 p(max) threshold did not stop them; they were two of Kev's five failures (with the reversed billing/account case and both technical/account orders). Caller authorization and routing safeguards remain necessary.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-md-0005"
+        ]
+      ],
+      "evidence": [
+        "docs/validation.md:94-100"
+      ],
+      "rationale": "The CPU record's abstention passage is the only one giving those two probabilities. The lookalike is the Metal validation's observations passage, which lists the same five Kev mistakes and says the 0.7 threshold still admitted two wrong labels without stating probabilities; the scoring record's CPU passage gives Qwen's scored probabilities on the injection-account case (unknown 0.4765 / account 0.4184), a different model and format."
+    }
+  ]
+}

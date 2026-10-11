@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semstreams-graph-clustering",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "07994c206642fae8f8792f753959841aebf7b956e188e1ec6f90ac6d33215933",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "runStructuralAndAnomalyDetection calls runStructuralComputation and passes its returned indices directly into anomaly detection. The structural routine builds fresh k-core and pivot indices, confirming one same-cycle workflow across two files."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "The exact Anomaly Configuration passage contains both core_anomaly.enabled and semantic_gap.enabled, and registerAnomalyDetectors branches on those fields. This is operator documentation of the implemented detector-selection responsibility."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "recordDefer calls countDefer with the gate decision's typed reason, and countDefer admits only the closed graph.AllDeferReasons vocabulary. The caller and metric method jointly describe how readiness deferrals become bounded metric labels."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "wrapSemanticEdges injects semanticFinderAdapter into the semantic provider, and SimilarNeighbors supplies that adapter's classified neighbor responses. Their wiring and implementation define the candidate source and failure policy for the same semantic edge tier."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "The exact Scheduling passage states that detection is interval driven, and runDetectionLoop creates the configured ticker and runs readiness gating and detection on its ticks. The passage and separate-file method document and implement the same scheduling behavior."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "doc.go explicitly instructs adopters to invoke graphclustering.Register, whose implementation registers the named factory, schema, and ports. This package documentation and separate-file entry point share component wiring responsibility without containment."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "handleQueryCommunityNATS calls graphStateContractError before answering a request, and that accessor turns the poison latch into the fatal reset requirement. The Start comment explains why the query surface remains available to return that same contract failure."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "GetOutgoingRelationships decodes []relationshipEntry and maps its predicate and endpoint fields into inference.RelationshipInfo. The separate-file struct fixes the wire format that this decoder consumes."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "The exact Configuration Options passage lists the JSON keys defined by Config, including detection, LLM, and anomaly settings. The batch_size descriptions differ, but inspecting this documentation and struct together is useful for checking the same operator configuration surface."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "rejectRemovedConfigKeys iterates removedConfigFields and returns the associated migration guidance when a withdrawn key is present. These sibling entities jointly define rejection of obsolete configuration without a containment relationship."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "The two KV querier structs share bucket-reader and logger scaffolding, but kvEntityQuerier reads entity state for summaries while kvRelationshipQuerier preserves relationship predicates for anomaly inference. Their documented consumers and payload types establish distinct data responsibilities."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "probeLLMEndpoint tests an external model endpoint's reachability, while Health reports this component's running, error, and poison state. The common health vocabulary would conceal the distinction between enhancement connectivity and component health reporting."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "EntityRequest selects an entity's community at a hierarchy level, while similarRequest asks the embedding service for a limited set of similar entities. The shared entity_id-plus-integer shape represents different query subjects and meanings."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "The timer/select scaffolding is alike, but runDetectionLoop drives readiness and community detection while monitorLLMHealth pauses or resumes the enhancement worker after endpoint probes. The latter's full body confirms it does not perform a detection cycle."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "waitForBucket waits for a dependency to exist during startup, whereas startStatusWatcher installs a continuing readiness watch whose missing data is runtime UNKNOWN. Their similarly named watcher helpers implement different startup and per-cycle readiness contracts."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "disagree",
+      "rationale": "The exact passage 0008 extends beyond the Anomaly Index example into the LPA algorithm and explicitly says it considers structural edges from OUTGOING/INCOMING indexes. That directly overlaps the input-topology responsibility of getNeighborsFromBucket, so the asserted output-only separation is not a clear negative for these complete entities."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "registerAnomalyDetectors installs configured inference algorithms, while registerSemanticMetrics exposes Prometheus series for an enabled semantic edge tier. The shared register/enable scaffolding does not join detector behavior to metric registration."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "SemanticEdgesConfig controls similarity-derived edges used in community voting, whereas the exact Anomaly Configuration passage controls semantic-gap anomaly thresholds. similarity.go explicitly documents separate consumers and opposite error policies, supporting the responsibility boundary."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "LevelRequest is consumed by the community hierarchy query, while the exact Anomaly Detection passage uses k-core levels to describe isolation. The common word level names hierarchy depth and graph coreness respectively."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "observeIndexingProfileForClustering logs a lenient dry-run policy observation for trace entities; observeDetectionDuration updates a wall-time histogram for completed runs. Their observe naming masks separate policy reporting and performance measurement responsibilities."
+    }
+  ]
+}

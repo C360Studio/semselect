@@ -1,0 +1,85 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3: bounded reviewer packets (eval/community-refinement/README.md)",
+  "family": "semsource-ui",
+  "split": "held-out",
+  "selection": {
+    "path": "eval/community-refinement/fixtures/tier1-capture/selections/semsource-ui.json",
+    "sha256": "dbd3e944b17a97a1f6f167884a7fb92f5164f2faae69c08da1ac90fb745245b1",
+    "selected": 32
+  },
+  "evidence": {
+    "hydration_capture": "docs/evidence/20261010T143434Z-legacy-tier1-capture-semsource-ui-explicit-only",
+    "frozen_capture": "docs/evidence/20261010T135023Z-legacy-tier1-capture-semsource-ui-explicit-only",
+    "entities_jsonl_sha256": "1fab2c514facbb9f8cc6e77e240e5d247048c2c34eac1c4efc2ad7c0f36c44b2",
+    "partition_hash": "d2318857074f5736a4d72fe8c42b213758a6726f6093473594eb04e70a589d61",
+    "mutual_pairs_jsonl_sha256": "7d3c48e39b3a84bd9d1fbdb9e0c9fc7fb29e46a5e6aa84db212339e151cc441d",
+    "hydration": {
+      "entities": 206,
+      "with_body_handle": 174,
+      "bodies_fetched": 164,
+      "checks": {
+        "all_handles_resolved": true,
+        "all_states_parse": true,
+        "handles_name_object_store": true
+      }
+    },
+    "mutual_pairs_drift": {
+      "frozen_sha256": "7d3c48e39b3a84bd9d1fbdb9e0c9fc7fb29e46a5e6aa84db212339e151cc441d",
+      "hydration_sha256": "c5bc114474902386bd342e112c35f0ad1912dbdc6bba882ca4788e86004cf39a",
+      "equal": false,
+      "mutual_pairs_frozen": 472,
+      "mutual_pairs_hydration": 467,
+      "pairs_only_frozen": 16,
+      "pairs_only_hydration": 11,
+      "max_similarity_delta": 0.10087095950846137,
+      "entities_with_moved_similarity": 12,
+      "most_moved_entities": [
+        "semselect.semsource.typescript.semsource-ui.const.ui-src-lib-api-workbench-ts-data",
+        "semselect.semsource.typescript.semsource-ui.const.ui-src-lib-api-search-ts-error",
+        "semselect.semsource.typescript.semsource-ui.const.ui-src-lib-api-workbench-ts-value"
+      ]
+    }
+  },
+  "parameters": {
+    "state_budget": 8192,
+    "instruction_limit": 1024,
+    "description_limit": 512,
+    "questions_per_request": 4,
+    "neighbour_cap": 6,
+    "children_cap": 8
+  },
+  "prompt": {
+    "objective": "Community objective: put evidence about a shared responsibility together without letting boilerplate, overloaded terms or generic utility nodes join unrelated subjects.",
+    "instructions": "Should this pair retain its semantic co-location hint for the stated community objective? Decide from the evidence in the state only. keep: the two passages address one shared subject or responsibility at this granularity. suppress: the match is incidental (boilerplate, an overloaded term, a generic utility) and would mislead the grouping. defer: the visible evidence is insufficient or conflicting.",
+    "criteria": {
+      "keep": "Evidence supports shared subject/responsibility at the chosen granularity",
+      "suppress": "Evidence shows an incidental match that would mislead this grouping",
+      "defer": "Available evidence is insufficient or conflicting"
+    }
+  },
+  "pairs": {
+    "packets": 32,
+    "state_bytes": {
+      "min": 1225,
+      "median": 2214,
+      "max": 8028
+    },
+    "sources_truncated": 2,
+    "sources_without_body": 1,
+    "sha256": "343ca3a43d9fa52708d7a7eac897877bbcd075edc11b453b0b0e071c4a7f9a28"
+  },
+  "bundles": {
+    "requests": 41,
+    "entities": 41,
+    "split_entities": 0,
+    "questions": 64,
+    "state_bytes": {
+      "min": 683,
+      "median": 1067,
+      "max": 8104
+    },
+    "excerpts_truncated": 21,
+    "sha256": "5b4b3bb204d9185dec2f67ad681424fcd6f7e6aeb53987bc27e152b435dcbedf"
+  }
+}

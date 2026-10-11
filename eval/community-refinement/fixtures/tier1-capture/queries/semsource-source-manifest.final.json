@@ -1,0 +1,99 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semsource-source-manifest",
+  "split": "held-out",
+  "rule": "queries both annotators agree on (ruling 7, 2026-10-10); disputed ones dropped; gold sets are annotator A's, sets B added are recorded under b_additional_sets and are not gold",
+  "success": "the budgeted evidence contains every member of at least one gold set",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semsource",
+    "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+    "workspace_sha256": "c9e2d72f455cda98b7f3cb79ca26e35fa38c52b71c7620352d74f6467e4a21f1"
+  },
+  "frozen_capture": "docs/evidence/20261010T134744Z-legacy-tier1-capture-semsource-source-manifest-explicit-only",
+  "partition_hash": "e66dacf7071e1cab88144c89fab411ea6412c5b647ff325566968f434bea8902",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "If expected_source_count is left at zero, when does the status aggregator consider all sources reported, and does source-manifest still arm the seed timeout?",
+      "answer": "With expectedCount <= 0, allReported no longer waits for a count: it is true as soon as at least one report has arrived (len(reports) > 0). startSeedTimeout returns nil before arming the timer when ExpectedSourceCount <= 0, so no seed-timeout goroutine runs and the status is never marked degraded by timeout; with a positive count the timer (SeedTimeout, fallback 120s) fires markDegraded unless seedComplete is already set.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-status-go-statusAggregator-allReported",
+          "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-component-go-Component-startSeedTimeout"
+        ]
+      ],
+      "evidence": [
+        "processor/source-manifest/status.go:138-143",
+        "processor/source-manifest/component.go:393-397"
+      ],
+      "rationale": "allReported holds the zero-expected rule (any single report counts as all reported); startSeedTimeout holds the early return that never arms the timer when ExpectedSourceCount <= 0. Each entity answers one half and neither mentions the other's rule, so no single entity establishes both.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "Why is a stable total_entities no longer an acceptable readiness signal, and which fields does the HTTP status endpoint add so a client can gate on index and embedding readiness instead?",
+      "answer": "On a big one-shot ingest embeddings (even BM25) lag structural readiness, so the old \"total_entities is stable\" heuristic is retired: counts are no longer a readiness proxy. Poll until embedding.ready is true before trusting code_search; index.ready gates the structural tools. GET /status takes the pre-marshaled status and adds top-level index (structural index readiness), embedding (semantic index readiness) and note fields; they are additive so namespace/phase/sources are untouched, and a failed sub-query yields an explicit {available:false, reason} object rather than omitting the key.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semsource-source-manifest.chunk.configs-tiers-README-md-0004",
+          "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-component-go-Component-handleStatus"
+        ]
+      ],
+      "evidence": [
+        "configs/tiers/README.md:35-38",
+        "processor/source-manifest/component.go:727-741"
+      ],
+      "rationale": "The tiers README passage explains why counts are not readiness (embedding lag; the stable-count heuristic is retired) and names embedding.ready and index.ready; handleStatus shows that GET /status is where they are surfaced, as additive top-level index/embedding/note fields with {available:false, reason} on failure. The passage never mentions the HTTP envelope and the handler never explains the lag.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "Under what exact conditions does the readiness note say a lookup miss is a genuine absence rather than not-yet-ingested, and which tools do index.ready and embedding.ready each make reliable?",
+      "answer": "A miss is a genuine absence only when status.phase is \"ready\" (every configured source has finished its initial seed) AND the relevant index signal is ready; while status.phase is \"seeding\" a miss may simply be not-yet-ingested. index.ready means the structural index (NAME_INDEX) has caught up to the latest committed write, so byName / code_context / code_impact are reliable; embedding.ready means the semantic pipeline has caught up, so code_search is reliable (surfaced, not gated). For exact read-your-write freshness compare the numeric indexed_revision against the write's revision.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-source-manifest.const.processor-source-manifest-readiness-go-ReadinessNote"
+        ]
+      ],
+      "evidence": [
+        "processor/source-manifest/readiness.go:11-17"
+      ],
+      "rationale": "ReadinessNote is the verbatim contract string: both gates, the per-signal tool lists and the indexed_revision rule. The lookalike is the tiers README passage at configs/tiers/README.md:35-38, which says to poll embedding.ready and that index.ready gates structural tools but states no genuine-absence rule; handleStatus only embeds the note by reference.",
+      "flags": [
+        {
+          "members": 1,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    }
+  ]
+}

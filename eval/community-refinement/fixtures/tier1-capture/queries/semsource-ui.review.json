@@ -1,0 +1,45 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semsource-ui",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "0bc9c89de18c4f3f825960f435e166152ce983ec15e4bcd8aa24b058d2db2095",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "agree",
+      "rationale": "The page supplies the refresh callback, readiness-driven sync, restart intent, and cleanup; createReadinessPoller supplies the default interval and timer transitions. Both are required for the complete answer."
+    },
+    {
+      "id": "q-02",
+      "verdict": "agree",
+      "rationale": "Each listed bootstrap/controller body establishes request ordering and concurrent inventory/summary loading, while each page/bootstrap body establishes the callback state updates and error presentation. All four alternatives are sufficient and minimal pairs."
+    },
+    {
+      "id": "q-03",
+      "verdict": "agree",
+      "rationale": "WorkbenchShell names and passes the advertised contract field; postFusionRequest supplies its version gate, and statusError supplies fallback wording and retry statuses. Removing any member loses a distinct part of the answer."
+    },
+    {
+      "id": "q-04",
+      "verdict": "disagree",
+      "rationale": "The alternative containing usable is not evidence for the advertisedRouteValid predicate: usable additionally requires availability ready, while advertisedRouteValid does not. Its body does not contain the advertisedRouteValid declaration, so that alternative cannot establish the answer as written."
+    },
+    {
+      "id": "q-05",
+      "verdict": "agree",
+      "rationale": "fetchJSON contains the three error messages and the HTTP status >= 500 retry rule, with abort propagation; statusError and postFusionRequest are real POST lookalikes with different wording and retry rules."
+    },
+    {
+      "id": "q-06",
+      "verdict": "disagree",
+      "rationale": "deriveReadinessCoverage establishes the signal keys and available filter, but the displayed labels come from READINESS_LABELS outside its body. The answer also states the backend overall comparison from the preceding comment, which is outside the catalogue function boundary, so the single gold member is insufficient."
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semselect-service",
+  "split": "development",
+  "rule": "queries both annotators agree on (ruling 7, 2026-10-10); disputed ones dropped; gold sets are annotator A's, sets B added are recorded under b_additional_sets and are not gold",
+  "success": "the budgeted evidence contains every member of at least one gold set",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semselect",
+    "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+    "workspace_sha256": "f00b031de9f674f48b867bba4a0465db482a3b8ea82be4c8b9c235b22e66ed8f"
+  },
+  "frozen_capture": "docs/evidence/20261010T132157Z-legacy-tier1-capture-semselect-service-explicit-only",
+  "partition_hash": "4fc199e2ca585c711cfbca851fcbf8c7bbc2e3239265696eea9c06dabe8cfc4a",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "Under the default configuration, what value must a request's optional `model` field carry, and what error message does the guard return when the field is present but different?",
+      "answer": "main defaults SEMSELECT_MODEL to \"semselect-kev-4b\" and passes it as Config.Model. validate accepts an absent or empty model, but any other value that differs from the configured alias is rejected with the error `model must be \"semselect-kev-4b\"`.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semselect-service.function.cmd-semselect-main-go-main",
+          "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-validate"
+        ]
+      ],
+      "evidence": [
+        "cmd/semselect/main.go:70",
+        "internal/guard/guard.go:92-94"
+      ],
+      "rationale": "main contributes the default alias \"semselect-kev-4b\" (the README names SEMSELECT_MODEL only as an expected alias with no default); validate contributes the rule that a non-empty model must equal the configured one and the exact `model must be %q` message. Neither alone gives both the value and the rejection.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "What are the default and allowed range of SEMSELECT_TIMEOUT, which deadline do the GET passthrough routes use instead, and what status does a caller get when a forwarded request exceeds its deadline?",
+      "answer": "Default 120s; it must parse as a positive duration of at most 5m. ServeHTTP passes Config.Timeout to forward only for POST /v1/systemone; /ready, /v1/models and /metrics/runtime are forwarded with a fixed 2-second deadline. When a deadline expires, forward answers 504 (`runtime unavailable or request deadline exceeded`, or `runtime response deadline exceeded` if it expires while reading the body); a non-deadline transport failure is 503.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semselect-service.function.cmd-semselect-main-go-main",
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-ServeHTTP",
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-forward"
+        ],
+        [
+          "semselect.semsource.web.semselect-service.chunk.README-md-0025",
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-ServeHTTP",
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-forward"
+        ]
+      ],
+      "evidence": [
+        "cmd/semselect/main.go:65-69",
+        "internal/guard/guard.go:161-169",
+        "internal/guard/guard.go:225",
+        "internal/guard/guard.go:228-253",
+        "README.md:417"
+      ],
+      "rationale": "main (or the README configuration table) gives the 120s default and the positive-to-5m range; ServeHTTP shows that Config.Timeout reaches forward only for the decision route while the GET routes use 2s; forward maps an expired context to 504 with its two messages and other failures to 503. No single entity holds the limit, the per-route deadline and the status.",
+      "flags": [
+        {
+          "members": 3,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 3,
+          "constraint_pairs": {
+            "positive": 1
+          }
+        },
+        {
+          "members": 3,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 1,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "Given SEMSELECT_ADDR of `:8084`, `0.0.0.0:8084` or `[::]:8084`, what readiness URL does the guard binary derive, and which SEMSELECT_ADDR values does it reject with an error?",
+      "answer": "listenConfig rewrites an empty host or 0.0.0.0 to 127.0.0.1 and :: to ::1 and returns http://<host>:<port>/ready, so the three become http://127.0.0.1:8084/ready or http://[::1]:8084/ready. It rejects values that do not split as host:port (`SEMSELECT_ADDR must be an IP address and port`) and ports outside 1-65535 or non-empty hosts that are not literal IPs (`SEMSELECT_ADDR requires a literal IP (or empty host) and port 1–65535`).",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semselect-service.function.cmd-semselect-main-go-listenConfig"
+        ]
+      ],
+      "evidence": [
+        "cmd/semselect/main.go:25-41"
+      ],
+      "rationale": "Only listenConfig contains the wildcard-to-loopback rewrite, the /ready path and both validation errors. The lookalikes are the README configuration passage, which says the health check 'follows that address' and names only the 127.0.0.1:8084 Metal case, and main, which reads SEMSELECT_ADDR and runs the healthcheck GET but delegates the URL to listenConfig.",
+      "flags": [
+        {
+          "members": 1,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "What must SEMSELECT_UPSTREAM look like for guard.New to accept it, and how does New keep its HTTP client from following a redirect issued by the runtime?",
+      "answer": "New parses the upstream and requires scheme http, a non-empty host, no user info, an empty or `/` path, and no query or fragment, otherwise it fails with `upstream must be an http origin without credentials, path, query or fragment`; it then trims a trailing `/`. It copies the supplied http.Client (or a zero one) and sets CheckRedirect to return http.ErrUseLastResponse, so a redirect is never followed and Client.Do returns the 3xx response itself. It also requires a non-empty Model and positive Timeout.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-New"
+        ]
+      ],
+      "evidence": [
+        "internal/guard/guard.go:50-70"
+      ],
+      "rationale": "New alone holds the origin rules, the exact error and the CheckRedirect policy. The lookalike is forward, which handles the resulting 3xx by replying 502 `unexpected runtime redirect` (the consequence, not the client policy), and the README configuration passage, which only calls SEMSELECT_UPSTREAM an 'HTTP origin' with no rules.",
+      "flags": [
+        {
+          "members": 1,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    }
+  ]
+}

@@ -1,0 +1,318 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "2 (candidate selection), frozen 2026-10-10 under owner rulings 5 and 6",
+  "parameters": {
+    "ceiling": 32,
+    "anchor": 0.8,
+    "order": "cross-partition first, then distance from 0.8, then stable hash",
+    "identity_profile": "explicit-only"
+  },
+  "totals": {
+    "families": 12,
+    "development_selected": 128,
+    "held_out_selected": 256,
+    "candidates": 4756
+  },
+  "families": [
+    {
+      "family": "semselect-service",
+      "split": "development",
+      "evidence": "20261010T132157Z-legacy-tier1-capture-semselect-service-explicit-only",
+      "selection": "semselect-service.json",
+      "mutual_pairs": 136,
+      "excluded": {
+        "explicit_dominated": 11,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 125,
+      "selected": 32,
+      "coverage": 0.256,
+      "cross_partition": {
+        "available": 29,
+        "selected": 29
+      },
+      "selected_similarity": {
+        "min": 0.7508336997818474,
+        "median": 0.7934421615829146,
+        "max": 1.0000000000000002
+      },
+      "selected_same_type": 12,
+      "partition_hash": "4fc199e2ca585c711cfbca851fcbf8c7bbc2e3239265696eea9c06dabe8cfc4a"
+    },
+    {
+      "family": "semselect-docs",
+      "split": "development",
+      "evidence": "20261010T132322Z-legacy-tier1-capture-semselect-docs-explicit-only",
+      "selection": "semselect-docs.json",
+      "mutual_pairs": 605,
+      "excluded": {
+        "explicit_dominated": 58,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 547,
+      "selected": 32,
+      "coverage": 0.05850091407678245,
+      "cross_partition": {
+        "available": 242,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.7763540131293727,
+        "median": 0.8186543431878213,
+        "max": 0.8282823562395378
+      },
+      "selected_same_type": 30,
+      "partition_hash": "e486ae2dcb1fb33c732c181fa8d373073725edb4ec0f3b9bc93ac5324a9dca32"
+    },
+    {
+      "family": "semengine-natsclient",
+      "split": "development",
+      "evidence": "20261010T132441Z-legacy-tier1-capture-semengine-natsclient-explicit-only",
+      "selection": "semengine-natsclient.json",
+      "mutual_pairs": 577,
+      "excluded": {
+        "explicit_dominated": 50,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 527,
+      "selected": 32,
+      "coverage": 0.06072106261859583,
+      "cross_partition": {
+        "available": 140,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.7919060580428419,
+        "median": 0.801651423764517,
+        "max": 0.8096902643338949
+      },
+      "selected_same_type": 12,
+      "partition_hash": "9479ddb8fbefd189f6fd8e1e9269ddc95361d1f3636059376ffce9463f3ba7dc"
+    },
+    {
+      "family": "semengine-message",
+      "split": "development",
+      "evidence": "20261010T132601Z-legacy-tier1-capture-semengine-message-explicit-only",
+      "selection": "semengine-message.json",
+      "mutual_pairs": 256,
+      "excluded": {
+        "explicit_dominated": 43,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 213,
+      "selected": 32,
+      "coverage": 0.15023474178403756,
+      "cross_partition": {
+        "available": 83,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.7838534782769425,
+        "median": 0.8078089945273219,
+        "max": 0.8180323806548886
+      },
+      "selected_same_type": 17,
+      "partition_hash": "28caea3a1bc49a9bc1927dfc27c4050a34c9197c2e4c496c9ea432f62e0334ba"
+    },
+    {
+      "family": "semstreams-graph-clustering",
+      "split": "held-out",
+      "evidence": "20261010T134102Z-legacy-tier1-capture-semstreams-graph-clustering-explicit-only",
+      "selection": "semstreams-graph-clustering.json",
+      "mutual_pairs": 436,
+      "excluded": {
+        "explicit_dominated": 46,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 390,
+      "selected": 32,
+      "coverage": 0.08205128205128205,
+      "cross_partition": {
+        "available": 111,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.7823044275987494,
+        "median": 0.8055782720846769,
+        "max": 0.8171779059393613
+      },
+      "selected_same_type": 23,
+      "partition_hash": "f5607063576652f180f364260b6e3c329b7578a43e911bac840662b8efd01473"
+    },
+    {
+      "family": "semstreams-rule",
+      "split": "held-out",
+      "evidence": "20261010T134225Z-legacy-tier1-capture-semstreams-rule-explicit-only",
+      "selection": "semstreams-rule.json",
+      "mutual_pairs": 401,
+      "excluded": {
+        "explicit_dominated": 83,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 318,
+      "selected": 32,
+      "coverage": 0.10062893081761007,
+      "cross_partition": {
+        "available": 142,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.7913109695053502,
+        "median": 0.8030836096826061,
+        "max": 0.8082076129985674
+      },
+      "selected_same_type": 15,
+      "partition_hash": "c6e213dc05f08aa80b39edcedd9b6bf2d8e455ba4b784a4b17a193e35a05f842"
+    },
+    {
+      "family": "semstreams-service",
+      "split": "held-out",
+      "evidence": "20261010T134345Z-legacy-tier1-capture-semstreams-service-explicit-only",
+      "selection": "semstreams-service.json",
+      "mutual_pairs": 506,
+      "excluded": {
+        "explicit_dominated": 85,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 421,
+      "selected": 32,
+      "coverage": 0.07600950118764846,
+      "cross_partition": {
+        "available": 170,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.7896504679032745,
+        "median": 0.8016181221563355,
+        "max": 0.8104973770763808
+      },
+      "selected_same_type": 24,
+      "partition_hash": "f002c39301af036aee368fcf5a4179346d60451772364df61f66e086a114f338"
+    },
+    {
+      "family": "semstreams-component",
+      "split": "held-out",
+      "evidence": "20261010T134505Z-legacy-tier1-capture-semstreams-component-explicit-only",
+      "selection": "semstreams-component.json",
+      "mutual_pairs": 541,
+      "excluded": {
+        "explicit_dominated": 58,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 483,
+      "selected": 32,
+      "coverage": 0.06625258799171843,
+      "cross_partition": {
+        "available": 226,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.7830622580484403,
+        "median": 0.7993850567664962,
+        "max": 0.8165546414987876
+      },
+      "selected_same_type": 17,
+      "partition_hash": "aec122988ec5863ccebeb1e0f380224598e2d57007285cd98e6415f13d58d35a"
+    },
+    {
+      "family": "semstreams-agentic-loop",
+      "split": "held-out",
+      "evidence": "20261010T134624Z-legacy-tier1-capture-semstreams-agentic-loop-explicit-only",
+      "selection": "semstreams-agentic-loop.json",
+      "mutual_pairs": 432,
+      "excluded": {
+        "explicit_dominated": 22,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 410,
+      "selected": 32,
+      "coverage": 0.07804878048780488,
+      "cross_partition": {
+        "available": 71,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.7706327590392662,
+        "median": 0.815546860458654,
+        "max": 0.8309020943058115
+      },
+      "selected_same_type": 31,
+      "partition_hash": "22eb698de2ced52a14bef7a26e3e8e9202aecbd3c166df2e2ffcf08309cb82a8"
+    },
+    {
+      "family": "semsource-source-manifest",
+      "split": "held-out",
+      "evidence": "20261010T134744Z-legacy-tier1-capture-semsource-source-manifest-explicit-only",
+      "selection": "semsource-source-manifest.json",
+      "mutual_pairs": 564,
+      "excluded": {
+        "explicit_dominated": 40,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 524,
+      "selected": 32,
+      "coverage": 0.061068702290076333,
+      "cross_partition": {
+        "available": 252,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.7939671019274852,
+        "median": 0.7992635163302402,
+        "max": 0.8059462277351164
+      },
+      "selected_same_type": 17,
+      "partition_hash": "e66dacf7071e1cab88144c89fab411ea6412c5b647ff325566968f434bea8902"
+    },
+    {
+      "family": "semsource-cli",
+      "split": "held-out",
+      "evidence": "20261010T134904Z-legacy-tier1-capture-semsource-cli-explicit-only",
+      "selection": "semsource-cli.json",
+      "mutual_pairs": 373,
+      "excluded": {
+        "explicit_dominated": 14,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 359,
+      "selected": 32,
+      "coverage": 0.08913649025069638,
+      "cross_partition": {
+        "available": 242,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.759560822252309,
+        "median": 0.8124213275992327,
+        "max": 0.8691485731808617
+      },
+      "selected_same_type": 27,
+      "partition_hash": "0ac1e5ae52bfd5a9b6ea1911556b19ea7458ee6784d9b841df8a5f8cd07b40c5"
+    },
+    {
+      "family": "semsource-ui",
+      "split": "held-out",
+      "evidence": "20261010T135023Z-legacy-tier1-capture-semsource-ui-explicit-only",
+      "selection": "semsource-ui.json",
+      "mutual_pairs": 472,
+      "excluded": {
+        "explicit_dominated": 33,
+        "endpoint_not_in_partition": 0
+      },
+      "candidates": 439,
+      "selected": 32,
+      "coverage": 0.07289293849658314,
+      "cross_partition": {
+        "available": 315,
+        "selected": 32
+      },
+      "selected_similarity": {
+        "min": 0.7922424029486786,
+        "median": 0.8129282710195487,
+        "max": 0.8221004071892265
+      },
+      "selected_same_type": 14,
+      "partition_hash": "d2318857074f5736a4d72fe8c42b213758a6726f6093473594eb04e70a589d61"
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semstreams-rule",
+    "split": "held-out",
+    "role": "multiple topics in one package",
+    "language": "Go",
+    "repo": "https://github.com/C360Studio/semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semstreams-rule",
+    "include": [
+      "processor/rule/doc.go",
+      "processor/rule/cron_metrics.go",
+      "processor/rule/cron_rule.go",
+      "processor/rule/cron_scheduler.go",
+      "processor/rule/cron_substitution.go",
+      "processor/rule/schedule_tracker.go",
+      "processor/rule/caller_substitution.go",
+      "processor/rule/entity_substitution.go",
+      "processor/rule/lifecycle_substitution.go",
+      "processor/rule/message_substitution.go",
+      "processor/rule/typed_substitution.go",
+      "processor/rule/state_tracker.go",
+      "processor/rule/stateful_evaluator.go",
+      "processor/rule/payload_projection.go",
+      "processor/rule/projection_derivation.go",
+      "processor/rule/projection_targets.go"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "*.md"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "processor/rule/caller_substitution.go",
+      "processor/rule/cron_metrics.go",
+      "processor/rule/cron_rule.go",
+      "processor/rule/cron_scheduler.go",
+      "processor/rule/cron_substitution.go",
+      "processor/rule/doc.go",
+      "processor/rule/entity_substitution.go",
+      "processor/rule/lifecycle_substitution.go",
+      "processor/rule/message_substitution.go",
+      "processor/rule/payload_projection.go",
+      "processor/rule/projection_derivation.go",
+      "processor/rule/projection_targets.go",
+      "processor/rule/schedule_tracker.go",
+      "processor/rule/state_tracker.go",
+      "processor/rule/stateful_evaluator.go",
+      "processor/rule/typed_substitution.go"
+    ],
+    "workspace_sha256": "8e8b560b67aaee170cfde788d0d939162ecbbe5c165de625958bd36b9d0e14ec",
+    "entities_total": 162,
+    "entities_by_type": {
+      "const": 13,
+      "file": 16,
+      "folder": 2,
+      "function": 39,
+      "interface": 1,
+      "method": 54,
+      "repo": 1,
+      "struct": 21,
+      "type": 1,
+      "var": 14
+    },
+    "entities_by_domain": {
+      "code": 3,
+      "golang": 159
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 162,
+      "edges": 598,
+      "induced_edges": 446,
+      "cross_system_edges": 0,
+      "dangling_edges": 152,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 151,
+        "code.relationship.parameter": 32,
+        "code.relationship.receiver": 54,
+        "code.relationship.references": 20,
+        "code.relationship.returns": 19,
+        "code.structure.belongs": 161,
+        "code.structure.contains": 161
+      },
+      "non_containment_edges": 276
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "processor/rule"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "*.md"
+        ],
+        "max_file_bytes": null,
+        "files": 53,
+        "entities": 747
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "processor/rule/doc.go",
+          "processor/rule/cron_metrics.go",
+          "processor/rule/cron_rule.go",
+          "processor/rule/cron_scheduler.go",
+          "processor/rule/cron_substitution.go",
+          "processor/rule/schedule_tracker.go",
+          "processor/rule/caller_substitution.go",
+          "processor/rule/entity_substitution.go",
+          "processor/rule/lifecycle_substitution.go",
+          "processor/rule/message_substitution.go",
+          "processor/rule/typed_substitution.go",
+          "processor/rule/state_tracker.go",
+          "processor/rule/stateful_evaluator.go",
+          "processor/rule/payload_projection.go",
+          "processor/rule/projection_derivation.go",
+          "processor/rule/projection_targets.go"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "*.md"
+        ],
+        "max_file_bytes": null,
+        "files": 16,
+        "entities": 162
+      }
+    ],
+    "notes": "processor/rule/ is trimmed by file to four topics named by the files' own package comments: cron scheduling (cron_*, schedule_tracker), substitution contexts (*_substitution), stateful evaluation (state_tracker, stateful_evaluator) and payload projection (payload_projection, projection_*), plus the package doc. The processor hub, actions, entity watcher, configuration, factories and the expression/ subpackage are excluded; references to them are dangling edges.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semstreams-rule",
+    "split": "held-out",
+    "repository": "semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "include": [
+      "processor/rule/doc.go",
+      "processor/rule/cron_metrics.go",
+      "processor/rule/cron_rule.go",
+      "processor/rule/cron_scheduler.go",
+      "processor/rule/cron_substitution.go",
+      "processor/rule/schedule_tracker.go",
+      "processor/rule/caller_substitution.go",
+      "processor/rule/entity_substitution.go",
+      "processor/rule/lifecycle_substitution.go",
+      "processor/rule/message_substitution.go",
+      "processor/rule/typed_substitution.go",
+      "processor/rule/state_tracker.go",
+      "processor/rule/stateful_evaluator.go",
+      "processor/rule/payload_projection.go",
+      "processor/rule/projection_derivation.go",
+      "processor/rule/projection_targets.go"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "*.md"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": true,
+    "has_docs": false,
+    "files": [
+      {
+        "path": "processor/rule/caller_substitution.go",
+        "bytes": 3233,
+        "sha256": "7edb73fc0c9e03343e07e64dc3f74017bf6f7d3d72a072dfcaa33ab78d68ac20"
+      },
+      {
+        "path": "processor/rule/cron_metrics.go",
+        "bytes": 12040,
+        "sha256": "ec072db0dec60be5435d60a5757d731cfea0508fbe0686c8f13c798ad25e6166"
+      },
+      {
+        "path": "processor/rule/cron_rule.go",
+        "bytes": 7030,
+        "sha256": "ff6745e7611fbaa774a9fc724f9da54c05c3f53dda76c753cbd974cba04d69cc"
+      },
+      {
+        "path": "processor/rule/cron_scheduler.go",
+        "bytes": 23701,
+        "sha256": "ee21df0cba95693e2ecfe32972e5e92a20e2f3611a266d9792abc2a5567b9e96"
+      },
+      {
+        "path": "processor/rule/cron_substitution.go",
+        "bytes": 3868,
+        "sha256": "4194a75806a0d71f608b520ab1453dc89917efe003d632413667b56bdae2ec57"
+      },
+      {
+        "path": "processor/rule/doc.go",
+        "bytes": 4599,
+        "sha256": "0b1349aa5415ebf2632cc6cf1298e146e5e37e32befc38dd0bb568fd97f48a21"
+      },
+      {
+        "path": "processor/rule/entity_substitution.go",
+        "bytes": 3899,
+        "sha256": "27bfa301d8ec4943333d44f1f68175a42ecb7cd66f18d256b74ee932738f9707"
+      },
+      {
+        "path": "processor/rule/lifecycle_substitution.go",
+        "bytes": 12620,
+        "sha256": "4614926fc1f8c91a37663072c8064c3e49438b74942632330fb5cc47710fb0a2"
+      },
+      {
+        "path": "processor/rule/message_substitution.go",
+        "bytes": 3582,
+        "sha256": "6d4e4569a8c2553740972efb0c0b64759cbaf38de92cdd540e169f00eca46d54"
+      },
+      {
+        "path": "processor/rule/payload_projection.go",
+        "bytes": 2964,
+        "sha256": "92c79da83db110bf21958f958fe1e8aed22defb2ddf0f31d6da1c6c65ae210d0"
+      },
+      {
+        "path": "processor/rule/projection_derivation.go",
+        "bytes": 10250,
+        "sha256": "9772ca5c278bacec0bbc07ca296458edbe42ea401abb062b82de14974e943a34"
+      },
+      {
+        "path": "processor/rule/projection_targets.go",
+        "bytes": 3898,
+        "sha256": "9077035df9cb2f05820dbba50dfe926f9e76c5751a3359de381b382227e29fe2"
+      },
+      {
+        "path": "processor/rule/schedule_tracker.go",
+        "bytes": 9589,
+        "sha256": "1f4e03a45ccd7d565ab0d2c12887391c86da50a065f2dfe2f45f2cf893b30943"
+      },
+      {
+        "path": "processor/rule/state_tracker.go",
+        "bytes": 9613,
+        "sha256": "1a03a8605184276e0ee3e44f29209a3e5350426a31d18d61dfd12828adeafbf2"
+      },
+      {
+        "path": "processor/rule/stateful_evaluator.go",
+        "bytes": 21098,
+        "sha256": "d99301763e2ed76fde3e445284c1a62e09cc748e7810f105d109ed5b511c9053"
+      },
+      {
+        "path": "processor/rule/typed_substitution.go",
+        "bytes": 9156,
+        "sha256": "6ebf9e0489a7d6ca7f9e2ccd78a8d678c0a23089c9e1404db7ca0b9ad6489d58"
+      }
+    ],
+    "workspace_sha256": "8e8b560b67aaee170cfde788d0d939162ecbbe5c165de625958bd36b9d0e14ec"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.apG973/config/semstreams-rule.tier1.json",
+    "sha256": "0ba945618610d8aa29903dd548436881ff61363cf2d57d8e7c0ea79abc074e4c",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}

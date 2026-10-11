@@ -1,0 +1,355 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semstreams-rule",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "packet-only"
+  },
+  "packets_sha256": "bdd24eb4aba871d01f9cf61ba65adab5a6be1158963db08abf1c674b6bb2f88a",
+  "labels": [
+    {
+      "pair_hash": "1babd5e06dfbb144d31b829a2c76c25f932a217a938279ecd070d3f25a95b347",
+      "rank": 1,
+      "label": "keep",
+      "evidence": [
+        "message.RuleReadable fields (see `ruleFields`) for message-path",
+        "ruleFields projects an inbound message's payload into the field map that `$message.*` conditions and `$message.*` substitutions read."
+      ],
+      "rationale": "B's MessageData field is documented as populated from ruleFields' output (the payload's RuleReadable fields) and A is the function that produces that map; together they implement message-path rule input."
+    },
+    {
+      "pair_hash": "f62c37a20ad26ebf47614097768a76c3ed21efd1f916e3bb7337000bf4641f83",
+      "rank": 2,
+      "label": "suppress",
+      "evidence": [
+        "func (r *CronRule) Description() string { return r.description }",
+        "func (s lifecycleParticipantSnapshot) Phase() string    { return s.phase }"
+      ],
+      "rationale": "Two one-line accessors on unrelated types (a cron rule's description, a lifecycle participant's phase); the only match is getter boilerplate."
+    },
+    {
+      "pair_hash": "b2aec783d09c6f32d2a79c2de37ecff3e5b16efe251580ffd7145400eed9d178",
+      "rank": 3,
+      "label": "keep",
+      "evidence": [
+        "applyEntityPartsSubstitutions replaces `$<prefix>.<part>` tokens in template against entityID",
+        "lifecycleSubstitutionRule describes one resolvable suffix path under `$entity.lifecycle.`",
+        "ok=false leaves the token verbatim so the unresolved-template warning downstream surfaces the misuse"
+      ],
+      "rationale": "Both resolve `$entity.*` tokens in rule templates and both document the same unresolved-token contract; they are two parts of the template-substitution responsibility, not merely a shared shape."
+    },
+    {
+      "pair_hash": "df1531496aa74261f3685fa01fdf57c617c881d18c4fe44ef9d648b65f285930",
+      "rank": 4,
+      "label": "keep",
+      "evidence": [
+        "expression-rule fires call this through ExecutionContext.SubstituteVariables and any `$schedule.*` token will then survive substitution and trip the unresolved-template warning in execution_context.go",
+        "the tokens survive substitution and trip the unresolved-template warning in execution_context.go"
+      ],
+      "rationale": "Both are per-namespace token resolvers run through the same ExecutionContext.SubstituteVariables chain with the same no-op-then-warning contract; the shared responsibility is rendering rule templates."
+    },
+    {
+      "pair_hash": "7ca44799a88abf4fdb3499eebfd54fbf3e5354c565461bed6baf4d5d0708ce2b",
+      "rank": 5,
+      "label": "suppress",
+      "evidence": [
+        "entityPartValues maps each token name to the named field it resolves from.",
+        "entityKey returns the state-tracker key (single entity or canonical pair)."
+      ],
+      "rationale": "A feeds `$<prefix>.<part>` template tokens while B builds a state-tracker key for stateful evaluation; they share the word \"entity\" but serve different responsibilities."
+    },
+    {
+      "pair_hash": "c8d4226f0a986a016084aa1896113dc4e32efe05224bd0853bcf915ddc577e0c",
+      "rank": 6,
+      "label": "keep",
+      "evidence": [
+        "Package rule - Cron-specific substitution context.",
+        "Package rule - Entity-part substitution context.",
+        "Plus the existing `$now` token, which SubstituteVariables already handles for every rule kind."
+      ],
+      "rationale": "Neither side has a body, but the file docs settle that both are substitution-context files feeding the shared SubstituteVariables layer; A's doc positions `$schedule.*` explicitly against the `$entity.*` namespace that B provides."
+    },
+    {
+      "pair_hash": "d1131fb4d275194e19760b184ee6d867ec8d47f8cd2795073de93c21a4ed558c",
+      "rank": 7,
+      "label": "suppress",
+      "evidence": [
+        "ScheduleTracker persists last-fired timestamps for cron rules to KV.",
+        "StateTracker manages rule match state persistence in NATS KV.",
+        "bucket jetstream.KeyValue"
+      ],
+      "rationale": "The two structs have an identical KV-bucket-plus-logger shape but persist different things (cron last-fired times vs rule match state); the match is structural boilerplate across two responsibilities."
+    },
+    {
+      "pair_hash": "07d10f888dc17396d6535d0d2ef9d77f4e25590b95bf57bfa37a69d9cbcd25f6",
+      "rank": 8,
+      "label": "keep",
+      "evidence": [
+        "func projectionPatternContains(declared, derived string) (bool, error)",
+        "func cloneProjectionContracts(contracts []projection.Contract) []projection.Contract",
+        "function:processor-rule-projection_derivation-go-deriveEffectiveProjectionContracts calls"
+      ],
+      "rationale": "Both are helpers of the projection-contract derivation path (A checks declared-vs-derived entity patterns, B copies the contracts derivation consumes); one shared responsibility of deriving and validating projection contracts."
+    },
+    {
+      "pair_hash": "8494b380aacbf5cf36e7f69be8fd53249ef3f162c22363fb6e47861ec85c114a",
+      "rank": 9,
+      "label": "keep",
+      "evidence": [
+        "Package rule - Prometheus metrics for the cron scheduler.",
+        "Pass nil to run without Prometheus",
+        "Metrics *cronMetrics"
+      ],
+      "rationale": "A has no body but its doc says it is the cron scheduler's metrics file, and B's config carries a `*cronMetrics` field for exactly that; both belong to the cron-scheduler responsibility."
+    },
+    {
+      "pair_hash": "e1f0ac2cc3a0a05a334148628810846fd206df6b98bda0a2ff1284a86f37939a",
+      "rank": 10,
+      "label": "keep",
+      "evidence": [
+        "Package rule - Entity-part substitution context.",
+        "Package rule — $entity.lifecycle.* substitution (ADR-047).",
+        "Rule templates frequently want a SEGMENT of an entity ID rather than the whole 6-part federated string."
+      ],
+      "rationale": "No bodies, but both file docs settle that each resolves a `$entity.*` namespace for rule templates; sibling parts of the template-substitution responsibility."
+    },
+    {
+      "pair_hash": "a2823340045b1e25d4d01c2a9fe6a8b3514b95c61c62b80de3e46b2ac7ab2fc4",
+      "rank": 11,
+      "label": "suppress",
+      "evidence": [
+        "entityPartValues maps each token name to the named field it resolves from.",
+        "unknown projection contract %q"
+      ],
+      "rationale": "A maps entity-ID segments to substitution tokens; B validates and resolves a projection contract/group/predicate target; nothing in either passage touches the other's subject."
+    },
+    {
+      "pair_hash": "270913d6bd4da8617198db68a815c97083ec40d255fb8f11faf4db78842370c0",
+      "rank": 12,
+      "label": "suppress",
+      "evidence": [
+        "function:processor-rule-projection_derivation-go-validateDeclaredProjectionSuperset",
+        "Package rule - State tracking for stateful ECA rules"
+      ],
+      "rationale": "Neither file has a body, but the headers settle it: A's contents are all projection-contract derivation and validation, B is match-state tracking for stateful rules; co-locating them would join unrelated responsibilities."
+    },
+    {
+      "pair_hash": "3308a4eb3acb35d6463af7464ecc2418d5b6a647c763f72985791dc05d4f2911",
+      "rank": 13,
+      "label": "keep",
+      "evidence": [
+        "type minimalProjectionContract struct",
+        "map[string]map[string]struct{}",
+        "predicates map[string]struct{}"
+      ],
+      "rationale": "Both are private index shapes for projection groups keyed to predicate sets (A's groups map and B's per-group predicate set); two representations of the same projection-contract responsibility."
+    },
+    {
+      "pair_hash": "fcc236015db02d7fac93de3d5afbad97f486a95c2593e300927bee2001d71422",
+      "rank": 14,
+      "label": "keep",
+      "evidence": [
+        "applyEntityPartsSubstitutions replaces `$<prefix>.<part>` tokens in template against entityID",
+        "SubstituteVariablesTyped attempts to resolve template to a typed value when it is EXACTLY one supported substitution token",
+        "return lookupTripleObjectTyped(ec.Related, m[1])"
+      ],
+      "rationale": "A is the string resolver for `$entity.*`/`$related.*` ID-part tokens and B is the typed resolver for the same template namespaces on ExecutionContext; both are parts of rule-template substitution."
+    },
+    {
+      "pair_hash": "3003e2b6bf638bdf0df881a16f6f8943cec333582f7e2196affc800a9bc7991e",
+      "rank": 15,
+      "label": "keep",
+      "evidence": [
+        "Package rule - Inbound-message substitution context.",
+        "if m := typedMessageRe.FindStringSubmatch(template); m != nil {",
+        "return expression.ExtractMessageValue(expression.MessageFields(ec.MessageData), m[1])"
+      ],
+      "rationale": "A has no body but its doc settles that it resolves `$message.*` tokens from the inbound payload, and B's source shows the typed path for the same `$message` tokens over ec.MessageData; one shared responsibility."
+    },
+    {
+      "pair_hash": "4cbca0344db5cc22a4b0de0139ffcbbc5e6f69f6d8f4f7cca1beaaf2f2538f4b",
+      "rank": 16,
+      "label": "keep",
+      "evidence": [
+        "ruleFields projects an inbound message's payload into the field map that `$message.*` conditions and `$message.*` substitutions read.",
+        "`$message.<path>` from messageFields",
+        "MessageData: map[string]any(messageFields),"
+      ],
+      "rationale": "A produces the message field map and B evaluates When conditions whose `$message.<path>` references resolve from that map; producer and consumer of one message-path evaluation behaviour."
+    },
+    {
+      "pair_hash": "8e3b5cf83b3fa176ff604286341eff2d9c365fd24e42cb549c50af9bb5431224",
+      "rank": 17,
+      "label": "keep",
+      "evidence": [
+        "NewCronScheduler builds a scheduler that will dispatch actions through cfg.Executor.",
+        "Enabled reports whether the rule should be registered with the scheduler.",
+        "to satisfy our own cronParser (cron_rule.go)"
+      ],
+      "rationale": "B is the CronRule gate the scheduler consults for registration and A constructs that scheduler, whose comment refers back to cron_rule.go; both sit in the cron-scheduling responsibility even though B is a trivial accessor."
+    },
+    {
+      "pair_hash": "b3a9dc6f7b906c8df1b0639b88d8dd01ee8996ad717eb4b26d1c7525b422607c",
+      "rank": 18,
+      "label": "suppress",
+      "evidence": [
+        "method:processor-rule-projection_targets-go-projectionTargetIndex-resolve",
+        "Package rule - State tracking for stateful ECA rules"
+      ],
+      "rationale": "No bodies, but the headers settle it: A holds the projection-target index and its resolver, B is match-state tracking for stateful rules; co-location would join unrelated responsibilities."
+    },
+    {
+      "pair_hash": "c1e4e913ee82a58499decbb9e8906fdc90ed715c380f56e9b49afe8a02cd78f0",
+      "rank": 19,
+      "label": "suppress",
+      "evidence": [
+        "func (r *CronRule) Name() string { return r.name }",
+        "func (s lifecycleParticipantSnapshot) Workflow() string { return s.workflow }"
+      ],
+      "rationale": "Two one-line getters on unrelated types (cron rule name, lifecycle participant workflow); accessor boilerplate only."
+    },
+    {
+      "pair_hash": "f71a140382f62a3c26039e01d53d4caa5627e74db51f455b8dbcdb1061593ab9",
+      "rank": 20,
+      "label": "keep",
+      "evidence": [
+        "ScheduleString returns the original cron expression, useful for metrics labels and substitution variables.",
+        "CronScheduler dispatches CronRule actions on a cron schedule."
+      ],
+      "rationale": "B is the scheduler that fires CronRule actions and A exposes the rule's cron expression for the scheduler's metrics labels and substitution; one cron-scheduling responsibility."
+    },
+    {
+      "pair_hash": "24ce25f349df8f94b7a01628975c4782478e8c433e1f6bc333aa425d2a09e269",
+      "rank": 21,
+      "label": "keep",
+      "evidence": [
+        "falls back to the string path (which logs the unresolved-template warning)",
+        "lookupLifecycleParticipant memoizes Manager.LookupByEntityID on ec so multi-template rules don't pay the linear-scan cost more than once.",
+        "func (ec *ExecutionContext) lookupLifecycleParticipant(ctx context.Context) (lifecycleParticipantSnapshot, error)"
+      ],
+      "rationale": "Both are ExecutionContext-side lookups that feed `$entity.*` template resolution (triple objects for the typed path, the lifecycle participant for `$entity.lifecycle.*`); parts of the substitution responsibility rather than a generic lookup pattern."
+    },
+    {
+      "pair_hash": "8111416f62271bf0e14bd631448c2f7707fb12edd5ef3b3e213e13730665e74a",
+      "rank": 22,
+      "label": "keep",
+      "evidence": [
+        "declared []projection.Contract,",
+        "func cloneProjectionContracts(contracts []projection.Contract) []projection.Contract",
+        "function:processor-rule-projection_derivation-go-deriveEffectiveProjectionContracts calls"
+      ],
+      "rationale": "Both operate on []projection.Contract for the derivation path (A validates declared contracts against derived obligations, B copies contracts before derivation); the same projection-contract responsibility."
+    },
+    {
+      "pair_hash": "2d2084ed56eb53b98b17eda91d3431530e5be53e0c7539b452363ef6d0bfe047",
+      "rank": 23,
+      "label": "keep",
+      "evidence": [
+        "PopulateLifecycleStateFields resolves the Participant for entityID via manager.LookupByEntityID and writes the resulting $entity.lifecycle.* keys into fields.",
+        "pre-resolves the trigger entity's lifecycle state into the",
+        "`$entity.lifecycle.phase` evaluate"
+      ],
+      "rationale": "B's lifecycleManager field is documented as pre-resolving lifecycle state into stateFields so `$entity.lifecycle.*` conditions evaluate, which is precisely what A does; a type and the function performing its documented behaviour."
+    },
+    {
+      "pair_hash": "bf7c3c5c5ad58422eebea42a1174e86ed7ebd1b537d2e2b125e56ef294425ac3",
+      "rank": 24,
+      "label": "keep",
+      "evidence": [
+        "CronRule holds a parsed cron-rule definition ready for the scheduler to register and fire.",
+        "CronSchedulerConfig groups the collaborators NewCronScheduler needs."
+      ],
+      "rationale": "A is the rule the cron scheduler registers and fires and B configures that scheduler; both belong to the cron-scheduling responsibility."
+    },
+    {
+      "pair_hash": "9bee9dd8cf14bf8fd30ceeb73d8e174d9d67361be24356d579544dfab7c8f18d",
+      "rank": 25,
+      "label": "keep",
+      "evidence": [
+        "messageFields carries the inbound message payload (nil on entity-state evaluations) so When clauses can match against `$message.<field>` tokens",
+        "ruleFields projects an inbound message's payload into the field map that `$message.*` conditions and `$message.*` substitutions read.",
+        "match, whenErr := e.evaluateWhen(ctx, action.When, entity, stateFields, messageFields)"
+      ],
+      "rationale": "B consumes the inbound-message field map for `$message.<field>` When matching and A is documented as the single producer of that map; the pair implements message-path action gating together."
+    },
+    {
+      "pair_hash": "d1cfeb95100c39eefc2d32bd464c646a6595118800f0a0644157daf16e7a31da",
+      "rank": 26,
+      "label": "keep",
+      "evidence": [
+        "Package rule - Cron-specific substitution context.",
+        "rules fired without a caller context (cron fires, pure KV-watch matches) call this through ExecutionContext.SubstituteVariables",
+        "Plus the existing `$now` token, which SubstituteVariables already handles for every rule kind."
+      ],
+      "rationale": "A has no body but its doc settles it as the `$schedule.*` substitution file; B is the `$caller.*` resolver in the same SubstituteVariables chain and names cron fires as its no-op case; both parts of the substitution responsibility."
+    },
+    {
+      "pair_hash": "90c86cefc2fa3a0a662eb39aabdb37875c8b79922b71c620cb193e6a084092f6",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "DetectTransition compares previous and current match state to determine transition type.",
+        "reEvaluateTransitions re-evaluates conditions when the rule has transition operators.",
+        "This method re-evaluates the full condition set with previous field values from the state tracker."
+      ],
+      "rationale": "Both implement transition handling for stateful rules (A classifies entered/exited from prior and current match, B recomputes the current match using prior field values); one stateful-transition responsibility."
+    },
+    {
+      "pair_hash": "1d011fa4385ba3eb6f32c1733cd366bdba4784144d1518c07a0bacd03005843e",
+      "rank": 28,
+      "label": "suppress",
+      "evidence": [
+        "MatchState tracks whether a rule's condition is currently matching for a specific entity or entity pair.",
+        "ruleFields projects an inbound message's payload into the field map"
+      ],
+      "rationale": "A interprets an inbound message payload while B is the persisted match-state record (iteration counts, field values, action counts) with no message content; the only overlap is the word \"rule\"."
+    },
+    {
+      "pair_hash": "27b47ad4d19b30e616ab3ea3a2386f26b57cac238b928c0504f46a949fe68e6a",
+      "rank": 29,
+      "label": "keep",
+      "evidence": [
+        "This matches the late-arriving-triple precedent for `$entity.triple.X`",
+        "lookupTripleObjectTyped scans entity.Triples for the first triple matching predicate and returns its Object as-is (typed `any`).",
+        "falls back to the string path (which logs the unresolved-template warning)"
+      ],
+      "rationale": "A resolves `$entity.<part>` tokens and cites the `$entity.triple.X` precedent that B implements; both resolve `$entity.*` template tokens with the same unresolved-token fallback."
+    },
+    {
+      "pair_hash": "4eaa95a8c3e6aa2860b921a81263b628eacfad690f3dc36a3d14e594abe6eef4",
+      "rank": 30,
+      "label": "keep",
+      "evidence": [
+        "applyMessageSubstitutions replaces `$message.<field_path>` tokens in template against data using dotted-path access into the map.",
+        "same surfacing behaviour as `$entity.triple.X` missing a predicate on the entity at fire time",
+        "lookupTripleObjectTyped scans entity.Triples for the first triple matching predicate"
+      ],
+      "rationale": "A is the `$message.*` resolver and explicitly ties its unresolved behaviour to the `$entity.triple.X` lookup that B performs; both are template-token resolvers in the substitution layer."
+    },
+    {
+      "pair_hash": "120e8a07cf65f4d75a2b4a0781ce480c04840ccd2310b8f205942a250eb91a4f",
+      "rank": 31,
+      "label": "keep",
+      "evidence": [
+        "applyCallerSubstitutions replaces `$caller.*` tokens in template against cc, returning the substituted string.",
+        "ExecutionContext holds a *ScheduleContext on cron-fire dispatches; expression-rule dispatches leave the field nil and the substitution is a no-op.",
+        "rules fired without a caller context (cron fires, pure KV-watch matches) call this through ExecutionContext.SubstituteVariables"
+      ],
+      "rationale": "A resolves `$caller.*` tokens and B is the `$schedule.*` context read by the same substitution layer on ExecutionContext, each documenting the nil-context no-op; sibling parts of rule-template substitution."
+    },
+    {
+      "pair_hash": "e167c3b2744949a1e53daa6c6edde9d1b952736f9146f6819a2c9c63b68de7dc",
+      "rank": 32,
+      "label": "suppress",
+      "evidence": [
+        "function:processor-rule-projection_derivation-go-validateProjectionActionSelectors",
+        "Package rule - Stateful rule evaluation with state tracking"
+      ],
+      "rationale": "No bodies, but the headers settle it: A's contents derive and validate projection contracts from rule definitions, B is runtime stateful evaluation; co-location would join two unrelated responsibilities."
+    }
+  ]
+}

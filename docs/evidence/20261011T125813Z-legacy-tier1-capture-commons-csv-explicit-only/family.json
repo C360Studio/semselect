@@ -1,0 +1,206 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "commons-csv",
+    "split": "generalization",
+    "role": "one topic with builder boilerplate hubs",
+    "language": "Java + Markdown",
+    "repo": "https://github.com/apache/commons-csv",
+    "commit": "26f2e869625ba102f5b6386d9799817e523637f7",
+    "license": "Apache-2.0",
+    "license_file": "LICENSE.txt",
+    "license_file_first_line": "Apache License",
+    "system_segment": "commons-csv",
+    "include": [
+      "src/main/java/org/apache/commons/csv",
+      "README.md"
+    ],
+    "exclude": [
+      "src/main/java/org/apache/commons/csv/CSVParser.java",
+      "src/main/java/org/apache/commons/csv/CSVRecord.java",
+      "src/main/java/org/apache/commons/csv/Constants.java",
+      "src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java",
+      "src/main/java/org/apache/commons/csv/Lexer.java",
+      "src/main/java/org/apache/commons/csv/Token.java"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "README.md",
+      "src/main/java/org/apache/commons/csv/CSVException.java",
+      "src/main/java/org/apache/commons/csv/CSVFormat.java",
+      "src/main/java/org/apache/commons/csv/CSVPrinter.java",
+      "src/main/java/org/apache/commons/csv/DuplicateHeaderMode.java",
+      "src/main/java/org/apache/commons/csv/QuoteMode.java",
+      "src/main/java/org/apache/commons/csv/package-info.java"
+    ],
+    "workspace_sha256": "bb2a011af72febb1fe175c12bf04c148e70b5dd321b1c5fdd202d956f32480c2",
+    "entities_total": 223,
+    "entities_by_type": {
+      "chunk": 8,
+      "class": 4,
+      "doc": 1,
+      "enum": 3,
+      "file": 6,
+      "folder": 7,
+      "method": 129,
+      "repo": 1,
+      "var": 64
+    },
+    "entities_by_domain": {
+      "code": 8,
+      "java": 206,
+      "web": 9
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 223,
+      "edges": 833,
+      "induced_edges": 760,
+      "cross_system_edges": 0,
+      "dangling_edges": 73,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.dependency.imports": 9,
+        "code.relationship.calls": 110,
+        "code.relationship.parameter": 27,
+        "code.relationship.receiver": 129,
+        "code.relationship.references": 19,
+        "code.relationship.returns": 58,
+        "code.structure.belongs": 221,
+        "code.structure.contains": 260
+      },
+      "non_containment_edges": 352
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "src/main/java/org/apache/commons/csv",
+          "README.md"
+        ],
+        "exclude": [],
+        "max_file_bytes": null,
+        "files": 13,
+        "entities": 414
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "src/main/java/org/apache/commons/csv",
+          "README.md"
+        ],
+        "exclude": [
+          "src/main/java/org/apache/commons/csv/CSVParser.java",
+          "src/main/java/org/apache/commons/csv/CSVRecord.java",
+          "src/main/java/org/apache/commons/csv/Constants.java",
+          "src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java",
+          "src/main/java/org/apache/commons/csv/Lexer.java",
+          "src/main/java/org/apache/commons/csv/Token.java"
+        ],
+        "max_file_bytes": null,
+        "files": 7,
+        "entities": 223
+      }
+    ],
+    "notes": "The package is one directory, so it is trimmed by file: the CSVFormat builder hub is kept with CSVPrinter, QuoteMode, DuplicateHeaderMode, CSVException and package-info. The parser/lexer/record side is excluded; references to it are dangling edges.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+    "ast_languages": [
+      "go",
+      "typescript",
+      "javascript",
+      "java",
+      "python",
+      "svelte",
+      "c"
+    ],
+    "export": "families.py prepare --generalization: shallow fetch of the pinned commit from the public URL, then git archive (no sibling checkout)",
+    "copied_from": "f10aff606fd0a28ee0e320ab5f446a3f35986887:eval/community-refinement/fixtures/families.json",
+    "evidence": "docs/evidence/20261009T163623Z-legacy-family-counts",
+    "generalization_note": "Owner ruling 4 (issue #5): kept from the earlier public-repo list under split 'generalization' as a check that a sem* result carries over to external code with an unambiguous licence. Copied verbatim from the earlier measurement and not re-measured; outside the four development and eight held-out families and not counted toward the promotion rule."
+  },
+  "prepared": {
+    "id": "commons-csv",
+    "split": "generalization",
+    "repository": "commons-csv",
+    "commit": "26f2e869625ba102f5b6386d9799817e523637f7",
+    "include": [
+      "src/main/java/org/apache/commons/csv",
+      "README.md"
+    ],
+    "exclude": [
+      "src/main/java/org/apache/commons/csv/CSVParser.java",
+      "src/main/java/org/apache/commons/csv/CSVRecord.java",
+      "src/main/java/org/apache/commons/csv/Constants.java",
+      "src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java",
+      "src/main/java/org/apache/commons/csv/Lexer.java",
+      "src/main/java/org/apache/commons/csv/Token.java"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "Apache License",
+    "has_code": true,
+    "has_docs": true,
+    "files": [
+      {
+        "path": "README.md",
+        "bytes": 6564,
+        "sha256": "084f80c856d588eec4f8d7c0c99fdfc875efec166cb37e09e7bd89b78ce3bcdb"
+      },
+      {
+        "path": "src/main/java/org/apache/commons/csv/CSVException.java",
+        "bytes": 1577,
+        "sha256": "71a061f8624b527222e2a5054f5605874ca6511a0923edcc76dc803f9911b0f3"
+      },
+      {
+        "path": "src/main/java/org/apache/commons/csv/CSVFormat.java",
+        "bytes": 130585,
+        "sha256": "14c8c3f7f4439b8157be710a43205918d044227fe1c4e0dbf6176079dff630f3"
+      },
+      {
+        "path": "src/main/java/org/apache/commons/csv/CSVPrinter.java",
+        "bytes": 20629,
+        "sha256": "70f00e6c924e0ee8a3f7a7e07bbaf5f9d49db9cd448b10ee354ac21b6f4f1d91"
+      },
+      {
+        "path": "src/main/java/org/apache/commons/csv/DuplicateHeaderMode.java",
+        "bytes": 1286,
+        "sha256": "e63497131bad5c8f809f504e5b4780a95ac3d973e7592751d4dd151fd4e3c13a"
+      },
+      {
+        "path": "src/main/java/org/apache/commons/csv/QuoteMode.java",
+        "bytes": 1566,
+        "sha256": "5567844b70a7ada9400ed6a5c8e69de75bdd709e37162434ca1800beb3422ddf"
+      },
+      {
+        "path": "src/main/java/org/apache/commons/csv/package-info.java",
+        "bytes": 3612,
+        "sha256": "864abef9bb1d95b1d6f1c7dec284e101b004978962c62378d7682e3af1b98c63"
+      }
+    ],
+    "workspace_sha256": "bb2a011af72febb1fe175c12bf04c148e70b5dd321b1c5fdd202d956f32480c2"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.E6eCDB/config/commons-csv.tier1.json",
+    "sha256": "2ac597cac4844215ab6465ef49b74cbd122007e98917f0f40f5b792d5cf68ab9",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "76c62776b3b99eb3c414ce241a04d73de0edb540cc7f561f905975c7721c98a4"
+}

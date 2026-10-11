@@ -1,0 +1,81 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "family": "semengine-message",
+  "split": "development",
+  "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+  "workspace_sha256": "f849efeefa27a653ebc204fcf3896a0c553231fda9cffe5cda8f8859105354f9",
+  "evidence": "docs/evidence/20261010T142338Z-legacy-tier1-capture-semengine-message-explicit-only",
+  "identity_profile": "explicit-only",
+  "tier0_entities_total": 111,
+  "entities": 111,
+  "embedded": 111,
+  "explicit_edges": 341,
+  "explicit_undirected_pairs": 229,
+  "explicit_indexes_consistent": true,
+  "voting_edges": 422,
+  "voting_by_tier": {
+    "explicit": 422,
+    "sibling": 0,
+    "system_peer": 0
+  },
+  "partition_level0": {
+    "level": 0,
+    "communities": 7,
+    "members": 111,
+    "entity_mapped": 111,
+    "singletons": 0,
+    "largest": 34,
+    "size_histogram": {
+      "15": 1,
+      "18": 1,
+      "21": 1,
+      "34": 1,
+      "7": 2,
+      "9": 1
+    }
+  },
+  "partition_hash": "28caea3a1bc49a9bc1927dfc27c4050a34c9197c2e4c496c9ea432f62e0334ba",
+  "structural_checks": {
+    "explicit_indexes_consistent": true,
+    "no_malformed_entity_ids": true,
+    "partition_covers_entity_states": true,
+    "partition_entity_map_consistent": true,
+    "partition_members_disjoint": true,
+    "partition_settled": true,
+    "stable_after_topology_read": true
+  },
+  "structural_baseline": {
+    "include_siblings": false,
+    "include_system_peers": false,
+    "sibling_weight": 0.7,
+    "max_siblings": 5,
+    "system_peer_weight": 0.2,
+    "max_system_peers": 8
+  },
+  "mutualknn": {
+    "k": 8,
+    "threshold": 0.75,
+    "queried": 111,
+    "failed": 0,
+    "directed_pairs_at_threshold": 700,
+    "mutual_pairs": 256,
+    "explicit_dominated": 43,
+    "review_candidates": 213,
+    "cross_type": 108,
+    "lower_bound": false
+  },
+  "hydration": {
+    "entities": 111,
+    "with_body_handle": 92,
+    "distinct_body_keys": 92,
+    "bodies_fetched": 92,
+    "body_bytes": 36628,
+    "bodies_missing": 0,
+    "invalid_utf8": 0,
+    "checks": {
+      "all_handles_resolved": true,
+      "all_states_parse": true,
+      "handles_name_object_store": true
+    }
+  }
+}

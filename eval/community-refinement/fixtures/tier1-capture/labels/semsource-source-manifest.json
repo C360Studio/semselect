@@ -1,0 +1,349 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semsource-source-manifest",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "packet-only"
+  },
+  "packets_sha256": "d7216a5945ea6eac4057c60210d2bacd1d944537dfbb54d9b0c7b507cd729a3d",
+  "labels": [
+    {
+      "pair_hash": "b18d0fc0b819104c82aeb911eb4a52540e123fb6deb39e55a4489122776cd62d",
+      "rank": 1,
+      "label": "keep",
+      "evidence": [
+        "so remove_source can scope the staleness lifecycle trigger (source_removed marking) to exactly what the removed source produced",
+        "remove drops a deregistered source's record so it stops appearing in status"
+      ],
+      "rationale": "Both act on the removal of a source instance by name: A derives the removed instance's systems for the lifecycle trigger and B drops its status record, so they are two steps of the one remove-source behaviour rather than a shared pattern. Judgement call on visible docs; B's caller is not shown."
+    },
+    {
+      "pair_hash": "6be63769c6e18da251ff2437dc0fec52cb69c4cf2a360a96e494c7e23c2a16ed",
+      "rank": 2,
+      "label": "defer",
+      "evidence": [
+        "handleSources serves the pre-marshaled manifest payload.",
+        "handleAddHTTP serves POST /sources — the HTTP face of the source-add path (ADR-0007)",
+        "reply := c.addSource(r.Context(), req, *cfg)"
+      ],
+      "rationale": "Both are HTTP handlers on the component, one reading the manifest and one adding a source, but the packet shows neither A's route nor whether addSource feeds the manifest payload A serves; the only visible common ground is the handler pattern, which does not settle keep versus suppress."
+    },
+    {
+      "pair_hash": "c7d69a4d47972039031ac7b77ce613fc363b488d157fb4b2d922592b053d938a",
+      "rank": 3,
+      "label": "suppress",
+      "evidence": [
+        "PredicatesType is the message type for predicate schema payloads.",
+        "StatusType is the message type for ingestion status payloads."
+      ],
+      "rationale": "Two parallel message-type declarations for different payloads (predicate schema versus ingestion status); the match is the shared declaration pattern, not a shared subject."
+    },
+    {
+      "pair_hash": "0186ad097d7372ef69efd4a4238e4a21f7a9026b69b44dc056bc07aa6d56e85a",
+      "rank": 4,
+      "label": "suppress",
+      "evidence": [
+        "querySubject is the NATS subject for request/reply source queries.",
+        "predicatesSubject is the NATS subject for publishing predicate schema."
+      ],
+      "rationale": "Two NATS subject constants for different responsibilities (manifest source queries versus predicate schema publishing); only the subject-constant pattern is shared."
+    },
+    {
+      "pair_hash": "d76ef1b3f171fd5a3db8dbe5fb40ebc831f8a95ed570b77602aaceaf28cbab42",
+      "rank": 5,
+      "label": "keep",
+      "evidence": [
+        "return marshalRemoveReply(&RemoveReply{",
+        "return marshalRemoveReply(c.removeSource(ctx, req.InstanceName, req.Provenance.Actor, cfg))",
+        "RemoveReply is the response to a RemoveRequest."
+      ],
+      "rationale": "The handler builds and marshals the RemoveReply that B defines on both its paths, so the handler and its reply type implement the remove request/reply exchange together."
+    },
+    {
+      "pair_hash": "11b34386ac5c4dcca537d8b72c23829896d329c551b091ca96a466ce5c6a8e9a",
+      "rank": 6,
+      "label": "keep",
+      "evidence": [
+        "predicateRole classifies a predicate into a semantic role for consumers.",
+        "PredicateDescriptor describes a single predicate with its semantic role.",
+        "Role        string `json:\"role\"` // \"identity\", \"content\", \"location\", \"relationship\", \"metric\", \"metadata\""
+      ],
+      "rationale": "A computes the semantic role that B's Role field carries, and B's comment lists the role vocabulary A classifies into; both concern the one subject of predicate role classification."
+    },
+    {
+      "pair_hash": "346d97ff21a2a62fcbf4188c714a867d6362d73dc6c6a0971e5965788ff9809d",
+      "rank": 7,
+      "label": "keep",
+      "evidence": [
+        "Register registers the source-manifest component with the given registry.",
+        "Factory:     NewComponent,",
+        "Component implements the source-manifest processor. On startup it publishes a ManifestPayload to the GRAPH stream and subscribes to graph.query.sources"
+      ],
+      "rationale": "Register registers exactly the component B defines (its factory is NewComponent and its description restates B's doc), so both concern the definition and registration of the source-manifest component."
+    },
+    {
+      "pair_hash": "113103075a11d40a2190450172e6e64ec3bbc4ec27f7672707044d0c52fba25b",
+      "rank": 8,
+      "label": "keep",
+      "evidence": [
+        "method:processor-source-manifest-http_sources-go-Component-handleAddHTTP, method:processor-source-manifest-http_sources-go-Component-handleRemoveHTTP",
+        "function:processor-source-manifest-http_sources-go-httpStatusForIngestError",
+        "const:processor-source-manifest-ingest-go-ingestAddSubjectPrefix, const:processor-source-manifest-ingest-go-ingestReadyWhen, const:processor-source-manifest-ingest-go-ingestRemoveSubjectPrefix"
+      ],
+      "rationale": "Neither file has a body, but the contained symbols settle it: A holds the HTTP add/remove handlers and the ingest-error status mapping, B holds the ingest add/remove subjects and reply marshalling, so both files implement the one source add/remove ingest API."
+    },
+    {
+      "pair_hash": "facd8e7425bde80d0d5c8e8230f93076bc80d378a3d39415c1b4fa80fb6b76b7",
+      "rank": 9,
+      "label": "suppress",
+      "evidence": [
+        "contains (14): file:processor-source-manifest-component-go, file:processor-source-manifest-config-go, file:processor-source-manifest-factory-go, file:processor-source-manifest-http_sources-go, file:processor-source-manifest-ingest-go, file:processor-source-manifest-lifecycle_scope-go",
+        "source: none (no verbatim body for this entity)",
+        "manifestSubject is the NATS subject for publishing manifest events."
+      ],
+      "rationale": "The folder is the structural container of the whole package, spanning the manifest, status, ingest, predicate and lifecycle files, so a semantic edge to one NATS-subject constant is a generic-container match on the word manifest that would join unrelated responsibilities."
+    },
+    {
+      "pair_hash": "01a305d4a8124ab404331a5ecf0d2305f1538479442ee99a4262906063960f9d",
+      "rank": 10,
+      "label": "suppress",
+      "evidence": [
+        "systemsForComponentConfig decodes cc's stored JSON back into the system-identifying fields each sourcespawn builder used to construct it",
+        "configuredSourceTypes returns the unique source types from config."
+      ],
+      "rationale": "A derives entity-ID system slugs from stored component config for removal scoping, B lists the configured source types; they share only the vocabulary of source types and config iteration, not a behaviour."
+    },
+    {
+      "pair_hash": "6ffc5fd05bce63418b2e61f07163ec042aba93719932d06856bdc2469600c6f2",
+      "rank": 11,
+      "label": "keep",
+      "evidence": [
+        "ingestAddSubjectPrefix is the per-namespace prefix for source-add requests: graph.ingest.add.{namespace}.",
+        "AddRequest registers a new source on the receiving SemSource instance. Sent to graph.ingest.add.{namespace} as request/reply."
+      ],
+      "rationale": "The constant names the subject on which the AddRequest is sent; together they define the one source-add request path."
+    },
+    {
+      "pair_hash": "752540ebf2a391956533f90c01cc2ede81ec16ad1c08f205ce950c61c5b21753",
+      "rank": 12,
+      "label": "suppress",
+      "evidence": [
+        "CodeUnsupportedType indicates the SourceEntry.Type is not yet implementable through this API (e.g., multi-branch repo).",
+        "SourceUnreachable indicates the source's origin could not be reached (git clone 404, URL DNS fail, path missing)."
+      ],
+      "rationale": "Two error-code constants from different enums (IngestErrorCode for the add API versus SourceErrorCode for source status); the match is the shared constant pattern, not a shared subject."
+    },
+    {
+      "pair_hash": "d1af8549b31066ab6437f3b5ff89a1059935ed08b64c224e475e7e6104a743ff",
+      "rank": 13,
+      "label": "keep",
+      "evidence": [
+        "httpStatusForIngestError maps a wire error code to an HTTP status.",
+        "mapSpawnError maps a sourcespawn.Error code onto the wire IngestErrorCode.",
+        "case CodeValidationFailed, CodeUnsupportedType:"
+      ],
+      "rationale": "Both translate the same wire IngestErrorCode set, one into it from spawn errors and one out of it to HTTP statuses, and enumerate the same codes, so they implement the ingest error-code mapping together."
+    },
+    {
+      "pair_hash": "ca554c6459025ff6d48a39126bf3008e2dbc771a0f54bb9ffc3d803d9c63b6c6",
+      "rank": 14,
+      "label": "keep",
+      "evidence": [
+        "StatusPayload reports the ingestion lifecycle phase and per-source status.",
+        "SummaryPayload provides a comprehensive graph overview for agent bootstrap. Combines status, entity type breakdown by domain, and predicate schema into a single response.",
+        "TotalEntities  int64                   `json:\"total_entities\"`"
+      ],
+      "rationale": "The summary explicitly combines the status payload and carries its namespace, phase and total-entity fields, so the two payloads share the ingestion-status subject. Judgement call: the summary also spans predicates."
+    },
+    {
+      "pair_hash": "58d0c75e526f8cd57472a3a67c7bc066704e9798f888b2183bfb7fdc17209583",
+      "rank": 15,
+      "label": "suppress",
+      "evidence": [
+        "CodeUnsupportedType indicates the SourceEntry.Type is not yet implementable through this API (e.g., multi-branch repo).",
+        "SourceAuthFailed indicates an authentication or authorization failure reaching the source (private repo without creds, 401/403 from URL)."
+      ],
+      "rationale": "Two error-code constants from different enums (IngestErrorCode for the add API versus SourceErrorCode for source status); the match is the shared constant pattern, not a shared subject."
+    },
+    {
+      "pair_hash": "d35af2591e5618533c123b8005f0440e73162df5551baf6cc5ce357614526000",
+      "rank": 16,
+      "label": "keep",
+      "evidence": [
+        "lifecycleTriggerTimeout bounds the background NATS round trip triggering a staleness lifecycle pass after remove_source.",
+        "runCtx, cancel := context.WithTimeout(ctx, lifecycleTriggerTimeout)"
+      ],
+      "rationale": "B's source applies the timeout constant A defines to the very round trip A's doc describes; the constant and its use implement one behaviour."
+    },
+    {
+      "pair_hash": "f63eb21d47da245f0a20f95118eb766a89e2f28ff83b8a4c4cce02c2da6da98a",
+      "rank": 17,
+      "label": "keep",
+      "evidence": [
+        "façade — POST add, GET/{id} handle, DELETE/{id} remove.",
+        "mux.HandleFunc(\"POST \"+sourcesPath, c.handleAddHTTP)",
+        "authorizedIngest runs the shared preconditions for the write/handle endpoints: the component is running, the ingest config is wired, and the bearer token (if configured) matches."
+      ],
+      "rationale": "A wires the POST, GET/{id} and DELETE write and handle endpoints and B is the shared precondition guard for exactly those endpoints, so both concern the component's HTTP registration façade."
+    },
+    {
+      "pair_hash": "0f108e2051489998526b879d98e76306a52728a0594aa5b209dac33afdd68f2a",
+      "rank": 18,
+      "label": "keep",
+      "evidence": [
+        "c.manifestSources = append([]ManifestSource(nil), c.config.Sources...)",
+        "appendManifestSources adds entries reflecting src to c.manifestSources.",
+        "c.manifestSources = append(c.manifestSources, entry)"
+      ],
+      "rationale": "Both maintain the same manifestSources list under manifestMu: A seeds it from config at start and B appends to it on add, one shared state and responsibility."
+    },
+    {
+      "pair_hash": "01b5fb6ebc989f1698da46a4c313d5f1ab39b82adeed668fbb1a03aa1306eb06",
+      "rank": 19,
+      "label": "keep",
+      "evidence": [
+        "SourceHandle is the auditable descriptor returned by GET /sources/{id}. It resolves a registration handle (a component instance name) to the stable metadata a long-running caller needs to prove which graph view it used (ADR-0007 §5).",
+        "Provenance carries caller-supplied attribution for an add or remove request. Recorded on source metadata"
+      ],
+      "rationale": "Both are wire types of the source registration API concerned with auditing a caller's registrations: the handle a caller holds and the attribution recorded on its add or remove. Judgement call, since neither references the other directly."
+    },
+    {
+      "pair_hash": "e869bb596d027d8ed2c76c7fafd4f28f337266d2e45a67fa959bb0bc7a466d4c",
+      "rank": 20,
+      "label": "keep",
+      "evidence": [
+        "SourcePredicateSchema describes the predicates a source type emits.",
+        "sourcePredicates maps source types to predicate prefixes."
+      ],
+      "rationale": "Both describe which predicates each source type emits, B as the prefix table per type and A as the per-type schema payload; one subject."
+    },
+    {
+      "pair_hash": "dcedbcb0cf2049c4b2ada676b6ffeef07449f3d3211e9dfa69f2269b3df4b9f0",
+      "rank": 21,
+      "label": "keep",
+      "evidence": [
+        "NewComponent creates a new source-manifest component.",
+        "Factory:     NewComponent,"
+      ],
+      "rationale": "Register passes NewComponent as the factory it registers; the constructor and the registration that exposes it implement one behaviour."
+    },
+    {
+      "pair_hash": "598e22b209cec9f7ef6bbbc04d9da57f6900290dda8db5ae002a5ac4258c4616",
+      "rank": 22,
+      "label": "keep",
+      "evidence": [
+        "ingestRemoveSubjectPrefix is the per-namespace prefix for source-remove requests: graph.ingest.remove.{namespace}.",
+        "RemoveRequest deregisters a source by instance name. Sent to graph.ingest.remove.{namespace} as request/reply."
+      ],
+      "rationale": "The constant names the subject on which the RemoveRequest is sent; together they define the one source-remove request path."
+    },
+    {
+      "pair_hash": "8b20412e4f03b138dedac5d5d39ae5b718bfc1275537fb4cc240f6b7e84213a2",
+      "rank": 23,
+      "label": "keep",
+      "evidence": [
+        "Description: \"Programmatic source-add request (graph.ingest.add.{namespace})\",",
+        "Factory:     func() any { return &AddRequest{} },",
+        "AddRequest registers a new source on the receiving SemSource instance. Sent to graph.ingest.add.{namespace} as request/reply."
+      ],
+      "rationale": "RegisterPayloads names, describes and constructs AddRequest, a direct relation rather than an incidental match. Judgement call: it registers six other payloads in the same way, so it is a cross-cutting bootstrap node."
+    },
+    {
+      "pair_hash": "89a0734e13727b267d55da7071ed79006c63571002ecebfc385fb1f6ba3b249a",
+      "rank": 24,
+      "label": "suppress",
+      "evidence": [
+        "contains (14): file:processor-source-manifest-component-go, file:processor-source-manifest-config-go, file:processor-source-manifest-factory-go, file:processor-source-manifest-http_sources-go, file:processor-source-manifest-ingest-go, file:processor-source-manifest-lifecycle_scope-go",
+        "source: none (no verbatim body for this entity)",
+        "manifestSchema defines the configuration schema for the source-manifest component."
+      ],
+      "rationale": "The folder is the package container spanning every responsibility in the family; the hint to the config-schema variable rests on the shared package name, a generic-container match that would join unrelated subjects."
+    },
+    {
+      "pair_hash": "f3c325d169d2bd41d1430f854bc5499edc5ac7ca05188547e58fba6209541ed0",
+      "rank": 25,
+      "label": "suppress",
+      "evidence": [
+        "for _, src := range c.config.Sources {",
+        "appendManifestSources adds entries reflecting src to c.manifestSources.",
+        "c.manifestSources = append(c.manifestSources, entry)"
+      ],
+      "rationale": "A reads config.Sources to list unique types, B mutates the separate manifestSources list on add; they share only the pattern of iterating source entries."
+    },
+    {
+      "pair_hash": "a36c61a76e96a957b7ca32f64fc8472a0a448a3e9ad34bc6e40a30ac8f05dee6",
+      "rank": 26,
+      "label": "suppress",
+      "evidence": [
+        "RemoveReplyType is the message type for ingest remove replies.",
+        "ManifestType is the message type for source manifest payloads."
+      ],
+      "rationale": "Two parallel message-type declarations for different payloads (ingest remove reply versus source manifest); the match is the shared declaration pattern."
+    },
+    {
+      "pair_hash": "5275d6d0a271aa3c677de1bcc3c64597e0f69fb095de86624013af8a8152533e",
+      "rank": 27,
+      "label": "defer",
+      "evidence": [
+        "HealthPayload is the UI-compatible health envelope served over HTTP.",
+        "TotalEntities int64             `json:\"total_entities,omitempty\"`",
+        "StatusPayload reports the ingestion lifecycle phase and per-source status."
+      ],
+      "rationale": "The health envelope repeats the status payload's namespace, phase and total-entity fields, but the packet does not show how HealthPayload is populated (buildHealthPayload appears only as a link name) and its Status field is the health sense of the word, so whether this is the status subject or a field-name overlap is not settled."
+    },
+    {
+      "pair_hash": "91ee47a6a9bc3d4d6e1cd8729d45ce64f0563d0b566c96bddb46b15267c80b12",
+      "rank": 28,
+      "label": "defer",
+      "evidence": [
+        "configuredSourceTypes returns the unique source types from config.",
+        "sourcePredicates maps source types to predicate prefixes."
+      ],
+      "rationale": "Both are keyed on source types, but A's callers are not shown and nothing in the packet shows the configured types being used to select predicate prefixes, so a shared subject beyond the vocabulary cannot be settled."
+    },
+    {
+      "pair_hash": "19a89eb828c28638d342852c2789219b3e52444aaa4ba0284d985755bfe51f92",
+      "rank": 29,
+      "label": "keep",
+      "evidence": [
+        "nowComplete := c.aggregator.allSeeded() && !c.aggregator.anyErrored()",
+        "allSeeded returns true when all expected sources have reported AND every reported source is past its initial seed (watching or idle)."
+      ],
+      "rationale": "A calls B directly to decide seed completion; the report handler and the aggregator predicate implement status aggregation together."
+    },
+    {
+      "pair_hash": "e9497437fdacbc1435446b1a054d1f8f153bdc43e61b83f445cfd3a90abd5cbe",
+      "rank": 30,
+      "label": "suppress",
+      "evidence": [
+        "func manifestSourcesEqual(a, b ManifestSource) bool {",
+        "func matchesPrefixes(name string, prefixes []string) bool {"
+      ],
+      "rationale": "Two small boolean helpers with no shared subject: one compares manifest source entries, the other tests string prefixes; the match is the helper pattern."
+    },
+    {
+      "pair_hash": "c5699f7ba5ef96d79974998253c1c78b94d015ebb5a75abeff23aa01e53f87d0",
+      "rank": 31,
+      "label": "keep",
+      "evidence": [
+        "ds = &DomainSummary{Domain: domain}",
+        "DomainSummary reports entity counts by type within a single domain."
+      ],
+      "rationale": "buildSummary constructs and fills DomainSummary values; a type and the function that constructs it."
+    },
+    {
+      "pair_hash": "0ccd2668be491d00756f0b92a7f9eef39df688f6e8cfaeced6f703ce0fc19d95",
+      "rank": 32,
+      "label": "suppress",
+      "evidence": [
+        "Register registers the source-manifest component with the given registry.",
+        "sourceHandle resolves an instance name back to a SourceHandle by finding the registered manifest source whose sourcespawn expansion produces it."
+      ],
+      "rationale": "The word register is overloaded here: A registers the component type with the host registry, B looks up a registered source instance; no shared behaviour."
+    }
+  ]
+}

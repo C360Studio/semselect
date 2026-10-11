@@ -1,0 +1,52 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-rule",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "c2052469a1de2b63c1335701550b4d149f864692d36c1be2437586a3c5f3a4fa",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "agree",
+      "rationale": "NewCronRule parses or defaults the cooldown and supplies the exact parse error, while fire shows the prior-time load, cooldown skip metric/log, early return and position before the inflight guard. Both different-file bodies are necessary for the complete answer."
+    },
+    {
+      "id": "q-02",
+      "verdict": "agree",
+      "rationale": "LastFiredAt supplies the KV read and missing-key error mapping; restoreFromTracker supplies silent skipping, timestamp hydration, bounded missed-fire counting and metrics/logging, with its in-body startup context. Neither body alone establishes both policies."
+    },
+    {
+      "id": "q-03",
+      "verdict": "disagree",
+      "rationale": "The pair establishes the firing-cap gate, count key/storage and persistence, but the exact cap_source labels framework_default and rule_config are supplied by capSource outside the gold bodies. The listed set therefore does not establish the full answer.",
+      "additional_sets": [
+        [
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-stateful_evaluator-go-StatefulEvaluator-runActions",
+          "semselect.semsource.golang.semstreams-rule.struct.processor-rule-state_tracker-go-MatchState",
+          "semselect.semsource.golang.semstreams-rule.function.processor-rule-stateful_evaluator-go-capSource"
+        ]
+      ]
+    },
+    {
+      "id": "q-04",
+      "verdict": "disagree",
+      "rationale": "The bodies establish RuleReadable projection and token preservation, but neither establishes that the unresolved-template warning fires. That answer claim is supported by documentation/caller logic outside both catalogue bodies, so the gold pair is incomplete."
+    },
+    {
+      "id": "q-05",
+      "verdict": "disagree",
+      "rationale": "resolve establishes all listed validation errors and copies targetGroup.ordered, but it does not establish that this slice is sorted. Sorting occurs in buildProjectionTargetIndex outside the single gold body, so the entire answer is not supported by this precise set."
+    },
+    {
+      "id": "q-06",
+      "verdict": "agree",
+      "rationale": "The body implements the exact NUL-delimited placeholder, per-suffix survivor map, final restoration and all unchanged-template guards; its comments describe survivor visibility and the workflow_def corruption. The named ordering table and plain schedule/caller substitution helpers are real lookalikes without this protection."
+    }
+  ]
+}

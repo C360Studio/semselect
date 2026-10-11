@@ -1,0 +1,116 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semsource-cli",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "afc5386219ecb6bd15e5de7ca93c3a50a764b6217f7403e170c4bb879c01e773",
+  "passages_sha256": null,
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "When quick setup builds the git source from auto-detected project info and the repository has no origin remote, what URL does the entry get, why is '.' never used, and what happens if that fallback also fails?",
+      "answer": "buildDetectedSources sets URL to resolvableGitURL(info.GitRemote) with Branch \"main\" and Watch true. resolvableGitURL returns the remote when non-empty, otherwise filepath.Abs(\".\"), the repository's absolute path; never \".\" because it slugs to an empty system segment so every commit entity is rejected at the publish gate while status looks healthy (audit 2026-07-19, zero git history ingested). If Abs fails it returns \"\" and buildDetectedSources appends no git source at all.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard-go-buildDetectedSources",
+          "semselect.semsource.golang.semsource-cli.function.cli-detect-go-resolvableGitURL"
+        ]
+      ],
+      "evidence": [
+        "cli/wizard.go:123-132",
+        "cli/detect.go:113-126"
+      ],
+      "rationale": "resolvableGitURL carries the fallback rule and the reason '.' is forbidden; buildDetectedSources shows that the quick-setup git entry's URL comes from it, the fixed branch/watch values, and that an empty result drops the git source. Neither alone links the detected remote to the written entry and the drop behaviour."
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "If semsource add is run with no arguments on a machine where ffmpeg is not in PATH and the user picks the video source from the menu, what error comes back?",
+      "answer": "Add lists every registered wizard (unavailable ones labelled \"Name — Description (reason)\"), then re-checks chosen.Available(); videoWizard.Available returns (false, \"ffmpeg not found in PATH\") when ffmpegAvailable() is false, so Add returns fmt.Errorf(\"%s is %s\", chosen.Name(), reason), i.e. \"Video stream is ffmpeg not found in PATH\", before Prompts runs and without writing the config.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name"
+        ]
+      ],
+      "evidence": [
+        "cli/add.go:38-57",
+        "cli/wizard_video.go:15",
+        "cli/wizard_video.go:19-24"
+      ],
+      "rationale": "Add supplies the error format and the fact that unavailable wizards remain selectable; videoWizard.Available supplies the reason string that fills it; videoWizard.Name supplies \"Video stream\". The format, the reason and the name live in different entities, so none alone yields the message; the audio wizard returns the same reason but a different name."
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "In interactive semsource remove, how is each entry in the selection list labelled, and where does the location text for a git source come from?",
+      "answer": "Remove labels each source \"[%d] %s  %s\" with the 1-based index, s.Type and truncate(loc, 40), where loc = sourceLocation(s), falling back to strings.Join(s.Paths, \", \") when that is empty; it then prints the header \"Remove a source\" and calls term.Select(\"Which source to remove?\", labels) to get the 0-based index. For git (and repo) sourceLocation returns s.URL when set, otherwise s.Path.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation"
+        ]
+      ],
+      "evidence": [
+        "cli/remove.go:30-47",
+        "cli/sources.go:46-54"
+      ],
+      "rationale": "Remove shows the label format, the 40-character cap and the Paths fallback; sourceLocation shows that a git source's location is its URL, else its Path. Remove only calls sourceLocation by name, and sourceLocation says nothing about how the list is rendered, so both are required."
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "Does a source added with semsource add image --paths get thumbnail generation set, and how does the interactive Images wizard differ on thumbnails and watch?",
+      "answer": "parseImageFlags defines only --paths (required, else \"image source requires --paths\"), --watch (default true) and --max-file-size (default \"50MB\"), so GenerateThumbnails is left nil. imageWizard.Prompts asks \"Max file size\" (default 50MB) and \"Generate thumbnails?\" (default yes) and stores boolPtr(answer) in GenerateThumbnails, and sets Watch: true unconditionally without asking.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts"
+        ]
+      ],
+      "evidence": [
+        "cli/add.go:213-230",
+        "cli/wizard_image.go:40-49"
+      ],
+      "rationale": "parseImageFlags establishes the complete flag set and hence the absence of a thumbnail flag; imageWizard.Prompts establishes the thumbnail prompt, its default and the forced Watch. Each entity covers one path only, so neither alone answers the comparison."
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "What does Term.Select return when the option list is empty or input reaches EOF, and what does it print when the user types a number outside the valid range?",
+      "answer": "Select returns 0 immediately when options is empty. Otherwise it prints the bold label and \"  N. option\" lines, then loops on \"Choice [1-N]: \"; if readLine reports EOF it returns 0; if the line does not parse with Sscanf \"%d\" or n is outside 1..N it prints \"  Please enter a number between 1 and N.\" and re-prompts; a valid n returns n-1 (0-based).",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-cli.method.cli-term-go-Term-Select"
+        ]
+      ],
+      "evidence": [
+        "cli/term.go:80-104"
+      ],
+      "rationale": "Only Term.Select has the empty-list, EOF and re-prompt behaviour. The lookalike is runSourceMenu's toggle loop in wizard.go, which also Sscanf's a number from the user but prints \"Enter a number 1-%d or 'done'.\" and exits on EOF, 'done' or an empty line rather than returning 0."
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "Which manifest files does the AST wizard's language auto-detection (detectLanguage) look for, where does it look, and what language does each imply?",
+      "answer": "detectLanguage stats, in the process's current directory (not a given dir), go.mod -> go, package.json -> typescript, Cargo.toml -> rust, pom.xml -> java and build.gradle -> java, returning the first one found (Go map iteration, so unspecified when several exist) or \"\" when none. It has no python manifests.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage"
+        ]
+      ],
+      "evidence": [
+        "cli/wizard_ast.go:61-76"
+      ],
+      "rationale": "detectLanguage in wizard_ast.go is the only place with this five-entry map checked against the current directory. The lookalike is the manifests map inside DetectProject in detect.go, which takes a dir argument, adds pyproject.toml and requirements.txt -> python and also records ConfigFiles; the ast flag parser's --language help text is another near-miss."
+    }
+  ]
+}

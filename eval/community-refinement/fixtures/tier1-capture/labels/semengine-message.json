@@ -1,0 +1,353 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semengine-message",
+  "split": "development",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "packet-only"
+  },
+  "packets_sha256": "14f6ca3a29724ee6ead679e5c9c0d6301ea41faa6e290233b3c89e6010c5d250",
+  "labels": [
+    {
+      "pair_hash": "26ea00e52c4dd65c481195e98451eefd969727eabff1ce9c0980dfba9e42c069",
+      "rank": 1,
+      "label": "keep",
+      "evidence": [
+        "schemaProvider is an interface for payloads that provide schema information. This matches the message.Payload interface's Schema() method signature.",
+        "// Schema returns the Type that defines this payload's structure."
+      ],
+      "rationale": "B is declared as a mirror of A's Schema() method so the registry can detect payloads that satisfy the message.Payload schema contract; both concern the one payload-schema contract."
+    },
+    {
+      "pair_hash": "29ef9d7769eaf84d69e66205b5ed9c9119fc3ba9dcedb723039282bb6446627e",
+      "rank": 2,
+      "label": "keep",
+      "evidence": [
+        "contains (5): const:message-triple-go-EntityReferenceDatatype, function:message-triple-go-IsValidEntityID, method:message-triple-go-Triple-IsExpired, method:message-triple-go-Triple-IsRelationship, struct:message-triple-go-Triple",
+        "contains function:message-triple_identity-go-DedupeAppendTriples; contains function:message-triple_identity-go-SameAppendTuple"
+      ],
+      "rationale": "Neither file has a body, but the headers settle it: A defines the Triple struct and its methods and B holds the identity-key and dedupe functions over triples, one subject (the Triple type and its identity) split across two files."
+    },
+    {
+      "pair_hash": "4de549cb687569b01077a9ceb6cf9c64f5f96e0637f1f6f83e7e6bc52108831a",
+      "rank": 3,
+      "label": "suppress",
+      "evidence": [
+        "ID returns the unique message identifier.",
+        "MessageType returns the formatted message type string for this registration. Format: \"domain.category.version\"",
+        "return fmt.Sprintf(\"%s.%s.%s\", pr.Domain, pr.Category, pr.Version)"
+      ],
+      "rationale": "A returns a message instance's id; B formats a registration's type key. The only resemblance is that both are one-line string getters with \"message\" in their names, a pattern match across unrelated subjects."
+    },
+    {
+      "pair_hash": "82a85150fa2165d73627d11f17fc1171c52035fb53b4332e79a34f42f7507818",
+      "rank": 4,
+      "label": "suppress",
+      "evidence": [
+        "Decode unmarshal data into a fresh *BaseMessage bound to this Decoder's registry.",
+        "UnmarshalJSON deserializes JSON data into the GenericJSON payload.",
+        "msg := &BaseMessage{registry: d.registry}"
+      ],
+      "rationale": "Both complete bodies unmarshal JSON, but A is the registry-bound entry point for the message envelope and B is the number-preserving decoder for one payload type's body; neither references the other, so the match is the shared unmarshal-and-wrap-error pattern rather than one responsibility."
+    },
+    {
+      "pair_hash": "3db72eef86fcc326bddd754ab1a8168af2b1ea700ba7047029cf78eecf500b89",
+      "rank": 5,
+      "label": "keep",
+      "evidence": [
+        "if data, err := m.payload.MarshalJSON(); err == nil {",
+        "// for deterministic serialization. The same payload must always",
+        "Hash returns a SHA256 hash of the message content. The hash includes the message type and payload data."
+      ],
+      "rationale": "Hash builds the content hash from payload.MarshalJSON(), the very json.Marshaler contract Payload imposes with its determinism requirement; the two concern one responsibility, deterministic payload serialization as the basis of message identity."
+    },
+    {
+      "pair_hash": "dcd8ae89732c8df5ec9f553b004e01d4c0f29845b894ba4d78ab321c0359519a",
+      "rank": 6,
+      "label": "keep",
+      "evidence": [
+        "msgType: msgType,",
+        "func (m *BaseMessage) Type() Type {",
+        "return m.msgType"
+      ],
+      "rationale": "A is the constructor that sets BaseMessage's msgType field and B is the accessor that returns it; a constructor and the accessor of the same struct field are one behaviour."
+    },
+    {
+      "pair_hash": "a1ff9452f2463cab6463448696b60b74bb859d08bd08559a62a93f54efa08d9d",
+      "rank": 7,
+      "label": "suppress",
+      "evidence": [
+        "func buildGenericJSONPayload(fields map[string]any) (any, error) {",
+        "ParseEntityID delegates canonical parsing to pkg/types."
+      ],
+      "rationale": "A builds a GenericJSONPayload from a field map; B parses an entity ID string by delegating to another package. Nothing visible connects them; both are small (value, error) functions, a shape match only."
+    },
+    {
+      "pair_hash": "70c79d58d59ad8b6cb69efe1202c5563ae645dcadd3a5f7492dbb9fe7fb2fda0",
+      "rank": 8,
+      "label": "keep",
+      "evidence": [
+        "wireFormat represents the JSON wire format for BaseMessage. This struct has public fields for JSON marshalling/unmarshalling.",
+        "Payload json.RawMessage `json:\"payload\"`"
+      ],
+      "rationale": "B is explicitly the wire representation of A, with public fields mirroring A's id, msgType, payload and meta; one type and its serialisation form."
+    },
+    {
+      "pair_hash": "fc9a247c9662c4e39fef754d399149f360db134da06335a1431996642398f611",
+      "rank": 9,
+      "label": "keep",
+      "evidence": [
+        "func buildGenericJSONPayload(fields map[string]any) (any, error) {",
+        "func (pr *Registry) Build(domain, category, version string, fields map[string]any) (any, error) {",
+        "return registration.Builder(fields)"
+      ],
+      "rationale": "Both build a typed payload from a fields map: B is the registry's dispatcher that calls a registered Builder with the same (map[string]any) -> (any, error) shape, and A is such a builder for the GenericJSON payload; one responsibility across the two packages."
+    },
+    {
+      "pair_hash": "83f155308ed9f02abad6ff425fd74e10ccd30393399b23d39572f7107054df8a",
+      "rank": 10,
+      "label": "suppress",
+      "evidence": [
+        "Type returns the structured message type.",
+        "ReceivedAt returns when the system received the message."
+      ],
+      "rationale": "A reads a message's type; B reads a metadata receipt timestamp on a different struct. Both are one-line getters, so the match is the getter pattern, not a shared subject."
+    },
+    {
+      "pair_hash": "17170e511394074bbcc600b1d19c251efa377316360f25d66dfaf00a771fe4d8",
+      "rank": 11,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "Package message provides core message infrastructure for SemStreams. See doc.go for complete package documentation."
+      ],
+      "rationale": "Neither file has a verbatim body and A has no doc at all; the only prose is B's package-level comment, which is shared by the whole package. Missing is any content showing whether base_message.go's BaseMessage code relates to triple.go's Triple code or merely shares the package boilerplate."
+    },
+    {
+      "pair_hash": "a4fcf2b43daef519439f52e60288dcd9cbe8f01011e8f418d5495ea7681fa6bf",
+      "rank": 12,
+      "label": "keep",
+      "evidence": [
+        "// Validate checks the payload data for correctness.",
+        "Validate() error",
+        "func (g *GenericJSONPayload) Validate() error {"
+      ],
+      "rationale": "A's interface requires Validate() error of every payload and B is one payload's implementation of exactly that method; an interface method and its implementation are one behaviour."
+    },
+    {
+      "pair_hash": "f06424000fb746d1b35543d38e0dc9270af00b7481c54e371631e0b628ec1e6a",
+      "rank": 13,
+      "label": "suppress",
+      "evidence": [
+        "validateSchemaConsistency checks that a factory-produced payload's Schema() method returns values matching the registration.",
+        "Validate performs basic validation on the GenericJSON payload. Ensures the data map is not nil."
+      ],
+      "rationale": "A checks a registration's Schema() consistency at registry init; B checks that a payload's data map is non-nil. They share only the overloaded term \"validate\" and the errs.WrapInvalid pattern, not a subject."
+    },
+    {
+      "pair_hash": "df9672909e81a2c1f711f18c4fe8a5dcedda1340c59f52712bc6862d22b6a3c3",
+      "rank": 14,
+      "label": "keep",
+      "evidence": [
+        "Meta returns the message metadata.",
+        "ReceivedAt returns when the system received the message.",
+        "returns interface:message-meta-go-Meta"
+      ],
+      "rationale": "Both concern message metadata: A hands out the message's Meta and B reads one of the metadata lifecycle timestamps from the default Meta implementation, so msg.Meta().ReceivedAt() is one behaviour. A judgement call on visible evidence since both are trivial getters, but the shared element is the subject, not just the getter shape."
+    },
+    {
+      "pair_hash": "d0d75ffd2131e7829ca30dba533c67b1fff3adcff3ae37116cd29283fc2249c8",
+      "rank": 15,
+      "label": "keep",
+      "evidence": [
+        "func NewBaseMessage(msgType Type, payload Payload, source string, opts ...Option) *BaseMessage {",
+        "func WithMeta(meta Meta) Option {",
+        "WithMeta replaces the default metadata with a custom Meta implementation."
+      ],
+      "rationale": "B produces an Option and A is the constructor that applies the opts; a functional option and the constructor that consumes it implement one behaviour, BaseMessage construction."
+    },
+    {
+      "pair_hash": "4b8075cf84139166765300ce4e61609e5a8ca493d9983bbb5cdaa901ac370e41",
+      "rank": 16,
+      "label": "keep",
+      "evidence": [
+        "a process that decodes core.json.v1 calls this on the registry its Decoder uses.",
+        "Decode unmarshal data into a fresh *BaseMessage bound to this Decoder's registry."
+      ],
+      "rationale": "A's doc ties registration to decoding through the Decoder's registry, and B is the Decoder's decode step bound to that registry; registering the payload type and decoding against the same registry is one responsibility."
+    },
+    {
+      "pair_hash": "fb37dbb1735d6656478f8615d4670c41ed8dc3bbfe7c485a0e0c2a9339b8be3a",
+      "rank": 17,
+      "label": "keep",
+      "evidence": [
+        "MessageType returns the formatted message type string for this registration. Format: \"domain.category.version\"",
+        "Type provides structured type information for messages. It enables type-safe routing and processing by clearly identifying the domain, category, and version of each message."
+      ],
+      "rationale": "Both are about the one message-type identity: A renders the domain.category.version key from a registration's fields and B is the structured type carrying those same three components."
+    },
+    {
+      "pair_hash": "cf24252e4eb1212dad6d0a009157010dbe8ba87bd8ae87624186f7129c6d87fc",
+      "rank": 18,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "contains (15): function:message-base_message-go-NewBaseMessage",
+        "contains (17): function:message-generic_json-go-NewGenericJSON"
+      ],
+      "rationale": "Neither file has a body or a doc line; the headers list two different types (BaseMessage and GenericJSONPayload) and nothing in the packet shows whether the files share a responsibility or only the package. Missing: any source or doc on either side."
+    },
+    {
+      "pair_hash": "8fd59642f1a2146f5fda843f56ecb40660cb538e49203d4d6bd258a437c71bc3",
+      "rank": 19,
+      "label": "keep",
+      "evidence": [
+        "func NewDecoder(reg *payloadregistry.Registry) *Decoder {",
+        "func RegisterPayloads(reg *payloadregistry.Registry) error {",
+        "a process that decodes core.json.v1 calls this on the registry its Decoder uses."
+      ],
+      "rationale": "Both take the same registry; B's doc states it must be called on the registry the Decoder uses, and A is the constructor that binds a Decoder to that registry. Setting up the registry and the decoder over it is one responsibility."
+    },
+    {
+      "pair_hash": "d0b110f5675d3734087d637304bef54783d8a910553306d25eae17aa4e62d67d",
+      "rank": 20,
+      "label": "keep",
+      "evidence": [
+        "if err := json.Unmarshal(wire.Payload, msgPayload); err != nil {",
+        "// Unknown type - payload must be registered or use core.json.v1",
+        "d.UseNumber()"
+      ],
+      "rationale": "A decodes the envelope and visibly hands wire.Payload to the resolved payload's own unmarshaller, naming core.json.v1 as the fallback type; B is a payload UnmarshalJSON of that kind using the same UseNumber literal-preserving decode. Two stages of one decoding behaviour."
+    },
+    {
+      "pair_hash": "83530d7fc144950ba03ab63d167760673cce7edb509d1aab1e48461250f076fe",
+      "rank": 21,
+      "label": "keep",
+      "evidence": [
+        "if defaultMeta, ok := m.meta.(*DefaultMeta); ok {",
+        "m.meta = NewDefaultMeta(createdAt, defaultMeta.Source())",
+        "func (m *DefaultMeta) ReceivedAt() time.Time {"
+      ],
+      "rationale": "A's body type-asserts and rebuilds the message's *DefaultMeta with an explicit creation time; B is a timestamp accessor on that same DefaultMeta. Both concern DefaultMeta lifecycle timestamps, not just the word \"time\"."
+    },
+    {
+      "pair_hash": "a6e8227a80e389c80244bf60231268f0ceebe9ee51be303ea62388c9559c2afd",
+      "rank": 22,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "contains (1): interface:message-behaviors-go-IndexingProfiler",
+        "contains (6): function:message-triple_identity-go-AppendIdentityKey"
+      ],
+      "rationale": "Neither file has a body or doc; the headers show an IndexingProfiler interface on one side and triple identity functions on the other, which neither establishes a shared subject nor shows what incidental text drove the match. Missing: any source or doc for either file."
+    },
+    {
+      "pair_hash": "1e27b02f72f32755b3fd200a20b701473e3c6c4eaca191516dc81e30e13f88d1",
+      "rank": 23,
+      "label": "keep",
+      "evidence": [
+        "Option is a functional option for configuring BaseMessage construction.",
+        "type Option func(*BaseMessage)",
+        "for _, opt := range opts {"
+      ],
+      "rationale": "B is the option type defined for BaseMessage construction and A is the constructor that applies it; a type and the function that consumes it in one construction path."
+    },
+    {
+      "pair_hash": "352e248c30ffec6ced81a2e27889d7d933e2f5a8a507ba29328304890105ed65",
+      "rank": 24,
+      "label": "keep",
+      "evidence": [
+        "RuleFields implements RuleReadable: the whole data map IS this payload's declared projection.",
+        "RuleFields() map[string]any"
+      ],
+      "rationale": "B's doc states it implements A, and its signature matches the single method A declares; an interface and its implementation."
+    },
+    {
+      "pair_hash": "5f44202560b8cc7a26b3b2c779a314b2be4b158067b32275258423cc3f932d07",
+      "rank": 25,
+      "label": "keep",
+      "evidence": [
+        "return reg.Register(&payloadregistry.Registration{",
+        "func (pr *Registry) Register(registration *Registration) error {"
+      ],
+      "rationale": "A's body is a direct call to B with a Registration literal; caller and callee of one registration behaviour."
+    },
+    {
+      "pair_hash": "1be041c0459d706c8d791b8ab9a011fc815bc69f5567f8f83929cf761085a271",
+      "rank": 26,
+      "label": "suppress",
+      "evidence": [
+        "return fmt.Errorf(\"%s is not valid UTF-8\", at)",
+        "Validate performs comprehensive message validation.",
+        "method:message-generic_json-go-shapeCheck-check calls"
+      ],
+      "rationale": "A is a generic UTF-8 string check used by generic_json's shape checker; B validates a message's type, payload and meta. They share the overloaded term \"valid\" and nothing else; the helper would join unrelated subjects."
+    },
+    {
+      "pair_hash": "42b9510ac60fd74488501d726711b364ee8652da2964e6eaf15aa3a88ed5cefd",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "DefaultMeta provides the standard implementation of the Meta interface.",
+        "ReceivedAt() time.Time"
+      ],
+      "rationale": "B's doc names it the standard implementation of A, and its fields (createdAt, receivedAt, source) correspond one-to-one to A's methods; interface and implementation."
+    },
+    {
+      "pair_hash": "6003c07c620ab487e4b94c151be30943a572bf41e48de9210d24a60dd24b192f",
+      "rank": 28,
+      "label": "keep",
+      "evidence": [
+        "BaseMessage provides the standard implementation of the Message interface.",
+        "Message represents the core message interface for the SemStreams platform."
+      ],
+      "rationale": "B's doc states it is the standard implementation of A, and A's methods (ID, Type, Payload, Meta, Hash, Validate) map to B's fields and receiver methods; interface and implementation."
+    },
+    {
+      "pair_hash": "a846d25114a784417cf2d4ded995ae5c6a6106c67051791e869c47fa94fe96ba",
+      "rank": 29,
+      "label": "keep",
+      "evidence": [
+        "func WithTime(createdAt time.Time) Option {",
+        "// Message with specific timestamp (for historical data)",
+        "for _, opt := range opts {"
+      ],
+      "rationale": "B returns an Option that A applies, and A's own doc example is the with-specific-timestamp construction B provides; option and constructor of one construction path."
+    },
+    {
+      "pair_hash": "faf8df7d49b9df32e5bebc2436fefe627b2a3b6cbe7714226b97111038094f85",
+      "rank": 30,
+      "label": "keep",
+      "evidence": [
+        "var wire wireFormat",
+        "wireFormat represents the JSON wire format for BaseMessage."
+      ],
+      "rationale": "A decodes into a wireFormat value and reads its ID, Type, Meta and Payload fields; B is that struct. A handler and the structure it parses."
+    },
+    {
+      "pair_hash": "bd4a2edc301029ffe00898063319f5abee2e9bcfe61017049ecc03a2183e0ab7",
+      "rank": 31,
+      "label": "keep",
+      "evidence": [
+        "WithTime sets a specific creation timestamp instead of using time.Now(). Useful for historical data import or testing.",
+        "NewDefaultMetaWithReceivedAt creates a new DefaultMeta instance with explicit creation and received times. This is useful for testing or when importing historical data.",
+        "m.meta = NewDefaultMeta(createdAt, defaultMeta.Source())"
+      ],
+      "rationale": "Both construct a DefaultMeta with caller-supplied timestamps for the same stated purpose (historical import, testing); A rebuilds the message's DefaultMeta through the sibling constructor and B is the explicit-times constructor. One subject, explicit-timestamp metadata construction, not merely shared wording."
+    },
+    {
+      "pair_hash": "ae2466f64b6dd1cce29a47f5417e09153c76b94357e9c5625c5c8d1f5a62a70a",
+      "rank": 32,
+      "label": "keep",
+      "evidence": [
+        "registry *payloadregistry.Registry",
+        "Registry manages payload factories for message deserialization.",
+        "resolving payload type discriminators against the supplied registry."
+      ],
+      "rationale": "A's only field is a B, and both docs describe the same job, resolving payload types for message deserialization; a wrapper and the registry it wraps."
+    }
+  ]
+}

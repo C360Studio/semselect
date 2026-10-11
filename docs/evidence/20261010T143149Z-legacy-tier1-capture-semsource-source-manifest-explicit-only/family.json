@@ -1,0 +1,237 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semsource-source-manifest",
+    "split": "held-out",
+    "role": "cross-type",
+    "language": "Go + Markdown",
+    "repo": "https://github.com/C360Studio/semsource",
+    "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semsource-source-manifest",
+    "include": [
+      "processor/source-manifest",
+      "configs/tiers/README.md"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "processor/source-manifest/workbench_capabilities.go"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "configs/tiers/README.md",
+      "processor/source-manifest/component.go",
+      "processor/source-manifest/config.go",
+      "processor/source-manifest/factory.go",
+      "processor/source-manifest/http_sources.go",
+      "processor/source-manifest/ingest.go",
+      "processor/source-manifest/lifecycle_scope.go",
+      "processor/source-manifest/payload_ingest.go",
+      "processor/source-manifest/payload_predicates.go",
+      "processor/source-manifest/payload_registry.go",
+      "processor/source-manifest/payload_status.go",
+      "processor/source-manifest/payload_summary.go",
+      "processor/source-manifest/payloads.go",
+      "processor/source-manifest/readiness.go",
+      "processor/source-manifest/status.go"
+    ],
+    "workspace_sha256": "c9e2d72f455cda98b7f3cb79ca26e35fa38c52b71c7620352d74f6467e4a21f1",
+    "entities_total": 223,
+    "entities_by_type": {
+      "chunk": 23,
+      "const": 36,
+      "doc": 1,
+      "file": 14,
+      "folder": 2,
+      "function": 27,
+      "interface": 1,
+      "method": 80,
+      "repo": 1,
+      "struct": 26,
+      "type": 2,
+      "var": 10
+    },
+    "entities_by_domain": {
+      "code": 3,
+      "golang": 196,
+      "web": 24
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 223,
+      "edges": 695,
+      "induced_edges": 589,
+      "cross_system_edges": 0,
+      "dangling_edges": 106,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 133,
+        "code.relationship.parameter": 15,
+        "code.relationship.receiver": 80,
+        "code.relationship.references": 32,
+        "code.relationship.returns": 16,
+        "code.structure.belongs": 221,
+        "code.structure.contains": 198
+      },
+      "non_containment_edges": 276
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "processor/source-manifest",
+          "configs/tiers/README.md"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*"
+        ],
+        "max_file_bytes": null,
+        "files": 16,
+        "entities": 255
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "processor/source-manifest",
+          "configs/tiers/README.md"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "processor/source-manifest/workbench_capabilities.go"
+        ],
+        "max_file_bytes": null,
+        "files": 15,
+        "entities": 223
+      }
+    ],
+    "notes": "Owner subtree processor/source-manifest/ non-test Go plus configs/tiers/README.md, less workbench_capabilities.go (32 entities), the UI capability advertisement, which the tiers README does not discuss.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semsource-source-manifest",
+    "split": "held-out",
+    "repository": "semsource",
+    "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+    "include": [
+      "processor/source-manifest",
+      "configs/tiers/README.md"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "processor/source-manifest/workbench_capabilities.go"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": true,
+    "has_docs": true,
+    "files": [
+      {
+        "path": "configs/tiers/README.md",
+        "bytes": 18796,
+        "sha256": "b75e1298905512d802e358f9aa6f6535ca39a005c05c4da0484d05c30001433b"
+      },
+      {
+        "path": "processor/source-manifest/component.go",
+        "bytes": 29411,
+        "sha256": "84f57b43ae162abb890965e050306c5e2af331457af1c3e42183aec1648446c0"
+      },
+      {
+        "path": "processor/source-manifest/config.go",
+        "bytes": 3595,
+        "sha256": "9dd68cc0b3110920b2c360676e839859bb95b7f8cc1fb478edebc130c79c6f87"
+      },
+      {
+        "path": "processor/source-manifest/factory.go",
+        "bytes": 1002,
+        "sha256": "97ce08a0ce4f06516ff72ee8249f5e0c784e11c8bb325504a3ce8da5abff8840"
+      },
+      {
+        "path": "processor/source-manifest/http_sources.go",
+        "bytes": 6439,
+        "sha256": "1edca1fe87e8e3f37a0ec61cb0ccee715942eee3022a01d21d5ad100073b5545"
+      },
+      {
+        "path": "processor/source-manifest/ingest.go",
+        "bytes": 16656,
+        "sha256": "5a4659d7884aaaa72d37435acf7bca01a325265c915eb459a4cb4cab5650a6f7"
+      },
+      {
+        "path": "processor/source-manifest/lifecycle_scope.go",
+        "bytes": 3223,
+        "sha256": "eb46ceb6d90d5fac07fb7dda70cefab70c2cac581ff36d6c31e38be77027baa3"
+      },
+      {
+        "path": "processor/source-manifest/payload_ingest.go",
+        "bytes": 7060,
+        "sha256": "c53d1054ccaabc3fa6ba9bf4657e6db9d6b89f4cfde3d70522278d505f939b10"
+      },
+      {
+        "path": "processor/source-manifest/payload_predicates.go",
+        "bytes": 1725,
+        "sha256": "b22a7ac1a6ab359f22c994419b0bb00f7e2174ad656d26a5cecda89fee61c879"
+      },
+      {
+        "path": "processor/source-manifest/payload_registry.go",
+        "bytes": 2258,
+        "sha256": "1da1a3550396de7fc8ced2cc32e734d3d8f66f98e9ef8e50292a7fba4fa6b868"
+      },
+      {
+        "path": "processor/source-manifest/payload_status.go",
+        "bytes": 3052,
+        "sha256": "2c3553c0ff702c3f152510cacfcf5fc95da4391e2453f3c57fe282bdb856f1bf"
+      },
+      {
+        "path": "processor/source-manifest/payload_summary.go",
+        "bytes": 1187,
+        "sha256": "ade9e45f4026b8a14428bc7868dc7c5f06f1b65bada4394bf09a6e3157232fd5"
+      },
+      {
+        "path": "processor/source-manifest/payloads.go",
+        "bytes": 1153,
+        "sha256": "d498b682cd212559de6a4ff7660948a03032f2d54c0c7d419f56b6e6dde27c25"
+      },
+      {
+        "path": "processor/source-manifest/readiness.go",
+        "bytes": 2694,
+        "sha256": "422ac08af74d918a63c099f267c55a68bfbd1508613907f587ab58cd4756d925"
+      },
+      {
+        "path": "processor/source-manifest/status.go",
+        "bytes": 10322,
+        "sha256": "cc5db747f793e8c761e9b3d4bb822f8aba8e03138928ba24ccff6899a9db76f7"
+      }
+    ],
+    "workspace_sha256": "c9e2d72f455cda98b7f3cb79ca26e35fa38c52b71c7620352d74f6467e4a21f1"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.9v6n78/config/semsource-source-manifest.tier1.json",
+    "sha256": "0dbcf8ebb6f1de5d6699bdb41ecc21de64da4f2af6d9e4481b16733f09bf6829",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}

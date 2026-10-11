@@ -1,0 +1,357 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semselect-service",
+  "split": "development",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "packet-only"
+  },
+  "packets_sha256": "20fe28447c67907dff0a247e39f43ecaa13051fff9e775ed5afa9548cfeaa7cf",
+  "labels": [
+    {
+      "pair_hash": "94051716f0b8fc9ce51ab19ac03d2ca4e40de351b9924104a14e3637017b3b58",
+      "rank": 1,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "\"choice\": \"billing\","
+      ],
+      "rationale": "A is the repository root with no verbatim body, so nothing shows what subject it embeds beyond containing cmd and internal; B is a bare example JSON response. Missing: any content for A that would connect it to this response example."
+    },
+    {
+      "pair_hash": "57b2c21fa7d2f9389fbcac8ae064a0ebafb145d9f616021a8f63ee49c65604ff",
+      "rank": 2,
+      "label": "suppress",
+      "evidence": [
+        "return \"http://\" + net.JoinHostPort(host, port) + \"/ready\", nil",
+        "return nil, errors.New(\"upstream must be an http origin without credentials, path, query or fragment\")",
+        "return &Guard{config: c, busy: make(chan struct{}, 1)}, nil"
+      ],
+      "rationale": "listenConfig turns the process's own listen address into a readiness probe URL, while New validates the upstream origin and builds the Guard; they share only the parse-an-address-and-return-an-error pattern, not a responsibility."
+    },
+    {
+      "pair_hash": "f78c56143f8bc3b447f4298fd3f0e1227e88c2bc16fa00c86b1ef65efc837d48",
+      "rank": 3,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "contains (1): file:cmd-semselect-main-go",
+        "\"choice\": \"billing\","
+      ],
+      "rationale": "A is a folder with no body whose header only says it holds main.go; B is an example JSON response. Missing: the folder's code, so nothing shows whether it concerns this response shape."
+    },
+    {
+      "pair_hash": "958009d22ec35404c2e7cd9e76cd335aa9deb495ae957ca1f175fb97f3c727bf",
+      "rank": 4,
+      "label": "keep",
+      "evidence": [
+        "return \"http://\" + net.JoinHostPort(host, port) + \"/ready\", nil",
+        "case \"/ready\":",
+        "g.forward(w, r, \"/health\", nil, 2*time.Second)"
+      ],
+      "rationale": "listenConfig exists to produce the /ready probe URL and ServeHTTP is where the /ready path is answered by forwarding to the runtime's /health; between them they implement the readiness check, so someone reading one would want the other."
+    },
+    {
+      "pair_hash": "8217a60d8fac9f02bc7994930c9c263c66f528a4b165d79b860a091b96f6321a",
+      "rank": 5,
+      "label": "suppress",
+      "evidence": [
+        "func replyError(w http.ResponseWriter, status int, message string) {",
+        "_ = json.NewEncoder(w).Encode(map[string]any{\"error\": map[string]any{\"code\": status, \"message\": message}})",
+        "return \"\", fmt.Errorf(\"SEMSELECT_ADDR must be an IP address and port: %w\", err)"
+      ],
+      "rationale": "replyError is a generic three-line JSON error writer used by the handlers, while listenConfig returns Go errors about the listen address and never writes an HTTP response; the only overlap is the word error, and the utility node would join unrelated subjects."
+    },
+    {
+      "pair_hash": "ea7917bac5086cd82b247a2019d33ad68d29de3c2259fa363a8722bd3983ad09",
+      "rank": 6,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "## Configuration and operational bounds",
+        "`.env` configures Compose and Task commands:"
+      ],
+      "rationale": "The repository root has no body, so there is nothing showing which responsibility it would stand for next to a passage covering environment variables, the API profile and several components. Missing: any content for A."
+    },
+    {
+      "pair_hash": "85cb8d42ab8699a8fbd643e266b4b96d6b5f13725cbd58bfddb746f2fa83c532",
+      "rank": 7,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "task smoke          # requires running model; all three native primitives"
+      ],
+      "rationale": "A is the bodiless repository root and B is a list of task commands for checks and evaluation; nothing visible on A shows whether it concerns that evaluation workflow. Missing: any content for A."
+    },
+    {
+      "pair_hash": "7e1e30ea6102b5014d03847f9907762714c05e3a31ca66be333ed3e2dfc8304b",
+      "rank": 8,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "That example exercises all three primitives. An actual smoke response included:"
+      ],
+      "rationale": "A has no body and B is a one-sentence lead-in that names no subject on its own, so neither side shows a responsibility to compare. Missing: content for A and the example the sentence introduces."
+    },
+    {
+      "pair_hash": "df4d9294ce1d92740034f06cabbccfc4345fe684513251595432aefc33c617bf",
+      "rank": 9,
+      "label": "suppress",
+      "evidence": [
+        "return \"http://\" + net.JoinHostPort(host, port) + \"/ready\", nil",
+        "r, err := http.NewRequestWithContext(ctx, incoming.Method, g.config.Upstream+path, bytes.NewReader(body))",
+        "replyError(w, code, \"runtime unavailable or request deadline exceeded\")"
+      ],
+      "rationale": "listenConfig derives the guard's own readiness URL from SEMSELECT_ADDR; forward relays a request to the upstream runtime and maps its failures to status codes. They share HTTP and URL vocabulary, not a responsibility."
+    },
+    {
+      "pair_hash": "2b9723bfaefff849c63ea6afd49b897dbd5c5c6a4e8a5cd95365fbcb07017754",
+      "rank": 10,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "--data-binary @examples/decision.json"
+      ],
+      "rationale": "A is the bodiless repository root; B is a curl command posting an example decision. Missing: any content for A showing whether it concerns the decision endpoint."
+    },
+    {
+      "pair_hash": "303108ec5c942f2d3aa3d2881e676a5fd29456a8e4af6ef6ae9423a5245be589",
+      "rank": 11,
+      "label": "keep",
+      "evidence": [
+        "HTTP read timeouts also bound slow uploads.",
+        "ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: timeout + 20*time.Second",
+        "if len(os.Args) == 2 && os.Args[1] == \"healthcheck\" {"
+      ],
+      "rationale": "The passage documents operational bounds that main sets: the HTTP read timeouts sentence describes the server timeouts main configures, the container health check sentence describes main's healthcheck mode, and the JSON guard logs line describes main's JSON logger. Much of the passage concerns the handler, but main is part of the code it documents."
+    },
+    {
+      "pair_hash": "29d9899910020788effeaaa7a35ed88b16fbc7861569d21c59e4204ac5c09c35",
+      "rank": 12,
+      "label": "suppress",
+      "evidence": [
+        "if err = srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {",
+        "ctx, cancel := context.WithTimeout(incoming.Context(), timeout)",
+        "replyError(w, 502, \"invalid or oversized runtime response\")"
+      ],
+      "rationale": "main is process startup, server wiring and shutdown; forward is the per-request upstream relay with its own error mapping, and main never touches it. They share net/http and context vocabulary, not a responsibility."
+    },
+    {
+      "pair_hash": "64fe123ecc458b6665ca273a06b330276e740dbf2fe83f9a87f25883befff3f4",
+      "rank": 13,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "contains (1): file:cmd-semselect-main-go",
+        "## Checks and evaluation"
+      ],
+      "rationale": "A is a folder with no body and B is a heading-only chunk with no body text, so neither side shows a subject. Missing: the folder's code and the section content under the heading."
+    },
+    {
+      "pair_hash": "adf16224795c5a4fc19c4ce875f9d818f75314c7329b16ec08944c26270b25f6",
+      "rank": 14,
+      "label": "suppress",
+      "evidence": [
+        "func env(key, fallback string) string {",
+        "if value := os.Getenv(key); value != \"\" {",
+        "r, err := http.NewRequestWithContext(ctx, incoming.Method, g.config.Upstream+path, bytes.NewReader(body))"
+      ],
+      "rationale": "env is a generic environment-lookup helper with no subject of its own; forward relays requests to the upstream runtime. Nothing is shared, and the utility node would join unrelated subjects."
+    },
+    {
+      "pair_hash": "4b8383bec47b3994b9591751b42c97896095b9f494ce9ad27595cc8f69af36dc",
+      "rank": 15,
+      "label": "keep",
+      "evidence": [
+        "g, err := guard.New(guard.Config{Upstream: env(\"SEMSELECT_UPSTREAM\", \"http://runtime:8080\"), Model: env(\"SEMSELECT_MODEL\", \"semselect-kev-4b\"), Timeout: timeout, Logger: logger})",
+        "type Config struct {",
+        "Logger   *slog.Logger"
+      ],
+      "rationale": "main is where every Config field is populated from the environment before the guard is built, the type-and-the-code-that-constructs-it case; someone reading Config would want to see where its values come from."
+    },
+    {
+      "pair_hash": "368761fc1ddd92806bda0867afd998a31667238f8c0097beffde4ca0f52183a2",
+      "rank": 16,
+      "label": "suppress",
+      "evidence": [
+        "func env(key, fallback string) string {",
+        "func replyError(w http.ResponseWriter, status int, message string) {"
+      ],
+      "rationale": "Two small generic helpers with unrelated jobs: env reads an environment variable with a fallback, replyError writes a JSON error response. Co-locating them would join unrelated subjects through utility nodes."
+    },
+    {
+      "pair_hash": "c7f1ffa0c0e86d6ab686f06de1dec49dff2cbdecc473315045de8f29a4d192aa",
+      "rank": 17,
+      "label": "suppress",
+      "evidence": [
+        "if value := os.Getenv(key); value != \"\" {",
+        "return &Guard{config: c, busy: make(chan struct{}, 1)}, nil"
+      ],
+      "rationale": "env is a generic environment-lookup utility; New validates the upstream configuration and builds the Guard, and nothing in New refers to env. The match is a generic helper next to a constructor, not a shared responsibility."
+    },
+    {
+      "pair_hash": "602db0ba903edbd73d4dde0ad19008e59164926a119aafa91796336058cd0ba0",
+      "rank": 18,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "contains (3): function:cmd-semselect-main-go-env, function:cmd-semselect-main-go-listenConfig, function:cmd-semselect-main-go-main",
+        "That example exercises all three primitives. An actual smoke response included:"
+      ],
+      "rationale": "main.go has no body and its header only names three functions; B is a one-sentence lead-in with no subject content. Missing: the file's code and the example the sentence refers to."
+    },
+    {
+      "pair_hash": "35f74d82aa7ef666023b45214eed78378b61d6fc86e6fc7cfe89441dfc8d3004",
+      "rank": 19,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "contains (3): function:cmd-semselect-main-go-env, function:cmd-semselect-main-go-listenConfig, function:cmd-semselect-main-go-main",
+        "contains (1): function:internal-guard-json-go-checkJSON"
+      ],
+      "rationale": "Both files lack bodies; the headers only name the functions each contains, which does not show whether an entry-point file and a JSON-checking file share a responsibility. Missing: both file bodies."
+    },
+    {
+      "pair_hash": "6b899865b74fdae93528c298f49a8677144974f4ac061970894cf5cf00a342e6",
+      "rank": 20,
+      "label": "suppress",
+      "evidence": [
+        "func env(key, fallback string) string {",
+        "if r.URL.Path != \"/v1/systemone\" {"
+      ],
+      "rationale": "env is a generic environment-variable helper with no subject; ServeHTTP is the guard's HTTP router. Nothing in either refers to the other, and the utility node would join unrelated subjects."
+    },
+    {
+      "pair_hash": "ff6d62b68cd69a00e69e7b5faddb2cdd049f61614d5e608e9b966f401371c8a6",
+      "rank": 21,
+      "label": "keep",
+      "evidence": [
+        "Go's struct decoder accepts case variants and duplicate keys, whereas the runtime reads case-sensitive JSON. Inspect keys before forwarding the original bytes; remarshal would sort the caller's candidate order.",
+        "d.DisallowUnknownFields()",
+        "return errors.New(\"expected exactly one JSON value\")"
+      ],
+      "rationale": "checkJSON's doc says it exists to cover what the struct decoder (decode) lets through, and both enforce the same single-JSON-value rule; they implement strict request parsing together rather than merely sharing a validation pattern."
+    },
+    {
+      "pair_hash": "f3449548cd7fb79583616fec2d09d9b80108e03c2d49136d405e7ff561321d14",
+      "rank": 22,
+      "label": "keep",
+      "evidence": [
+        "srv := &http.Server{Addr: addr, Handler: g, ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: timeout + 20*time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 8192}",
+        "func (g *Guard) ServeHTTP(w http.ResponseWriter, r *http.Request) {",
+        "status = g.forward(w, r, \"/v1/systemone\", data, g.config.Timeout)"
+      ],
+      "rationale": "main mounts the guard as the server's Handler, pads the write timeout around the g.config.Timeout that ServeHTTP forwards with, and its healthcheck mode calls the /ready route ServeHTTP serves; the two implement serving the guard together."
+    },
+    {
+      "pair_hash": "1d2cbee29bfb1075bcd5da17f082c697369adb4d5555ab6307502f611fde6200",
+      "rank": 23,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "contains (1): function:internal-guard-json-go-checkJSON",
+        "if err = validate(data, g.config.Model); err != nil {"
+      ],
+      "rationale": "json.go has no body and its header only names checkJSON; ServeHTTP calls validate, but nothing visible shows whether validate reaches checkJSON. Missing: json.go's content or a visible call path."
+    },
+    {
+      "pair_hash": "05b899f78feb8773ea4056b44a7dd673e17480ef770123d498d089b157df731c",
+      "rank": 24,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "## Checks and evaluation"
+      ],
+      "rationale": "A is the bodiless repository root and B is a heading-only chunk with no body text, so neither side shows a subject. Missing: content for A and the section under the heading."
+    },
+    {
+      "pair_hash": "87b3a90cd6e15f947d52b6ecf730a77fd9e9fbccbf27fda24c051461bc08e11a",
+      "rank": 25,
+      "label": "suppress",
+      "evidence": [
+        "return \"\", fmt.Errorf(\"SEMSELECT_ADDR must be an IP address and port: %w\", err)",
+        "return errors.New(\"state must be a string of 1..8192 UTF-8 bytes\")",
+        "return errors.New(\"type must be choice, score or noul\")"
+      ],
+      "rationale": "listenConfig validates the process's own listen address; validate enforces the request profile (state, questions, criteria). Both validate input and return errors, which is a shared pattern, not a shared subject."
+    },
+    {
+      "pair_hash": "5af8889918125cc823772124a049d1e8d8ab5a62a74a298e9acf65681c5e406c",
+      "rank": 26,
+      "label": "suppress",
+      "evidence": [
+        "host, port, err := net.SplitHostPort(addr)",
+        "d := json.NewDecoder(bytes.NewReader(data))",
+        "d.DisallowUnknownFields()"
+      ],
+      "rationale": "listenConfig parses a host:port listen address; decode strictly decodes a JSON request body. Only the parse-and-return-error pattern is shared."
+    },
+    {
+      "pair_hash": "d09318eb06263898362cdee5754f1ecc39bebf849c8bbf5060de563af45da11b",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "g, err := guard.New(guard.Config{Upstream: env(\"SEMSELECT_UPSTREAM\", \"http://runtime:8080\"), Model: env(\"SEMSELECT_MODEL\", \"semselect-kev-4b\"), Timeout: timeout, Logger: logger})",
+        "logger.Error(\"invalid configuration\", \"error\", err)",
+        "return nil, errors.New(\"model and positive timeout are required\")"
+      ],
+      "rationale": "main builds the Config and calls guard.New, reporting New's rejections as invalid configuration; the caller that constructs the guard and the constructor that validates it implement one behaviour together."
+    },
+    {
+      "pair_hash": "b8f1758216b220292d6d31eaf8142d4d1949f2fd1e16805e4f0499c39703985c",
+      "rank": 28,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "repo | semselect-service | code | (no path) | language golang",
+        "doc | 'semselect' | web | README.md | content hash fd38db99448f"
+      ],
+      "rationale": "Both the repository root and the README document node lack bodies; the headers show only containment. Missing: any content on either side that would show a shared responsibility rather than two whole-corpus containers."
+    },
+    {
+      "pair_hash": "3f79e3f82da78cfc5bc9913182454a6bb7bd5fcbae4cf1221d593d5944faab75",
+      "rank": 29,
+      "label": "defer",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "folder | semselect | code | cmd/semselect | language golang",
+        "doc | 'semselect' | web | README.md | content hash fd38db99448f"
+      ],
+      "rationale": "Neither the cmd/semselect folder nor the README document node has a body; the headers share only the name semselect, which does not show whether the folder's code and the document address one responsibility. Missing: both bodies."
+    },
+    {
+      "pair_hash": "8f4244066807f991d68a2943c507b48a6342a94aa00789dce80a220c278c5d9d",
+      "rank": 30,
+      "label": "keep",
+      "evidence": [
+        "\"choice\": \"billing\",",
+        "label = answer['choice']",
+        "if label == 'unknown' or answer['probabilities'][label] < 0.7:"
+      ],
+      "rationale": "Passage 22 shows a choice response with choice and probabilities fields, and passage 24 shows caller code reading exactly those fields to threshold and fall back; they document one behaviour, consuming a choice answer."
+    },
+    {
+      "pair_hash": "ad091d82153bfea4c677e0a81b1c209c49f441f19d6e0acdf0fbe716d635c246",
+      "rank": 31,
+      "label": "suppress",
+      "evidence": [
+        "d.DisallowUnknownFields()",
+        "_ = json.NewEncoder(w).Encode(map[string]any{\"error\": map[string]any{\"code\": status, \"message\": message}})"
+      ],
+      "rationale": "decode strictly parses an incoming request; replyError is the generic helper that writes any error response. They share the json package, not a responsibility, and the utility node would join unrelated subjects."
+    },
+    {
+      "pair_hash": "0b865209ed2cb14d85367b00e4150439e2223fb918b763c4415231a1df3609b2",
+      "rank": 32,
+      "label": "suppress",
+      "evidence": [
+        "## Checks and evaluation",
+        "This threshold is not a safety guarantee. A confident wrong label can still pass."
+      ],
+      "rationale": "B is a heading-only chunk with no content about thresholds, probabilities or confidence fields, so the match to A's quick-start caveat is incidental; the hint would attach that caveat to another section's bare heading."
+    }
+  ]
+}

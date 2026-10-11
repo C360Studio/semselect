@@ -1,0 +1,217 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semselect-docs",
+    "split": "development",
+    "role": "docs with multiple topics; isolated entities",
+    "language": "Markdown",
+    "repo": "https://github.com/C360Studio/semselect",
+    "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semselect-docs",
+    "include": [
+      "docs/*.md"
+    ],
+    "exclude": [],
+    "max_file_bytes": 50000,
+    "unmatched_includes": [],
+    "files": [
+      "docs/answering-path.md",
+      "docs/code-baselines-and-rag.md",
+      "docs/laptop-and-gpu.md",
+      "docs/research-and-decision.md",
+      "docs/results.md",
+      "docs/semengine-integration.md",
+      "docs/semstreams-integration.md",
+      "docs/sglang-investigation.md",
+      "docs/validation-answerability-source.md",
+      "docs/validation-answerability.md",
+      "docs/validation-metal.md",
+      "docs/validation-query-routing.md",
+      "docs/validation-qwen-size.md",
+      "docs/validation-scoring.md",
+      "docs/validation-specialist-intent.md",
+      "docs/validation-synthesis.md",
+      "docs/validation.md",
+      "docs/when-to-use.md"
+    ],
+    "workspace_sha256": "2e11ee13a4691e0358f2b5a45459a3c27a61280cc509a81f70bbf99ef3f93548",
+    "entities_total": 242,
+    "entities_by_type": {
+      "chunk": 224,
+      "doc": 18
+    },
+    "entities_by_domain": {
+      "web": 242
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 242,
+      "edges": 224,
+      "induced_edges": 224,
+      "cross_system_edges": 0,
+      "dangling_edges": 0,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.structure.belongs": 224
+      },
+      "non_containment_edges": 0
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "docs/*.md"
+        ],
+        "exclude": [],
+        "max_file_bytes": null,
+        "files": 19,
+        "entities": 303
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "docs/*.md"
+        ],
+        "exclude": [],
+        "max_file_bytes": 50000,
+        "files": 18,
+        "entities": 242
+      }
+    ],
+    "notes": "Owner subtree docs/*.md (top level; docs/evidence excluded) trimmed by the owner's size rule: files of 50,000 bytes or more are dropped, which removes only validation-throughput.md (57,502 bytes, 61 entities). The remaining 18 documents keep every topic the docs cover.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semselect-docs",
+    "split": "development",
+    "repository": "semselect",
+    "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+    "include": [
+      "docs/*.md"
+    ],
+    "exclude": [],
+    "max_file_bytes": 50000,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": false,
+    "has_docs": true,
+    "files": [
+      {
+        "path": "docs/answering-path.md",
+        "bytes": 10873,
+        "sha256": "05527f04a1ad1f5800e054273fed86e601f2d1791ee2d8cd5d4251faf0fb1efa"
+      },
+      {
+        "path": "docs/code-baselines-and-rag.md",
+        "bytes": 15074,
+        "sha256": "a6023472d3cb94ff9dc9d9a590fdc2774c3d54a67fe90438c652ee588811bd90"
+      },
+      {
+        "path": "docs/laptop-and-gpu.md",
+        "bytes": 6345,
+        "sha256": "ea6375d05a72b90bfc947532575b72aa59ac45b433a5d25ec139e29295d79d66"
+      },
+      {
+        "path": "docs/research-and-decision.md",
+        "bytes": 44296,
+        "sha256": "4e613cf10c808cc9cf39dc03ebec378cb8e0788f933d70365e205943dd0bde25"
+      },
+      {
+        "path": "docs/results.md",
+        "bytes": 33234,
+        "sha256": "3bb1eb088f381fdaea8635d39084dc5c03e6353b4f4c8c002dcf6a550ee3102f"
+      },
+      {
+        "path": "docs/semengine-integration.md",
+        "bytes": 4756,
+        "sha256": "35774441d659c96dc774d88c48bdbb01c7dcd5ca08d9f3c2a0af9fad14a1c84b"
+      },
+      {
+        "path": "docs/semstreams-integration.md",
+        "bytes": 18009,
+        "sha256": "d2615558646442f228d923c94de90fdfd02bdcf724a38be9aa8a23ab01c7e920"
+      },
+      {
+        "path": "docs/sglang-investigation.md",
+        "bytes": 16679,
+        "sha256": "a15adc0424c8a2991f692b38d27ee90ae0a88a380af1d3cecc58e56e72f14a6f"
+      },
+      {
+        "path": "docs/validation-answerability-source.md",
+        "bytes": 8854,
+        "sha256": "9cf1526ba4a674ce011d224736a1fc807d6818d75dd9154862e312ad9360aa22"
+      },
+      {
+        "path": "docs/validation-answerability.md",
+        "bytes": 8068,
+        "sha256": "5d4a0b88ef4a372ce21f1a4db35f98d43c870f48e3e74166616c7bfb35b244bb"
+      },
+      {
+        "path": "docs/validation-metal.md",
+        "bytes": 6665,
+        "sha256": "925f4d75fa3b80b381772c8a995c939250588fb657434b2ce5c4ad4e551ad3a8"
+      },
+      {
+        "path": "docs/validation-query-routing.md",
+        "bytes": 13107,
+        "sha256": "4239eb8f53d4aca57eacffa87ddff20873702eb5da814eddf5d74980dfe624c1"
+      },
+      {
+        "path": "docs/validation-qwen-size.md",
+        "bytes": 9373,
+        "sha256": "dcaadc707c6525b9c00bcca71de11b3a80439d21b52993a9345e7520c7d69296"
+      },
+      {
+        "path": "docs/validation-scoring.md",
+        "bytes": 15579,
+        "sha256": "8f4b55e05ed9bf6489a1a07615970878eff3d46fdb4e44c6707a46aa1e436fc0"
+      },
+      {
+        "path": "docs/validation-specialist-intent.md",
+        "bytes": 8862,
+        "sha256": "213afc072aaa16d3436939daebb40db6a3f98027ae57d96a846039cb9e34beae"
+      },
+      {
+        "path": "docs/validation-synthesis.md",
+        "bytes": 11497,
+        "sha256": "af8db7d7bedff0d4f1d0775610c84114f49fef4095bfc6e704efe18deb21c8ac"
+      },
+      {
+        "path": "docs/validation.md",
+        "bytes": 9365,
+        "sha256": "b9f22f0e698ada0a3641850447764f9278e96c5aaf6b5053cf07791a269b0cea"
+      },
+      {
+        "path": "docs/when-to-use.md",
+        "bytes": 26306,
+        "sha256": "64ffd796f8a531fbc8c7f35cb4d9d232663c8515e1fcaa1ef6b5f7e6202fcafd"
+      }
+    ],
+    "workspace_sha256": "2e11ee13a4691e0358f2b5a45459a3c27a61280cc509a81f70bbf99ef3f93548"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.Bc3yKg/config/semselect-docs.tier1.json",
+    "sha256": "736abba3dac42462ac2bdf32e8728cd6692f0e6b214e9517284618e47f46523e",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "structural_baseline": {
+      "include_siblings": true,
+      "include_system_peers": true,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}

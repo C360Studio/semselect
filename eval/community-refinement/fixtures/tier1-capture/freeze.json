@@ -1,0 +1,1159 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "fixture freeze (eval/community-refinement/README.md; issue #5 \"Fixtures frozen\")",
+  "built_at": "2026-10-11T13:00:27Z",
+  "git_commit": "a3e59bb38026be9edf83187e8546ca1c7cc62e3a",
+  "rulings": "owner rulings 1 to 9 as recorded on issue #5 and in eval/community-refinement/README.md",
+  "capture_profile": {
+    "semsource_commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+    "semstreams_version": "v1.0.0-beta.160",
+    "semsource_image": "sha256:08801743b4eeb774ee5818d23c238757cbb25bccc039766f85939a8a2d0b394f",
+    "tier": "0 (graph.embedder_type=bm25; no HTTP embedder, no semembed, no LLM)",
+    "config": "eval/community-refinement/fixtures/legacy-count/family-count.tier0.json",
+    "ast_languages": [
+      "go",
+      "typescript",
+      "javascript",
+      "svelte",
+      "python"
+    ],
+    "entity_range": [
+      50,
+      250
+    ],
+    "evidence": "docs/evidence/20261009T172300Z-legacy-family-counts-semrepos",
+    "runtime_note": "semstreams_version is the library SemSource links at runtime; the fixture source commits are under repositories"
+  },
+  "families_json": {
+    "path": "eval/community-refinement/fixtures/families.json",
+    "sha256": "76c62776b3b99eb3c414ce241a04d73de0edb540cc7f561f905975c7721c98a4"
+  },
+  "contracts": {
+    "labels/PROMPT.md": "1582ab63f7468c5b813cafe73a67979ebdd7565f1feb7e155b97e3d543f3e593",
+    "labels/REVIEW.md": "10d7cedd10e0576e50e1a8f8c3f8d88bd332887706c56590851c3a72363a5e2e",
+    "constraints/PROMPT.md": "c2dfb3785ff862d6e2be274f6ec2fc1478ed0328fb4e93c3ba0c19063605cf49",
+    "constraints/REVIEW.md": "3362ce2fea10a32eabd341f507c443b71eed8841032b8cbfd27b741c269b5dd5",
+    "queries/PROMPT.md": "a705a4425891113c24cb3c81062405d2ef5b19bbcb14392b49ed52cc611aae6c",
+    "queries/REVIEW.md": "50feedc3ac935a3e2e5f9543a0c8b8ab9e60a5c4f98e435aabae12b2866d5022"
+  },
+  "model_locks": {
+    "models.lock.json": "a79136a2c946e1fdbbdfc79f9e21bb47aa466adf19ba25d7cefe11f37c6d8b16",
+    "models.baseline.lock.json": "c218e6b307360c4098e6454839b319948a4bfe4744344ccd859dde83b0c84ae5"
+  },
+  "families": [
+    {
+      "family": "semselect-service",
+      "split": "development",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semselect",
+        "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c"
+      },
+      "tier0_entities_total": 56,
+      "capture": {
+        "evidence": "docs/evidence/20261010T132157Z-legacy-tier1-capture-semselect-service-explicit-only",
+        "sha256sums": "555509e0a41a7af9096e3401e1ee383ac16076448b5e1a4c25ab37dec81cf8f8",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+        "workspace_sha256": "f00b031de9f674f48b867bba4a0465db482a3b8ea82be4c8b9c235b22e66ed8f",
+        "entities": 56,
+        "explicit_edges": 103,
+        "partition_hash": "4fc199e2ca585c711cfbca851fcbf8c7bbc2e3239265696eea9c06dabe8cfc4a",
+        "level0_communities": 4,
+        "mutual_pairs": 136,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semselect-service.json",
+        "sha256": "b88f358db89769f930cdfe8adfcabc8292ca700daad6ed379379c0f727f2ddef"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semselect-service/index.json",
+          "sha256": "a151b2a5999a4a21b1d232cbe5194e5597b4a7bb1517ba2d9075da244cd07eee"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semselect-service/pairs.jsonl",
+          "sha256": "20fe28447c67907dff0a247e39f43ecaa13051fff9e775ed5afa9548cfeaa7cf",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semselect-service/bundles.jsonl",
+          "sha256": "ac1c2a8fef6d4cee1a2beb2d9e6268f07aa5e6c7554fda477e947eb0fb86b18b"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semselect-service/tokens.json",
+          "sha256": "6719f2dde63409c3a64bf35452b2c18db5ac4d24ad2f476b7932c996bd0cb61f"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semselect-service.final.json",
+        "sha256": "445730ae162c6bf73c0d4b3e732cdc2243ce17dc5331cf1f38b554c9cc57cf07",
+        "final_counts": {
+          "defer": 15,
+          "keep": 7,
+          "suppress": 10
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semselect-service.final.json",
+        "sha256": "75fd672d07b7086dfb92e77dd7e9fd9bafcbaed4da65ae1154a4ef281b02570e",
+        "final_counts": {
+          "negative": 10,
+          "positive": 10
+        },
+        "final_total": 20
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semselect-service.final.json",
+        "sha256": "05a319ad63b96641ea59a4250c722c9ca0078ba14e31fae0cff7f24a5b45ca6e",
+        "final_counts": {
+          "complementary": 2,
+          "precise": 2
+        },
+        "final_total": 4
+      }
+    },
+    {
+      "family": "semselect-docs",
+      "split": "development",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semselect",
+        "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c"
+      },
+      "tier0_entities_total": 242,
+      "capture": {
+        "evidence": "docs/evidence/20261010T132322Z-legacy-tier1-capture-semselect-docs-explicit-only",
+        "sha256sums": "b7beb88ad69075e515a05eb3d799e9ac238c03cf98303538a16945aa16d55133",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+        "workspace_sha256": "2e11ee13a4691e0358f2b5a45459a3c27a61280cc509a81f70bbf99ef3f93548",
+        "entities": 242,
+        "explicit_edges": 224,
+        "partition_hash": "e486ae2dcb1fb33c732c181fa8d373073725edb4ec0f3b9bc93ac5324a9dca32",
+        "level0_communities": 18,
+        "mutual_pairs": 605,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semselect-docs.json",
+        "sha256": "fd9a944a8855e74b4cc8b99fd2dab8dddccdc697350442778ed6d55abbc882d6"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semselect-docs/index.json",
+          "sha256": "6877021997dcd981a3c829a50c83675dc36c834cf311e7e4a9d8d6d3a47c18ed"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semselect-docs/pairs.jsonl",
+          "sha256": "3beb75dc04ee4afabc525295f1c15452e6c2080fe7d3879350caa1eccbab6d74",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semselect-docs/bundles.jsonl",
+          "sha256": "23fc037786ad9776b000f9391b5e9332d86044254a9e8e7b4d31a44b68092295"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semselect-docs/tokens.json",
+          "sha256": "c1bb385ca25e35088efcf77eda95d4b28ff2f751906035dc9195ca13a2e1f2d6"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semselect-docs.final.json",
+        "sha256": "f6d58a6e5b5e93f82aa218787d1cc875a8d2297517617e445318c36475df9940",
+        "final_counts": {
+          "defer": 3,
+          "keep": 16,
+          "suppress": 13
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semselect-docs.final.json",
+        "sha256": "b3e5a3a0c431ba07ae1f0279837391b01ee0bdcc90dc9b0a5ec0b25ddf1fa3d7",
+        "final_counts": {
+          "negative": 10,
+          "positive": 9
+        },
+        "final_total": 19
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semselect-docs.final.json",
+        "sha256": "e906a2ace53c2db74d3fe310157d8b2c10a5c49ed560235c3ef59b2d612795ea",
+        "final_counts": {
+          "complementary": 2,
+          "precise": 1
+        },
+        "final_total": 3
+      }
+    },
+    {
+      "family": "semengine-natsclient",
+      "split": "development",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semengine",
+        "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116"
+      },
+      "tier0_entities_total": 226,
+      "capture": {
+        "evidence": "docs/evidence/20261010T132441Z-legacy-tier1-capture-semengine-natsclient-explicit-only",
+        "sha256sums": "98db6b46954a882dead1ef53329f767883fc0a9d2e5466f4265564c7d9889e0f",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+        "workspace_sha256": "160273dacc04ca4fca0f23f9e47fd6680c2eaa70397d474626b32d176d65d725",
+        "entities": 226,
+        "explicit_edges": 805,
+        "partition_hash": "9479ddb8fbefd189f6fd8e1e9269ddc95361d1f3636059376ffce9463f3ba7dc",
+        "level0_communities": 8,
+        "mutual_pairs": 577,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semengine-natsclient.json",
+        "sha256": "c97c5850a3e6f4c192b16478e47c220d91fe270faa79c0e4a683a6add8d97533"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semengine-natsclient/index.json",
+          "sha256": "8923c78d09080f780c956631bebdefd9882347d0907bf4a51fc6cd2b3ddf506c"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semengine-natsclient/pairs.jsonl",
+          "sha256": "2750dd0a015ce36368bbfcc4b5f844fd2b46b8f21de514bba6af8f6288e3b81e",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semengine-natsclient/bundles.jsonl",
+          "sha256": "e17134cc9ac97aa51b70a7ab1ab13ac432b95316a6da495bf3103baf7814478c"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semengine-natsclient/tokens.json",
+          "sha256": "f7198a0a2480d968c20faaee52d128cd025f0aa037d1e8bfdc9525060a2b12cb"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semengine-natsclient.final.json",
+        "sha256": "715d1699c1f6a13afc7d6b4ad0ba50b781edd9701f88bff230b8e4b34a1b9c9b",
+        "final_counts": {
+          "defer": 4,
+          "keep": 16,
+          "suppress": 12
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semengine-natsclient.final.json",
+        "sha256": "9287690bbf9b0636fa65e2a2865bc21d771549f4e4374bfb5393f828490435a8",
+        "final_counts": {
+          "negative": 10,
+          "positive": 10
+        },
+        "final_total": 20
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semengine-natsclient.final.json",
+        "sha256": "6f86c5afd6333178c6048bf0f1c6b7b56d9532e7c126f120961ce2bc06af5768",
+        "final_counts": {
+          "complementary": 3
+        },
+        "final_total": 3
+      }
+    },
+    {
+      "family": "semengine-message",
+      "split": "development",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semengine",
+        "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116"
+      },
+      "tier0_entities_total": 111,
+      "capture": {
+        "evidence": "docs/evidence/20261010T132601Z-legacy-tier1-capture-semengine-message-explicit-only",
+        "sha256sums": "d37c6b68c98cd2f5cc2065cd62154e03f47a6cf8426d5549fa7bfd66ca9774e6",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+        "workspace_sha256": "f849efeefa27a653ebc204fcf3896a0c553231fda9cffe5cda8f8859105354f9",
+        "entities": 111,
+        "explicit_edges": 341,
+        "partition_hash": "28caea3a1bc49a9bc1927dfc27c4050a34c9197c2e4c496c9ea432f62e0334ba",
+        "level0_communities": 7,
+        "mutual_pairs": 256,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semengine-message.json",
+        "sha256": "5584f1e41ea086acf94fcf3d285cb84de3cc09b884c5265bf5aa35721f98899f"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semengine-message/index.json",
+          "sha256": "4a9074e15fe5874ff79ed383e3ebd9b90993da8928b0c5386e0ba3dea4f976ed"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semengine-message/pairs.jsonl",
+          "sha256": "14f6ca3a29724ee6ead679e5c9c0d6301ea41faa6e290233b3c89e6010c5d250",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semengine-message/bundles.jsonl",
+          "sha256": "f7bf1fcd4e3e7b54d0f095aec81e63153c09dbcfd89aa71ecb5d8cf046ca159c"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semengine-message/tokens.json",
+          "sha256": "c989497409351c4547a6741ac8a61c639990d2b6d477a50a4b3a9034584f2e82"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semengine-message.final.json",
+        "sha256": "a5a3d0af9e95c2a555afba06098699805b76b6ec1b544649a4572ce293dc8332",
+        "final_counts": {
+          "defer": 4,
+          "keep": 22,
+          "suppress": 6
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semengine-message.final.json",
+        "sha256": "80921aade5386892be6043f67d04c5bd9813bd346c374f878adafa9876937580",
+        "final_counts": {
+          "negative": 9,
+          "positive": 10
+        },
+        "final_total": 19
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semengine-message.final.json",
+        "sha256": "2c601efd1eb7792c8a51afa252e845ad9a65bc367c5bcadfa05bd67b26d3813c",
+        "final_counts": {
+          "complementary": 3,
+          "precise": 2
+        },
+        "final_total": 5
+      }
+    },
+    {
+      "family": "semstreams-graph-clustering",
+      "split": "held-out",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semstreams",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a"
+      },
+      "tier0_entities_total": 175,
+      "capture": {
+        "evidence": "docs/evidence/20261010T134102Z-legacy-tier1-capture-semstreams-graph-clustering-explicit-only",
+        "sha256sums": "0c99a32333cbf944e13b98ba5c5a28b3803d1b3fcbdd71c42fccf49c2481404a",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+        "workspace_sha256": "812aeaccca05f630a3ebb9f7fce2c7f26fed122271ed3fb88bdbe8bb8a77832f",
+        "entities": 175,
+        "explicit_edges": 624,
+        "partition_hash": "f5607063576652f180f364260b6e3c329b7578a43e911bac840662b8efd01473",
+        "level0_communities": 6,
+        "mutual_pairs": 436,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semstreams-graph-clustering.json",
+        "sha256": "84a878ac6c0f2cce2775592fba643edde387e4b60c579b14e07ae9b177e73ea4"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-graph-clustering/index.json",
+          "sha256": "1b6cd349202fbfe0cb7cf8913acfac32c44fe1cdecb9914d3cd7a0721a50d465"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-graph-clustering/pairs.jsonl",
+          "sha256": "4d3e0f009929358dfc048a26dabac2da55c9bb46f89d5c467514f8efe632927e",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-graph-clustering/bundles.jsonl",
+          "sha256": "d047b5d47882d2653eb6f8c69d9a137bdd14d800443b4d08131187a592795a4d"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-graph-clustering/tokens.json",
+          "sha256": "b185f6c0afdb2a158112ef6fdf8928cf915aebb21f8b97980487e6201701cbef"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semstreams-graph-clustering.final.json",
+        "sha256": "432402867e373fb583383682c3cafff218287233d2c9022230a75d8a84e37843",
+        "final_counts": {
+          "defer": 9,
+          "keep": 11,
+          "suppress": 12
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semstreams-graph-clustering.final.json",
+        "sha256": "91d2e2d974ac85cc2030b3177ce120ff1dd66d21facf84c9fd7bfee378a102b7",
+        "final_counts": {
+          "negative": 9,
+          "positive": 10
+        },
+        "final_total": 19
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semstreams-graph-clustering.final.json",
+        "sha256": "33b9855c69f5010eae702e379866b5a89caaaebb2f0f0f068bc65802d875a771",
+        "final_counts": {
+          "complementary": 2
+        },
+        "final_total": 2
+      }
+    },
+    {
+      "family": "semstreams-rule",
+      "split": "held-out",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semstreams",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a"
+      },
+      "tier0_entities_total": 162,
+      "capture": {
+        "evidence": "docs/evidence/20261010T134225Z-legacy-tier1-capture-semstreams-rule-explicit-only",
+        "sha256sums": "1e04a47be594092d8a3d35119e9ad254eb595cfd8e89ce893325e054744151cc",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+        "workspace_sha256": "8e8b560b67aaee170cfde788d0d939162ecbbe5c165de625958bd36b9d0e14ec",
+        "entities": 162,
+        "explicit_edges": 598,
+        "partition_hash": "c6e213dc05f08aa80b39edcedd9b6bf2d8e455ba4b784a4b17a193e35a05f842",
+        "level0_communities": 12,
+        "mutual_pairs": 401,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semstreams-rule.json",
+        "sha256": "427348ef069e5c6c668a3be4809bc8e9901c212c2cc1ddc2f51ca7c9eec15023"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-rule/index.json",
+          "sha256": "5af48dc1505c8ad756ac45c754663ba0392285ecd002293d330d35bb8eba43ca"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-rule/pairs.jsonl",
+          "sha256": "bdd24eb4aba871d01f9cf61ba65adab5a6be1158963db08abf1c674b6bb2f88a",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-rule/bundles.jsonl",
+          "sha256": "1c2b4ac520c3c657066a4d4e7e664178267436bde20d32816030f23962cdebbe"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-rule/tokens.json",
+          "sha256": "9392cce661d63b9399f13dc8f1a072ca29afafab954670a5f59bf6dabbbe69f5"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semstreams-rule.final.json",
+        "sha256": "a698f9a1934a434f9ce79e21149604179eeca3b73fc3199b14132e53c432c22f",
+        "final_counts": {
+          "defer": 13,
+          "keep": 13,
+          "suppress": 6
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semstreams-rule.final.json",
+        "sha256": "089eb7f4bfada3984836807596b4addcead06f00abb3624a3f9fc3def1037649",
+        "final_counts": {
+          "negative": 10,
+          "positive": 10
+        },
+        "final_total": 20
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semstreams-rule.final.json",
+        "sha256": "294a9d725a06a1bad557c22b2ee09a123b10d2ff9e77fb73baf635d5a104dcf6",
+        "final_counts": {
+          "complementary": 2,
+          "precise": 1
+        },
+        "final_total": 3
+      }
+    },
+    {
+      "family": "semstreams-service",
+      "split": "held-out",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semstreams",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a"
+      },
+      "tier0_entities_total": 202,
+      "capture": {
+        "evidence": "docs/evidence/20261010T134345Z-legacy-tier1-capture-semstreams-service-explicit-only",
+        "sha256sums": "7a70f5bb801bfa14595d3ed9d69669840b3dcc7397fe88734bd5f7912a0b6be4",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+        "workspace_sha256": "9003c0fa3b7e20c5dc454f13f3e732f25f117954f63d0a3aff8469165d7da153",
+        "entities": 202,
+        "explicit_edges": 675,
+        "partition_hash": "f002c39301af036aee368fcf5a4179346d60451772364df61f66e086a114f338",
+        "level0_communities": 14,
+        "mutual_pairs": 506,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semstreams-service.json",
+        "sha256": "89386e69be1e25f5f7978cdbe0740e902ab4657cde29ef74de939133faa7db0c"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-service/index.json",
+          "sha256": "29a8a88c882e7b9f1b747c092c9b652c1c5af54cf1a93b83c18a621646b23bdd"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-service/pairs.jsonl",
+          "sha256": "2f0f381eddb0efdd449f3e74d6d41f25b5d351be5fd50e943a96bc494b5f8616",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-service/bundles.jsonl",
+          "sha256": "d8d6b7587bb336072560b54b5a972e0ded1d7dc1baa7609c620034e67a157f5e"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-service/tokens.json",
+          "sha256": "094cd29732b9280ccc2a901569281ef95a26ebc195bd57d90735dcb0fda65952"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semstreams-service.final.json",
+        "sha256": "40076eef094714d7e5bce0e418506522a0f4d1a6cd5cf67eb47ce4abbd967942",
+        "final_counts": {
+          "defer": 2,
+          "keep": 6,
+          "suppress": 24
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semstreams-service.final.json",
+        "sha256": "028d31731a6339dca8cc48d73e92f5361f44c700f311fd674bd33295401e0d4e",
+        "final_counts": {
+          "negative": 10,
+          "positive": 10
+        },
+        "final_total": 20
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semstreams-service.final.json",
+        "sha256": "0bb080ff4704b191d4460ee28f6620ac48748e3b015c96db4c7446ef4baa81bf",
+        "final_counts": {
+          "complementary": 2,
+          "precise": 2
+        },
+        "final_total": 4
+      }
+    },
+    {
+      "family": "semstreams-component",
+      "split": "held-out",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semstreams",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a"
+      },
+      "tier0_entities_total": 226,
+      "capture": {
+        "evidence": "docs/evidence/20261010T134505Z-legacy-tier1-capture-semstreams-component-explicit-only",
+        "sha256sums": "126032bd9cd1d291ec71d2accb9010ba9e77727662f735326850cbf4d9c3b477",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+        "workspace_sha256": "b7fee656072eb3d805a36dce3dafb9906e6dc1fb0c6a7e935ffc95516d57c31a",
+        "entities": 226,
+        "explicit_edges": 807,
+        "partition_hash": "aec122988ec5863ccebeb1e0f380224598e2d57007285cd98e6415f13d58d35a",
+        "level0_communities": 13,
+        "mutual_pairs": 541,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semstreams-component.json",
+        "sha256": "fdb06ec4836496cbbab6ee8d22edd52eefb8af3feda57784822593b1fc436cfa"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-component/index.json",
+          "sha256": "65ae526589dba1a788dac5ae16d1af03fb106d0f2afac5e84e2b5417709cc8ba"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-component/pairs.jsonl",
+          "sha256": "d902b39351ff3e3ba4709545763f4bc3b3c944b7af5c989d26ac724660ba0a24",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-component/bundles.jsonl",
+          "sha256": "f5175cb5b4941614ab32cc67ce06f4edb5236a3cdad637733c7176439f95e53b"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-component/tokens.json",
+          "sha256": "e3f13ba3e99427cbe5cdc2ec13f3b9401917b7a2a382fc85c7c4d733c89151d9"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semstreams-component.final.json",
+        "sha256": "91f03bd7a1cc97a36856e466f7e56f16341c3071466057b832b40c50cc1bcf56",
+        "final_counts": {
+          "defer": 15,
+          "keep": 9,
+          "suppress": 8
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semstreams-component.final.json",
+        "sha256": "0eb3a6754c3a6d0a0e6ba10245e0864c79d8061bb8c981b3eb57b2aee14bca4f",
+        "final_counts": {
+          "negative": 10,
+          "positive": 10
+        },
+        "final_total": 20
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semstreams-component.final.json",
+        "sha256": "892a8dbb8868cfe964f8cfdfedb0133227be30f487f6e2d2d96a21d282122f4a",
+        "final_counts": {
+          "complementary": 2,
+          "precise": 2
+        },
+        "final_total": 4
+      }
+    },
+    {
+      "family": "semstreams-agentic-loop",
+      "split": "held-out",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semstreams",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a"
+      },
+      "tier0_entities_total": 207,
+      "capture": {
+        "evidence": "docs/evidence/20261010T134624Z-legacy-tier1-capture-semstreams-agentic-loop-explicit-only",
+        "sha256sums": "d27457ec2db80ce47c27366c2037279166e3c8ba08c4afd200fc6305b6249d20",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+        "workspace_sha256": "0d97e0498498866ff973c46b8819f7c1a386ff0b58dc42aed11bbffdd737c793",
+        "entities": 207,
+        "explicit_edges": 1072,
+        "partition_hash": "22eb698de2ced52a14bef7a26e3e8e9202aecbd3c166df2e2ffcf08309cb82a8",
+        "level0_communities": 3,
+        "mutual_pairs": 432,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semstreams-agentic-loop.json",
+        "sha256": "0bbe55b33d6c8c45da8f302c18115ec7acc10f6fc0f84b86f9ceecd4442cfca3"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-agentic-loop/index.json",
+          "sha256": "39e544cc16346af46884fd8cb5e6941848cc96920a8d6476be64b9c871dbdacd"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-agentic-loop/pairs.jsonl",
+          "sha256": "af2bac724421bc73f8cf95aa0fbb578235508204d89f0f5e6241d7cd7d4000c6",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-agentic-loop/bundles.jsonl",
+          "sha256": "380df213362c76d86af10151ed5d7b5afad32e25ae0b31e8ccb9ac86940a8e0e"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semstreams-agentic-loop/tokens.json",
+          "sha256": "93d2e1d85c0b757135c5db48ace6ccd295d4c280f3460f73dc4649c0aa841555"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semstreams-agentic-loop.final.json",
+        "sha256": "2a183270d37f9c931e173bbbc64de2b05f06864bad97ffd9877d89cce902a047",
+        "final_counts": {
+          "defer": 4,
+          "keep": 22,
+          "suppress": 6
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semstreams-agentic-loop.final.json",
+        "sha256": "d05cc1a33bc71890e122b5225d9bc9bd58ed77e1ba6e330cc185db7d7375d545",
+        "final_counts": {
+          "negative": 10,
+          "positive": 10
+        },
+        "final_total": 20
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semstreams-agentic-loop.final.json",
+        "sha256": "ddc3a5b008b694e1205d2997a3a2924616c8d243b83d847b0a57e2f47a01514f",
+        "final_counts": {
+          "complementary": 3,
+          "precise": 2
+        },
+        "final_total": 5
+      }
+    },
+    {
+      "family": "semsource-source-manifest",
+      "split": "held-out",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semsource",
+        "commit": "4093d3ce421371f4a99d7168e372552899bf6795"
+      },
+      "tier0_entities_total": 223,
+      "capture": {
+        "evidence": "docs/evidence/20261010T134744Z-legacy-tier1-capture-semsource-source-manifest-explicit-only",
+        "sha256sums": "9537413f0f2e30e452c9f90d3e50e2e711673f3eee833a5e254ee05e416803b6",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+        "workspace_sha256": "c9e2d72f455cda98b7f3cb79ca26e35fa38c52b71c7620352d74f6467e4a21f1",
+        "entities": 223,
+        "explicit_edges": 694,
+        "partition_hash": "e66dacf7071e1cab88144c89fab411ea6412c5b647ff325566968f434bea8902",
+        "level0_communities": 11,
+        "mutual_pairs": 564,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semsource-source-manifest.json",
+        "sha256": "a387b1f238d911d164eee0bd933563de929ad532e8c6e57c68096c61f9b73b0e"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-source-manifest/index.json",
+          "sha256": "69ac00eaa2b421bbfde96bedb4e18e780845585e5a844376ed14e1855976b6fe"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-source-manifest/pairs.jsonl",
+          "sha256": "d7216a5945ea6eac4057c60210d2bacd1d944537dfbb54d9b0c7b507cd729a3d",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-source-manifest/bundles.jsonl",
+          "sha256": "fe1b4a55f7d887d96bfb7a6d1b2dda654abd223e9580b4f6d76cefb9afdf697b"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-source-manifest/tokens.json",
+          "sha256": "355db69659db05feaa34cfb5a6cfe4a3f456132de059d227f390f1ca639fc6b0"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semsource-source-manifest.final.json",
+        "sha256": "5f98187b7b9313ef49396977f7324b76e0eaff721e5bacce56776246ec9f2341",
+        "final_counts": {
+          "defer": 8,
+          "keep": 16,
+          "suppress": 8
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semsource-source-manifest.final.json",
+        "sha256": "49127025e0e9028ef5238021c2abd95a454a113473017516ed588b3f89cb6451",
+        "final_counts": {
+          "negative": 10,
+          "positive": 10
+        },
+        "final_total": 20
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semsource-source-manifest.final.json",
+        "sha256": "30d2d3bf51adf5903c82726f159f52d2be040c4d3f2d7f12f0722bf3afd16c8a",
+        "final_counts": {
+          "complementary": 2,
+          "precise": 1
+        },
+        "final_total": 3
+      }
+    },
+    {
+      "family": "semsource-cli",
+      "split": "held-out",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semsource",
+        "commit": "4093d3ce421371f4a99d7168e372552899bf6795"
+      },
+      "tier0_entities_total": 143,
+      "capture": {
+        "evidence": "docs/evidence/20261010T134904Z-legacy-tier1-capture-semsource-cli-explicit-only",
+        "sha256sums": "c23aca7e393097308dc517e1f75b2405d2db9ca77341374f0b49676cf11ee74c",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+        "workspace_sha256": "02b9bfb04d39ee387dd4444f631711b8dcb4516b48b1e3d3fe6deb468c1084de",
+        "entities": 143,
+        "explicit_edges": 435,
+        "partition_hash": "0ac1e5ae52bfd5a9b6ea1911556b19ea7458ee6784d9b841df8a5f8cd07b40c5",
+        "level0_communities": 14,
+        "mutual_pairs": 373,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semsource-cli.json",
+        "sha256": "3ed981f540f1e7970af06d9ef73e6a71ae3b3aa5efcf25e4f93a82b099d58b00"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-cli/index.json",
+          "sha256": "f205dbc6f3732aa50a356ed96040c7bf743821ca1f94dd44999968060ef0ab0b"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-cli/pairs.jsonl",
+          "sha256": "14fcd7e0c23feca745835418d511da987ac2ac4ca9e39af40f9455931dc89ce2",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-cli/bundles.jsonl",
+          "sha256": "7bc6a9d56f0f3313fd83f0d9ea456b4b7ecdbe4bea08c9f477819bed24a2d930"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-cli/tokens.json",
+          "sha256": "6a7e515ecdcac57901b08c0390714b0ed2fb7d3456d3426912e38bcc90e725ff"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semsource-cli.final.json",
+        "sha256": "26181dea1cdea6e9a9a96581d43adcb5f0088a96399fcd8e4fb82c0473218515",
+        "final_counts": {
+          "defer": 7,
+          "keep": 10,
+          "suppress": 15
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semsource-cli.final.json",
+        "sha256": "037878878599ba90d9dfc24b85f15da4074738fda31954b4f27bd2cb814559e1",
+        "final_counts": {
+          "negative": 10,
+          "positive": 10
+        },
+        "final_total": 20
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semsource-cli.final.json",
+        "sha256": "729082ae48648b9fc8f7aa40f61f5802bfda2211d7cc421f47d2e8d5e1be2887",
+        "final_counts": {
+          "complementary": 2,
+          "precise": 1
+        },
+        "final_total": 3
+      }
+    },
+    {
+      "family": "semsource-ui",
+      "split": "held-out",
+      "corpus": {
+        "repo": "https://github.com/C360Studio/semsource",
+        "commit": "4093d3ce421371f4a99d7168e372552899bf6795"
+      },
+      "tier0_entities_total": 206,
+      "capture": {
+        "evidence": "docs/evidence/20261010T135023Z-legacy-tier1-capture-semsource-ui-explicit-only",
+        "sha256sums": "d8907862ac160a4d8800fb123b1ec2a60c7d0f7215542bd6a906dfd2fb9dab90",
+        "files_listed": 25,
+        "files_matching": 25,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+        "workspace_sha256": "0b4539115bfa5979e2b7ec14740936ef24006bbe5c63966e44ec7eee386de495",
+        "entities": 206,
+        "explicit_edges": 479,
+        "partition_hash": "d2318857074f5736a4d72fe8c42b213758a6726f6093473594eb04e70a589d61",
+        "level0_communities": 16,
+        "mutual_pairs": 472,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": null
+      },
+      "selection": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/selections/semsource-ui.json",
+        "sha256": "dbd3e944b17a97a1f6f167884a7fb92f5164f2faae69c08da1ac90fb745245b1"
+      },
+      "packets": {
+        "index": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-ui/index.json",
+          "sha256": "d05d95520884e266451d9b5360b2846cbf3474dbf05e1fd342a21b2a19006e88"
+        },
+        "pairs": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-ui/pairs.jsonl",
+          "sha256": "343ca3a43d9fa52708d7a7eac897877bbcd075edc11b453b0b0e071c4a7f9a28",
+          "packets": 32
+        },
+        "bundles": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-ui/bundles.jsonl",
+          "sha256": "5b4b3bb204d9185dec2f67ad681424fcd6f7e6aeb53987bc27e152b435dcbedf"
+        },
+        "tokens": {
+          "path": "eval/community-refinement/fixtures/tier1-capture/packets/semsource-ui/tokens.json",
+          "sha256": "9fd31471ec3be57cf1dc80d68ccbe59db3a56eef9b8e7ae399026ef6b9dda957"
+        }
+      },
+      "labels": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/labels/semsource-ui.final.json",
+        "sha256": "ed3a8826f8c24e6d7556488f96909f33c487120d63bd54ea5dc94a74b75703af",
+        "final_counts": {
+          "defer": 6,
+          "keep": 12,
+          "suppress": 14
+        },
+        "final_total": 32
+      },
+      "constraints": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/constraints/semsource-ui.final.json",
+        "sha256": "62444c84906ef8918432a8678c265744e76bba6e36788a3339320859feedc253",
+        "final_counts": {
+          "negative": 10,
+          "positive": 10
+        },
+        "final_total": 20
+      },
+      "queries": {
+        "path": "eval/community-refinement/fixtures/tier1-capture/queries/semsource-ui.final.json",
+        "sha256": "5d11c01c127efd54524f9a6bbca0ef0bee1bd552edd540df744c06297c944041",
+        "final_counts": {
+          "complementary": 3,
+          "precise": 1
+        },
+        "final_total": 4
+      }
+    },
+    {
+      "family": "nats-go-micro",
+      "split": "generalization",
+      "corpus": {
+        "repo": "https://github.com/nats-io/nats.go",
+        "commit": "31a3ee4cf0fef9e2dc2d85d5068087b46236cd12"
+      },
+      "tier0_entities_total": 217,
+      "capture": {
+        "evidence": "docs/evidence/20261011T125648Z-legacy-tier1-capture-nats-go-micro-explicit-only",
+        "sha256sums": "36e5436865ced4569797bfbf1e248a096b4eb7aebbe1ff3fe79eb4988783bb6a",
+        "files_listed": 29,
+        "files_matching": 29,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "31a3ee4cf0fef9e2dc2d85d5068087b46236cd12",
+        "workspace_sha256": "748217ef6f458befadcba49f16e98ca7490896fc0828ce274c2bf6c74f8236d3",
+        "entities": 217,
+        "explicit_edges": 547,
+        "partition_hash": "82a22c5239d162fa8812d5ba46737f43ef1fc77da46860b10fdb89ff3bf971a4",
+        "level0_communities": 9,
+        "mutual_pairs": 493,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": {
+          "all_handles_resolved": true,
+          "all_states_parse": true,
+          "handles_name_object_store": true
+        }
+      },
+      "selection": null,
+      "packets": null,
+      "labels": null,
+      "constraints": null,
+      "queries": null
+    },
+    {
+      "family": "commons-csv",
+      "split": "generalization",
+      "corpus": {
+        "repo": "https://github.com/apache/commons-csv",
+        "commit": "26f2e869625ba102f5b6386d9799817e523637f7"
+      },
+      "tier0_entities_total": 223,
+      "capture": {
+        "evidence": "docs/evidence/20261011T125813Z-legacy-tier1-capture-commons-csv-explicit-only",
+        "sha256sums": "6598ed871cb2998b3922486fc1728573da8b5bd2c4ad73ec882e9cead0e4a72f",
+        "files_listed": 29,
+        "files_matching": 29,
+        "mismatched": [],
+        "identity_profile": "explicit-only",
+        "commit": "26f2e869625ba102f5b6386d9799817e523637f7",
+        "workspace_sha256": "bb2a011af72febb1fe175c12bf04c148e70b5dd321b1c5fdd202d956f32480c2",
+        "entities": 223,
+        "explicit_edges": 786,
+        "partition_hash": "7a96e345f80044617adfb8405dbf2f4a21657d0cb43566981a392ad82142221d",
+        "level0_communities": 7,
+        "mutual_pairs": 576,
+        "structural_checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        },
+        "hydration_checks": {
+          "all_handles_resolved": true,
+          "all_states_parse": true,
+          "handles_name_object_store": true
+        }
+      },
+      "selection": null,
+      "packets": null,
+      "labels": null,
+      "constraints": null,
+      "queries": null
+    }
+  ],
+  "totals": {
+    "constraints.negative": 118,
+    "constraints.positive": 119,
+    "labels.defer": 90,
+    "labels.keep": 160,
+    "labels.suppress": 134,
+    "queries.complementary": 28,
+    "queries.held-out": 28,
+    "queries.precise": 15
+  }
+}

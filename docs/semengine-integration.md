@@ -27,6 +27,20 @@ candidate generation parameters (`k`, threshold, weight), the per-pair candidate
 set with its embedding revision, and explicit-edge dominance, so a reviewer can
 be driven and cached outside the clustering tick.
 
+One port requirement is already measured. The legacy clustering provider
+synthesizes sibling and system-peer virtual edges from lexically sorted,
+per-entity capped candidate lists, so every entity in a system votes for the
+same few lexically-first entities: on four pilot families the top eight
+system-peer targets received 92 to 95 percent of those edges, identity edges
+carried 54 to 83 percent of the vote mass, and label propagation collapsed each
+family to one or two communities. With both identity tiers off the same
+detector gives a containment-shaped floor of 4 to 18 communities (see the
+[tier-1 capture record](../eval/community-refinement/fixtures/tier1-capture/README.md#identity-synthesis-check-explicit-only-re-capture-2026-10-10)).
+A SemEngine clustering port should not reproduce sorted-then-capped identity
+synthesis; if identity priors are wanted they must not create fixed hubs, and
+containment should be an explicit, named structural comparator rather than an
+emergent effect of the vote.
+
 The immediate deliverable is therefore an evaluation contract. Execution needs
 the actual ported algorithm/provider chain and a pinned SemEngine revision. Do
 not build another graph implementation in semselect to fill the port gap, or

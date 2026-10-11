@@ -1,0 +1,104 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-rule",
+  "split": "held-out",
+  "rule": "queries both annotators agree on (ruling 7, 2026-10-10); disputed ones dropped; gold sets are annotator A's, sets B added are recorded under b_additional_sets and are not gold",
+  "success": "the budgeted evidence contains every member of at least one gold set",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "workspace_sha256": "8e8b560b67aaee170cfde788d0d939162ecbbe5c165de625958bd36b9d0e14ec"
+  },
+  "frozen_capture": "docs/evidence/20261010T134225Z-legacy-tier1-capture-semstreams-rule-explicit-only",
+  "partition_hash": "c6e213dc05f08aa80b39edcedd9b6bf2d8e455ba4b784a4b17a193e35a05f842",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "How is a cron rule's cooldown configured and parsed, and what exactly does the scheduler do when a tick arrives before the cooldown since the previous fire has elapsed?",
+      "answer": "Definition.Cooldown is a duration string: NewCronRule parses it with time.ParseDuration (empty means zero, no cooldown; a bad value fails construction with `rule <id> cooldown \"<value>\": <err>`). In fire(), after the every-N gate, the previous fire time is loaded once from entry.lastFiredNanos; when Cooldown() > 0, that value is non-zero and time.Since(it) < cooldown, the tick is skipped: metrics.recordFire(ruleID, cronFireStatusCooldownSkipped, 0), Debug log \"Cron rule fire skipped (cooldown)\", no actions run, lastFiredNanos unchanged. The check precedes the inflight CAS.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-rule.function.processor-rule-cron_rule-go-NewCronRule",
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-cron_scheduler-go-CronScheduler-fire"
+        ]
+      ],
+      "evidence": [
+        "processor/rule/cron_rule.go:71-77",
+        "processor/rule/cron_rule.go:87",
+        "processor/rule/cron_scheduler.go:512-525"
+      ],
+      "rationale": "NewCronRule is the only place the Cooldown string is parsed into the CronRule's duration (and the parse error produced); fire() is the only place the cooldown gate runs and names the skip's metric status and log line. Neither entity mentions the other's half.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "When the cron scheduler starts, what happens for a registered rule that has no last-fired record in the schedule KV bucket, versus one whose persisted record shows that its schedule expected fires while the process was down?",
+      "answer": "restoreFromTracker (run by Start) calls ScheduleTracker.LastFiredAt per registered entry. LastFiredAt does a KV Get on scheduleKey(ruleID) and maps jetstream.ErrKeyNotFound to ErrScheduleRecordNotFound; the scheduler treats that as never fired and skips silently (other read errors Warn and skip). For a found record it stores rec.LastFiredAt into entry.lastFiredNanos, walks Schedule().Next from that time counting expected fires up to a cap of 100, and if any were missed calls recordMissedFire (recordMissedFireCapped at the cap) and Warns \"Cron rule missed fires while scheduler was offline\".",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-cron_scheduler-go-CronScheduler-restoreFromTracker",
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-schedule_tracker-go-ScheduleTracker-LastFiredAt"
+        ]
+      ],
+      "evidence": [
+        "processor/rule/cron_scheduler.go:316-325",
+        "processor/rule/cron_scheduler.go:332-367",
+        "processor/rule/schedule_tracker.go:123-129"
+      ],
+      "rationale": "restoreFromTracker holds the startup policy (skip on ErrScheduleRecordNotFound, hydrate lastFiredNanos, 100-fire cap, metrics and Warn, no replay) but only sees an opaque tracker error; LastFiredAt is where the KV read happens and where the missing key becomes ErrScheduleRecordNotFound. Neither alone connects an absent KV record to the startup outcome.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 1,
+          "constraint_pairs": {
+            "positive": 1
+          }
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "During `$entity.lifecycle.*` substitution, how is a token whose resolver returns ok=false protected from being mangled by a later shorter-suffix replacement, and what does the template contain for it afterwards?",
+      "answer": "applyLifecycleSubstitutions swaps an unresolved token for a per-suffix NUL-delimited placeholder `\\x00__LIFECYCLE_SURVIVED_<suffix>__\\x00`, records it in a survived map, runs the remaining rules, then restores every placeholder to the original `$entity.lifecycle.<suffix>` token, so it survives verbatim (a surviving workflow_def is not turned into `$entity.lifecycle.<workflow>_def`) and the unresolved-template warning fires. The template is returned unchanged when it lacks the `$entity.lifecycle.` prefix, when ec.Lifecycle or ec.EntityID is unset, or when the participant lookup fails.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-lifecycle_substitution-go-ExecutionContext-applyLifecycleSubstitutions"
+        ]
+      ],
+      "evidence": [
+        "processor/rule/lifecycle_substitution.go:165-181",
+        "processor/rule/lifecycle_substitution.go:191-215"
+      ],
+      "rationale": "Only applyLifecycleSubstitutions holds the two-pass placeholder swap and restore. Lookalikes: lifecycleSubstitutionRules and its init sort in the same file address ordering (longest suffix first), not survivor protection; resolveWorkflowDefJSON only returns ok=false; and the sibling shims applyScheduleSubstitutions and applyCallerSubstitutions do plain ReplaceAll with no protection.",
+      "flags": [
+        {
+          "members": 1,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    }
+  ]
+}

@@ -1,0 +1,335 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semstreams-component",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "packet-only"
+  },
+  "packets_sha256": "d902b39351ff3e3ba4709545763f4bc3b3c944b7af5c989d26ac724660ba0a24",
+  "labels": [
+    {
+      "pair_hash": "9654530d9ca88b2b222ce164ba6bb854491f8bddb092ec4f228a3e18fc875556",
+      "rank": 1,
+      "label": "suppress",
+      "evidence": [
+        "synchronous operations",
+        "periodic timer trigger port"
+      ],
+      "rationale": "Request/reply messaging and periodic triggering are different port responsibilities."
+    },
+    {
+      "pair_hash": "5ce51247f5370afa9961f8d63eae8f58c9be26c40720bbe696f7b32fc34517a3",
+      "rank": 2,
+      "label": "keep",
+      "evidence": [
+        "Registration() Registration",
+        "factories map[string]*Registration"
+      ],
+      "rationale": "Self-described registration and the registry's stored factory registrations share the same component registration contract."
+    },
+    {
+      "pair_hash": "a4d3a48189f992acdf25c27e5871bc2e69bc27be8edd086cd4ac82036f19320b",
+      "rank": 3,
+      "label": "suppress",
+      "evidence": [
+        "DirectionOutput Direction = \"output\"",
+        "Minimum valid port number"
+      ],
+      "rationale": "Semantic data-flow ports and numeric network ports use port in different senses."
+    },
+    {
+      "pair_hash": "d9c18c17dac8c45ddf030758761d24c1cec9be965a93cba8a0b3370e75694508",
+      "rank": 4,
+      "label": "suppress",
+      "evidence": [
+        "File system access",
+        "metadata about an available component type"
+      ],
+      "rationale": "Filesystem bindings and generic component metadata concern different responsibilities."
+    },
+    {
+      "pair_hash": "6a0156ed2f775f73561d5ad4e43d7f98c0162a8f4331696d375f6d68159caa30",
+      "rank": 5,
+      "label": "suppress",
+      "evidence": [
+        "current health state of a component",
+        "periodic timer trigger port"
+      ],
+      "rationale": "Health reporting and timer declaration have no shown behavior tying them together."
+    },
+    {
+      "pair_hash": "fac3fcd7c39eae24c132e4e128a18b3190ecf136cec241e62bacdd5b96d72454",
+      "rank": 6,
+      "label": "suppress",
+      "evidence": [
+        "NATS KV Write for state persistence",
+        "NATS Request/Response pattern"
+      ],
+      "rationale": "KV persistence and synchronous request/reply are distinct NATS uses."
+    },
+    {
+      "pair_hash": "232d572287e8fadda9ca8548bb8f6ee3bd08d4c43030e9ebb313bf0755d2b59e",
+      "rank": 7,
+      "label": "keep",
+      "evidence": [
+        "ENTAILS External",
+        "External declares that this input is fed from outside the composition"
+      ],
+      "rationale": "Import-lane inference and the declaration describe the same external-input fact."
+    },
+    {
+      "pair_hash": "b51615970bd75c524ce7761d91a10d035af7e55f16ddf5c0cb52c5cfcd9becc1",
+      "rank": 8,
+      "label": "keep",
+      "evidence": [
+        "self-describe for registry registration",
+        "between factory construction and boot admission"
+      ],
+      "rationale": "Both concern component factory discovery and admission through the registry."
+    },
+    {
+      "pair_hash": "a535d96d25fa31f41e53ab0c66da0199201ec3eb1b41720e296c29514e125db6",
+      "rank": 9,
+      "label": "suppress",
+      "evidence": [
+        "current data flow through a component",
+        "metadata about an available component type"
+      ],
+      "rationale": "Live flow metrics and static type metadata have different responsibilities."
+    },
+    {
+      "pair_hash": "f50281b59e2b3f6acbce5b37fdc9ccd300cbced24bf4173575f62b537f0e20ee",
+      "rank": 10,
+      "label": "keep",
+      "evidence": [
+        "current health state of a component",
+        "current lifecycle state of a component"
+      ],
+      "rationale": "Both represent the running component's operational lifecycle state."
+    },
+    {
+      "pair_hash": "6e39927caaecc3a7b5cfbeac2003fb8af450076bd7f07468548f576786ebcb0c",
+      "rank": 11,
+      "label": "keep",
+      "evidence": [
+        "Registration() Registration",
+        "type Registration struct"
+      ],
+      "rationale": "The interface returns the exact registration type shown."
+    },
+    {
+      "pair_hash": "b25b9cf9377abe78764240e358ff2dbcd3aa005c886e37eb9d1aa4712571ae1d",
+      "rank": 12,
+      "label": "keep",
+      "evidence": [
+        "self-describe for registry registration",
+        "maps 1:1 to Registration struct fields"
+      ],
+      "rationale": "Both provide the component self-registration API and its configuration representation."
+    },
+    {
+      "pair_hash": "32d5229359448b6786836162b41fae1acdb10c5ab6d0d3b9f7dc4a4d059f1395",
+      "rank": 13,
+      "label": "suppress",
+      "evidence": [
+        "File system access",
+        "NATS KV Write for state persistence"
+      ],
+      "rationale": "Filesystem and NATS KV are different port transports; declaration shape is incidental."
+    },
+    {
+      "pair_hash": "735bbb4512cfb49814d362d563b7a0a0f1d76c762d6165d54f232403ccd6dcaf",
+      "rank": 14,
+      "label": "suppress",
+      "evidence": [
+        "extracts its consumer configuration",
+        "ADR-102 import lane"
+      ],
+      "rationale": "Consumer delivery settings and peer-deployment import authority are separate facts despite using port projections."
+    },
+    {
+      "pair_hash": "65038ed504f95ada44d3b0b6c2a3fd4f2d192706358f72ca4b9cd5d80cbde668",
+      "rank": 15,
+      "label": "suppress",
+      "evidence": [
+        "DirectionInput Direction = \"input\"",
+        "Minimum valid port number"
+      ],
+      "rationale": "Semantic direction and network port-number validation use port in different senses."
+    },
+    {
+      "pair_hash": "dc92cf46583de1760680e7b80d1a181f9341c71d1b041e154015ac8cb48f5c5e",
+      "rank": 16,
+      "label": "keep",
+      "evidence": [
+        "construct a Discoverable",
+        "component Discoverable"
+      ],
+      "rationale": "The package description explains the construction/admission boundary represented by preparedComponent."
+    },
+    {
+      "pair_hash": "f350aa48d74b309237ad6699255b26620da9e69a0696b407b855c1ec9a0b82f8",
+      "rank": 17,
+      "label": "suppress",
+      "evidence": [
+        "func directionFieldEmpty",
+        "func appendSubjectSuffix"
+      ],
+      "rationale": "Generic empty-value detection and NATS subject suffixing are different helpers."
+    },
+    {
+      "pair_hash": "70e1a4b7ab20e94a442a9705c332473b0dd6e3d7beb6df2631d090ef0b5591d3",
+      "rank": 18,
+      "label": "suppress",
+      "evidence": [
+        "File system access",
+        "NATS Request/Response pattern"
+      ],
+      "rationale": "Filesystem bindings and synchronous messaging are separate port responsibilities."
+    },
+    {
+      "pair_hash": "a3cad2878450aa9be0a95660b0926ffeffbef83d56fc135eb0938544df39b579",
+      "rank": 19,
+      "label": "keep",
+      "evidence": [
+        "configuration-shaped semantic port declaration",
+        "declares a factory's ports as a pure function"
+      ],
+      "rationale": "Both define the static semantic port declaration supplied at factory registration."
+    },
+    {
+      "pair_hash": "b16a954bafa5174ee50b12e07c8bff70fbe7b1d3b7020502db17fb0efd256564",
+      "rank": 20,
+      "label": "defer",
+      "evidence": [
+        "repo | semstreams-component",
+        "StateStarted"
+      ],
+      "rationale": "The repository header has no substantive lifecycle description or source showing the running-state contract."
+    },
+    {
+      "pair_hash": "43cc50a3061e0fbf35f12938d19d7663b10d23a69ffaad6bab1ad8ee633f3f20",
+      "rank": 21,
+      "label": "suppress",
+      "evidence": [
+        "File system access",
+        "NATS pub/sub"
+      ],
+      "rationale": "Filesystem and pub/sub ports implement different access responsibilities."
+    },
+    {
+      "pair_hash": "3f954cc2a80e62372de7e8dbbf7e278940c33f2d852d07b4faf76d00f8e5db41",
+      "rank": 22,
+      "label": "suppress",
+      "evidence": [
+        "payload contract carried across a port",
+        "TCP/UDP network bindings"
+      ],
+      "rationale": "Payload compatibility and network address bindings are different contracts; this network type shows no payload interface."
+    },
+    {
+      "pair_hash": "7a3000623027c957311036ef76f071a141ee3d36ceba336503953df93f1e121b",
+      "rank": 23,
+      "label": "suppress",
+      "evidence": [
+        "func appendSubjectSuffix",
+        "string representation of the component state"
+      ],
+      "rationale": "NATS subject composition and lifecycle formatting are unrelated string helpers."
+    },
+    {
+      "pair_hash": "28233f0647d517f767fef215e9faf089d9a6d7e4776d6b54e11580d0c407ce09",
+      "rank": 24,
+      "label": "suppress",
+      "evidence": [
+        "TCP/UDP network bindings",
+        "periodic timer trigger port"
+      ],
+      "rationale": "Network bindings and timer triggers are different port responsibilities."
+    },
+    {
+      "pair_hash": "83ea52e4961a2e08d38711fca0ec97a3d199d0ac264bd255b9824320f1d18ba7",
+      "rank": 25,
+      "label": "keep",
+      "evidence": [
+        "immutable registry declarations",
+        "Registry manages component factories and immutable admitted declarations."
+      ],
+      "rationale": "The package header describes the exact registry ownership model shown."
+    },
+    {
+      "pair_hash": "5f18e4f49f64a8cbcc147fcc9880db910976fe862f7780b043bd81f153359e07",
+      "rank": 26,
+      "label": "defer",
+      "evidence": [
+        "folder | component",
+        "StateStarted"
+      ],
+      "rationale": "The folder body and substantive lifecycle description are missing, so the running-state relationship is unproved."
+    },
+    {
+      "pair_hash": "358b256dab403e13a4507d65c67b81afebfbc08733c794de255cd185cf77d30e",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "defines the Discoverable interface",
+        "component Discoverable"
+      ],
+      "rationale": "The discovery header identifies the interface held during factory preparation."
+    },
+    {
+      "pair_hash": "d837bfd9f4afab7fa2f0ca3b37d5006f155124406dadd35b878f360870822c91",
+      "rank": 28,
+      "label": "suppress",
+      "evidence": [
+        "DirectionOutput Direction = \"output\"",
+        "Maximum valid port number"
+      ],
+      "rationale": "Data-flow direction and numeric network port limits concern different meanings of port."
+    },
+    {
+      "pair_hash": "7799ccf2bbefc2f333587e1ff9f732b1bef0fa6c04b834af7f7105afdf3439cb",
+      "rank": 29,
+      "label": "keep",
+      "evidence": [
+        "DepModelRegistry = \"model-registry\"",
+        "ModelRegistry model.RegistryReader"
+      ],
+      "rationale": "The declared dependency identifier corresponds to the model-registry dependency supplied to components."
+    },
+    {
+      "pair_hash": "4111c5838c452f026584880426f42925da11eca180dd505a5a6127fcf1f0f638",
+      "rank": 30,
+      "label": "defer",
+      "evidence": [
+        "folder | component",
+        "StateStopped"
+      ],
+      "rationale": "The folder has no source or substantive lifecycle header establishing stopped-state behavior."
+    },
+    {
+      "pair_hash": "bf9af594369f6eab8baed9ac02960af59ebbdf1baade3220cc4b41237718c03a",
+      "rank": 31,
+      "label": "defer",
+      "evidence": [
+        "file | discovery.go",
+        "file | metrics.go"
+      ],
+      "rationale": "Both bodies are absent; generic package descriptions do not establish how discovery and metrics collaborate."
+    },
+    {
+      "pair_hash": "95255420aaac7455a1e178bbb62cdad858c4dd61002e95d3051171a539a8a538",
+      "rank": 32,
+      "label": "suppress",
+      "evidence": [
+        "durable, at-least-once messaging",
+        "NATS KV Write for state persistence"
+      ],
+      "rationale": "JetStream delivery and KV state persistence are separate NATS port responsibilities."
+    }
+  ]
+}

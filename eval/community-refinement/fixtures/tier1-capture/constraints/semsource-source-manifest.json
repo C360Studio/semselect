@@ -1,0 +1,246 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semsource-source-manifest",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "314f1cc9829a376b25d03829f00bcf06064e680caaf00459a8dcc27dbac93c37",
+  "constraints": [
+    {
+      "id": "pos-01",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-ingest-go-Component-addSource",
+      "b": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-http_sources-go-Component-handleAddHTTP",
+      "evidence": [
+        "processor/source-manifest/ingest.go:153-157",
+        "processor/source-manifest/http_sources.go:41-43",
+        "processor/source-manifest/http_sources.go:70-75"
+      ],
+      "rationale": "One source-add workflow split across two files: addSource is documented as the single add path shared by the NATS handler and the HTTP facade, and handleAddHTTP applies the transport guards then delegates to it and maps its AddReply onto an HTTP status. Changing what addSource returns changes what the HTTP face must translate."
+    },
+    {
+      "id": "pos-02",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-ingest-go-Component-RegisterIngestHandlers",
+      "b": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-http_sources-go-Component-ingestConfig",
+      "evidence": [
+        "processor/source-manifest/ingest.go:113-117",
+        "processor/source-manifest/http_sources.go:33-39",
+        "processor/source-manifest/component.go:92-97"
+      ],
+      "rationale": "RegisterIngestHandlers stores a copy of the IngestHandlerConfig in c.ingestCfg expressly so the separately registered HTTP facade can read it at request time; ingestConfig is that read, and the 503-while-nil startup race is only understandable with both sides in view."
+    },
+    {
+      "id": "pos-03",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-ingest-go-Component-removeSource",
+      "b": "semselect.semsource.golang.semsource-source-manifest.function.processor-source-manifest-lifecycle_scope-go-systemsForRemovedInstance",
+      "evidence": [
+        "processor/source-manifest/ingest.go:360-363",
+        "processor/source-manifest/ingest.go:389-396",
+        "processor/source-manifest/lifecycle_scope.go:11-18"
+      ],
+      "rationale": "removeSource must call systemsForRemovedInstance before the KV delete so the staleness lifecycle trigger is scoped to the removed source's entity-ID systems; the helper's comment names remove_source as its sole purpose. The ordering constraint lives on one side and the reason on the other."
+    },
+    {
+      "id": "pos-04",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-source-manifest.const.processor-source-manifest-ingest-go-ingestReadyWhen",
+      "b": "semselect.semsource.golang.semsource-source-manifest.struct.processor-source-manifest-payload_ingest-go-AddReply",
+      "evidence": [
+        "processor/source-manifest/ingest.go:25-28",
+        "processor/source-manifest/payload_ingest.go:93-99",
+        "processor/source-manifest/ingest.go:180-184"
+      ],
+      "rationale": "ingestReadyWhen is defined as the canonical condition returned in AddReply.ReadyWhen, and AddReply documents ReadyWhen as the condition callers poll on StatusSubject. The constant's text and the field's contract are one readiness promise to remote callers."
+    },
+    {
+      "id": "pos-05",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-ingest-go-Component-dropSourceStatus",
+      "b": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-status-go-statusAggregator-remove",
+      "evidence": [
+        "processor/source-manifest/ingest.go:263-277",
+        "processor/source-manifest/status.go:175-189"
+      ],
+      "rationale": "Both halves fix the same audit finding (removed sources lingering as phantom 'watching' entries): remove drops the record and decrements expectedCount, dropSourceStatus calls it, remembers the instance in removedSources and republishes. Neither is correct without the other."
+    },
+    {
+      "id": "pos-06",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-component-go-Component-handleStatusReport",
+      "b": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-status-go-statusAggregator-allSeeded",
+      "evidence": [
+        "processor/source-manifest/component.go:314-322",
+        "processor/source-manifest/status.go:145-157",
+        "processor/source-manifest/status.go:110-120"
+      ],
+      "rationale": "handleStatusReport defines seed-complete as allSeeded && !anyErrored and its comment explains why all-reported is not enough; allSeeded is the predicate that encodes 'every expected source is watching or idle'. The honest-readiness rule is split between the caller's transition logic and the aggregator's predicate."
+    },
+    {
+      "id": "pos-07",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-source-manifest.struct.processor-source-manifest-config-go-ManifestSource",
+      "b": "semselect.semsource.golang.semsource-source-manifest.function.processor-source-manifest-ingest-go-sourceEntryToManifestSource",
+      "evidence": [
+        "processor/source-manifest/config.go:34-48",
+        "processor/source-manifest/ingest.go:287-300"
+      ],
+      "rationale": "ManifestSource is the external-facing projection of a configured source and sourceEntryToManifestSource is the field-by-field construction of it from config.SourceEntry on ingest add. Adding or dropping a ManifestSource field means editing the converter in the other file."
+    },
+    {
+      "id": "pos-08",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-component-go-Component-buildSummary",
+      "b": "semselect.semsource.golang.semsource-source-manifest.struct.processor-source-manifest-payload_summary-go-DomainSummary",
+      "evidence": [
+        "processor/source-manifest/component.go:454-493",
+        "processor/source-manifest/payload_summary.go:19-25"
+      ],
+      "rationale": "buildSummary is the only producer of DomainSummary: it splits each source's type_counts key into domain and type, accumulates EntityCount and Types, and tracks contributing Sources. The struct's fields are meaningless without the aggregation that fills them."
+    },
+    {
+      "id": "pos-09",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semsource-source-manifest.function.processor-source-manifest-status-go-buildPredicateSchema",
+      "b": "semselect.semsource.golang.semsource-source-manifest.struct.processor-source-manifest-payload_predicates-go-PredicateDescriptor",
+      "evidence": [
+        "processor/source-manifest/status.go:214-233",
+        "processor/source-manifest/payload_predicates.go:26-32"
+      ],
+      "rationale": "buildPredicateSchema fills every PredicateDescriptor field: name from the vocabulary registry, description and data_type from predicate metadata with a 'string' default, and role from predicateRole. The descriptor's documented role values are exactly the ones the builder assigns."
+    },
+    {
+      "id": "pos-10",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semsource-source-manifest.chunk.configs-tiers-README-md-0004",
+      "b": "semselect.semsource.golang.semsource-source-manifest.const.processor-source-manifest-readiness-go-ReadinessNote",
+      "evidence": [
+        "configs/tiers/README.md:35-38",
+        "processor/source-manifest/readiness.go:5-17"
+      ],
+      "rationale": "The README's Tier 0 note tells operators to poll source_status for embedding.ready and index.ready and says counts are no longer a readiness proxy; ReadinessNote is the canonical prose contract for those two signals, shared by the MCP source_status tool and the HTTP status endpoint. The passage documents the behaviour the constant defines."
+    },
+    {
+      "id": "neg-01",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-source-manifest.struct.processor-source-manifest-payload_ingest-go-IngestError",
+      "b": "semselect.semsource.golang.semsource-source-manifest.struct.processor-source-manifest-payload_status-go-SourceError",
+      "evidence": [
+        "processor/source-manifest/payload_ingest.go:23-26",
+        "processor/source-manifest/payload_ingest.go:60-64",
+        "processor/source-manifest/payload_status.go:37-62"
+      ],
+      "rationale": "Same shape (a typed string code plus message) and a near-identical comment about codes letting callers branch on retryability without scraping logs. IngestError is the synchronous reply envelope for add/remove requests; SourceError is the asynchronous runtime failure a source reports in its status, with its own code set. Grouping them merges the ingest API with status aggregation."
+    },
+    {
+      "id": "neg-02",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-source-manifest.struct.processor-source-manifest-config-go-Config",
+      "b": "semselect.semsource.golang.semsource-source-manifest.struct.processor-source-manifest-ingest-go-IngestHandlerConfig",
+      "evidence": [
+        "processor/source-manifest/config.go:12-32",
+        "processor/source-manifest/ingest.go:37-55"
+      ],
+      "rationale": "Two Config types in one package. Config is the component's JSON configuration (namespace, sources, timeouts) decoded and validated in NewComponent; IngestHandlerConfig is the host-wired runtime dependency bundle (KV store, spawn options, API token, path allowlist) passed to RegisterIngestHandlers after Start and never JSON-decoded. Only the suffix is shared."
+    },
+    {
+      "id": "neg-03",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-source-manifest.var.processor-source-manifest-factory-go-manifestSchema",
+      "b": "semselect.semsource.golang.semsource-source-manifest.function.processor-source-manifest-status-go-buildPredicateSchema",
+      "evidence": [
+        "processor/source-manifest/factory.go:10-11",
+        "processor/source-manifest/status.go:203-205",
+        "processor/source-manifest/component.go:617-620"
+      ],
+      "rationale": "Both are 'schema' in the source-manifest package. manifestSchema is the component's configuration schema reflected from Config for the component registry and ConfigSchema(); buildPredicateSchema produces the predicate vocabulary advertised to consumers per source type. Configuration shape and published vocabulary are unrelated responsibilities."
+    },
+    {
+      "id": "neg-04",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-source-manifest.function.processor-source-manifest-factory-go-Register",
+      "b": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-ingest-go-Component-RegisterIngestHandlers",
+      "evidence": [
+        "processor/source-manifest/factory.go:18-33",
+        "processor/source-manifest/ingest.go:57-63",
+        "processor/source-manifest/ingest.go:85-92"
+      ],
+      "rationale": "Both are 'Register' entry points called by the host program. Register supplies one-time registry metadata (factory, schema, protocol, version) so the component can be instantiated; RegisterIngestHandlers opens live NATS request/reply subscriptions for the ingest API on an already running component. Discovery metadata and a runtime subject surface are different subjects."
+    },
+    {
+      "id": "neg-05",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-source-manifest.function.processor-source-manifest-ingest-go-stringSliceEqual",
+      "b": "semselect.semsource.golang.semsource-source-manifest.function.processor-source-manifest-status-go-matchesPrefixes",
+      "evidence": [
+        "processor/source-manifest/ingest.go:317-337",
+        "processor/source-manifest/status.go:209-216",
+        "processor/source-manifest/status.go:248-255"
+      ],
+      "rationale": "Two tiny []string helpers of the same shape (loop, compare, return bool). stringSliceEqual exists for manifestSourcesEqual, the manifest-level identity that makes duplicate adds idempotent; matchesPrefixes filters vocabulary predicates by source-type prefix for the predicate schema. A generic-utility community joining them would bridge manifest ingest and predicate advertisement."
+    },
+    {
+      "id": "neg-06",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-payloads-go-ManifestPayload-MarshalJSON",
+      "b": "semselect.semsource.golang.semsource-source-manifest.method.processor-source-manifest-payload_ingest-go-AddReply-MarshalJSON",
+      "evidence": [
+        "processor/source-manifest/payloads.go:27-31",
+        "processor/source-manifest/payload_ingest.go:143-147"
+      ],
+      "rationale": "Byte-for-byte the same Alias boilerplate implementing json.Marshaler. One serialises the manifest broadcast published at startup and on every add/remove; the other serialises the reply to a programmatic source-add request. The boilerplate carries no evidence about either responsibility."
+    },
+    {
+      "id": "neg-07",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-source-manifest.var.processor-source-manifest-status-go-sourcePredicatePrefixes",
+      "b": "semselect.semsource.golang.semsource-source-manifest.function.processor-source-manifest-lifecycle_scope-go-systemsForComponentConfig",
+      "evidence": [
+        "processor/source-manifest/status.go:191-201",
+        "processor/source-manifest/lifecycle_scope.go:33-40",
+        "processor/source-manifest/lifecycle_scope.go:59-74"
+      ],
+      "rationale": "Both are dispatch tables keyed by the same eight source kinds (ast, git, doc, config, url, image, video, audio). sourcePredicatePrefixes maps a source type to the vocabulary prefixes it emits for the predicate schema; systemsForComponentConfig decodes a stored component config by factory name to recover entity-ID system slugs for staleness marking on removal. Shared keys, unrelated outputs."
+    },
+    {
+      "id": "neg-08",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semsource-source-manifest.function.processor-source-manifest-http_sources-go-watchMode",
+      "b": "semselect.semsource.golang.semsource-source-manifest.const.processor-source-manifest-status-go-SourcePhaseWatching",
+      "evidence": [
+        "processor/source-manifest/http_sources.go:176-181",
+        "processor/source-manifest/http_sources.go:28",
+        "processor/source-manifest/status.go:36-41"
+      ],
+      "rationale": "Both produce the word 'watch': watchMode renders a registration handle's static Mode ('watch' or 'snapshot') from the configured Watch flag, while SourcePhaseWatching is a live phase a source component reports after its seed. A watch-mode source can be ingesting or errored; mode is configuration, phase is runtime state."
+    },
+    {
+      "id": "neg-09",
+      "polarity": "negative",
+      "a": "semselect.semsource.web.semsource-source-manifest.chunk.configs-tiers-README-md-0022",
+      "b": "semselect.semsource.golang.semsource-source-manifest.struct.processor-source-manifest-payload_ingest-go-Provenance",
+      "evidence": [
+        "configs/tiers/README.md:291-293",
+        "processor/source-manifest/payload_ingest.go:66-74"
+      ],
+      "rationale": "The README's enablement passage reports 'provenance: embedding' on code_search, meaning which retrieval layer produced a hit. The Provenance struct is caller-supplied attribution (actor, on_behalf_of, trace_id) on add/remove requests, opaque to SemSource. Same word, retrieval provenance versus request attribution."
+    },
+    {
+      "id": "neg-10",
+      "polarity": "negative",
+      "a": "semselect.semsource.web.semsource-source-manifest.chunk.configs-tiers-README-md-0021",
+      "b": "semselect.semsource.golang.semsource-source-manifest.const.processor-source-manifest-component-go-summaryQuerySubject",
+      "evidence": [
+        "configs/tiers/README.md:253-255",
+        "processor/source-manifest/component.go:29-39"
+      ],
+      "rationale": "The README passage describes graph.query.summary and graph_summary as the substrate's discovery resolver; summaryQuerySubject is graph.query.sourceSummary, and its comment records that squatting on graph.query.summary produced a race between two reply shapes. The shared 'summary' subject name is exactly the collision the code was changed to avoid."
+    }
+  ]
+}

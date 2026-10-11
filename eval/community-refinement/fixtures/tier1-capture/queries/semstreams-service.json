@@ -1,0 +1,119 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-service",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "b273f97a20dbf33113652a74f54a2c898653954bbaae607205a9e49f0c87ff53",
+  "passages_sha256": null,
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "Does NewMetrics accept a metrics service config JSON that carries a field the service does not know, and what error does it return if not?",
+      "answer": "No. NewMetrics decodes rawConfig through decodeStrictServiceJSON, which builds a json.Decoder with DisallowUnknownFields, so an unknown field fails decoding and NewMetrics returns it wrapped as \"parse metrics config: <decode error>\". Empty or whitespace-only rawConfig is accepted (decodeStrictServiceJSON returns nil without decoding), after which NewMetrics applies the defaults port 9090 and path /metrics.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-service.function.service-metrics-go-NewMetrics",
+          "semselect.semsource.golang.semstreams-service.function.service-service_configs-go-decodeStrictServiceJSON"
+        ]
+      ],
+      "evidence": [
+        "service/metrics.go:71-84",
+        "service/service_configs.go:130-140"
+      ],
+      "rationale": "NewMetrics shows the config goes through decodeStrictServiceJSON, the \"parse metrics config\" wrapping and the defaults, but not what strict decoding rejects; decodeStrictServiceJSON shows DisallowUnknownFields and the empty-input pass-through but not which service calls it or how the error surfaces. Neither alone answers."
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "Which service entry does ComponentsImplementing look up on the Manager, what does it return when that entry is missing, and does ResolveServiceConfigs add that service when the desired services map omits it?",
+      "answer": "ComponentsImplementing reads m.services[\"component-manager\"] and asserts *ComponentManager; it returns nil when the Manager is nil, the entry is absent, or the entry is not a *ComponentManager. ResolveServiceConfigs calls resolveServiceConfigs with applyDefaults true, which materializes a missing \"component-manager\" as Enabled:true with config {} (and likewise \"service-manager\" with {} and \"metrics\" with {\"path\":\"/metrics\",\"port\":9090}), so the resolved map always names component-manager.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-service.function.service-rule_pack_bind-go-ComponentsImplementing",
+          "semselect.semsource.golang.semstreams-service.function.service-service_configs-go-ResolveServiceConfigs",
+          "semselect.semsource.golang.semstreams-service.function.service-service_configs-go-resolveServiceConfigs",
+          "semselect.semsource.golang.semstreams-service.function.service-service_configs-go-materializeServiceConfig"
+        ]
+      ],
+      "evidence": [
+        "service/rule_pack_bind.go:28-39",
+        "service/service_configs.go:59-64",
+        "service/service_configs.go:79-96"
+      ],
+      "rationale": "ComponentsImplementing shows the \"component-manager\" lookup and its nil returns but says nothing about defaults; ResolveServiceConfigs shows the exported path applies defaults; resolveServiceConfigs names which services are materialized and with which config; materializeServiceConfig shows the entry is added only when absent and with Enabled true. No single entity links the lookup to the guarantee."
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "Why is there no milestone entry among the constructors RegisterAll registers, and could NewMilestoneService be registered as-is?",
+      "answer": "RegisterAll registers only metrics, message-logger, log-forwarder, metrics-forwarder, component-manager, heartbeat and StorageObservabilityServiceName; no milestone name. A registry entry must be a Constructor: func(rawConfig json.RawMessage, deps *Dependencies) (Service, error). NewMilestoneService is func(subscriber milestoneStarter, client *natsclient.Client, cfg agentrun.StartConfig, logger *slog.Logger) *MilestoneService, taking a pre-built subscriber from the composition root and returning no error, so it does not fit Constructor and cannot be registered unchanged.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-service.function.service-register-go-RegisterAll",
+          "semselect.semsource.golang.semstreams-service.type.service-dependencies-go-Constructor",
+          "semselect.semsource.golang.semstreams-service.function.service-milestone_service-go-NewMilestoneService"
+        ]
+      ],
+      "evidence": [
+        "service/register.go:8-19",
+        "service/dependencies.go:40-43",
+        "service/milestone_service.go:61-64"
+      ],
+      "rationale": "RegisterAll shows the registered name set (no milestone) but not why; Constructor gives the signature a registered function must have; NewMilestoneService shows a signature that takes a pre-built subscriber and returns no error. The mismatch is only visible with all three, and no single entity states it."
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "Which built-in service is currently the only implementer of the Configurable interface, and what type, default, minimum and maximum does its config schema advertise for the port property?",
+      "answer": "Only the Metrics service implements Configurable (ConfigSchema() ConfigSchema); the interface is reserved for future UI features and the Discovery service exposes it over HTTP. Metrics.ConfigSchema advertises port as type \"int\", description \"Port for the metrics HTTP server\", Default 9090, Minimum 1024, Maximum 65535, Category \"network\"; path is a \"string\" with Default \"/metrics\"; the required list is empty because every field has a default.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-service.interface.service-configurable-go-Configurable",
+          "semselect.semsource.golang.semstreams-service.method.service-metrics-go-Metrics-ConfigSchema"
+        ]
+      ],
+      "evidence": [
+        "service/configurable.go:7-17",
+        "service/metrics.go:354-377"
+      ],
+      "rationale": "The Configurable interface comment is the only text saying Metrics is currently the sole implementer; Metrics.ConfigSchema is the only text carrying the advertised port type, default and bounds. Each half of the answer lives in one entity and neither entity contains the other half."
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "Which interval strings does the heartbeat service's HeartbeatConfig.Validate reject, and what exact error message does each case return?",
+      "answer": "An empty Interval passes (nil; the comment says a default will be used). Otherwise the string is parsed with time.ParseDuration: an unparsable value returns \"invalid interval: <parse error>\"; a duration <= 0 returns \"invalid interval: must be positive\"; a duration under one second returns \"invalid interval: must be at least 1s\". Any parsable duration of at least 1s passes.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-service.method.service-heartbeat-go-HeartbeatConfig-Validate"
+        ]
+      ],
+      "evidence": [
+        "service/heartbeat.go:25-42"
+      ],
+      "rationale": "Only HeartbeatConfig.Validate holds the three interval rules and their messages. Lookalikes: ManagerConfig.Validate also parses duration strings but for http_read_timeout/http_write_timeout with different messages; NewHeartbeatService and newHeartbeatServiceForTest emit their own \"invalid interval: %w\" without the positive/1s rules; MetricsConfig, LogForwarderConfig and ComponentManagerConfig have Validate methods too."
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "What exact error text does Registry.Register return when a constructor is registered under a name the registry already holds, and which two inputs does it reject before taking the lock?",
+      "answer": "A duplicate name returns the plain fmt.Errorf error \"service <name> already registered\" (no typed error). Before locking r.mu it rejects an empty name with \"service name cannot be empty\" and a nil constructor with \"constructor cannot be nil\". On success it stores the constructor in r.constructors under the name and returns nil.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-service.method.service-registry-go-Registry-Register"
+        ]
+      ],
+      "evidence": [
+        "service/registry.go:23-41"
+      ],
+      "rationale": "Registry.Register is the only entity with these checks and texts. The lookalike is DuplicateServiceError in service_configs.go, whose Error() reads \"service <name> is already registered\" (nearly the same words) but is a typed error for composition-level duplicates, not the constructor registry; RegisterAll only wraps Register's error as \"register <name>: ...\"."
+    }
+  ]
+}

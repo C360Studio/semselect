@@ -1,0 +1,169 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "family": "semstreams-graph-clustering",
+  "outcome": "ok",
+  "failure": null,
+  "milestones": [
+    {
+      "name": "prepare_start",
+      "utc": "2026-10-10T13:41:04Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "prepare_done",
+      "utc": "2026-10-10T13:41:05Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": {
+        "split": "held-out",
+        "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+        "files": 8,
+        "workspace_sha256": "812aeaccca05f630a3ebb9f7fce2c7f26fed122271ed3fb88bdbe8bb8a77832f"
+      }
+    },
+    {
+      "name": "build_start",
+      "utc": "2026-10-10T13:41:06Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "build_done",
+      "utc": "2026-10-10T13:41:07Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "compose_up_start",
+      "utc": "2026-10-10T13:41:07Z",
+      "elapsed_s_since_compose_up": 0,
+      "detail": null
+    },
+    {
+      "name": "containers_healthy",
+      "utc": "2026-10-10T13:41:19Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": null
+    },
+    {
+      "name": "phase_ready",
+      "utc": "2026-10-10T13:41:19Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 175,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": false,
+          "state": "building",
+          "lag": 177
+        }
+      }
+    },
+    {
+      "name": "index_ready",
+      "utc": "2026-10-10T13:41:19Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 175,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": false,
+          "state": "building",
+          "lag": 177
+        }
+      }
+    },
+    {
+      "name": "embedding_ready",
+      "utc": "2026-10-10T13:41:29Z",
+      "elapsed_s_since_compose_up": 22,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 175,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        }
+      }
+    },
+    {
+      "name": "structural_start",
+      "utc": "2026-10-10T13:41:31Z",
+      "elapsed_s_since_compose_up": 24,
+      "detail": null
+    },
+    {
+      "name": "structural_done",
+      "utc": "2026-10-10T13:42:21Z",
+      "elapsed_s_since_compose_up": 74,
+      "detail": {
+        "entities": 175,
+        "embedded": 175,
+        "explicit_edges": 624,
+        "voting_edges": 785,
+        "level0_communities": 6,
+        "checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        }
+      }
+    },
+    {
+      "name": "mutualknn_start",
+      "utc": "2026-10-10T13:42:21Z",
+      "elapsed_s_since_compose_up": 74,
+      "detail": null
+    },
+    {
+      "name": "mutualknn_done",
+      "utc": "2026-10-10T13:42:22Z",
+      "elapsed_s_since_compose_up": 75,
+      "detail": null
+    },
+    {
+      "name": "graph_unchanged_check",
+      "utc": "2026-10-10T13:42:22Z",
+      "elapsed_s_since_compose_up": 75,
+      "detail": {
+        "before": {
+          "total_entities": 175,
+          "embedding_ready": true,
+          "embedding_indexed_revision": 177,
+          "embedding_target_revision": 177,
+          "embedding_revision": "177"
+        },
+        "after": {
+          "total_entities": 175,
+          "embedding_ready": true,
+          "embedding_indexed_revision": 177,
+          "embedding_target_revision": 177,
+          "embedding_revision": "177"
+        },
+        "mutualknn_total_entities": 175,
+        "structural_total_entities": 175,
+        "unchanged": true
+      }
+    }
+  ]
+}

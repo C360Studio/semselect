@@ -1,0 +1,245 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semsource",
+    "commit": "4093d3ce421371f4a99d7168e372552899bf6795"
+  },
+  "semsource_commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+  "semstreams_version": "v1.0.0-beta.160",
+  "semembed": {
+    "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+    "model": "Snowflake/snowflake-arctic-embed-s"
+  },
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.5tsuwF/config/semsource-ui.tier1.json",
+    "sha256": "ac22ff7181170aec18974a24b823d11a0201a924836cc65dd62e85ae0dffb9b1"
+  },
+  "compose_file": {
+    "path": "/Users/coby/Code/c360/semsource/docker-compose.yml",
+    "sha256": "1ac8fccdc3a8bb63b673900ba11258279c5178594e44cf723ffecf7c27170601"
+  },
+  "compose_override": {
+    "path": "/Users/coby/Code/c360/semselect/eval/community-refinement/fixtures/tier1-capture/compose.tier1.yml",
+    "sha256": "8a3260b8c6e086b824dffdae031844e30b373d07a9427d726fe7246dc1409d68"
+  },
+  "machine": {
+    "tool_os": "darwin",
+    "tool_arch": "arm64",
+    "docker_arch": "aarch64"
+  },
+  "tool": {
+    "module": "github.com/c360studio/semselect/eval/community-refinement/legacy-capture",
+    "go_version": "go1.26.4",
+    "vcs_revision": "618271bd239896bef81715e5be9c00e1a38afdbc",
+    "vcs_modified": "true"
+  },
+  "nats_url": "nats://127.0.0.1:14222",
+  "started_utc": "2026-10-10T14:35:50Z",
+  "finished_utc": "2026-10-10T14:35:50Z",
+  "run": {
+    "provenance": "legacy SemStreams capture; not a SemEngine result",
+    "compose_project": "semselect-tier1-capture",
+    "family": {
+      "id": "semsource-ui",
+      "split": "held-out",
+      "role": "sparse explicit topology",
+      "repo": "https://github.com/C360Studio/semsource",
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "license": "MIT",
+      "workspace_sha256": "0b4539115bfa5979e2b7ec14740936ef24006bbe5c63966e44ec7eee386de495",
+      "files": 16,
+      "tier0_entities_total": 206
+    },
+    "config": {
+      "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.5tsuwF/config/semsource-ui.tier1.json",
+      "sha256": "ac22ff7181170aec18974a24b823d11a0201a924836cc65dd62e85ae0dffb9b1",
+      "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+      "identity_profile": "explicit-only",
+      "structural_baseline": {
+        "include_siblings": false,
+        "include_system_peers": false,
+        "sibling_weight": 0.7,
+        "max_siblings": 5,
+        "system_peer_weight": 0.2,
+        "max_system_peers": 8
+      },
+      "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+    },
+    "semsource": {
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "dirty_paths": 0,
+      "image_id": "sha256:4c0fde6ff31b2a6cab42ba0f7f90e099ba4a87e281566c2ed9e2ff671ce57050",
+      "semstreams_version": "v1.0.0-beta.160",
+      "log_level": "info"
+    },
+    "semembed": {
+      "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "image_id": "sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "model": "Snowflake/snowflake-arctic-embed-s",
+      "cpus": "2"
+    },
+    "semselect": {
+      "commit": "618271bd239896bef81715e5be9c00e1a38afdbc",
+      "dirty_paths": 12
+    },
+    "docker": {
+      "os": "Docker Desktop",
+      "server_version": "29.8.2",
+      "architecture": "aarch64",
+      "ncpu": 12,
+      "mem_total_bytes": 24895582208
+    },
+    "host_cpu": "Apple M3 Pro",
+    "status_at_capture": {
+      "embedding": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 211,
+        "target_revision": 211,
+        "revision": "211",
+        "last_synced": "2026-10-10T14:34:48Z"
+      },
+      "index": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 211,
+        "target_revision": 211,
+        "revision": "211",
+        "last_synced": "2026-10-10T14:34:48Z"
+      },
+      "namespace": "semselect",
+      "note": "readiness is honest (semstreams ADR-066): index.ready means the structural index (NAME_INDEX) has caught up to the latest committed write — byName / code_context / code_impact are reliable. embedding.ready means the semantic pipeline has caught up — code_search is reliable (surfaced, not gated). A miss is a genuine absence only when status.phase is \"ready\" (every configured source has finished its initial seed) AND the relevant index signal is ready; while status.phase is \"seeding\" a miss may simply be not-yet-ingested. For exact read-your-write freshness, compare the numeric indexed_revision field against your write's revision.",
+      "phase": "ready",
+      "sources": [
+        {
+          "entity_count": 206,
+          "error_count": 0,
+          "instance_name": "ast-source-semsource-ui",
+          "phase": "watching",
+          "publish_total": 211,
+          "source_type": "ast",
+          "type_counts": {
+            "code.folder": 7,
+            "code.repo": 1,
+            "svelte.component": 7,
+            "svelte.const": 33,
+            "svelte.file": 7,
+            "svelte.function": 26,
+            "svelte.var": 57,
+            "typescript.class": 3,
+            "typescript.const": 18,
+            "typescript.file": 9,
+            "typescript.function": 21,
+            "typescript.interface": 4,
+            "typescript.type": 7,
+            "typescript.var": 6
+          }
+        }
+      ],
+      "timestamp": "2026-10-10T14:34:43.660695792Z",
+      "total_entities": 206
+    },
+    "milestones": [
+      {
+        "name": "prepare_start",
+        "utc": "2026-10-10T14:34:34Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "prepare_done",
+        "utc": "2026-10-10T14:34:34Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": {
+          "split": "held-out",
+          "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+          "files": 16,
+          "workspace_sha256": "0b4539115bfa5979e2b7ec14740936ef24006bbe5c63966e44ec7eee386de495"
+        }
+      },
+      {
+        "name": "build_start",
+        "utc": "2026-10-10T14:34:35Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "build_done",
+        "utc": "2026-10-10T14:34:36Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "compose_up_start",
+        "utc": "2026-10-10T14:34:36Z",
+        "elapsed_s_since_compose_up": 0,
+        "detail": null
+      },
+      {
+        "name": "containers_healthy",
+        "utc": "2026-10-10T14:34:48Z",
+        "elapsed_s_since_compose_up": 12,
+        "detail": null
+      },
+      {
+        "name": "phase_ready",
+        "utc": "2026-10-10T14:34:49Z",
+        "elapsed_s_since_compose_up": 13,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 206,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          }
+        }
+      },
+      {
+        "name": "index_ready",
+        "utc": "2026-10-10T14:34:49Z",
+        "elapsed_s_since_compose_up": 13,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 206,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          }
+        }
+      },
+      {
+        "name": "embedding_ready",
+        "utc": "2026-10-10T14:34:49Z",
+        "elapsed_s_since_compose_up": 13,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 206,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          }
+        }
+      }
+    ]
+  }
+}

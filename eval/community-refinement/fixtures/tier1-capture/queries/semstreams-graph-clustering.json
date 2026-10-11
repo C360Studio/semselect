@@ -1,0 +1,116 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-graph-clustering",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "a3a369d7efc3e91bd38b96a34ef82956a721d382cef58d557399894aeb22e312",
+  "passages_sha256": "14d5939e313ba736b347697e2ff3b9f1cbfb7db3f4194325eaa2cfe22bfee1a1",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "What conditions does the README list for graph-clustering reporting healthy, and which conditions does the Health() method actually evaluate to set Healthy and Status?",
+      "answer": "README: NATS and required KV dependencies initialised, detection runs complete within timeout, LLM API reachable (if enabled), NATS available for similarity queries (if semantic_gap enabled). Health(): Healthy = running && errorCount == 0 && no graph-state poison; Status is \"stopped\" or \"running\", replaced by graph.IndexStateResetRequired (LastError graph.ErrorCodeGraphStateResetRequired) when poison is latched; errorCount > 0 sets LastError \"errors occurred during processing\". The code checks no LLM reachability and no timeout.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semstreams-graph-clustering.chunk.processor-graph-clustering-README-md-0012",
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-Health"
+        ]
+      ],
+      "evidence": [
+        "processor/graph-clustering/README.md:244-250",
+        "processor/graph-clustering/component.go:864-882"
+      ],
+      "rationale": "The README Health passage supplies the documented conditions (LLM reachable, runs within timeout) and Health() supplies the real rule (running, zero errors, no poison latch). The passage never mentions the poison latch or error counter and the method never mentions the LLM or a timeout, so neither alone answers both halves."
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "After graph-clustering has latched a graph-state contract violation, what does a graph.clustering.query.members request receive, and is the request body parsed before that check?",
+      "answer": "handleQueryMembersNATS calls c.graphStateContractError(\"handleQueryMembersNATS\") before any parsing; when graphStatePoison holds a *graph.StateContractError that returns errs.WrapFatal(contractErr, \"Component\", \"handleQueryMembersNATS\", \"authoritative graph state requires operator reset and canonical reingest\"), so the handler returns (nil, that fatal error) without unmarshalling MembersRequest or reading COMMUNITY_INDEX. With no poison latched it returns nil and the handler proceeds to parse the request.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-query-go-Component-handleQueryMembersNATS",
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-graphStateContractError"
+        ]
+      ],
+      "evidence": [
+        "processor/graph-clustering/query.go:143-155",
+        "processor/graph-clustering/component.go:1856-1863"
+      ],
+      "rationale": "The handler shows the poison guard runs first, with operation name handleQueryMembersNATS, before json.Unmarshal and getCommunity; graphStateContractError (component.go) supplies the condition (a loaded *graph.StateContractError) and the exact WrapFatal message. The handler alone never shows the error text and the helper alone never shows which handler calls it or when."
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "Both the anomaly relationship querier and the community-detection KV provider prefix-scan INCOMING_INDEX with entityID.>; what does each return per composite key, and which one deduplicates source IDs?",
+      "answer": "kvRelationshipQuerier.GetIncomingRelationships returns one inference.RelationshipInfo per key: FromEntityID = the first six dot-separated suffix tokens, ToEntityID = the queried entity, Predicate = graph.DecodePredicateToken of the seventh token (keys with fewer than seven parts, invalid IDs, undecodable/empty or unparseable predicates are skipped); it does not deduplicate. kvProvider.getIncomingNeighbors parses the same shape but returns only distinct source entity IDs (seen map) and discards the predicate after decoding and validating it.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-anomaly-go-kvRelationshipQuerier-GetIncomingRelationships",
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-kvProvider-getIncomingNeighbors"
+        ]
+      ],
+      "evidence": [
+        "processor/graph-clustering/anomaly.go:113-159",
+        "processor/graph-clustering/component.go:2181-2226"
+      ],
+      "rationale": "GetIncomingRelationships (anomaly.go) establishes the per-key RelationshipInfo with predicate and no dedupe; getIncomingNeighbors (component.go) establishes the distinct-source-only result with the seen map. Each method documents only its own return shape, so the comparison needs both."
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "When the readiness gate defers a community-detection tick, what is logged and counted, and what happens to a defer reason that is not in the closed label set?",
+      "answer": "recordDefer calls metrics.countDefer(reason), then logs \"community detection deferred\" with reason, status_known, status_age, state, lag, staleness_ms (plus status_error when the reading carries one) at WARN the first tick a reason appears or changes (noteGateOutcome) and at Debug on repeats. countDefer increments semstreams_graph_clustering_defer_total{reason} only when the reason is in deferReasons (graph.AllDeferReasons); any other reason is dropped without incrementing anything, to avoid an unbounded label.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-recordDefer",
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-metrics-go-clusteringMetrics-countDefer"
+        ]
+      ],
+      "evidence": [
+        "processor/graph-clustering/component.go:1678-1702",
+        "processor/graph-clustering/metrics.go:270-277",
+        "processor/graph-clustering/metrics.go:92"
+      ],
+      "rationale": "recordDefer (component.go) gives the metric call, the log fields and the WARN-on-transition/Debug-on-repeat policy; countDefer (metrics.go) gives the closed-set check and the silent drop. recordDefer only shows a call to countDefer, and countDefer says nothing about logging, so neither establishes the whole answer."
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "When min_community_size is omitted (zero) in the graph-clustering config, what value does Config.ApplyDefaults assign to it?",
+      "answer": "3: ApplyDefaults sets c.MinCommunitySize = 3 when it is 0 (DefaultConfig also uses MinCommunitySize: 3). The README Configuration Options table and its example config state 2, which does not match the code.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Config-ApplyDefaults"
+        ]
+      ],
+      "evidence": [
+        "processor/graph-clustering/component.go:420-422",
+        "processor/graph-clustering/README.md:101"
+      ],
+      "rationale": "ApplyDefaults is the code that fills the zero value and is the only entity that answers what it assigns. The lookalike is the README Configuration Options passage (and the example config), which documents a default of 2 and would give the wrong value; DefaultConfig shows the same 3 but for the no-config path, not ApplyDefaults."
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "Which querySimilarityFinder method turns a failed graph.embedding.query.similar request into an empty nil, nil result instead of returning the error, and which consumer depends on that?",
+      "answer": "FindSimilar: when natsClient.RequestClassified fails (transport or handler, e.g. the source entity has no embedding yet) it logs at Debug (\"similarity query failed (transport or handler)\") and returns nil, nil - blanket fail-open - so anomaly detection's SemanticGapDetector keeps walking other entities; it also returns nil, nil when natsClient is nil. Only a marshal or parse error is returned. The clustering-edge consumer uses findSimilarClassified instead, which preserves the classified error.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-similarity-go-querySimilarityFinder-FindSimilar"
+        ]
+      ],
+      "evidence": [
+        "processor/graph-clustering/similarity.go:68-117"
+      ],
+      "rationale": "FindSimilar's body and doc comment state the fail-open policy and name SemanticGapDetector as its consumer. The lookalike is findSimilarClassified, the sibling method with the identical RPC that deliberately returns the classified error for semanticFinderAdapter; the adapter's SimilarNeighbors is a second lookalike that also returns nil, nil but only for a recognised embedding miss."
+    }
+  ]
+}

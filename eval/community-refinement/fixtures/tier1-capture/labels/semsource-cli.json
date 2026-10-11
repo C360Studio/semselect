@@ -1,0 +1,361 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semsource-cli",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "packet-only"
+  },
+  "packets_sha256": "14fcd7e0c23feca745835418d511da987ac2ac4ca9e39af40f9455931dc89ce2",
+  "labels": [
+    {
+      "pair_hash": "fe46bfdd83ad6319b08ebedc8062d57be2211974946022550346a6c7652e25c7",
+      "rank": 1,
+      "label": "suppress",
+      "evidence": [
+        "func joinPaths(paths []string) string",
+        "links in (4): method:cli-wizard_cfg-go-cfgWizard-Prompts calls; method:cli-wizard_doc-go-docWizard-Prompts calls; method:cli-wizard_image-go-imageWizard-Prompts calls",
+        "detectImagePaths checks for common image directories in the working directory."
+      ],
+      "rationale": "joinPaths is a generic string-join helper called from three different wizards, while detectImagePaths probes the working directory for image directories; the only overlap is the word \"paths\", so the hint would attach a utility node to the image wizard's subject."
+    },
+    {
+      "pair_hash": "2aff249825b0db109f84f5ac6ed47033af8e57ad69995ddcf01b5c7ac5554c61",
+      "rank": 2,
+      "label": "suppress",
+      "evidence": [
+        "Header prints a bold section header.",
+        "term.Success(fmt.Sprintf(\"Config written to %s\", configPath))",
+        "data, err := json.MarshalIndent(cfg, \"\", \"  \")"
+      ],
+      "rationale": "writeAndSummarize serialises and writes the wizard's config; Header is a generic terminal output primitive on Term that writeAndSummarize does not even call. Pairing them joins a utility node to the config-writing subject."
+    },
+    {
+      "pair_hash": "7ae40702dbeb8862b0453e8c4b7dc4dcd2c90db503d92f9b4773bb46f7a2eded",
+      "rank": 3,
+      "label": "suppress",
+      "evidence": [
+        "detectImagePaths checks for common image directories in the working directory.",
+        "ffmpegAvailable reports whether ffmpeg is present in PATH.",
+        "links in (3): method:cli-wizard_audio-go-audioWizard-Available calls; method:cli-wizard_video-go-videoWizard-Available calls"
+      ],
+      "rationale": "One probes the working directory for image directories for the image wizard, the other checks PATH for ffmpeg for the audio and video wizards; they share only the pattern of checking whether something exists."
+    },
+    {
+      "pair_hash": "ccc2cd87f0ac9061a5da5444f83d8aee71bf008a4bd818d0556bae4a4121c752",
+      "rank": 4,
+      "label": "suppress",
+      "evidence": [
+        "func splitComma(s string) []string",
+        "func truncate(s string, maxLen int) string",
+        "links in (3): function:cli-remove-go-Remove calls; function:cli-sources-go-Sources calls"
+      ],
+      "rationale": "Two small generic string helpers in different files with unrelated callers (flag parsing in add.go versus display truncation for the sources and remove listings); only the string-utility pattern is shared."
+    },
+    {
+      "pair_hash": "5111bbeda68982d15c45625d0969a273611d4b86ef2cdad37639503de1af59ff",
+      "rank": 5,
+      "label": "suppress",
+      "evidence": [
+        "func splitComma(s string) []string",
+        "func joinPaths(paths []string) string",
+        "links in (7): function:cli-add-go-parseAudioFlags calls; function:cli-add-go-parseConfigFlags calls; function:cli-add-go-parseDocsFlags calls"
+      ],
+      "rationale": "One splits a comma list for flag parsing in add.go, the other joins paths for wizard display; both are generic string utilities with many callers and would join unrelated subjects."
+    },
+    {
+      "pair_hash": "e9bbf821323f6ab9375edd65b1985281de2e3b28374c32bbaafc3f1ca0ac1be1",
+      "rank": 6,
+      "label": "suppress",
+      "evidence": [
+        "Validate loads the config at configPath and prints a validation result.",
+        "term.Success(fmt.Sprintf(\"Config written to %s\", configPath))",
+        "cfg, err := config.LoadConfig(configPath)"
+      ],
+      "rationale": "Validate reads and validates an existing config for the validate command; writeAndSummarize serialises and writes a new one for the init wizard. Different commands that share only the configPath and term-reporting pattern."
+    },
+    {
+      "pair_hash": "e4609e99a4f3fe5ef3f8ab17855a9b96ee38ed62458f2b555f0a1848c33efb3f",
+      "rank": 7,
+      "label": "keep",
+      "evidence": [
+        "DetectProject scans the given directory and returns what it finds.",
+        "buildDetectedSources creates SourceEntry values from auto-detected project info.",
+        "links in (3): function:cli-wizard-go-Init calls; function:cli-wizard-go-InitQuick calls"
+      ],
+      "rationale": "DetectProject produces the ProjectInfo that buildDetectedSources consumes to build source entries; producer and consumer of one auto-detection behaviour, both driven from InitQuick."
+    },
+    {
+      "pair_hash": "d042fcc7dc1c5df893a695c5d9940c8fa8e605d4b586ea20fd4471bcebd5cff3",
+      "rank": 8,
+      "label": "keep",
+      "evidence": [
+        "detectGitRemote runs git to get the origin remote URL.",
+        "resolvableGitURL returns a git source URL that yields a non-empty source identity: the origin remote when available, else the repository's absolute path.",
+        "method:cli-wizard_git-go-gitWizard-Prompts calls"
+      ],
+      "rationale": "detectGitRemote obtains the origin remote and resolvableGitURL turns that remote into a usable source URL; both are called from the git wizard and together implement git source identity detection."
+    },
+    {
+      "pair_hash": "23d47e6cd96962a1f30aa17babcf2603b1d77a4df929a5bfa8283c1f017ae2ae",
+      "rank": 9,
+      "label": "suppress",
+      "evidence": [
+        "Select prints a numbered list and returns the 0-based index of the choice. Re-prompts on invalid input.",
+        "index = term.Select(\"Which source to remove?\", labels)",
+        "receiver struct:cli-term-go-Term"
+      ],
+      "rationale": "Select is a generic terminal prompt primitive on Term; Remove merely uses it the way any interactive command would. Keeping the hint would pull a utility node into the remove command's subject."
+    },
+    {
+      "pair_hash": "15886366eb3f4835a24d4213d146ec29e93c89ee8bfb8313cc6d8896b6d932a9",
+      "rank": 10,
+      "label": "suppress",
+      "evidence": [
+        "func detectDocPaths() []string",
+        "ffmpegAvailable reports whether ffmpeg is present in PATH.",
+        "if info, err := os.Stat(\"docs\"); err == nil && info.IsDir() {"
+      ],
+      "rationale": "One looks for docs/ and README.md for the doc wizard, the other checks PATH for ffmpeg for the audio and video wizards; they share only an existence-check pattern."
+    },
+    {
+      "pair_hash": "847d4cf0946d265f6019bc995d05c9ef556586d7fd741b5dccc4f7f6b050e5a7",
+      "rank": 11,
+      "label": "keep",
+      "evidence": [
+        "printDetectionSummary shows what was auto-detected.",
+        "DetectProject scans the given directory and returns what it finds.",
+        "links in (3): function:cli-wizard-go-Init calls; function:cli-wizard-go-InitQuick calls"
+      ],
+      "rationale": "printDetectionSummary reports the same ProjectInfo fields (HasGit, Language, HasDocs, ConfigFiles, HasImages) that DetectProject fills in, and both are invoked by Init and InitQuick; detection and its report are one behaviour."
+    },
+    {
+      "pair_hash": "8022eebf5fb60b349a0c9b77004864c1adbc7c781a039163cf258be1d2bfad9d",
+      "rank": 12,
+      "label": "keep",
+      "evidence": [
+        "info.DocPaths = append(info.DocPaths, \"README.md\")",
+        "paths = append(paths, \"README.md\")",
+        "if info, err := os.Stat(\"docs\"); err == nil && info.IsDir() {"
+      ],
+      "rationale": "DetectProject's documentation-detection block checks the same docs/ and README.md candidates that detectDocPaths checks; the two detect the same facts, so someone changing one would want the other alongside."
+    },
+    {
+      "pair_hash": "fbce8248bb11512c441ef9e5e590266575d8ca4986b5b9bf547cd8455be7d71b",
+      "rank": 13,
+      "label": "suppress",
+      "evidence": [
+        "sanitizeName lowercases and replaces non-alphanumeric chars with hyphens.",
+        "func truncate(s string, maxLen int) string",
+        "links in (3): function:cli-remove-go-Remove calls; function:cli-sources-go-Sources calls"
+      ],
+      "rationale": "A namespace slug helper in detect.go and a display truncation helper in sources.go; both are small string utilities with unrelated callers, sharing only the pattern."
+    },
+    {
+      "pair_hash": "29f3e44c4f3d19e64e137b4a8a71f79ddb24e9234c13527e6bf7c2980fc30819",
+      "rank": 14,
+      "label": "suppress",
+      "evidence": [
+        "detectLanguage checks for common manifest files in the current directory.",
+        "func detectDocPaths() []string",
+        "paths = append(paths, \"docs/\")"
+      ],
+      "rationale": "detectLanguage maps manifest files to a language for the ast wizard; detectDocPaths looks for docs/ and README.md for the doc wizard. Disjoint candidates for different wizards; only the os.Stat probing pattern is shared."
+    },
+    {
+      "pair_hash": "fe800e2622db2d80c48e5e968a56460524c4c35c86fb72a2a2d8aadcfd8cd0b7",
+      "rank": 15,
+      "label": "defer",
+      "evidence": [
+        "type gitWizard struct{}",
+        "type repoWizard struct{}",
+        "method:cli-wizard_repo-go-repoWizard-Prompts receiver"
+      ],
+      "rationale": "Both sides are empty struct declarations with the same five-method wizard interface and no behaviour shown. Missing: either wizard's Description or Prompts body, which would show whether the repo wizard concerns git repositories (one subject) or a different source type (pattern only)."
+    },
+    {
+      "pair_hash": "12facbbb92a935f9abb7458d3e155350c9f008dc59f6682c58bcddcc775af10f",
+      "rank": 16,
+      "label": "keep",
+      "evidence": [
+        "info.ImagePaths = append(info.ImagePaths, c.display)",
+        "detectImagePaths checks for common image directories in the working directory.",
+        "{filepath.Join(\"static\", \"images\"), \"static/images/\"},"
+      ],
+      "rationale": "DetectProject's image-directory block checks the same assets/, images/, screenshots/, static/images/ and docs/images/ candidates that detectImagePaths checks; the same facts are detected in both."
+    },
+    {
+      "pair_hash": "7848cb2d07d2ac68fd9c6d28a171dc31427ee29190e2b4c9bb87ef42468a84c9",
+      "rank": 17,
+      "label": "suppress",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "contains (1): folder:cli",
+        "Package cli provides terminal I/O helpers and interactive wizards for configuring semsource from the command line."
+      ],
+      "rationale": "A is a bare repository container with no body and a single folder link; B is the terminal I/O helper file. A root container would join every file alike and the only textual overlap is the project name, so the hint is incidental rather than a shared responsibility."
+    },
+    {
+      "pair_hash": "101d482ff98d08599848f5b4adfb5ee1f6d813520b79b3702acb8b17e2901ddf",
+      "rank": 18,
+      "label": "suppress",
+      "evidence": [
+        "detectLanguage checks for common manifest files in the current directory.",
+        "detectImagePaths checks for common image directories in the working directory."
+      ],
+      "rationale": "Different facts (language from manifest files versus image directories) for different wizards (ast versus image); only the probe-the-directory pattern is shared."
+    },
+    {
+      "pair_hash": "235484ad5154a7ce714566f6dbedee921ca37dbb5b25c4df0d024d0361e25439",
+      "rank": 19,
+      "label": "keep",
+      "evidence": [
+        "detectLanguage checks for common manifest files in the current directory.",
+        "\"go.mod\", \"go.sum\", \"package.json\", \"package-lock.json\",",
+        "\"Makefile\", \"Cargo.toml\", \"pom.xml\", \"build.gradle\","
+      ],
+      "rationale": "Every manifest detectLanguage probes (go.mod, package.json, Cargo.toml, pom.xml, build.gradle) is also in detectConfigFiles' candidate list, so both detect which project manifests exist even though one maps them to a language and the other lists them. Judgement call on fully visible evidence."
+    },
+    {
+      "pair_hash": "350212f57a303bc5e163f0ce76b1425e7baca7b5c0e268fed7caca181d3051a9",
+      "rank": 20,
+      "label": "suppress",
+      "evidence": [
+        "Sources loads the config at configPath and prints a formatted table of sources.",
+        "term.Header(\"Summary\")",
+        "term.Info(\"  semsource sources    View configured sources\")"
+      ],
+      "rationale": "Sources is the standalone listing command; printSummary is the init wizard's closing summary and next-steps text, which only refers the user to the sources command. Different commands sharing the print-the-config-sources pattern."
+    },
+    {
+      "pair_hash": "f637939a4fd195ec213a5a08b4f620bce611626cf69d4e823418e81dd9df894b",
+      "rank": 21,
+      "label": "suppress",
+      "evidence": [
+        "Sources loads the config at configPath and prints a formatted table of sources.",
+        "term.Success(fmt.Sprintf(\"Config written to %s\", configPath))"
+      ],
+      "rationale": "One reads the config and lists its sources, the other writes the wizard's config; different commands that share only the configPath and term vocabulary."
+    },
+    {
+      "pair_hash": "5bb1e9f9df429ad10eb22ddf422a99e38fa549b56d152c39bc6cb6fd36ea6fef",
+      "rank": 22,
+      "label": "suppress",
+      "evidence": [
+        "source: none (no verbatim body for this entity)",
+        "const defaultConfigPath = \"semsource.json\""
+      ],
+      "rationale": "A is the bare repository container with no body; B is a one-line constant whose only overlap with it is the project name \"semsource\". A container node would join unrelated subjects and no shared responsibility is shown."
+    },
+    {
+      "pair_hash": "eb4d96403a075256d6fa822448835c2de7ecd2d6d4d91b64901ae02e180e4757",
+      "rank": 23,
+      "label": "keep",
+      "evidence": [
+        "orgFromRemote extracts the org/owner segment from common git remote formats",
+        "// Namespace is the best-guess org name (from git remote or dir name).",
+        "function:cli-detect-go-deriveNamespace calls"
+      ],
+      "rationale": "ProjectInfo.Namespace is documented as the org name derived from the git remote, which is exactly what orgFromRemote computes for deriveNamespace (which takes ProjectInfo); the pair is one detection behaviour in detect.go."
+    },
+    {
+      "pair_hash": "ba9b10e338a3f28576b4e7e5c0adafbd92d2e5e4198b9ca0bd8b6759f9098fdc",
+      "rank": 24,
+      "label": "suppress",
+      "evidence": [
+        "func splitComma(s string) []string",
+        "sanitizeName lowercases and replaces non-alphanumeric chars with hyphens."
+      ],
+      "rationale": "A flag-list splitter in add.go and a namespace slug helper in detect.go; generic string utilities with unrelated callers, sharing a pattern only."
+    },
+    {
+      "pair_hash": "b1aee1606f26d4d82d8d21ae73d032b8697cb4b80ceec1ddf9dd702d49ac048a",
+      "rank": 25,
+      "label": "suppress",
+      "evidence": [
+        "func sourceLocation(s config.SourceEntry) string",
+        "func buildConfig(namespace string, sources []config.SourceEntry) *config.Config",
+        "links in (3): function:cli-remove-go-Remove calls; function:cli-sources-go-Sources calls"
+      ],
+      "rationale": "sourceLocation formats a SourceEntry's location for the sources and remove listings; buildConfig assembles the wizard's Config. They share the SourceEntry type as vocabulary, not one behaviour."
+    },
+    {
+      "pair_hash": "05016ea001faa615b52290aa442c0d192d60760d394740024a5a0487a5256188",
+      "rank": 26,
+      "label": "keep",
+      "evidence": [
+        "deriveNamespace extracts an org/owner name from the git remote URL, falling back to the directory name.",
+        "resolvableGitURL returns a git source URL that yields a non-empty source identity: the origin remote when available, else the repository's absolute path."
+      ],
+      "rationale": "Both consume the detected origin remote to derive a project identity (namespace versus git source URL), each with a fallback when the remote is absent, in the same detect.go; one subject, git-remote-based identity. Judgement call on fully visible evidence."
+    },
+    {
+      "pair_hash": "3b380cd45a5f6e537ebec59e683132525f31c74ad24d13675491d055f3737a93",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "orgFromRemote extracts the org/owner segment from common git remote formats",
+        "resolvableGitURL returns a git source URL that yields a non-empty source identity: the origin remote when available",
+        "func resolvableGitURL(remote string) string"
+      ],
+      "rationale": "Both take the origin remote string and derive project identity from it in detect.go (org name versus resolvable source URL); someone changing how remotes are interpreted would want both. Judgement call on fully visible evidence."
+    },
+    {
+      "pair_hash": "027b078eb13bc8d0110d8bb352b535eb9d291674e792658914a09eea898a7239",
+      "rank": 28,
+      "label": "suppress",
+      "evidence": [
+        "Sources loads the config at configPath and prints a formatted table of sources.",
+        "Validate loads the config at configPath and prints a validation result.",
+        "cfg, err := config.LoadConfig(configPath)"
+      ],
+      "rationale": "Two sibling commands that share the load-config prologue and the term printing pattern but do different jobs (listing versus validating); the match is boilerplate and pattern, not one responsibility. Judgement call on fully visible evidence."
+    },
+    {
+      "pair_hash": "0ecbd764c7d3f9a07e6e02b11cc0f45fe2a5160e31739956d6c44ca3e0b7fef9",
+      "rank": 29,
+      "label": "suppress",
+      "evidence": [
+        "func detectConfigFiles() []string",
+        "detectImagePaths checks for common image directories in the working directory."
+      ],
+      "rationale": "Config-file candidates versus image-directory candidates for different wizards (cfg versus image); disjoint facts, shared probing pattern only."
+    },
+    {
+      "pair_hash": "298e0789bdf55a03952dea158757c09dea4aeb595c295bdfbcef8ddda82c8818",
+      "rank": 30,
+      "label": "keep",
+      "evidence": [
+        "info.ConfigFiles = append(info.ConfigFiles, f)",
+        "extras := []string{\"Dockerfile\", \"docker-compose.yml\", \"docker-compose.yaml\", \"Makefile\", \".env.example\"}",
+        "\"Dockerfile\", \"docker-compose.yml\", \"docker-compose.yaml\","
+      ],
+      "rationale": "DetectProject fills ConfigFiles from the same manifest and extras candidates (go.mod, package.json, Cargo.toml, pom.xml, build.gradle, Dockerfile, docker-compose, Makefile) that detectConfigFiles probes; the same facts are detected."
+    },
+    {
+      "pair_hash": "aacd3d36aa6aaae722a9bfb13e26e4e1d073bd8bef7c25a8de2825b103769499",
+      "rank": 31,
+      "label": "suppress",
+      "evidence": [
+        "term.Header(\"Code / AST source\")",
+        "term.Header(\"Git history source\")",
+        "func (w *gitWizard) Prompts(term *Term) (*config.SourceEntry, error)"
+      ],
+      "rationale": "Two implementations of the same wizard Prompts interface for different source types (code/AST versus git history); the shared shape (header, prompts, confirm, SourceEntry) is a pattern and the subjects differ."
+    },
+    {
+      "pair_hash": "e04617dd27635de905f7cbaaf8e9e9b7fe272e8ee5885e1e65bfad2da1e4f866",
+      "rank": 32,
+      "label": "suppress",
+      "evidence": [
+        "func detectConfigFiles() []string",
+        "func detectDocPaths() []string",
+        "paths = append(paths, \"docs/\")"
+      ],
+      "rationale": "Config-file candidates versus docs/ and README.md candidates for the cfg and doc wizards; disjoint facts, shared os.Stat pattern only."
+    }
+  ]
+}

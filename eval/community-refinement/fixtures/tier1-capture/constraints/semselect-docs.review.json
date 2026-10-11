@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semselect-docs",
+  "split": "development",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "2e36e764ee79d8a6c9328675290a4d1028896373036e7b933bbbcdefacc500d7",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "The audit requires preserving the synthesizer's instruction, generation limits and retries; the replay passage confirms preserving those same settings. These passages jointly establish replay fidelity."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "The guide defines the authoritative-fact precheck and the source-pilot passage records its allow/defer outcomes on H01/H02. The reported unresolved cases need the precheck definition alongside them."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "disagree",
+      "rationale": "The exact laptop passage contains only the two task commands, not the comparison settings or validation-report link cited by the rationale. Those lines belong outside this entity, so the cited relationship is not established for this pair."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "Both passages explicitly use the same specialist cohort and binder; the smaller-model table imports the 95 and 111 historical results shown in the specialist table. They carry the shared model-size comparison and its reference results."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "The validation passage defines the keyword/BM25 arms and exact operation-plus-argument grading, while the history passage reports those arms' results. The latter needs the former's contract to interpret its counts."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "Both actual passages record the same Metal throughput experiment and head-grouping gain. The research passage adds the explanation for the history passage's slot-scaling result."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "The investigation summarizes the one-fixture compatibility checkpoint; the scoring passage gives its limits and shutdown detail. Both distinguish that endpoint probe from a matched workload result."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "The decision passage selects native SystemOne packaging and the bootstrap passage records the resulting CPU service's primitive and contract validation. This is the implementation decision alongside its local outcome."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "The guide explicitly summarizes the audit's loose-language fusion scorecard and refers to that audit. Both passages support the same finding that this set demonstrated no need for an additional classifier."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "The selection passage draws a cost-versus-quality conclusion from Julia's first CPU diagnostic, and the history passage supplies that diagnostic's quality, latency and resource observations. They describe the same challenger outcome."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "The similarly shaped threshold tables describe separate score sources and experiment outcomes: Kev bootstrap probabilities versus evaluation-only direct scoring. Treating them as one abstention result would mix distinct denominators and semantics."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "The tables reuse hardware, model and metric vocabulary but compare different things: two models versus two output formats. The cited laptop warning explicitly says their latencies are not interchangeable."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "The shared task-check and EPERM wording is verification boilerplate. The passages reproduce separate scoring-format and answerability experiments with different commands and evidence."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "Gate denotes promotion acceptance criteria in the specialist passage and request-level allow/defer filtering in the synthesis passage. The cited tables concern different responsibilities despite that shared word."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "The integration passage defines native llama.cpp primitive fields that an adapter must preserve; the SGLang passage defines a chat-token scoring mechanism under investigation. Compatible API vocabulary does not make these the same scoring contract."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "The methods share model and order-reversal vocabulary, but the Metal smoke concerns 24 routing cases and the classifier contract concerns exact operation/node/field tuples. Grouping their workload definitions as one would misstate the evaluation."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "Both entities are shell reproduction blocks with output paths, but one launches the CPU bootstrap evaluators and the other launches query-routing stages. Their resemblance is command scaffolding rather than a shared experiment."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "The integration passage proposes reviewing candidate edges before community recomputation; the answering passage freezes already-produced summaries for generation replay. Community and defer vocabulary describes different stages and objectives."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "The same small seminstruct artifact is a label-only routing comparator in one passage and an answer generator in the other. Their roles and resource profiles differ, so the shared model pin does not make their workloads equivalent."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "Both plans discuss NVIDIA deployment, but the laptop passage validates llama.cpp primitives and routing whereas the SGLang passage plans a separate serving comparison. Their shared hardware vocabulary must not merge runtime-specific validation claims."
+    }
+  ]
+}

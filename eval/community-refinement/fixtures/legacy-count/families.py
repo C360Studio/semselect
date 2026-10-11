@@ -4,7 +4,10 @@
 prepare: export each repository's committed tree at its pinned commit from the
 local sibling checkout (`git archive`, so uncommitted files are never read),
 copy only the chosen subtree into its own workspace directory and write a
-per-file manifest plus the SemSource tier-0 config.
+per-file manifest plus the SemSource tier-0 config. With --generalization,
+also export the generalization families: their public repositories have no
+sibling checkout, so the pinned commit is shallow-fetched from the URL into a
+bare clone under --src-root and archived from there.
 
 dupcheck: hash every captured file and compare development families with
 held-out families: identical SHA-256, and same-basename files whose lines are
@@ -24,14 +27,16 @@ import io
 import itertools
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
 import tarfile
 
-CODE_EXT = {".go", ".py", ".js", ".mjs", ".cjs", ".jsx", ".ts", ".tsx", ".mts", ".cts", ".svelte"}
+CODE_EXT = {".go", ".py", ".js", ".mjs", ".cjs", ".jsx", ".ts", ".tsx", ".mts", ".cts", ".svelte", ".java"}
 DOC_EXT = {".md", ".mdx", ".adoc", ".txt"}
-# c and cpp are omitted: no family carries C or C++ sources.
+# c and cpp are omitted: no family carries C or C++ sources. java is here for
+# the commons-csv generalization family only; no sem* family has Java files.
 LANGUAGES = ["go", "typescript", "javascript", "svelte", "python"]
 PROVENANCE = ("legacy SemStreams capture (SemSource {semsource}, SemStreams {semstreams}); "
               "not a SemEngine result")
@@ -44,9 +49,29 @@ def git(*args, cwd=None):
                           text=True).stdout.strip()
 
 
+def fetch_public(name, spec, src_root):
+    """Shallow-fetch the pinned commit of a public repository into a bare clone
+    under src_root and return the clone path. Only a full commit hash is
+    accepted, so nothing but the pinned tree can be exported; a clone that
+    already holds the commit is reused without touching the network."""
+    commit = spec["commit"]
+    if not re.fullmatch(r"[0-9a-f]{40}", commit):
+        sys.exit(f"{name}: a public repository needs a full 40-hex commit, got {commit!r}")
+    bare = os.path.join(src_root, f"{name}.git")
+    if not os.path.isdir(bare):
+        os.makedirs(src_root, exist_ok=True)
+        git("init", "--quiet", "--bare", bare)
+    if subprocess.run(["git", "cat-file", "-e", commit + "^{commit}"], cwd=bare,
+                      capture_output=True).returncode != 0:
+        git("fetch", "--quiet", "--depth", "1", spec["url"], commit, cwd=bare)
+    return bare
+
+
 def export_repo(name, spec, repos_root, src_root):
-    """Extract the committed tree of a local checkout into src_root/<name>@<commit>."""
-    local = os.path.join(repos_root, spec["local"])
+    """Extract the committed tree of a repository into src_root/<name>@<commit>.
+    A spec with `local` names a sibling checkout; one without names a public
+    repository fetched at its pinned commit from `url`."""
+    local = os.path.join(repos_root, spec["local"]) if spec.get("local") else fetch_public(name, spec, src_root)
     commit = git("rev-parse", "--verify", spec["commit"] + "^{commit}", cwd=local)
     dest = os.path.join(src_root, f"{name}@{commit}")
     marker = os.path.join(dest, ".semselect-export")
@@ -113,20 +138,32 @@ def prepare(args):
     if os.path.basename(ws_root) != "semselect-families":
         sys.exit(f"refusing to manage workspace root {ws_root}")
     os.makedirs(ws_root, exist_ok=True)
-    # Workspaces of families no longer in the spec would still be mounted.
-    for stale in set(os.listdir(ws_root)) - {f["id"] for f in spec["families"]}:
+    gen = spec.get("generalization") or {}
+    gen_families = [dict(f, split="generalization") for f in gen.get("families", [])]
+    if args.generalization and not (gen.get("repositories") and gen_families):
+        sys.exit("--generalization: the input spec lists no generalization repositories and families")
+    # Workspaces of families no longer in the spec would still be mounted. A
+    # generalization workspace is kept across sem* runs rather than re-fetched.
+    keep = {f["id"] for f in spec["families"]} | {f["id"] for f in gen_families}
+    for stale in set(os.listdir(ws_root)) - keep:
         if os.path.isdir(os.path.join(ws_root, stale)):
             shutil.rmtree(os.path.join(ws_root, stale))
     manifest = {"workspace_root": ws_root, "repositories": {}, "families": []}
     exports = {}
-    for name, rspec in spec["repositories"].items():
+    repositories = dict(spec["repositories"])
+    families = list(spec["families"])
+    if args.generalization:
+        repositories.update(gen["repositories"])
+        families += gen_families
+    for name, rspec in repositories.items():
         path, commit, tree = export_repo(name, rspec, args.repos_root, args.src_root)
         exports[name] = (path, commit)
         manifest["repositories"][name] = {"commit": commit, "tree": tree,
                                           "export_exclude": rspec.get("export_exclude", []),
+                                          "public": not rspec.get("local"),
                                           "license_file_first_line":
                                               license_line(path, rspec.get("license_file"))}
-    for fam in spec["families"]:
+    for fam in families:
         repo, head = exports[fam["repository"]]
         files, unmatched = select_files(fam, repo)
         ws = os.path.join(ws_root, fam["id"])
@@ -159,8 +196,11 @@ def prepare(args):
     for fam in manifest["families"]:
         path = f"/workspace/{fam['id']}"
         roots.append(path)
+        # The generalization families keep the language list of the count they
+        # were copied from (it had java and c); the sem* families use LANGUAGES.
+        languages = gen.get("ast_languages", LANGUAGES) if fam["split"] == "generalization" else LANGUAGES
         if fam["has_code"]:
-            sources.append({"type": "ast", "path": path, "languages": LANGUAGES, "watch": False})
+            sources.append({"type": "ast", "path": path, "languages": languages, "watch": False})
         if fam["has_docs"]:
             sources.append({"type": "docs", "paths": [path], "watch": False})
     config = {
@@ -340,6 +380,9 @@ def assemble(args):
         for fid in gen["ids"]:
             entry = dict(next(f for f in earlier["families"] if f["id"] == fid))
             entry["split"] = "generalization"
+            entry["ast_languages"] = earlier["capture_profile"]["ast_languages"]
+            entry["export"] = ("families.py prepare --generalization: shallow fetch of the pinned commit "
+                               "from the public URL, then git archive (no sibling checkout)")
             entry["copied_from"] = f"{gen['manifest_commit']}:{gen['manifest']}"
             entry["evidence"] = gen["evidence"]
             entry["generalization_note"] = gen["note"]
@@ -362,6 +405,8 @@ def main():
                     help="directory holding the sibling repository checkouts")
     pp.add_argument("--config-out", required=True)
     pp.add_argument("--manifest-out", required=True)
+    pp.add_argument("--generalization", action="store_true",
+                    help="also export the generalization families from their public repositories")
     pd = sub.add_parser("dupcheck")
     pd.add_argument("--manifest", required=True)
     pd.add_argument("--out", required=True)

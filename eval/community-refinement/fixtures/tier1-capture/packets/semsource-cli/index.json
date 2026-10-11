@@ -1,0 +1,74 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3: bounded reviewer packets (eval/community-refinement/README.md)",
+  "family": "semsource-cli",
+  "split": "held-out",
+  "selection": {
+    "path": "eval/community-refinement/fixtures/tier1-capture/selections/semsource-cli.json",
+    "sha256": "3ed981f540f1e7970af06d9ef73e6a71ae3b3aa5efcf25e4f93a82b099d58b00",
+    "selected": 32
+  },
+  "evidence": {
+    "hydration_capture": "docs/evidence/20261010T143313Z-legacy-tier1-capture-semsource-cli-explicit-only",
+    "frozen_capture": "docs/evidence/20261010T134904Z-legacy-tier1-capture-semsource-cli-explicit-only",
+    "entities_jsonl_sha256": "a94bc0e9649b357f0b974a2e0f911fd22065f295a4ecc6ebb79e9e3c6eca4861",
+    "partition_hash": "0ac1e5ae52bfd5a9b6ea1911556b19ea7458ee6784d9b841df8a5f8cd07b40c5",
+    "mutual_pairs_jsonl_sha256": "5f6a8ede806f8050a359dfc8495add7e9151ac64a2ad13fc151fa0c727881b88",
+    "hydration": {
+      "entities": 143,
+      "with_body_handle": 124,
+      "bodies_fetched": 124,
+      "checks": {
+        "all_handles_resolved": true,
+        "all_states_parse": true,
+        "handles_name_object_store": true
+      }
+    },
+    "mutual_pairs_drift": {
+      "frozen_sha256": "5f6a8ede806f8050a359dfc8495add7e9151ac64a2ad13fc151fa0c727881b88",
+      "hydration_sha256": "5f6a8ede806f8050a359dfc8495add7e9151ac64a2ad13fc151fa0c727881b88",
+      "equal": true
+    }
+  },
+  "parameters": {
+    "state_budget": 8192,
+    "instruction_limit": 1024,
+    "description_limit": 512,
+    "questions_per_request": 4,
+    "neighbour_cap": 6,
+    "children_cap": 8
+  },
+  "prompt": {
+    "objective": "Community objective: put evidence about a shared responsibility together without letting boilerplate, overloaded terms or generic utility nodes join unrelated subjects.",
+    "instructions": "Should this pair retain its semantic co-location hint for the stated community objective? Decide from the evidence in the state only. keep: the two passages address one shared subject or responsibility at this granularity. suppress: the match is incidental (boilerplate, an overloaded term, a generic utility) and would mislead the grouping. defer: the visible evidence is insufficient or conflicting.",
+    "criteria": {
+      "keep": "Evidence supports shared subject/responsibility at the chosen granularity",
+      "suppress": "Evidence shows an incidental match that would mislead this grouping",
+      "defer": "Available evidence is insufficient or conflicting"
+    }
+  },
+  "pairs": {
+    "packets": 32,
+    "state_bytes": {
+      "min": 980,
+      "median": 2144,
+      "max": 4874
+    },
+    "sources_truncated": 0,
+    "sources_without_body": 3,
+    "sha256": "14fcd7e0c23feca745835418d511da987ac2ac4ca9e39af40f9455931dc89ce2"
+  },
+  "bundles": {
+    "requests": 35,
+    "entities": 33,
+    "split_entities": 2,
+    "questions": 64,
+    "state_bytes": {
+      "min": 545,
+      "median": 1257,
+      "max": 3180
+    },
+    "excerpts_truncated": 18,
+    "sha256": "7bc6a9d56f0f3313fd83f0d9ea456b4b7ecdbe4bea08c9f477819bed24a2d930"
+  }
+}

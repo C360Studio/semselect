@@ -1,0 +1,73 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-graph-clustering",
+  "split": "held-out",
+  "rule": "queries both annotators agree on (ruling 7, 2026-10-10); disputed ones dropped; gold sets are annotator A's, sets B added are recorded under b_additional_sets and are not gold",
+  "success": "the budgeted evidence contains every member of at least one gold set",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "workspace_sha256": "812aeaccca05f630a3ebb9f7fce2c7f26fed122271ed3fb88bdbe8bb8a77832f"
+  },
+  "frozen_capture": "docs/evidence/20261010T134102Z-legacy-tier1-capture-semstreams-graph-clustering-explicit-only",
+  "partition_hash": "f5607063576652f180f364260b6e3c329b7578a43e911bac840662b8efd01473",
+  "queries": [
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "After graph-clustering has latched a graph-state contract violation, what does a graph.clustering.query.members request receive, and is the request body parsed before that check?",
+      "answer": "handleQueryMembersNATS calls c.graphStateContractError(\"handleQueryMembersNATS\") before any parsing; when graphStatePoison holds a *graph.StateContractError that returns errs.WrapFatal(contractErr, \"Component\", \"handleQueryMembersNATS\", \"authoritative graph state requires operator reset and canonical reingest\"), so the handler returns (nil, that fatal error) without unmarshalling MembersRequest or reading COMMUNITY_INDEX. With no poison latched it returns nil and the handler proceeds to parse the request.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-query-go-Component-handleQueryMembersNATS",
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-graphStateContractError"
+        ]
+      ],
+      "evidence": [
+        "processor/graph-clustering/query.go:143-155",
+        "processor/graph-clustering/component.go:1856-1863"
+      ],
+      "rationale": "The handler shows the poison guard runs first, with operation name handleQueryMembersNATS, before json.Unmarshal and getCommunity; graphStateContractError (component.go) supplies the condition (a loaded *graph.StateContractError) and the exact WrapFatal message. The handler alone never shows the error text and the helper alone never shows which handler calls it or when.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "Both the anomaly relationship querier and the community-detection KV provider prefix-scan INCOMING_INDEX with entityID.>; what does each return per composite key, and which one deduplicates source IDs?",
+      "answer": "kvRelationshipQuerier.GetIncomingRelationships returns one inference.RelationshipInfo per key: FromEntityID = the first six dot-separated suffix tokens, ToEntityID = the queried entity, Predicate = graph.DecodePredicateToken of the seventh token (keys with fewer than seven parts, invalid IDs, undecodable/empty or unparseable predicates are skipped); it does not deduplicate. kvProvider.getIncomingNeighbors parses the same shape but returns only distinct source entity IDs (seen map) and discards the predicate after decoding and validating it.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-anomaly-go-kvRelationshipQuerier-GetIncomingRelationships",
+          "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-kvProvider-getIncomingNeighbors"
+        ]
+      ],
+      "evidence": [
+        "processor/graph-clustering/anomaly.go:113-159",
+        "processor/graph-clustering/component.go:2181-2226"
+      ],
+      "rationale": "GetIncomingRelationships (anomaly.go) establishes the per-key RelationshipInfo with predicate and no dedupe; getIncomingNeighbors (component.go) establishes the distinct-source-only result with the seen map. Each method documents only its own return shape, so the comparison needs both.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 1,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    }
+  ]
+}

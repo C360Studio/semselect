@@ -1,0 +1,335 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semselect-service",
+  "split": "development",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "packet-only"
+  },
+  "packets_sha256": "20fe28447c67907dff0a247e39f43ecaa13051fff9e775ed5afa9548cfeaa7cf",
+  "labels": [
+    {
+      "pair_hash": "94051716f0b8fc9ce51ab19ac03d2ca4e40de351b9924104a14e3637017b3b58",
+      "rank": 1,
+      "label": "defer",
+      "evidence": [
+        "repo | semselect-service",
+        "\"choice\": \"billing\""
+      ],
+      "rationale": "The repository has no body or API description, so its implementation of the sample response is missing."
+    },
+    {
+      "pair_hash": "57b2c21fa7d2f9389fbcac8ae064a0ebafb145d9f616021a8f63ee49c65604ff",
+      "rank": 2,
+      "label": "suppress",
+      "evidence": [
+        "SEMSELECT_ADDR requires a literal IP",
+        "upstream must be an http origin"
+      ],
+      "rationale": "Listener-address validation and upstream-origin configuration check different endpoints; the validation pattern is incidental."
+    },
+    {
+      "pair_hash": "f78c56143f8bc3b447f4298fd3f0e1227e88c2bc16fa00c86b1ef65efc837d48",
+      "rank": 3,
+      "label": "defer",
+      "evidence": [
+        "folder | semselect",
+        "\"choice\": \"billing\""
+      ],
+      "rationale": "The command folder lacks verbatim source and its header does not establish the response behavior."
+    },
+    {
+      "pair_hash": "958009d22ec35404c2e7cd9e76cd335aa9deb495ae957ca1f175fb97f3c727bf",
+      "rank": 4,
+      "label": "keep",
+      "evidence": [
+        "+ \"/ready\"",
+        "case \"/ready\":"
+      ],
+      "rationale": "The listener helper constructs the readiness URL served by the guard."
+    },
+    {
+      "pair_hash": "8217a60d8fac9f02bc7994930c9c263c66f528a4b165d79b860a091b96f6321a",
+      "rank": 5,
+      "label": "suppress",
+      "evidence": [
+        "SEMSELECT_ADDR must be an IP address and port",
+        "func replyError"
+      ],
+      "rationale": "Listener configuration and a generic JSON error emitter have no shown behavioral connection."
+    },
+    {
+      "pair_hash": "ea7917bac5086cd82b247a2019d33ad68d29de3c2259fa363a8722bd3983ad09",
+      "rank": 6,
+      "label": "defer",
+      "evidence": [
+        "repo | semselect-service",
+        "SEMSELECT_ADDR"
+      ],
+      "rationale": "The repository's bare folder list does not show the configuration behavior documented by the passage."
+    },
+    {
+      "pair_hash": "85cb8d42ab8699a8fbd643e266b4b96d6b5f13725cbd58bfddb746f2fa83c532",
+      "rank": 7,
+      "label": "defer",
+      "evidence": [
+        "repo | semselect-service",
+        "task check"
+      ],
+      "rationale": "Repository source and test definitions are absent, leaving the documented checks unconnected to visible implementation."
+    },
+    {
+      "pair_hash": "7e1e30ea6102b5014d03847f9907762714c05e3a31ca66be333ed3e2dfc8304b",
+      "rank": 8,
+      "label": "defer",
+      "evidence": [
+        "repo | semselect-service",
+        "An actual smoke response included:"
+      ],
+      "rationale": "Neither a bare repository header nor this introductory sentence shows the relevant primitive implementation."
+    },
+    {
+      "pair_hash": "df4d9294ce1d92740034f06cabbccfc4345fe684513251595432aefc33c617bf",
+      "rank": 9,
+      "label": "suppress",
+      "evidence": [
+        "net.SplitHostPort(addr)",
+        "g.config.Upstream+path"
+      ],
+      "rationale": "Local listener parsing and generic upstream forwarding are different endpoint responsibilities without a shown handoff."
+    },
+    {
+      "pair_hash": "2b9723bfaefff849c63ea6afd49b897dbd5c5c6a4e8a5cd95365fbcb07017754",
+      "rank": 10,
+      "label": "defer",
+      "evidence": [
+        "repo | semselect-service",
+        "/v1/systemone"
+      ],
+      "rationale": "The repository header does not show an endpoint implementation for the curl invocation."
+    },
+    {
+      "pair_hash": "303108ec5c942f2d3aa3d2881e676a5fd29456a8e4af6ef6ae9423a5245be589",
+      "rank": 11,
+      "label": "keep",
+      "evidence": [
+        "ReadTimeout: 15 * time.Second",
+        "HTTP read timeouts also bound slow uploads."
+      ],
+      "rationale": "The passage documents the server timeouts and health-check setup shown in main."
+    },
+    {
+      "pair_hash": "29d9899910020788effeaaa7a35ed88b16fbc7861569d21c59e4204ac5c09c35",
+      "rank": 12,
+      "label": "keep",
+      "evidence": [
+        "Timeout: timeout",
+        "context.WithTimeout(incoming.Context(), timeout)"
+      ],
+      "rationale": "Startup configures the upstream request deadline that forwarding enforces."
+    },
+    {
+      "pair_hash": "64fe123ecc458b6665ca273a06b330276e740dbf2fe83f9a87f25883befff3f4",
+      "rank": 13,
+      "label": "defer",
+      "evidence": [
+        "folder | semselect",
+        "## Checks and evaluation"
+      ],
+      "rationale": "A source-free command folder and bare heading provide no actual check definitions or connection."
+    },
+    {
+      "pair_hash": "adf16224795c5a4fc19c4ce875f9d818f75314c7329b16ec08944c26270b25f6",
+      "rank": 14,
+      "label": "suppress",
+      "evidence": [
+        "os.Getenv(key)",
+        "func (g *Guard) forward"
+      ],
+      "rationale": "The generic environment helper does not show any use by upstream forwarding."
+    },
+    {
+      "pair_hash": "4b8383bec47b3994b9591751b42c97896095b9f494ce9ad27595cc8f69af36dc",
+      "rank": 15,
+      "label": "keep",
+      "evidence": [
+        "guard.New(guard.Config{",
+        "type Config struct"
+      ],
+      "rationale": "Main constructs the exact guard configuration type shown."
+    },
+    {
+      "pair_hash": "368761fc1ddd92806bda0867afd998a31667238f8c0097beffde4ca0f52183a2",
+      "rank": 16,
+      "label": "suppress",
+      "evidence": [
+        "func env(key, fallback string)",
+        "func replyError"
+      ],
+      "rationale": "Generic environment lookup and generic error serialization are unrelated utilities."
+    },
+    {
+      "pair_hash": "c7f1ffa0c0e86d6ab686f06de1dec49dff2cbdecc473315045de8f29a4d192aa",
+      "rank": 17,
+      "label": "suppress",
+      "evidence": [
+        "os.Getenv(key)",
+        "func New(c Config)"
+      ],
+      "rationale": "The environment helper is generic and the guard constructor does not use it in the packet."
+    },
+    {
+      "pair_hash": "602db0ba903edbd73d4dde0ad19008e59164926a119aafa91796336058cd0ba0",
+      "rank": 18,
+      "label": "defer",
+      "evidence": [
+        "file | main.go",
+        "An actual smoke response included:"
+      ],
+      "rationale": "The file has no body and the passage lacks the response, so primitive behavior cannot be assessed."
+    },
+    {
+      "pair_hash": "35f74d82aa7ef666023b45214eed78378b61d6fc86e6fc7cfe89441dfc8d3004",
+      "rank": 19,
+      "label": "defer",
+      "evidence": [
+        "file | main.go",
+        "file | json.go"
+      ],
+      "rationale": "Both file bodies are missing; the symbol lists do not establish startup's relationship to JSON key checks."
+    },
+    {
+      "pair_hash": "6b899865b74fdae93528c298f49a8677144974f4ac061970894cf5cf00a342e6",
+      "rank": 20,
+      "label": "suppress",
+      "evidence": [
+        "os.Getenv(key)",
+        "func (g *Guard) ServeHTTP"
+      ],
+      "rationale": "Generic environment fallback would pull request serving into a utility node without a shown semantic connection."
+    },
+    {
+      "pair_hash": "ff6d62b68cd69a00e69e7b5faddb2cdd049f61614d5e608e9b966f401371c8a6",
+      "rank": 21,
+      "label": "keep",
+      "evidence": [
+        "d.DisallowUnknownFields()",
+        "Inspect keys before forwarding the original bytes"
+      ],
+      "rationale": "Both implement complementary parts of strict request JSON validation."
+    },
+    {
+      "pair_hash": "f3449548cd7fb79583616fec2d09d9b80108e03c2d49136d405e7ff561321d14",
+      "rank": 22,
+      "label": "keep",
+      "evidence": [
+        "Handler: g",
+        "func (g *Guard) ServeHTTP"
+      ],
+      "rationale": "Main installs the guard as the HTTP handler whose request behavior is shown."
+    },
+    {
+      "pair_hash": "1d2cbee29bfb1075bcd5da17f082c697369adb4d5555ab6307502f611fde6200",
+      "rank": 23,
+      "label": "defer",
+      "evidence": [
+        "function:internal-guard-json-go-checkJSON",
+        "if err = validate(data, g.config.Model)"
+      ],
+      "rationale": "The JSON file has no body, and the intervening validation implementation is not present to establish the checkJSON handoff."
+    },
+    {
+      "pair_hash": "05b899f78feb8773ea4056b44a7dd673e17480ef770123d498d089b157df731c",
+      "rank": 24,
+      "label": "defer",
+      "evidence": [
+        "repo | semselect-service",
+        "## Checks and evaluation"
+      ],
+      "rationale": "A repository folder list and bare heading show no actual checking responsibility."
+    },
+    {
+      "pair_hash": "87b3a90cd6e15f947d52b6ecf730a77fd9e9fbccbf27fda24c051461bc08e11a",
+      "rank": 25,
+      "label": "suppress",
+      "evidence": [
+        "net.SplitHostPort(addr)",
+        "state must be a string of 1..8192 UTF-8 bytes"
+      ],
+      "rationale": "Listener configuration and inference-request validation address different inputs; error-checking structure is incidental."
+    },
+    {
+      "pair_hash": "5af8889918125cc823772124a049d1e8d8ab5a62a74a298e9acf65681c5e406c",
+      "rank": 26,
+      "label": "suppress",
+      "evidence": [
+        "net.SplitHostPort(addr)",
+        "d.DisallowUnknownFields()"
+      ],
+      "rationale": "Address parsing and strict JSON decoding concern different input formats and responsibilities."
+    },
+    {
+      "pair_hash": "d09318eb06263898362cdee5754f1ecc39bebf849c8bbf5060de563af45da11b",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "guard.New(guard.Config{",
+        "func New(c Config)"
+      ],
+      "rationale": "Main directly invokes the shown guard constructor."
+    },
+    {
+      "pair_hash": "b8f1758216b220292d6d31eaf8142d4d1949f2fd1e16805e4f0499c39703985c",
+      "rank": 28,
+      "label": "defer",
+      "evidence": [
+        "repo | semselect-service",
+        "doc | 'semselect'"
+      ],
+      "rationale": "Both sides lack source; their names alone do not establish the document's content or implemented responsibility."
+    },
+    {
+      "pair_hash": "3f79e3f82da78cfc5bc9913182454a6bb7bd5fcbae4cf1221d593d5944faab75",
+      "rank": 29,
+      "label": "defer",
+      "evidence": [
+        "folder | semselect",
+        "doc | 'semselect'"
+      ],
+      "rationale": "The command folder and document have no source or substantive headers to settle their relationship."
+    },
+    {
+      "pair_hash": "8f4244066807f991d68a2943c507b48a6342a94aa00789dce80a220c278c5d9d",
+      "rank": 30,
+      "label": "keep",
+      "evidence": [
+        "\"probabilities\"",
+        "answer['probabilities'][label] < 0.7"
+      ],
+      "rationale": "The caller policy consumes the exact choice and probability fields shown in the response."
+    },
+    {
+      "pair_hash": "ad091d82153bfea4c677e0a81b1c209c49f441f19d6e0acdf0fbe716d635c246",
+      "rank": 31,
+      "label": "suppress",
+      "evidence": [
+        "func decode(data []byte, dst any)",
+        "func replyError"
+      ],
+      "rationale": "Generic JSON decoding and error-response encoding show separate utilities rather than a shared behavior."
+    },
+    {
+      "pair_hash": "0b865209ed2cb14d85367b00e4150439e2223fb918b763c4415231a1df3609b2",
+      "rank": 32,
+      "label": "defer",
+      "evidence": [
+        "This threshold is not a safety guarantee.",
+        "## Checks and evaluation"
+      ],
+      "rationale": "The checks side contains only a heading, so no threshold validation or related checking content is visible."
+    }
+  ]
+}

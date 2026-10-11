@@ -1,0 +1,45 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-agentic-loop",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "c2e9e13b8bfc7e8cc15a16f7dcbd4d1774e3bbf5aa148ffafa924837a2e848d2",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "agree",
+      "rationale": "attachContinuation supplies the outstanding-request condition and all three deferred-turn fields; deferredContinuationResult supplies the state, empty publications, prompt and requested observation. Both bodies are needed and neither member is redundant."
+    },
+    {
+      "id": "q-02",
+      "verdict": "agree",
+      "rationale": "The truncation handler establishes the utilization/first-retry decision, compaction/failure branches and unchanged iteration; publishedRetryOrdinal establishes the parse, loop/iteration match and zero fallback. The two bodies fully support the answer and are individually insufficient."
+    },
+    {
+      "id": "q-03",
+      "verdict": "disagree",
+      "rationale": "The gate refusal and errors.As handling are supported, but the gold bodies do not establish the claimed effect-free terminalGuardResult or HandleToolResult early return: those bodies lie outside the set. The answer therefore needs more than the two named members to be established in full."
+    },
+    {
+      "id": "q-04",
+      "verdict": "agree",
+      "rationale": "dispatchToolCall explicitly describes and implements overwriting the enforced cached keys on every dispatch path, while restoreLoopFromRequest implements the defensive record-metadata copy and explains the permissive missing-key hazard. Both different-file members are necessary."
+    },
+    {
+      "id": "q-05",
+      "verdict": "agree",
+      "rationale": "SettleRequest alone shows locking, the outstanding-settlement call, the nonempty carrier-match guard and all three clears. The actual settleTruncatedRequest lookalike only settles outstanding work; TrackRequest writes the carrier instead of clearing it."
+    },
+    {
+      "id": "q-06",
+      "verdict": "agree",
+      "rationale": "truncateToolResult alone supplies the exact marker, byte budget, marker-only fallback and UTF-8 rune-start walk. The cited oversized-result call confirms its use, and the real model-response diagnostic/truncation helpers do not supply this tool-result marker."
+    }
+  ]
+}

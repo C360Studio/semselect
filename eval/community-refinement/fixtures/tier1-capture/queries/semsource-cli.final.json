@@ -1,0 +1,101 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semsource-cli",
+  "split": "held-out",
+  "rule": "queries both annotators agree on (ruling 7, 2026-10-10); disputed ones dropped; gold sets are annotator A's, sets B added are recorded under b_additional_sets and are not gold",
+  "success": "the budgeted evidence contains every member of at least one gold set",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semsource",
+    "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+    "workspace_sha256": "02b9bfb04d39ee387dd4444f631711b8dcb4516b48b1e3d3fe6deb468c1084de"
+  },
+  "frozen_capture": "docs/evidence/20261010T134904Z-legacy-tier1-capture-semsource-cli-explicit-only",
+  "partition_hash": "0ac1e5ae52bfd5a9b6ea1911556b19ea7458ee6784d9b841df8a5f8cd07b40c5",
+  "queries": [
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "In interactive semsource remove, how is each entry in the selection list labelled, and where does the location text for a git source come from?",
+      "answer": "Remove labels each source \"[%d] %s  %s\" with the 1-based index, s.Type and truncate(loc, 40), where loc = sourceLocation(s), falling back to strings.Join(s.Paths, \", \") when that is empty; it then prints the header \"Remove a source\" and calls term.Select(\"Which source to remove?\", labels) to get the 0-based index. For git (and repo) sourceLocation returns s.URL when set, otherwise s.Path.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-cli.function.cli-remove-go-Remove",
+          "semselect.semsource.golang.semsource-cli.function.cli-sources-go-sourceLocation"
+        ]
+      ],
+      "evidence": [
+        "cli/remove.go:30-47",
+        "cli/sources.go:46-54"
+      ],
+      "rationale": "Remove shows the label format, the 40-character cap and the Paths fallback; sourceLocation shows that a git source's location is its URL, else its Path. Remove only calls sourceLocation by name, and sourceLocation says nothing about how the list is rendered, so both are required.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 1,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {
+            "positive": 1
+          }
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "Does a source added with semsource add image --paths get thumbnail generation set, and how does the interactive Images wizard differ on thumbnails and watch?",
+      "answer": "parseImageFlags defines only --paths (required, else \"image source requires --paths\"), --watch (default true) and --max-file-size (default \"50MB\"), so GenerateThumbnails is left nil. imageWizard.Prompts asks \"Max file size\" (default 50MB) and \"Generate thumbnails?\" (default yes) and stores boolPtr(answer) in GenerateThumbnails, and sets Watch: true unconditionally without asking.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-parseImageFlags",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_image-go-imageWizard-Prompts"
+        ]
+      ],
+      "evidence": [
+        "cli/add.go:213-230",
+        "cli/wizard_image.go:40-49"
+      ],
+      "rationale": "parseImageFlags establishes the complete flag set and hence the absence of a thumbnail flag; imageWizard.Prompts establishes the thumbnail prompt, its default and the forced Watch. Each entity covers one path only, so neither alone answers the comparison.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "Which manifest files does the AST wizard's language auto-detection (detectLanguage) look for, where does it look, and what language does each imply?",
+      "answer": "detectLanguage stats, in the process's current directory (not a given dir), go.mod -> go, package.json -> typescript, Cargo.toml -> rust, pom.xml -> java and build.gradle -> java, returning the first one found (Go map iteration, so unspecified when several exist) or \"\" when none. It has no python manifests.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_ast-go-detectLanguage"
+        ]
+      ],
+      "evidence": [
+        "cli/wizard_ast.go:61-76"
+      ],
+      "rationale": "detectLanguage in wizard_ast.go is the only place with this five-entry map checked against the current directory. The lookalike is the manifests map inside DetectProject in detect.go, which takes a dir argument, adds pyproject.toml and requirements.txt -> python and also records ConfigFiles; the ast flag parser's --language help text is another near-miss.",
+      "flags": [
+        {
+          "members": 1,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    }
+  ]
+}

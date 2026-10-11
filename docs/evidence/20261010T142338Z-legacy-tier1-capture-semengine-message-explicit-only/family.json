@@ -1,0 +1,241 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "semengine-message",
+    "split": "development",
+    "role": "multiple legitimate topics",
+    "language": "Go",
+    "repo": "https://github.com/C360Studio/semengine",
+    "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "license_file_first_line": "MIT License",
+    "system_segment": "semengine-message",
+    "include": [
+      "message",
+      "payloadregistry"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "*.md"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "message/base_message.go",
+      "message/behaviors.go",
+      "message/content_storable.go",
+      "message/decoder.go",
+      "message/doc.go",
+      "message/generic_json.go",
+      "message/message.go",
+      "message/meta.go",
+      "message/meta_default.go",
+      "message/payload.go",
+      "message/rule_readable.go",
+      "message/storable.go",
+      "message/triple.go",
+      "message/triple_identity.go",
+      "message/types.go",
+      "payloadregistry/registry.go"
+    ],
+    "workspace_sha256": "f849efeefa27a653ebc204fcf3896a0c553231fda9cffe5cda8f8859105354f9",
+    "entities_total": 111,
+    "entities_by_type": {
+      "const": 6,
+      "file": 16,
+      "folder": 2,
+      "function": 25,
+      "interface": 9,
+      "method": 33,
+      "repo": 1,
+      "struct": 12,
+      "type": 7
+    },
+    "entities_by_domain": {
+      "code": 3,
+      "golang": 108
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 111,
+      "edges": 343,
+      "induced_edges": 307,
+      "cross_system_edges": 0,
+      "dangling_edges": 36,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 54,
+        "code.relationship.embeds": 2,
+        "code.relationship.parameter": 10,
+        "code.relationship.receiver": 33,
+        "code.relationship.references": 6,
+        "code.relationship.returns": 18,
+        "code.structure.belongs": 110,
+        "code.structure.contains": 110
+      },
+      "non_containment_edges": 123
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "message",
+          "payloadregistry"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "*.md"
+        ],
+        "max_file_bytes": null,
+        "files": 16,
+        "entities": 111
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "message",
+          "payloadregistry"
+        ],
+        "exclude": [
+          "*_test.go",
+          "*/testdata/*",
+          "*.md"
+        ],
+        "max_file_bytes": null,
+        "files": 16,
+        "entities": 111
+      }
+    ],
+    "notes": "Owner subtree: message/ and payloadregistry/ non-test Go; message/README.md is not Go and is excluded.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result"
+  },
+  "prepared": {
+    "id": "semengine-message",
+    "split": "development",
+    "repository": "semengine",
+    "commit": "00b4a81871d0dbfbf60382ac86a13c6a9908f116",
+    "include": [
+      "message",
+      "payloadregistry"
+    ],
+    "exclude": [
+      "*_test.go",
+      "*/testdata/*",
+      "*.md"
+    ],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "MIT License",
+    "has_code": true,
+    "has_docs": false,
+    "files": [
+      {
+        "path": "message/base_message.go",
+        "bytes": 11220,
+        "sha256": "cbd171011f6bb98cbe09bcd78c60af3859d21d4b92fe1ac3cf95b6bb19d6170c"
+      },
+      {
+        "path": "message/behaviors.go",
+        "bytes": 1464,
+        "sha256": "fc3d5947f48ed7fa4065a647e3ef2073ebed5cc0ba9b59b0e3b0d13487d3d910"
+      },
+      {
+        "path": "message/content_storable.go",
+        "bytes": 5489,
+        "sha256": "e6374b7cdcf4b74549f3dffe4e5e3c859456cb58b8e2cf80c0fac3c14d12ddf0"
+      },
+      {
+        "path": "message/decoder.go",
+        "bytes": 1622,
+        "sha256": "92e2d3738806b138119e0bcf75edea4e63d8c9f87091527b620a44686bdb95ab"
+      },
+      {
+        "path": "message/doc.go",
+        "bytes": 17726,
+        "sha256": "dbdac141704b05d7a1f4030d1ef64e5c22126af2d784491e91570c252154109a"
+      },
+      {
+        "path": "message/generic_json.go",
+        "bytes": 8550,
+        "sha256": "485acd4c3ac74ccd7f7ee633bf639f484314b3cfd3a2d62634b8b03ab29084cd"
+      },
+      {
+        "path": "message/message.go",
+        "bytes": 1715,
+        "sha256": "5690939a8a65e27ce3e59257e708901f6c7ae2ac5580c3a724650b11613fb4b1"
+      },
+      {
+        "path": "message/meta.go",
+        "bytes": 1094,
+        "sha256": "2ef3c9c390c18daed8f1b65f70b7413a0b3057d5ca889f0035248c7c5e9997c0"
+      },
+      {
+        "path": "message/meta_default.go",
+        "bytes": 1567,
+        "sha256": "47b1d017a215d6f1db0b2499ee65ef93f01691004830b04ff6689c714e41eda5"
+      },
+      {
+        "path": "message/payload.go",
+        "bytes": 2249,
+        "sha256": "c8ec0f5350324027b04a75612b85d8ed6b0182fc2a5bd5ca1bd6d9206c5d95e7"
+      },
+      {
+        "path": "message/rule_readable.go",
+        "bytes": 3438,
+        "sha256": "54d9e214dda65fe36d9b8a71c80a0f7c9a91a8b519aece1ebea5a17e0e78054f"
+      },
+      {
+        "path": "message/storable.go",
+        "bytes": 3180,
+        "sha256": "68aba401da08288173ba5c57aa8d0f6824cac03900e1cdb19937b672089eef8c"
+      },
+      {
+        "path": "message/triple.go",
+        "bytes": 6543,
+        "sha256": "336fded54006800c78c1d9ec7891b7b9181c188df837349e916c19d4a06ed1fa"
+      },
+      {
+        "path": "message/triple_identity.go",
+        "bytes": 9632,
+        "sha256": "e7cf5976b99536e62ad92cc86f45e6432a4858c431dc1f698c4da2c992c8d40b"
+      },
+      {
+        "path": "message/types.go",
+        "bytes": 1113,
+        "sha256": "40d31f7fddd8ee2b747e0b598fc14b2fd0a1960f675688f2acbe959572ba64f2"
+      },
+      {
+        "path": "payloadregistry/registry.go",
+        "bytes": 16318,
+        "sha256": "8b597459d6b980cb5ba2eef4454f1a333d1f3bc0bfd32b72b6335eb143d1699b"
+      }
+    ],
+    "workspace_sha256": "f849efeefa27a653ebc204fcf3896a0c553231fda9cffe5cda8f8859105354f9"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.dGkd3w/config/semengine-message.tier1.json",
+    "sha256": "caaca135fd674945169c9b5a3ae5f67c9f6132aa37e5208c66a4369a4e3cb449",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "47c441ac87b5d0d075a2eb4da7f3510e6f4d65ccecbde8593ef265127c81b69c"
+}

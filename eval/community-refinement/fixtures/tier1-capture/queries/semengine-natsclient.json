@@ -1,0 +1,121 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semengine-natsclient",
+  "split": "development",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "b166333148269855509cf5c8899abc2dac959824bcfea5bdd5a69bce7e774a33",
+  "passages_sha256": "3dff5bbaf1951943b23f97d6d58b87f84439177cbdca0a5596dd1c66bceea054",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "Which client option sets how often the health monitor runs, and on each tick what does the monitor check on the connection and which status transitions can it make?",
+      "answer": "WithHealthInterval(d) sets healthInterval. Each tick reads the installed conn (a nil conn is skipped), treats it as healthy only if conn.IsConnected() and conn.RTT() succeeds, then under mu and only while the client still owns the status for that conn (Close not begun, conn still installed) it sets Connected when healthy and the status is not Connected, or Reconnecting when unhealthy and the status is Connected.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-natsclient.function.natsclient-options-go-WithHealthInterval",
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-startHealthMonitoring"
+        ]
+      ],
+      "evidence": [
+        "natsclient/options.go:30-35",
+        "natsclient/client.go:2203-2228"
+      ],
+      "rationale": "WithHealthInterval is the only text naming the option that writes healthInterval; startHealthMonitoring is the only text showing what a tick checks (IsConnected, RTT) and the ownership-guarded Connected/Reconnecting writes. The option says nothing about the tick and the monitor never names the option, so neither alone establishes the answer."
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "Inside a core Subscribe handler, what deadline does the per-message context carry, and which message headers are consulted, in what order, to attach a trace context to it?",
+      "answer": "subscribeWith wraps the handler so each message gets context.WithTimeout(subscribe ctx, 30s) and calls ExtractTrace(msg): a nil msg or nil Header yields nil and no trace is attached; otherwise the W3C traceparent header is tried first and used when ParseTraceparent succeeds; else it falls back to X-Trace-ID (required, otherwise nil) with X-Span-ID and X-Parent-Span-ID and Sampled=true. A non-nil result is attached with ContextWithTrace.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-subscribeWith",
+          "semselect.semsource.golang.semengine-natsclient.function.natsclient-trace-go-ExtractTrace"
+        ]
+      ],
+      "evidence": [
+        "natsclient/client.go:1274-1291",
+        "natsclient/trace.go:89-114"
+      ],
+      "rationale": "subscribeWith establishes the 30-second per-message timeout and that ExtractTrace is what populates the handler context; ExtractTrace establishes the header precedence (traceparent, then the X-Trace-ID fallback) and the nil cases. The wrapper never lists the headers and ExtractTrace never mentions the subscribe path or its deadline."
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "I called CreateKeyValueBucket with a KeyValueConfig carrying no MaxAge or MaxBytes, yet CheckNoLifecycleRetention fails for that bucket: does CreateKeyValueBucket apply my config to a bucket that already exists, and exactly which values does the check reject?",
+      "answer": "No. CreateKeyValueBucket first calls js.KeyValue(ctx, cfg.Bucket) and, if the bucket exists, returns it unchanged (logging \"Using existing KV bucket\"); it only calls CreateKeyValue when that lookup fails, and on an already-exists race it again fetches the existing bucket, so another process's retention config stands. CheckNoLifecycleRetention rejects maxAge > 0 (\"bucket %q has TTL/MaxAge %s\") and maxBytes > 0 (\"bucket %q has MaxBytes %d\"), each wrapping ErrGraphBucketRetention; zero or negative values pass.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-CreateKeyValueBucket",
+          "semselect.semsource.golang.semengine-natsclient.function.natsclient-kv-go-CheckNoLifecycleRetention"
+        ]
+      ],
+      "evidence": [
+        "natsclient/client.go:1793-1830",
+        "natsclient/kv.go:179-187"
+      ],
+      "rationale": "CreateKeyValueBucket establishes the lookup-first order (an existing bucket is returned as-is, the config is not applied); CheckNoLifecycleRetention establishes the exact rejected values and error texts. AssertNoLifecycleRetention only says the config must not be 'binding' and delegates, so it cannot replace the check, and nothing in kv.go describes CreateKeyValueBucket's lookup-first behaviour."
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "With the default KVOptions, how many CAS attempts does UpdateWithRetryRev make, how are the delays between them computed, and what error is returned when the last attempt still conflicts?",
+      "answer": "Defaults are MaxRetries 10, RetryDelay 10ms, MaxRetryDelay 1s, UseExponentialBackoff true. getRetryConfig turns that into retry.Config{MaxAttempts: MaxRetries+1 = 11, InitialDelay 10ms, MaxDelay 1s, AddJitter: true, Multiplier 2.0 (1.0 when exponential backoff is off)}. UpdateWithRetryRev runs the loop with retry.Do; if the final error is still a conflict (IsKVConflictError) it returns (0, ErrKVMaxRetriesExceeded); any other final error is returned as-is with revision 0.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semengine-natsclient.chunk.natsclient-README-md-0009",
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-getRetryConfig",
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-UpdateWithRetryRev"
+        ],
+        [
+          "semselect.semsource.golang.semengine-natsclient.function.natsclient-kv-go-DefaultKVOptions",
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-getRetryConfig",
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-kv-go-KVStore-UpdateWithRetryRev"
+        ]
+      ],
+      "evidence": [
+        "natsclient/README.md:170-175",
+        "natsclient/kv.go:273-289",
+        "natsclient/kv.go:443-449"
+      ],
+      "rationale": "The README API-reference passage states the default values; getRetryConfig shows MaxRetries+1 attempts, the always-on jitter and the 2.0/1.0 multiplier; UpdateWithRetryRev shows the conflict-after-retries mapping to ErrKVMaxRetriesExceeded. Each member carries one third: the defaults are not in the retry code, and the attempt arithmetic and the sentinel mapping sit in different functions."
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "When a reply carries X-Status: error but its X-Error-Class header holds a value the client does not recognise, what error class does the reconstructed error get, and why that default?",
+      "answer": "errs.ErrorInvalid. classifiedFromHeader maps \"fatal\", \"transient\" and \"invalid\" to their classes and every other string (including empty) to ErrorInvalid, as the conservative choice: a caller seeing IsInvalid will not retry an unrecognised class, whereas IsTransient would loop. An empty message becomes \"handler error\"; with a code or detail present it builds errs.ClassifiedCodeDetail, otherwise errs.Classified.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-natsclient.function.natsclient-errors-go-classifiedFromHeader"
+        ]
+      ],
+      "evidence": [
+        "natsclient/errors.go:347-371"
+      ],
+      "rationale": "Only classifiedFromHeader holds the wire-to-class switch and the comment justifying its default. The lookalike is classForHeader, the producer-side mirror in the same file, whose default is ErrorClassTransient, the opposite answer; ClassifyReply calls the function but does not show the default."
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "Exactly which JetStream publish failures does the client treat as circuit-neutral, so they are not counted as a connection failure: what error type, error code and descriptions must match?",
+      "answer": "Only a *jetstream.APIError (found with errors.As) whose ErrorCode is jetstream.ErrorCode(10077) and whose Description is exactly \"maximum bytes exceeded\", \"maximum messages exceeded\" or \"maximum messages per subject exceeded\". Any other error, including a 10077 with another description or a nil APIError, is not neutral and goes to recordFailure.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-natsclient.function.natsclient-client-go-isCircuitNeutralStreamCapacityError"
+        ]
+      ],
+      "evidence": [
+        "natsclient/client.go:528-541"
+      ],
+      "rationale": "isCircuitNeutralStreamCapacityError is the sole text listing the code and the three description strings. The lookalike is recordStreamPublishFailure, which describes the rule only as 'configured admission ceilings'; asyncPublishErrHandler and publishToStreamAsync likewise mention 'the exact classified capacity set' without listing it."
+    }
+  ]
+}

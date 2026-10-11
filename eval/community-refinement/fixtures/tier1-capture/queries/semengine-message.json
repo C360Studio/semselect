@@ -1,0 +1,117 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semengine-message",
+  "split": "development",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "36a218d4979116bf6bb988cd8837ee27a192cb348f5a7eedade738d254138875",
+  "passages_sha256": null,
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "What does the core.json.v1 payload expose to rule conditions and $message.* substitutions, and how is a payload that does not implement RuleReadable at all treated compared with one whose projection is an empty map?",
+      "answer": "GenericJSONPayload.RuleFields returns its whole Data map verbatim, so every caller-supplied key is readable. A payload that does not implement RuleReadable is unreadable and the rule engine reports it; that is distinct from implementing it and returning a nil or empty map, which is a valid answer meaning \"nothing to match on\".",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-message.method.message-generic_json-go-GenericJSONPayload-RuleFields",
+          "semselect.semsource.golang.semengine-message.interface.message-rule_readable-go-RuleReadable"
+        ]
+      ],
+      "evidence": [
+        "message/generic_json.go:259-261",
+        "message/rule_readable.go:57-63"
+      ],
+      "rationale": "RuleFields shows that core.json.v1 returns its entire Data map; the RuleReadable interface text defines what not implementing it means and distinguishes that from an empty projection. Neither file carries the other half: generic_json.go says nothing about non-implementers and rule_readable.go never names GenericJSONPayload."
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "What error does Decoder.Decode return when the Decoder was built with a nil registry, and how does that differ from calling json.Unmarshal directly on a zero-value BaseMessage?",
+      "answer": "Decode fails before unmarshalling anything with errs.WrapInvalid(errs.ErrInvalidConfig, \"Decoder\", \"Decode\", \"decoder constructed with nil registry\"); a usable Decoder allocates &BaseMessage{registry: d.registry} and calls json.Unmarshal on it. A zero-value BaseMessage has no registry, so its UnmarshalJSON first parses the wire format and meta and then returns an invalid-data error wrapping \"no payload registry configured; use message.NewDecoder(reg).Decode(data)\" with operation \"missing registry\".",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-message.method.message-decoder-go-Decoder-Decode",
+          "semselect.semsource.golang.semengine-message.method.message-base_message-go-BaseMessage-UnmarshalJSON"
+        ]
+      ],
+      "evidence": [
+        "message/decoder.go:39-50",
+        "message/base_message.go:273-281",
+        "message/base_message.go:306-312"
+      ],
+      "rationale": "Decode carries the nil-registry config error and shows that the Decoder is what sets the private registry field; UnmarshalJSON carries the different missing-registry invalid-data error and the order of checks for a zero-value message. Each file states only its own error, so neither entity establishes the contrast."
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "When Registry.Build is called for core.json.v1 with a fields map, does it take the JSON round-trip fallback or a registered Builder, and what does that builder do with the fields?",
+      "answer": "The Builder path: Build calls registration.Builder whenever one is set and only falls back to json.Marshal(fields) plus Factory() and json.Unmarshal when Builder is nil, and RegisterPayloads registers core.json.v1 with Builder: buildGenericJSONPayload. That builder makes an empty GenericJSONPayload, copies fields[\"data\"] into Data only when it is a map[string]any, then runs Validate and returns any failure wrapped with operation buildGenericJSONPayload and message \"validation failed\".",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-message.method.payloadregistry-registry-go-Registry-Build",
+          "semselect.semsource.golang.semengine-message.function.message-generic_json-go-RegisterPayloads",
+          "semselect.semsource.golang.semengine-message.function.message-generic_json-go-buildGenericJSONPayload"
+        ]
+      ],
+      "evidence": [
+        "payloadregistry/registry.go:335-351",
+        "message/generic_json.go:33-51",
+        "message/generic_json.go:16-28"
+      ],
+      "rationale": "Build establishes that a registered Builder is preferred over the JSON round-trip; RegisterPayloads establishes that core.json.v1 registers buildGenericJSONPayload as its Builder; buildGenericJSONPayload establishes what that builder does. Remove any one and either the path taken or its behaviour is unknown, and the registry file never names core.json.v1."
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "Which fields of a Triple are left out of the add-lane identity key, so that two triples differing only in them count as the same assertion for append deduplication?",
+      "answer": "The key is written from exactly six fields: Subject, Predicate, Datatype, Source, Context and canonicalObjectKey(Object). Of Triple's nine fields, Timestamp, Confidence and ExpiresAt are not part of it, so a re-assertion that changes only those produces the same key.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-message.function.message-triple_identity-go-AppendIdentityKey",
+          "semselect.semsource.golang.semengine-message.struct.message-triple-go-Triple"
+        ]
+      ],
+      "evidence": [
+        "message/triple_identity.go:61-72",
+        "message/triple.go:37-100"
+      ],
+      "rationale": "AppendIdentityKey shows the six fields the key is written from; only the Triple struct shows the full field list, so the three excluded fields can be named. The key function never mentions Timestamp, Confidence or ExpiresAt and the struct says nothing about identity, so neither alone establishes the answer."
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "Once Validate has passed, what else can BaseMessage.MarshalJSON still refuse to serialize, and with what errors?",
+      "answer": "Two things, both refused rather than written with U+FFFD replacement: a meta Source that is not valid UTF-8, with errs.WrapInvalid(fmt.Errorf(\"meta source %q is not valid UTF-8\"), \"BaseMessage\", \"MarshalJSON\", \"source\"), and a message Type any of whose Domain, Category or Version is not valid UTF-8, with \"message type %q is not valid UTF-8\" and operation \"type\". Before those checks a payload MarshalJSON failure is wrapped as \"failed to marshal payload\" and a Validate failure as \"payload validation failed\".",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-message.method.message-base_message-go-BaseMessage-MarshalJSON"
+        ]
+      ],
+      "evidence": [
+        "message/base_message.go:191-221"
+      ],
+      "rationale": "The UTF-8 checks on meta source and type components, with their exact wrapping, exist only in BaseMessage.MarshalJSON. The lookalike is GenericJSONPayload.MarshalJSON in generic_json.go, which also refuses invalid UTF-8 but over Data strings and map keys through shapeCheck, naming a path such as data.a[2].b and never the source or type; BaseMessage.Validate is a second near miss, checking only that type components are non-empty."
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "If Registry.Create is asked for a domain, category and version that no registration covers, does it return an error or nil, and what does it return for a registered type?",
+      "answer": "nil, with no error: Create's only return value is any. It formats the key as domain.category.version with %s.%s.%s, looks it up under a read lock, returns nil when the key is absent, and otherwise returns the result of calling the registration's Factory().",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semengine-message.method.payloadregistry-registry-go-Registry-Create"
+        ]
+      ],
+      "evidence": [
+        "payloadregistry/registry.go:305-317"
+      ],
+      "rationale": "Create's body is the whole answer: the formatted key, the read-locked lookup, a bare nil for a miss and Factory() for a hit. The lookalike is Registry.Build in the same file, which looks up the same key but reports a miss with the error `payload type %q not registered`; GetRegistration is a second near miss, returning (nil, false)."
+    }
+  ]
+}

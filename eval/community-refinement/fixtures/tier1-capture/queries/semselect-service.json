@@ -1,0 +1,126 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semselect-service",
+  "split": "development",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "e020f914fb7439d83fffff160c03a0dfa8115a6f5479b1b1111794dcb9fcbfd5",
+  "passages_sha256": "73e1c1d177a9c4c82b7628b9663be6a16cfcf9e041c92bdf9b03ff7094019754",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "Under the default configuration, what value must a request's optional `model` field carry, and what error message does the guard return when the field is present but different?",
+      "answer": "main defaults SEMSELECT_MODEL to \"semselect-kev-4b\" and passes it as Config.Model. validate accepts an absent or empty model, but any other value that differs from the configured alias is rejected with the error `model must be \"semselect-kev-4b\"`.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semselect-service.function.cmd-semselect-main-go-main",
+          "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-validate"
+        ]
+      ],
+      "evidence": [
+        "cmd/semselect/main.go:70",
+        "internal/guard/guard.go:92-94"
+      ],
+      "rationale": "main contributes the default alias \"semselect-kev-4b\" (the README names SEMSELECT_MODEL only as an expected alias with no default); validate contributes the rule that a non-empty model must equal the configured one and the exact `model must be %q` message. Neither alone gives both the value and the rejection."
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "What are the default and allowed range of SEMSELECT_TIMEOUT, which deadline do the GET passthrough routes use instead, and what status does a caller get when a forwarded request exceeds its deadline?",
+      "answer": "Default 120s; it must parse as a positive duration of at most 5m. ServeHTTP passes Config.Timeout to forward only for POST /v1/systemone; /ready, /v1/models and /metrics/runtime are forwarded with a fixed 2-second deadline. When a deadline expires, forward answers 504 (`runtime unavailable or request deadline exceeded`, or `runtime response deadline exceeded` if it expires while reading the body); a non-deadline transport failure is 503.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semselect-service.function.cmd-semselect-main-go-main",
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-ServeHTTP",
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-forward"
+        ],
+        [
+          "semselect.semsource.web.semselect-service.chunk.README-md-0025",
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-ServeHTTP",
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-forward"
+        ]
+      ],
+      "evidence": [
+        "cmd/semselect/main.go:65-69",
+        "internal/guard/guard.go:161-169",
+        "internal/guard/guard.go:225",
+        "internal/guard/guard.go:228-253",
+        "README.md:417"
+      ],
+      "rationale": "main (or the README configuration table) gives the 120s default and the positive-to-5m range; ServeHTTP shows that Config.Timeout reaches forward only for the decision route while the GET routes use 2s; forward maps an expired context to 504 with its two messages and other failures to 503. No single entity holds the limit, the per-route deadline and the status."
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "Why does the guard walk the JSON keys itself instead of relying on the struct decoder, and does that validation happen before or after a decision request takes the single admission slot?",
+      "answer": "checkJSON's note: Go's struct decoder accepts case variants and duplicate keys while the runtime reads case-sensitive JSON, and re-marshalling would sort the caller's candidate order, so keys are inspected on the original bytes (duplicate keys, unknown top-level or question fields and nesting over 8 levels are rejected). It runs before the slot: ServeHTTP checks Content-Type (415), reads at most MaxBody bytes (413), calls validate (400), and only then tries the non-blocking send on busy (429) before forwarding the same raw bytes.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semselect-service.function.internal-guard-json-go-checkJSON",
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-ServeHTTP"
+        ]
+      ],
+      "evidence": [
+        "internal/guard/json.go:12-15",
+        "internal/guard/json.go:45-54",
+        "internal/guard/guard.go:196-225"
+      ],
+      "rationale": "checkJSON carries the reason (decoder leniency, case-sensitive runtime, remarshal would reorder candidates) and the key rules; ServeHTTP carries the order of Content-Type check, capped read, validate, slot acquisition and forward of the raw data. The README states only that such requests are rejected and order is preserved, with neither the reason nor the ordering."
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "If a caller disconnects while its decision request is being forwarded, does the guard free its single admission slot, and does the documentation say the runtime stops computing?",
+      "answer": "Yes: forward builds the upstream request on a context derived from the incoming request's context plus the timeout, so the client's cancellation cancels Client.Do; forward replies 503 (not 504, since ctx.Err() is Canceled) and returns, and ServeHTTP's deferred receive on busy frees the one slot for the next request. The README promises only that client cancellation cancels the upstream HTTP call and states that immediate interruption of native model computation has not been established, so the runtime may still be busy.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-ServeHTTP",
+          "semselect.semsource.golang.semselect-service.method.internal-guard-guard-go-Guard-forward",
+          "semselect.semsource.web.semselect-service.chunk.README-md-0026"
+        ]
+      ],
+      "evidence": [
+        "internal/guard/guard.go:216-225",
+        "internal/guard/guard.go:228-247",
+        "README.md:438-442"
+      ],
+      "rationale": "ServeHTTP shows the slot is released by a deferred receive when the handler returns; forward shows the upstream context derives from incoming.Context() so a disconnect ends Client.Do with a 503 path; the README passage supplies the one-at-a-time profile and the caveat that interruption of native computation is not established, which no code entity can state."
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "Given SEMSELECT_ADDR of `:8084`, `0.0.0.0:8084` or `[::]:8084`, what readiness URL does the guard binary derive, and which SEMSELECT_ADDR values does it reject with an error?",
+      "answer": "listenConfig rewrites an empty host or 0.0.0.0 to 127.0.0.1 and :: to ::1 and returns http://<host>:<port>/ready, so the three become http://127.0.0.1:8084/ready or http://[::1]:8084/ready. It rejects values that do not split as host:port (`SEMSELECT_ADDR must be an IP address and port`) and ports outside 1-65535 or non-empty hosts that are not literal IPs (`SEMSELECT_ADDR requires a literal IP (or empty host) and port 1–65535`).",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semselect-service.function.cmd-semselect-main-go-listenConfig"
+        ]
+      ],
+      "evidence": [
+        "cmd/semselect/main.go:25-41"
+      ],
+      "rationale": "Only listenConfig contains the wildcard-to-loopback rewrite, the /ready path and both validation errors. The lookalikes are the README configuration passage, which says the health check 'follows that address' and names only the 127.0.0.1:8084 Metal case, and main, which reads SEMSELECT_ADDR and runs the healthcheck GET but delegates the URL to listenConfig."
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "What must SEMSELECT_UPSTREAM look like for guard.New to accept it, and how does New keep its HTTP client from following a redirect issued by the runtime?",
+      "answer": "New parses the upstream and requires scheme http, a non-empty host, no user info, an empty or `/` path, and no query or fragment, otherwise it fails with `upstream must be an http origin without credentials, path, query or fragment`; it then trims a trailing `/`. It copies the supplied http.Client (or a zero one) and sets CheckRedirect to return http.ErrUseLastResponse, so a redirect is never followed and Client.Do returns the 3xx response itself. It also requires a non-empty Model and positive Timeout.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semselect-service.function.internal-guard-guard-go-New"
+        ]
+      ],
+      "evidence": [
+        "internal/guard/guard.go:50-70"
+      ],
+      "rationale": "New alone holds the origin rules, the exact error and the CheckRedirect policy. The lookalike is forward, which handles the resulting 3xx by replying 502 `unexpected runtime redirect` (the consequence, not the client policy), and the README configuration passage, which only calls SEMSELECT_UPSTREAM an 'HTTP origin' with no rules."
+    }
+  ]
+}

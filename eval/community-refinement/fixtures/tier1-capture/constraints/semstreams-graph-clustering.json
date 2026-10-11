@@ -1,0 +1,245 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semstreams-graph-clustering",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "a3a369d7efc3e91bd38b96a34ef82956a721d382cef58d557399894aeb22e312",
+  "constraints": [
+    {
+      "id": "pos-01",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-runStructuralAndAnomalyDetection",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-structural-go-Component-runStructuralComputation",
+      "evidence": [
+        "processor/graph-clustering/component.go:1877-1891",
+        "processor/graph-clustering/structural.go:13-15"
+      ],
+      "rationale": "One same-cycle workflow split across two files: runStructuralAndAnomalyDetection calls runStructuralComputation for the ephemeral k-core and pivot indices and hands those pointers straight to runAnomalyDetection. Changing what the structural pass returns or when it may run means touching both."
+    },
+    {
+      "id": "pos-02",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semstreams-graph-clustering.chunk.processor-graph-clustering-README-md-0005",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-anomaly-go-Component-registerAnomalyDetectors",
+      "evidence": [
+        "processor/graph-clustering/README.md:111-116",
+        "processor/graph-clustering/anomaly.go:239-257"
+      ],
+      "rationale": "The README anomaly-configuration table documents core_anomaly.enabled and semantic_gap.enabled; registerAnomalyDetectors is the code that reads exactly those flags to decide which detectors join the orchestrator. The table is the operator view of this switch logic (it also omits the transitivity detector the code registers)."
+    },
+    {
+      "id": "pos-03",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-recordDefer",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-metrics-go-clusteringMetrics-countDefer",
+      "evidence": [
+        "processor/graph-clustering/component.go:1678-1681",
+        "processor/graph-clustering/metrics.go:267-277",
+        "processor/graph-clustering/metrics.go:88-92"
+      ],
+      "rationale": "recordDefer is the gate's defer path and its first act is c.metrics.countDefer(d.reason); countDefer only accepts the closed graph.DeferReason set. The typed-reason contract between the gate and the defer_total metric lives in both symbols, so a new defer reason must be understood on both sides."
+    },
+    {
+      "id": "pos-04",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-wrapSemanticEdges",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-similarity-go-semanticFinderAdapter-SimilarNeighbors",
+      "evidence": [
+        "processor/graph-clustering/component.go:1417-1419",
+        "processor/graph-clustering/similarity.go:196-200",
+        "processor/graph-clustering/similarity.go:256-257"
+      ],
+      "rationale": "wrapSemanticEdges builds the mutual-kNN provider chain and injects semanticFinderAdapter{finder} as its SemanticNeighborFinder; SimilarNeighbors is that adapter's readiness-aware classification of similarity-RPC outcomes. The semantic edge tier's candidate source is defined by these two together."
+    },
+    {
+      "id": "pos-05",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semstreams-graph-clustering.chunk.processor-graph-clustering-README-md-0007",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-runDetectionLoop",
+      "evidence": [
+        "processor/graph-clustering/README.md:142-145",
+        "processor/graph-clustering/component.go:1449-1456",
+        "processor/graph-clustering/component.go:1463-1483"
+      ],
+      "rationale": "README Scheduling says detection runs when detection_interval elapses and each tick reads the current graph rather than an entity-change stream; runDetectionLoop is that timer, ticking on config.DetectionInterval() and running readiness, gate and detection per tick. The passage describes this loop's behaviour."
+    },
+    {
+      "id": "pos-06",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.file.processor-graph-clustering-doc-go",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.function.processor-graph-clustering-component-go-Register",
+      "evidence": [
+        "processor/graph-clustering/doc.go:98-106",
+        "processor/graph-clustering/component.go:800-813"
+      ],
+      "rationale": "doc.go's Usage section tells adopters to call graphclustering.Register(registry) and describes the component the registry will create; Register is the function that performs that registration with the name, type, schema, factory and port declarer. Package docs and the registration entry point are read together by anyone wiring the component."
+    },
+    {
+      "id": "pos-07",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-query-go-Component-handleQueryCommunityNATS",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-graphStateContractError",
+      "evidence": [
+        "processor/graph-clustering/query.go:110-113",
+        "processor/graph-clustering/component.go:1856-1863",
+        "processor/graph-clustering/component.go:1048-1051"
+      ],
+      "rationale": "Every query handler opens with c.graphStateContractError(...), and that method turns the sticky graph-state poison latch into the typed fatal reply the query surface must return. Start explains the design: a poisoned component keeps its query surface up only so it can return this reset requirement, so the handler and the latch accessor carry one contract."
+    },
+    {
+      "id": "pos-08",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-anomaly-go-kvRelationshipQuerier-GetOutgoingRelationships",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.struct.processor-graph-clustering-component-go-relationshipEntry",
+      "evidence": [
+        "processor/graph-clustering/anomaly.go:91-92",
+        "processor/graph-clustering/anomaly.go:104-108",
+        "processor/graph-clustering/component.go:2131-2136"
+      ],
+      "rationale": "kvRelationshipQuerier.GetOutgoingRelationships unmarshals an OUTGOING_INDEX value into []relationshipEntry, the struct defined in component.go that fixes the index row format (predicate, to_entity_id). The querier in anomaly.go depends on that cross-file type for the wire format it decodes."
+    },
+    {
+      "id": "pos-09",
+      "polarity": "positive",
+      "a": "semselect.semsource.web.semstreams-graph-clustering.chunk.processor-graph-clustering-README-md-0004",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.struct.processor-graph-clustering-component-go-Config",
+      "evidence": [
+        "processor/graph-clustering/README.md:96-105",
+        "processor/graph-clustering/component.go:56-63",
+        "processor/graph-clustering/component.go:76-77"
+      ],
+      "rationale": "The README configuration-options table lists detection_interval, batch_size, min_community_size, max_iterations, enable_llm, enable_anomaly_detection and anomaly_config; Config's json tags are those same keys with their schema descriptions. The table documents this struct's operator surface."
+    },
+    {
+      "id": "pos-10",
+      "polarity": "positive",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.var.processor-graph-clustering-component-go-removedConfigFields",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.function.processor-graph-clustering-component-go-rejectRemovedConfigKeys",
+      "evidence": [
+        "processor/graph-clustering/component.go:249-255",
+        "processor/graph-clustering/component.go:269-273"
+      ],
+      "rationale": "removedConfigFields maps each withdrawn operator key to its replacement guidance, and rejectRemovedConfigKeys is the only consumer: it probes the raw config for those keys and fails the load with the mapped message. Adding or retiring a removed field means editing the map and understanding the probe that reads it."
+    },
+    {
+      "id": "neg-01",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.struct.processor-graph-clustering-component-go-kvEntityQuerier",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.struct.processor-graph-clustering-anomaly-go-kvRelationshipQuerier",
+      "evidence": [
+        "processor/graph-clustering/component.go:2510-2523",
+        "processor/graph-clustering/anomaly.go:58-65"
+      ],
+      "rationale": "Likeness: both are kv*Querier structs with bucket-reader fields and a logger, built by matching newKV*Querier constructors. Difference: kvEntityQuerier reads authoritative ENTITY_STATES for LPA summarization and the enhancement worker and carries the poison latch; kvRelationshipQuerier reads OUTGOING/INCOMING index rows with predicates for the anomaly transitivity detector."
+    },
+    {
+      "id": "neg-02",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.function.processor-graph-clustering-component-go-probeLLMEndpoint",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-Health",
+      "evidence": [
+        "processor/graph-clustering/component.go:2356-2359",
+        "processor/graph-clustering/component.go:850-852",
+        "processor/graph-clustering/component.go:875-882"
+      ],
+      "rationale": "Likeness: both are about 'health' (probeLLMEndpoint hits the LLM service's /health path). Difference: Health is the framework Discoverable report of this component's own running/error/poison state and never consults the LLM; probeLLMEndpoint is a connectivity check on an external model endpoint used only to start and pause the enhancement worker."
+    },
+    {
+      "id": "neg-03",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.struct.processor-graph-clustering-query-go-EntityRequest",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.struct.processor-graph-clustering-similarity-go-similarRequest",
+      "evidence": [
+        "processor/graph-clustering/query.go:84-88",
+        "processor/graph-clustering/similarity.go:49-53"
+      ],
+      "rationale": "Likeness: both are small JSON request structs keyed by entity_id with one integer field. Difference: EntityRequest is inbound, parsed by this component's graph.clustering.query.entity handler to look up a community; similarRequest is outbound, marshalled by this component to call graph-embedding's graph.embedding.query.similar (it mirrors graphembedding.SimilarRequest)."
+    },
+    {
+      "id": "neg-04",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-runDetectionLoop",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-monitorLLMHealth",
+      "evidence": [
+        "processor/graph-clustering/component.go:1452-1463",
+        "processor/graph-clustering/component.go:2379-2386"
+      ],
+      "rationale": "Likeness: identical goroutine scaffold, a time.NewTicker with a select over ctx.Done() and ticker.C plus wg.Done. Difference: runDetectionLoop drives the readiness gate and community detection cycle on detection_interval; monitorLLMHealth probes the LLM endpoint every 30s to pause or resume the enhancement worker and never touches detection."
+    },
+    {
+      "id": "neg-05",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-waitForBucket",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-Component-startStatusWatcher",
+      "evidence": [
+        "processor/graph-clustering/component.go:1328-1337",
+        "processor/graph-clustering/component.go:1509-1516",
+        "processor/graph-clustering/component.go:1502-1503"
+      ],
+      "rationale": "Likeness: both construct a 'Watcher' (resource.NewWatcher vs readiness.NewWatcher) during Start. Difference: waitForBucket polls until a dependency KV bucket exists and fails Start if it never appears; startStatusWatcher binds a long-lived watch on the GRAPH_STATUS readiness envelope that each detection tick reads, and an absent bucket there is a benign runtime unknown."
+    },
+    {
+      "id": "neg-06",
+      "polarity": "negative",
+      "a": "semselect.semsource.web.semstreams-graph-clustering.chunk.processor-graph-clustering-README-md-0008",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-component-go-kvProvider-getNeighborsFromBucket",
+      "evidence": [
+        "processor/graph-clustering/README.md:164-178",
+        "processor/graph-clustering/component.go:2138-2141"
+      ],
+      "rationale": "Likeness: both are about an 'index' record format. Difference: the README Index Structures passage documents the COMMUNITY_INDEX and ANOMALY_INDEX records this component writes as outputs; getNeighborsFromBucket decodes the OUTGOING_INDEX rows written upstream by graph-index that LPA reads as input topology."
+    },
+    {
+      "id": "neg-07",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-anomaly-go-Component-registerAnomalyDetectors",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-metrics-go-clusteringMetrics-registerSemanticMetrics",
+      "evidence": [
+        "processor/graph-clustering/anomaly.go:233-239",
+        "processor/graph-clustering/metrics.go:176-186"
+      ],
+      "rationale": "Likeness: both are register* methods gated on an enable flag in config. Difference: registerAnomalyDetectors adds core, semantic-gap and transitivity detectors to the inference orchestrator; registerSemanticMetrics exposes the three semantic-edge-tier Prometheus series only on deployments that enable that tier. Anomaly inference versus metric surface."
+    },
+    {
+      "id": "neg-08",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.struct.processor-graph-clustering-component-go-SemanticEdgesConfig",
+      "b": "semselect.semsource.web.semstreams-graph-clustering.chunk.processor-graph-clustering-README-md-0005",
+      "evidence": [
+        "processor/graph-clustering/component.go:149-151",
+        "processor/graph-clustering/README.md:115-116",
+        "processor/graph-clustering/similarity.go:68-76"
+      ],
+      "rationale": "Likeness: both define a 'semantic similarity' threshold (semantic_similarity_threshold vs semantic_gap.min_semantic_similarity). Difference: SemanticEdgesConfig tunes the mutual-kNN virtual edges that vote in community detection (ADR-086); the README anomaly table tunes semantic-gap anomaly detection. similarity.go spells out that these are two consumers with different error policies."
+    },
+    {
+      "id": "neg-09",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.struct.processor-graph-clustering-query-go-LevelRequest",
+      "b": "semselect.semsource.web.semstreams-graph-clustering.chunk.processor-graph-clustering-README-md-0010",
+      "evidence": [
+        "processor/graph-clustering/query.go:97-100",
+        "processor/graph-clustering/component.go:1386",
+        "processor/graph-clustering/README.md:217"
+      ],
+      "rationale": "Likeness: the word 'level'. Difference: LevelRequest's level is the hierarchical community level (the detector is built WithLevels(3) and keys are '{level}.{id}'); the README Anomaly Detection passage's 'high k-core levels' means coreness from k-core decomposition. A tool matching on the term would join the query API to the anomaly algorithm."
+    },
+    {
+      "id": "neg-10",
+      "polarity": "negative",
+      "a": "semselect.semsource.golang.semstreams-graph-clustering.function.processor-graph-clustering-component-go-observeIndexingProfileForClustering",
+      "b": "semselect.semsource.golang.semstreams-graph-clustering.method.processor-graph-clustering-metrics-go-clusteringMetrics-observeDetectionDuration",
+      "evidence": [
+        "processor/graph-clustering/component.go:2534-2548",
+        "processor/graph-clustering/metrics.go:208-214"
+      ],
+      "rationale": "Likeness: both are observe* functions that record something without acting on it. Difference: observeIndexingProfileForClustering is an ADR-054 Phase 1 dry-run that logs a Debug line when an entity carries a trace indexing profile; observeDetectionDuration records a run's wall time into the detection_duration_seconds Prometheus histogram."
+    }
+  ]
+}

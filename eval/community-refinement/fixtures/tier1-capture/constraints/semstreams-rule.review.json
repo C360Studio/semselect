@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semstreams-rule",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "1aa64a5ff42f605fe897e2075e850c83721d5fcbda3a256524cd8bd55d2e0cfa",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "dispatchAndRecord calls RecordFire with the current schedule and fire timestamp after dispatch, and the tracker serializes that record to KV. Both sides explicitly treat persistence failure as a logged warning, defining one cron-fire recording workflow."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "restoreFromTracker calls LastFiredAt and handles missing records as never-fired before hydrating the prior timestamp. The returned schedule and timestamp are the inputs to this same restart and missed-fire recovery responsibility."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "dispatchAndRecord constructs ScheduleContext from the rule ID, schedule, and previous fire time. The cross-file type documents the zero-on-first-fire and immutable captured-value contracts that this producer supplies."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "fire emits cronFireStatusInflightSkipped when the inflight CompareAndSwap fails. The status comment explains the same operator distinction from configured cooldown skipping, making it documentation of this exact gate."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "CronScheduler.Register calls CronRule.Enabled and skips registration when it is false. The accessor's documented meaning and the scheduler's admission branch are two parts of the enabled-rule registration contract."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "runActions reads and increments MatchState.ActionIterations by stable action identity to enforce firing caps. The separate-file state type documents the map's identity scheme, persistence, and missing-entry semantics required by that gate."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "Evaluate calls DetectTransition to choose entered/exited/unchanged behavior before its explicit bootstrap promotion. The transition function defines the state-machine outcomes on which the evaluator's action selection depends."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "reEvaluateTransitions calls PopulateLifecycleStateFields into the same map containing previous values before evaluating phase-conditioned transitions. The helper documents and implements the lifecycle field population and tolerant lookup behavior consumed by this path."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "The typed regex explicitly mirrors messageTokenRe's dotted-path grammar, with anchoring selecting the native-value path and fallback selecting string substitution. Keeping the two token grammars consistent is a shared cross-file substitution responsibility."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "deriveEffectiveProjectionContracts invokes cloneProjectionContracts before checking and returning declared authorization contracts. The helper deep-copies nested predicate slices, implementing the immutability required of that boot snapshot."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "The Tracker structs have identical KV/logger scaffolding but store cron last-fire records versus per-rule/entity ECA match state. Their record schemas and recovery or transition consumers establish distinct persistence responsibilities."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "scheduleKey returns a bare rule ID for schedule records; buildStateKey combines rule and entity identity, with exact suffix ownership semantics. Treating their similar key-helper shapes as one contract would blur the separate bucket key schemes."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "ruleFields projects inbound payload values for message conditions and substitutions, whereas deriveEffectiveProjectionContracts builds authorization envelopes for predicate reconciliation. The projection word is overloaded between data visibility and permitted writes."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "The Context structs use similar substitution-shim scaffolding, but ScheduleContext describes cron fire facts and CallerContext describes authenticated request identity. The explicit namespace boundary and nil behavior preserve different provenance for those values."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "createAndRegisterCronMetrics registers observability collectors, whereas CronScheduler.Register adds a rule's schedule and callback to the scheduler. The common registration vocabulary refers to collector setup and per-rule scheduling respectively."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "cronMetrics contains cron fire and scheduler collectors, while SetMetrics installs the ECA evaluator's separate Metrics instance for action failures. The shared metrics naming and optional wiring convention do not make these different firing-path instruments interchangeable."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "restoreFromTracker restores cron timestamps and logs missed ticks without replay, whereas shouldFireOnRecovery controls opt-in ECA entry-action replay during bootstrap. Similar restart terminology conceals distinct firing paths and explicit recovery policies."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "CronScheduler's lifecycle fields govern its own Start/Stop admission and shutdown, while applyLifecycleSubstitutions resolves managed entity lifecycle values. The shared lifecycle term denotes component operation and participant state respectively; cron dispatch constructs a schedule-only context."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "validateCronDefinition checks clock-driven rule shape, while validateProjectionActionSelectors checks reconciliation contract/group/predicate selectors. Those are distinct validation obligations despite similar required-field errors; reconciliation selector checks are not themselves a cron-shape rule."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "dispatchAndRecord and runActions share executor and deny-handling scaffolding, but the former supplies schedule-only fire context and records cron outcomes while the latter applies ECA conditions and persisted per-action caps. Those differing triggers, state, and accounting make the near-identical loops a misleading basis for conflation."
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "family": "semselect-service",
+  "outcome": "ok",
+  "failure": null,
+  "milestones": [
+    {
+      "name": "prepare_start",
+      "utc": "2026-10-10T14:16:43Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "prepare_done",
+      "utc": "2026-10-10T14:16:43Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": {
+        "split": "development",
+        "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+        "files": 4,
+        "workspace_sha256": "f00b031de9f674f48b867bba4a0465db482a3b8ea82be4c8b9c235b22e66ed8f"
+      }
+    },
+    {
+      "name": "build_start",
+      "utc": "2026-10-10T14:16:45Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "build_done",
+      "utc": "2026-10-10T14:16:47Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "compose_up_start",
+      "utc": "2026-10-10T14:16:47Z",
+      "elapsed_s_since_compose_up": 0,
+      "detail": null
+    },
+    {
+      "name": "containers_healthy",
+      "utc": "2026-10-10T14:16:59Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": null
+    },
+    {
+      "name": "phase_ready",
+      "utc": "2026-10-10T14:16:59Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 56,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        }
+      }
+    },
+    {
+      "name": "index_ready",
+      "utc": "2026-10-10T14:16:59Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 56,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        }
+      }
+    },
+    {
+      "name": "embedding_ready",
+      "utc": "2026-10-10T14:16:59Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 56,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        }
+      }
+    },
+    {
+      "name": "structural_start",
+      "utc": "2026-10-10T14:17:01Z",
+      "elapsed_s_since_compose_up": 14,
+      "detail": null
+    },
+    {
+      "name": "structural_done",
+      "utc": "2026-10-10T14:18:02Z",
+      "elapsed_s_since_compose_up": 75,
+      "detail": {
+        "entities": 56,
+        "embedded": 56,
+        "explicit_edges": 103,
+        "voting_edges": 146,
+        "level0_communities": 4,
+        "checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        }
+      }
+    },
+    {
+      "name": "mutualknn_start",
+      "utc": "2026-10-10T14:18:02Z",
+      "elapsed_s_since_compose_up": 75,
+      "detail": null
+    },
+    {
+      "name": "mutualknn_done",
+      "utc": "2026-10-10T14:18:02Z",
+      "elapsed_s_since_compose_up": 75,
+      "detail": null
+    },
+    {
+      "name": "hydrate_start",
+      "utc": "2026-10-10T14:18:02Z",
+      "elapsed_s_since_compose_up": 75,
+      "detail": null
+    },
+    {
+      "name": "hydrate_done",
+      "utc": "2026-10-10T14:18:03Z",
+      "elapsed_s_since_compose_up": 76,
+      "detail": {
+        "entities": 56,
+        "with_body_handle": 47,
+        "distinct_body_keys": 47,
+        "bodies_fetched": 47,
+        "body_bytes": 42398,
+        "checks": {
+          "all_handles_resolved": true,
+          "all_states_parse": true,
+          "handles_name_object_store": true
+        }
+      }
+    },
+    {
+      "name": "graph_unchanged_check",
+      "utc": "2026-10-10T14:18:03Z",
+      "elapsed_s_since_compose_up": 76,
+      "detail": {
+        "before": {
+          "total_entities": 56,
+          "embedding_ready": true,
+          "embedding_indexed_revision": 56,
+          "embedding_target_revision": 56,
+          "embedding_revision": "56"
+        },
+        "after": {
+          "total_entities": 56,
+          "embedding_ready": true,
+          "embedding_indexed_revision": 56,
+          "embedding_target_revision": 56,
+          "embedding_revision": "56"
+        },
+        "mutualknn_total_entities": 56,
+        "structural_total_entities": 56,
+        "unchanged": true
+      }
+    }
+  ]
+}

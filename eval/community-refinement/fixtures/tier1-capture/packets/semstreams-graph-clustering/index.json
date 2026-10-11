@@ -1,0 +1,85 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3: bounded reviewer packets (eval/community-refinement/README.md)",
+  "family": "semstreams-graph-clustering",
+  "split": "held-out",
+  "selection": {
+    "path": "eval/community-refinement/fixtures/tier1-capture/selections/semstreams-graph-clustering.json",
+    "sha256": "84a878ac6c0f2cce2775592fba643edde387e4b60c579b14e07ae9b177e73ea4",
+    "selected": 32
+  },
+  "evidence": {
+    "hydration_capture": "docs/evidence/20261010T142458Z-legacy-tier1-capture-semstreams-graph-clustering-explicit-only",
+    "frozen_capture": "docs/evidence/20261010T134102Z-legacy-tier1-capture-semstreams-graph-clustering-explicit-only",
+    "entities_jsonl_sha256": "d947cf1b6c154ced62d20546c535e2b7120d9ca0d45dfb6e03745e4bd82c5296",
+    "partition_hash": "f5607063576652f180f364260b6e3c329b7578a43e911bac840662b8efd01473",
+    "mutual_pairs_jsonl_sha256": "869ad2ac4196c4c61ae9de66d3f7dff5ed38c7cdd7248b753c02b4da1499710e",
+    "hydration": {
+      "entities": 175,
+      "with_body_handle": 164,
+      "bodies_fetched": 164,
+      "checks": {
+        "all_handles_resolved": true,
+        "all_states_parse": true,
+        "handles_name_object_store": true
+      }
+    },
+    "mutual_pairs_drift": {
+      "frozen_sha256": "869ad2ac4196c4c61ae9de66d3f7dff5ed38c7cdd7248b753c02b4da1499710e",
+      "hydration_sha256": "e870d4d83c9542a90d7a71f4bfdccd85764760979aaede5f756b31c1848781f1",
+      "equal": false,
+      "mutual_pairs_frozen": 436,
+      "mutual_pairs_hydration": 438,
+      "pairs_only_frozen": 1,
+      "pairs_only_hydration": 3,
+      "max_similarity_delta": 0.045481705006627404,
+      "entities_with_moved_similarity": 7,
+      "most_moved_entities": [
+        "semselect.semsource.golang.semstreams-graph-clustering.var.processor-graph-clustering-similarity-go-d2e2adf7",
+        "semselect.semsource.golang.semstreams-graph-clustering.var.processor-graph-clustering-component-go-d2e2adf7",
+        "semselect.semsource.golang.semstreams-graph-clustering.var.processor-graph-clustering-metrics-go-d2e2adf7"
+      ]
+    }
+  },
+  "parameters": {
+    "state_budget": 8192,
+    "instruction_limit": 1024,
+    "description_limit": 512,
+    "questions_per_request": 4,
+    "neighbour_cap": 6,
+    "children_cap": 8
+  },
+  "prompt": {
+    "objective": "Community objective: put evidence about a shared responsibility together without letting boilerplate, overloaded terms or generic utility nodes join unrelated subjects.",
+    "instructions": "Should this pair retain its semantic co-location hint for the stated community objective? Decide from the evidence in the state only. keep: the two passages address one shared subject or responsibility at this granularity. suppress: the match is incidental (boilerplate, an overloaded term, a generic utility) and would mislead the grouping. defer: the visible evidence is insufficient or conflicting.",
+    "criteria": {
+      "keep": "Evidence supports shared subject/responsibility at the chosen granularity",
+      "suppress": "Evidence shows an incidental match that would mislead this grouping",
+      "defer": "Available evidence is insufficient or conflicting"
+    }
+  },
+  "pairs": {
+    "packets": 32,
+    "state_bytes": {
+      "min": 1362,
+      "median": 2960,
+      "max": 8021
+    },
+    "sources_truncated": 2,
+    "sources_without_body": 2,
+    "sha256": "4d3e0f009929358dfc048a26dabac2da55c9bb46f89d5c467514f8efe632927e"
+  },
+  "bundles": {
+    "requests": 50,
+    "entities": 50,
+    "split_entities": 0,
+    "questions": 64,
+    "state_bytes": {
+      "min": 772,
+      "median": 1467,
+      "max": 7385
+    },
+    "excerpts_truncated": 19,
+    "sha256": "d047b5d47882d2653eb6f8c69d9a137bdd14d800443b4d08131187a592795a4d"
+  }
+}

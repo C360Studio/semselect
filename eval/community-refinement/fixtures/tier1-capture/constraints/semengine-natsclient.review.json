@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semengine-natsclient",
+  "split": "development",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "9d6036296d122c3692504f825f8254bcc1c3e1c50b23c3aec1ab1c7917418e7f",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "WithConnectionLossTimeout sets the grace duration that armConnectionLossTimer checks and supplies to time.AfterFunc. These are configuration and implementation of the same continuous-outage watchdog."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "Publish creates or propagates a trace context and directly calls InjectTrace on its outbound message. InjectTrace supplies the actual wire headers promised by that publish path."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "RespondError writes the status, error-class, optional code, and body that ClassifyReply reads to reconstruct a classified failure. They jointly define the request/reply error wire contract."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "The exact Distributed Tracing passage states automatic trace generation and header propagation for publishes. publishToStream implements that claim by generating missing context and calling InjectTrace before JetStream publication."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "The exact Error Handling passage shows IsKVNotFoundError for detecting missing keys. The function implements that documented detection through local and JetStream sentinels plus raw-error matching."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "The exact Configuration Management with KV passage calls UpdateJSON and warns that its mutator may repeat on conflict. The method passes that mutator through the CAS retry path, so example and implementation describe the same atomic update behavior."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "WithMetrics installs jsMetrics, which the connection setup tests before admitting startMetricsPoller. The option and poller are complementary parts of the JetStream metrics feature."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "startBackground registers owned work through admitLocked, whose completion decrements owned and signals idleWait. join waits for that same count and signal, coupling work admission with shutdown completion."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "BucketRetention extracts MaxAge and MaxBytes, and CheckNoLifecycleRetention checks exactly those values. AssertNoLifecycleRetention directly composes them into one live-graph retention guardrail."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "publishToStreamAsync resets the circuit after enqueue and explicitly delegates failed-ack accounting to asyncPublishErrHandler. The latter records stream publish failures without resetting, completing the asynchronous breaker policy."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "ErrHeartbeatFailed denotes loss of one delivery's InProgress settlement path; startHealthMonitoring probes connection RTT and changes connection status. Their liveness vocabulary masks message settlement versus broker connection monitoring."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "TerminateDelivery wraps an error to request JetStream Term settlement; classForHeader maps errors to the RPC error-class header. Similar error handling belongs to separate delivery-settlement and request/reply contracts."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "KVStore.Delete deletes one key, while DeleteKeyValueBucket deletes the entire bucket through the client's JetStream path. The shared Delete verb and context scaffold conceal different resource scopes and lifecycle responsibilities."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "Status is a connection-health snapshot with failures, reconnects, and RTT. HeaderStatus is a wire marker for handler-side reply failure, so the common word does not identify a shared status responsibility."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "recordFailureLocked increases connection circuit backoff, while getRetryConfig sets retry pacing for KV updates. Similar capped exponential arithmetic belongs to connection protection and per-key CAS conflict resolution."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "KVStore.Watch subscribes to key changes on an existing bucket; WaitForBucket repeatedly checks bucket availability during startup. The watcher terminology denotes a change feed in one case and readiness polling in the other."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "filteredWatcherDrainTimeout bounds cleanup of one filtered listing watcher after Stop. drainAndCloseConnection drains and closes the entire broker connection, so the drain terminology represents different cleanup scopes."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "isAlreadyExistsError handles a bucket-creation race by retrieving the existing bucket. IsKVConflictError handles key existence and revision conflicts for CAS retries; similar error-text matching serves bucket provisioning and key updates separately."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "WithTimeout configures nats.Timeout for dialing, while applyTimeout derives deadlines from KVOptions for individual store operations. The two timeout mechanisms protect distinct connection and operation boundaries."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "TraceIDHeader carries distributed trace identity, whereas HeaderErrorClass describes a classified failure reply. Their X-prefixed constant shape is boilerplate shared by separate tracing and RPC failure contracts."
+    }
+  ]
+}

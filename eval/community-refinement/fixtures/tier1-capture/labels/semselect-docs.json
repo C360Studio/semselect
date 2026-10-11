@@ -1,0 +1,367 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 3 labels (eval/community-refinement/README.md)",
+  "family": "semselect-docs",
+  "split": "development",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "packet-only"
+  },
+  "packets_sha256": "3beb75dc04ee4afabc525295f1c15452e6c2080fe7d3879350caa1eccbab6d74",
+  "labels": [
+    {
+      "pair_hash": "844da3a73a7fd48b63eb1e8c954ed9aef67f9fd7d82d1d8674c26011d90ff7aa",
+      "rank": 1,
+      "label": "keep",
+      "evidence": [
+        "packages llama.cpp `b8994` with Qwen3-0.6B Q4_K_M. It already supplies the runtime, health checks and deployment conventions needed for a small local classifier.",
+        "seminstruct packages llama-server with a baked GGUF, `/health`, native `/metrics`,",
+        "semselect can reuse the llama.cpp operational knowledge"
+      ],
+      "rationale": "Both passages describe the same seminstruct sibling baseline (llama.cpp b8994 with Qwen3-0.6B and its Dockerfile conventions) and how semselect's packaging relates to it; this is one subject, not shared vocabulary."
+    },
+    {
+      "pair_hash": "90d35919919daa7a89acc3d17c96e3af4512d739ab2652ab86565537ad4d9626",
+      "rank": 2,
+      "label": "keep",
+      "evidence": [
+        "The fusion MCP tools (`code_context`, `code_search`, `code_impact`, `doc_context`)",
+        "return retrieved source evidence. They do not themselves invoke an answer",
+        "do not traverse query classification or answer synthesis; the separate Tier 2"
+      ],
+      "rationale": "Both passages make the same point about the same component: SemSource's fusion MCP tools return retrieved evidence and do not perform answer synthesis, which is bound elsewhere."
+    },
+    {
+      "pair_hash": "386566280d7a761f7f4e8565ff1b7ffd280c12a5e8029458cf730d91f536a96f",
+      "rank": 3,
+      "label": "suppress",
+      "evidence": [
+        "Contract tests cover admission/429, context cancellation and deadlines,",
+        "`python3 scripts/smoke.py`: real Choice, Score and Noul inference passed on the",
+        "Eight Go driver race tests pass. Thirteen Python synthesis tests pass. Independent"
+      ],
+      "rationale": "A records the service's bootstrap checks (Compose build, contract tests, smoke) and B the synthesis replay driver's checks; the only overlap is the recurring tests-passed/review-fixed-defects validation-record scaffolding, which would join two unrelated experiments."
+    },
+    {
+      "pair_hash": "41e02f2f4552a9d0f03fde6c4589a40d712abee9fa00780d77dc6a3cb363ebdf",
+      "rank": 4,
+      "label": "suppress",
+      "evidence": [
+        "Add regressions for extracting `of` instead of a metric (R17/R21), then improve",
+        "Verify the actual gateway-to-dispatch path before claiming a user-visible",
+        "Reuse the unchanged 24-case routing smoke and both candidate orders. Confirm"
+      ],
+      "rationale": "A plans fixes and tests for the SemStreams keyword classifier and its dispatch path; B plans a staged SGLang scoring workload. They share evaluation-method vocabulary (negation cases, regressions, abstention, calls avoided by rules), not a subject."
+    },
+    {
+      "pair_hash": "8d64f7b20110ec67c4b00b3877c4af7c845307a9ad0f3d85dd7716811e832283",
+      "rank": 5,
+      "label": "keep",
+      "evidence": [
+        "The project owner explicitly reports a strong skeptical prior toward Jev's hype.",
+        "The project owner's skeptical prior is recorded in the",
+        "The caller owns eligibility, permissions, valid transitions,"
+      ],
+      "rationale": "B restates and cites the stance A records: the owner's skeptical prior and the code-first boundary where the caller owns abstention, fallback and execution; both frame the same investigation question."
+    },
+    {
+      "pair_hash": "189e2f4be26c127f794a7db416054864c46a6fd5642b5902d6d8fc5cf53ee729",
+      "rank": 6,
+      "label": "keep",
+      "evidence": [
+        "cleanup check mistook TCP `TIME_WAIT` for a listener. The original record is retained",
+        "`failed` because a bind-based cleanup check mistook TCP `TIME_WAIT` for a listener.",
+        "evidence/20261005T152813.162235Z-metal/cleanup-followup.json"
+      ],
+      "rationale": "Both passages describe the same event in the same experiment, the earlier Metal scoring run whose provenance is failed because of the TIME_WAIT cleanup false alarm, and cite the same follow-up record."
+    },
+    {
+      "pair_hash": "5f3b0fab102c78d87dc8ef5f5d92f09fe8b62dab350fa71077b85e05ea0d8bc1",
+      "rank": 7,
+      "label": "keep",
+      "evidence": [
+        "request limits and raw native responses; it acquires no graph/NATS dependency.",
+        "semselect owns model acquisition, runtime packaging, request limits, readiness,",
+        "The service needs no graph, NATS dependency, agent loop, or durable workflow state."
+      ],
+      "rationale": "Both sections draw the same boundary, what semselect owns versus what the host framework and caller own, for the SemEngine proposal and its SemStreams predecessor; a reader of one seam would want the other."
+    },
+    {
+      "pair_hash": "8d22f59f746750a4c34f9fa4e8f00f8e88808df6c95275cc113ebab0375fb752",
+      "rank": 8,
+      "label": "keep",
+      "evidence": [
+        "# Answerability teaching run: validation record",
+        "The run uses the same bounded lifecycle and operation lock",
+        "as the teaching runner. Model/runtime/guard hashes are verified before launch;"
+      ],
+      "rationale": "B is the real-source answerability pilot's checks section and explicitly reuses the teaching runner whose record A introduces; both belong to the one answerability evaluation line."
+    },
+    {
+      "pair_hash": "f54a7600be5cb428e6f2639a7018e77cfc3f7979e4f86792a54490374662bd19",
+      "rank": 9,
+      "label": "suppress",
+      "evidence": [
+        "| HTTP median / p95 | ≤250 / ≤750 ms | 5,928 / 6,127 ms: fail | 5,267 / 5,480 ms: fail |",
+        "Specialists and semembed ran in CPU-only Linux ARM64 Docker with four CPUs,",
+        "99.34 s GLiClass, 460.46 s DeBERTa and 300.72 s Qwen, each below its 1,800 s cap."
+      ],
+      "rationale": "A reports resource and sensitivity gates for the 2B/1.7B Qwen candidates; B reports the execution environment and limits of the GLiClass/DeBERTa specialist run. The overlap is the resource-reporting pattern (memory peaks, caps, request counts), not a shared subject."
+    },
+    {
+      "pair_hash": "3f3f8183226d3648f91738b9cb4ea7c2e572c8bfee1ce4d3f2c63c49637f55bf",
+      "rank": 10,
+      "label": "suppress",
+      "evidence": [
+        "Freeze explicit `CommunitySummary` fixtures, including representative entities,",
+        "Reproduce the pinned system prompt and `buildAnswerPrompt` formatting exactly.",
+        "a separate regression corrected a latent promotion guard: a development-ineligible"
+      ],
+      "rationale": "A designs the synthesis-gate replay experiment; B records post-run provenance of the smaller-Qwen classification run. Only freeze/replay vocabulary is shared."
+    },
+    {
+      "pair_hash": "9ed6b9f51d150db730e35e93beed5a5f3575f0de922b7177e0dd14bb86e8e441",
+      "rank": 11,
+      "label": "suppress",
+      "evidence": [
+        "After the documented model/runtime setup, run `task compare:metal` and",
+        "`--validate` launches the two owned Metal servers and guard, checks actual token",
+        "Eight Go driver race tests pass. Thirteen Python synthesis tests pass. Independent"
+      ],
+      "rationale": "A is the scoring comparison's reproduction checklist and B the synthesis replay's; they share the validation-record scaffolding (tests pass, review found defects, failing regressions) for different experiments."
+    },
+    {
+      "pair_hash": "382d2b288422c33813aa2f7e573a86dfab15a299ede5a000ab1767fbdbb4d6bc",
+      "rank": 12,
+      "label": "suppress",
+      "evidence": [
+        "After the documented model/runtime setup, run `task compare:metal` and",
+        "Build the [isolated Go driver](../eval/synthesis/driver/README.md) from cached pinned",
+        "The frozen driver hash identifies this exact local build. A different platform's"
+      ],
+      "rationale": "Reproduction instructions for two different experiments (scoring comparison versus the synthesis replay driver); the match is the recurring reproduction-section pattern, not a shared subject."
+    },
+    {
+      "pair_hash": "a40571b5b1dc4a46126947d64add45853db503902e047d9571817a4fffec3259",
+      "rank": 13,
+      "label": "suppress",
+      "evidence": [
+        "`task answerability:source:validate` validates the frozen dataset offline.",
+        "`task check` passed Go race tests, formatting, vet and Compose validation. Python",
+        "After the documented model/runtime setup, run `task compare:metal` and"
+      ],
+      "rationale": "The answerability source pilot and the scoring baseline share near-identical check boilerplate (task check passed Go race tests, one EPERM skip); the experiments themselves are unrelated."
+    },
+    {
+      "pair_hash": "e1b89ebeb421a65682959014395b01e7d45017596efefa086ae2909769114742",
+      "rank": 14,
+      "label": "keep",
+      "evidence": [
+        "SGLang/MLX also passed a one-fixture endpoint probe after disabling radix caching;",
+        "SGLang supplies serving mechanisms, not Jev's training. See the [bounded investigation](sglang-investigation.md).",
+        "[B] doc | 'Bounded SGLang investigation' | web | docs/sglang-investigation.md"
+      ],
+      "rationale": "A is entirely about the SGLang investigation's status and points to the bounded investigation document; B's header identifies it as that document, so the subject is shared even though B has no body."
+    },
+    {
+      "pair_hash": "8e879c6cc579f774dabf2090437b2e4d7a781207020207c54fcc6c128ce880aa",
+      "rank": 15,
+      "label": "keep",
+      "evidence": [
+        "Candidate expansion, membership moves, merge/split selection, factual anomaly",
+        "Missing-edge proposals, membership moves, merge/split choices, factual anomaly",
+        "[SemEngine integration](semengine-integration.md)."
+      ],
+      "rationale": "Both passages scope the same SemEngine community-refinement work, listing the same separate graph tasks, and B directs new proposals to A's document."
+    },
+    {
+      "pair_hash": "fe88ee8b6b5eb1c977fc3697d3f978dabd84f0c194fc3cd41f982b41297de602",
+      "rank": 16,
+      "label": "suppress",
+      "evidence": [
+        "For query routing, compare supported strategy and extracted fields using existing",
+        "on billing-ticket labels and present that taxonomy mismatch as a model victory.",
+        "Prepare and independently review fresh graph families, source evidence,"
+      ],
+      "rationale": "A's chunk gives query-routing comparison rules (held-out paraphrases, taxonomy mismatch); B lists next steps for the SemEngine graph-refinement pilot. Only the general compare-existing-algorithms-fairly principle is shared; the workloads differ."
+    },
+    {
+      "pair_hash": "6bf0780a3bacdafd45def587c853617166e8011afb037ccaec78f5df2b1e05c3",
+      "rank": 17,
+      "label": "defer",
+      "evidence": [
+        "Twenty-four cases span six new source families, four cases per family, with two",
+        "Strict sufficiency requires defer on",
+        "No source-pilot labels were transferred to the retrieved summaries."
+      ],
+      "rationale": "Both are freeze records of defer-gate experiments on the same pinned SemSource, and B mentions the source pilot only to say its labels were not transferred; the packet does not show whether the synthesis replay shares the answerability task and policy (one responsibility) or is a separate experiment that merely follows the same freeze template."
+    },
+    {
+      "pair_hash": "a987521e52c6c126b5068f0bca10d2d089a9580f3afc0c238b8fcf508065bfe3",
+      "rank": 18,
+      "label": "keep",
+      "evidence": [
+        "`unknown` always abstains. Additional thresholds apply to the selected candidate's",
+        "Scores permit an additional caller abstention rule beyond the explicit `unknown`",
+        "Zero observed errors at 0.9 does not establish safety or make 0.9 a recommended"
+      ],
+      "rationale": "Both passages analyze the same question, caller abstention by thresholding the selected candidate's probability, with matching accepted/coverage/error tables and the same calibration caveats; this is one responsibility across the two experiments."
+    },
+    {
+      "pair_hash": "57b76f7051a9c54930f9ccc61824f0a7180a4179f10a7efcb782c0566bec259b",
+      "rank": 19,
+      "label": "suppress",
+      "evidence": [
+        "Design commit: `d098bb4`. Design freeze SHA-256:",
+        "starting Kev because a bind-based check mistook TCP TIME_WAIT for a listener.",
+        "a separate regression corrected a latent promotion guard: a development-ineligible"
+      ],
+      "rationale": "Both are execution-provenance records (freeze hashes, manifests, post-run corrections) for two different query-classification runs; the passages share the bookkeeping pattern, and nothing shown relates the runs' content."
+    },
+    {
+      "pair_hash": "ce3cdf2b1b1e41d845865259e7e9a1cc09022cbb75fbc147f4651581e73aa49c",
+      "rank": 20,
+      "label": "keep",
+      "evidence": [
+        "task model:fetch",
+        "# foreground; Ctrl-C stops its runtime and guard",
+        "task metal:baseline:evaluate"
+      ],
+      "rationale": "Both are command sequences for the same native Metal path (fetch the model, build Metal, free the port, then serve or evaluate); a reader reproducing the Metal validation would want the Apple Silicon setup alongside."
+    },
+    {
+      "pair_hash": "01a55239bb4c9d4edb5bcc781a47acafbae1b15271a09b6da3b78644b2467958",
+      "rank": 21,
+      "label": "defer",
+      "evidence": [
+        "## Recording the next result",
+        "[B] doc | 'Actual answer-synthesis replay' | web | docs/validation-synthesis.md",
+        "source: none (no verbatim body for this entity)"
+      ],
+      "rationale": "A is a bare heading with no content and B has no body; nothing in the packet connects 'Recording the next result' to the synthesis replay document, so the decisive content (A's section text, B's body) is missing."
+    },
+    {
+      "pair_hash": "ccb0bf76265047e0b5ba2f5e926025d41911cddd37ec20f51ef8ea641c1460cf",
+      "rank": 22,
+      "label": "suppress",
+      "evidence": [
+        "`task answerability:source:validate` validates the frozen dataset offline.",
+        "`--validate` launches the two owned Metal servers and guard, checks actual token",
+        "Eight Go driver race tests pass. Thirteen Python synthesis tests pass. Independent"
+      ],
+      "rationale": "Checks sections of two unrelated experiments (answerability source pilot, synthesis replay); the overlap is the test-count, review and regression scaffolding."
+    },
+    {
+      "pair_hash": "61f922f64d181832e2f272fc9e7c22e9777ff4c4f5dabe262ac4a419612d0230",
+      "rank": 23,
+      "label": "keep",
+      "evidence": [
+        "Follow-up: [native Metal validation](validation-metal.md) on the M3 Pro now compares",
+        "for retaining seminstruct as the routing reference and positioning semselect",
+        "For ordinary routing, Qwen3.5-4B is now the stronger measured reference. Keep"
+      ],
+      "rationale": "A summarizes the native Metal validation's result and its positioning conclusion; B is that validation's own observations stating the same conclusion. Same experiment, same finding."
+    },
+    {
+      "pair_hash": "7aa1593b5f979a2cc52561e643872013f0f652e3bc2da5113bc1563e45125351",
+      "rank": 24,
+      "label": "keep",
+      "evidence": [
+        "A normalized distribution is not proof that reported confidence matches observed correctness.",
+        "Scores are normalized over candidate labels; `label_mass`",
+        "also reports their full-vocabulary mass. These are not calibrated correctness"
+      ],
+      "rationale": "Both passages explain what native option scores mean and that normalized distributions are not calibrated correctness, citing the same SGLang decision documentation; one subject (score semantics and calibration caveats)."
+    },
+    {
+      "pair_hash": "4c1573388d9bb579472556640c004204dd65feda5dee67f1ae118a503e34f4e9",
+      "rank": 25,
+      "label": "suppress",
+      "evidence": [
+        "Design commit: `d098bb4`. Design freeze SHA-256:",
+        "The experiment uses llama.cpp revision",
+        "Independent review verified all 912 alias-only payloads and 63 frozen sources"
+      ],
+      "rationale": "Two experiments' provenance sections (freeze hashes, pins, review sign-off) with the same record structure; the passages share bookkeeping form, not a subject."
+    },
+    {
+      "pair_hash": "0565f67e08df096fae1f10db4a9788d3de836c7cb75924be38c279a57b8fb56f",
+      "rank": 26,
+      "label": "keep",
+      "evidence": [
+        "Its described demo generation comparison asks for a label and a short explanation",
+        "that requests a label plus explanation, with a 32-token allowance. Our JSON-only",
+        "article's isolated label-token check is also weaker than checking labels at the"
+      ],
+      "rationale": "Both passages discuss the same article and the same experimental choices derived from it (JSON label-only baseline, label check at the answer position, 32-token allowance); B reports the experiment A sets up."
+    },
+    {
+      "pair_hash": "1f3643ba6c3be8ef41f061d8f1e376b4f3a43b928ff8496338fcc9a7e93b1209",
+      "rank": 27,
+      "label": "keep",
+      "evidence": [
+        "The next quality step is a separately frozen test set from real source families,",
+        "# Real-source answerability pilot: validation record",
+        "Run `task answerability:validate`, then `task answerability:metal` with the existing"
+      ],
+      "rationale": "A closes the teaching run by naming the next step, a frozen real-source test set, and B is the record of exactly that real-source answerability pilot; both belong to the one answerability evaluation line."
+    },
+    {
+      "pair_hash": "0d0841a17fd637ca699733830294e501be0209458c71d9a5d9eb341222dfcf35",
+      "rank": 28,
+      "label": "suppress",
+      "evidence": [
+        "- semselect: `Kev-4B-Q4_K_M.gguf`, repository revision",
+        "| Correct | 92/96 (95.8%) | 90/96 (93.8%) |",
+        "This ran on the same M3 Pro inside Docker Desktop Linux/ARM64, with four CPU quota"
+      ],
+      "rationale": "A documents the bootstrap Kev-versus-seminstruct run's hardware and pins; B reports the Qwen JSON-versus-scoring CPU results. The shared material is the common test-environment description (M3 Pro, Docker Desktop Linux/ARM64, 4 CPU, 8 GiB), which recurs across experiments and would join unrelated ones."
+    },
+    {
+      "pair_hash": "2c5ebe067ad36868a9f0027aa16389ec9357b4c51f38949f58941672d03b4a63",
+      "rank": 29,
+      "label": "suppress",
+      "evidence": [
+        "this agent environment: `killpg` returned `EPERM` even on an owned group after a",
+        "because this environment prohibits its signal operation (`EPERM`). The new",
+        "Both GGUF checksums, the clean native build, full-layer GPU offload, Kev's real"
+      ],
+      "rationale": "The Metal validation's checks and the scoring baseline's checks share the same skipped-EPERM-test and task-check scaffolding; the experiments (native Metal packaging validation versus the JSON-versus-scoring comparison) are different subjects."
+    },
+    {
+      "pair_hash": "ea4bc0456611ff15eb045621733f1cf3236d6c3a3bcabb529bd6675dbc79acba",
+      "rank": 30,
+      "label": "keep",
+      "evidence": [
+        "[workload criteria](when-to-use.md#research-closeout-and-reopening-conditions)",
+        "has a design dated 2026-10-08 and **no results yet**. Graph refinement was not",
+        "production integration.** That closeout did not evaluate graph refinement."
+      ],
+      "rationale": "Both passages state the research closeout position: the initial phase is complete, graph refinement is unmeasured and the SemEngine track is pending; A links directly to B's section as the workload criteria."
+    },
+    {
+      "pair_hash": "354fbd0890ac953912af2092e317344750385cebdbf2ce9967f9ec859f5aa3f5",
+      "rank": 31,
+      "label": "keep",
+      "evidence": [
+        "**Target update, 2026-10-08: SemEngine replaces SemStreams when ready.** New",
+        "[new evaluation design](../eval/community-refinement/README.md) targets SemEngine,",
+        "evidence. The required clustering/semantic-edge port is not present in the audited"
+      ],
+      "rationale": "Both passages carry the same 2026-10-08 scope update: SemEngine replaces SemStreams as the target and the clustering/semantic-edge port is absent from the audited SemEngine main and ingest PR; one shared subject."
+    },
+    {
+      "pair_hash": "4b81f94cb47bdfd5537974b03007a3ddd53bc16e7beea0e1074b24dcdb9ca530",
+      "rank": 32,
+      "label": "suppress",
+      "evidence": [
+        "Run `task answerability:validate`, then `task answerability:metal` with the existing",
+        "After the documented model/runtime setup, run `task compare:metal` and",
+        "environment rejects owned process-group signals with `EPERM`. The skip concerns"
+      ],
+      "rationale": "Reproduction-and-checks sections for two unrelated experiments (answerability teaching run, scoring baseline) that share the task-check and EPERM-skip boilerplate."
+    }
+  ]
+}
