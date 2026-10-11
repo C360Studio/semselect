@@ -16,7 +16,7 @@ provider chain.
 | 1. Neighbours and partition | directed neighbour results (`k=8`, threshold 0.75 recorded), mutual pairs, explicit and identity memberships, effective weights, the structural-only partition, embedding identity (semembed image digest and model), source and config hashes | one legacy tier-1 stack **per family** ([`run-family.sh`](run-family.sh)), so the similarity index holds that family alone; [`cmd/structural`](../../legacy-capture/README.md#structural-freeze-cmdstructural) freezes the structural side, [`cmd/mutualknn`](../../legacy-capture/README.md) the candidates | runner built; four development families captured (below) |
 | 2. Candidate selection | at most 32 effective candidates, with the fraction of all candidates they cover | [`select_candidates.py`](select_candidates.py), deterministic and offline; order fixed by ruling 6 | frozen for the twelve families in [`selections/`](selections/) (below) |
 | 3. Reviewer packets | one packet per candidate, 8,192-byte state bound, per-entity bundle variant, both tokenizers verified | [`make_packets.py`](make_packets.py) over the hydration captures, [`verify_packets.py`](verify_packets.py) on both pinned runtimes | frozen for the twelve families in [`packets/`](packets/) (below) |
-| 4. Co-membership constraints | 20 per family, ten positive and ten negative | [`constraint_sheet.py`](constraint_sheet.py) catalogue, validator and index; annotators as in ruling 7, from full source | annotator A done for the twelve families in [`constraints/`](constraints/) (below); Codex review pending |
+| 4. Co-membership constraints | 20 per family, ten positive and ten negative | [`constraint_sheet.py`](constraint_sheet.py) catalogue, validator and index; annotators as in ruling 7, from full source | done for the twelve families in [`constraints/`](constraints/) (below): 237 of 240 agreed, 119 positive and 118 negative stand |
 | 5. Retrieval queries | 6 per family with gold evidence sets | annotators as in ruling 7 | not started |
 
 Labels (`keep`, `suppress`, `defer`) follow step 3. Ruling 7 (owner,
@@ -452,23 +452,23 @@ Annotator A ran as twelve Claude Code subagents, one per family, each given
 told to read nothing else.
 
 <!-- constraints-table -->
-| Family | Split | Proposed pos/neg | Outside review set | Outside mutual-kNN | With explicit edge | Same file | Review |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `semselect-service` | development | 10/10 | 15 | 12 | 1 | 4 | awaiting annotator B |
-| `semselect-docs` | development | 10/10 | 18 | 14 | 0 | 0 | awaiting annotator B |
-| `semengine-natsclient` | development | 10/10 | 19 | 12 | 1 | 4 | awaiting annotator B |
-| `semengine-message` | development | 10/10 | 18 | 11 | 3 | 3 | awaiting annotator B |
-| `semstreams-graph-clustering` | held-out | 10/10 | 19 | 14 | 0 | 4 | awaiting annotator B |
-| `semstreams-rule` | held-out | 10/10 | 19 | 11 | 3 | 0 | awaiting annotator B |
-| `semstreams-service` | held-out | 10/10 | 19 | 14 | 2 | 2 | awaiting annotator B |
-| `semstreams-component` | held-out | 10/10 | 20 | 15 | 3 | 0 | awaiting annotator B |
-| `semstreams-agentic-loop` | held-out | 10/10 | 19 | 15 | 1 | 9 | awaiting annotator B |
-| `semsource-source-manifest` | held-out | 10/10 | 18 | 12 | 2 | 0 | awaiting annotator B |
-| `semsource-cli` | held-out | 10/10 | 18 | 15 | 6 | 0 | awaiting annotator B |
-| `semsource-ui` | held-out | 10/10 | 20 | 10 | 2 | 1 | awaiting annotator B |
-| **Total** | | **120/120** | **222** | **155** | **24** | **27** | |
+| Family | Split | Proposed pos/neg | Outside review set | Outside mutual-kNN | With explicit edge | Same file | Agreed pos/neg | Dropped |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `semselect-service` | development | 10/10 | 15 | 12 | 1 | 4 | 10/10 | 0 |
+| `semselect-docs` | development | 10/10 | 18 | 14 | 0 | 0 | 9/10 | 1 |
+| `semengine-natsclient` | development | 10/10 | 19 | 12 | 1 | 4 | 10/10 | 0 |
+| `semengine-message` | development | 10/10 | 18 | 11 | 3 | 3 | 10/9 | 1 |
+| `semstreams-graph-clustering` | held-out | 10/10 | 19 | 14 | 0 | 4 | 10/9 | 1 |
+| `semstreams-rule` | held-out | 10/10 | 19 | 11 | 3 | 0 | 10/10 | 0 |
+| `semstreams-service` | held-out | 10/10 | 19 | 14 | 2 | 2 | 10/10 | 0 |
+| `semstreams-component` | held-out | 10/10 | 20 | 15 | 3 | 0 | 10/10 | 0 |
+| `semstreams-agentic-loop` | held-out | 10/10 | 19 | 15 | 1 | 9 | 10/10 | 0 |
+| `semsource-source-manifest` | held-out | 10/10 | 18 | 12 | 2 | 0 | 10/10 | 0 |
+| `semsource-cli` | held-out | 10/10 | 18 | 15 | 6 | 0 | 10/10 | 0 |
+| `semsource-ui` | held-out | 10/10 | 20 | 10 | 2 | 1 | 10/10 | 0 |
+| **Total** | | **120/120** | **222** | **155** | **24** | **27** | **119/118** | **3** |
 
-Of the 240 proposed pairs, 222 lie outside the step-3 review set and 155 outside the mutual-kNN candidate set, 24 are joined by some explicit edge (never a containment edge, which the validator forbids) and 27 sit in one file. Final constraints wait for annotator B.
+Of the 240 proposed pairs, 222 lie outside the step-3 review set and 155 outside the mutual-kNN candidate set, 24 are joined by some explicit edge (never a containment edge, which the validator forbids) and 27 sit in one file. After annotator B, 119 positives and 118 negatives stand and 3 were dropped; per-pair constraints with their flags are in `constraints/<family>.final.json`.
 <!-- /constraints-table -->
 
 What the annotators reported: positives were almost all cross-file by
@@ -499,18 +499,42 @@ families (all eight done under the explicit-only floor), then the two
 generalization families. Held-out captures were frozen before any held-out
 label exists.
 
+Annotator B ran as one Codex session (model string `GPT-6`) following
+[`constraints/REVIEW.md`](constraints/REVIEW.md): the same contract, the
+same workspaces (hashes recomputed by the validator), A's sheets, and
+`constraints/<family>.passages.jsonl` with every document passage's verbatim
+text, which A did not have. B agreed with 237 of the 240 constraints and
+disagreed with three, each dropped without adjudication (ruling 7):
+`semengine-message` neg-01, where `BaseMessage.Validate` calls
+`m.payload.Validate()` on the other side, so the pair splits one validation
+workflow rather than conflating two; `semselect-docs` pos-03, where the
+cited laptop-guide passage entity is a 47-byte command block and the text A
+quoted lies in a neighbouring passage; and `semstreams-graph-clustering`
+neg-06, where the cited README passage goes on to say the algorithm reads
+the OUTGOING/INCOMING indexes, the very responsibility of the method A set
+against it. All three verdicts were checked against the source and the
+passage text; two of the three trace to A inferring passage boundaries
+from section sizes, the input limitation the passages file now removes. B's
+rationales name the symbols and behaviours involved and cite no line numbers.
+Every review sheet validated with its `sheet_sha256` matching A's file as
+committed; A's sheets and the catalogues are byte-identical before and after
+the review, and re-running `constraint_sheet.py index` reproduces B's
+`<family>.final.json` and `index.json` byte for byte. Whether the Codex
+session read anything it was told not to is not verifiable from this
+repository; the independence rests on its instructions and on the flags
+above, which were computed afterwards.
+
 ## Stop-point
 
-Steps 1 to 3 are done for the twelve sem* families: captures under the ruled
+Steps 1 to 4 are done for the twelve sem* families: captures under the ruled
 explicit-only floor (the development families also under the artifact profile
 for the record), frozen 32-pair selections, hydration re-captures and frozen
-reviewer packets verified on both pinned runtimes, and annotator A's labels
-for all 384 pairs, annotator B's blind review, and the merged final labels
+reviewer packets verified on both pinned runtimes, final edge-review labels
 (ruling 7: model-written, packet-only, validated, disagreement `defer`): 160
-keep, 134 suppress, 90 defer, 321 of 384 agreed. Step 4 has annotator A's
-240 constraints (ten positive and ten negative per family, validated, from
-the full source) and awaits the Codex review by
-[`constraints/REVIEW.md`](constraints/REVIEW.md); a constraint survives only
-when both agree. Then the retrieval queries (step 5) under the same
+keep, 134 suppress, 90 defer, 321 of 384 agreed; and final co-membership
+constraints (full-source, validated, disputed ones dropped): 119 positive and
+118 negative, 237 of 240 agreed, in
+[`constraints/<family>.final.json`](constraints/). Next are the retrieval
+queries (step 5, six per family with gold evidence sets) under the same
 arrangement. The generalization families still need an export step before
 the runner accepts them.
