@@ -41,3 +41,27 @@ a claim of equivalent quality, calibration, latency, or endorsement.
 Julia sources: [pinned source model card](https://huggingface.co/SupersonicLabs/Julia-1/blob/a85b127321d580d65176c89ced8273f305745d85/README.md),
 [pinned GGUF card](https://huggingface.co/ggml-org/Julia-1-GGUF/blob/16fee17949206fbf58da9347daea44d792a81211/README.md),
 [base encoder](https://huggingface.co/jhu-clsp/mmBERT-small).
+
+## Captured source text in evaluation evidence
+
+The community-refinement fixture (`eval/community-refinement/fixtures/tier1-capture/`,
+`docs/evidence/*-legacy-tier1-capture-*`) stores verbatim source and
+documentation passages of the captured families (entity bodies in
+`hydration/bodies.jsonl`, excerpts in reviewer packets) for evaluation only.
+
+- C360Studio `semselect`, `semengine`, `semstreams`, `semsource`: MIT, this
+  organisation's own repositories, at the commits recorded in
+  `eval/community-refinement/fixtures/families.json`.
+- [nats.go](https://github.com/nats-io/nats.go) at
+  `31a3ee4cf0fef9e2dc2d85d5068087b46236cd12` (`micro/` and `README.md`):
+  Copyright The NATS Authors, Apache-2.0; see `licenses/Apache-2.0.txt`.
+- [Apache Commons CSV](https://github.com/apache/commons-csv) at
+  `26f2e869625ba102f5b6386d9799817e523637f7` (`src/main/java/org/apache/commons/csv/`
+  in part and `README.md`): Apache-2.0; see `licenses/Apache-2.0.txt`. Its
+  NOTICE, retained as required: "Apache Commons CSV. Copyright 2005-2026 The
+  Apache Software Foundation. This product includes software developed at
+  The Apache Software Foundation (https://www.apache.org/)."
+
+The copies are unmodified excerpts of the files named in each capture's
+`family.json`; no file of either public repository is redistributed whole
+except `README.md`.
