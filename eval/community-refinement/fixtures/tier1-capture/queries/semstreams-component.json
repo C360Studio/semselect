@@ -1,0 +1,125 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-component",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "06102e48a64a7cc6c4b5deaa9f98f78b1b2376706aa3c4d63b39ee1767a6e4d7",
+  "passages_sha256": null,
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "Which Dependencies field must be non-nil before the registry will run a component factory, how is its absence reported, and which other Dependencies fields are documented as allowed to be nil?",
+      "answer": "NATSClient. prepareComponent (reached from CreateComponent) returns errs.WrapInvalid(errs.ErrInvalidConfig, \"Registry\", \"CreateComponent\", \"NATS client validation\") when deps.NATSClient is nil, before config security validation and factory lookup. The Dependencies struct documents MetricsRegistry, Logger (defaults to slog.Default()), ModelRegistry, ToolRegistry (agentic-tools requires it), PayloadRegistry, LifecycleManager and StoreRegistry as nil-able; Platform and Security are plain values.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-component.method.component-registry-go-Registry-prepareComponent",
+          "semselect.semsource.golang.semstreams-component.struct.component-dependencies-go-Dependencies"
+        ]
+      ],
+      "evidence": [
+        "component/registry.go:252-254",
+        "component/dependencies.go:70-77",
+        "component/dependencies.go:96-99",
+        "component/dependencies.go:108-112"
+      ],
+      "rationale": "prepareComponent is the only place a dependency is checked; it names NATSClient and the error context. The Dependencies struct's field comments are the only statement of which other fields may be nil. The check alone does not say the rest are optional, and the struct alone never shows NATSClient being enforced."
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "Which methods must a component type implement for IsLifecycleComponent to return true (and AsLifecycleComponent to succeed)?",
+      "answer": "Both type-assert the Discoverable to LifecycleComponent, which embeds Discoverable and adds Initialize() error, Start(ctx context.Context) error and Stop(ctx context.Context) error. So the type needs Meta() Metadata, InputPorts() []Port, OutputPorts() []Port, ConfigSchema() ConfigSchema, Health() HealthStatus and DataFlow() FlowMetrics plus those three lifecycle methods: nine methods in all.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-component.function.component-lifecycle-go-IsLifecycleComponent",
+          "semselect.semsource.golang.semstreams-component.interface.component-lifecycle-go-LifecycleComponent",
+          "semselect.semsource.golang.semstreams-component.interface.component-discovery-go-Discoverable"
+        ],
+        [
+          "semselect.semsource.golang.semstreams-component.function.component-lifecycle-go-AsLifecycleComponent",
+          "semselect.semsource.golang.semstreams-component.interface.component-lifecycle-go-LifecycleComponent",
+          "semselect.semsource.golang.semstreams-component.interface.component-discovery-go-Discoverable"
+        ]
+      ],
+      "evidence": [
+        "component/lifecycle.go:94-97",
+        "component/lifecycle.go:63-68",
+        "component/discovery.go:17-35",
+        "component/lifecycle.go:100-103"
+      ],
+      "rationale": "The check function shows the assertion target is LifecycleComponent; that interface lists the three lifecycle methods but only embeds Discoverable, whose six methods live in another file. Either check function reveals the target, hence the two sets; no member alone gives the full method list."
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "When an HTTP-client port's polling is driven by a timer, which field ties it to that timer, and which field, in what format, holds the polling interval?",
+      "answer": "HTTPClientPort.TriggerPort (JSON trigger_port) holds the NAME of a sibling TimerPort that drives the cadence; empty means event-driven or internal. The interval is not on the HTTP-client port at all: it is TimerPort.Interval (JSON interval), a duration string such as \"30s\" or \"1m\".",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-component.struct.component-port_httpclient-go-HTTPClientPort",
+          "semselect.semsource.golang.semstreams-component.struct.component-port_timer-go-TimerPort"
+        ]
+      ],
+      "evidence": [
+        "component/port_httpclient.go:20-27",
+        "component/port_httpclient.go:12-15",
+        "component/port_timer.go:6-9"
+      ],
+      "rationale": "HTTPClientPort contributes the TriggerPort link and the rule that cadence is not owned there; TimerPort contributes the Interval field and its duration-string format. HTTPClientPort never shows the timer's field name or format, and TimerPort knows nothing of trigger_port."
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "What does setting external: true on a port declaration change for composition validation, and what happens if it is set on an output port?",
+      "answer": "External is an operator statement that the input is fed from outside the composition (a UI, a peer process, a rule action), so composition validation suppresses only the no-publisher orphan finding for that port and nothing else (ADR-100 ruling). It is meaningful only on inputs: resolving a definition with External set for any non-input direction fails in resolveAndProjectPort with portConfigError(name, kind, \"external\", ...) whose message is: field \"external\" is only meaningful on an input port; direction is \"output\".",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-component.struct.component-ports-go-PortDefinition",
+          "semselect.semsource.golang.semstreams-component.function.component-port_resolver-go-resolveAndProjectPort"
+        ]
+      ],
+      "evidence": [
+        "component/ports.go:57-63",
+        "component/port_resolver.go:39-46"
+      ],
+      "rationale": "PortDefinition's External field comment is the only statement of what the flag means and which validation finding it suppresses; resolveAndProjectPort is the only place the non-input rejection and its exact error text live. Neither entity contains the other half."
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "When boot admission compares a factory's declared ports with the constructed component's ports, in what order are the per-port fields checked, and is the external flag one of them?",
+      "answer": "portDifference checks, in order: Name, Direction, Required, External, facts Kind, facts ResourceID, NATSSubjects (slices.Equal), then the interface contract (presence, Type, Version, Compatible). Yes, External is compared: a mismatch yields \"declared external=%v, constructed %v\". The first difference found is returned as the reason string; an empty string means the two ports agree.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-component.function.component-registry-go-portDifference"
+        ]
+      ],
+      "evidence": [
+        "component/registry.go:422-447"
+      ],
+      "rationale": "Only portDifference's switch fixes the order and contains the External case. The lookalike is comparePortDeclarations, whose doc comment lists 'name, direction, required, kind, resource identity, NATS subjects, or interface contract' and omits external; comparePortLane is a second lookalike that only reports port-count mismatches."
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "When a JetStream port's consumer configuration is extracted, what happens if its ack_wait string is not a valid duration, and how is a max_ack_pending of -1 carried over?",
+      "answer": "applyJetStreamConsumerConfig parses a non-empty ack_wait with time.ParseDuration and on failure returns fmt.Errorf(\"parse ack_wait: %w\", err) (heartbeat_interval likewise: \"parse heartbeat_interval: %w\"). MaxAckPending is copied whenever the port value is non-zero, so -1 (unlimited) is carried into ConsumerConfig.MaxAckPending, while 0 is left at 0 for the caller or server default. DeliverPolicy and AckPolicy override only when non-empty and MaxDeliver only when greater than zero.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-component.function.component-port_jetstream-go-applyJetStreamConsumerConfig"
+        ]
+      ],
+      "evidence": [
+        "component/port_jetstream.go:141-171"
+      ],
+      "rationale": "Only applyJetStreamConsumerConfig holds the parse error text and the non-zero-overrides copy rule. The lookalikes are the JetStreamPort struct, whose AckWait and MaxAckPending field comments describe the declaration ('parsed via time.ParseDuration', '-1 is unlimited') but not the extraction error or copy rule, and ConsumerConfig, which only states the zero-value convention."
+    }
+  ]
+}

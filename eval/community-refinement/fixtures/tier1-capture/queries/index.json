@@ -1,0 +1,290 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "rule": "queries both annotators agree on; disputed ones dropped; flags are after-the-fact and were never shown to annotator A",
+  "families": [
+    {
+      "family": "semengine-message",
+      "split": "development",
+      "catalogue_entities": 111,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 0,
+      "primary_set_spans_communities": 4,
+      "some_set_within_one_community": 0,
+      "primary_set_has_explicit_edge": 1,
+      "primary_set_has_mutual_pair": 4,
+      "primary_set_has_constraint_pair": 3,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semengine-natsclient",
+      "split": "development",
+      "catalogue_entities": 226,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 1,
+      "primary_set_spans_communities": 4,
+      "some_set_within_one_community": 1,
+      "primary_set_has_explicit_edge": 1,
+      "primary_set_has_mutual_pair": 0,
+      "primary_set_has_constraint_pair": 0,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semselect-docs",
+      "split": "development",
+      "catalogue_entities": 242,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 2,
+      "primary_set_spans_communities": 4,
+      "some_set_within_one_community": 0,
+      "primary_set_has_explicit_edge": 0,
+      "primary_set_has_mutual_pair": 1,
+      "primary_set_has_constraint_pair": 0,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semselect-service",
+      "split": "development",
+      "catalogue_entities": 56,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 1,
+      "primary_set_spans_communities": 4,
+      "some_set_within_one_community": 0,
+      "primary_set_has_explicit_edge": 0,
+      "primary_set_has_mutual_pair": 2,
+      "primary_set_has_constraint_pair": 2,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semsource-cli",
+      "split": "held-out",
+      "catalogue_entities": 143,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 0,
+      "primary_set_spans_communities": 3,
+      "some_set_within_one_community": 1,
+      "primary_set_has_explicit_edge": 2,
+      "primary_set_has_mutual_pair": 0,
+      "primary_set_has_constraint_pair": 1,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semsource-source-manifest",
+      "split": "held-out",
+      "catalogue_entities": 223,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 2,
+      "primary_set_spans_communities": 4,
+      "some_set_within_one_community": 0,
+      "primary_set_has_explicit_edge": 1,
+      "primary_set_has_mutual_pair": 0,
+      "primary_set_has_constraint_pair": 0,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semsource-ui",
+      "split": "held-out",
+      "catalogue_entities": 206,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 5,
+      "primary_set_spans_communities": 4,
+      "some_set_within_one_community": 0,
+      "primary_set_has_explicit_edge": 2,
+      "primary_set_has_mutual_pair": 2,
+      "primary_set_has_constraint_pair": 1,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-agentic-loop",
+      "split": "held-out",
+      "catalogue_entities": 207,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 0,
+      "primary_set_spans_communities": 4,
+      "some_set_within_one_community": 0,
+      "primary_set_has_explicit_edge": 0,
+      "primary_set_has_mutual_pair": 2,
+      "primary_set_has_constraint_pair": 1,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-component",
+      "split": "held-out",
+      "catalogue_entities": 226,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 1,
+      "primary_set_spans_communities": 3,
+      "some_set_within_one_community": 1,
+      "primary_set_has_explicit_edge": 3,
+      "primary_set_has_mutual_pair": 1,
+      "primary_set_has_constraint_pair": 1,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-graph-clustering",
+      "split": "held-out",
+      "catalogue_entities": 175,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 0,
+      "primary_set_spans_communities": 3,
+      "some_set_within_one_community": 1,
+      "primary_set_has_explicit_edge": 0,
+      "primary_set_has_mutual_pair": 2,
+      "primary_set_has_constraint_pair": 1,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-rule",
+      "split": "held-out",
+      "catalogue_entities": 162,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 0,
+      "primary_set_spans_communities": 3,
+      "some_set_within_one_community": 1,
+      "primary_set_has_explicit_edge": 0,
+      "primary_set_has_mutual_pair": 1,
+      "primary_set_has_constraint_pair": 2,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    },
+    {
+      "family": "semstreams-service",
+      "split": "held-out",
+      "catalogue_entities": 202,
+      "annotator_a": {
+        "role": "A",
+        "kind": "llm",
+        "model": "claude (Claude Code subagent)",
+        "method": "full-source"
+      },
+      "proposed": {
+        "complementary": 4,
+        "precise": 2
+      },
+      "alternative_sets": 0,
+      "primary_set_spans_communities": 4,
+      "some_set_within_one_community": 0,
+      "primary_set_has_explicit_edge": 2,
+      "primary_set_has_mutual_pair": 2,
+      "primary_set_has_constraint_pair": 1,
+      "annotator_b": "missing",
+      "review": "awaiting annotator B"
+    }
+  ],
+  "reviewed_families": 0,
+  "totals": {
+    "complementary": 48,
+    "precise": 24,
+    "development": 24,
+    "held-out": 48
+  }
+}

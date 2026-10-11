@@ -1,0 +1,117 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-rule",
+  "split": "held-out",
+  "annotator": {
+    "role": "A",
+    "kind": "llm",
+    "model": "claude (Claude Code subagent)",
+    "method": "full-source"
+  },
+  "catalogue_sha256": "58885994940f11b51fb1919a8f4b3f4473d3dac0a673625bcfbca1e76bf21108",
+  "passages_sha256": null,
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "How is a cron rule's cooldown configured and parsed, and what exactly does the scheduler do when a tick arrives before the cooldown since the previous fire has elapsed?",
+      "answer": "Definition.Cooldown is a duration string: NewCronRule parses it with time.ParseDuration (empty means zero, no cooldown; a bad value fails construction with `rule <id> cooldown \"<value>\": <err>`). In fire(), after the every-N gate, the previous fire time is loaded once from entry.lastFiredNanos; when Cooldown() > 0, that value is non-zero and time.Since(it) < cooldown, the tick is skipped: metrics.recordFire(ruleID, cronFireStatusCooldownSkipped, 0), Debug log \"Cron rule fire skipped (cooldown)\", no actions run, lastFiredNanos unchanged. The check precedes the inflight CAS.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-rule.function.processor-rule-cron_rule-go-NewCronRule",
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-cron_scheduler-go-CronScheduler-fire"
+        ]
+      ],
+      "evidence": [
+        "processor/rule/cron_rule.go:71-77",
+        "processor/rule/cron_rule.go:87",
+        "processor/rule/cron_scheduler.go:512-525"
+      ],
+      "rationale": "NewCronRule is the only place the Cooldown string is parsed into the CronRule's duration (and the parse error produced); fire() is the only place the cooldown gate runs and names the skip's metric status and log line. Neither entity mentions the other's half."
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "When the cron scheduler starts, what happens for a registered rule that has no last-fired record in the schedule KV bucket, versus one whose persisted record shows that its schedule expected fires while the process was down?",
+      "answer": "restoreFromTracker (run by Start) calls ScheduleTracker.LastFiredAt per registered entry. LastFiredAt does a KV Get on scheduleKey(ruleID) and maps jetstream.ErrKeyNotFound to ErrScheduleRecordNotFound; the scheduler treats that as never fired and skips silently (other read errors Warn and skip). For a found record it stores rec.LastFiredAt into entry.lastFiredNanos, walks Schedule().Next from that time counting expected fires up to a cap of 100, and if any were missed calls recordMissedFire (recordMissedFireCapped at the cap) and Warns \"Cron rule missed fires while scheduler was offline\".",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-cron_scheduler-go-CronScheduler-restoreFromTracker",
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-schedule_tracker-go-ScheduleTracker-LastFiredAt"
+        ]
+      ],
+      "evidence": [
+        "processor/rule/cron_scheduler.go:316-325",
+        "processor/rule/cron_scheduler.go:332-367",
+        "processor/rule/schedule_tracker.go:123-129"
+      ],
+      "rationale": "restoreFromTracker holds the startup policy (skip on ErrScheduleRecordNotFound, hydrate lastFiredNanos, 100-fire cap, metrics and Warn, no replay) but only sees an opaque tracker error; LastFiredAt is where the KV read happens and where the missing key becomes ErrScheduleRecordNotFound. Neither alone connects an absent KV record to the startup outcome."
+    },
+    {
+      "id": "q-03",
+      "kind": "complementary",
+      "question": "When a rule action has already fired up to its max_iterations cap, what does the stateful evaluator do, and how are the per-action counts keyed and stored so the cap survives an entity's exits and re-entries?",
+      "answer": "runActions, when ec.State is set, reads fired = ec.State.ActionIterations[action.effectiveID(rule ID)] and the cap from action.effectiveMaxIterations() (default 3; 0 = unlimited); if fired >= cap the action is skipped with Warn \"Action firing cap reached, skipping\" (cap_source framework_default or rule_config), else the count is incremented before Execute. Counts live in MatchState.ActionIterations (JSON action_iterations), keyed by the author's Action.ID or a hash of rule_id, action_type, subject_or_predicate and role; a missing key is 0 and the map persists across entries and exits.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-stateful_evaluator-go-StatefulEvaluator-runActions",
+          "semselect.semsource.golang.semstreams-rule.struct.processor-rule-state_tracker-go-MatchState"
+        ]
+      ],
+      "evidence": [
+        "processor/rule/stateful_evaluator.go:398-424",
+        "processor/rule/state_tracker.go:53-62"
+      ],
+      "rationale": "runActions establishes the gate: the lookup, the default-3/0-unlimited cap, the skip log and the increment; MatchState establishes the storage contract: the action_iterations JSON field, the effectiveID key composition, missing-key-is-zero and persistence across entries and exits. runActions never states the key shape or JSON field and MatchState never states the cap default or skip behaviour."
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "Which inbound payloads can be projected into the `$message` field map, what does the projection helper return when a payload cannot be read, and what happens to a `$message.<path>` token when the map is empty or the path does not resolve?",
+      "answer": "ruleFields returns (payload.RuleFields(), true) only when msg.Payload() implements message.RuleReadable; a nil message, a nil payload or a payload that does not implement RuleReadable yields (nil, false), i.e. the engine cannot read it at all. applyMessageSubstitutions returns the template untouched when the data map is nil or empty; otherwise each `$message.<dotted.path>` token is resolved through expression.ExtractMessageValue and rendered with fmt %v, and a token whose path does not resolve is left verbatim so the unresolved-template warning fires.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-rule.function.processor-rule-payload_projection-go-ruleFields",
+          "semselect.semsource.golang.semstreams-rule.function.processor-rule-message_substitution-go-applyMessageSubstitutions"
+        ]
+      ],
+      "evidence": [
+        "processor/rule/payload_projection.go:40-52",
+        "processor/rule/message_substitution.go:65-81"
+      ],
+      "rationale": "ruleFields is the single home for deciding which payloads expose fields and carries the (nil, false) unreadable contract; applyMessageSubstitutions is the only place that defines the empty-map no-op and the leave-token-verbatim behaviour for unresolved paths. Neither entity describes the other's half of the $message pipeline."
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "At action execution time, what errors does the projection target index return when a reconcile_predicates action names an unknown contract, an unknown group, a group whose mode is not reconcile, or a predicate outside the group?",
+      "answer": "projectionTargetIndex.resolve returns, in order: `unknown projection contract %q`; `projection contract %q has no named projection group %q`; `projection group %q in contract %q uses mode %q, not reconcile`; `predicate %q is outside projection contract %q group %q`. Before those it rejects blank contract/group/predicate (\"projection_contract is required\" etc.), a predicate containing `$` (`predicate %q must be a literal`) and a nil index. On success it returns a projectionTarget carrying a sorted copy of the group's predicates.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-projection_targets-go-projectionTargetIndex-resolve"
+        ]
+      ],
+      "evidence": [
+        "processor/rule/projection_targets.go:99-126"
+      ],
+      "rationale": "resolve is the runtime lookup against the copied boot-time index and the only source of these messages. The lookalike is validateDeclaredProjectionSuperset in projection_derivation.go, which checks the same four conditions at boot against a declared envelope with different wording (\"explicit projection_contracts is missing derived contract\", \"does not cover projection group\", \"uses mode %q, want %q\", \"does not cover predicate\"); validateProjectionActionSelectors likewise has its own `reconcile_predicates predicate %q must be a literal`."
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "During `$entity.lifecycle.*` substitution, how is a token whose resolver returns ok=false protected from being mangled by a later shorter-suffix replacement, and what does the template contain for it afterwards?",
+      "answer": "applyLifecycleSubstitutions swaps an unresolved token for a per-suffix NUL-delimited placeholder `\\x00__LIFECYCLE_SURVIVED_<suffix>__\\x00`, records it in a survived map, runs the remaining rules, then restores every placeholder to the original `$entity.lifecycle.<suffix>` token, so it survives verbatim (a surviving workflow_def is not turned into `$entity.lifecycle.<workflow>_def`) and the unresolved-template warning fires. The template is returned unchanged when it lacks the `$entity.lifecycle.` prefix, when ec.Lifecycle or ec.EntityID is unset, or when the participant lookup fails.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-rule.method.processor-rule-lifecycle_substitution-go-ExecutionContext-applyLifecycleSubstitutions"
+        ]
+      ],
+      "evidence": [
+        "processor/rule/lifecycle_substitution.go:165-181",
+        "processor/rule/lifecycle_substitution.go:191-215"
+      ],
+      "rationale": "Only applyLifecycleSubstitutions holds the two-pass placeholder swap and restore. Lookalikes: lifecycleSubstitutionRules and its init sort in the same file address ordering (longest suffix first), not survivor protection; resolveWorkflowDefJSON only returns ok=false; and the sibling shims applyScheduleSubstitutions and applyCallerSubstitutions do plain ReplaceAll with no protection."
+    }
+  ]
+}
