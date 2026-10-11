@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semengine-message",
+  "split": "development",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "ada12f6a56789df0d7e805a7fdf6dac58de8e3848e99dc0308b43f86c6033016",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "Decode seeds the registry on the fresh BaseMessage before unmarshaling, and UnmarshalJSON explicitly rejects a missing registry. These are cooperating halves of the registry-bound wire decoder."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "UnmarshalJSON calls Registry.Create with the wire type and rejects its nil result. Create documents precisely that consumer and returns the registered payload factory result, establishing one payload-resolution responsibility."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "schemaProvider explicitly mirrors Payload.Schema, and registration validation asserts this interface to compare the produced payload schema with its registration. The two contracts must agree for that check to operate."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "MarshalJSON writes metadata timestamps in Unix milliseconds, while wireMillis reads that representation and preserves its zero-time convention. They define the encoding and decoding of the same metadata fields without a containment relationship."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "WithTime directly replaces default metadata by calling NewDefaultMeta with the requested creation time and preserved source. The constructor determines the received-time behavior of this option."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "Storable exposes facts through Triples() []Triple, and Triple defines those facts and their provenance fields. The interface and returned element contract are useful together when implementing or consuming entity facts."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "AppendIdentityKey reads the six identity-bearing Triple fields and explicitly excludes the remaining timestamp, confidence, and expiry fields. The struct and key function jointly define graph-fact deduplication semantics."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "canonicalObjectKey calls roundTripIsIdentity to decide whether normalization can be skipped. The predicate and its exclusion of numbers are integral to the persisted-object identity algorithm."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "RuleFields is explicitly documented as implementing RuleReadable and returns the generic payload's declared Data projection. This concrete behavior supplies evidence for the interface's rule-access contract."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "IndexingProfiler documents falling through to the registered floor when its hint is absent, while IndexingProfileFor returns that per-type floor. They describe complementary channels of the same indexing-profile policy, even though the consuming ingest path is not ported here."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "disagree",
+      "rationale": "BaseMessage.Validate directly calls m.payload.Validate(), which for GenericJSONPayload executes the second entity. They split one message-validation workflow into envelope and payload checks, so the evidence establishes useful co-inspection rather than harmful conflation."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "Meta tracks message origin and lifecycle, whereas Triple records the source and assertion time of an individual graph fact. Shared provenance and timestamp vocabulary does not make these interchangeable responsibilities."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "Keyable denotes dotted semantic addresses, while AppendIdentityKey produces an injective length-prefixed deduplication identity. The cited comments distinguish routing/storage addressing from suppressing repeated fact assertions."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "shapeCheck.check accepts JSON-shaped input for payload serialization; roundTripIsIdentity identifies values safe to skip persistence normalization. Their similar type switches answer different questions, particularly for numeric values."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "Type identifies message schemas by domain/category/version, and EntityType classifies graph entities by domain/type. The package documentation explicitly separates these similarly named dotted identifiers."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "IndexingProfiler declares indexing policy, whereas ContentStorable locates and exposes stored text for extraction. Embedding and content terminology overlaps, but the interfaces represent policy selection and content access respectively."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "RuleReadable exposes fields available to rules; Registry.Contracts returns mutation projection contracts containing birth predicates and predicate groups. The shared word projection refers to different consumers and contracts."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "Registry.Build constructs a payload from workflow field mappings, while Decode reconstructs the complete wire-message envelope with registry-bound decoding. Their use of factories and JSON does not equate their input contracts or responsibilities."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "writeIdentityField creates collision-resistant identity encoding; member formats readable paths for JSON-shape diagnostics. Their string-building and awkward-character handling serve deduplication and error reporting separately."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "IsExpired tests graph-fact expiry, whereas NewDefaultMeta stamps message receipt metadata. The clock calls are superficial likeness, and the source explicitly keeps triple TTL separate from lifecycle timestamps."
+    }
+  ]
+}

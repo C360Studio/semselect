@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semstreams-agentic-loop",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "8ec17fd05f99cca48bbd0963b7926968f5b3810df7c56b986f8d054607964e9a",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "The rebuild drops a leading run by calling isIterationPrefixMessage, whose source distinguishes the per-request budget and working-list prefixes from conversation turns. These separate-file symbols jointly define reconstruction of retained request context."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "handleLengthTruncation obtains its retry count directly from publishedRetryOrdinal before deciding whether self-healing is available. The latter reads the durable current-iteration request identity, so both govern the same retry budget across process replacement."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "The current-response guard compares OutstandingRequest with the response identity and returns errResponseAlreadyApplied on a mismatch. The accessor documentation and sentinel documentation describe the same protection against adding a duplicate assistant turn."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "HandleTask explicitly calls attachContinuation when creation returns ErrLoopAlreadyExists and consumes its deferred result. The admission checks and pending-turn mutations in the manager determine the intake behavior in the handler."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "gateForApproval calls beginApprovalGate and passes the returned pending state into approval event construction. The manager atomically updates the live approval gate and removes queued siblings, making these two parts of one tool-approval workflow."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "The cited doc.go text states that reconstruction preserves the original deadline, and restoreDeadline restores the saved StartedAt and TimeoutAt fields. The documentation file and implementation are in different files, so this is behavioral documentation rather than containment."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "recoverEmptyContext reads deferredContinuationPrompt and appends the returned text after recovering the birth prompt. The state accessor deliberately returns carried as well as uncarried deferred text, matching this context-recovery use."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "publishIterationRequest calls TrackRequest for the request it creates, and both comments assign deferred-turn carrier bookkeeping to that common tracking operation. They share responsibility for retaining the carrier identity across the iteration and retry publication paths."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "synthesizeSkippedQueuedTools obtains its drain bound from QueuedToolCount, whose implementation returns the actual queued-call length. Both cited comments explain why a fixed bound would leave unaccounted tool calls."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "The completion branch checks hasDecideToolCall and then uses decideToolAvailable alongside the explicit configuration flag to decide whether to synthesize a missing decision. The two independent predicates contribute to the same completion-recovery decision without enclosing one another."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "Although both terminal sentinels have errors.New scaffolding, ErrLoopTerminal rejects continuation admission to a settled token while errTerminalOwnedElsewhere protects ownership of terminal record rendering. Those are distinct intake and persistence decisions."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "The similarly shaped timeout setters write different facts: SetTimeout establishes the loop deadline, whereas CacheRequestTimeout stores a string copied into individual model requests. Conflating them would confuse loop lifetime with model-call budgeting."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "The shared truncation terminology masks different operations: truncateToolResult bounds incoming tool text, while buildTruncationDiagnostic explains model-output cutoff failures. The cited call site and diagnostic body establish the input-versus-output distinction."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "BuildIterationBudgetMessage returns a model-facing system ChatMessage; BuildFailureMessages serializes a failure event for the agent.failed NATS subject. Their Build/Message names refer to prompt framing and terminal event publication respectively."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "The Cache-prefixed setters share locking boilerplate but persist different kinds of information: CacheTaskPrompt changes the entity record, whereas CacheMetadata fills an explicitly nonpersisted dispatch cache. Their documented consumers concern context recovery and propagated tool-call metadata respectively."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "TrackRequest records routing, outstanding identity, and the deferred-turn carrier, whereas TrackRequestStart records a timestamp consumed by computeRequestDuration. Their similar names and common publish call sites do not make timing measurement the same responsibility as response identity control."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "The two Has predicates share read-lock scaffolding but differ in both keys and decisions: HasActiveLoopForTask prevents duplicate task intake, while HasPendingContinuation asks whether an admitted turn still lacks a carrier. The cited handler branches confirm separate creation and completion responsibilities."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "The Published terminology joins a generic NATS output envelope with a manager operation that records durable request authority. PublishedMessage describes subject/data/dedup headers, while SetPublishedRequest enforces when a loop record may claim a retained request identity."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "SettleRequest clears a matching outstanding request and carried deferral; settleTerminal prepares the terminal owner's entity write and clears or adopts terminal outcome state. The similar settle names mask request completion and whole-loop terminal commitment."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "IsTimedOut compares the loop's TimeoutAt, while SnapshotExpiredApprovals compares a pending human gate's RequestedAt plus Timeout. The documentation separately describes recovery of these deadlines, so grouping them as one timeout responsibility would misrepresent their policies."
+    }
+  ]
+}

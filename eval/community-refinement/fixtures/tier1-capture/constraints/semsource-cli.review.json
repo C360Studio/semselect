@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semsource-cli",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "529dc5afec9ca9a40c4684e66ed74133a8765797633e7d82759b88c34273309c",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "runSourceMenu obtains registered SourceWizard implementations and consumes their availability, type keys, labels, and prompts. The interface defines the contract that drives this initialization menu."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "wizard_url.go's init directly registers urlWizard through RegisterSourceWizard, following the registration function's documented initialization convention. The pair shows how this source type enters the shared wizard registry."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "gitWizard.Prompts directly uses resolvableGitURL for its default and normalizes user-supplied local paths. Both implement the requirement that git source identity use a resolvable remote or absolute path rather than a bare dot."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "buildDetectedSources reads ProjectInfo fields to build git, AST, documentation, config, and image entries. The detected-facts type and its quick-setup consumer jointly define this configuration derivation."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "DetectProject stores deriveNamespace's result in info.Namespace, which Init uses as the prompt default and validates before constructing the config. The pair supplies derivation and user acceptance of the same namespace."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "parseVideoFlags and videoWizard.Prompts both populate the video source settings and matching default interval, size, and watch behavior. Their differing scene-threshold handling makes co-inspection useful for maintaining the two interfaces to one source contract."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "Both functions infer a language from manifest filenames, feeding different setup entry points. DetectProject's additional Python manifests expose a real difference within the shared language-detection responsibility."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "Remove directly calls sourceLocation to label the source being selected for deletion. Its fallback for an empty location depends on the formatter's type-specific result."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "audioWizard.Available directly calls ffmpegAvailable and reports the missing executable when the probe fails. The helper in the video file also determines audio wizard availability."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "Add reads Wizards(), displays their availability and descriptions, and invokes the selected wizard's Prompts. The accessor's registry contents determine the interactive add menu and its behavior."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "cfgWizard.Prompts selects project manifest files as ingestion data, whereas buildConfig constructs semsource's own namespace/source configuration. The overloaded config term refers to source content in one case and service setup in the other."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "printSummary reports a newly written setup config and provides startup guidance; Validate loads an existing config and reports validation. Their repeated namespace and source-count output does not establish one command responsibility."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "Term.Select implements reusable single-choice input, while runSourceMenu owns an initialization-specific multi-toggle selection loop. Their numbered-menu parsing scaffold masks distinct selection contracts and neither entity calls the other."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "Remove selects and deletes an existing source entry before persisting it; writeAndSummarize completes initial setup and prints guidance. Shared JSON/file-writing boilerplate does not make their command responsibilities interchangeable."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "addNonInteractive dispatches explicit source arguments to flag parsers, whereas shouldPreselect computes initial menu selections from detection facts. They share type-key cases but answer dispatch and default-selection questions separately."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "detectGitRemote retrieves the origin URL for git defaults and namespace derivation; ffmpegAvailable tests media-tool availability. Their exec-package usage is a shared mechanism serving different source responsibilities."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "joinPaths formats detected paths for presentation, while splitComma parses flag input into path or URL values. Their comma-list resemblance does not make hint rendering and noninteractive input parsing one workflow."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "orgFromRemote extracts an organization for namespace identity, while gitWizard.Prompts uses URL shape to normalize local source paths. Similar remote syntax checks implement namespace selection and git source-location handling separately."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "detectLanguage maps manifests to a language; detectConfigFiles returns files to ingest as config content. The overlapping os.Stat probes and filenames serve distinct questions about code language and ingestion paths."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "repoWizard configures an all-in-one clone for code, docs, and config; gitWizard configures commit-history ingestion. Their matching URL/branch/watch fields obscure different source types, which the wizard labels and preselection comment explicitly distinguish."
+    }
+  ]
+}

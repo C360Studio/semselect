@@ -21,8 +21,23 @@
       "outside_mutual_candidates": 11,
       "with_explicit_edge": 3,
       "same_file": 3,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 9
+      },
+      "dropped": [
+        {
+          "id": "neg-01",
+          "polarity": "negative",
+          "reason": "BaseMessage.Validate directly calls m.payload.Validate(), which for GenericJSONPayload executes the second entity. They split one message-validation workflow into envelope and payload checks, so the evidence establishes useful co-inspection rather than harmful conflation."
+        }
+      ]
     },
     {
       "family": "semengine-natsclient",
@@ -42,8 +57,17 @@
       "outside_mutual_candidates": 12,
       "with_explicit_edge": 1,
       "same_file": 4,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "dropped": []
     },
     {
       "family": "semselect-docs",
@@ -63,8 +87,23 @@
       "outside_mutual_candidates": 14,
       "with_explicit_edge": 0,
       "same_file": 0,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 9,
+        "negative": 10
+      },
+      "dropped": [
+        {
+          "id": "pos-03",
+          "polarity": "positive",
+          "reason": "The exact laptop passage contains only the two task commands, not the comparison settings or validation-report link cited by the rationale. Those lines belong outside this entity, so the cited relationship is not established for this pair."
+        }
+      ]
     },
     {
       "family": "semselect-service",
@@ -84,8 +123,17 @@
       "outside_mutual_candidates": 12,
       "with_explicit_edge": 1,
       "same_file": 4,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "dropped": []
     },
     {
       "family": "semsource-cli",
@@ -105,8 +153,17 @@
       "outside_mutual_candidates": 15,
       "with_explicit_edge": 6,
       "same_file": 0,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "dropped": []
     },
     {
       "family": "semsource-source-manifest",
@@ -126,8 +183,17 @@
       "outside_mutual_candidates": 12,
       "with_explicit_edge": 2,
       "same_file": 0,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "dropped": []
     },
     {
       "family": "semsource-ui",
@@ -147,8 +213,17 @@
       "outside_mutual_candidates": 10,
       "with_explicit_edge": 2,
       "same_file": 1,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "dropped": []
     },
     {
       "family": "semstreams-agentic-loop",
@@ -168,8 +243,17 @@
       "outside_mutual_candidates": 15,
       "with_explicit_edge": 1,
       "same_file": 9,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "dropped": []
     },
     {
       "family": "semstreams-component",
@@ -189,8 +273,17 @@
       "outside_mutual_candidates": 15,
       "with_explicit_edge": 3,
       "same_file": 0,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "dropped": []
     },
     {
       "family": "semstreams-graph-clustering",
@@ -210,8 +303,23 @@
       "outside_mutual_candidates": 14,
       "with_explicit_edge": 0,
       "same_file": 4,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 9
+      },
+      "dropped": [
+        {
+          "id": "neg-06",
+          "polarity": "negative",
+          "reason": "The exact passage 0008 extends beyond the Anomaly Index example into the LPA algorithm and explicitly says it considers structural edges from OUTGOING/INCOMING indexes. That directly overlaps the input-topology responsibility of getNeighborsFromBucket, so the asserted output-only separation is not a clear negative for these complete entities."
+        }
+      ]
     },
     {
       "family": "semstreams-rule",
@@ -231,8 +339,17 @@
       "outside_mutual_candidates": 11,
       "with_explicit_edge": 3,
       "same_file": 0,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "dropped": []
     },
     {
       "family": "semstreams-service",
@@ -252,13 +369,22 @@
       "outside_mutual_candidates": 14,
       "with_explicit_edge": 2,
       "same_file": 2,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "positive": 10,
+        "negative": 10
+      },
+      "dropped": []
     }
   ],
-  "reviewed_families": 0,
+  "reviewed_families": 12,
   "totals": {
-    "positive": 120,
-    "negative": 120
+    "positive": 119,
+    "negative": 118
   }
 }

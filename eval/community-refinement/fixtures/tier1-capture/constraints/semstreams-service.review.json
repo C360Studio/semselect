@@ -1,0 +1,115 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 4 co-membership constraints (eval/community-refinement/README.md)",
+  "family": "semstreams-service",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "5eaa7bb4573ffe00b2f576ab006cfd99899dccd7dd5c1aaf81fb854cf367c392",
+  "verdicts": [
+    {
+      "id": "pos-01",
+      "verdict": "agree",
+      "rationale": "Constructor defines the function type stored by Registry.Register, whose code enforces the admission rules for that type. These are the contract and registration path for service constructors."
+    },
+    {
+      "id": "pos-02",
+      "verdict": "agree",
+      "rationale": "RegisterAll explicitly binds the heartbeat service name to NewHeartbeatService in its Constructor map. The catalogue entry and implementation jointly expose that built-in service."
+    },
+    {
+      "id": "pos-03",
+      "verdict": "agree",
+      "rationale": "The package documentation names the startup-unit gauge and its stage counts, while newStartupMetricWriter constructs that exact metric with owner/stage labels. The separate file documents the writer's metric responsibility."
+    },
+    {
+      "id": "pos-04",
+      "verdict": "agree",
+      "rationale": "resolveServiceConfigs materializes metrics configuration with the path and port consumed and defaulted by NewMetrics. Their matching keys and values show a shared default metrics-service setup."
+    },
+    {
+      "id": "pos-05",
+      "verdict": "agree",
+      "rationale": "HTTPHandler declares the mounting contract implemented by StorageObservabilityService.RegisterHTTPHandlers, and the compile-time assertion confirms the implementation. This interface and method belong together when changing the report's HTTP surface."
+    },
+    {
+      "id": "pos-06",
+      "verdict": "agree",
+      "rationale": "Configurable declares ConfigSchema and explicitly names Metrics as an implementer; Metrics.ConfigSchema states that it implements that discovery interface. They carry one service-configuration discovery contract."
+    },
+    {
+      "id": "pos-07",
+      "verdict": "agree",
+      "rationale": "OpenAPISpec carries reflected request/response types for schema generation, and SchemaFromType generates JSON Schema from reflected types. The declaration and generator are complementary pieces of the OpenAPI schema responsibility."
+    },
+    {
+      "id": "pos-08",
+      "verdict": "agree",
+      "rationale": "ManagerConfig's ServerInfo field is typed InfoSpec, which defines the API metadata also used by OpenAPIDocument. Configuration changes to those metadata fields require the type definition alongside the containing configuration."
+    },
+    {
+      "id": "pos-09",
+      "verdict": "agree",
+      "rationale": "Health directly asserts deliveryFatalReporter on the subscriber, and the interface comment explains this health-read seam. These symbols implement the same delivery-failure health observation."
+    },
+    {
+      "id": "pos-10",
+      "verdict": "agree",
+      "rationale": "preflightRulePackMutations invokes the ProjectionBinder preflight and binding methods and validates their contracts. This implements the interface's stated validation-before-injection responsibility."
+    },
+    {
+      "id": "neg-01",
+      "verdict": "agree",
+      "rationale": "The shared small-config shape and boilerplate comment mask separate listeners: the metrics service's port/path versus the Manager HTTP server's API and Swagger settings. Combining them would misidentify the configuration surface."
+    },
+    {
+      "id": "neg-02",
+      "verdict": "agree",
+      "rationale": "Both methods share the Validate name and configuration-validity boilerplate. Heartbeat validation governs its interval, whereas log-forwarder validation delegates min-level/source-filter policy for a separate service."
+    },
+    {
+      "id": "neg-03",
+      "verdict": "agree",
+      "rationale": "Both register named values in mutex-protected maps, but one catalogues constructors for service composition and the other catalogues OpenAPI specifications. Their registry shape serves different responsibilities."
+    },
+    {
+      "id": "neg-04",
+      "verdict": "agree",
+      "rationale": "Both assemble properties and required fields under schema terminology. NewConfigSchema builds service configuration-discovery metadata, while schemaFromStruct reflects a type into a JSON Schema object."
+    },
+    {
+      "id": "neg-05",
+      "verdict": "agree",
+      "rationale": "The cited Stop methods share lifecycle synchronization and terminal-state scaffolding. Their remaining source cleans up different service resources: a metrics server versus a milestone subscriber."
+    },
+    {
+      "id": "neg-06",
+      "verdict": "agree",
+      "rationale": "Both start diagnostic HTTP listeners, but the pprof source explicitly rejects lifecycle-managed Service ownership. Metrics.Start participates in service lifecycle and failure rollback, so matching start-server vocabulary would conceal that distinction."
+    },
+    {
+      "id": "neg-07",
+      "verdict": "agree",
+      "rationale": "Both handlers use GET-only JSON response scaffolding. serveGraphTriples returns queried graph triples, whereas handleReport serializes an existing storage-report snapshot; the endpoint responsibilities differ."
+    },
+    {
+      "id": "neg-08",
+      "verdict": "agree",
+      "rationale": "The immediate emission and ticker/select loops have the same periodic shape. One emits heartbeat logs while the other re-evaluates stream migration-override expiry, so the subjects are separate."
+    },
+    {
+      "id": "neg-09",
+      "verdict": "agree",
+      "rationale": "The register name is overloaded: one registers a Prometheus gauge and the other mounts an HTTP report route. The cited calls target different registration systems and responsibilities."
+    },
+    {
+      "id": "neg-10",
+      "verdict": "agree",
+      "rationale": "Both classify changes into operation strings, but detectKVOperation labels an individual KV event and pendingServiceChanges compares boot and desired service configuration. Event observation and composition drift are distinct subjects."
+    }
+  ]
+}
