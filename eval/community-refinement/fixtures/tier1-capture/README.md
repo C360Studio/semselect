@@ -74,9 +74,17 @@ owner ruled on 2026-10-10 and its evidence directories carry the
 `-explicit-only` suffix. `semantic-baseline` is the profile the protocol first
 named; it collapses every family and is kept for the artifact record.
 
-Generalization families (`nats-go-micro`, `commons-csv`) are not in
-`families.input.json`, so `prepare` does not export them and `family_config.py`
-refuses them; they need their own export step before capture.
+Generalization families (`nats-go-micro`, `commons-csv`) have no sibling
+checkout: `families.input.json` names their public repositories under
+`generalization`, and `prepare --generalization` (which the runner passes for
+a family whose split is `generalization`) shallow-fetches the pinned commit
+from the URL into a bare clone under `/tmp/semselect-families-src/<name>.git`
+and archives it from there. `family_config.py` then checks the export
+against the copied manifest entry (commit, file list, `workspace_sha256`)
+exactly as for a sem* family, and writes the config with the entry's own
+`ast_languages` (the list of the count it was copied from, with Java and C)
+so the entity set matches the copied counts. Verified 2026-10-11 for both
+families: the exports reproduce the copied workspace hashes.
 
 ## Captured: the four development families
 
@@ -650,6 +658,7 @@ constraints (full-source, validated, disputed ones dropped): 119 positive and
 queries (full-source and passage text, validated, disputed ones dropped): 28
 complementary and 15 precise, 43 of 72 agreed, 28 held-out against the
 48-question target, in [`queries/<family>.final.json`](queries/), accepted
-as the frozen query set by ruling 8 (owner, 2026-10-11). The
-generalization families still need an export step before the runner
-accepts them; then the fixture is frozen.
+as the frozen query set by ruling 8 (owner, 2026-10-11). The generalization
+families export from their public repositories and pass the runner's checks
+(above); their capture, and which later steps the generalization check
+needs, is the next decision. Then the fixture is frozen.
