@@ -1,0 +1,436 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "nats_url": "nats://127.0.0.1:14222",
+  "started_utc": "2026-10-11T12:58:37Z",
+  "finished_utc": "2026-10-11T12:59:32Z",
+  "parameters": {
+    "identity": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "settle_seconds": 35,
+    "poll_seconds": 5,
+    "max_keys": 500000
+  },
+  "entities": {
+    "total": 223,
+    "valid_six_part_ids": 223,
+    "malformed_ids": [],
+    "embedded": 223,
+    "by_system": {
+      "commons-csv": 223
+    },
+    "by_type": {
+      "chunk": 8,
+      "class": 4,
+      "doc": 1,
+      "enum": 3,
+      "file": 6,
+      "folder": 7,
+      "method": 129,
+      "repo": 1,
+      "var": 64
+    },
+    "by_domain": {
+      "code": 8,
+      "java": 206,
+      "web": 9
+    }
+  },
+  "explicit": {
+    "outgoing_rows": 223,
+    "outgoing_rows_rejected": 0,
+    "outgoing_keys_not_in_entity_states": 0,
+    "edges": 786,
+    "edges_to_outside_entity_states": 73,
+    "predicates": {
+      "code.dependency.imports": 9,
+      "code.relationship.calls": 110,
+      "code.relationship.parameter": 27,
+      "code.relationship.receiver": 129,
+      "code.relationship.references": 19,
+      "code.relationship.returns": 58,
+      "code.structure.belongs": 221,
+      "code.structure.contains": 213
+    },
+    "incoming_keys": 786,
+    "incoming_keys_malformed": 0,
+    "outgoing_only": 0,
+    "incoming_only": 0,
+    "outgoing_only_examples": [],
+    "incoming_only_examples": [],
+    "indexes_consistent": true,
+    "undirected_pairs": 407,
+    "undirected_pairs_cross_level0": 21
+  },
+  "voting": {
+    "edges": 736,
+    "by_tier": {
+      "explicit": 736,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "by_listed_as": {
+      "explicit": 736,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "weight_mass_by_tier": {
+      "explicit": 736,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "edges_to_outside_entity_states": 72,
+    "cross_level0_by_tier": {
+      "explicit": 42,
+      "sibling": 0,
+      "system_peer": 0
+    },
+    "entities_sibling_capped": 0,
+    "entities_system_peer_capped": 0,
+    "entities_without_neighbors": 0
+  },
+  "partition": {
+    "levels": [
+      {
+        "level": 0,
+        "communities": 7,
+        "members": 223,
+        "entity_mapped": 223,
+        "singletons": 0,
+        "largest": 132,
+        "size_histogram": {
+          "132": 1,
+          "16": 1,
+          "3": 1,
+          "47": 1,
+          "7": 1,
+          "9": 2
+        }
+      },
+      {
+        "level": 1,
+        "communities": 7,
+        "members": 223,
+        "entity_mapped": 223,
+        "singletons": 0,
+        "largest": 135,
+        "size_histogram": {
+          "135": 1,
+          "16": 1,
+          "3": 1,
+          "44": 1,
+          "7": 1,
+          "9": 2
+        }
+      },
+      {
+        "level": 2,
+        "communities": 7,
+        "members": 223,
+        "entity_mapped": 223,
+        "singletons": 0,
+        "largest": 135,
+        "size_histogram": {
+          "135": 1,
+          "16": 1,
+          "3": 1,
+          "44": 1,
+          "7": 1,
+          "9": 2
+        }
+      }
+    ],
+    "level0_covers_entity_states": true,
+    "level0_members_disjoint": true,
+    "level0_entity_map_consistent": true,
+    "malformed_keys": 0,
+    "hash": "7a96e345f80044617adfb8405dbf2f4a21657d0cb43566981a392ad82142221d"
+  },
+  "settle": {
+    "reads": [
+      {
+        "utc": "2026-10-11T12:58:37Z",
+        "entities": 223,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "704d06e662eee2bf6c275f06172efd568c8f5bdbd533d71a31c65c5c0d5613db",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 223 entities (223 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-11T12:58:42Z",
+        "entities": 223,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "704d06e662eee2bf6c275f06172efd568c8f5bdbd533d71a31c65c5c0d5613db",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 223 entities (223 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-11T12:58:47Z",
+        "entities": 223,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "704d06e662eee2bf6c275f06172efd568c8f5bdbd533d71a31c65c5c0d5613db",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 223 entities (223 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-11T12:58:52Z",
+        "entities": 223,
+        "communities_level0": 0,
+        "covered": false,
+        "hash": "704d06e662eee2bf6c275f06172efd568c8f5bdbd533d71a31c65c5c0d5613db",
+        "raw_value_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note": "level 0 covers 0 of 223 entities (223 missing, 0 not in ENTITY_STATES)"
+      },
+      {
+        "utc": "2026-10-11T12:58:57Z",
+        "entities": 223,
+        "communities_level0": 7,
+        "covered": true,
+        "hash": "7a96e345f80044617adfb8405dbf2f4a21657d0cb43566981a392ad82142221d",
+        "raw_value_hash": "ab7484a7cc903bb5aad16518b8720dc637ccca2bc1d6ddc1c9339e297cdca268"
+      },
+      {
+        "utc": "2026-10-11T12:59:32Z",
+        "entities": 223,
+        "communities_level0": 7,
+        "covered": true,
+        "hash": "7a96e345f80044617adfb8405dbf2f4a21657d0cb43566981a392ad82142221d",
+        "raw_value_hash": "3895e5b33b659192d56fc9197fda3c505dc3f24ce0199f389e622fcbd647c95d",
+        "note": "memberships unchanged since the read 35.2s earlier; stored community values differ byte-wise (summary decoration), memberships do not"
+      }
+    ],
+    "settled": true,
+    "settled_over_seconds": 35.198393208,
+    "waited_seconds": 55.411167,
+    "stable_after_topology_read": true,
+    "community_values_byte_stable": false
+  },
+  "checks": {
+    "explicit_indexes_consistent": true,
+    "no_malformed_entity_ids": true,
+    "partition_covers_entity_states": true,
+    "partition_entity_map_consistent": true,
+    "partition_members_disjoint": true,
+    "partition_settled": true,
+    "stable_after_topology_read": true
+  },
+  "run": {
+    "provenance": "legacy SemStreams capture; not a SemEngine result",
+    "compose_project": "semselect-tier1-capture",
+    "family": {
+      "id": "commons-csv",
+      "split": "generalization",
+      "role": "one topic with builder boilerplate hubs",
+      "repo": "https://github.com/apache/commons-csv",
+      "commit": "26f2e869625ba102f5b6386d9799817e523637f7",
+      "license": "Apache-2.0",
+      "workspace_sha256": "bb2a011af72febb1fe175c12bf04c148e70b5dd321b1c5fdd202d956f32480c2",
+      "files": 7,
+      "tier0_entities_total": 223
+    },
+    "config": {
+      "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.E6eCDB/config/commons-csv.tier1.json",
+      "sha256": "2ac597cac4844215ab6465ef49b74cbd122007e98917f0f40f5b792d5cf68ab9",
+      "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+      "identity_profile": "explicit-only",
+      "structural_baseline": {
+        "include_siblings": false,
+        "include_system_peers": false,
+        "sibling_weight": 0.7,
+        "max_siblings": 5,
+        "system_peer_weight": 0.2,
+        "max_system_peers": 8
+      },
+      "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+    },
+    "semsource": {
+      "commit": "4093d3ce421371f4a99d7168e372552899bf6795",
+      "dirty_paths": 0,
+      "image_id": "sha256:e24199f9f1633c90329bfd6217f239f81bf587699a9226f74be5db2be863ccfc",
+      "semstreams_version": "v1.0.0-beta.160",
+      "log_level": "info"
+    },
+    "semembed": {
+      "image": "ghcr.io/c360studio/semembed:latest@sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "image_id": "sha256:7972174f8e3462fd38bf3ad95d94870f406bb3d1350e0ea3280ce002cb2e09b2",
+      "model": "Snowflake/snowflake-arctic-embed-s",
+      "cpus": "2"
+    },
+    "semselect": {
+      "commit": "a3e59bb38026be9edf83187e8546ca1c7cc62e3a",
+      "dirty_paths": 3
+    },
+    "docker": {
+      "os": "Docker Desktop",
+      "server_version": "29.8.2",
+      "architecture": "aarch64",
+      "ncpu": 12,
+      "mem_total_bytes": 24895582208
+    },
+    "host_cpu": "Apple M3 Pro",
+    "status_at_capture": {
+      "embedding": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 270,
+        "target_revision": 270,
+        "revision": "270",
+        "last_synced": "2026-10-11T12:58:35Z"
+      },
+      "index": {
+        "available": true,
+        "ready": true,
+        "state": "ready",
+        "indexed_revision": 270,
+        "target_revision": 270,
+        "revision": "270",
+        "last_synced": "2026-10-11T12:58:30Z"
+      },
+      "namespace": "semselect",
+      "note": "readiness is honest (semstreams ADR-066): index.ready means the structural index (NAME_INDEX) has caught up to the latest committed write — byName / code_context / code_impact are reliable. embedding.ready means the semantic pipeline has caught up — code_search is reliable (surfaced, not gated). A miss is a genuine absence only when status.phase is \"ready\" (every configured source has finished its initial seed) AND the relevant index signal is ready; while status.phase is \"seeding\" a miss may simply be not-yet-ingested. For exact read-your-write freshness, compare the numeric indexed_revision field against your write's revision.",
+      "phase": "ready",
+      "sources": [
+        {
+          "entity_count": 214,
+          "error_count": 0,
+          "instance_name": "ast-source-commons-csv",
+          "phase": "watching",
+          "publish_total": 261,
+          "source_type": "ast",
+          "type_counts": {
+            "code.folder": 7,
+            "code.repo": 1,
+            "java.class": 4,
+            "java.enum": 3,
+            "java.file": 6,
+            "java.method": 129,
+            "java.var": 64
+          }
+        },
+        {
+          "entity_count": 9,
+          "error_count": 0,
+          "instance_name": "doc-source-commons-csv",
+          "phase": "watching",
+          "publish_total": 9,
+          "source_type": "docs",
+          "type_counts": {
+            "web.chunk": 8,
+            "web.doc": 1
+          }
+        }
+      ],
+      "timestamp": "2026-10-11T12:58:25.15095792Z",
+      "total_entities": 223
+    },
+    "milestones": [
+      {
+        "name": "prepare_start",
+        "utc": "2026-10-11T12:58:13Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "prepare_done",
+        "utc": "2026-10-11T12:58:14Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": {
+          "split": "generalization",
+          "commit": "26f2e869625ba102f5b6386d9799817e523637f7",
+          "files": 7,
+          "workspace_sha256": "bb2a011af72febb1fe175c12bf04c148e70b5dd321b1c5fdd202d956f32480c2"
+        }
+      },
+      {
+        "name": "build_start",
+        "utc": "2026-10-11T12:58:15Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "build_done",
+        "utc": "2026-10-11T12:58:18Z",
+        "elapsed_s_since_compose_up": null,
+        "detail": null
+      },
+      {
+        "name": "compose_up_start",
+        "utc": "2026-10-11T12:58:18Z",
+        "elapsed_s_since_compose_up": 0,
+        "detail": null
+      },
+      {
+        "name": "containers_healthy",
+        "utc": "2026-10-11T12:58:30Z",
+        "elapsed_s_since_compose_up": 12,
+        "detail": null
+      },
+      {
+        "name": "phase_ready",
+        "utc": "2026-10-11T12:58:30Z",
+        "elapsed_s_since_compose_up": 12,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 223,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": false,
+            "state": "building",
+            "lag": 270
+          }
+        }
+      },
+      {
+        "name": "index_ready",
+        "utc": "2026-10-11T12:58:30Z",
+        "elapsed_s_since_compose_up": 12,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 223,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": false,
+            "state": "building",
+            "lag": 270
+          }
+        }
+      },
+      {
+        "name": "embedding_ready",
+        "utc": "2026-10-11T12:58:35Z",
+        "elapsed_s_since_compose_up": 17,
+        "detail": {
+          "phase": "ready",
+          "total_entities": 223,
+          "index": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          },
+          "embedding": {
+            "ready": true,
+            "state": "ready",
+            "lag": null
+          }
+        }
+      }
+    ]
+  }
+}

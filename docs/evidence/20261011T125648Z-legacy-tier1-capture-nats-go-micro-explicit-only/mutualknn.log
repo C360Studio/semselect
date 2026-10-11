@@ -1,0 +1,4 @@
+time=2026-10-11T07:58:09.164-05:00 level=INFO msg="listed buckets" entities=217 embedded=217 swept=217 embedded_not_in_entity_states=0
+time=2026-10-11T07:58:09.289-05:00 level=INFO msg="similar queries" done=217 of=217
+time=2026-10-11T07:58:09.301-05:00 level=INFO msg="explicit-edge reads" endpoints=207 errors=0
+time=2026-10-11T07:58:09.304-05:00 level=INFO msg="capture written" output=/Users/coby/Code/c360/semselect/docs/evidence/20261011T125648Z-legacy-tier1-capture-nats-go-micro-explicit-only/mutualknn mutual_pairs=493 failed=0 aborted=false

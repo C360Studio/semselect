@@ -1,0 +1,192 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "family": "commons-csv",
+  "outcome": "ok",
+  "failure": null,
+  "milestones": [
+    {
+      "name": "prepare_start",
+      "utc": "2026-10-11T12:58:13Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "prepare_done",
+      "utc": "2026-10-11T12:58:14Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": {
+        "split": "generalization",
+        "commit": "26f2e869625ba102f5b6386d9799817e523637f7",
+        "files": 7,
+        "workspace_sha256": "bb2a011af72febb1fe175c12bf04c148e70b5dd321b1c5fdd202d956f32480c2"
+      }
+    },
+    {
+      "name": "build_start",
+      "utc": "2026-10-11T12:58:15Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "build_done",
+      "utc": "2026-10-11T12:58:18Z",
+      "elapsed_s_since_compose_up": null,
+      "detail": null
+    },
+    {
+      "name": "compose_up_start",
+      "utc": "2026-10-11T12:58:18Z",
+      "elapsed_s_since_compose_up": 0,
+      "detail": null
+    },
+    {
+      "name": "containers_healthy",
+      "utc": "2026-10-11T12:58:30Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": null
+    },
+    {
+      "name": "phase_ready",
+      "utc": "2026-10-11T12:58:30Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 223,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": false,
+          "state": "building",
+          "lag": 270
+        }
+      }
+    },
+    {
+      "name": "index_ready",
+      "utc": "2026-10-11T12:58:30Z",
+      "elapsed_s_since_compose_up": 12,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 223,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": false,
+          "state": "building",
+          "lag": 270
+        }
+      }
+    },
+    {
+      "name": "embedding_ready",
+      "utc": "2026-10-11T12:58:35Z",
+      "elapsed_s_since_compose_up": 17,
+      "detail": {
+        "phase": "ready",
+        "total_entities": 223,
+        "index": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        },
+        "embedding": {
+          "ready": true,
+          "state": "ready",
+          "lag": null
+        }
+      }
+    },
+    {
+      "name": "structural_start",
+      "utc": "2026-10-11T12:58:36Z",
+      "elapsed_s_since_compose_up": 18,
+      "detail": null
+    },
+    {
+      "name": "structural_done",
+      "utc": "2026-10-11T12:59:32Z",
+      "elapsed_s_since_compose_up": 74,
+      "detail": {
+        "entities": 223,
+        "embedded": 223,
+        "explicit_edges": 786,
+        "voting_edges": 736,
+        "level0_communities": 7,
+        "checks": {
+          "explicit_indexes_consistent": true,
+          "no_malformed_entity_ids": true,
+          "partition_covers_entity_states": true,
+          "partition_entity_map_consistent": true,
+          "partition_members_disjoint": true,
+          "partition_settled": true,
+          "stable_after_topology_read": true
+        }
+      }
+    },
+    {
+      "name": "mutualknn_start",
+      "utc": "2026-10-11T12:59:32Z",
+      "elapsed_s_since_compose_up": 74,
+      "detail": null
+    },
+    {
+      "name": "mutualknn_done",
+      "utc": "2026-10-11T12:59:33Z",
+      "elapsed_s_since_compose_up": 75,
+      "detail": null
+    },
+    {
+      "name": "hydrate_start",
+      "utc": "2026-10-11T12:59:33Z",
+      "elapsed_s_since_compose_up": 75,
+      "detail": null
+    },
+    {
+      "name": "hydrate_done",
+      "utc": "2026-10-11T12:59:33Z",
+      "elapsed_s_since_compose_up": 75,
+      "detail": {
+        "entities": 223,
+        "with_body_handle": 208,
+        "distinct_body_keys": 208,
+        "bodies_fetched": 208,
+        "body_bytes": 222896,
+        "checks": {
+          "all_handles_resolved": true,
+          "all_states_parse": true,
+          "handles_name_object_store": true
+        }
+      }
+    },
+    {
+      "name": "graph_unchanged_check",
+      "utc": "2026-10-11T12:59:33Z",
+      "elapsed_s_since_compose_up": 75,
+      "detail": {
+        "before": {
+          "total_entities": 223,
+          "embedding_ready": true,
+          "embedding_indexed_revision": 270,
+          "embedding_target_revision": 270,
+          "embedding_revision": "270"
+        },
+        "after": {
+          "total_entities": 223,
+          "embedding_ready": true,
+          "embedding_indexed_revision": 270,
+          "embedding_target_revision": 270,
+          "embedding_revision": "270"
+        },
+        "mutualknn_total_entities": 223,
+        "structural_total_entities": 223,
+        "unchanged": true
+      }
+    }
+  ]
+}

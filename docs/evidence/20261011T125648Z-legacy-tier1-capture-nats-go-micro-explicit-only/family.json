@@ -1,0 +1,218 @@
+{
+  "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+  "family": {
+    "id": "nats-go-micro",
+    "split": "generalization",
+    "role": "code and doc about the same responsibility",
+    "language": "Go + Markdown",
+    "repo": "https://github.com/nats-io/nats.go",
+    "commit": "31a3ee4cf0fef9e2dc2d85d5068087b46236cd12",
+    "license": "Apache-2.0",
+    "license_file": "LICENSE",
+    "license_file_first_line": "Apache License",
+    "system_segment": "nats-go-micro",
+    "include": [
+      "micro",
+      "README.md"
+    ],
+    "exclude": [],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "files": [
+      "README.md",
+      "micro/README.md",
+      "micro/error_test.go",
+      "micro/example_handler_test.go",
+      "micro/example_package_test.go",
+      "micro/example_test.go",
+      "micro/request.go",
+      "micro/service.go",
+      "micro/service_internal_test.go",
+      "micro/test/main_test.go",
+      "micro/test/service_test.go",
+      "micro/test/testservice_helper_test.go"
+    ],
+    "workspace_sha256": "748217ef6f458befadcba49f16e98ca7490896fc0828ce274c2bf6c74f8236d3",
+    "entities_total": 217,
+    "entities_by_type": {
+      "chunk": 55,
+      "const": 10,
+      "doc": 2,
+      "file": 10,
+      "folder": 2,
+      "function": 57,
+      "interface": 4,
+      "method": 37,
+      "repo": 1,
+      "struct": 19,
+      "type": 9,
+      "var": 11
+    },
+    "entities_by_domain": {
+      "code": 3,
+      "golang": 157,
+      "web": 57
+    },
+    "in_range": true,
+    "edge_proxy": {
+      "source_keys": 217,
+      "edges": 547,
+      "induced_edges": 477,
+      "cross_system_edges": 0,
+      "dangling_edges": 70,
+      "undecodable_values": 0,
+      "predicates": {
+        "code.relationship.calls": 85,
+        "code.relationship.embeds": 5,
+        "code.relationship.parameter": 15,
+        "code.relationship.receiver": 37,
+        "code.relationship.references": 14,
+        "code.relationship.returns": 18,
+        "code.structure.belongs": 214,
+        "code.structure.contains": 159
+      },
+      "non_containment_edges": 174
+    },
+    "iterations": [
+      {
+        "iteration": "iter1",
+        "include": [
+          "micro",
+          "README.md"
+        ],
+        "exclude": [],
+        "max_file_bytes": null,
+        "files": 12,
+        "entities": 217
+      },
+      {
+        "iteration": "iter2",
+        "include": [
+          "micro",
+          "README.md"
+        ],
+        "exclude": [],
+        "max_file_bytes": null,
+        "files": 12,
+        "entities": 217
+      }
+    ],
+    "notes": "Owner subtree unchanged; micro/ includes its tests and micro/README.md.",
+    "provenance": "legacy SemStreams capture (SemSource 4093d3ce421371f4a99d7168e372552899bf6795, SemStreams v1.0.0-beta.160); not a SemEngine result",
+    "ast_languages": [
+      "go",
+      "typescript",
+      "javascript",
+      "java",
+      "python",
+      "svelte",
+      "c"
+    ],
+    "export": "families.py prepare --generalization: shallow fetch of the pinned commit from the public URL, then git archive (no sibling checkout)",
+    "copied_from": "f10aff606fd0a28ee0e320ab5f446a3f35986887:eval/community-refinement/fixtures/families.json",
+    "evidence": "docs/evidence/20261009T163623Z-legacy-family-counts",
+    "generalization_note": "Owner ruling 4 (issue #5): kept from the earlier public-repo list under split 'generalization' as a check that a sem* result carries over to external code with an unambiguous licence. Copied verbatim from the earlier measurement and not re-measured; outside the four development and eight held-out families and not counted toward the promotion rule."
+  },
+  "prepared": {
+    "id": "nats-go-micro",
+    "split": "generalization",
+    "repository": "nats.go",
+    "commit": "31a3ee4cf0fef9e2dc2d85d5068087b46236cd12",
+    "include": [
+      "micro",
+      "README.md"
+    ],
+    "exclude": [],
+    "max_file_bytes": null,
+    "unmatched_includes": [],
+    "license_file_first_line": "Apache License",
+    "has_code": true,
+    "has_docs": true,
+    "files": [
+      {
+        "path": "README.md",
+        "bytes": 13793,
+        "sha256": "66ca23049ba798106f43470db57f6ce86eaaa6c906895b408921469b248453c1"
+      },
+      {
+        "path": "micro/README.md",
+        "bytes": 8808,
+        "sha256": "64cb3ca3e26a856356a6de8d8bfd0b1c3555c677e98eddab22bb7c547f1ad280"
+      },
+      {
+        "path": "micro/error_test.go",
+        "bytes": 2724,
+        "sha256": "1759250477e82964a78246a8abe968e1560cbc73c4021231a9cd04942ff0f301"
+      },
+      {
+        "path": "micro/example_handler_test.go",
+        "bytes": 1390,
+        "sha256": "2b7262b3159be8b0f73d6092bbb9cf352f4a8d01c3562f2cc0363d958f83af02"
+      },
+      {
+        "path": "micro/example_package_test.go",
+        "bytes": 2627,
+        "sha256": "5d6da14e986c7fedf495922e2a7574f4e5b8e5cdc473f04f0f81fb472986f383"
+      },
+      {
+        "path": "micro/example_test.go",
+        "bytes": 7771,
+        "sha256": "bb710e5cda6fb15a95fd39c01be37ad5b16ec00d76b48424e00bafc7dc0fc26c"
+      },
+      {
+        "path": "micro/request.go",
+        "bytes": 5710,
+        "sha256": "bf10f14347585e9d4f1c5efc5dc7546263772f0660df988dfd1d41dc6a87b66d"
+      },
+      {
+        "path": "micro/service.go",
+        "bytes": 29163,
+        "sha256": "bfb38f72679a3546fa20067fdb869ae5e70fedda689882dbccc38d32bcea71e5"
+      },
+      {
+        "path": "micro/service_internal_test.go",
+        "bytes": 1777,
+        "sha256": "af8733110d63de5ff8ccb15b09fd8a4f8f0e10084536d92a3d133c68ea6aebc0"
+      },
+      {
+        "path": "micro/test/main_test.go",
+        "bytes": 1626,
+        "sha256": "a44c0bf8216acdcec9bba984d550fed23865d013465df231ca1b8964f844e2c3"
+      },
+      {
+        "path": "micro/test/service_test.go",
+        "bytes": 56924,
+        "sha256": "a2f2a26d63eb2979cc47be03dcd5a4dae192f0be92b697cc27c63793266a6b5a"
+      },
+      {
+        "path": "micro/test/testservice_helper_test.go",
+        "bytes": 3212,
+        "sha256": "27248de26af5fbff5d9daed0bc0272252f50aa86a57d2ebef93ed2e184021ebd"
+      }
+    ],
+    "workspace_sha256": "748217ef6f458befadcba49f16e98ca7490896fc0828ce274c2bf6c74f8236d3"
+  },
+  "workspace_root": "/private/tmp/semselect-families",
+  "config": {
+    "path": "/var/folders/db/qk1n2zs935q9ld3p2sn98yzr0000gn/T//semselect-tier1-capture.mYUq6F/config/nats-go-micro.tier1.json",
+    "sha256": "815c4ffc8c466415a9300b636a32324e3596d314b41ed2a4907e3518a3a3f428",
+    "mvp_json_sha256": "fe1615f88651a810a6cbda4b8133569423e4900ec7ade64c21329a687c5dc06e",
+    "identity_profile": "explicit-only",
+    "structural_baseline": {
+      "include_siblings": false,
+      "include_system_peers": false,
+      "sibling_weight": 0.7,
+      "max_siblings": 5,
+      "system_peer_weight": 0.2,
+      "max_system_peers": 8
+    },
+    "semantic_edges": "off (SemSource passes no semantic_edges block to graph-clustering)"
+  },
+  "checks": {
+    "commit": true,
+    "workspace_sha256": true,
+    "split": true,
+    "files": true
+  },
+  "families_json_sha256": "76c62776b3b99eb3c414ce241a04d73de0edb540cc7f561f905975c7721c98a4"
+}
