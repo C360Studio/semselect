@@ -206,7 +206,9 @@ For each primary snapshot:
    Under ruling 7 the queries are model-written and Codex-reviewed like the
    constraints, a disputed query is dropped, and ruling 8 (owner,
    2026-10-11) accepted the 43 that survived (28 held-out) as the frozen set
-   rather than running a second round.
+   rather than running a second round. Ruling 9 (owner, 2026-10-11): the two
+   generalization families are captured only (step 1) and the fixture is
+   then frozen; their later steps wait on a positive main result.
 
 The target is 128 development and 256 held-out edge reviews, 160 held-out
 co-membership constraints and 48 held-out retrieval questions. These are ceilings

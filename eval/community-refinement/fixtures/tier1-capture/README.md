@@ -13,7 +13,7 @@ provider chain.
 
 | Step | Output | How | Status |
 | --- | --- | --- | --- |
-| 1. Neighbours and partition | directed neighbour results (`k=8`, threshold 0.75 recorded), mutual pairs, explicit and identity memberships, effective weights, the structural-only partition, embedding identity (semembed image digest and model), source and config hashes | one legacy tier-1 stack **per family** ([`run-family.sh`](run-family.sh)), so the similarity index holds that family alone; [`cmd/structural`](../../legacy-capture/README.md#structural-freeze-cmdstructural) freezes the structural side, [`cmd/mutualknn`](../../legacy-capture/README.md) the candidates | runner built; four development families captured (below) |
+| 1. Neighbours and partition | directed neighbour results (`k=8`, threshold 0.75 recorded), mutual pairs, explicit and identity memberships, effective weights, the structural-only partition, embedding identity (semembed image digest and model), source and config hashes | one legacy tier-1 stack **per family** ([`run-family.sh`](run-family.sh)), so the similarity index holds that family alone; [`cmd/structural`](../../legacy-capture/README.md#structural-freeze-cmdstructural) freezes the structural side, [`cmd/mutualknn`](../../legacy-capture/README.md) the candidates | all fourteen families captured: four development, eight held-out and the two generalization families (below) |
 | 2. Candidate selection | at most 32 effective candidates, with the fraction of all candidates they cover | [`select_candidates.py`](select_candidates.py), deterministic and offline; order fixed by ruling 6 | frozen for the twelve families in [`selections/`](selections/) (below) |
 | 3. Reviewer packets | one packet per candidate, 8,192-byte state bound, per-entity bundle variant, both tokenizers verified | [`make_packets.py`](make_packets.py) over the hydration captures, [`verify_packets.py`](verify_packets.py) on both pinned runtimes | frozen for the twelve families in [`packets/`](packets/) (below) |
 | 4. Co-membership constraints | 20 per family, ten positive and ten negative | [`constraint_sheet.py`](constraint_sheet.py) catalogue, validator and index; annotators as in ruling 7, from full source | done for the twelve families in [`constraints/`](constraints/) (below): 237 of 240 agreed, 119 positive and 118 negative stand |
@@ -500,12 +500,58 @@ passages). A check of the twelve annotators' tool calls shows reads of
 wrote, and no command naming the packets, labels, selections or evidence
 directories.
 
+## Captured: the two generalization families (ruling 9, 2026-10-11)
+
+Captured one after another through the same runner and legacy stack as the
+twelve sem* families, under the explicit-only floor, from the public
+repositories at their pinned commits (the export path above). Every check
+passed, both explicit indexes agree, no similar query failed, and the entity
+counts equal the counts copied into the manifest on 2026-10-09, including
+commons-csv's 206 Java entities, which the Java-aware language list and the
+`.java` code rule restore. Capture only, by ruling 9: no selection, packets,
+labels, constraints or queries exist for these families, and they stay
+outside the promotion rule (ruling 4).
+
+<!-- generalization-table -->
+| Family | Evidence | Entities (copied count) | Explicit edges | Level-0 communities (largest) | Mutual pairs (explicit-dominated) | Candidates | Cross-type | Candidate similarity median; at or above 0.85 | Elapsed to embedding ready |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `nats-go-micro` | `20261011T125648Z-legacy-tier1-capture-nats-go-micro-explicit-only` | 217 (217) | 547 | 9 (81) | 493 (40) | 453 | 88 | 0.892; 375 | 23 s |
+| `commons-csv` | `20261011T125813Z-legacy-tier1-capture-commons-csv-explicit-only` | 223 (223) | 786 | 7 (132) | 576 (40) | 536 | 100 | 0.857; 335 | 17 s |
+<!-- /generalization-table -->
+
+Both families sit at the high end of the candidate-similarity range seen on
+the sem* families (medians 0.892 and 0.857, with 375 and 335 candidates at
+or above 0.85), so the embedding model's "similar" links are as dense on
+external code as on ours. commons-csv's level-0 partition puts 132 of 223
+entities in one community (the `CSVFormat` builder hub), the largest share
+of any family; nats-go-micro's largest community holds 81 of 217.
+
+## Freeze (2026-10-11)
+
+[`freeze.py build`](freeze.py) writes [`freeze.json`](freeze.json): for each
+of the fourteen families the frozen evidence directory with every file of
+its `SHA256SUMS` recomputed, the capture's commit, workspace hash, entity
+count, partition hash and checks, and the SHA-256 and counts of the frozen
+selection, packets, final labels, final constraints and final queries; plus
+the six annotation contracts (`PROMPT.md` and `REVIEW.md` for labels,
+constraints and queries), the two model locks, the capture profile and the
+measured family manifest. `freeze.py verify` rebuilds the record from disk
+and reports any drift, including a changed file inside an evidence
+directory; `tests/test_freeze.py` runs it, so `task check` fails if anything
+frozen moves. What is frozen: 14 captures (12 with 25 files each, 2 with 29),
+12 selections of 32 pairs, 384 pair packets with their bundles and token
+checks, 384 final labels (160 keep, 134 suppress, 90 defer), 237 final
+constraints (119 positive, 118 negative), 43 final queries (28
+complementary, 15 precise; 28 held-out). Rulings 1 to 9 are on issue #5
+and in the protocol. This closes the "Fixtures frozen" item of issue #5 on
+the legacy stand-in; the remaining items wait on the SemEngine port.
+
 ## Order
 
 Development families first (all four done), then the eight held-out
 families (all eight done under the explicit-only floor), then the two
-generalization families. Held-out captures were frozen before any held-out
-label exists.
+generalization families (both done, capture only). Held-out captures were
+frozen before any held-out label exists.
 
 Annotator B ran as one Codex session (model string `GPT-6`) following
 [`constraints/REVIEW.md`](constraints/REVIEW.md): the same contract, the
@@ -646,19 +692,11 @@ targets as ceilings, so this is recorded, not padded. Ruling 8 (owner,
 
 ## Stop-point
 
-Steps 1 to 5 are done for the twelve sem* families: captures under the ruled
-explicit-only floor (the development families also under the artifact profile
-for the record), frozen 32-pair selections, hydration re-captures and frozen
-reviewer packets verified on both pinned runtimes, final edge-review labels
-(ruling 7: model-written, packet-only, validated, disagreement `defer`): 160
-keep, 134 suppress, 90 defer, 321 of 384 agreed; final co-membership
-constraints (full-source, validated, disputed ones dropped): 119 positive and
-118 negative, 237 of 240 agreed, in
-[`constraints/<family>.final.json`](constraints/); and final retrieval
-queries (full-source and passage text, validated, disputed ones dropped): 28
-complementary and 15 precise, 43 of 72 agreed, 28 held-out against the
-48-question target, in [`queries/<family>.final.json`](queries/), accepted
-as the frozen query set by ruling 8 (owner, 2026-10-11). The generalization
-families export from their public repositories and pass the runner's checks
-(above); their capture, and which later steps the generalization check
-needs, is the next decision. Then the fixture is frozen.
+The fixture is frozen (`freeze.json`, verified by `task check`): steps 1 to 5
+for the twelve sem* families (final labels 160 keep, 134 suppress, 90 defer;
+final constraints 119 positive, 118 negative; final queries 28 complementary,
+15 precise, 28 held-out, ruling 8) and the capture-only generalization
+families (ruling 9). Everything is legacy SemStreams evidence, not a
+SemEngine result. Next: PR #7 leaves draft for review; after that this track
+waits on the SemEngine port (issue #5's remaining items), with any ask
+recorded in `docs/semengine-integration.md`.
