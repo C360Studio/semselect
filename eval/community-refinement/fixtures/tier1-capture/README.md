@@ -17,7 +17,7 @@ provider chain.
 | 2. Candidate selection | at most 32 effective candidates, with the fraction of all candidates they cover | [`select_candidates.py`](select_candidates.py), deterministic and offline; order fixed by ruling 6 | frozen for the twelve families in [`selections/`](selections/) (below) |
 | 3. Reviewer packets | one packet per candidate, 8,192-byte state bound, per-entity bundle variant, both tokenizers verified | [`make_packets.py`](make_packets.py) over the hydration captures, [`verify_packets.py`](verify_packets.py) on both pinned runtimes | frozen for the twelve families in [`packets/`](packets/) (below) |
 | 4. Co-membership constraints | 20 per family, ten positive and ten negative | [`constraint_sheet.py`](constraint_sheet.py) catalogue, validator and index; annotators as in ruling 7, from full source | done for the twelve families in [`constraints/`](constraints/) (below): 237 of 240 agreed, 119 positive and 118 negative stand |
-| 5. Retrieval queries | 6 per family with gold evidence sets | annotators as in ruling 7 | not started |
+| 5. Retrieval queries | 6 per family with gold evidence sets, four complementary and two precise | [`query_sheet.py`](query_sheet.py) validator and index; annotators as in ruling 7, from full source and passage text | annotator A done for the twelve families in [`queries/`](queries/) (below): 72 queries, 48 held-out; Codex review pending |
 
 Labels (`keep`, `suppress`, `defer`) follow step 3. Ruling 7 (owner,
 2026-10-10) replaces the annotator arrangement of ruling 3: no person labels.
@@ -524,6 +524,83 @@ session read anything it was told not to is not verifiable from this
 repository; the independence rests on its instructions and on the flags
 above, which were computed afterwards.
 
+## Step 5: retrieval queries (2026-10-11)
+
+A query is a question a developer working in the family would ask, with its
+known answer and its gold supporting sets: the entities whose text, read
+together, establishes the answer. Later each comparison arm retrieves
+evidence for the question under the protocol's fixed 4,096-token budget,
+and the query succeeds when the budgeted evidence contains every member of
+at least one gold set; no answer generator is involved. Six per family,
+four complementary (the answer needs at least two entities from different
+files or documents, so community expansion has something to add) and two
+precise (one entity establishes the whole answer and a named lookalike
+elsewhere would be the wrong source). [`queries/PROMPT.md`](queries/PROMPT.md)
+is the contract for both annotators: every known supporting set recorded,
+primary first and minimal; gold members restricted to entities that carry
+text (never the repo, a folder, a file or a document); questions free of
+entity IDs and file paths; `path:lines` evidence citing every file of the
+primary set; the six primary sets distinct and drawn from at least three
+files or documents. [`query_sheet.py`](query_sheet.py) reuses the step-4
+family reader to validate both annotators' sheets and builds
+[`queries/index.json`](queries/index.json) with after-the-fact flags
+computed from the frozen captures and never shown to annotator A: how many
+level-0 communities of the frozen structural partition each gold set
+spans, and whether its members are joined by an explicit edge, a mutual-kNN
+pair or a step-4 constraint. [`queries/REVIEW.md`](queries/REVIEW.md) tells
+the Codex session what to do: agree or disagree on the source, record any
+supporting set A missed (kept beside the gold sets, never gold, since
+nobody adjudicates); a query survives only when both agree.
+
+Annotator A ran as twelve Claude Code subagents, one per family, each given
+`PROMPT.md`, the family's catalogue, its passages file where it has
+documents (the step-4 lesson) and its exported workspace at
+`/tmp/semselect-families/<family>/` (hash verified against the capture), and
+told to read nothing else; the split was given in the instruction since it
+is not derivable from those inputs.
+
+<!-- queries-table -->
+| Family | Split | Proposed compl./precise | Alternative sets | Primary set spans communities | Some set inside one community | Primary set has explicit edge | Primary set has mutual pair | Primary set has constraint pair | Review |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `semselect-service` | development | 4/2 | 1 | 4 | 0 | 0 | 2 | 2 | awaiting annotator B |
+| `semselect-docs` | development | 4/2 | 2 | 4 | 0 | 0 | 1 | 0 | awaiting annotator B |
+| `semengine-natsclient` | development | 4/2 | 1 | 4 | 1 | 1 | 0 | 0 | awaiting annotator B |
+| `semengine-message` | development | 4/2 | 0 | 4 | 0 | 1 | 4 | 3 | awaiting annotator B |
+| `semstreams-graph-clustering` | held-out | 4/2 | 0 | 3 | 1 | 0 | 2 | 1 | awaiting annotator B |
+| `semstreams-rule` | held-out | 4/2 | 0 | 3 | 1 | 0 | 1 | 2 | awaiting annotator B |
+| `semstreams-service` | held-out | 4/2 | 0 | 4 | 0 | 2 | 2 | 1 | awaiting annotator B |
+| `semstreams-component` | held-out | 4/2 | 1 | 3 | 1 | 3 | 1 | 1 | awaiting annotator B |
+| `semstreams-agentic-loop` | held-out | 4/2 | 0 | 4 | 0 | 0 | 2 | 1 | awaiting annotator B |
+| `semsource-source-manifest` | held-out | 4/2 | 2 | 4 | 0 | 1 | 0 | 0 | awaiting annotator B |
+| `semsource-cli` | held-out | 4/2 | 0 | 3 | 1 | 2 | 0 | 1 | awaiting annotator B |
+| `semsource-ui` | held-out | 4/2 | 5 | 4 | 0 | 2 | 2 | 1 | awaiting annotator B |
+| **Total** | | **48/24** | **12** | **44** | **5** | **12** | **17** | **13** | |
+
+Of the 72 proposed queries (48 complementary, 24 precise) with 12 alternative supporting sets, the primary gold set of 44 of the 48 complementary queries spans more than one level-0 community of the frozen structural partition, 5 have some gold set inside one community, 12 have an explicit edge among the primary members, 17 a mutual-kNN pair and 13 a step-4 constraint pair. Final queries wait for annotator B.
+<!-- /queries-table -->
+
+What the annotators reported, and two rule changes made while they ran.
+Every family's six questions validated; the closest calls were
+complementary questions whose first entity nearly answers alone (a doc
+comment or inline comment restating the rule), which the annotators handled
+by asking for the part only the second entity shows. Two of my rules were
+wrong for the data and were relaxed before any sheet was frozen: the
+`semstreams-agentic-loop` family has text-bearing entities in only two
+files, so the "three files" spread rule now bends to every text-bearing
+file when a family has fewer; and the two-file requirement had applied to
+every supporting set, which stopped `semengine-natsclient` and
+`semselect-service` from recording same-file sets that genuinely establish
+an answer, so it now binds the primary set only and every annotator was
+asked afterwards to add the same-file alternatives they knew of (an arm
+that retrieves true evidence must not be scored as a miss). Findings for
+the port, all from the legacy producer: catalogue line ranges for Go
+symbols exclude the doc comment above the declaration, so a fact stated
+only there is not in the entity's text and the annotators grounded gold
+sets in code and in-range comments; Svelte catalogue lines sit one below
+the file's lines; eleven of `semselect-docs`'s passages split mid-table or
+mid-list; the Go `doc.go` files yield a file entity without text and no
+passages, so package documentation is unreachable as evidence.
+
 ## Stop-point
 
 Steps 1 to 4 are done for the twelve sem* families: captures under the ruled
@@ -534,7 +611,9 @@ reviewer packets verified on both pinned runtimes, final edge-review labels
 keep, 134 suppress, 90 defer, 321 of 384 agreed; and final co-membership
 constraints (full-source, validated, disputed ones dropped): 119 positive and
 118 negative, 237 of 240 agreed, in
-[`constraints/<family>.final.json`](constraints/). Next are the retrieval
-queries (step 5, six per family with gold evidence sets) under the same
-arrangement. The generalization families still need an export step before
+[`constraints/<family>.final.json`](constraints/). Step 5 has annotator A's
+72 retrieval queries (four complementary and two precise per family, 48 of
+them held-out, validated, from the full source and passage text) and awaits
+the Codex review by [`queries/REVIEW.md`](queries/REVIEW.md); a query
+survives only when both agree. The generalization families still need an export step before
 the runner accepts them.
