@@ -23,8 +23,24 @@
       "primary_set_has_explicit_edge": 1,
       "primary_set_has_mutual_pair": 4,
       "primary_set_has_constraint_pair": 3,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 3,
+        "precise": 2
+      },
+      "dropped": [
+        {
+          "id": "q-01",
+          "kind": "complementary",
+          "reason": "RuleFields and RuleReadable establish the projection and unreadable-versus-empty distinction, but neither submitted gold member links GenericJSONPayload to core.json.v1. RegisterPayloads supplies that missing type association."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semengine-natsclient",
@@ -46,8 +62,33 @@
       "primary_set_has_explicit_edge": 1,
       "primary_set_has_mutual_pair": 0,
       "primary_set_has_constraint_pair": 0,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 3
+      },
+      "dropped": [
+        {
+          "id": "q-02",
+          "kind": "complementary",
+          "reason": "The gold establishes the timeout and header precedence, but ExtractTrace contains only symbolic TraceIDHeader, SpanIDHeader and ParentSpanHeader references, not their X-Trace-ID, X-Span-ID and X-Parent-Span-ID values. Those three constant entities are necessary for the submitted literal-header answer."
+        },
+        {
+          "id": "q-05",
+          "kind": "precise",
+          "reason": "classifiedFromHeader establishes the default class and constructors, but the required reason for that default exists only in lines 348–350 before its catalogue body, which starts at line 351. Its sole gold member therefore does not establish the whole answer, despite the real classForHeader lookalike."
+        },
+        {
+          "id": "q-06",
+          "kind": "precise",
+          "reason": "The predicate establishes the exact type, code and description match, but it only returns a bool; it never calls recordFailure. The submitted answer also requires recordStreamPublishFailure, so the precise single-entity gold does not establish the whole answer."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semselect-docs",
@@ -69,8 +110,34 @@
       "primary_set_has_explicit_edge": 0,
       "primary_set_has_mutual_pair": 1,
       "primary_set_has_constraint_pair": 0,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 2,
+        "precise": 1
+      },
+      "dropped": [
+        {
+          "id": "q-02",
+          "kind": "complementary",
+          "reason": "The alternative answering-path/results set does not establish the answer's empty-summary bypass or degraded-template timeout behavior. Those facts appear in the primary synthesis member, so not every proposed gold set supports the full answer."
+        },
+        {
+          "id": "q-03",
+          "kind": "complementary",
+          "reason": "The alternative shortlist/bootstrap set gives the size, license and artifact pin but does not identify the official ggml-org GGUF card as the publisher, as the answer claims. That attribution appears only in the primary research passage, leaving the alternative incomplete."
+        },
+        {
+          "id": "q-05",
+          "kind": "precise",
+          "reason": "Gold passage 0005 ends before the operation_correct definition and does not establish the answer. The complete definition is in passage 0006; the specialist raw-operation table is a real but different metric."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semselect-service",
@@ -92,8 +159,29 @@
       "primary_set_has_explicit_edge": 0,
       "primary_set_has_mutual_pair": 2,
       "primary_set_has_constraint_pair": 2,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 2,
+        "precise": 2
+      },
+      "dropped": [
+        {
+          "id": "q-03",
+          "kind": "complementary",
+          "reason": "The decoder-leniency and candidate-order explanation is in comments before checkJSON's catalogue body, not in either gold member. The set also omits validate, whose body establishes that the pre-admission validation invokes checkJSON."
+        },
+        {
+          "id": "q-04",
+          "kind": "complementary",
+          "reason": "The answer overstates cancellation as a 503 outcome: forward uses 503 when Client.Do fails, but a canceled response-body read follows its separate non-deadline read-error branch to 502. The admission-slot release and computation caveat are supported, but the full answer is not correct for all disconnect timings."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semsource-cli",
@@ -115,8 +203,34 @@
       "primary_set_has_explicit_edge": 2,
       "primary_set_has_mutual_pair": 0,
       "primary_set_has_constraint_pair": 1,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 2,
+        "precise": 1
+      },
+      "dropped": [
+        {
+          "id": "q-01",
+          "kind": "complementary",
+          "reason": "The submitted members establish the remote/absolute-path fallback and omitted git entry, but the slugging, publish-gate and audit explanation is only in the comment at detect.go:113–117. resolvableGitURL’s catalogue body starts at line 118 and neither gold member contains that required reason."
+        },
+        {
+          "id": "q-02",
+          "kind": "complementary",
+          "reason": "Add, videoWizard.Available and videoWizard.Name establish the error once ffmpegAvailable returns false, but do not establish that missing ffmpeg in PATH makes that helper false. Its omitted body supplies the exec.LookPath test required by the question’s premise."
+        },
+        {
+          "id": "q-05",
+          "kind": "precise",
+          "reason": "Select establishes the empty-list return and invalid-number prompt, but EOF is handled by the omitted readLine helper; Select only checks that helper’s boolean result. Its single gold member does not independently establish the EOF part of the answer, although runSourceMenu is a real lookalike."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semsource-source-manifest",
@@ -138,8 +252,34 @@
       "primary_set_has_explicit_edge": 1,
       "primary_set_has_mutual_pair": 0,
       "primary_set_has_constraint_pair": 0,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 2,
+        "precise": 1
+      },
+      "dropped": [
+        {
+          "id": "q-02",
+          "kind": "complementary",
+          "reason": "The gold const body contains only the INSTANCE_EXISTS literal, not the different-config condition, and the other members never establish that condition either. The answer also expands the sibling error codes to wire strings whose declarations are outside this set."
+        },
+        {
+          "id": "q-03",
+          "kind": "complementary",
+          "reason": "The alternative using dropSourceStatus records removal but omits the report-discard guard; the struct alternative supplies only a general comment rather than the claimed early return under statusMu. The answer also overstates the fallback: decrementing a still-positive expectedCount does not make allReported use the any-report rule, and no listed set includes allReported or the re-add code."
+        },
+        {
+          "id": "q-06",
+          "kind": "precise",
+          "reason": "manifestSourcesEqual lists the compared fields, but its body delegates slice equality to stringSliceEqual and does not establish the stated same-length/same-elements semantics by itself. Its single gold member therefore does not establish the entire precise answer."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semsource-ui",
@@ -161,8 +301,29 @@
       "primary_set_has_explicit_edge": 2,
       "primary_set_has_mutual_pair": 2,
       "primary_set_has_constraint_pair": 1,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 3,
+        "precise": 1
+      },
+      "dropped": [
+        {
+          "id": "q-04",
+          "kind": "complementary",
+          "reason": "The alternative containing usable is not evidence for the advertisedRouteValid predicate: usable additionally requires availability ready, while advertisedRouteValid does not. Its body does not contain the advertisedRouteValid declaration, so that alternative cannot establish the answer as written."
+        },
+        {
+          "id": "q-06",
+          "kind": "precise",
+          "reason": "deriveReadinessCoverage establishes the signal keys and available filter, but the displayed labels come from READINESS_LABELS outside its body. The answer also states the backend overall comparison from the preceding comment, which is outside the catalogue function boundary, so the single gold member is insufficient."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semstreams-agentic-loop",
@@ -184,8 +345,24 @@
       "primary_set_has_explicit_edge": 0,
       "primary_set_has_mutual_pair": 2,
       "primary_set_has_constraint_pair": 1,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 3,
+        "precise": 2
+      },
+      "dropped": [
+        {
+          "id": "q-03",
+          "kind": "complementary",
+          "reason": "The gate refusal and errors.As handling are supported, but the gold bodies do not establish the claimed effect-free terminalGuardResult or HandleToolResult early return: those bodies lie outside the set. The answer therefore needs more than the two named members to be established in full."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semstreams-component",
@@ -207,8 +384,29 @@
       "primary_set_has_explicit_edge": 3,
       "primary_set_has_mutual_pair": 1,
       "primary_set_has_constraint_pair": 1,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 2,
+        "precise": 2
+      },
+      "dropped": [
+        {
+          "id": "q-01",
+          "kind": "complementary",
+          "reason": "prepareComponent uses its operation parameter in the error rather than the literal CreateComponent claimed in the answer. The listed set omits the caller that supplies that literal and the public-to-private call link, so it does not establish the complete answer."
+        },
+        {
+          "id": "q-02",
+          "kind": "complementary",
+          "reason": "Each listed set shows only one of the two assertion helpers, but the answer explicitly claims both helpers assert to LifecycleComponent. Neither alternative establishes that complete claim; both interfaces plus both helpers do."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semstreams-graph-clustering",
@@ -230,8 +428,38 @@
       "primary_set_has_explicit_edge": 0,
       "primary_set_has_mutual_pair": 2,
       "primary_set_has_constraint_pair": 1,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 2
+      },
+      "dropped": [
+        {
+          "id": "q-01",
+          "kind": "complementary",
+          "reason": "The answer omits the running guard: Health only changes Status to reset-required and sets LastError inside if c.running, so a stopped poisoned component reports stopped with empty LastError. Its stated poison/error behavior is therefore not fully correct for the source."
+        },
+        {
+          "id": "q-04",
+          "kind": "complementary",
+          "reason": "The two bodies show fields, branching on noteGateOutcome and dropping unknown deferReasons, but they omit the first/change-versus-repeat policy, metric name and graph.AllDeferReasons binding. Those answer facts are defined in other entities or comments outside the catalogue body boundaries."
+        },
+        {
+          "id": "q-05",
+          "kind": "precise",
+          "reason": "ApplyDefaults alone establishes the zero-to-3 assignment, but the answer also asserts DefaultConfig uses 3 and the README table/example use 2. Those facts are outside its single gold body, so this precise set does not establish the whole answer despite the real README lookalike."
+        },
+        {
+          "id": "q-06",
+          "kind": "precise",
+          "reason": "FindSimilar itself establishes fail-open, the nil-client case, returned helper errors and the SemanticGapDetector consumer through an in-body comment. The additional answer claim about the clustering consumer using error-preserving findSimilarClassified appears outside this gold body, so the single entity is insufficient."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semstreams-rule",
@@ -253,8 +481,34 @@
       "primary_set_has_explicit_edge": 0,
       "primary_set_has_mutual_pair": 1,
       "primary_set_has_constraint_pair": 2,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 2,
+        "precise": 1
+      },
+      "dropped": [
+        {
+          "id": "q-03",
+          "kind": "complementary",
+          "reason": "The pair establishes the firing-cap gate, count key/storage and persistence, but the exact cap_source labels framework_default and rule_config are supplied by capSource outside the gold bodies. The listed set therefore does not establish the full answer."
+        },
+        {
+          "id": "q-04",
+          "kind": "complementary",
+          "reason": "The bodies establish RuleReadable projection and token preservation, but neither establishes that the unresolved-template warning fires. That answer claim is supported by documentation/caller logic outside both catalogue bodies, so the gold pair is incomplete."
+        },
+        {
+          "id": "q-05",
+          "kind": "precise",
+          "reason": "resolve establishes all listed validation errors and copies targetGroup.ordered, but it does not establish that this slice is sorted. Sorting occurs in buildProjectionTargetIndex outside the single gold body, so the entire answer is not supported by this precise set."
+        }
+      ],
+      "b_additional_sets": 0
     },
     {
       "family": "semstreams-service",
@@ -276,15 +530,36 @@
       "primary_set_has_explicit_edge": 2,
       "primary_set_has_mutual_pair": 2,
       "primary_set_has_constraint_pair": 1,
-      "annotator_b": "missing",
-      "review": "awaiting annotator B"
+      "annotator_b": {
+        "role": "B",
+        "kind": "llm",
+        "model": "GPT-6",
+        "method": "full-source"
+      },
+      "agreed": {
+        "complementary": 2,
+        "precise": 2
+      },
+      "dropped": [
+        {
+          "id": "q-03",
+          "kind": "complementary",
+          "reason": "The gold bodies establish the registered names and constructor-signature mismatch, but not that the subscriber comes from the composition root. That origin is stated in comments before NewMilestoneService's catalogue body, so the complete answer is not established by this set."
+        },
+        {
+          "id": "q-04",
+          "kind": "complementary",
+          "reason": "The Configurable body's text declares only ConfigSchema and does not state sole Metrics implementation, future UI reservation or Discovery's HTTP role. Those answer claims occur in preceding comments outside the gold entity, while the other member supplies only Metrics' schema."
+        }
+      ],
+      "b_additional_sets": 0
     }
   ],
-  "reviewed_families": 0,
+  "reviewed_families": 12,
   "totals": {
-    "complementary": 48,
-    "precise": 24,
-    "development": 24,
-    "held-out": 48
+    "complementary": 28,
+    "precise": 15,
+    "development": 15,
+    "held-out": 28
   }
 }

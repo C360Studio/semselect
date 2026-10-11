@@ -1,0 +1,50 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semselect-docs",
+  "split": "development",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "1fa15e480b15480c9a458db0f92267e5280cbea638035bf431c92f0a7f27cf15",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "agree",
+      "rationale": "The launcher passage supplies the port/file checks, readiness deadline and full-offload requirement; the validation passage explains the two pre-inference failures and corrected log check. Neither passage alone establishes both the launch policy and its observed failure cause."
+    },
+    {
+      "id": "q-02",
+      "verdict": "disagree",
+      "rationale": "The alternative answering-path/results set does not establish the answer's empty-summary bypass or degraded-template timeout behavior. Those facts appear in the primary synthesis member, so not every proposed gold set supports the full answer."
+    },
+    {
+      "id": "q-03",
+      "verdict": "disagree",
+      "rationale": "The alternative shortlist/bootstrap set gives the size, license and artifact pin but does not identify the official ggml-org GGUF card as the publisher, as the answer claims. That attribution appears only in the primary research passage, leaving the alternative incomplete."
+    },
+    {
+      "id": "q-04",
+      "verdict": "agree",
+      "rationale": "The scoring passage gives the exact installed revision and versions; the investigation passage gives the Apple environment variable, launch flag and installation floors. Both are necessary for the complete pinned-environment answer."
+    },
+    {
+      "id": "q-05",
+      "verdict": "disagree",
+      "rationale": "Gold passage 0005 ends before the operation_correct definition and does not establish the answer. The complete definition is in passage 0006; the specialist raw-operation table is a real but different metric.",
+      "additional_sets": [
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-query-routing-md-0006"
+        ]
+      ]
+    },
+    {
+      "id": "q-06",
+      "verdict": "agree",
+      "rationale": "The sole gold passage states both billing probabilities, the failed 0.7 threshold, the remaining failure cases and the caller-policy warning. The Metal observations and CPU-scoring injection account are real lookalikes that omit or concern different probabilities."
+    }
+  ]
+}

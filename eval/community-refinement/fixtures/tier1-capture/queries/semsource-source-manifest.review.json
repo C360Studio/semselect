@@ -1,0 +1,45 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semsource-source-manifest",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "aaea01d6eb0bfd2e8e970412889785edd1b3fefe53948fa0bb840e97e370af97",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "agree",
+      "rationale": "allReported establishes the non-positive-count rule, while startSeedTimeout independently establishes the early return and positive-count timeout behavior; both bodies are needed."
+    },
+    {
+      "id": "q-02",
+      "verdict": "disagree",
+      "rationale": "The gold const body contains only the INSTANCE_EXISTS literal, not the different-config condition, and the other members never establish that condition either. The answer also expands the sibling error codes to wire strings whose declarations are outside this set."
+    },
+    {
+      "id": "q-03",
+      "verdict": "disagree",
+      "rationale": "The alternative using dropSourceStatus records removal but omits the report-discard guard; the struct alternative supplies only a general comment rather than the claimed early return under statusMu. The answer also overstates the fallback: decrementing a still-positive expectedCount does not make allReported use the any-report rule, and no listed set includes allReported or the re-add code."
+    },
+    {
+      "id": "q-04",
+      "verdict": "agree",
+      "rationale": "The full README passage explains embedding lag and retirement of stable counts, while handleStatus supplies the additive HTTP readiness fields and explicit unavailable objects; neither establishes both halves alone."
+    },
+    {
+      "id": "q-05",
+      "verdict": "agree",
+      "rationale": "ReadinessNote itself states both genuine-absence gates, the exact tool lists, and the revision comparison. The cited tiers passage is a real lookalike and lacks the genuine-absence contract."
+    },
+    {
+      "id": "q-06",
+      "verdict": "disagree",
+      "rationale": "manifestSourcesEqual lists the compared fields, but its body delegates slice equality to stringSliceEqual and does not establish the stated same-length/same-elements semantics by itself. Its single gold member therefore does not establish the entire precise answer."
+    }
+  ]
+}

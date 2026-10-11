@@ -1,0 +1,45 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-graph-clustering",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "63e8266036de520b13e35c8a1e8528ab15ea386f35a9df971b998b29c5df70a7",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "disagree",
+      "rationale": "The answer omits the running guard: Health only changes Status to reset-required and sets LastError inside if c.running, so a stopped poisoned component reports stopped with empty LastError. Its stated poison/error behavior is therefore not fully correct for the source."
+    },
+    {
+      "id": "q-02",
+      "verdict": "agree",
+      "rationale": "handleQueryMembersNATS places the poison check before context creation, unmarshalling and community lookup; graphStateContractError supplies the loaded-poison condition and exact fatal wrapper. Neither body alone establishes both ordering and the returned fatal error."
+    },
+    {
+      "id": "q-03",
+      "verdict": "agree",
+      "rationale": "GetIncomingRelationships builds one validated RelationshipInfo per accepted composite key without deduplication, whereas getIncomingNeighbors validates the predicate and deduplicates source IDs. Both different-file bodies are required for this comparison."
+    },
+    {
+      "id": "q-04",
+      "verdict": "disagree",
+      "rationale": "The two bodies show fields, branching on noteGateOutcome and dropping unknown deferReasons, but they omit the first/change-versus-repeat policy, metric name and graph.AllDeferReasons binding. Those answer facts are defined in other entities or comments outside the catalogue body boundaries."
+    },
+    {
+      "id": "q-05",
+      "verdict": "disagree",
+      "rationale": "ApplyDefaults alone establishes the zero-to-3 assignment, but the answer also asserts DefaultConfig uses 3 and the README table/example use 2. Those facts are outside its single gold body, so this precise set does not establish the whole answer despite the real README lookalike."
+    },
+    {
+      "id": "q-06",
+      "verdict": "disagree",
+      "rationale": "FindSimilar itself establishes fail-open, the nil-client case, returned helper errors and the SemanticGapDetector consumer through an in-body comment. The additional answer claim about the clustering consumer using error-preserving findSimilarClassified appears outside this gold body, so the single entity is insufficient."
+    }
+  ]
+}

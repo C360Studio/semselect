@@ -1,0 +1,61 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-component",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "ec45ce0af8a371094ba1215ce740b1b160d29a5bfecd7526aea93684b833a93d",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "disagree",
+      "rationale": "prepareComponent uses its operation parameter in the error rather than the literal CreateComponent claimed in the answer. The listed set omits the caller that supplies that literal and the public-to-private call link, so it does not establish the complete answer.",
+      "additional_sets": [
+        [
+          "semselect.semsource.golang.semstreams-component.method.component-registry-go-Registry-CreateComponent",
+          "semselect.semsource.golang.semstreams-component.method.component-registry-go-Registry-createComponent",
+          "semselect.semsource.golang.semstreams-component.method.component-registry-go-Registry-prepareComponent",
+          "semselect.semsource.golang.semstreams-component.struct.component-dependencies-go-Dependencies"
+        ]
+      ]
+    },
+    {
+      "id": "q-02",
+      "verdict": "disagree",
+      "rationale": "Each listed set shows only one of the two assertion helpers, but the answer explicitly claims both helpers assert to LifecycleComponent. Neither alternative establishes that complete claim; both interfaces plus both helpers do.",
+      "additional_sets": [
+        [
+          "semselect.semsource.golang.semstreams-component.function.component-lifecycle-go-IsLifecycleComponent",
+          "semselect.semsource.golang.semstreams-component.function.component-lifecycle-go-AsLifecycleComponent",
+          "semselect.semsource.golang.semstreams-component.interface.component-lifecycle-go-LifecycleComponent",
+          "semselect.semsource.golang.semstreams-component.interface.component-discovery-go-Discoverable"
+        ]
+      ]
+    },
+    {
+      "id": "q-03",
+      "verdict": "agree",
+      "rationale": "HTTPClientPort contains the sibling timer name and empty-link meaning and lacks an interval field; TimerPort supplies Interval and its duration-string examples. Both bodies are needed."
+    },
+    {
+      "id": "q-04",
+      "verdict": "agree",
+      "rationale": "PortDefinition explains the precise no-publisher suppression and input meaning; resolveAndProjectPort supplies the external-field rejection and its quoted direction error. Both contribute necessary evidence for an otherwise valid output declaration."
+    },
+    {
+      "id": "q-05",
+      "verdict": "agree",
+      "rationale": "portDifference itself fixes the complete field order, External mismatch text, and empty result. comparePortDeclarations is a real lookalike whose comment omits External; comparePortLane delegates individual differences rather than spelling out their order."
+    },
+    {
+      "id": "q-06",
+      "verdict": "agree",
+      "rationale": "applyJetStreamConsumerConfig directly contains the duration parse errors, nonzero MaxAckPending override including -1, and the other override conditions. JetStreamPort and ConsumerConfig are real declaration lookalikes lacking that extraction logic."
+    }
+  ]
+}

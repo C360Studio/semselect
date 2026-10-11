@@ -1,0 +1,52 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semengine-message",
+  "split": "development",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "b45308aa15f61aaa07e6663320c9a3e78b198515a32b1adce114dd7e5d38c7ad",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "disagree",
+      "rationale": "RuleFields and RuleReadable establish the projection and unreadable-versus-empty distinction, but neither submitted gold member links GenericJSONPayload to core.json.v1. RegisterPayloads supplies that missing type association.",
+      "additional_sets": [
+        [
+          "semselect.semsource.golang.semengine-message.method.message-generic_json-go-GenericJSONPayload-RuleFields",
+          "semselect.semsource.golang.semengine-message.interface.message-rule_readable-go-RuleReadable",
+          "semselect.semsource.golang.semengine-message.function.message-generic_json-go-RegisterPayloads"
+        ]
+      ]
+    },
+    {
+      "id": "q-02",
+      "verdict": "agree",
+      "rationale": "Decode establishes the immediate nil-registry configuration failure and registry installation; UnmarshalJSON establishes parsing before its distinct missing-registry failure. Both members are necessary to establish the contrast."
+    },
+    {
+      "id": "q-03",
+      "verdict": "agree",
+      "rationale": "Build establishes builder precedence and the fallback, RegisterPayloads connects core.json.v1 to its builder, and buildGenericJSONPayload establishes field handling and validation wrapping. The three-member set is minimal and spans two files."
+    },
+    {
+      "id": "q-04",
+      "verdict": "agree",
+      "rationale": "AppendIdentityKey identifies the six inputs while Triple enumerates all nine fields, establishing the exclusion of Timestamp, Confidence and ExpiresAt. Neither member alone names both the complete field inventory and its identity projection."
+    },
+    {
+      "id": "q-05",
+      "verdict": "agree",
+      "rationale": "MarshalJSON contains the source and type UTF-8 checks, their exact wrapping, and the preceding validation and payload-marshalling failures. GenericJSONPayload.MarshalJSON is a real lookalike that checks Data through shapeCheck instead."
+    },
+    {
+      "id": "q-06",
+      "verdict": "agree",
+      "rationale": "Create alone establishes the formatted key, read-locked lookup, nil miss and Factory hit. Build and GetRegistration are real lookalikes with different miss behavior."
+    }
+  ]
+}

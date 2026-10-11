@@ -1,0 +1,45 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semselect-service",
+  "split": "development",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "db23ba7733703e83a0125910719fd37e38ae99e9f0fb27b27b650166d4b98764",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "agree",
+      "rationale": "main supplies the default alias and validate supplies the optional-field comparison and exact rejection format. Both are needed to determine the concrete default error, and neither body alone gives the whole answer."
+    },
+    {
+      "id": "q-02",
+      "verdict": "agree",
+      "rationale": "Both gold alternatives contribute the timeout default/range, ServeHTTP contributes route-specific deadlines, and forward contributes deadline/error status mapping. Each set is necessary and sufficient for all parts of the answer."
+    },
+    {
+      "id": "q-03",
+      "verdict": "disagree",
+      "rationale": "The decoder-leniency and candidate-order explanation is in comments before checkJSON's catalogue body, not in either gold member. The set also omits validate, whose body establishes that the pre-admission validation invokes checkJSON."
+    },
+    {
+      "id": "q-04",
+      "verdict": "disagree",
+      "rationale": "The answer overstates cancellation as a 503 outcome: forward uses 503 when Client.Do fails, but a canceled response-body read follows its separate non-deadline read-error branch to 502. The admission-slot release and computation caveat are supported, but the full answer is not correct for all disconnect timings."
+    },
+    {
+      "id": "q-05",
+      "verdict": "agree",
+      "rationale": "listenConfig alone contains the wildcard rewrites, ready URL construction and both rejection rules. main and the actual README configuration passage are real lookalikes that delegate or omit those exact details."
+    },
+    {
+      "id": "q-06",
+      "verdict": "agree",
+      "rationale": "New's body supplies every origin restriction, the client-copy redirect policy, slash trimming and model/timeout requirements. forward and the README are real lookalikes that describe the redirect consequence or origin concept rather than this constructor policy."
+    }
+  ]
+}

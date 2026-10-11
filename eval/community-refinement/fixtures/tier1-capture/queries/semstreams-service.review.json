@@ -1,0 +1,45 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-service",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "899be56b74383bb335ca1f3ab27b7d2d2ee865b057da1381c17c8c53c636bdd2",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "agree",
+      "rationale": "NewMetrics supplies the service-specific decode call, error wrapping and defaults; decodeStrictServiceJSON supplies unknown-field rejection and whitespace-only acceptance. Both bodies are necessary and together establish the full answer."
+    },
+    {
+      "id": "q-02",
+      "verdict": "agree",
+      "rationale": "The four bodies jointly establish the lookup/nil behavior, exported defaults switch, names/configurations and absent-entry Enabled=true insertion. Removing any member leaves a distinct part of that resolution contract unsupported."
+    },
+    {
+      "id": "q-03",
+      "verdict": "disagree",
+      "rationale": "The gold bodies establish the registered names and constructor-signature mismatch, but not that the subscriber comes from the composition root. That origin is stated in comments before NewMilestoneService's catalogue body, so the complete answer is not established by this set."
+    },
+    {
+      "id": "q-04",
+      "verdict": "disagree",
+      "rationale": "The Configurable body's text declares only ConfigSchema and does not state sole Metrics implementation, future UI reservation or Discovery's HTTP role. Those answer claims occur in preceding comments outside the gold entity, while the other member supplies only Metrics' schema."
+    },
+    {
+      "id": "q-05",
+      "verdict": "agree",
+      "rationale": "HeartbeatConfig.Validate alone specifies the empty-value behavior, parsing failure and exact positive/minimum-duration errors. ManagerConfig.Validate is a real duration-validation lookalike for different timeout fields with different messages."
+    },
+    {
+      "id": "q-06",
+      "verdict": "agree",
+      "rationale": "Registry.Register alone shows the two pre-lock input checks, plain duplicate error and successful insertion. DuplicateServiceError is a real typed-error lookalike with the distinct 'is already registered' wording."
+    }
+  ]
+}

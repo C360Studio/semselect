@@ -1,0 +1,99 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semselect-docs",
+  "split": "development",
+  "rule": "queries both annotators agree on (ruling 7, 2026-10-10); disputed ones dropped; gold sets are annotator A's, sets B added are recorded under b_additional_sets and are not gold",
+  "success": "the budgeted evidence contains every member of at least one gold set",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semselect",
+    "commit": "5ee6c9bb214254393728ef5b588273cf3de5339c",
+    "workspace_sha256": "2e11ee13a4691e0358f2b5a45459a3c27a61280cc509a81f70bbf99ef3f93548"
+  },
+  "frozen_capture": "docs/evidence/20261010T132322Z-legacy-tier1-capture-semselect-docs-explicit-only",
+  "partition_hash": "e486ae2dcb1fb33c732c181fa8d373073725edb4ec0f3b9bc93ac5324a9dca32",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "What does the native Metal launcher verify and wait for before it treats a service as ready, and why did its initial full-offload check stop two runs before any inference?",
+      "answer": "It checks both native ports before startup, verifies the GGUF and built runtime files, waits at most 180 seconds per service for readiness, and requires log evidence that all model layers were offloaded. The first offload check stopped two runs because the default runtime log level hid allocation details and this llama.cpp revision names its Metal device `MTL0`; the final check uses trace-level allocation logs, requires a positive full-offload count on an Apple MTL device, and has a regression for that device-name format. Those startup failures were not scored as model calls.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-laptop-and-gpu-md-0003",
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-metal-md-0006"
+        ]
+      ],
+      "evidence": [
+        "docs/laptop-and-gpu.md:31-35",
+        "docs/validation-metal.md:102-106"
+      ],
+      "rationale": "The laptop guide passage states the launcher's port/file checks, the 180-second readiness wait and the offload-evidence requirement but says nothing about stopped runs; the Metal validation passage explains the MTL0/log-level failure and the corrected trace-level check but never states the readiness timeout or file checks. Neither passage alone covers both halves.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "To reproduce the SGLang/MLX probe on Apple Silicon, which SGLang revision and Python/PyTorch/MLX versions were pinned, and which environment variable and launch flag does SGLang's Apple serving path use?",
+      "answer": "The probe pinned SGLang `efb62ce269b499123e2d1c89005ee4cea8c31098` with Python 3.12.13, PyTorch 2.13.0 and MLX 0.32.3 in an isolated source-pinned install with a dependency freeze. SGLang's Apple path serves through MLX/Metal with `SGLANG_USE_MLX=1` and `--disable-cuda-graph`; its source-install guide requires macOS 14+, stable PyTorch 2.13.x and MLX 0.32+, with full Xcode needed only for the optional native Metal kernels.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-scoring-md-0008",
+          "semselect.semsource.web.semselect-docs.chunk.docs-sglang-investigation-md-0008"
+        ]
+      ],
+      "evidence": [
+        "docs/validation-scoring.md:186-191",
+        "docs/sglang-investigation.md:191-196"
+      ],
+      "rationale": "The scoring record's SGLang compatibility passage holds the exact pinned revision and installed versions but no Apple-path flags; the investigation's hardware passage gives `SGLANG_USE_MLX=1`, `--disable-cuda-graph` and the documented version floors but no pinned revision. The results-history mention of `efb62ce2` is a short form with neither versions nor flags.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 1,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "In the original CPU bootstrap evaluation, what probabilities did Kev assign to its wrong `billing` selections on the two instruction-only injection observations, and did the declared 0.7 threshold stop them?",
+      "answer": "Both instruction-only injection orders selected `billing` with probabilities 0.783 and 0.851 although the expected category was `unknown`, so the example 0.7 p(max) threshold did not stop them; they were two of Kev's five failures (with the reversed billing/account case and both technical/account orders). Caller authorization and routing safeguards remain necessary.",
+      "gold_sets": [
+        [
+          "semselect.semsource.web.semselect-docs.chunk.docs-validation-md-0005"
+        ]
+      ],
+      "evidence": [
+        "docs/validation.md:94-100"
+      ],
+      "rationale": "The CPU record's abstention passage is the only one giving those two probabilities. The lookalike is the Metal validation's observations passage, which lists the same five Kev mistakes and says the 0.7 threshold still admitted two wrong labels without stating probabilities; the scoring record's CPU passage gives Qwen's scored probabilities on the injection-account case (unknown 0.4765 / account 0.4184), a different model and format.",
+      "flags": [
+        {
+          "members": 1,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    }
+  ]
+}

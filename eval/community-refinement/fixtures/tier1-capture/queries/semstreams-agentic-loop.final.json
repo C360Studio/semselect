@@ -1,0 +1,159 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semstreams-agentic-loop",
+  "split": "held-out",
+  "rule": "queries both annotators agree on (ruling 7, 2026-10-10); disputed ones dropped; gold sets are annotator A's, sets B added are recorded under b_additional_sets and are not gold",
+  "success": "the budgeted evidence contains every member of at least one gold set",
+  "corpus": {
+    "repo": "https://github.com/C360Studio/semstreams",
+    "commit": "1b1accf4ea4ea878c26236b5a9e6cb83d2d89d7a",
+    "workspace_sha256": "0d97e0498498866ff973c46b8819f7c1a386ff0b58dc42aed11bbffdd737c793"
+  },
+  "frozen_capture": "docs/evidence/20261010T134624Z-legacy-tier1-capture-semstreams-agentic-loop-explicit-only",
+  "partition_hash": "22eb698de2ced52a14bef7a26e3e8e9202aecbd3c166df2e2ffcf08309cb82a8",
+  "queries": [
+    {
+      "id": "q-01",
+      "kind": "complementary",
+      "question": "When a continuation task names a live loop that is still waiting on its model response, what decides that the turn is deferred, what gets recorded on the loop entity, and what does the task handler return instead of publishing a request?",
+      "answer": "attachContinuation, after refusing terminal, pending-tool and awaiting-approval loops and rebinding TaskID, finds the loop in outstandingRequests and sets PendingContinuation=true, PendingContinuationRequestID=\"\" (uncarried) and PendingContinuationPrompt=the task prompt, returning deferred=true. The handler returns deferredContinuationResult: Deferred=true, deferredPrompt=the prompt, empty PublishedMessages, the entity's current state, and a loop_started trajectory observation with status requested whose evidence names the task, the outstanding request ID and the loop state.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-agentic-loop.method.processor-agentic-loop-state-go-LoopManager-attachContinuation",
+          "semselect.semsource.golang.semstreams-agentic-loop.method.processor-agentic-loop-handlers-go-MessageHandler-deferredContinuationResult"
+        ]
+      ],
+      "evidence": [
+        "processor/agentic-loop/state.go:317-336",
+        "processor/agentic-loop/handlers.go:1148-1179",
+        "processor/agentic-loop/handlers.go:1116-1119"
+      ],
+      "rationale": "attachContinuation establishes the deferral condition (an outstanding request for the loop) and the three entity fields it writes; deferredContinuationResult establishes what comes back: Deferred set, nothing published, the prompt carried for the marker write and the requested-status observation. Neither shows the other half: attachContinuation only says the caller publishes nothing, and the result builder never states when a continuation is deferred.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-02",
+      "kind": "complementary",
+      "question": "After a length-truncated model response, what decides between an inline compaction retry and failing the loop, and what does the retry ordinal read as when the record's PublishedRequestID is empty, unparseable or names another iteration?",
+      "answer": "handleLengthTruncation sets retryCount = publishedRetryOrdinal(loopID)+1 and canRetry = pre-compaction utilization >= Context.CompactThreshold && retryCount == 1. publishedRetryOrdinal parses the entity's PublishedRequestID and returns its retry ordinal only when it parses, names this loop and its iteration equals Iterations+1; otherwise 0, so one self-heal remains. canRetry: compact inline, record a compaction_retry event and step, emit a fresh request at the same iteration (no Iterations increment). Otherwise, or if compaction fails: failLoop with OutcomeTruncated, reason \"length_truncated\".",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-agentic-loop.method.processor-agentic-loop-handlers-go-MessageHandler-handleLengthTruncation",
+          "semselect.semsource.golang.semstreams-agentic-loop.method.processor-agentic-loop-state-go-LoopManager-publishedRetryOrdinal"
+        ]
+      ],
+      "evidence": [
+        "processor/agentic-loop/handlers.go:2218-2241",
+        "processor/agentic-loop/handlers.go:2314-2319",
+        "processor/agentic-loop/state.go:1879-1892"
+      ],
+      "rationale": "handleLengthTruncation carries the decision rule, both branches and their outcomes but only names the ordinal it reads; publishedRetryOrdinal carries the parse-and-match rule and the zero fallback for an empty, foreign or other-iteration PublishedRequestID. The handler's in-body comment says what ordinals 0 and 1 mean, not how they are derived, so neither entity alone establishes the full answer.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 1,
+          "constraint_pairs": {
+            "positive": 1
+          }
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-04",
+      "kind": "complementary",
+      "question": "On a loop rebuilt after a process replacement, where does tool dispatch get the task-scoped enforcement metadata it stamps on every outgoing tool call, and can a value already on the call survive that stamp?",
+      "answer": "dispatchToolCall reads GetCachedMetadata(loopID) and, for each key in agentic.DispatchEnforcedMetadataKeys present in the cache, overwrites tc.Metadata[key] (absent keys stay absent) so a pre-existing value cannot defeat the control; this runs on every dispatch path. On a rebuild, restoreLoopFromRequest seeds cachedMetadata from the loop RECORD's Metadata (a defensive maps.Copy), not from the retained request, which never carried it; both consumers read an absent key as permissive, so a rebuild that skipped it silently turned a read-only task writable.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-agentic-loop.method.processor-agentic-loop-handlers-go-MessageHandler-dispatchToolCall",
+          "semselect.semsource.golang.semstreams-agentic-loop.method.processor-agentic-loop-state-go-LoopManager-restoreLoopFromRequest"
+        ]
+      ],
+      "evidence": [
+        "processor/agentic-loop/handlers.go:2111-2125",
+        "processor/agentic-loop/state.go:534-548"
+      ],
+      "rationale": "dispatchToolCall establishes the stamp itself: which keys, from which cache, and that it overwrites rather than fills. restoreLoopFromRequest establishes where that cache comes from on a rebuilt loop (the record, not the request) and why. The rebuild code only says dispatch stamps 'from this cache', never that it overwrites; dispatch never says how the cache is seated after a replacement.",
+      "flags": [
+        {
+          "members": 2,
+          "files": 2,
+          "communities_spanned": 2,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-05",
+      "kind": "precise",
+      "question": "Which LoopManager method clears a deferred continuation's marker, carrier and text together with settling the outstanding request, and what condition on the request ID gates that clear?",
+      "answer": "SettleRequest(loopID, requestID). Under the lock it calls settleOutstandingLocked for the outstanding mark, then, only when the loop is held, requestID is non-empty and equals the entity's PendingContinuationRequestID (the carrier), it sets PendingContinuation=false and empties PendingContinuationRequestID and PendingContinuationPrompt.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-agentic-loop.method.processor-agentic-loop-state-go-LoopManager-SettleRequest"
+        ]
+      ],
+      "evidence": [
+        "processor/agentic-loop/state.go:1355-1364",
+        "processor/agentic-loop/state.go:1374-1378"
+      ],
+      "rationale": "Only SettleRequest's body shows the carrier-match condition and the three-field clear. The lookalike is settleTruncatedRequest, which has the same signature and also clears the outstanding mark but deliberately leaves the deferral untouched; TrackRequest is the other near miss, since it writes the carrier but never clears it.",
+      "flags": [
+        {
+          "members": 1,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    },
+    {
+      "id": "q-06",
+      "kind": "precise",
+      "question": "When the loop caps an oversized tool result at ToolResultMaxBytes, what marker text does it append and how does it keep the cut from splitting a multi-byte UTF-8 character?",
+      "answer": "truncateToolResult(s, maxBytes) builds marker = \"\\n…[truncated: <len(s)> bytes → <maxBytes>]\" and budget = maxBytes - len(marker). If budget <= 0 it returns the marker alone. Otherwise cut starts at budget and is decremented while cut > 0 and !utf8.RuneStart(s[cut]), and the result is s[:cut] + marker.",
+      "gold_sets": [
+        [
+          "semselect.semsource.golang.semstreams-agentic-loop.function.processor-agentic-loop-handlers-go-truncateToolResult"
+        ]
+      ],
+      "evidence": [
+        "processor/agentic-loop/handlers.go:228-239",
+        "processor/agentic-loop/handlers.go:2750-2759"
+      ],
+      "rationale": "The marker format, the budget arithmetic and the rune-start walk are all in truncateToolResult's body. Lookalikes: buildTruncationDiagnostic and handleLengthTruncation also speak of 'truncated' but describe a length-truncated MODEL response and its diagnostic text, and HandleToolResult applies the cap and logs 'tool result truncated' but shows no marker.",
+      "flags": [
+        {
+          "members": 1,
+          "files": 1,
+          "communities_spanned": 1,
+          "explicit_edges_among_members": 0,
+          "mutual_pairs_among_members": 0,
+          "constraint_pairs": {}
+        }
+      ],
+      "b_additional_sets": []
+    }
+  ]
+}

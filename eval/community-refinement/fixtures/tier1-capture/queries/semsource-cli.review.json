@@ -1,0 +1,53 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semsource-cli",
+  "split": "held-out",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "34ab0b233ae540345b982154152e479ce4a95b321fd95a8b81130fe7c6e42d08",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "disagree",
+      "rationale": "The submitted members establish the remote/absolute-path fallback and omitted git entry, but the slugging, publish-gate and audit explanation is only in the comment at detect.go:113–117. resolvableGitURL’s catalogue body starts at line 118 and neither gold member contains that required reason."
+    },
+    {
+      "id": "q-02",
+      "verdict": "disagree",
+      "rationale": "Add, videoWizard.Available and videoWizard.Name establish the error once ffmpegAvailable returns false, but do not establish that missing ffmpeg in PATH makes that helper false. Its omitted body supplies the exec.LookPath test required by the question’s premise.",
+      "additional_sets": [
+        [
+          "semselect.semsource.golang.semsource-cli.function.cli-add-go-Add",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Available",
+          "semselect.semsource.golang.semsource-cli.method.cli-wizard_video-go-videoWizard-Name",
+          "semselect.semsource.golang.semsource-cli.function.cli-wizard_video-go-ffmpegAvailable"
+        ]
+      ]
+    },
+    {
+      "id": "q-03",
+      "verdict": "agree",
+      "rationale": "Remove supplies the format, index handling, truncation call, Paths fallback and prompt; sourceLocation supplies git/repo URL-or-Path selection. Both members are needed and their bodies establish the submitted answer."
+    },
+    {
+      "id": "q-04",
+      "verdict": "agree",
+      "rationale": "parseImageFlags establishes its three flags and omitted thumbnail field; imageWizard.Prompts establishes the thumbnail default, stored bool pointer and unconditional watch. The two paths are in different files and neither member alone answers their comparison."
+    },
+    {
+      "id": "q-05",
+      "verdict": "disagree",
+      "rationale": "Select establishes the empty-list return and invalid-number prompt, but EOF is handled by the omitted readLine helper; Select only checks that helper’s boolean result. Its single gold member does not independently establish the EOF part of the answer, although runSourceMenu is a real lookalike."
+    },
+    {
+      "id": "q-06",
+      "verdict": "agree",
+      "rationale": "detectLanguage alone establishes the five manifest mappings, relative current-directory lookups, unspecified map iteration order and empty result. DetectProject is a real lookalike that uses a supplied directory, includes Python manifests and records ConfigFiles."
+    }
+  ]
+}

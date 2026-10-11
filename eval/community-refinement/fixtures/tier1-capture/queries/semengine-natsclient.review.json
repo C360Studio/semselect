@@ -1,0 +1,54 @@
+{
+  "provenance": "legacy SemStreams capture; not a SemEngine result",
+  "step": "step 5 known-answer retrieval queries (eval/community-refinement/README.md)",
+  "family": "semengine-natsclient",
+  "split": "development",
+  "annotator": {
+    "role": "B",
+    "kind": "llm",
+    "model": "GPT-6",
+    "method": "full-source"
+  },
+  "sheet_sha256": "ca49d4dbdbf3b5e944247548324561f2818a99c7071d3dbe7a607619b8ae185e",
+  "verdicts": [
+    {
+      "id": "q-01",
+      "verdict": "agree",
+      "rationale": "WithHealthInterval names and sets the option; startHealthMonitoring supplies the ticker interval, connection checks and guarded status transitions, including the ownership explanation inside its body. Both members are necessary."
+    },
+    {
+      "id": "q-02",
+      "verdict": "disagree",
+      "rationale": "The gold establishes the timeout and header precedence, but ExtractTrace contains only symbolic TraceIDHeader, SpanIDHeader and ParentSpanHeader references, not their X-Trace-ID, X-Span-ID and X-Parent-Span-ID values. Those three constant entities are necessary for the submitted literal-header answer.",
+      "additional_sets": [
+        [
+          "semselect.semsource.golang.semengine-natsclient.method.natsclient-client-go-Client-subscribeWith",
+          "semselect.semsource.golang.semengine-natsclient.function.natsclient-trace-go-ExtractTrace",
+          "semselect.semsource.golang.semengine-natsclient.const.natsclient-trace-go-TraceIDHeader",
+          "semselect.semsource.golang.semengine-natsclient.const.natsclient-trace-go-SpanIDHeader",
+          "semselect.semsource.golang.semengine-natsclient.const.natsclient-trace-go-ParentSpanHeader"
+        ]
+      ]
+    },
+    {
+      "id": "q-03",
+      "verdict": "agree",
+      "rationale": "CreateKeyValueBucket shows the existing-bucket and race paths returning the fetched bucket rather than applying cfg; CheckNoLifecycleRetention supplies the positive-value tests and exact sentinel-wrapping errors. Neither member alone establishes both halves."
+    },
+    {
+      "id": "q-04",
+      "verdict": "agree",
+      "rationale": "Both the README passage and DefaultKVOptions independently establish the defaults; getRetryConfig supplies attempt arithmetic and delay configuration, and UpdateWithRetryRev supplies the final conflict mapping. Both listed three-member sets are minimal, and the primary spans the README and implementation."
+    },
+    {
+      "id": "q-05",
+      "verdict": "disagree",
+      "rationale": "classifiedFromHeader establishes the default class and constructors, but the required reason for that default exists only in lines 348–350 before its catalogue body, which starts at line 351. Its sole gold member therefore does not establish the whole answer, despite the real classForHeader lookalike."
+    },
+    {
+      "id": "q-06",
+      "verdict": "disagree",
+      "rationale": "The predicate establishes the exact type, code and description match, but it only returns a bool; it never calls recordFailure. The submitted answer also requires recordStreamPublishFailure, so the precise single-entity gold does not establish the whole answer."
+    }
+  ]
+}
